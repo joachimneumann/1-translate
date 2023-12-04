@@ -1,0 +1,10 @@
+*/xcuserdata
+VietnameseNumbers.xcodeproj/project.xcworkspace/xcuserdata/
+dist.old
+dist/gmp/*
+dist/mpfr/*
+dist/build.log
+dist/signed
+dist/gmp.xcframework
+dist/mpfr.xcframework
+~$*
