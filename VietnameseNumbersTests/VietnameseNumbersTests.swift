@@ -244,6 +244,8 @@ final class VietnameseNumbersTests: XCTestCase {
         XCTAssertEqual( english(109), "one hundred nine")
         XCTAssertEqual( english(110), "one hundred ten")
         XCTAssertEqual( english(111), "one hundred eleven")
+        XCTAssertEqual( english(112), "one hundred twelve")
+        XCTAssertEqual( english(113), "one hundred thirteen")
         XCTAssertEqual( english(119), "one hundred nineteen")
         XCTAssertEqual( english(120), "one hundred twenty")
         XCTAssertEqual( english(121), "one hundred twenty one")
