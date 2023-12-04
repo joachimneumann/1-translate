@@ -10,7 +10,7 @@ import SwiftUI
 public typealias AppleFont = NSFont
 
 @main
-struct CalculatorApp: App {
+struct VietnameseNumbersApp: App {
     
     let width: CGFloat = 574.0
     let height: CGFloat = 293.0
@@ -18,7 +18,7 @@ struct CalculatorApp: App {
     var body: some Scene {
         let screen = Screen(CGSize(width: width, height: height))
         WindowGroup {
-            Calculator(screen: screen)
+            VietnameseNumbers(screen: screen)
                 .frame(width: width, height: height)
                 .background(screen.backgroundColor)
         }

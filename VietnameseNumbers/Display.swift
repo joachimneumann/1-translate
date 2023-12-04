@@ -12,7 +12,6 @@ protocol DisplayLengthLimiter {
     var appleFont: AppleFont        { get }
     var displayWidth: CGFloat { set get }
     var ePadding: CGFloat     { set get }
-    var isPortraitPhone: Bool { get }
 }
 
 struct Display {
@@ -274,7 +273,7 @@ extension Display {
                     let w = floatCandidate.textWidth(kerning: displayLengthLimiter.kerning, appleFont: displayLengthLimiter.appleFont)
                     let fitsInOneLine = w <= displayLengthLimiter.displayWidth - displayLengthLimiter.ePadding
                     if !fitsInOneLine && exponent < Self.MAX_DISPLAY_LENGTH { returnValue.canBeFloat = true }
-                    if fitsInOneLine && displayLengthLimiter.isPortraitPhone {
+                    if fitsInOneLine {
                         while indexInt <= floatString.count && w <= displayLengthLimiter.displayWidth - displayLengthLimiter.ePadding {
                             indexInt += 1
                             floatCandidate = String(floatString.prefix(indexInt+1))
@@ -312,7 +311,7 @@ extension Display {
                 let w = testFloat.textWidth(kerning: displayLengthLimiter.kerning, appleFont: displayLengthLimiter.appleFont)
                 let fitsInOneLine = w <= displayLengthLimiter.displayWidth - displayLengthLimiter.ePadding
                 if !fitsInOneLine && exponent > -Self.MAX_DISPLAY_LENGTH { returnValue.canBeFloat = true }
-                if fitsInOneLine && displayLengthLimiter.isPortraitPhone {
+                if fitsInOneLine {
                     var indexInt = 3 /// minimum: X,x
                     var limitedFloatString = String(floatString.prefix(indexInt))
                     while indexInt <= floatString.count && w <= displayLengthLimiter.displayWidth {
@@ -347,27 +346,21 @@ extension Display {
         mantissa = withSeparators(numberString: mantissa, isNegative: isNegative, separators: separators)
         let exponentString = "e\(exponent)"
         if let displayLengthLimiter = displayLengthLimiter {
-            if displayLengthLimiter.isPortraitPhone {
-                var indexInt = 3 /// minimum: X,x
-                var floatString = String(mantissa.prefix(indexInt))
-                let w = (floatString + exponentString).textWidth(kerning: displayLengthLimiter.kerning, appleFont: displayLengthLimiter.appleFont)
-                if w > displayLengthLimiter.displayWidth - displayLengthLimiter.ePadding {
-                    returnValue.left = "can not show"
-                    return returnValue
-                }
-                while indexInt <= mantissa.count && w <= displayLengthLimiter.displayWidth - displayLengthLimiter.ePadding {
-                    indexInt += 1
-                    floatString = String(mantissa.prefix(indexInt))
-                }
-                floatString = String(floatString.prefix(indexInt-1))
-                returnValue.left = floatString
-                returnValue.right = exponentString
-                return returnValue
-            } else {
-                returnValue.left = mantissa
-                returnValue.right = exponentString
+            var indexInt = 3 /// minimum: X,x
+            var floatString = String(mantissa.prefix(indexInt))
+            let w = (floatString + exponentString).textWidth(kerning: displayLengthLimiter.kerning, appleFont: displayLengthLimiter.appleFont)
+            if w > displayLengthLimiter.displayWidth - displayLengthLimiter.ePadding {
+                returnValue.left = "can not show"
                 return returnValue
             }
+            while indexInt <= mantissa.count && w <= displayLengthLimiter.displayWidth - displayLengthLimiter.ePadding {
+                indexInt += 1
+                floatString = String(mantissa.prefix(indexInt))
+            }
+            floatString = String(floatString.prefix(indexInt-1))
+            returnValue.left = floatString
+            returnValue.right = exponentString
+            return returnValue
         } else {
             returnValue.left = mantissa
             returnValue.right = exponentString

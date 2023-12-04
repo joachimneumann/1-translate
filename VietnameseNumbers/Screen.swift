@@ -73,7 +73,6 @@ struct Screen: Equatable, DisplayLengthLimiter, Separators {
 
     private let isPad: Bool
 
-    let isPortraitPhone: Bool
     let keyboardHeight: CGFloat
     let keySpacing: CGFloat
     let keySize: CGSize
@@ -121,17 +120,9 @@ struct Screen: Equatable, DisplayLengthLimiter, Separators {
         defaultTextColor = .white
         isPad = UIDevice.current.userInterfaceIdiom == .pad
         let isPortrait = screenSize.height > screenSize.width
-        isPortraitPhone = isPad ? false : isPortrait
-        if isPortraitPhone {
-            keySpacing = 0.034 * screenSize.width
-            horizontalPadding = keySpacing
-            displayHorizontalPadding = screenSize.width * 0.035
-        } else {
-            // with scientific keyboard: narrower spacing
-            keySpacing = 0.012 * screenSize.width
-            horizontalPadding = 0.0
-            displayHorizontalPadding = screenSize.width * 0.015
-        }
+        keySpacing = 0.034 * screenSize.width
+        horizontalPadding = keySpacing
+        displayHorizontalPadding = screenSize.width * 0.035
 #endif
         
         portraitIPhoneDisplayBottomPadding = screenSize.height * 0.012
@@ -172,13 +163,13 @@ struct Screen: Equatable, DisplayLengthLimiter, Separators {
         plusIconSize = keyboardHeight * 0.13
         iconsWidth   = keyboardHeight * 0.16
         plusIconTrailingPadding = plusIconSize * 0.4
-        ePadding = isPortraitPhone ? plusIconSize * 0.1 : plusIconSize * 0.3
+        ePadding = plusIconSize * 0.1
 #if os(macOS)
         uiFontSize = (0.22 * keyboardHeight).rounded()
         infoUiFontSize = 12.0
 #else
         uiFontSize = (0.16 * keyboardHeight).rounded()
-        if isPortraitPhone { uiFontSize = 0.125 * keyboardHeight }
+        uiFontSize = 0.125 * keyboardHeight
         infoUiFontSize = 16.0
 #endif
         appleFont = Self.appleFont(ofSize: uiFontSize)
@@ -222,14 +213,7 @@ struct Screen: Equatable, DisplayLengthLimiter, Separators {
         CGFloat(0.5 * plusIconSize)
 #endif
                 
-        if isPortraitPhone {
-            displayWidth = calculatorWidth - 2.0 * displayHorizontalPadding
-        } else {
-            displayWidth = calculatorWidth -
-            2.0 * displayHorizontalPadding -
-            iconsWidth -
-            plusIconTrailingPadding
-        }
+        displayWidth = calculatorWidth - 2.0 * displayHorizontalPadding
     }
 }
 

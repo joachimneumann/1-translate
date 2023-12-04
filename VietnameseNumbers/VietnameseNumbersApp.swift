@@ -10,11 +10,11 @@ import SwiftUI
 public typealias AppleFont = UIFont
 
 @main
-struct CalculatorApp: App {
+struct VietnameseNumbersApp: App {
     var body: some Scene {
         WindowGroup {
             GeometryReader { geo in
-                Calculator(screen: Screen(geo.size))
+                VietnameseNumbers(screen: Screen(geo.size))
             }
         }
     }
