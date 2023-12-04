@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Vietnamese: View {
+struct VietnameseDisplay: View {
     let display: Display
     let screen: Screen
     let backgroundColor: Color

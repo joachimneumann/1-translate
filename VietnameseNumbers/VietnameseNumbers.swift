@@ -20,7 +20,7 @@ struct VietnameseNumbers: View {
     var portraitView: some View {
         VStack(spacing: 0.0) {
             Spacer(minLength: 0.0)
-            Vietnamese(
+            VietnameseDisplay(
                 display: viewModel.currentDisplay,
                 screen: screen,
                 backgroundColor: screen.backgroundColor)
