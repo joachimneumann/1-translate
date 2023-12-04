@@ -150,6 +150,7 @@ final class VietnameseNumbersTests: XCTestCase {
         XCTAssertEqual(vietnamese.toString(1010), "một nghìn không trăm mười")
         XCTAssertEqual(vietnamese.toString(1011), "một nghìn không trăm mười một")
         XCTAssertEqual(vietnamese.toString(1012), "một nghìn không trăm mười hai")
+        XCTAssertEqual(vietnamese.toString(1015), "một nghìn không trăm mười lăm")
         XCTAssertEqual(vietnamese.toString(1035), "một nghìn không trăm ba mươi lăm")
         XCTAssertEqual(vietnamese.toString(1099), "một nghìn không trăm chín mươi chín")
         XCTAssertEqual(vietnamese.toString(1100), "một nghìn một trăm")
@@ -160,6 +161,12 @@ final class VietnameseNumbersTests: XCTestCase {
         XCTAssertEqual(vietnamese.toString(1115), "một nghìn một trăm mười lăm")
         XCTAssertEqual(vietnamese.toString(1121), "một nghìn một trăm hai mươi mốt")
         XCTAssertEqual(vietnamese.toString(1125), "một nghìn một trăm hai mươi lăm")
+        XCTAssertEqual(vietnamese.toString(10000), "mười nghìn")
+        XCTAssertEqual(vietnamese.toString(10001), "mười nghìn không trăm lẻ một")
+        XCTAssertEqual(vietnamese.toString(20001), "hai mươi nghìn không trăm lẻ một")
+        XCTAssertEqual(vietnamese.toString(20010), "hai mươi nghìn không trăm mười")
+        XCTAssertEqual(vietnamese.toString(20101), "hai mươi nghìn một trăm lẻ một")
+        XCTAssertEqual(vietnamese.toString(999999), "chín trăm chín mươi chín nghìn chín trăm chín mươi chín")
 
         
         XCTAssertEqual(english(0), "zero")
