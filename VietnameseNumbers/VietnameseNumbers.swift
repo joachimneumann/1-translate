@@ -17,11 +17,15 @@ struct VietnameseNumbers: View {
     @State var scrollViewID = UUID()
     @State var isZoomed: Bool = false
     
-    var store = Store()
-    
     var portraitView: some View {
         VStack(spacing: 0.0) {
             Spacer(minLength: 0.0)
+            Vietnamese(
+                display: viewModel.currentDisplay,
+                screen: screen,
+                backgroundColor: screen.backgroundColor)
+                .padding(.bottom, screen.portraitIPhoneDisplayBottomPadding)
+                .padding(.horizontal, screen.displayHorizontalPadding)
             PortraitDisplay(
                 display: viewModel.currentDisplay,
                 screen: screen,

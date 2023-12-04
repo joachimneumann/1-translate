@@ -10,7 +10,6 @@ import SwiftUI
 struct Icons : View {
     let simulatePurchased = true
     @Environment(\.scenePhase) var scenePhase
-    @ObservedObject var store: Store
     @ObservedObject var viewModel: ViewModel
     let screen: Screen
     @Binding var isZoomed: Bool
@@ -47,88 +46,7 @@ struct Icons : View {
         }
     }
     
-    @ViewBuilder
-    var copy: some View {
-        if !simulatePurchased && store.purchasedIDs.isEmpty {
-            NavigationLink {
-                PurchaseView(store: store, viewModel: viewModel, screen: screen)
-            } label: {
-                Text("copy")
-                    .font(Font(screen.infoUiFont))
-                    .foregroundColor(Color.white)
-            }
-        } else {
-            Text("copy")
-                .font(Font(screen.infoUiFont))
-                .foregroundColor(viewModel.isCopying ? Color.orange : Color.white)
-                .onTapGesture {
-                    if copyDone && pasteDone && !viewModel.isCopying && !viewModel.isPasting {
-                        setIsCopying(to: true)
-                        wait300msDone = false
-                        Task.detached(priority: .high) {
-                            try? await Task.sleep(nanoseconds: 300_000_000)
-                            await MainActor.run() {
-                                wait300msDone = true
-                                if copyDone {
-                                    setIsCopying(to: false)
-                                }
-                            }
-                        }
-                        Task(priority: .low) {
-                            copyDone = false
-                            await viewModel.copyToPastBin(screen: screen)
-                            copyDone = true
-                            if wait300msDone {
-                                setIsCopying(to: false)
-                            }
-                        }
-                        isValidPasteContent = true
-                    }
-                }
-                .accessibilityIdentifier("copyButton")
-        }
-    }
-    
-    @ViewBuilder
-    var paste: some View {
-        if !simulatePurchased && store.purchasedIDs.isEmpty {
-            NavigationLink {
-                PurchaseView(store: store, viewModel: viewModel, screen: screen)
-            } label: {
-                Text("paste")
-                    .font(Font(screen.infoUiFont))
-                    .foregroundColor(Color.white)
-            }
-        } else {
-            Text("paste")
-                .font(Font(screen.infoUiFont))
-                .foregroundColor(isValidPasteContent ? (viewModel.isPasting ? .orange : .white) : .gray)
-                .onTapGesture {
-                    if copyDone && pasteDone && !viewModel.isCopying && !viewModel.isPasting && isValidPasteContent {
-                        setIsPasting(to: true)
-                        pasteDone = false
-                        wait300msDone = false
-                        Task.detached(priority: .high) {
-                            try? await Task.sleep(nanoseconds: 300_000_000)
-                            await MainActor.run() {
-                                wait300msDone = true
-                                if pasteDone {
-                                    viewModel.isPasting = false
-                                }
-                            }
-                        }
-                        Task(priority: .low) {
-                            isValidPasteContent = await viewModel.copyFromPasteBin(screen: screen)
-                            pasteDone = true
-                            if wait300msDone {
-                                setIsPasting(to: false)
-                            }
-                        }
-                    }
-                }
-                .accessibilityIdentifier("pasteButton")
-        }
-    }
+
     
     @ViewBuilder
     var settings: some View {
@@ -187,8 +105,6 @@ struct Icons : View {
             plus
                 .padding(.top, screen.infoTextHeight * 0.2)
             Group {
-                copy
-                paste
                 settings
                 toInt
                 toFloat

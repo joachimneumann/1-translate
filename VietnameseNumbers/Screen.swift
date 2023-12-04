@@ -111,7 +111,6 @@ struct Screen: Equatable, DisplayLengthLimiter, Separators {
         defaultTextColor = Color(white: 236.0/255.0)
         isPad = false
         let isPortrait = false
-        isPortraitPhone = false
         keySpacing = 1.0
         horizontalPadding = 0.0
         displayHorizontalPadding = 10
