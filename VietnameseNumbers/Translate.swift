@@ -14,9 +14,14 @@
 
 import Foundation
 
-class Vietnamese {
-    var linh_instead_of_lẻ: Bool
-    var ngàn_instead_of_nghìn: Bool
+protocol Translator {
+    func toString(_ string: String) -> String?
+    func toString(_ int: Int) -> String?
+}
+
+class Vietnamese: Translator {
+    var useLinh: Bool
+    var useNgan: Bool
     var compact: Bool
     private let one = "một"
     private let one_with_up_tone = "mốt"
@@ -27,18 +32,18 @@ class Vietnamese {
     private let billion = "tỷ"
 
     private var secondlastZero: String {
-        linh_instead_of_lẻ ? "linh" : "lẻ"
+        useLinh ? "linh" : "lẻ"
     }
     private var thousand: String {
-        ngàn_instead_of_nghìn ? "ngàn" : "nghìn"
-    }
-
-    init(linh_instread_of_lẻ: Bool = false, ngàn_instead_of_nghìn: Bool = false, compact: Bool = false) {
-        self.linh_instead_of_lẻ = linh_instread_of_lẻ
-        self.ngàn_instead_of_nghìn = ngàn_instead_of_nghìn
-        self.compact = compact
+        useNgan ? "ngàn" : "nghìn"
     }
     
+    init(useLinh: Bool, useNgan: Bool, compact: Bool) {
+        self.useLinh = useLinh
+        self.useNgan = useNgan
+        self.compact = compact
+    }
+
     private func toString_0_10(_ intValue: Int, one_up_tone: Bool = false, lăm: Bool = false, ten_tone: Bool = false) -> String? {
         switch intValue {
         case 0:     return "không"
@@ -56,6 +61,10 @@ class Vietnamese {
         }
     }
     
+    func toString(_ intValue: Int) -> String? {
+        toString(intValue, fromLargerNumber: false)
+    }
+
     func toString(_ intValue: Int, fromLargerNumber: Bool = false) -> String? {
         if intValue < 0 { return nil }
         if !fromLargerNumber && intValue <= 10 {
@@ -159,7 +168,7 @@ class Vietnamese {
     }
 }
 
-class English {
+class English: Translator {
     enum Variant {
         case british, american
     }

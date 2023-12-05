@@ -12,6 +12,10 @@ protocol ShowAs {
     var showAsFloat: Bool { get }
 }
 
+enum Country {
+    case Vietnam, UK, USA
+}
+
 class ViewModel: ObservableObject, ShowAs {
     @Published var showAsInt = false /// This will update the "-> Int or -> sci button texts
     @Published var showAsFloat = false
@@ -21,6 +25,7 @@ class ViewModel: ObservableObject, ShowAs {
     @Published var backgroundColor: [String: Color] = [:]
     @Published var textColor: [String: Color] = [:]
     @Published var currentDisplay: Display
+    @Published var translationCountry: Country
 
     var precisionDescription = "unknown"
     var showPrecision: Bool = false
@@ -28,9 +33,11 @@ class ViewModel: ObservableObject, ShowAs {
 
     @AppStorage("precision", store: .standard) private (set) var precision: Int = 1000
     @AppStorage("showPreliminaryResults", store: .standard) var showPreliminaryResults: Bool = true
-    @AppStorage("memoryValue", store: .standard) var memoryValue: String = ""
     @AppStorage("rad", store: .standard) var rad: Bool = false
-
+    @AppStorage("vietnameseUseLinh", store: .standard) var vietnameseUseLinh: Bool = false
+    @AppStorage("vietnameseUseNgan", store: .standard) var vietnameseUseNgan: Bool = false
+    @AppStorage("vietnameseCompact", store: .standard) var vietnameseCompact: Bool = false
+    
     private let brain: Brain /// initialized later with _precision.wrappedValue
     private var stupidBrain = BrainEngine(precision: 100) /// I want to call fast sync functions
 
@@ -64,6 +71,7 @@ class ViewModel: ObservableObject, ShowAs {
         currentDisplay = Display(left: "0", right: nil, canBeInteger: false, canBeFloat: false)
         brain = Brain(precision: _precision.wrappedValue)
         precisionDescription = _precision.wrappedValue.useWords
+        translationCountry = .Vietnam
         for symbol in [
             "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", ",",
             "C", "AC", "±", "%", "/", "x", "-", "+", "=",

@@ -106,15 +106,6 @@ struct Screen: Equatable, DisplayLengthLimiter, Separators {
         //print("Screen INIT", screenSize)
 
         
-#if os(macOS)
-        backgroundColor = Color(white: 80.0/255.0)
-        defaultTextColor = Color(white: 236.0/255.0)
-        isPad = false
-        let isPortrait = false
-        keySpacing = 1.0
-        horizontalPadding = 0.0
-        displayHorizontalPadding = 10
-#else
         backgroundColor = .black
         defaultTextColor = .white
         isPad = UIDevice.current.userInterfaceIdiom == .pad
@@ -122,7 +113,6 @@ struct Screen: Equatable, DisplayLengthLimiter, Separators {
         keySpacing = 0.034 * screenSize.width
         horizontalPadding = keySpacing
         displayHorizontalPadding = screenSize.width * 0.035
-#endif
         
         portraitIPhoneDisplayBottomPadding = screenSize.height * 0.012
         
@@ -130,16 +120,9 @@ struct Screen: Equatable, DisplayLengthLimiter, Separators {
         let keyWidth: CGFloat
         let keyHeight: CGFloat
         
-#if os(macOS)
-        keyWidth = (calculatorWidth - 9.0 * keySpacing) * 0.1
-        keyboardHeight = 0.815 * screenSize.height
-        keyHeight = (keyboardHeight - 4.0 * keySpacing) * 0.2
-        bottomPadding = 0.0
-#else
         if isPortrait {
-            /// Round keys
             keyWidth = isPad ? (calculatorWidth - 9.0 * keySpacing) * 0.1 : (calculatorWidth - 3.0 * keySpacing) * 0.25
-            keyHeight = keyWidth
+            keyHeight = keyWidth * 0.9
             keyboardHeight = 5 * keyHeight + 4 * keySpacing
             bottomPadding = isPad ? 0.0 : keyboardHeight * 0.09
         } else {
@@ -155,7 +138,6 @@ struct Screen: Equatable, DisplayLengthLimiter, Separators {
             keyHeight = (keyboardHeight - 4.0 * keySpacing) * 0.2
             bottomPadding = 0.0
         }
-#endif
         
         keySize = CGSize(width: keyWidth, height: keyHeight)
         
@@ -163,14 +145,9 @@ struct Screen: Equatable, DisplayLengthLimiter, Separators {
         iconsWidth   = keyboardHeight * 0.16
         plusIconTrailingPadding = plusIconSize * 0.4
         ePadding = plusIconSize * 0.1
-#if os(macOS)
-        uiFontSize = (0.22 * keyboardHeight).rounded()
-        infoUiFontSize = 12.0
-#else
         uiFontSize = (0.16 * keyboardHeight).rounded()
         uiFontSize = 0.125 * keyboardHeight
         infoUiFontSize = 16.0
-#endif
         appleFont = Self.appleFont(ofSize: uiFontSize)
         infoUiFont = Screen.appleFont(ofSize: infoUiFontSize, weight: .regular)
 
@@ -181,21 +158,6 @@ struct Screen: Equatable, DisplayLengthLimiter, Separators {
         radWidth       = "Rad".textWidth(kerning: 0.0, appleFont: infoUiFont)
         digitWidth     = "0".textWidth(kerning: kerning, appleFont: appleFont)
 
-#if os(macOS)
-        offsetToVerticallyAlignTextWithkeyboard =
-        CGFloat(screenSize.height) -
-        CGFloat(keyboardHeight) -
-        CGFloat(textHeight)
-
-        offsetToVerticallyAlignIconWithText =
-        CGFloat(screenSize.height) -
-        CGFloat(keyboardHeight) -
-        0.5 * CGFloat(infoUiFontSize) -
-        CGFloat(plusIconSize) +
-        CGFloat(appleFont.descender) -
-        CGFloat(0.5 * appleFont.capHeight) +
-        CGFloat(0.5 * plusIconSize)
-#else
         offsetToVerticallyAlignTextWithkeyboard =
         CGFloat(screenSize.height) -
         CGFloat(keyboardHeight) -
@@ -210,8 +172,6 @@ struct Screen: Equatable, DisplayLengthLimiter, Separators {
         CGFloat(appleFont.descender) -
         CGFloat(0.5 * appleFont.capHeight) +
         CGFloat(0.5 * plusIconSize)
-#endif
-                
         displayWidth = calculatorWidth - 2.0 * displayHorizontalPadding
     }
 }

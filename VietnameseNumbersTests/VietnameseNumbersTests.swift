@@ -12,7 +12,7 @@ public typealias AppleFont = UIFont
 final class VietnameseNumbersTests: XCTestCase {
     
     func XXtest_translation() {
-        let vietnamese = Vietnamese()
+        let vietnamese = Vietnamese(useLinh: false, useNgan: false, compact: false)
         XCTAssertEqual(vietnamese.toString(0), "không")
         XCTAssertEqual(vietnamese.toString(1), "một")
         XCTAssertEqual(vietnamese.toString(2), "hai")
@@ -124,7 +124,7 @@ final class VietnameseNumbersTests: XCTestCase {
         XCTAssertEqual(vietnamese.toString(108), "một trăm lẻ tám")
         XCTAssertEqual(vietnamese.toString(109), "một trăm lẻ chín")
         
-        vietnamese.linh_instead_of_lẻ = true
+        vietnamese.useLinh = true
         XCTAssertEqual(vietnamese.toString(101), "một trăm linh một")
         XCTAssertEqual(vietnamese.toString(102), "một trăm linh hai")
         XCTAssertEqual(vietnamese.toString(103), "một trăm linh ba")
@@ -134,7 +134,7 @@ final class VietnameseNumbersTests: XCTestCase {
         XCTAssertEqual(vietnamese.toString(107), "một trăm linh bảy")
         XCTAssertEqual(vietnamese.toString(108), "một trăm linh tám")
         XCTAssertEqual(vietnamese.toString(109), "một trăm linh chín")
-        vietnamese.linh_instead_of_lẻ = false
+        vietnamese.useLinh = false
         
         XCTAssertEqual(vietnamese.toString(110), "một trăm mười")
         XCTAssertEqual(vietnamese.toString(111), "một trăm mười một")
@@ -288,7 +288,7 @@ final class VietnameseNumbersTests: XCTestCase {
         XCTAssertEqual(vietnamese.toString(108), "một trăm lẻ tám")
         XCTAssertEqual(vietnamese.toString(109), "một trăm lẻ chín")
         
-        vietnamese.linh_instead_of_lẻ = true
+        vietnamese.useLinh = true
         XCTAssertEqual(vietnamese.toString(101), "một trăm linh một")
         XCTAssertEqual(vietnamese.toString(102), "một trăm linh hai")
         XCTAssertEqual(vietnamese.toString(103), "một trăm linh ba")
@@ -298,7 +298,7 @@ final class VietnameseNumbersTests: XCTestCase {
         XCTAssertEqual(vietnamese.toString(107), "một trăm linh bảy")
         XCTAssertEqual(vietnamese.toString(108), "một trăm linh tám")
         XCTAssertEqual(vietnamese.toString(109), "một trăm linh chín")
-        vietnamese.linh_instead_of_lẻ = false
+        vietnamese.useLinh = false
         
         XCTAssertEqual(vietnamese.toString(110), "một trăm mười")
         XCTAssertEqual(vietnamese.toString(111), "một trăm mười một")

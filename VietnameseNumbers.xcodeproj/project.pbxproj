@@ -8,36 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		AA01B9D42957E44300617AFB /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA01B9D32957E44300617AFB /* Display.swift */; };
-		AA03B1EF298D537400A7837A /* CalculatorAppMac.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA03B1ED298D535800A7837A /* CalculatorAppMac.swift */; };
-		AA03B1F1298E0B1E00A7837A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA0CE3CE298CBFB00057D0D8 /* Assets.xcassets */; };
 		AA03B1F2298F639100A7837A /* gmp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA2FABEE272F2141006DE4C8 /* gmp.xcframework */; };
-		AA03B1F3298F639200A7837A /* gmp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA2FABEE272F2141006DE4C8 /* gmp.xcframework */; };
 		AA08C7C6272EDA4A001B8575 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA08C7C5272EDA4A001B8575 /* Assets.xcassets */; };
 		AA08C7C9272EDA4A001B8575 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA08C7C8272EDA4A001B8575 /* Preview Assets.xcassets */; };
-		AA0CE3D2298CBFB00057D0D8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA0CE3D1298CBFB00057D0D8 /* Preview Assets.xcassets */; };
-		AA0CE3D8298CC0BA0057D0D8 /* VietnameseNumbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA92B4C829273A58005E43F0 /* VietnameseNumbers.swift */; };
-		AA0CE3D9298CC0C40057D0D8 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE426F629597AE3005FE365 /* Screen.swift */; };
-		AA0CE3DB298CC0E40057D0D8 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA32853A297248B800D86CB4 /* ViewModel.swift */; };
-		AA0CE3DC298CC1E60057D0D8 /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA01B9D32957E44300617AFB /* Display.swift */; };
-		AA0CE3DD298CC31C0057D0D8 /* PortraitDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29F589293CD608001ADF5A /* PortraitDisplay.swift */; };
-		AA0CE3DF298CC32A0057D0D8 /* NonScientificKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB10B96292A2222004707E9 /* NonScientificKeyboard.swift */; };
-		AA0CE3E0298CC3370057D0D8 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA370C30293352D60041AE4E /* Key.swift */; };
-		AA0CE3E1298CC36E0057D0D8 /* Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FABF8272F2348006DE4C8 /* Number.swift */; };
-		AA0CE3E2298CC3770057D0D8 /* Gmp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FABF1272F217F006DE4C8 /* Gmp.swift */; };
-		AA0CE3E3298CC3980057D0D8 /* OperatorStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FAC0D272F2349006DE4C8 /* OperatorStack.swift */; };
-		AA0CE3E6298CC4130057D0D8 /* ThreeDots.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA92B4C429266CC1005E43F0 /* ThreeDots.swift */; };
-		AA0CE3E8298CC45C0057D0D8 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8453E7294D872300A50B74 /* Icons.swift */; };
-		AA0CE3E9298CC4680057D0D8 /* ScrollViewConditionalAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672B09295189950044DC08 /* ScrollViewConditionalAnimation.swift */; };
-		AA0CE3EB298CC4890057D0D8 /* FlexibleNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA32853C29724D5700D86CB4 /* FlexibleNavigation.swift */; };
-		AA0CE3EC298CC4B90057D0D8 /* KeyColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABEFC122972A8780023A3C9 /* KeyColor.swift */; };
-		AA0CE3ED298CC4C30057D0D8 /* Brain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA689124295E681400129593 /* Brain.swift */; };
-		AA0CE3EE298CC4C70057D0D8 /* BrainEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FAC01272F2348006DE4C8 /* BrainEngine.swift */; };
-		AA0CE3EF298CC4CB0057D0D8 /* NumberStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FABFB272F2348006DE4C8 /* NumberStack.swift */; };
-		AA0CE3F0298CF8820057D0D8 /* mpfr.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA2FABEA272F2135006DE4C8 /* mpfr.xcframework */; };
-		AA0CE3F2298CF8D10057D0D8 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA370C2C293352960041AE4E /* Extensions.swift */; };
-		AA0CE3F3298CF9FB0057D0D8 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3FB8262920E0E5002ECCEB /* Settings.swift */; };
-		AA0CE3F4298CFA100057D0D8 /* ColoredStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA92B4C229250827005E43F0 /* ColoredStepper.swift */; };
-		AA0CE3F5298CFD090057D0D8 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB10B94292A2222004707E9 /* Label.swift */; };
 		AA29F58A293CD608001ADF5A /* PortraitDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29F589293CD608001ADF5A /* PortraitDisplay.swift */; };
 		AA2FABEB272F2135006DE4C8 /* mpfr.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA2FABEA272F2135006DE4C8 /* mpfr.xcframework */; };
 		AA2FABF2272F217F006DE4C8 /* Gmp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FABF1272F217F006DE4C8 /* Gmp.swift */; };
@@ -52,7 +25,6 @@
 		AA3FB8272920E0E5002ECCEB /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3FB8262920E0E5002ECCEB /* Settings.swift */; };
 		AA672B0A295189950044DC08 /* ScrollViewConditionalAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672B09295189950044DC08 /* ScrollViewConditionalAnimation.swift */; };
 		AA689125295E681400129593 /* Brain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA689124295E681400129593 /* Brain.swift */; };
-		AA7179272B1EB4040071FB2B /* Translate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8A91152B1D80F800CE7185 /* Translate.swift */; };
 		AA8453E8294D872300A50B74 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8453E7294D872300A50B74 /* Icons.swift */; };
 		AA8A91112B1D7B5F00CE7185 /* VietnameseNumbersApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FABFF272F2348006DE4C8 /* VietnameseNumbersApp.swift */; };
 		AA8A91122B1D7B7100CE7185 /* VietnameseNumbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA92B4C829273A58005E43F0 /* VietnameseNumbers.swift */; };
@@ -60,7 +32,6 @@
 		AA8A91162B1D80F800CE7185 /* Translate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8A91152B1D80F800CE7185 /* Translate.swift */; };
 		AA8A911E2B1D815C00CE7185 /* VietnameseNumbersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8A911D2B1D815C00CE7185 /* VietnameseNumbersTests.swift */; };
 		AA8A91292B1D838C00CE7185 /* Translate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8A91152B1D80F800CE7185 /* Translate.swift */; };
-		AA8A912A2B1D853B00CE7185 /* VietnameseDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8A91132B1D7FD000CE7185 /* VietnameseDisplay.swift */; };
 		AA8A91322B1D865B00CE7185 /* KeyColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABEFC122972A8780023A3C9 /* KeyColor.swift */; };
 		AA8A91342B1D86A900CE7185 /* ThreeDots.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA92B4C429266CC1005E43F0 /* ThreeDots.swift */; };
 		AA8A91352B1D870B00CE7185 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA370C2C293352960041AE4E /* Extensions.swift */; };
@@ -71,16 +42,6 @@
 		AABEFC132972A8780023A3C9 /* KeyColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABEFC122972A8780023A3C9 /* KeyColor.swift */; };
 		AAE426F729597AE3005FE365 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE426F629597AE3005FE365 /* Screen.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		AA8A911F2B1D815C00CE7185 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AA08C7B6272EDA48001B8575 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AA0CE3C7298CBFAF0057D0D8;
-			remoteInfo = VietnameseNumbersMac;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		AA2FABED272F2136006DE4C8 /* Embed Frameworks */ = {
@@ -103,7 +64,6 @@
 		AA08C7C8272EDA4A001B8575 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AA08C7EB272F1241001B8575 /* VietnameseNumbers.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VietnameseNumbers.entitlements; sourceTree = "<group>"; };
 		AA08C7EC272F1572001B8575 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		AA0CE3C8298CBFAF0057D0D8 /* VietnameseNumbers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VietnameseNumbers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA0CE3CE298CBFB00057D0D8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA0CE3D1298CBFB00057D0D8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AA0CE3D3298CBFB00057D0D8 /* VietnameseNumbersMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VietnameseNumbersMac.entitlements; sourceTree = "<group>"; };
@@ -153,15 +113,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AA0CE3C5298CBFAF0057D0D8 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AA03B1F3298F639200A7837A /* gmp.xcframework in Frameworks */,
-				AA0CE3F0298CF8820057D0D8 /* mpfr.xcframework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		AA8A91182B1D815C00CE7185 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -188,7 +139,6 @@
 			isa = PBXGroup;
 			children = (
 				AA08C7BE272EDA48001B8575 /* VietnameseNumbers.app */,
-				AA0CE3C8298CBFAF0057D0D8 /* VietnameseNumbers.app */,
 				AA8A911B2B1D815C00CE7185 /* VietnameseNumbersTests.xctest */,
 			);
 			name = Products;
@@ -308,23 +258,6 @@
 			productReference = AA08C7BE272EDA48001B8575 /* VietnameseNumbers.app */;
 			productType = "com.apple.product-type.application";
 		};
-		AA0CE3C7298CBFAF0057D0D8 /* VietnameseNumbersMac */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AA0CE3D4298CBFB00057D0D8 /* Build configuration list for PBXNativeTarget "VietnameseNumbersMac" */;
-			buildPhases = (
-				AA0CE3C4298CBFAF0057D0D8 /* Sources */,
-				AA0CE3C5298CBFAF0057D0D8 /* Frameworks */,
-				AA0CE3C6298CBFAF0057D0D8 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = VietnameseNumbersMac;
-			productName = CalculatorMac;
-			productReference = AA0CE3C8298CBFAF0057D0D8 /* VietnameseNumbers.app */;
-			productType = "com.apple.product-type.application";
-		};
 		AA8A911A2B1D815C00CE7185 /* VietnameseNumbersTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AA8A91212B1D815C00CE7185 /* Build configuration list for PBXNativeTarget "VietnameseNumbersTests" */;
@@ -336,7 +269,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				AA8A91202B1D815C00CE7185 /* PBXTargetDependency */,
 			);
 			name = VietnameseNumbersTests;
 			productName = VietnameseNumbersTests;
@@ -355,9 +287,6 @@
 				TargetAttributes = {
 					AA08C7BD272EDA48001B8575 = {
 						CreatedOnToolsVersion = 13.1;
-					};
-					AA0CE3C7298CBFAF0057D0D8 = {
-						CreatedOnToolsVersion = 14.2;
 					};
 					AA8A911A2B1D815C00CE7185 = {
 						CreatedOnToolsVersion = 15.0.1;
@@ -379,7 +308,6 @@
 			projectRoot = "";
 			targets = (
 				AA08C7BD272EDA48001B8575 /* VietnameseNumbers */,
-				AA0CE3C7298CBFAF0057D0D8 /* VietnameseNumbersMac */,
 				AA8A911A2B1D815C00CE7185 /* VietnameseNumbersTests */,
 			);
 		};
@@ -392,15 +320,6 @@
 			files = (
 				AA08C7C9272EDA4A001B8575 /* Preview Assets.xcassets in Resources */,
 				AA08C7C6272EDA4A001B8575 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AA0CE3C6298CBFAF0057D0D8 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AA0CE3D2298CBFB00057D0D8 /* Preview Assets.xcassets in Resources */,
-				AA03B1F1298E0B1E00A7837A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,38 +365,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AA0CE3C4298CBFAF0057D0D8 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AA0CE3E6298CC4130057D0D8 /* ThreeDots.swift in Sources */,
-				AA0CE3F3298CF9FB0057D0D8 /* Settings.swift in Sources */,
-				AA0CE3EF298CC4CB0057D0D8 /* NumberStack.swift in Sources */,
-				AA03B1EF298D537400A7837A /* CalculatorAppMac.swift in Sources */,
-				AA0CE3ED298CC4C30057D0D8 /* Brain.swift in Sources */,
-				AA0CE3F4298CFA100057D0D8 /* ColoredStepper.swift in Sources */,
-				AA0CE3E3298CC3980057D0D8 /* OperatorStack.swift in Sources */,
-				AA0CE3E8298CC45C0057D0D8 /* Icons.swift in Sources */,
-				AA0CE3E0298CC3370057D0D8 /* Key.swift in Sources */,
-				AA0CE3DC298CC1E60057D0D8 /* Display.swift in Sources */,
-				AA8A912A2B1D853B00CE7185 /* VietnameseDisplay.swift in Sources */,
-				AA0CE3E2298CC3770057D0D8 /* Gmp.swift in Sources */,
-				AA0CE3EB298CC4890057D0D8 /* FlexibleNavigation.swift in Sources */,
-				AA0CE3DD298CC31C0057D0D8 /* PortraitDisplay.swift in Sources */,
-				AA7179272B1EB4040071FB2B /* Translate.swift in Sources */,
-				AA0CE3D8298CC0BA0057D0D8 /* VietnameseNumbers.swift in Sources */,
-				AA0CE3E1298CC36E0057D0D8 /* Number.swift in Sources */,
-				AA0CE3DF298CC32A0057D0D8 /* NonScientificKeyboard.swift in Sources */,
-				AA0CE3E9298CC4680057D0D8 /* ScrollViewConditionalAnimation.swift in Sources */,
-				AA0CE3F2298CF8D10057D0D8 /* Extensions.swift in Sources */,
-				AA0CE3DB298CC0E40057D0D8 /* ViewModel.swift in Sources */,
-				AA0CE3EC298CC4B90057D0D8 /* KeyColor.swift in Sources */,
-				AA0CE3D9298CC0C40057D0D8 /* Screen.swift in Sources */,
-				AA0CE3F5298CFD090057D0D8 /* Label.swift in Sources */,
-				AA0CE3EE298CC4C70057D0D8 /* BrainEngine.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		AA8A91172B1D815C00CE7185 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -491,14 +378,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		AA8A91202B1D815C00CE7185 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AA0CE3C7298CBFAF0057D0D8 /* VietnameseNumbersMac */;
-			targetProxy = AA8A911F2B1D815C00CE7185 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		AA08C7E0272EDA4A001B8575 /* Debug */ = {
@@ -702,80 +581,6 @@
 			};
 			name = Release;
 		};
-		AA0CE3D5298CBFB00057D0D8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_ENTITLEMENTS = VietnameseNumbersMac/VietnameseNumbersMac.entitlements;
-				CODE_SIGN_IDENTITY = "-";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"VietnameseNumbersMac/Preview Content\"";
-				DEVELOPMENT_TEAM = 8A4DL788W9;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = HighPrecision;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 13.1;
-				MARKETING_VERSION = 4.1;
-				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.joachimneumann.VietnameseNumbersMac;
-				PRODUCT_NAME = VietnameseNumbers;
-				SDKROOT = macosx;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_ENFORCE_EXCLUSIVE_ACCESS = off;
-				SWIFT_OBJC_BRIDGING_HEADER = dist/include/bridge.h;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		AA0CE3D6298CBFB00057D0D8 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_ENTITLEMENTS = VietnameseNumbersMac/VietnameseNumbersMac.entitlements;
-				CODE_SIGN_IDENTITY = "-";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"VietnameseNumbersMac/Preview Content\"";
-				DEVELOPMENT_TEAM = 8A4DL788W9;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = HighPrecision;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 13.1;
-				MARKETING_VERSION = 4.1;
-				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.joachimneumann.VietnameseNumbersMac;
-				PRODUCT_NAME = VietnameseNumbers;
-				SDKROOT = macosx;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_ENFORCE_EXCLUSIVE_ACCESS = off;
-				SWIFT_OBJC_BRIDGING_HEADER = dist/include/bridge.h;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
 		AA8A91222B1D815C00CE7185 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -795,7 +600,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.joachimneumann.VietnameseNumbersTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -824,7 +629,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.joachimneumann.VietnameseNumbersTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -850,15 +655,6 @@
 			buildConfigurations = (
 				AA08C7E3272EDA4A001B8575 /* Debug */,
 				AA08C7E4272EDA4A001B8575 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		AA0CE3D4298CBFB00057D0D8 /* Build configuration list for PBXNativeTarget "VietnameseNumbersMac" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AA0CE3D5298CBFB00057D0D8 /* Debug */,
-				AA0CE3D6298CBFB00057D0D8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

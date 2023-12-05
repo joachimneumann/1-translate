@@ -8,24 +8,34 @@
 import SwiftUI
 
 struct VietnameseDisplay: View {
+    @ObservedObject var viewModel: ViewModel
     let display: Display
+    let country: Country
     let screen: Screen
     let backgroundColor: Color
     private let font: Font
-    private let vietnamese: Vietnamese
     private let toShow: String
     
-    init(display: Display, screen: Screen, backgroundColor: Color) {
+    init(viewModel: ViewModel, display: Display, country: Country, screen: Screen, backgroundColor: Color) {
+        self.viewModel = viewModel
         self.display = display
+        self.country = country
         self.screen = screen
         self.backgroundColor = backgroundColor
-        vietnamese = Vietnamese(linh_instread_of_lẻ: false, ngàn_instead_of_nghìn: false, compact: true)
         let uiFont = Screen.appleFont(ofSize: screen.uiFontSize * 0.5)
         font = Font(uiFont)
-        if display.right != nil {
-            toShow = "can't translate"
-        } else {
-            toShow = vietnamese.toString(display.left) ?? "can't translate"
+        toShow = "can't translate"
+    }
+    
+    var translator: Translator {
+        switch country {
+        case .Vietnam:
+            Vietnamese(
+                useLinh: viewModel.vietnameseUseLinh,
+                useNgan: viewModel.vietnameseUseNgan, 
+                compact: viewModel.vietnameseCompact)
+        default:
+            English()
         }
     }
     
@@ -34,7 +44,7 @@ struct VietnameseDisplay: View {
         //let _ = print(display.data.left)
         VStack(spacing: 0.0) {
             HStack(alignment: .bottom, spacing: 0.0) {
-                Text(toShow)
+                Text(translator.toString(viewModel.currentDisplay.left) ?? "?")
                     .multilineTextAlignment(.leading)
                     .font(font)
                 Spacer(minLength: 0.0)

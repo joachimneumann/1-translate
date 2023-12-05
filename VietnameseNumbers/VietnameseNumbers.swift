@@ -19,9 +19,49 @@ struct VietnameseNumbers: View {
     
     var portraitView: some View {
         VStack(spacing: 0.0) {
+            HStack(spacing: 30.0) {
+                Button(action: {
+                    viewModel.translationCountry = .Vietnam
+                }) {
+                Image("flag_vietnam")
+                        .resizable()
+                        .scaledToFit()
+                }
+                Button(action: {
+                    viewModel.translationCountry = .UK
+                }) {
+                Image("flag UK")
+                        .resizable()
+                        .scaledToFit()
+                }
+                Button(action: {
+                    viewModel.translationCountry = .USA
+                }) {
+                Image("flag USA")
+                        .resizable()
+                        .scaledToFit()
+                }
+                Spacer()
+                NavigationLink {
+                    Settings(viewModel: viewModel, screen: screen, font: Font(screen.infoUiFont))
+                } label: {
+                    Image(systemName: "switch.2")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .font(Font.title.weight(.thin))
+                        .frame(height: screen.plusIconSize * 0.6)
+                        .foregroundColor(Color.white)
+                        .accessibilityIdentifier("settingsButton")
+                }
+                .buttonStyle(TransparentButtonStyle())
+            }
+            .frame(height: 30.0)
+            .padding(.vertical, 10)
             Spacer(minLength: 0.0)
             VietnameseDisplay(
+                viewModel: viewModel,
                 display: viewModel.currentDisplay,
+                country: viewModel.translationCountry,
                 screen: screen,
                 backgroundColor: screen.backgroundColor)
                 .padding(.bottom, screen.portraitIPhoneDisplayBottomPadding)
@@ -57,21 +97,23 @@ struct VietnameseNumbers: View {
     }
     
     var body: some View {
-        //let _ = print("Calculator body isPortraitPhone", screen.isPortraitPhone)
-        content
-            .padding(.bottom, screen.bottomPadding)
-            .padding(.horizontal, screen.horizontalPadding)
-            .preferredColorScheme(.dark)
-            .onAppear() {
-                Task {
-                    await viewModel.refreshDisplay(screen: screen)
+        NavigationView {
+            //let _ = print("Calculator body isPortraitPhone", screen.isPortraitPhone)
+            content
+                .padding(.bottom, screen.bottomPadding)
+                .padding(.horizontal, screen.horizontalPadding)
+                .preferredColorScheme(.dark)
+                .onAppear() {
+                    Task {
+                        await viewModel.refreshDisplay(screen: screen)
+                    }
                 }
-            }
-            .onChange(of: screen) { newScreen in /// e.g., rotation
-                Task {
-                    await viewModel.refreshDisplay(screen: newScreen)
+                .onChange(of: screen) { newScreen in /// e.g., rotation
+                    Task {
+                        await viewModel.refreshDisplay(screen: newScreen)
+                    }
                 }
-            }
+        }
     }
 }
 
