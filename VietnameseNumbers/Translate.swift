@@ -22,6 +22,8 @@ class Vietnamese {
     private var thousand: String {
         ngàn_instead_of_nghìn ? "ngàn" : "nghìn"
     }
+    let million = "triệu"
+    let billion = "tỷ"
 
     init(linh_instread_of_lẻ: Bool = false, ngàn_instead_of_nghìn: Bool = false) {
         self.linh_instead_of_lẻ = linh_instread_of_lẻ
@@ -45,68 +47,92 @@ class Vietnamese {
         }
     }
     
-    func toString(_ intValue: Int) -> String? {
+    func toString(_ intValue: Int, fromLargerNumber: Bool = false) -> String? {
         if intValue < 0 { return nil }
-        if intValue <= 10 {
+        if !fromLargerNumber && intValue <= 10 {
             return toString_0_10(intValue)
         }
-        if intValue < 20 {
+        if !fromLargerNumber && intValue < 20 {
             return toString_0_10(10)! + " " +
             toString_0_10(intValue - 10, one_up_tone: false, lăm: true)!
         }
-        if intValue <= 9999 {
+        if intValue <= 999 {
             var temp = intValue
-            let x = temp % 10
-            temp = (temp - x) / 10
-            let x_ = temp % 10
-            temp = (temp - x_) / 10
-            let x__ = temp % 10
-            temp = (temp - x__) / 10
-            let x___ = temp % 10
+            let X = temp % 10
+            temp = (temp - X) / 10
+            let X0 = temp % 10
+            temp = (temp - X0) / 10
+            let X00 = temp % 10
+            temp = (temp - X00) / 10
             var ret = ""
-            if x___ > 0 {
-                ret += toString(x___)! + " " + thousand
-            }
-            if x__ == 0 && x_ == 0 && x == 0 {
-                return ret
-            }
-            if x__ > 0 {
+            if fromLargerNumber || X00 > 0 {
                 if ret.count > 0 { ret += " " }
-                ret += toString(x__)! + " " + hundred
+                ret += toString(X00)! + " " + hundred
             } else {
-                if ret.count > 0 {
+                if fromLargerNumber || ret.count > 0 {
                     if ret.count > 0 { ret += " " }
                     ret += toString(0)! + " " + hundred
                 }
             }
-            if x_ == 0 && x == 0 {
+            if X0 == 0 && X == 0 {
                 return ret
             }
-            if x_ > 0 {
+            if X0 > 0 {
                 if ret.count > 0 { ret += " " }
-                if x_ >= 2 {
-                    ret += toString(x_)! + " " + ten_no_tone
-                    if x > 0 {
-                        ret += " " + toString_0_10(x, one_up_tone: true, lăm: true)!
+                if X0 >= 2 {
+                    ret += toString(X0)! + " " + ten_no_tone
+                    if X > 0 {
+                        ret += " " + toString_0_10(X, one_up_tone: true, lăm: true)!
                     }
                 } else {
                     ret += ten
-                    if x > 0 {
-                        ret += " " + toString_0_10(x, one_up_tone: false, lăm: true)!
+                    if X > 0 {
+                        ret += " " + toString_0_10(X, one_up_tone: false, lăm: true)!
                     }
                 }
             } else {
                 // lẻ?
                 if ret.count > 0 { ret += " " }
-                if x > 0 {
+                if X > 0 {
                     ret += secondlastZero + " "
-                    ret += toString(x)!
+                    ret += toString(X)!
                 } else {
                     ret += toString(0)!
                 }
             }
             return ret
         }
+        
+        if intValue <= 999_999 {
+            let XXX = intValue % 1_000
+            let XXX_000 = (intValue - XXX) / 1_000
+            var ret = toString(XXX_000)! + " " + thousand
+            if XXX > 0 {
+                ret += " " + toString(XXX, fromLargerNumber: true)!
+            }
+            return ret
+        }
+
+        if intValue <= 999_999_999 {
+            let XXX_XXX = intValue % 1_000_000
+            let XXX_000_000 = (intValue - XXX_XXX) / 1_000_000
+            var ret = toString(XXX_000_000)! + " " + million
+            if XXX_XXX > 0 {
+                ret += " " + toString(XXX_XXX, fromLargerNumber: true)!
+            }
+            return ret
+        }
+
+        if intValue <= 999_999_999_999 {
+            let XXX_XXX_XXX = intValue % 1_000_000_000
+            let XXX_000_000_000 = (intValue - XXX_XXX_XXX) / 1_000_000_000
+            var ret = toString(XXX_000_000_000)! + " " + billion
+            if XXX_XXX_XXX > 0 {
+                ret += " " + toString(XXX_XXX_XXX, fromLargerNumber: true)!
+            }
+            return ret
+        }
+
         return nil
     }
 

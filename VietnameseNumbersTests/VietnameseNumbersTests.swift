@@ -166,9 +166,14 @@ final class VietnameseNumbersTests: XCTestCase {
         XCTAssertEqual(vietnamese.toString(20001), "hai mươi nghìn không trăm lẻ một")
         XCTAssertEqual(vietnamese.toString(20010), "hai mươi nghìn không trăm mười")
         XCTAssertEqual(vietnamese.toString(20101), "hai mươi nghìn một trăm lẻ một")
+        XCTAssertEqual(vietnamese.toString(201001), "hai trăm lẻ một nghìn không trăm lẻ một")
+        XCTAssertEqual(vietnamese.toString(502305), "năm trăm lẻ hai nghìn ba trăm lẻ năm")
         XCTAssertEqual(vietnamese.toString(999999), "chín trăm chín mươi chín nghìn chín trăm chín mươi chín")
+        XCTAssertEqual(vietnamese.toString(62_000_000), "sáu mươi hai triệu")
+        XCTAssertEqual(vietnamese.toString(62_003_100), "sáu mươi hai triệu ba nghìn một trăm")
+        XCTAssertEqual(vietnamese.toString(99_000_000_909), "chín mươi chín tỷ chín trăm lẻ chín")
+        XCTAssertEqual(vietnamese.toString(99_999_999_999), "chín mươi chín tỷ chín trăm chín mươi chín triệu chín trăm chín mươi chín nghìn chín trăm chín mươi chín")
 
-        
         XCTAssertEqual(english(0), "zero")
         XCTAssertEqual(english(1), "one")
         XCTAssertEqual(english(2), "two")
