@@ -53,6 +53,7 @@
 		AA672B0A295189950044DC08 /* ScrollViewConditionalAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672B09295189950044DC08 /* ScrollViewConditionalAnimation.swift */; };
 		AA689125295E681400129593 /* Brain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA689124295E681400129593 /* Brain.swift */; };
 		AA6CE70A2945CC5C002BB5FE /* Test.storekit in Resources */ = {isa = PBXBuildFile; fileRef = AA6CE7092945CC5C002BB5FE /* Test.storekit */; };
+		AA7179272B1EB4040071FB2B /* Translate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8A91152B1D80F800CE7185 /* Translate.swift */; };
 		AA8453E8294D872300A50B74 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8453E7294D872300A50B74 /* Icons.swift */; };
 		AA8A91112B1D7B5F00CE7185 /* VietnameseNumbersApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FABFF272F2348006DE4C8 /* VietnameseNumbersApp.swift */; };
 		AA8A91122B1D7B7100CE7185 /* VietnameseNumbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA92B4C829273A58005E43F0 /* VietnameseNumbers.swift */; };
@@ -469,6 +470,7 @@
 				AA0CE3E2298CC3770057D0D8 /* Gmp.swift in Sources */,
 				AA0CE3EB298CC4890057D0D8 /* FlexibleNavigation.swift in Sources */,
 				AA0CE3DD298CC31C0057D0D8 /* PortraitDisplay.swift in Sources */,
+				AA7179272B1EB4040071FB2B /* Translate.swift in Sources */,
 				AA0CE3D8298CC0BA0057D0D8 /* VietnameseNumbers.swift in Sources */,
 				AA0CE3E1298CC36E0057D0D8 /* Number.swift in Sources */,
 				AA0CE3DF298CC32A0057D0D8 /* NonScientificKeyboard.swift in Sources */,

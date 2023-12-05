@@ -12,73 +12,34 @@ struct VietnameseDisplay: View {
     let screen: Screen
     let backgroundColor: Color
     private let font: Font
+    private let vietnamese: Vietnamese
+    private let toShow: String
     
     init(display: Display, screen: Screen, backgroundColor: Color) {
         self.display = display
         self.screen = screen
         self.backgroundColor = backgroundColor
-        
-        /// calculate possibly expanded font
-        var availableDisplayWidth = screen.displayWidth
-        if display.right != nil {
-            availableDisplayWidth -= screen.ePadding
-        }
-        let text = display.left + (display.right ?? "")
-        let n = CGFloat(text.count)
-        let lengthOfNulls = n * screen.digitWidth
-        
-        var factor: CGFloat = 1.0
-        let expandLimit = screen.displayWidth - screen.digitWidth * 0.9
-        if lengthOfNulls < expandLimit {
-            /// scale up
-            factor = expandLimit / lengthOfNulls
-            if factor > 1.5 { factor = 1.5 }
-            if factor < 1.0 { factor = 1.0 }
-        }
-        let uiFont = Screen.appleFont(ofSize: screen.uiFontSize * factor)
+        vietnamese = Vietnamese(linh_instread_of_lẻ: false, ngàn_instead_of_nghìn: false, compact: true)
+        let uiFont = Screen.appleFont(ofSize: screen.uiFontSize * 0.5)
         font = Font(uiFont)
-    }
-    
-    @ViewBuilder
-    var mantissa: some View {
-        let toShow = display.preliminary && display.left.count > 1 ? String(display.left.dropLast()) : display.left
-        Text(toShow)
-            .kerning(screen.kerning)
-            .font(font)
-            .foregroundColor(display.preliminary ? .gray : display.color)
-            .multilineTextAlignment(.trailing)
-            .background(testColors ? .yellow : backgroundColor).opacity(testColors ? 0.9 : 1.0)
-    }
-
-    @ViewBuilder
-    var threeDots: some View {
-        if display.preliminary {
-            ThreeDots().frame(width: screen.digitWidth, height: screen.digitWidth / 3)
-                .offset(y: -screen.digitWidth / 3)
+        if display.right != nil {
+            toShow = "can't translate"
+        } else {
+            toShow = vietnamese.toString(display.left) ?? "can't translate"
         }
     }
     
-    @ViewBuilder
-    var exponent: some View {
-        if let exponent = display.right {
-            Text(exponent)
-                .kerning(screen.kerning)
-                .font(font)
-                .foregroundColor(display.preliminary ? .gray : display.color)
-                .multilineTextAlignment(.trailing)
-                .background(testColors ? .yellow : backgroundColor).opacity(testColors ? 0.9 : 1.0)
-                .lineLimit(1)
-                .padding(.leading, screen.ePadding)
-        }
-    }
     
     var body: some View {
         //let _ = print(display.data.left)
-        HStack(alignment: .bottom, spacing: 0.0) {
+        VStack(spacing: 0.0) {
+            HStack(alignment: .bottom, spacing: 0.0) {
+                Text(toShow)
+                    .multilineTextAlignment(.leading)
+                    .font(font)
+                Spacer(minLength: 0.0)
+            }
             Spacer(minLength: 0.0)
-            mantissa
-            threeDots
-            exponent
         }
     }
 }

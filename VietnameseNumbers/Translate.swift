@@ -10,6 +10,7 @@ import Foundation
 class Vietnamese {
     var linh_instead_of_lẻ: Bool
     var ngàn_instead_of_nghìn: Bool
+    var compact: Bool
     
     private let one = "một"
     private let one_with_up_tone = "mốt"
@@ -25,9 +26,10 @@ class Vietnamese {
     let million = "triệu"
     let billion = "tỷ"
 
-    init(linh_instread_of_lẻ: Bool = false, ngàn_instead_of_nghìn: Bool = false) {
+    init(linh_instread_of_lẻ: Bool = false, ngàn_instead_of_nghìn: Bool = false, compact: Bool = false) {
         self.linh_instead_of_lẻ = linh_instread_of_lẻ
         self.ngàn_instead_of_nghìn = ngàn_instead_of_nghìn
+        self.compact = compact
     }
     
     private func toString_0_10(_ intValue: Int, one_up_tone: Bool = false, lăm: Bool = false, ten_tone: Bool = false) -> String? {
@@ -80,7 +82,13 @@ class Vietnamese {
             if X0 > 0 {
                 if ret.count > 0 { ret += " " }
                 if X0 >= 2 {
-                    ret += toString(X0)! + " " + ten_no_tone
+                    var between = " " + ten_no_tone
+                    if compact {
+                        if X > 0 {
+                            between = ""
+                        }
+                    }
+                    ret += toString(X0)! + between
                     if X > 0 {
                         ret += " " + toString_0_10(X, one_up_tone: true, lăm: true)!
                     }
