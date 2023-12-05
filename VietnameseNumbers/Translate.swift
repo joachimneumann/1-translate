@@ -15,9 +15,9 @@
 import Foundation
 
 class Vietnamese {
-    private var linh_instead_of_lẻ: Bool
-    private var ngàn_instead_of_nghìn: Bool
-    private var compact: Bool
+    var linh_instead_of_lẻ: Bool
+    var ngàn_instead_of_nghìn: Bool
+    var compact: Bool
     private let one = "một"
     private let one_with_up_tone = "mốt"
     private let ten = "mười"
