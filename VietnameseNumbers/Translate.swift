@@ -5,26 +5,33 @@
 //  Created by Joachim Neumann on 12/4/23.
 //
 
+///
+/// TODOs:
+///  Vietamese: kleinerer Numer Font, 000 separator
+///  English translation
+///  Country selectrion
+///  Reading the text
+
 import Foundation
 
 class Vietnamese {
-    var linh_instead_of_lẻ: Bool
-    var ngàn_instead_of_nghìn: Bool
-    var compact: Bool
-    
+    private var linh_instead_of_lẻ: Bool
+    private var ngàn_instead_of_nghìn: Bool
+    private var compact: Bool
     private let one = "một"
     private let one_with_up_tone = "mốt"
     private let ten = "mười"
     private let ten_no_tone = "mươi"
     private let hundred = "trăm"
+    private let million = "triệu"
+    private let billion = "tỷ"
+
     private var secondlastZero: String {
         linh_instead_of_lẻ ? "linh" : "lẻ"
     }
     private var thousand: String {
         ngàn_instead_of_nghìn ? "ngàn" : "nghìn"
     }
-    let million = "triệu"
-    let billion = "tỷ"
 
     init(linh_instread_of_lẻ: Bool = false, ngàn_instead_of_nghìn: Bool = false, compact: Bool = false) {
         self.linh_instead_of_lẻ = linh_instread_of_lẻ
@@ -153,7 +160,63 @@ class Vietnamese {
     }
 }
 
+class English {
+    enum Variant {
+        case british, american
+    }
+    
+    private let zero = "zero"
+    private let one = "one"
+    private let ten = "ten"
+    private let hundred = "hundred"
+    private let thousand = "thousand"
+    private let million = "million"
+    
+    private var variant: Variant
+    
+    init(variant: Variant = Variant.american) {
+        self.variant = variant
+    }
+    
+    private func toString_0_10(_ intValue: Int) -> String? {
+        switch intValue {
+        case 0:     return zero
+        case 1:     return one
+        case 2:     return "two"
+        case 3:     return "three"
+        case 4:     return "four"
+        case 5:     return "five"
+        case 6:     return "six"
+        case 7:     return "seven"
+        case 8:     return "eight"
+        case 9:     return "nine"
+        case 10:    return ten
+        default: return nil
+        }
+    }
+    
+    func toString(_ intValue: Int) -> String? {
+        if intValue <= 10 {
+            return toString_0_10(intValue)
+        }
+        if intValue < 20 {
+            return toString_0_10(10)! + " ?"
+        }
+        if intValue <= 999 {
+            return "?"
+        }
+        return "?"
+    }
+    
+    func toString(_ string: String) -> String? {
+        let intValue = Int(string)
+        if intValue != nil {
+            return toString(intValue!)
+        }
+        return nil;
+    }
 
+}
 
 
 private func english_0_9(_ intValue: Int) -> String? {
