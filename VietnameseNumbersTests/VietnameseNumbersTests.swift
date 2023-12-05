@@ -170,7 +170,9 @@ final class VietnameseNumbersTests: XCTestCase {
         XCTAssertEqual(vietnamese.toString(502305), "năm trăm lẻ hai nghìn ba trăm lẻ năm")
         XCTAssertEqual(vietnamese.toString(999999), "chín trăm chín mươi chín nghìn chín trăm chín mươi chín")
         XCTAssertEqual(vietnamese.toString(62_000_000), "sáu mươi hai triệu")
-        XCTAssertEqual(vietnamese.toString(62_003_100), "sáu mươi hai triệu không trăm lẻ ba nghìn không trăm lẻ năm")
+        XCTAssertEqual(vietnamese.toString(62_003_005), "sáu mươi hai triệu không trăm lẻ ba nghìn không trăm lẻ năm")
+        XCTAssertEqual(vietnamese.toString(62_003_105), "sáu mươi hai triệu không trăm lẻ ba nghìn một trăm lẻ năm")
+        XCTAssertEqual(vietnamese.toString(62_003_155), "sáu mươi hai triệu không trăm lẻ ba nghìn một trăm năm mươi lăm")
         XCTAssertEqual(vietnamese.toString(99_000_000_909), "chín mươi chín tỷ chín trăm lẻ chín")
         XCTAssertEqual(vietnamese.toString(99_999_999_999), "chín mươi chín tỷ chín trăm chín mươi chín triệu chín trăm chín mươi chín nghìn chín trăm chín mươi chín")
 
@@ -332,7 +334,9 @@ final class VietnameseNumbersTests: XCTestCase {
         XCTAssertEqual(vietnamese.toString(502305), "năm trăm lẻ hai nghìn ba trăm lẻ năm")
         XCTAssertEqual(vietnamese.toString(999999), "chín trăm chín chín nghìn chín trăm chín chín")
         XCTAssertEqual(vietnamese.toString(62_000_000), "sáu hai triệu")
-        XCTAssertEqual(vietnamese.toString(62_003_100), "sáu mươi hai triệu không trăm lẻ ba nghìn không trăm lẻ năm")
+        XCTAssertEqual(vietnamese.toString(62_003_005), "sáu hai triệu không trăm lẻ ba nghìn không trăm lẻ năm")
+        XCTAssertEqual(vietnamese.toString(62_003_105), "sáu hai triệu không trăm lẻ ba nghìn một trăm lẻ năm")
+        XCTAssertEqual(vietnamese.toString(62_003_155), "sáu hai triệu không trăm lẻ ba nghìn một trăm năm lăm")
         XCTAssertEqual(vietnamese.toString(99_000_000_909), "chín chín tỷ chín trăm lẻ chín")
         XCTAssertEqual(vietnamese.toString(99_999_999_999), "chín chín tỷ chín trăm chín chín triệu chín trăm chín chín nghìn chín trăm chín chín")
 

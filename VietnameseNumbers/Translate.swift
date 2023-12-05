@@ -114,7 +114,7 @@ class Vietnamese {
         if intValue <= 999_999 {
             let XXX = intValue % 1_000
             let XXX_000 = (intValue - XXX) / 1_000
-            var ret = toString(XXX_000)! + " " + thousand
+            var ret = toString(XXX_000, fromLargerNumber: fromLargerNumber)! + " " + thousand
             if XXX > 0 {
                 ret += " " + toString(XXX, fromLargerNumber: true)!
             }
