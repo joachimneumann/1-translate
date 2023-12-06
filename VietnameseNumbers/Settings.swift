@@ -23,7 +23,7 @@ struct Settings: View {
 
     var body: some View {
         let example = "1\(settingsGroupingSeparator.string)000\(settingsGroupingSeparator.string)000\(settingsDecimalSeparator.string)05"
-        var vietnamese = Vietnamese(screen: screen)
+        var vietnamese = Vietnamese(groupingSeparator: .comma, vietnameseThousand: .nghìn, vietnameseSecondLast: .lẻ, vietnameseCompact: false)
         VStack {
             BackButton(
                 screen: screen,
@@ -151,7 +151,7 @@ struct Settings: View {
                                         if screen.vietnameseCompact != vietnameseCompact {
                                             screen.vietnameseCompact = vietnameseCompact
                                             // hack to make swiftui redraw and show the compact translation
-                                            vietnamese = Vietnamese(screen: screen)
+//                                            vietnamese = Vietnamese(screen: screen)
                                             print("Settings -> " + (vietnameseCompact ? "true" : "false"))
                                         }
                                     }

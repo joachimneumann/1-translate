@@ -30,7 +30,7 @@ struct VietnameseDisplay: View {
     var translator: Translator {
         switch country {
         case .Vietnam:
-            Vietnamese(screen: screen)
+            Vietnamese(groupingSeparator: .comma, vietnameseThousand: .nghìn, vietnameseSecondLast: .lẻ, vietnameseCompact: false)
         default:
             English()
         }

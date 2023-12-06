@@ -11,8 +11,8 @@ public typealias AppleFont = UIFont
 
 final class VietnameseNumbersTests: XCTestCase {
     
-    func XXtest_translation() {
-        let vietnamese = Vietnamese(useLinh: false, useNgan: false, compact: false)
+    func test_translation() {
+        let vietnamese = Vietnamese(groupingSeparator: .comma, vietnameseThousand: .nghìn, vietnameseSecondLast: .lẻ, vietnameseCompact: false)
         XCTAssertEqual(vietnamese.toString(0), "không")
         XCTAssertEqual(vietnamese.toString(1), "một")
         XCTAssertEqual(vietnamese.toString(2), "hai")
@@ -124,7 +124,7 @@ final class VietnameseNumbersTests: XCTestCase {
         XCTAssertEqual(vietnamese.toString(108), "một trăm lẻ tám")
         XCTAssertEqual(vietnamese.toString(109), "một trăm lẻ chín")
         
-        vietnamese.useLinh = true
+        vietnamese.vietnameseSecondLast = .linh
         XCTAssertEqual(vietnamese.toString(101), "một trăm linh một")
         XCTAssertEqual(vietnamese.toString(102), "một trăm linh hai")
         XCTAssertEqual(vietnamese.toString(103), "một trăm linh ba")
@@ -134,8 +134,8 @@ final class VietnameseNumbersTests: XCTestCase {
         XCTAssertEqual(vietnamese.toString(107), "một trăm linh bảy")
         XCTAssertEqual(vietnamese.toString(108), "một trăm linh tám")
         XCTAssertEqual(vietnamese.toString(109), "một trăm linh chín")
-        vietnamese.useLinh = false
-        
+        vietnamese.vietnameseSecondLast = .lẻ
+
         XCTAssertEqual(vietnamese.toString(110), "một trăm mười")
         XCTAssertEqual(vietnamese.toString(111), "một trăm mười một")
         XCTAssertEqual(vietnamese.toString(119), "một trăm mười chín")
@@ -176,7 +176,7 @@ final class VietnameseNumbersTests: XCTestCase {
         XCTAssertEqual(vietnamese.toString(99_000_000_909), "chín mươi chín tỷ chín trăm lẻ chín")
         XCTAssertEqual(vietnamese.toString(99_999_999_999), "chín mươi chín tỷ chín trăm chín mươi chín triệu chín trăm chín mươi chín nghìn chín trăm chín mươi chín")
         
-        vietnamese.compact = true
+        vietnamese.vietnameseCompact = true
         XCTAssertEqual(vietnamese.toString(0), "không")
         XCTAssertEqual(vietnamese.toString(1), "một")
         XCTAssertEqual(vietnamese.toString(2), "hai")
@@ -288,7 +288,7 @@ final class VietnameseNumbersTests: XCTestCase {
         XCTAssertEqual(vietnamese.toString(108), "một trăm lẻ tám")
         XCTAssertEqual(vietnamese.toString(109), "một trăm lẻ chín")
         
-        vietnamese.useLinh = true
+        vietnamese.vietnameseSecondLast = .linh
         XCTAssertEqual(vietnamese.toString(101), "một trăm linh một")
         XCTAssertEqual(vietnamese.toString(102), "một trăm linh hai")
         XCTAssertEqual(vietnamese.toString(103), "một trăm linh ba")
@@ -298,8 +298,8 @@ final class VietnameseNumbersTests: XCTestCase {
         XCTAssertEqual(vietnamese.toString(107), "một trăm linh bảy")
         XCTAssertEqual(vietnamese.toString(108), "một trăm linh tám")
         XCTAssertEqual(vietnamese.toString(109), "một trăm linh chín")
-        vietnamese.useLinh = false
-        
+        vietnamese.vietnameseSecondLast = .lẻ
+
         XCTAssertEqual(vietnamese.toString(110), "một trăm mười")
         XCTAssertEqual(vietnamese.toString(111), "một trăm mười một")
         XCTAssertEqual(vietnamese.toString(119), "một trăm mười chín")
