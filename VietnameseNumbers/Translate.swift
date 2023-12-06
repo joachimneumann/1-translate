@@ -120,7 +120,10 @@ class Vietnamese: Translator {
                             between = ""
                         }
                     }
-                    ret += toString(X0)! + between + toString(X)!
+                    ret += toString(X0)! + between
+                    if X > 0 {
+                        ret += " " + toString_0_10(X, one_up_tone: true, lăm: true)!
+                    }
                 } else {
                     // X0 is 1
                     ret += ten

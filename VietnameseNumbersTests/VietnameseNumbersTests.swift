@@ -13,6 +13,9 @@ final class VietnameseNumbersTests: XCTestCase {
     
     func test_translation() {
         let vietnamese = Vietnamese(groupingSeparator: .comma, vietnameseThousand: .nghìn, vietnameseSecondLast: .lẻ, vietnameseCompact: false)
+
+        XCTAssertEqual(vietnamese.toString(20), "hai mươi")
+
         XCTAssertEqual(vietnamese.toString(0), "không")
         XCTAssertEqual(vietnamese.toString(1), "một")
         XCTAssertEqual(vietnamese.toString(2), "hai")
