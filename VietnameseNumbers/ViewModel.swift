@@ -34,9 +34,6 @@ class ViewModel: ObservableObject, ShowAs {
     @AppStorage("precision", store: .standard) private (set) var precision: Int = 1000
     @AppStorage("showPreliminaryResults", store: .standard) var showPreliminaryResults: Bool = true
     @AppStorage("rad", store: .standard) var rad: Bool = false
-    @AppStorage("vietnameseUseLinh", store: .standard) var vietnameseUseLinh: Bool = false
-    @AppStorage("vietnameseUseNgan", store: .standard) var vietnameseUseNgan: Bool = false
-    @AppStorage("vietnameseCompact", store: .standard) var vietnameseCompact: Bool = false
     
     private let brain: Brain /// initialized later with _precision.wrappedValue
     private var stupidBrain = BrainEngine(precision: 100) /// I want to call fast sync functions

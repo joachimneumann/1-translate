@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-enum DecimalSeparator: String, Codable, CaseIterable{
+enum DecimalSeparator: String, Codable, CaseIterable {
     case comma
     case dot
     var character: Character {
@@ -25,7 +25,7 @@ enum DecimalSeparator: String, Codable, CaseIterable{
         }
     }
 }
-enum GroupingSeparator: String, Codable, CaseIterable{
+enum GroupingSeparator: String, Codable, CaseIterable {
     case comma
     case dot
     case none
@@ -70,6 +70,15 @@ struct Screen: Equatable, DisplayLengthLimiter, Separators {
     
     @AppStorage("groupingSeparator", store: .standard)
     var groupingSeparator: GroupingSeparator = .none
+
+    @AppStorage("vietnameseThousand", store: .standard)
+    var vietnameseThousand: VietnameseThousand = .nghìn
+    
+    @AppStorage("vietnameseSecondLast", store: .standard)
+    var vietnameseSecondLast: VietnameseSecondLast = .lẻ
+    
+    @AppStorage("vietnameseCompact", store: .standard)
+    var vietnameseCompact: Bool = false
 
     private let isPad: Bool
 

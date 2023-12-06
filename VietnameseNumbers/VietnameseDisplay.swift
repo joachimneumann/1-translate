@@ -30,10 +30,7 @@ struct VietnameseDisplay: View {
     var translator: Translator {
         switch country {
         case .Vietnam:
-            Vietnamese(
-                useLinh: viewModel.vietnameseUseLinh,
-                useNgan: viewModel.vietnameseUseNgan, 
-                compact: viewModel.vietnameseCompact)
+            Vietnamese(screen: screen)
         default:
             English()
         }

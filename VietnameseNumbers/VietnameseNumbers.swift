@@ -26,6 +26,7 @@ struct VietnameseNumbers: View {
                 Image("flag_vietnam")
                         .resizable()
                         .scaledToFit()
+                        .opacity(viewModel.translationCountry == .Vietnam ? 1.0 : 0.5)
                 }
                 Button(action: {
                     viewModel.translationCountry = .UK
@@ -33,13 +34,7 @@ struct VietnameseNumbers: View {
                 Image("flag UK")
                         .resizable()
                         .scaledToFit()
-                }
-                Button(action: {
-                    viewModel.translationCountry = .USA
-                }) {
-                Image("flag USA")
-                        .resizable()
-                        .scaledToFit()
+                        .opacity(viewModel.translationCountry == .UK ? 1.0 : 0.5)
                 }
                 Spacer()
                 NavigationLink {
@@ -49,11 +44,12 @@ struct VietnameseNumbers: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .font(Font.title.weight(.thin))
-                        .frame(height: screen.plusIconSize * 0.6)
+                        .frame(height: screen.plusIconSize * 0.5)
                         .foregroundColor(Color.white)
                         .accessibilityIdentifier("settingsButton")
                 }
                 .buttonStyle(TransparentButtonStyle())
+                .opacity(0.8)
             }
             .frame(height: 30.0)
             .padding(.vertical, 10)

@@ -19,10 +19,30 @@ protocol Translator {
     func toString(_ int: Int) -> String?
 }
 
+enum VietnameseThousand: String, Codable, CaseIterable {
+    case ngàn
+    case nghìn
+    var string: String {
+        switch self {
+            case .ngàn: return "ngàn"
+            case .nghìn: return "nghìn"
+        }
+    }
+}
+
+enum VietnameseSecondLast: String, Codable, CaseIterable {
+    case linh
+    case lẻ
+    var string: String {
+        switch self {
+            case .linh: return "linh"
+            case .lẻ: return "lẻ"
+        }
+    }
+}
+
 class Vietnamese: Translator {
-    var useLinh: Bool
-    var useNgan: Bool
-    var compact: Bool
+    let screen: Screen
     private let one = "một"
     private let one_with_up_tone = "mốt"
     private let ten = "mười"
@@ -30,18 +50,9 @@ class Vietnamese: Translator {
     private let hundred = "trăm"
     private let million = "triệu"
     private let billion = "tỷ"
-
-    private var secondlastZero: String {
-        useLinh ? "linh" : "lẻ"
-    }
-    private var thousand: String {
-        useNgan ? "ngàn" : "nghìn"
-    }
     
-    init(useLinh: Bool, useNgan: Bool, compact: Bool) {
-        self.useLinh = useLinh
-        self.useNgan = useNgan
-        self.compact = compact
+    init(screen: Screen) {
+        self.screen = screen
     }
 
     private func toString_0_10(_ intValue: Int, one_up_tone: Bool = false, lăm: Bool = false, ten_tone: Bool = false) -> String? {
@@ -98,12 +109,13 @@ class Vietnamese: Translator {
                 if ret.count > 0 { ret += " " }
                 if X0 >= 2 {
                     var between = " " + ten_no_tone
-                    if compact {
-                        if X > 0 {
-                            between = ""
-                        }
+                    if screen.vietnameseCompact {
+                        print("compact!")
+                        between = ""
                     }
-                    ret += toString(X0)! + between
+                    if X > 0 {
+                        ret += toString(X0)! + between
+                    }
                     if X > 0 {
                         ret += " " + toString_0_10(X, one_up_tone: true, lăm: true)!
                     }
@@ -117,7 +129,7 @@ class Vietnamese: Translator {
                 // lẻ?
                 if ret.count > 0 { ret += " " }
                 if X > 0 {
-                    ret += secondlastZero + " "
+                    ret += screen.vietnameseSecondLast.string + " "
                     ret += toString(X)!
                 } else {
                     ret += toString(0)!
@@ -129,7 +141,7 @@ class Vietnamese: Translator {
         if intValue <= 999_999 {
             let XXX = intValue % 1_000
             let XXX_000 = (intValue - XXX) / 1_000
-            var ret = toString(XXX_000, fromLargerNumber: fromLargerNumber)! + " " + thousand
+            var ret = toString(XXX_000, fromLargerNumber: fromLargerNumber)! + " " + screen.vietnameseThousand.string
             if XXX > 0 {
                 ret += " " + toString(XXX, fromLargerNumber: true)!
             }
@@ -160,7 +172,9 @@ class Vietnamese: Translator {
     }
 
     func toString(_ string: String) -> String? {
-        let intValue = Int(string)
+        let groupSeparator = screen.groupingSeparator.string
+        let strippedString = string.replacingOccurrences(of: groupSeparator, with: "")
+        let intValue = Int(strippedString)
         if intValue != nil {
             return toString(intValue!)
         }
