@@ -26,7 +26,7 @@
 		AA672B0A295189950044DC08 /* ScrollViewConditionalAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672B09295189950044DC08 /* ScrollViewConditionalAnimation.swift */; };
 		AA689125295E681400129593 /* Brain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA689124295E681400129593 /* Brain.swift */; };
 		AA8453E8294D872300A50B74 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8453E7294D872300A50B74 /* Icons.swift */; };
-		AA8A91112B1D7B5F00CE7185 /* VietnameseNumbersApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FABFF272F2348006DE4C8 /* VietnameseNumbersApp.swift */; };
+		AA8A91112B1D7B5F00CE7185 /* TranslateNumbersApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FABFF272F2348006DE4C8 /* TranslateNumbersApp.swift */; };
 		AA8A91122B1D7B7100CE7185 /* VietnameseNumbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA92B4C829273A58005E43F0 /* VietnameseNumbers.swift */; };
 		AA8A91142B1D7FD000CE7185 /* TranslatedDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8A91132B1D7FD000CE7185 /* TranslatedDisplay.swift */; };
 		AA8A91162B1D80F800CE7185 /* Translate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8A91152B1D80F800CE7185 /* Translate.swift */; };
@@ -61,10 +61,10 @@
 /* Begin PBXFileReference section */
 		AA01B9D32957E44300617AFB /* Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Display.swift; sourceTree = "<group>"; };
 		AA03B1ED298D535800A7837A /* CalculatorAppMac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorAppMac.swift; sourceTree = "<group>"; };
-		AA08C7BE272EDA48001B8575 /* VietnameseNumbers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VietnameseNumbers.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA08C7BE272EDA48001B8575 /* TranslateNumbers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TranslateNumbers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA08C7C5272EDA4A001B8575 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA08C7C8272EDA4A001B8575 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		AA08C7EB272F1241001B8575 /* VietnameseNumbers.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VietnameseNumbers.entitlements; sourceTree = "<group>"; };
+		AA08C7EB272F1241001B8575 /* TranslateNumbers.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TranslateNumbers.entitlements; sourceTree = "<group>"; };
 		AA08C7EC272F1572001B8575 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		AA0CE3CE298CBFB00057D0D8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA0CE3D1298CBFB00057D0D8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -79,8 +79,8 @@
 		AA2FABF1272F217F006DE4C8 /* Gmp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gmp.swift; sourceTree = "<group>"; };
 		AA2FABF8272F2348006DE4C8 /* Number.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Number.swift; sourceTree = "<group>"; };
 		AA2FABFB272F2348006DE4C8 /* NumberStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberStack.swift; sourceTree = "<group>"; };
-		AA2FABFC272F2348006DE4C8 /* Calculator.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Calculator.entitlements; sourceTree = "<group>"; };
-		AA2FABFF272F2348006DE4C8 /* VietnameseNumbersApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VietnameseNumbersApp.swift; sourceTree = "<group>"; };
+		AA2FABFC272F2348006DE4C8 /* TranslateNumbersApp.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = TranslateNumbersApp.entitlements; sourceTree = "<group>"; };
+		AA2FABFF272F2348006DE4C8 /* TranslateNumbersApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslateNumbersApp.swift; sourceTree = "<group>"; };
 		AA2FAC01272F2348006DE4C8 /* BrainEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrainEngine.swift; sourceTree = "<group>"; };
 		AA2FAC04272F2348006DE4C8 /* CalculatorCommands.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorCommands.swift; sourceTree = "<group>"; };
 		AA2FAC0D272F2349006DE4C8 /* OperatorStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperatorStack.swift; sourceTree = "<group>"; };
@@ -94,7 +94,7 @@
 		AA8453E7294D872300A50B74 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		AA8A91132B1D7FD000CE7185 /* TranslatedDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatedDisplay.swift; sourceTree = "<group>"; };
 		AA8A91152B1D80F800CE7185 /* Translate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translate.swift; sourceTree = "<group>"; };
-		AA8A911B2B1D815C00CE7185 /* VietnameseNumbersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VietnameseNumbersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA8A911B2B1D815C00CE7185 /* TranslateNumbersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TranslateNumbersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA8A911D2B1D815C00CE7185 /* VietnameseNumbersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VietnameseNumbersTests.swift; sourceTree = "<group>"; };
 		AA92B4C229250827005E43F0 /* ColoredStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoredStepper.swift; sourceTree = "<group>"; };
 		AA92B4C429266CC1005E43F0 /* ThreeDots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDots.swift; sourceTree = "<group>"; };
@@ -129,7 +129,7 @@
 		AA08C7B5272EDA48001B8575 = {
 			isa = PBXGroup;
 			children = (
-				AA08C7EB272F1241001B8575 /* VietnameseNumbers.entitlements */,
+				AA08C7EB272F1241001B8575 /* TranslateNumbers.entitlements */,
 				AA08C7C0272EDA48001B8575 /* VietnameseNumbers */,
 				AA0CE3C9298CBFAF0057D0D8 /* VietnameseNumbersMac */,
 				AA8A911C2B1D815C00CE7185 /* VietnameseNumbersTests */,
@@ -141,8 +141,8 @@
 		AA08C7BF272EDA48001B8575 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AA08C7BE272EDA48001B8575 /* VietnameseNumbers.app */,
-				AA8A911B2B1D815C00CE7185 /* VietnameseNumbersTests.xctest */,
+				AA08C7BE272EDA48001B8575 /* TranslateNumbers.app */,
+				AA8A911B2B1D815C00CE7185 /* TranslateNumbersTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -151,7 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				AA1B007B294772980054C851 /* Brain */,
-				AA2FABFF272F2348006DE4C8 /* VietnameseNumbersApp.swift */,
+				AA2FABFF272F2348006DE4C8 /* TranslateNumbersApp.swift */,
 				AA03B1ED298D535800A7837A /* CalculatorAppMac.swift */,
 				AA32853A297248B800D86CB4 /* ViewModel.swift */,
 				AA8A91152B1D80F800CE7185 /* Translate.swift */,
@@ -171,7 +171,7 @@
 				AA3FB8262920E0E5002ECCEB /* Settings.swift */,
 				AAB10B94292A2222004707E9 /* Label.swift */,
 				AA92B4C229250827005E43F0 /* ColoredStepper.swift */,
-				AA2FABFC272F2348006DE4C8 /* Calculator.entitlements */,
+				AA2FABFC272F2348006DE4C8 /* TranslateNumbersApp.entitlements */,
 				AA2FAC04272F2348006DE4C8 /* CalculatorCommands.swift */,
 				AA08C7EC272F1572001B8575 /* Info.plist */,
 				AA08C7C5272EDA4A001B8575 /* Assets.xcassets */,
@@ -244,9 +244,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AA08C7BD272EDA48001B8575 /* VietnameseNumbers */ = {
+		AA08C7BD272EDA48001B8575 /* TranslateNumbers */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AA08C7E2272EDA4A001B8575 /* Build configuration list for PBXNativeTarget "VietnameseNumbers" */;
+			buildConfigurationList = AA08C7E2272EDA4A001B8575 /* Build configuration list for PBXNativeTarget "TranslateNumbers" */;
 			buildPhases = (
 				AA08C7BA272EDA48001B8575 /* Sources */,
 				AA08C7BB272EDA48001B8575 /* Frameworks */,
@@ -257,14 +257,14 @@
 			);
 			dependencies = (
 			);
-			name = VietnameseNumbers;
+			name = TranslateNumbers;
 			productName = xx;
-			productReference = AA08C7BE272EDA48001B8575 /* VietnameseNumbers.app */;
+			productReference = AA08C7BE272EDA48001B8575 /* TranslateNumbers.app */;
 			productType = "com.apple.product-type.application";
 		};
-		AA8A911A2B1D815C00CE7185 /* VietnameseNumbersTests */ = {
+		AA8A911A2B1D815C00CE7185 /* TranslateNumbersTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AA8A91212B1D815C00CE7185 /* Build configuration list for PBXNativeTarget "VietnameseNumbersTests" */;
+			buildConfigurationList = AA8A91212B1D815C00CE7185 /* Build configuration list for PBXNativeTarget "TranslateNumbersTests" */;
 			buildPhases = (
 				AA8A91172B1D815C00CE7185 /* Sources */,
 				AA8A91182B1D815C00CE7185 /* Frameworks */,
@@ -274,9 +274,9 @@
 			);
 			dependencies = (
 			);
-			name = VietnameseNumbersTests;
+			name = TranslateNumbersTests;
 			productName = VietnameseNumbersTests;
-			productReference = AA8A911B2B1D815C00CE7185 /* VietnameseNumbersTests.xctest */;
+			productReference = AA8A911B2B1D815C00CE7185 /* TranslateNumbersTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -298,7 +298,7 @@
 					};
 				};
 			};
-			buildConfigurationList = AA08C7B9272EDA48001B8575 /* Build configuration list for PBXProject "VietnameseNumbers" */;
+			buildConfigurationList = AA08C7B9272EDA48001B8575 /* Build configuration list for PBXProject "TranslateNumbers" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -311,8 +311,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AA08C7BD272EDA48001B8575 /* VietnameseNumbers */,
-				AA8A911A2B1D815C00CE7185 /* VietnameseNumbersTests */,
+				AA08C7BD272EDA48001B8575 /* TranslateNumbers */,
+				AA8A911A2B1D815C00CE7185 /* TranslateNumbersTests */,
 			);
 		};
 /* End PBXProject section */
@@ -363,7 +363,7 @@
 				AAE426F729597AE3005FE365 /* Screen.swift in Sources */,
 				AA2FAC23272F2349006DE4C8 /* OperatorStack.swift in Sources */,
 				AA370C31293352D60041AE4E /* Key.swift in Sources */,
-				AA8A91112B1D7B5F00CE7185 /* VietnameseNumbersApp.swift in Sources */,
+				AA8A91112B1D7B5F00CE7185 /* TranslateNumbersApp.swift in Sources */,
 				AA3FB8272920E0E5002ECCEB /* Settings.swift in Sources */,
 				AA689125295E681400129593 /* Brain.swift in Sources */,
 				AA32853D29724D5700D86CB4 /* FlexibleNavigation.swift in Sources */,
@@ -511,7 +511,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
-				CODE_SIGN_ENTITLEMENTS = VietnameseNumbers.entitlements;
+				CODE_SIGN_ENTITLEMENTS = TranslateNumbers.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"VietnameseNumbers/Preview Content\"";
@@ -534,7 +534,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.joachimneumann.VietnameseNumbers;
-				PRODUCT_NAME = VietnameseNumbers;
+				PRODUCT_NAME = TranslateNumbers;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -552,7 +552,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
-				CODE_SIGN_ENTITLEMENTS = VietnameseNumbers.entitlements;
+				CODE_SIGN_ENTITLEMENTS = TranslateNumbers.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"VietnameseNumbers/Preview Content\"";
@@ -575,7 +575,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.joachimneumann.VietnameseNumbers;
-				PRODUCT_NAME = VietnameseNumbers;
+				PRODUCT_NAME = TranslateNumbers;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -612,7 +612,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VietnameseNumbers.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/VietnameseNumbers";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TranslateNumbers.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TranslateNumbers";
 			};
 			name = Debug;
 		};
@@ -640,14 +640,14 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VietnameseNumbers.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/VietnameseNumbers";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TranslateNumbers.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TranslateNumbers";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AA08C7B9272EDA48001B8575 /* Build configuration list for PBXProject "VietnameseNumbers" */ = {
+		AA08C7B9272EDA48001B8575 /* Build configuration list for PBXProject "TranslateNumbers" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AA08C7E0272EDA4A001B8575 /* Debug */,
@@ -656,7 +656,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AA08C7E2272EDA4A001B8575 /* Build configuration list for PBXNativeTarget "VietnameseNumbers" */ = {
+		AA08C7E2272EDA4A001B8575 /* Build configuration list for PBXNativeTarget "TranslateNumbers" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AA08C7E3272EDA4A001B8575 /* Debug */,
@@ -665,7 +665,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AA8A91212B1D815C00CE7185 /* Build configuration list for PBXNativeTarget "VietnameseNumbersTests" */ = {
+		AA8A91212B1D815C00CE7185 /* Build configuration list for PBXNativeTarget "TranslateNumbersTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AA8A91222B1D815C00CE7185 /* Debug */,

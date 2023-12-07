@@ -1,6 +1,5 @@
 //
-//  CalculatorApp.swift
-//  Calculator
+//  TranslateNumbersApp.swift
 //
 //  Created by Joachim Neumann on 20/09/2021.
 //
@@ -11,7 +10,7 @@ public typealias AppleFont = UIFont
 
 
 @main
-struct VietnameseNumbersApp: App {
+struct TranslateNumbersApp: App {
     var body: some Scene {
         WindowGroup {
             GeometryReader { geo in

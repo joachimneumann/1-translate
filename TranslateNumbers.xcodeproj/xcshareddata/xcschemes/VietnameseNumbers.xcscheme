@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AA08C7BD272EDA48001B8575"
                BuildableName = "VietnameseNumbers.app"
-               BlueprintName = "VietnameseNumbers"
-               ReferencedContainer = "container:VietnameseNumbers.xcodeproj">
+               BlueprintName = "TranslateNumbers"
+               ReferencedContainer = "container:TranslateNumbers.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AA8A911A2B1D815C00CE7185"
-               BuildableName = "VietnameseNumbersTests.xctest"
-               BlueprintName = "VietnameseNumbersTests"
-               ReferencedContainer = "container:VietnameseNumbers.xcodeproj">
+               BuildableName = "TranslateNumbersTests.xctest"
+               BlueprintName = "TranslateNumbersTests"
+               ReferencedContainer = "container:TranslateNumbers.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -46,7 +46,7 @@
                BlueprintIdentifier = "AA050D56296BECD500A55498"
                BuildableName = "VietnameseNumbers_UITests.xctest"
                BlueprintName = "VietnameseNumbers_UITests"
-               ReferencedContainer = "container:VietnameseNumbers.xcodeproj">
+               ReferencedContainer = "container:TranslateNumbers.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -67,8 +67,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AA08C7BD272EDA48001B8575"
             BuildableName = "VietnameseNumbers.app"
-            BlueprintName = "VietnameseNumbers"
-            ReferencedContainer = "container:VietnameseNumbers.xcodeproj">
+            BlueprintName = "TranslateNumbers"
+            ReferencedContainer = "container:TranslateNumbers.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -84,8 +84,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AA08C7BD272EDA48001B8575"
             BuildableName = "VietnameseNumbers.app"
-            BlueprintName = "VietnameseNumbers"
-            ReferencedContainer = "container:VietnameseNumbers.xcodeproj">
+            BlueprintName = "TranslateNumbers"
+            ReferencedContainer = "container:TranslateNumbers.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
