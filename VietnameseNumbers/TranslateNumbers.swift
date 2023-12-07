@@ -1,6 +1,5 @@
 //
-//  Calculator.swift
-//  Calculator
+//  TranslateNumbers.swift
 //
 //  Created by Joachim Neumann on 11/18/22.
 //
@@ -9,7 +8,7 @@ import SwiftUI
 
 let testColors = false
 
-struct VietnameseNumbers: View {
+struct TranslateNumbers: View {
     @StateObject private var viewModel: ViewModel = ViewModel()
     var screen: Screen
 
@@ -52,9 +51,11 @@ struct VietnameseNumbers: View {
                 .opacity(0.8)
             }
             .frame(height: 30.0)
-            .padding(.vertical, 10)
+            .padding(.bottom, 20)
             Spacer(minLength: 0.0)
-            TranslatedDisplay(translatedString: viewModel.translated())
+            TranslatedDisplay(
+                translatedString: viewModel.translated(),
+                screen: screen)
                 .padding(.bottom, screen.portraitIPhoneDisplayBottomPadding)
                 .padding(.horizontal, screen.displayHorizontalPadding)
             PortraitDisplay(

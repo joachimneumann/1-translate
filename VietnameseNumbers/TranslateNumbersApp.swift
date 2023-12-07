@@ -14,7 +14,7 @@ struct TranslateNumbersApp: App {
     var body: some Scene {
         WindowGroup {
             GeometryReader { geo in
-                VietnameseNumbers(screen: Screen(geo.size))
+                TranslateNumbers(screen: Screen(geo.size))
             }
         }
     }

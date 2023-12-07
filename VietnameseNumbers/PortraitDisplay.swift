@@ -27,15 +27,16 @@ struct PortraitDisplay: View {
         let n = CGFloat(text.count)
         let lengthOfNulls = n * screen.digitWidth
         
-        var factor: CGFloat = 1.0
-        let expandLimit = screen.displayWidth - screen.digitWidth * 0.9
-        if lengthOfNulls < expandLimit {
-            /// scale up
-            factor = expandLimit / lengthOfNulls
-            if factor > 1.5 { factor = 1.5 }
-            if factor < 1.0 { factor = 1.0 }
-        }
-        let uiFont = Screen.appleFont(ofSize: screen.uiFontSize * factor)
+//        var factor: CGFloat = 1.0
+//        let expandLimit = screen.displayWidth - screen.digitWidth * 0.9
+//        if lengthOfNulls < expandLimit {
+//            /// scale up
+//            factor = expandLimit / lengthOfNulls
+//            if factor > 2.0 { factor = 2.0 }
+//            if factor < 1.0 { factor = 1.0 }
+//            factor = 1.0
+//        }
+        let uiFont = Screen.appleFont(ofSize: screen.uiFontSize)
         font = Font(uiFont)
     }
     
@@ -45,6 +46,7 @@ struct PortraitDisplay: View {
         Text(toShow)
             .kerning(screen.kerning)
             .font(font)
+            .lineLimit(0)
             .foregroundColor(display.preliminary ? .gray : display.color)
             .multilineTextAlignment(.trailing)
             .background(testColors ? .yellow : backgroundColor).opacity(testColors ? 0.9 : 1.0)

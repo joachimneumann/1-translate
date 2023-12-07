@@ -67,7 +67,7 @@ struct Screen: Equatable, DisplayLengthLimiter {
         
         if isPortrait {
             keyWidth = isPad ? (calculatorWidth - 9.0 * keySpacing) * 0.1 : (calculatorWidth - 3.0 * keySpacing) * 0.25
-            keyHeight = keyWidth * 0.9
+            keyHeight = keyWidth * 0.7
             keyboardHeight = 5 * keyHeight + 4 * keySpacing
             bottomPadding = isPad ? 0.0 : keyboardHeight * 0.09
         } else {
@@ -90,7 +90,6 @@ struct Screen: Equatable, DisplayLengthLimiter {
         iconsWidth   = keyboardHeight * 0.16
         plusIconTrailingPadding = plusIconSize * 0.4
         ePadding = plusIconSize * 0.1
-        uiFontSize = (0.16 * keyboardHeight).rounded()
         uiFontSize = 0.125 * keyboardHeight
         infoUiFontSize = 16.0
         appleFont = Self.appleFont(ofSize: uiFontSize)
