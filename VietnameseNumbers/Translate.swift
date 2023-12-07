@@ -81,12 +81,8 @@ class VietnameseTranslator: Translator {
         default: return nil
         }
     }
-    
-    func toString(_ intValue: Int) -> String? {
-        toString(intValue, fromLargerNumber: false)
-    }
-    
-    func toString(_ intValue: Int, fromLargerNumber: Bool = false) -> String? {
+        
+    private func toString_(_ intValue: Int, fromLargerNumber: Bool) -> String? {
         if intValue < 0 { return nil }
         if !fromLargerNumber && intValue <= 10 {
             return toString_0_10(intValue)
@@ -105,11 +101,11 @@ class VietnameseTranslator: Translator {
             var ret = ""
             if fromLargerNumber || X00 > 0 {
                 if ret.count > 0 { ret += " " }
-                ret += toString(X00)! + " " + hundred
+                ret += toString_(X00, fromLargerNumber: false)! + " " + hundred
             } else {
                 if fromLargerNumber || ret.count > 0 {
                     if ret.count > 0 { ret += " " }
-                    ret += toString(0)! + " " + hundred
+                    ret += toString_(0, fromLargerNumber: false)! + " " + hundred
                 }
             }
             if X0 == 0 && X == 0 {
@@ -124,7 +120,7 @@ class VietnameseTranslator: Translator {
                             between = ""
                         }
                     }
-                    ret += toString(X0)! + between
+                    ret += toString_(X0, fromLargerNumber: false)! + between
                     if X > 0 {
                         ret += " " + toString_0_10(X, one_up_tone: true, lăm: true)!
                     }
@@ -140,9 +136,9 @@ class VietnameseTranslator: Translator {
                 if ret.count > 0 { ret += " " }
                 if X > 0 {
                     ret += secondLast.string + " "
-                    ret += toString(X)!
+                    ret += toString_(X, fromLargerNumber: false)!
                 } else {
-                    ret += toString(0)!
+                    ret += toString_(0, fromLargerNumber: false)!
                 }
             }
             return ret
@@ -151,9 +147,9 @@ class VietnameseTranslator: Translator {
         if intValue <= 999_999 {
             let XXX = intValue % 1_000
             let XXX_000 = (intValue - XXX) / 1_000
-            var ret = toString(XXX_000, fromLargerNumber: fromLargerNumber)! + " " + thousand.string
+            var ret = toString_(XXX_000, fromLargerNumber: fromLargerNumber)! + " " + thousand.string
             if XXX > 0 {
-                ret += " " + toString(XXX, fromLargerNumber: true)!
+                ret += " " + toString_(XXX, fromLargerNumber: true)!
             }
             return ret
         }
@@ -161,9 +157,9 @@ class VietnameseTranslator: Translator {
         if intValue <= 999_999_999 {
             let XXX_XXX = intValue % 1_000_000
             let XXX_000_000 = (intValue - XXX_XXX) / 1_000_000
-            var ret = toString(XXX_000_000)! + " " + million
+            var ret = toString_(XXX_000_000, fromLargerNumber: false)! + " " + million
             if XXX_XXX > 0 {
-                ret += " " + toString(XXX_XXX, fromLargerNumber: true)!
+                ret += " " + toString_(XXX_XXX, fromLargerNumber: true)!
             }
             return ret
         }
@@ -171,16 +167,33 @@ class VietnameseTranslator: Translator {
         if intValue <= 999_999_999_999 {
             let XXX_XXX_XXX = intValue % 1_000_000_000
             let XXX_000_000_000 = (intValue - XXX_XXX_XXX) / 1_000_000_000
-            var ret = toString(XXX_000_000_000)! + " " + billion
+            var ret = toString_(XXX_000_000_000, fromLargerNumber: false)! + " " + billion
             if XXX_XXX_XXX > 0 {
-                ret += " " + toString(XXX_XXX_XXX, fromLargerNumber: true)!
+                ret += " " + toString_(XXX_XXX_XXX, fromLargerNumber: true)!
             }
             return ret
         }
         
         return nil
     }
-    
+
+    func toString(_ intValue: Int) -> String? {
+        var wasNegative = false
+        if intValue < 0 {
+            wasNegative = true
+        }
+        var ret: String
+        if wasNegative {
+            ret = toString_(-intValue, fromLargerNumber: false)!
+        } else {
+            ret = toString_(intValue, fromLargerNumber: false)!
+        }
+        if wasNegative {
+            ret = "âm " + ret
+        }
+        return ret
+    }
+
     func toString(_ string: String) -> String? {
         let groupSeparator = groupingSeparator.string
         let strippedString = string.replacingOccurrences(of: groupSeparator, with: "")
@@ -251,7 +264,7 @@ class EnglishTranslator: Translator {
         }
     }
     
-    func toString(_ intValue: Int) -> String? {
+    private func toString_(_ intValue: Int) -> String? {
         if intValue <= 20 {
             return english_0_20(intValue)
         }
@@ -319,6 +332,23 @@ class EnglishTranslator: Translator {
         return nil
     }
     
+    func toString(_ intValue: Int) -> String? {
+        var wasNegative = false
+        if intValue < 0 {
+            wasNegative = true
+        }
+        var ret: String
+        if wasNegative {
+            ret = toString_(-intValue)!
+        } else {
+            ret = toString_(intValue)!
+        }
+        if wasNegative {
+            ret = "minus " + ret
+        }
+        return ret
+    }
+    
     func toString(_ string: String) -> String? {
         let groupSeparator = groupingSeparator.string
         let strippedString = string.replacingOccurrences(of: groupSeparator, with: "")
@@ -380,17 +410,7 @@ class GermanTranslator: Translator {
         default: return nil
         }
     }
-    
-    func toStringNoSoftHyphen(_ intValue: Int) -> String? {
-        let withSoftHyphen = toString(intValue)!
-        return withSoftHyphen.replacingOccurrences(of: "\u{AD}", with: "")
-    }
-
-    func toString(_ intValue: Int) -> String? {
-        let lowercase = toStringLowercase(intValue)!
-        return lowercase.firstCapitalized
-    }
-    
+        
     private func toStringLowercase(_ intValue: Int) -> String? {
         if intValue == 1 {
             return "eins"
@@ -475,6 +495,24 @@ class GermanTranslator: Translator {
         return nil
     }
     
+    func toString(_ intValue: Int) -> String? {
+        var wasNegative = false
+        if intValue < 0 {
+            wasNegative = true
+        }
+        let lowercase: String
+        if wasNegative {
+            lowercase = toStringLowercase(-intValue)!
+        } else {
+            lowercase = toStringLowercase(intValue)!
+        }
+        var ret = lowercase.firstCapitalized
+        if wasNegative {
+            ret = "Minus " + ret
+        }
+        return ret
+    }
+
     func toString(_ string: String) -> String? {
         let groupSeparator = groupingSeparator.string
         let strippedString = string.replacingOccurrences(of: groupSeparator, with: "")
