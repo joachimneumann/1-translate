@@ -29,7 +29,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     private var translator: Translator?
         
     func translate(_ string: String) -> String {
-        return translator!.toString(string) ?? "?"
+        return translator!.translate(string) ?? "?"
     }
     func translated() -> String {
         return translate(currentDisplay.left)
@@ -126,7 +126,10 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         case .vietnamese:
             translator = VietnameseTranslator(groupingSeparator: groupingSeparator, thousand: vietnameseThousand, secondLast: vietnameseSecondLast, compact: vietnameseCompact)
         case .english:
-            translator = EnglishTranslator(groupingSeparator: groupingSeparator, useAndAfterHundred: englishUseAndAfterHundred)
+            translator = EnglishTranslator(
+                groupingSeparator: groupingSeparator,
+                decimalSeparator: decimalSeparator,
+                useAndAfterHundred: englishUseAndAfterHundred)
         case .german:
             translator = GermanTranslator(groupingSeparator: groupingSeparator)
         }

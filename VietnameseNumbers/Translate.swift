@@ -14,8 +14,7 @@
 import Foundation
 
 protocol Translator {
-    func toString(_ string: String) -> String?
-    func toString(_ int: Int) -> String?
+    func translate(_ string: String) -> String?
 }
 
 enum VietnameseThousand: String, Codable, CaseIterable {
@@ -189,7 +188,7 @@ class VietnameseTranslator: Translator {
         return ret
     }
 
-    func toString(_ string: String) -> String? {
+    func translate(_ string: String) -> String? {
         let groupSeparator = groupingSeparator.string
         let strippedString = string.replacingOccurrences(of: groupSeparator, with: "")
         let intValue = Int(strippedString)
@@ -202,6 +201,7 @@ class VietnameseTranslator: Translator {
 
 class EnglishTranslator: Translator {
     var groupingSeparator: GroupingSeparator
+    var decimalSeparator: DecimalSeparator
     var useAndAfterHundred: Bool
     
     private let zero = "zero"
@@ -212,8 +212,9 @@ class EnglishTranslator: Translator {
     private let million = "million"
     private let billion = "billion"
     
-    init(groupingSeparator: GroupingSeparator, useAndAfterHundred: Bool) {
+    init(groupingSeparator: GroupingSeparator, decimalSeparator: DecimalSeparator, useAndAfterHundred: Bool) {
         self.groupingSeparator = groupingSeparator
+        self.decimalSeparator = decimalSeparator
         self.useAndAfterHundred = useAndAfterHundred
     }
     
@@ -259,7 +260,7 @@ class EnglishTranslator: Translator {
         }
     }
     
-    private func toString_(_ intValue: Int) -> String? {
+    private func translateInteger(_ intValue: Int) -> String? {
         if intValue <= 20 {
             return english_0_20(intValue)
         }
@@ -289,7 +290,7 @@ class EnglishTranslator: Translator {
                 } else {
                     ret += " "
                 }
-                ret += toString(leftover)!
+                ret += translateInteger(leftover)!
             }
             return ret
         }
@@ -297,9 +298,9 @@ class EnglishTranslator: Translator {
         if intValue <= 999_999 {
             let XXX_000 = (intValue - intValue % 1000) / 1000
             let XXX = intValue - 1000 * XXX_000
-            var ret = toString(XXX_000)! + " " + thousand
+            var ret = translateInteger(XXX_000)! + " " + thousand
             if XXX > 0 {
-                ret += " " + toString(XXX)!
+                ret += " " + translateInteger(XXX)!
             }
             return ret
         }
@@ -307,9 +308,9 @@ class EnglishTranslator: Translator {
         if intValue <= 999_999_999 {
             let XXX_000_000 = (intValue - intValue % 1_000_000) / 1_000_000
             let XXX_000 = intValue - 1_000_000 * XXX_000_000
-            var ret = toString(XXX_000_000)! + " " + million
+            var ret = translateInteger(XXX_000_000)! + " " + million
             if XXX_000 > 0 {
-                ret += " " + toString(XXX_000)!
+                ret += " " + translateInteger(XXX_000)!
             }
             return ret
         }
@@ -317,9 +318,9 @@ class EnglishTranslator: Translator {
         if intValue <= 999_999_999_999 {
             let XXX_000_000_000 = (intValue - intValue % 1_000_000_000) / 1_000_000_000
             let XXX_000_000 = intValue - 1_000_000_000 * XXX_000_000_000
-            var ret = toString(XXX_000_000_000)! + " " + billion
+            var ret = translateInteger(XXX_000_000_000)! + " " + billion
             if XXX_000_000 > 0 {
-                ret += " " + toString(XXX_000_000)!
+                ret += " " + translateInteger(XXX_000_000)!
             }
             return ret
         }
@@ -327,16 +328,16 @@ class EnglishTranslator: Translator {
         return nil
     }
     
-    func toString(_ intValue: Int) -> String? {
+    private func handleNegative(_ intValue: Int) -> String? {
         var wasNegative = false
         if intValue < 0 {
             wasNegative = true
         }
         var ret: String
         if wasNegative {
-            ret = toString_(-intValue)!
+            ret = translateInteger(-intValue)!
         } else {
-            ret = toString_(intValue)!
+            ret = translateInteger(intValue)!
         }
         if wasNegative {
             ret = "minus " + ret
@@ -344,12 +345,34 @@ class EnglishTranslator: Translator {
         return ret
     }
     
-    func toString(_ string: String) -> String? {
+    func translate(_ string: String) -> String? {
         let groupSeparator = groupingSeparator.string
         let strippedString = string.replacingOccurrences(of: groupSeparator, with: "")
-        let intValue = Int(strippedString)
-        if intValue != nil {
-            return toString(intValue!)
+        let parts = strippedString.components(separatedBy: decimalSeparator.string)
+        if parts.count == 1 {
+            // is an integer
+            let intValue = Int(parts[0])
+            if intValue != nil {
+                return handleNegative(intValue!)
+            }
+        } else if parts.count == 2 {
+            var ret = ""
+            let intValue = Int(parts[0])
+            if intValue != nil {
+                ret = handleNegative(intValue!)!
+                ret += " dot"
+                var count = 0
+                for char in parts[1] {
+                    if count < 10 {
+                        ret += " " + translate(String(char))!
+                    }
+                    count += 1
+                }
+                if count >= 10 {
+                    ret += " and so on"
+                }
+            }
+            return ret
         }
         return nil;
     }
@@ -508,7 +531,7 @@ class GermanTranslator: Translator {
         return ret
     }
 
-    func toString(_ string: String) -> String? {
+    func translate(_ string: String) -> String? {
         let groupSeparator = groupingSeparator.string
         let strippedString = string.replacingOccurrences(of: groupSeparator, with: "")
         let intValue = Int(strippedString)

@@ -150,8 +150,11 @@ struct Settings: View {
                                 .frame(height: 25)
                         }
                         GridRow {
-                            let english = EnglishTranslator(groupingSeparator: .comma, useAndAfterHundred: englishUseAndAfterHundred)
-                            Text(english.toString(105)!)
+                            let english = EnglishTranslator(
+                                groupingSeparator: .comma,
+                                decimalSeparator: .dot,
+                                useAndAfterHundred: englishUseAndAfterHundred)
+                            Text(english.translate("105")!)
                                 .foregroundColor(.white)
                                 .padding(.leading, 0)
                                 .gridCellColumns(2)

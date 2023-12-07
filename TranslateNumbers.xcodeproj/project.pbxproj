@@ -37,6 +37,8 @@
 		AA8A91352B1D870B00CE7185 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA370C2C293352960041AE4E /* Extensions.swift */; };
 		AA92B4C329250827005E43F0 /* ColoredStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA92B4C229250827005E43F0 /* ColoredStepper.swift */; };
 		AA92B4C529266CC1005E43F0 /* ThreeDots.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA92B4C429266CC1005E43F0 /* ThreeDots.swift */; };
+		AAAE6D642B228B7300079392 /* TranslateEnglish.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAE6D632B228B7300079392 /* TranslateEnglish.swift */; };
+		AAAE6D652B228B7300079392 /* TranslateEnglish.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAE6D632B228B7300079392 /* TranslateEnglish.swift */; };
 		AAB10B9A292A2222004707E9 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB10B94292A2222004707E9 /* Label.swift */; };
 		AAB10B9C292A2222004707E9 /* NonScientificKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB10B96292A2222004707E9 /* NonScientificKeyboard.swift */; };
 		AABEFC132972A8780023A3C9 /* KeyColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABEFC122972A8780023A3C9 /* KeyColor.swift */; };
@@ -98,6 +100,7 @@
 		AA92B4C229250827005E43F0 /* ColoredStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoredStepper.swift; sourceTree = "<group>"; };
 		AA92B4C429266CC1005E43F0 /* ThreeDots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDots.swift; sourceTree = "<group>"; };
 		AA92B4C829273A58005E43F0 /* TranslateNumbers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateNumbers.swift; sourceTree = "<group>"; };
+		AAAE6D632B228B7300079392 /* TranslateEnglish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateEnglish.swift; sourceTree = "<group>"; };
 		AAB10B94292A2222004707E9 /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		AAB10B96292A2222004707E9 /* NonScientificKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonScientificKeyboard.swift; sourceTree = "<group>"; };
 		AABEFC122972A8780023A3C9 /* KeyColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyColor.swift; sourceTree = "<group>"; };
@@ -175,6 +178,7 @@
 				AA08C7C5272EDA4A001B8575 /* Assets.xcassets */,
 				AA08C7C7272EDA4A001B8575 /* Preview Content */,
 				AAEF2FB82B20D54B0012DDDD /* Separators.swift */,
+				AAAE6D632B228B7300079392 /* TranslateEnglish.swift */,
 			);
 			path = VietnameseNumbers;
 			sourceTree = SOURCE_ROOT;
@@ -360,6 +364,7 @@
 				AAB10B9A292A2222004707E9 /* Label.swift in Sources */,
 				AAE426F729597AE3005FE365 /* Screen.swift in Sources */,
 				AA2FAC23272F2349006DE4C8 /* OperatorStack.swift in Sources */,
+				AAAE6D642B228B7300079392 /* TranslateEnglish.swift in Sources */,
 				AA370C31293352D60041AE4E /* Key.swift in Sources */,
 				AA8A91112B1D7B5F00CE7185 /* TranslateNumbersApp.swift in Sources */,
 				AA3FB8272920E0E5002ECCEB /* Settings.swift in Sources */,
@@ -373,6 +378,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA8A91352B1D870B00CE7185 /* Extensions.swift in Sources */,
+				AAAE6D652B228B7300079392 /* TranslateEnglish.swift in Sources */,
 				AAEF2FBA2B20D5500012DDDD /* Separators.swift in Sources */,
 				AA8A91342B1D86A900CE7185 /* ThreeDots.swift in Sources */,
 				AA8A91292B1D838C00CE7185 /* Translate.swift in Sources */,
