@@ -16,7 +16,6 @@ protocol DisplayLengthLimiter {
 
 struct Display {
     static let MAX_DISPLAY_LENGTH = 10_000 // too long strings in Text() crash the app
-
     var left: String
     var portraitPhoneString: String?
     var right: String?
@@ -61,19 +60,19 @@ extension Display {
         canBeInteger = false
         canBeFloat = false
     }
-    init(_ number: Number, screen: Screen, noLimits: Bool = false, showAs: ShowAs, forceScientific: Bool) {
+    init(_ number: Number, screen: Screen, separators: Separators, noLimits: Bool = false, showAs: ShowAs, forceScientific: Bool) {
         self.left = "0"
         right = nil
         canBeInteger = false
         canBeFloat = false
-        self = fromNumber(number, displayLengthLimiter: noLimits ? nil : screen, separators: screen, showAs: showAs, forceScientific: forceScientific)
+        self = fromNumber(number, displayLengthLimiter: noLimits ? nil : screen, separators: separators, showAs: showAs, forceScientific: forceScientific)
     }
-    init(_ stringNumber: String, screen: Screen, showAs: ShowAs, forceScientific: Bool) {
+    init(_ stringNumber: String, screen: Screen, separators: Separators, showAs: ShowAs, forceScientific: Bool) {
         self.left = "0"
         right = nil
         canBeInteger = false
         canBeFloat = false
-        self = fromStringNumber(stringNumber, displayLengthLimiter: screen, separators: screen, showAs: showAs, forceScientific: forceScientific)
+        self = fromStringNumber(stringNumber, displayLengthLimiter: screen, separators: separators, showAs: showAs, forceScientific: forceScientific)
     }
 }
 

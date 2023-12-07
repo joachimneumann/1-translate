@@ -11,6 +11,10 @@
 ///  English translation
 ///  Country selectrion
 ///  Reading the text
+///
+///  in VietnameseDisplay: only show
+///  Model for translation, translation happens there. No dependencies to screen or viewmodel.
+///  test: no need for screen
 
 import Foundation
 
@@ -41,11 +45,11 @@ enum VietnameseSecondLast: String, Codable, CaseIterable {
     }
 }
 
-class Vietnamese: Translator {
-    var groupingSeparator: GroupingSeparator
-    var vietnameseThousand: VietnameseThousand
-    var vietnameseSecondLast: VietnameseSecondLast
-    var vietnameseCompact: Bool
+class VietnameseTranslator: Translator {
+    let groupingSeparator: GroupingSeparator
+    let thousand: VietnameseThousand
+    let secondLast: VietnameseSecondLast
+    let compact: Bool
     private let one = "một"
     private let one_with_up_tone = "mốt"
     private let ten = "mười"
@@ -54,11 +58,11 @@ class Vietnamese: Translator {
     private let million = "triệu"
     private let billion = "tỷ"
     
-    init(groupingSeparator: GroupingSeparator, vietnameseThousand: VietnameseThousand, vietnameseSecondLast: VietnameseSecondLast, vietnameseCompact: Bool) {
+    init(groupingSeparator: GroupingSeparator, thousand: VietnameseThousand, secondLast: VietnameseSecondLast, compact: Bool) {
         self.groupingSeparator = groupingSeparator
-        self.vietnameseThousand = vietnameseThousand
-        self.vietnameseSecondLast = vietnameseSecondLast
-        self.vietnameseCompact = vietnameseCompact
+        self.thousand = thousand
+        self.secondLast = secondLast
+        self.compact = compact
     }
 
     private func toString_0_10(_ intValue: Int, one_up_tone: Bool = false, lăm: Bool = false, ten_tone: Bool = false) -> String? {
@@ -115,7 +119,7 @@ class Vietnamese: Translator {
                 if ret.count > 0 { ret += " " }
                 if X0 >= 2 {
                     var between = " " + ten_no_tone
-                    if vietnameseCompact {
+                    if compact {
                         if X > 0 {
                             between = ""
                         }
@@ -135,7 +139,7 @@ class Vietnamese: Translator {
                 // lẻ?
                 if ret.count > 0 { ret += " " }
                 if X > 0 {
-                    ret += vietnameseSecondLast.string + " "
+                    ret += secondLast.string + " "
                     ret += toString(X)!
                 } else {
                     ret += toString(0)!
@@ -147,7 +151,7 @@ class Vietnamese: Translator {
         if intValue <= 999_999 {
             let XXX = intValue % 1_000
             let XXX_000 = (intValue - XXX) / 1_000
-            var ret = toString(XXX_000, fromLargerNumber: fromLargerNumber)! + " " + vietnameseThousand.string
+            var ret = toString(XXX_000, fromLargerNumber: fromLargerNumber)! + " " + thousand.string
             if XXX > 0 {
                 ret += " " + toString(XXX, fromLargerNumber: true)!
             }
@@ -188,7 +192,7 @@ class Vietnamese: Translator {
     }
 }
 
-class English: Translator {
+class EnglishTranslator: Translator {
     enum Variant {
         case british, american
     }

@@ -9,6 +9,7 @@ import SwiftUI
 
 public typealias AppleFont = UIFont
 
+
 @main
 struct VietnameseNumbersApp: App {
     var body: some Scene {

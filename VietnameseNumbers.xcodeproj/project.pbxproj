@@ -28,7 +28,7 @@
 		AA8453E8294D872300A50B74 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8453E7294D872300A50B74 /* Icons.swift */; };
 		AA8A91112B1D7B5F00CE7185 /* VietnameseNumbersApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FABFF272F2348006DE4C8 /* VietnameseNumbersApp.swift */; };
 		AA8A91122B1D7B7100CE7185 /* VietnameseNumbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA92B4C829273A58005E43F0 /* VietnameseNumbers.swift */; };
-		AA8A91142B1D7FD000CE7185 /* VietnameseDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8A91132B1D7FD000CE7185 /* VietnameseDisplay.swift */; };
+		AA8A91142B1D7FD000CE7185 /* TranslatedDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8A91132B1D7FD000CE7185 /* TranslatedDisplay.swift */; };
 		AA8A91162B1D80F800CE7185 /* Translate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8A91152B1D80F800CE7185 /* Translate.swift */; };
 		AA8A911E2B1D815C00CE7185 /* VietnameseNumbersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8A911D2B1D815C00CE7185 /* VietnameseNumbersTests.swift */; };
 		AA8A91292B1D838C00CE7185 /* Translate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8A91152B1D80F800CE7185 /* Translate.swift */; };
@@ -92,7 +92,7 @@
 		AA672B09295189950044DC08 /* ScrollViewConditionalAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewConditionalAnimation.swift; sourceTree = "<group>"; };
 		AA689124295E681400129593 /* Brain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brain.swift; sourceTree = "<group>"; };
 		AA8453E7294D872300A50B74 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
-		AA8A91132B1D7FD000CE7185 /* VietnameseDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VietnameseDisplay.swift; sourceTree = "<group>"; };
+		AA8A91132B1D7FD000CE7185 /* TranslatedDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatedDisplay.swift; sourceTree = "<group>"; };
 		AA8A91152B1D80F800CE7185 /* Translate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translate.swift; sourceTree = "<group>"; };
 		AA8A911B2B1D815C00CE7185 /* VietnameseNumbersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VietnameseNumbersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA8A911D2B1D815C00CE7185 /* VietnameseNumbersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VietnameseNumbersTests.swift; sourceTree = "<group>"; };
@@ -158,7 +158,7 @@
 				AA92B4C829273A58005E43F0 /* VietnameseNumbers.swift */,
 				AAE426F629597AE3005FE365 /* Screen.swift */,
 				AA01B9D32957E44300617AFB /* Display.swift */,
-				AA8A91132B1D7FD000CE7185 /* VietnameseDisplay.swift */,
+				AA8A91132B1D7FD000CE7185 /* TranslatedDisplay.swift */,
 				AA29F589293CD608001ADF5A /* PortraitDisplay.swift */,
 				AAB10B96292A2222004707E9 /* NonScientificKeyboard.swift */,
 				AA370C30293352D60041AE4E /* Key.swift */,
@@ -353,7 +353,7 @@
 				AA370C2D293352960041AE4E /* Extensions.swift in Sources */,
 				AA29F58A293CD608001ADF5A /* PortraitDisplay.swift in Sources */,
 				AA92B4C529266CC1005E43F0 /* ThreeDots.swift in Sources */,
-				AA8A91142B1D7FD000CE7185 /* VietnameseDisplay.swift in Sources */,
+				AA8A91142B1D7FD000CE7185 /* TranslatedDisplay.swift in Sources */,
 				AA2FAC17272F2349006DE4C8 /* BrainEngine.swift in Sources */,
 				AA8A91162B1D80F800CE7185 /* Translate.swift in Sources */,
 				AA2FAC12272F2349006DE4C8 /* NumberStack.swift in Sources */,

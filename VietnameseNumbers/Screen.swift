@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Screen: Equatable, DisplayLengthLimiter, Separators {
+struct Screen: Equatable, DisplayLengthLimiter {
 
     static func == (lhs: Screen, rhs: Screen) -> Bool { /// used to detect rotation
         lhs.keySize == rhs.keySize
@@ -16,26 +16,6 @@ struct Screen: Equatable, DisplayLengthLimiter, Separators {
         return AppleFont.monospacedDigitSystemFont(ofSize: size, weight: weight)
     }
     
-    /// I initialize the decimalSeparator with the locale preference, but
-    /// I ignore the value of Locale.current.groupingSeparator
-    @AppStorage("forceScientific", store: .standard)
-    var forceScientific: Bool = false
-    
-    @AppStorage("decimalSeparator", store: .standard)
-    var decimalSeparator: DecimalSeparator = Locale.current.decimalSeparator == "," ? .comma : .dot
-    
-    @AppStorage("groupingSeparator", store: .standard)
-    var groupingSeparator: GroupingSeparator = .none
-
-    @AppStorage("vietnameseThousand", store: .standard)
-    var vietnameseThousand: VietnameseThousand = .nghìn
-    
-    @AppStorage("vietnameseSecondLast", store: .standard)
-    var vietnameseSecondLast: VietnameseSecondLast = .lẻ
-    
-    @AppStorage("vietnameseCompact", store: .standard)
-    var vietnameseCompact: Bool = false
-
     private let isPad: Bool
 
     let keyboardHeight: CGFloat

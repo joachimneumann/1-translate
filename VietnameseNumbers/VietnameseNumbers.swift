@@ -11,8 +11,8 @@ let testColors = false
 
 struct VietnameseNumbers: View {
     @StateObject private var viewModel: ViewModel = ViewModel()
-
     var screen: Screen
+
     @State var scrollViewHasScrolled = false
     @State var scrollViewID = UUID()
     @State var isZoomed: Bool = false
@@ -21,20 +21,20 @@ struct VietnameseNumbers: View {
         VStack(spacing: 0.0) {
             HStack(spacing: 30.0) {
                 Button(action: {
-                    viewModel.translationCountry = .Vietnam
+                    viewModel.languge = .vietnamese
                 }) {
                 Image("flag_vietnam")
                         .resizable()
                         .scaledToFit()
-                        .opacity(viewModel.translationCountry == .Vietnam ? 1.0 : 0.5)
+                        .opacity(viewModel.languge == .vietnamese ? 1.0 : 0.5)
                 }
                 Button(action: {
-                    viewModel.translationCountry = .UK
+                    viewModel.languge = .english
                 }) {
                 Image("flag UK")
                         .resizable()
                         .scaledToFit()
-                        .opacity(viewModel.translationCountry == .UK ? 1.0 : 0.5)
+                        .opacity(viewModel.languge == .english ? 1.0 : 0.5)
                 }
                 Spacer()
                 NavigationLink {
@@ -54,12 +54,7 @@ struct VietnameseNumbers: View {
             .frame(height: 30.0)
             .padding(.vertical, 10)
             Spacer(minLength: 0.0)
-            VietnameseDisplay(
-                viewModel: viewModel,
-                display: viewModel.currentDisplay,
-                country: viewModel.translationCountry,
-                screen: screen,
-                backgroundColor: screen.backgroundColor)
+            TranslatedDisplay(translatedString: viewModel.translated())
                 .padding(.bottom, screen.portraitIPhoneDisplayBottomPadding)
                 .padding(.horizontal, screen.displayHorizontalPadding)
             PortraitDisplay(

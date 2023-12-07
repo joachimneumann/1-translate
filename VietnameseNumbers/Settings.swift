@@ -23,7 +23,6 @@ struct Settings: View {
 
     var body: some View {
         let example = "1\(settingsGroupingSeparator.string)000\(settingsGroupingSeparator.string)000\(settingsDecimalSeparator.string)05"
-        var vietnamese = Vietnamese(groupingSeparator: .comma, vietnameseThousand: .nghìn, vietnameseSecondLast: .lẻ, vietnameseCompact: false)
         VStack {
             BackButton(
                 screen: screen,
@@ -38,6 +37,7 @@ struct Settings: View {
                                 .padding(.leading, 0)
                                 .font(.title)
                                 .gridCellColumns(2)
+                                .frame(maxWidth: .infinity)
                         }
                         GridRow {
                             Text("Decimal")
@@ -48,6 +48,7 @@ struct Settings: View {
                                 }
                             }
                             .padding(2)
+                            .frame(width: 220)
                             .background(Color(UIColor.darkGray))
                             .borderRadius(Color.black, width: 5, cornerRadius: 10, corners: [.topLeft, .bottomLeft, .topRight, .bottomRight])
                             .onChange(of: settingsDecimalSeparator) { _ in
@@ -85,78 +86,56 @@ struct Settings: View {
                                     }
                                 }
                             }
+                            .frame(width: 220)
                             .pickerStyle(.segmented)
                         }
                         .padding(.bottom, 20.0)
                         GridRow {
-                            Text("103133 trong tiếng việt = \n" + vietnamese.toString(103133)!)
+                            let vietnamese = VietnameseTranslator(groupingSeparator: .comma, thousand: vietnameseThousand, secondLast: vietnameseSecondLast, compact: vietnameseCompact)
+                            Text(vietnamese.toString(103133)!)
                                 .foregroundColor(.white)
                                 .padding(.leading, 0)
-//                                .font(.title)
                                 .gridCellColumns(2)
                         }
                         GridRow {
+                            Text("1000")
                             Picker("", selection: $vietnameseThousand) {
                                 ForEach(VietnameseThousand.allCases, id: \.self) { value in
                                     Text("\(value.rawValue)")
                                         .tag(value)
                                 }
                             }
+                            .frame(width: 220)
                             .padding(2)
                             .background(Color(UIColor.darkGray))
                             .borderRadius(Color.black, width: 5, cornerRadius: 10, corners: [.topLeft, .bottomLeft, .topRight, .bottomRight])
-                            .onChange(of: vietnameseThousand) { _ in
-                                if vietnameseThousand == .ngàn {
-                                    vietnameseThousand = .nghìn
-                                } else {
-                                    vietnameseThousand = .ngàn
-                                }
-                                if screen.vietnameseThousand != vietnameseThousand {
-                                    screen.vietnameseThousand = vietnameseThousand
-                                }
-                            }
                             .pickerStyle(.segmented)
                         }
                         GridRow {
+                            Text("1?3")
                             Picker("", selection: $vietnameseSecondLast) {
                                 ForEach(VietnameseSecondLast.allCases, id: \.self) { value in
                                     Text("\(value.rawValue)")
                                         .tag(value)
                                 }
                             }
+                            .frame(width: 220)
                             .padding(2)
                             .background(Color(UIColor.darkGray))
                             .borderRadius(Color.black, width: 5, cornerRadius: 10, corners: [.topLeft, .bottomLeft, .topRight, .bottomRight])
-                            .onChange(of: vietnameseSecondLast) { _ in
-                                if vietnameseSecondLast == .linh {
-                                    vietnameseSecondLast = .lẻ
-                                } else {
-                                    vietnameseSecondLast = .linh
-                                }
-                                if screen.vietnameseSecondLast != vietnameseSecondLast {
-                                    screen.vietnameseSecondLast = vietnameseSecondLast
-                                }
-                            }
                             .pickerStyle(.segmented)
                         }
                         GridRow {
-                            HStack {
-                                Text("Compact")
-                                Toggle("", isOn: $vietnameseCompact)
-                                    .toggleStyle(
-                                        ColoredToggleStyle(onColor: Color(white: 0.6),
-                                                           offColor: Color(white: 0.25),
-                                                           thumbColor: .white))
-                                    .onChange(of: vietnameseCompact) { _ in
-                                        if screen.vietnameseCompact != vietnameseCompact {
-                                            screen.vietnameseCompact = vietnameseCompact
-                                            // hack to make swiftui redraw and show the compact translation
-//                                            vietnamese = Vietnamese(screen: screen)
-                                            print("Settings -> " + (vietnameseCompact ? "true" : "false"))
-                                        }
-                                    }
-                                    .pickerStyle(.segmented)
-                            }
+                            Text("Compact")
+                                .background(Color.green)
+                            Toggle("", isOn: $vietnameseCompact)
+                                .toggleStyle(SwitchToggleStyle(tint: .gray))
+                                .frame(width: 40)
+//                                    .toggleStyle(
+//                                        ColoredToggleStyle(onColor: Color(white: 0.6),
+//                                                           offColor: Color(white: 0.25),
+//                                                           thumbColor: .white))
+//                                    .background(Color.yellow)
                         }
                     }
                    hobbyProject
@@ -168,20 +147,29 @@ struct Settings: View {
             }
             .padding(.horizontal)
             .onDisappear() {
-                if screen.decimalSeparator != settingsDecimalSeparator {
-                    screen.decimalSeparator = settingsDecimalSeparator
+                if viewModel.decimalSeparator != settingsDecimalSeparator {
+                    viewModel.decimalSeparator = settingsDecimalSeparator
                 }
-                if screen.groupingSeparator != settingsGroupingSeparator {
-                    screen.groupingSeparator = settingsGroupingSeparator
+                if viewModel.groupingSeparator != settingsGroupingSeparator {
+                    viewModel.groupingSeparator = settingsGroupingSeparator
+                }
+                if viewModel.vietnameseThousand != vietnameseThousand {
+                    viewModel.vietnameseThousand = vietnameseThousand
+                }
+                if viewModel.vietnameseSecondLast != vietnameseSecondLast {
+                    viewModel.vietnameseSecondLast = vietnameseSecondLast
+                }
+                if viewModel.vietnameseCompact != vietnameseCompact {
+                    viewModel.vietnameseCompact = vietnameseCompact
                 }
             }
         }
         .onAppear() {
-            settingsDecimalSeparator  = screen.decimalSeparator
-            settingsGroupingSeparator = screen.groupingSeparator
-            vietnameseThousand        = screen.vietnameseThousand
-            vietnameseSecondLast      = screen.vietnameseSecondLast
-            vietnameseCompact         = screen.vietnameseCompact
+            settingsDecimalSeparator  = viewModel.decimalSeparator
+            settingsGroupingSeparator = viewModel.groupingSeparator
+            vietnameseThousand        = viewModel.vietnameseThousand
+            vietnameseSecondLast      = viewModel.vietnameseSecondLast
+            vietnameseCompact         = viewModel.vietnameseCompact
         }
         .navigationBarBackButtonHidden(true)
     }

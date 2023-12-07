@@ -12,11 +12,11 @@ protocol ShowAs {
     var showAsFloat: Bool { get }
 }
 
-enum Country {
-    case Vietnam, UK, USA
+enum Language {
+    case vietnamese, english
 }
 
-class ViewModel: ObservableObject, ShowAs {
+class ViewModel: ObservableObject, ShowAs, Separators {
     @Published var showAsInt = false /// This will update the "-> Int or -> sci button texts
     @Published var showAsFloat = false
     @Published var isCopying: Bool = false
@@ -25,33 +25,69 @@ class ViewModel: ObservableObject, ShowAs {
     @Published var backgroundColor: [String: Color] = [:]
     @Published var textColor: [String: Color] = [:]
     @Published var currentDisplay: Display
-    @Published var translationCountry: Country
-
+    
+    private var translator: Translator = EnglishTranslator()
+    
+    @Published var languge: Language = .vietnamese {
+        didSet {
+            switch languge {
+            case .vietnamese:
+                translator = VietnameseTranslator(groupingSeparator: groupingSeparator, thousand: vietnameseThousand, secondLast: vietnameseSecondLast, compact: vietnameseCompact)
+            case .english:
+                translator = EnglishTranslator()
+            }
+        }
+    }
+    
+    func translated() -> String {
+        return translator.toString(currentDisplay.left) ?? "?"
+    }
+    
+    /// I initialize the decimalSeparator with the locale preference, but
+    /// I ignore the value of Locale.current.groupingSeparator
+    @AppStorage("forceScientific", store: .standard)
+    var forceScientific: Bool = false
+    
+    @AppStorage("decimalSeparator", store: .standard)
+    var decimalSeparator: DecimalSeparator = Locale.current.decimalSeparator == "," ? .comma : .dot
+    
+    @AppStorage("groupingSeparator", store: .standard)
+    var groupingSeparator: GroupingSeparator = .none
+    
+    @AppStorage("vietnameseThousand", store: .standard)
+    var vietnameseThousand: VietnameseThousand = .nghìn
+    
+    @AppStorage("vietnameseSecondLast", store: .standard)
+    var vietnameseSecondLast: VietnameseSecondLast = .lẻ
+    
+    @AppStorage("vietnameseCompact", store: .standard)
+    var vietnameseCompact: Bool = false
+    
     var precisionDescription = "unknown"
     var showPrecision: Bool = false
     var secondActive = false
-
+    
     @AppStorage("precision", store: .standard) private (set) var precision: Int = 1000
     @AppStorage("showPreliminaryResults", store: .standard) var showPreliminaryResults: Bool = true
     @AppStorage("rad", store: .standard) var rad: Bool = false
     
     private let brain: Brain /// initialized later with _precision.wrappedValue
     private var stupidBrain = BrainEngine(precision: 100) /// I want to call fast sync functions
-
+    
     private let keysThatRequireValidNumber = ["±", "%", "/", "x", "-", "+", "=", "( ", " )", "m+", "m-", "x^2", "x^3", "x^y", "e^x", "y^x", "2^x", "10^x", "One_x", "√", "3√", "y√", "logy", "ln", "log2", "log10", "x!", "sin", "cos", "tan", "asin", "acos", "atan", "EE", "sinh", "cosh", "tanh", "asinh", "acosh", "atanh"]
     private static let MAX_DISPLAY_LEN = 10_000 /// too long strings in Text() crash the app
     private let keyColor = KeyColor()
     
     private var upHasHappended = false
     private var downAnimationFinished = false
-
+    
     private enum KeyState {
         case notPressed
         case pressed
         case highPrecisionProcessing
         case highPrecisionProcessingDisabled
     }
-
+    
     private var keyState: KeyState = .notPressed //{ didSet { print("keyState ->", keyState) } }
     private let downTime = 0.1
     private let upTime = 0.4
@@ -59,7 +95,7 @@ class ViewModel: ObservableObject, ShowAs {
     private var displayNumber = Number("0", precision: 10)
     
     private var previouslyPendingOperator: String? = nil
-
+    
     init() {
         //print("ViewModel INIT")
         
@@ -68,7 +104,6 @@ class ViewModel: ObservableObject, ShowAs {
         currentDisplay = Display(left: "0", right: nil, canBeInteger: false, canBeFloat: false)
         brain = Brain(precision: _precision.wrappedValue)
         precisionDescription = _precision.wrappedValue.useWords
-        translationCountry = .Vietnam
         for symbol in [
             "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", ",",
             "C", "AC", "±", "%", "/", "x", "-", "+", "=",
@@ -99,7 +134,7 @@ class ViewModel: ObservableObject, ShowAs {
             displayNumber = new
         }
     }
-
+    
     ///  To give a clear visual feedback to the user that the button has been pressed,
     ///  the animation will always wait for the downAnimation to finish
     func showDisabledColors(for symbol: String) async {
@@ -133,7 +168,7 @@ class ViewModel: ObservableObject, ShowAs {
             await showUpColors(for: symbol)
         }
     }
-
+    
     func showUpColors(for symbol: String) async {
         /// Set the background color back to normal
         await MainActor.run {
@@ -171,7 +206,7 @@ class ViewModel: ObservableObject, ShowAs {
             /// this allows the user to try pressing a button again
             return
         }
-
+        
         let calculatorSymbol = ["sin", "cos", "tan", "asin", "acos", "atan"].contains(symbol) && !rad ? symbol+"D" : symbol
         switch symbol {
         case "2nd":
@@ -191,16 +226,16 @@ class ViewModel: ObservableObject, ShowAs {
             showPrecision = false
         default:
             guard keyState == .notPressed else { return }
-
+            
             let valid = displayNumber.isValid || !keysThatRequireValidNumber.contains(symbol)
             guard valid else { return }
-
+            
             if symbol == "AC" {
                 showPrecision.toggle()
             } else {
                 showPrecision = false
             }
-
+            
             keyState = .pressed
             upHasHappended = true
             Task(priority: .high) {
@@ -239,16 +274,16 @@ class ViewModel: ObservableObject, ShowAs {
     }
     
     func defaultTask(for symbol: String, screen: Screen) async {
-
+        
         await MainActor.run() {
             showAsInt = false
             showAsFloat = false
         }
-
+        
         //print("defaultTask", symbol)
         if showPreliminaryResults {
             let preliminaryResult = stupidBrain.operation(symbol)
-            let preliminary = Display(preliminaryResult, screen: screen, showAs: self, forceScientific: screen.forceScientific)
+            let preliminary = Display(preliminaryResult, screen: screen, separators: self, showAs: self, forceScientific: forceScientific)
             Task(priority: .high) {
                 try? await Task.sleep(nanoseconds: 300_000_000)
                 if keyState == .highPrecisionProcessing {
@@ -266,31 +301,31 @@ class ViewModel: ObservableObject, ShowAs {
     
     func refreshDisplay(screen: Screen) async {
         //print("refreshDisplay precision =", displayNumber.precision)
-        let tempDisplay = Display(displayNumber, screen: screen, showAs: self, forceScientific: screen.forceScientific)
+        let tempDisplay = Display(displayNumber, screen: screen, separators: self, showAs: self, forceScientific: forceScientific)
         await MainActor.run() {
             currentDisplay = tempDisplay
             self.showAC = currentDisplay.isZero
         }
     }
-
+    
     func copyFromPasteBin(screen: Screen) async -> Bool {
-//        if UIPasteboard.general.hasStrings {
-//            if let pasteString = UIPasteboard.general.string {
-//                print("pasteString", pasteString, pasteString.count)
-//                if pasteString.count > 0 {
-//                    if Gmp.isValidGmpString(pasteString, bits: 1000) {
-//                        displayNumber = await brain.replaceLast(withString: pasteString)
-//                        await refreshDisplay(screen: screen)
-//                        return true
-//                    }
-//                }
-//            }
-//        }
+        //        if UIPasteboard.general.hasStrings {
+        //            if let pasteString = UIPasteboard.general.string {
+        //                print("pasteString", pasteString, pasteString.count)
+        //                if pasteString.count > 0 {
+        //                    if Gmp.isValidGmpString(pasteString, bits: 1000) {
+        //                        displayNumber = await brain.replaceLast(withString: pasteString)
+        //                        await refreshDisplay(screen: screen)
+        //                        return true
+        //                    }
+        //                }
+        //            }
+        //        }
         return false
     }
     
     func copyToPastBin(screen: Screen) async {
-//        let copyData = Display(displayNumber, screen: screen, noLimits: true, showAs: self, forceScientific: screen.forceScientific)
-//        UIPasteboard.general.string = copyData.allInOneLine
+        //        let copyData = Display(displayNumber, screen: screen, noLimits: true, showAs: self, forceScientific: screen.forceScientific)
+        //        UIPasteboard.general.string = copyData.allInOneLine
     }
 }
