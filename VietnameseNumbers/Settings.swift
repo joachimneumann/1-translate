@@ -32,12 +32,14 @@ struct Settings: View {
                 VStack(alignment: .leading, spacing: 0.0) {
                     Grid(alignment: .leading, horizontalSpacing: 20.0, verticalSpacing: 10.0) {
                         GridRow {
-                            Text("\(example)")
-                                .foregroundColor(.white)
-                                .padding(.leading, 0)
-                                .font(.title)
-                                .gridCellColumns(2)
-                                .frame(maxWidth: .infinity)
+                            HStack {
+                                Text("\(example)")
+                                    .foregroundColor(.white)
+                                    .padding(.leading, 0)
+                                    .gridCellColumns(2)
+                                    .frame(maxWidth: .infinity)
+                                Spacer()
+                            }
                         }
                         GridRow {
                             Text("Decimal")
@@ -89,7 +91,7 @@ struct Settings: View {
                             .frame(width: 220)
                             .pickerStyle(.segmented)
                         }
-                        .padding(.bottom, 20.0)
+                        .padding(.bottom, 40.0)
                         GridRow {
                             let vietnamese = VietnameseTranslator(groupingSeparator: .comma, thousand: vietnameseThousand, secondLast: vietnameseSecondLast, compact: vietnameseCompact)
                             Text(vietnamese.toString(103133)!)
@@ -127,15 +129,12 @@ struct Settings: View {
                         }
                         GridRow {
                             Text("Compact")
-                                .background(Color.green)
                             Toggle("", isOn: $vietnameseCompact)
-                                .toggleStyle(SwitchToggleStyle(tint: .gray))
                                 .frame(width: 40)
-//                                    .toggleStyle(
-//                                        ColoredToggleStyle(onColor: Color(white: 0.6),
-//                                                           offColor: Color(white: 0.25),
-//                                                           thumbColor: .white))
-//                                    .background(Color.yellow)
+                                .toggleStyle(
+                                    ColoredToggleStyle(onColor: Color(white: 0.6),
+                                                       offColor: Color(white: 0.25),
+                                                       thumbColor: .white))
                         }
                     }
                    hobbyProject
