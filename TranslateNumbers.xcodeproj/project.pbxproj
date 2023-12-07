@@ -60,7 +60,6 @@
 
 /* Begin PBXFileReference section */
 		AA01B9D32957E44300617AFB /* Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Display.swift; sourceTree = "<group>"; };
-		AA03B1ED298D535800A7837A /* CalculatorAppMac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorAppMac.swift; sourceTree = "<group>"; };
 		AA08C7BE272EDA48001B8575 /* TranslateNumbers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TranslateNumbers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA08C7C5272EDA4A001B8575 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA08C7C8272EDA4A001B8575 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -152,7 +151,6 @@
 			children = (
 				AA1B007B294772980054C851 /* Brain */,
 				AA2FABFF272F2348006DE4C8 /* TranslateNumbersApp.swift */,
-				AA03B1ED298D535800A7837A /* CalculatorAppMac.swift */,
 				AA32853A297248B800D86CB4 /* ViewModel.swift */,
 				AA8A91152B1D80F800CE7185 /* Translate.swift */,
 				AA92B4C829273A58005E43F0 /* TranslateNumbers.swift */,

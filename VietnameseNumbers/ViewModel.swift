@@ -13,7 +13,7 @@ protocol ShowAs {
 }
 
 enum Language: String, Codable, CaseIterable {
-    case vietnamese, english
+    case vietnamese, english, german
 }
 
 class ViewModel: ObservableObject, ShowAs, Separators {
@@ -127,6 +127,8 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             translator = VietnameseTranslator(groupingSeparator: groupingSeparator, thousand: vietnameseThousand, secondLast: vietnameseSecondLast, compact: vietnameseCompact)
         case .english:
             translator = EnglishTranslator(groupingSeparator: groupingSeparator, useAndAfterHundred: englishUseAndAfterHundred)
+        case .german:
+            translator = GermanTranslator(groupingSeparator: groupingSeparator)
         }
     }
     

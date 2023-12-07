@@ -35,6 +35,14 @@ struct TranslateNumbers: View {
                         .scaledToFit()
                         .opacity(viewModel.language == .english ? 1.0 : 0.5)
                 }
+                Button(action: {
+                    viewModel.language = .german
+                }) {
+                Image("flag germany")
+                        .resizable()
+                        .scaledToFit()
+                        .opacity(viewModel.language == .german ? 1.0 : 0.5)
+                }
                 Spacer()
                 NavigationLink {
                     Settings(viewModel: viewModel, screen: screen, font: Font(screen.infoUiFont))
