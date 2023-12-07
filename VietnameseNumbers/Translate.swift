@@ -7,14 +7,9 @@
 
 ///
 /// TODOs:
-///  Vietamese: kleinerer Numer Font, 000 separator
-///  English translation
-///  Country selectrion
 ///  Reading the text
+///  Nachkommastellen
 ///
-///  in VietnameseDisplay: only show
-///  Model for translation, translation happens there. No dependencies to screen or viewmodel.
-///  test: no need for screen
 
 import Foundation
 
