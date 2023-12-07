@@ -19,14 +19,13 @@ struct PortraitDisplay: View {
         self.backgroundColor = backgroundColor
         
         /// calculate possibly expanded font
-        var availableDisplayWidth = screen.displayWidth
-        if display.right != nil {
-            availableDisplayWidth -= screen.ePadding
-        }
-        let text = display.left + (display.right ?? "")
-        let n = CGFloat(text.count)
-        let lengthOfNulls = n * screen.digitWidth
-        
+//        var availableDisplayWidth = screen.displayWidth
+//        if display.right != nil {
+//            availableDisplayWidth -= screen.ePadding
+//        }
+//        let text = display.left + (display.right ?? "")
+//        let n = CGFloat(text.count)
+//        let lengthOfNulls = n * screen.digitWidth
 //        var factor: CGFloat = 1.0
 //        let expandLimit = screen.displayWidth - screen.digitWidth * 0.9
 //        if lengthOfNulls < expandLimit {
