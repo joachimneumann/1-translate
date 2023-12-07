@@ -387,14 +387,14 @@ class GermanTranslator: Translator {
     }
 
     func toString(_ intValue: Int) -> String? {
-        if intValue == 1 {
-            return "Eins"
-        }
         let lowercase = toStringLowercase(intValue)!
         return lowercase.firstCapitalized
     }
     
     private func toStringLowercase(_ intValue: Int) -> String? {
+        if intValue == 1 {
+            return "eins"
+        }
         if intValue <= 20 {
             return german_0_20(intValue)
         }
@@ -403,7 +403,11 @@ class GermanTranslator: Translator {
             let X = temp % 10
             temp = (temp - X) / 10
             let X0 = temp % 10
-            return german_0_20(X)! + "\u{AD}" + "und" + "\u{AD}" + german_tens(X0)! // "\u{AD}" is a soft hyphen
+            if X == 0 {
+                return german_tens(X0)!
+            } else {
+                return german_0_20(X)! + "\u{AD}" + "und" + "\u{AD}" + german_tens(X0)! // "\u{AD}" is a soft hyphen
+            }
         }
         if intValue <= 999 {
             var temp = intValue
@@ -423,7 +427,13 @@ class GermanTranslator: Translator {
         if intValue <= 999_999 {
             let XXX_000 = (intValue - intValue % 1000) / 1000
             let XXX = intValue - 1000 * XXX_000
-            var ret = toStringLowercase(XXX_000)! + "\u{AD}" + "tausend" + "\u{AD}"
+            var ret = ""
+            if XXX_000 == 1 {
+                ret = "ein"
+            } else {
+                ret = toStringLowercase(XXX_000)!
+            }
+            ret += "\u{AD}" + "tausend" + "\u{AD}"
             if XXX > 0 {
                 ret += toStringLowercase(XXX)!
             }
