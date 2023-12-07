@@ -55,6 +55,9 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @AppStorage("vietnameseCompact", store: .standard)
     var vietnameseCompact: Bool = false
     
+    @AppStorage("englishUseAndAfterHundred", store: .standard)
+    var englishUseAndAfterHundred: Bool = true
+    
     @AppStorage("language", store: .standard)
     var language: Language = .vietnamese {
         didSet {
@@ -67,7 +70,6 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     var secondActive = false
     
     @AppStorage("precision", store: .standard) private (set) var precision: Int = 1000
-    @AppStorage("showPreliminaryResults", store: .standard) var showPreliminaryResults: Bool = true
     @AppStorage("rad", store: .standard) var rad: Bool = false
     
     private let brain: Brain /// initialized later with _precision.wrappedValue
@@ -124,7 +126,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         case .vietnamese:
             translator = VietnameseTranslator(groupingSeparator: groupingSeparator, thousand: vietnameseThousand, secondLast: vietnameseSecondLast, compact: vietnameseCompact)
         case .english:
-            translator = EnglishTranslator(groupingSeparator: groupingSeparator)
+            translator = EnglishTranslator(groupingSeparator: groupingSeparator, useAndAfterHundred: englishUseAndAfterHundred)
         }
     }
     
@@ -290,27 +292,17 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             showAsFloat = false
         }
         
-        //print("defaultTask", symbol)
-        if showPreliminaryResults {
-            let preliminaryResult = stupidBrain.operation(symbol)
-            let preliminary = Display(preliminaryResult, screen: screen, separators: self, showAs: self, forceScientific: forceScientific)
-            Task(priority: .high) {
-                try? await Task.sleep(nanoseconds: 300_000_000)
-                if keyState == .highPrecisionProcessing {
-                    await MainActor.run() {
-                        currentDisplay = preliminary
-                        currentDisplay.preliminary = true
-                    }
-                }
-            }
-        }
         keyState = .highPrecisionProcessing
         displayNumber = await brain.operation(symbol)
         await refreshDisplay(screen: screen)
     }
     
+    func refreshDisplaySync(screen: Screen) {
+        Task {
+            await refreshDisplay(screen: screen)
+        }
+    }
     func refreshDisplay(screen: Screen) async {
-        //print("refreshDisplay precision =", displayNumber.precision)
         let tempDisplay = Display(displayNumber, screen: screen, separators: self, showAs: self, forceScientific: forceScientific)
         await MainActor.run() {
             currentDisplay = tempDisplay

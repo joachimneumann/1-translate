@@ -20,6 +20,7 @@ struct Settings: View {
     @State var vietnameseThousand: VietnameseThousand = .ngàn
     @State var vietnameseSecondLast: VietnameseSecondLast = .lẻ
     @State var vietnameseCompact: Bool = false
+    @State var englishUseAndAfterHundred: Bool = true
 
     var body: some View {
         let example = "1\(settingsGroupingSeparator.string)000\(settingsGroupingSeparator.string)000\(settingsDecimalSeparator.string)05"
@@ -32,14 +33,10 @@ struct Settings: View {
                 VStack(alignment: .leading, spacing: 0.0) {
                     Grid(alignment: .leading, horizontalSpacing: 20.0, verticalSpacing: 10.0) {
                         GridRow {
-                            HStack {
-                                Text("\(example)")
-                                    .foregroundColor(.white)
-                                    .padding(.leading, 0)
-                                    .gridCellColumns(2)
-                                    .frame(maxWidth: .infinity)
-                                Spacer()
-                            }
+                            Text("\(example)")
+                                .foregroundColor(.white)
+                                .padding(.leading, 0)
+                                .gridCellColumns(2)
                         }
                         GridRow {
                             Text("Decimal")
@@ -93,11 +90,19 @@ struct Settings: View {
                         }
                         .padding(.bottom, 40.0)
                         GridRow {
+                            Image("flag_vietnam")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 25)
+                        }
+                        GridRow {
                             let vietnamese = VietnameseTranslator(groupingSeparator: .comma, thousand: vietnameseThousand, secondLast: vietnameseSecondLast, compact: vietnameseCompact)
-                            Text(vietnamese.toString(103133)!)
+                            Text(vietnamese.toString(303333)!)
                                 .foregroundColor(.white)
+//                                .font(.title)
                                 .padding(.leading, 0)
                                 .gridCellColumns(2)
+                                .gridCellUnsizedAxes(.horizontal)
                         }
                         GridRow {
                             Text("1000")
@@ -135,9 +140,35 @@ struct Settings: View {
                                     ColoredToggleStyle(onColor: Color(white: 0.6),
                                                        offColor: Color(white: 0.25),
                                                        thumbColor: .white))
+                                .padding(.leading, 3)
+                        }
+                        .padding(.bottom, 40)
+                        GridRow {
+                            Image("flag UK")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 25)
+                        }
+                        GridRow {
+                            let english = EnglishTranslator(groupingSeparator: .comma, useAndAfterHundred: englishUseAndAfterHundred)
+                            Text(english.toString(105)!)
+                                .foregroundColor(.white)
+                                .padding(.leading, 0)
+                                .gridCellColumns(2)
+                                .gridCellUnsizedAxes(.horizontal)
+                        }
+                        GridRow {
+                            Text("use and")
+                            Toggle("", isOn: $englishUseAndAfterHundred)
+                                .frame(width: 40)
+                                .toggleStyle(
+                                    ColoredToggleStyle(onColor: Color(white: 0.6),
+                                                       offColor: Color(white: 0.25),
+                                                       thumbColor: .white))
+                                .padding(.leading, 3)
                         }
                     }
-                   hobbyProject
+                    hobbyProject
                         .padding(.top, 20)
                     
                     Spacer()
@@ -161,7 +192,11 @@ struct Settings: View {
                 if viewModel.vietnameseCompact != vietnameseCompact {
                     viewModel.vietnameseCompact = vietnameseCompact
                 }
+                if viewModel.englishUseAndAfterHundred != englishUseAndAfterHundred {
+                    viewModel.englishUseAndAfterHundred = englishUseAndAfterHundred
+                }
                 viewModel.setTranslator()
+                viewModel.refreshDisplaySync(screen: screen)
             }
         }
         .onAppear() {

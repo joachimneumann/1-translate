@@ -21,7 +21,6 @@ struct Display {
     var right: String?
     var canBeInteger: Bool
     var canBeFloat: Bool
-    var preliminary: Bool = false
 
 #if os(macOS)
     var color: Color = Color(white: 230.0/255.0)

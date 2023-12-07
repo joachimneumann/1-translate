@@ -46,10 +46,10 @@ enum VietnameseSecondLast: String, Codable, CaseIterable {
 }
 
 class VietnameseTranslator: Translator {
-    let groupingSeparator: GroupingSeparator
-    let thousand: VietnameseThousand
-    let secondLast: VietnameseSecondLast
-    let compact: Bool
+    var groupingSeparator: GroupingSeparator
+    var thousand: VietnameseThousand
+    var secondLast: VietnameseSecondLast
+    var compact: Bool
     private let one = "một"
     private let one_with_up_tone = "mốt"
     private let ten = "mười"
@@ -193,10 +193,8 @@ class VietnameseTranslator: Translator {
 }
 
 class EnglishTranslator: Translator {
-    let groupingSeparator: GroupingSeparator
-    enum Variant {
-        case british, american
-    }
+    var groupingSeparator: GroupingSeparator
+    var useAndAfterHundred: Bool
     
     private let zero = "zero"
     private let one = "one"
@@ -205,12 +203,10 @@ class EnglishTranslator: Translator {
     private let thousand = "thousand"
     private let million = "million"
     private let billion = "billion"
-
-    private var variant: Variant
     
-    init(groupingSeparator: GroupingSeparator, variant: Variant = Variant.american) {
+    init(groupingSeparator: GroupingSeparator, useAndAfterHundred: Bool) {
         self.groupingSeparator = groupingSeparator
-        self.variant = variant
+        self.useAndAfterHundred = useAndAfterHundred
     }
     
     private func english_0_20(_ intValue: Int) -> String? {
@@ -280,7 +276,12 @@ class EnglishTranslator: Translator {
             var ret = english_0_20(X00)! + " " + hundred
             let leftover = 10 * X0 + X
             if leftover > 0 {
-                ret += " " + toString(leftover)!
+                if useAndAfterHundred {
+                    ret += " and "
+                } else {
+                    ret += " "
+                }
+                ret += toString(leftover)!
             }
             return ret
         }

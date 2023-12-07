@@ -29,12 +29,12 @@ struct ScrollViewConditionalAnimation: View {
             HStack(alignment: .top, spacing: 0.0) {
                 ScrollView(.vertical) {
                     HStack(alignment: .bottom, spacing: 0.0) {
-                        let toShow = display.preliminary && display.left.count > 1 ? String(display.left.dropLast()) : display.left
+                        let toShow = display.left
                         Spacer(minLength: 0.0)
                         Text(toShow)
                             .kerning(screen.kerning)
                             .font(Font(screen.appleFont))
-                            .foregroundColor(display.preliminary ? .gray : foregroundColor)
+                            .foregroundColor(foregroundColor)
                             .multilineTextAlignment(.trailing)
                             .background(backgroundColor)
                             .lineLimit(nil)
@@ -48,11 +48,6 @@ struct ScrollViewConditionalAnimation: View {
                 }
                 .id(scrollViewID)
                 .disabled(disabledScrolling)
-                if display.preliminary {
-                    ThreeDots()
-                        .frame(width: screen.digitWidth, height: screen.digitWidth / 3)
-                        .offset(y: offsetY + screen.textHeight - screen.digitWidth * 2.0 / 3.0)
-                }
             }
         }
     }

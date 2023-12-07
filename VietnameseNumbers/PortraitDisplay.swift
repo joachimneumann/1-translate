@@ -41,31 +41,23 @@ struct PortraitDisplay: View {
     
     @ViewBuilder
     var mantissa: some View {
-        let toShow = display.preliminary && display.left.count > 1 ? String(display.left.dropLast()) : display.left
+        let toShow = display.left
         Text(toShow)
             .kerning(screen.kerning)
             .font(font)
             .lineLimit(0)
-            .foregroundColor(display.preliminary ? .gray : display.color)
+            .foregroundColor(display.color)
             .multilineTextAlignment(.trailing)
             .background(testColors ? .yellow : backgroundColor).opacity(testColors ? 0.9 : 1.0)
     }
 
-    @ViewBuilder
-    var threeDots: some View {
-        if display.preliminary {
-            ThreeDots().frame(width: screen.digitWidth, height: screen.digitWidth / 3)
-                .offset(y: -screen.digitWidth / 3)
-        }
-    }
-    
     @ViewBuilder
     var exponent: some View {
         if let exponent = display.right {
             Text(exponent)
                 .kerning(screen.kerning)
                 .font(font)
-                .foregroundColor(display.preliminary ? .gray : display.color)
+                .foregroundColor(display.color)
                 .multilineTextAlignment(.trailing)
                 .background(testColors ? .yellow : backgroundColor).opacity(testColors ? 0.9 : 1.0)
                 .lineLimit(1)
@@ -78,7 +70,6 @@ struct PortraitDisplay: View {
         HStack(alignment: .bottom, spacing: 0.0) {
             Spacer(minLength: 0.0)
             mantissa
-            threeDots
             exponent
         }
     }

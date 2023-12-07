@@ -52,18 +52,19 @@ struct TranslateNumbers: View {
             }
             .frame(height: 30.0)
             .padding(.bottom, 20)
+            .padding(.bottom, 20)
             Spacer(minLength: 0.0)
             TranslatedDisplay(
                 translatedString: viewModel.translated(),
                 screen: screen)
                 .padding(.bottom, screen.portraitIPhoneDisplayBottomPadding)
-                .padding(.horizontal, screen.displayHorizontalPadding)
+                .padding(.horizontal, 0)
             PortraitDisplay(
                 display: viewModel.currentDisplay,
                 screen: screen,
                 backgroundColor: screen.backgroundColor)
                 .padding(.bottom, screen.portraitIPhoneDisplayBottomPadding)
-                .padding(.horizontal, screen.displayHorizontalPadding)
+                .padding(.horizontal, 0)
             NonScientificKeyboard(
                 screen: screen,
                 viewModel: viewModel)
