@@ -21,20 +21,20 @@ struct VietnameseNumbers: View {
         VStack(spacing: 0.0) {
             HStack(spacing: 30.0) {
                 Button(action: {
-                    viewModel.languge = .vietnamese
+                    viewModel.language = .vietnamese
                 }) {
                 Image("flag_vietnam")
                         .resizable()
                         .scaledToFit()
-                        .opacity(viewModel.languge == .vietnamese ? 1.0 : 0.5)
+                        .opacity(viewModel.language == .vietnamese ? 1.0 : 0.5)
                 }
                 Button(action: {
-                    viewModel.languge = .english
+                    viewModel.language = .english
                 }) {
                 Image("flag UK")
                         .resizable()
                         .scaledToFit()
-                        .opacity(viewModel.languge == .english ? 1.0 : 0.5)
+                        .opacity(viewModel.language == .english ? 1.0 : 0.5)
                 }
                 Spacer()
                 NavigationLink {

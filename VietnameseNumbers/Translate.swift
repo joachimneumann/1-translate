@@ -193,6 +193,7 @@ class VietnameseTranslator: Translator {
 }
 
 class EnglishTranslator: Translator {
+    let groupingSeparator: GroupingSeparator
     enum Variant {
         case british, american
     }
@@ -207,7 +208,8 @@ class EnglishTranslator: Translator {
 
     private var variant: Variant
     
-    init(variant: Variant = Variant.american) {
+    init(groupingSeparator: GroupingSeparator, variant: Variant = Variant.american) {
+        self.groupingSeparator = groupingSeparator
         self.variant = variant
     }
     
@@ -317,7 +319,9 @@ class EnglishTranslator: Translator {
     }
     
     func toString(_ string: String) -> String? {
-        let intValue = Int(string)
+        let groupSeparator = groupingSeparator.string
+        let strippedString = string.replacingOccurrences(of: groupSeparator, with: "")
+        let intValue = Int(strippedString)
         if intValue != nil {
             return toString(intValue!)
         }

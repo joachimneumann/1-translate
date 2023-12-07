@@ -161,6 +161,7 @@ struct Settings: View {
                 if viewModel.vietnameseCompact != vietnameseCompact {
                     viewModel.vietnameseCompact = vietnameseCompact
                 }
+                viewModel.setTranslator()
             }
         }
         .onAppear() {

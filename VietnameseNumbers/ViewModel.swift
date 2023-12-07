@@ -12,7 +12,7 @@ protocol ShowAs {
     var showAsFloat: Bool { get }
 }
 
-enum Language {
+enum Language: String, Codable, CaseIterable {
     case vietnamese, english
 }
 
@@ -26,21 +26,13 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @Published var textColor: [String: Color] = [:]
     @Published var currentDisplay: Display
     
-    private var translator: Translator = EnglishTranslator()
-    
-    @Published var languge: Language = .vietnamese {
-        didSet {
-            switch languge {
-            case .vietnamese:
-                translator = VietnameseTranslator(groupingSeparator: groupingSeparator, thousand: vietnameseThousand, secondLast: vietnameseSecondLast, compact: vietnameseCompact)
-            case .english:
-                translator = EnglishTranslator()
-            }
-        }
+    private var translator: Translator?
+        
+    func translate(_ string: String) -> String {
+        return translator!.toString(string) ?? "?"
     }
-    
     func translated() -> String {
-        return translator.toString(currentDisplay.left) ?? "?"
+        return translate(currentDisplay.left)
     }
     
     /// I initialize the decimalSeparator with the locale preference, but
@@ -62,6 +54,13 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     
     @AppStorage("vietnameseCompact", store: .standard)
     var vietnameseCompact: Bool = false
+    
+    @AppStorage("language", store: .standard)
+    var language: Language = .vietnamese {
+        didSet {
+            setTranslator()
+        }
+    }
     
     var precisionDescription = "unknown"
     var showPrecision: Bool = false
@@ -116,6 +115,17 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             textColor[symbol] = keyColor.textColor(for: symbol, isPending: false)
         }
         backgroundColor["plus"] = keyColor.upColor(for: "+", isPending: false)
+        
+        setTranslator()
+    }
+    
+    func setTranslator() {
+        switch language {
+        case .vietnamese:
+            translator = VietnameseTranslator(groupingSeparator: groupingSeparator, thousand: vietnameseThousand, secondLast: vietnameseSecondLast, compact: vietnameseCompact)
+        case .english:
+            translator = EnglishTranslator(groupingSeparator: groupingSeparator)
+        }
     }
     
     /// the update of the precision in brain can be slow.
