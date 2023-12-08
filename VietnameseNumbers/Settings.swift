@@ -12,18 +12,18 @@ struct Settings: View {
     @Environment(\.presentationMode) var presentation /// for dismissing the Settings View
     
     @ObservedObject var viewModel: ViewModel
-    let screen: Screen
-    let font: Font
-    
-    @State var settingsDecimalSeparator: DecimalSeparator = .comma
-    @State var settingsGroupingSeparator: GroupingSeparator = .none
     @State var vietnameseThousand: VietnameseThousand = .ngàn
     @State var vietnameseSecondLast: VietnameseSecondLast = .lẻ
     @State var vietnameseCompact: Bool = false
     @State var englishUseAndAfterHundred: Bool = true
+    let screen: Screen
+    let font: Font
 
     var body: some View {
-        let example = "1\(settingsGroupingSeparator.string)000\(settingsGroupingSeparator.string)000\(settingsDecimalSeparator.string)05"
+        let english = TranslateEnglish(separators: viewModel)
+        let vietnamese = TranslateVietnamese(separators: viewModel)
+        
+        let example = "1\(viewModel.groupingSeparator.string)000\(viewModel.groupingSeparator.string)000\(viewModel.decimalSeparator.string)05"
         VStack {
             BackButton(
                 screen: screen,
@@ -40,7 +40,7 @@ struct Settings: View {
                         }
                         GridRow {
                             Text("Decimal")
-                            Picker("", selection: $settingsDecimalSeparator) {
+                            Picker("", selection: $viewModel.decimalSeparator) {
                                 ForEach(DecimalSeparator.allCases, id: \.self) { value in
                                     Text("\(value.rawValue)")
                                         .tag(value)
@@ -50,14 +50,14 @@ struct Settings: View {
                             .frame(width: 220)
                             .background(Color(UIColor.darkGray))
                             .borderRadius(Color.black, width: 5, cornerRadius: 10, corners: [.topLeft, .bottomLeft, .topRight, .bottomRight])
-                            .onChange(of: settingsDecimalSeparator) { _ in
-                                if settingsDecimalSeparator == .comma {
-                                    if settingsGroupingSeparator == .comma {
-                                        settingsGroupingSeparator = .dot
+                            .onChange(of: viewModel.decimalSeparator) { _ in
+                                if viewModel.decimalSeparator == .comma {
+                                    if viewModel.groupingSeparator == .comma {
+                                        viewModel.groupingSeparator = .dot
                                     }
-                                } else if settingsDecimalSeparator == .dot {
-                                    if settingsGroupingSeparator == .dot {
-                                        settingsGroupingSeparator = .comma
+                                } else if viewModel.decimalSeparator == .dot {
+                                    if viewModel.groupingSeparator == .dot {
+                                        viewModel.groupingSeparator = .comma
                                     }
                                 }
                             }
@@ -65,7 +65,7 @@ struct Settings: View {
                         }
                         GridRow {
                             Text("Grouping")
-                            Picker("", selection: $settingsGroupingSeparator) {
+                            Picker("", selection: $viewModel.groupingSeparator) {
                                 ForEach(GroupingSeparator.allCases, id: \.self) { value in
                                     Text("\(value.rawValue)")
                                         .tag(value)
@@ -74,14 +74,14 @@ struct Settings: View {
                             .padding(2)
                             .background(Color(UIColor.darkGray))
                             .borderRadius(Color.black, width: 5, cornerRadius: 10, corners: [.topLeft, .bottomLeft, .topRight, .bottomRight])
-                            .onChange(of: settingsGroupingSeparator) { _ in
-                                if settingsGroupingSeparator == .comma {
-                                    if settingsDecimalSeparator == .comma {
-                                        settingsDecimalSeparator = .dot
+                            .onChange(of: viewModel.groupingSeparator) { _ in
+                                if viewModel.groupingSeparator == .comma {
+                                    if viewModel.decimalSeparator == .comma {
+                                        viewModel.decimalSeparator = .dot
                                     }
-                                } else if settingsGroupingSeparator == .dot { /// dot
-                                    if settingsDecimalSeparator == .dot { /// also dot
-                                        settingsDecimalSeparator = .comma
+                                } else if viewModel.groupingSeparator == .dot { /// dot
+                                    if viewModel.decimalSeparator == .dot { /// also dot
+                                        viewModel.decimalSeparator = .comma
                                     }
                                 }
                             }
@@ -96,8 +96,7 @@ struct Settings: View {
                                 .frame(height: 25)
                         }
                         GridRow {
-                            let vietnamese = VietnameseTranslator(groupingSeparator: .comma, thousand: vietnameseThousand, secondLast: vietnameseSecondLast, compact: vietnameseCompact)
-                            Text(vietnamese.toString(303333)!)
+                            Text(vietnamese.translate(303333)!)
                                 .foregroundColor(.white)
 //                                .font(.title)
                                 .padding(.leading, 0)
@@ -150,10 +149,7 @@ struct Settings: View {
                                 .frame(height: 25)
                         }
                         GridRow {
-                            let english = EnglishTranslator(
-                                groupingSeparator: .comma,
-                                decimalSeparator: .dot,
-                                useAndAfterHundred: englishUseAndAfterHundred)
+                            let english = TranslateEnglish(separators: viewModel)
                             Text(english.translate("105")!)
                                 .foregroundColor(.white)
                                 .padding(.leading, 0)
@@ -180,34 +176,34 @@ struct Settings: View {
             }
             .padding(.horizontal)
             .onDisappear() {
-                if viewModel.decimalSeparator != settingsDecimalSeparator {
-                    viewModel.decimalSeparator = settingsDecimalSeparator
+//                if viewModel.decimalSeparator != settingsDecimalSeparator {
+//                    viewModel.decimalSeparator = settingsDecimalSeparator
+//                }
+//                if viewModel.groupingSeparator != settingsGroupingSeparator {
+//                    viewModel.groupingSeparator = settingsGroupingSeparator
+//                }
+                if vietnamese.thousand != vietnameseThousand {
+                    vietnamese.thousand = vietnameseThousand
                 }
-                if viewModel.groupingSeparator != settingsGroupingSeparator {
-                    viewModel.groupingSeparator = settingsGroupingSeparator
+                if vietnamese.secondLast != vietnameseSecondLast {
+                    vietnamese.secondLast = vietnameseSecondLast
                 }
-                if viewModel.vietnameseThousand != vietnameseThousand {
-                    viewModel.vietnameseThousand = vietnameseThousand
+                if vietnamese.compact != vietnameseCompact {
+                    vietnamese.compact = vietnameseCompact
                 }
-                if viewModel.vietnameseSecondLast != vietnameseSecondLast {
-                    viewModel.vietnameseSecondLast = vietnameseSecondLast
+                if english.useAndAfterHundred != englishUseAndAfterHundred {
+                    english.useAndAfterHundred = englishUseAndAfterHundred
                 }
-                if viewModel.vietnameseCompact != vietnameseCompact {
-                    viewModel.vietnameseCompact = vietnameseCompact
-                }
-                if viewModel.englishUseAndAfterHundred != englishUseAndAfterHundred {
-                    viewModel.englishUseAndAfterHundred = englishUseAndAfterHundred
-                }
-                viewModel.setTranslator()
-                viewModel.refreshDisplaySync(screen: screen)
+//                viewModel.setTranslator()
+//                viewModel.refreshDisplaySync(screen: screen)
             }
         }
         .onAppear() {
-            settingsDecimalSeparator  = viewModel.decimalSeparator
-            settingsGroupingSeparator = viewModel.groupingSeparator
-            vietnameseThousand        = viewModel.vietnameseThousand
-            vietnameseSecondLast      = viewModel.vietnameseSecondLast
-            vietnameseCompact         = viewModel.vietnameseCompact
+//            settingsDecimalSeparator  = viewModel.decimalSeparator
+//            settingsGroupingSeparator = viewModel.groupingSeparator
+//            vietnameseThousand        = viewModel.vietnameseThousand
+//            vietnameseSecondLast      = viewModel.vietnameseSecondLast
+//            vietnameseCompact         = viewModel.vietnameseCompact
         }
         .navigationBarBackButtonHidden(true)
     }

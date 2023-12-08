@@ -39,6 +39,10 @@
 		AA92B4C529266CC1005E43F0 /* ThreeDots.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA92B4C429266CC1005E43F0 /* ThreeDots.swift */; };
 		AAAE6D642B228B7300079392 /* TranslateEnglish.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAE6D632B228B7300079392 /* TranslateEnglish.swift */; };
 		AAAE6D652B228B7300079392 /* TranslateEnglish.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAE6D632B228B7300079392 /* TranslateEnglish.swift */; };
+		AAAE6D672B22B5CF00079392 /* TranslateVietnamese.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAE6D662B22B5CF00079392 /* TranslateVietnamese.swift */; };
+		AAAE6D682B22B5CF00079392 /* TranslateVietnamese.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAE6D662B22B5CF00079392 /* TranslateVietnamese.swift */; };
+		AAAE6D6A2B22B77B00079392 /* TranslateGerman.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAE6D692B22B77B00079392 /* TranslateGerman.swift */; };
+		AAAE6D6B2B22B77B00079392 /* TranslateGerman.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAE6D692B22B77B00079392 /* TranslateGerman.swift */; };
 		AAB10B9A292A2222004707E9 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB10B94292A2222004707E9 /* Label.swift */; };
 		AAB10B9C292A2222004707E9 /* NonScientificKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB10B96292A2222004707E9 /* NonScientificKeyboard.swift */; };
 		AABEFC132972A8780023A3C9 /* KeyColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABEFC122972A8780023A3C9 /* KeyColor.swift */; };
@@ -101,6 +105,8 @@
 		AA92B4C429266CC1005E43F0 /* ThreeDots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDots.swift; sourceTree = "<group>"; };
 		AA92B4C829273A58005E43F0 /* TranslateNumbers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateNumbers.swift; sourceTree = "<group>"; };
 		AAAE6D632B228B7300079392 /* TranslateEnglish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateEnglish.swift; sourceTree = "<group>"; };
+		AAAE6D662B22B5CF00079392 /* TranslateVietnamese.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateVietnamese.swift; sourceTree = "<group>"; };
+		AAAE6D692B22B77B00079392 /* TranslateGerman.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateGerman.swift; sourceTree = "<group>"; };
 		AAB10B94292A2222004707E9 /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		AAB10B96292A2222004707E9 /* NonScientificKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonScientificKeyboard.swift; sourceTree = "<group>"; };
 		AABEFC122972A8780023A3C9 /* KeyColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyColor.swift; sourceTree = "<group>"; };
@@ -155,8 +161,11 @@
 				AA1B007B294772980054C851 /* Brain */,
 				AA2FABFF272F2348006DE4C8 /* TranslateNumbersApp.swift */,
 				AA32853A297248B800D86CB4 /* ViewModel.swift */,
-				AA8A91152B1D80F800CE7185 /* Translate.swift */,
 				AA92B4C829273A58005E43F0 /* TranslateNumbers.swift */,
+				AA8A91152B1D80F800CE7185 /* Translate.swift */,
+				AAAE6D632B228B7300079392 /* TranslateEnglish.swift */,
+				AAAE6D662B22B5CF00079392 /* TranslateVietnamese.swift */,
+				AAAE6D692B22B77B00079392 /* TranslateGerman.swift */,
 				AAE426F629597AE3005FE365 /* Screen.swift */,
 				AA01B9D32957E44300617AFB /* Display.swift */,
 				AA8A91132B1D7FD000CE7185 /* TranslatedDisplay.swift */,
@@ -178,7 +187,6 @@
 				AA08C7C5272EDA4A001B8575 /* Assets.xcassets */,
 				AA08C7C7272EDA4A001B8575 /* Preview Content */,
 				AAEF2FB82B20D54B0012DDDD /* Separators.swift */,
-				AAAE6D632B228B7300079392 /* TranslateEnglish.swift */,
 			);
 			path = VietnameseNumbers;
 			sourceTree = SOURCE_ROOT;
@@ -346,6 +354,7 @@
 				AA8453E8294D872300A50B74 /* Icons.swift in Sources */,
 				AA01B9D42957E44300617AFB /* Display.swift in Sources */,
 				AAB10B9C292A2222004707E9 /* NonScientificKeyboard.swift in Sources */,
+				AAAE6D6A2B22B77B00079392 /* TranslateGerman.swift in Sources */,
 				AA92B4C329250827005E43F0 /* ColoredStepper.swift in Sources */,
 				AA8A91122B1D7B7100CE7185 /* TranslateNumbers.swift in Sources */,
 				AA32853B297248B800D86CB4 /* ViewModel.swift in Sources */,
@@ -366,6 +375,7 @@
 				AA2FAC23272F2349006DE4C8 /* OperatorStack.swift in Sources */,
 				AAAE6D642B228B7300079392 /* TranslateEnglish.swift in Sources */,
 				AA370C31293352D60041AE4E /* Key.swift in Sources */,
+				AAAE6D672B22B5CF00079392 /* TranslateVietnamese.swift in Sources */,
 				AA8A91112B1D7B5F00CE7185 /* TranslateNumbersApp.swift in Sources */,
 				AA3FB8272920E0E5002ECCEB /* Settings.swift in Sources */,
 				AA689125295E681400129593 /* Brain.swift in Sources */,
@@ -380,10 +390,12 @@
 				AA8A91352B1D870B00CE7185 /* Extensions.swift in Sources */,
 				AAAE6D652B228B7300079392 /* TranslateEnglish.swift in Sources */,
 				AAEF2FBA2B20D5500012DDDD /* Separators.swift in Sources */,
+				AAAE6D682B22B5CF00079392 /* TranslateVietnamese.swift in Sources */,
 				AA8A91342B1D86A900CE7185 /* ThreeDots.swift in Sources */,
 				AA8A91292B1D838C00CE7185 /* Translate.swift in Sources */,
 				AA8A911E2B1D815C00CE7185 /* VietnameseNumbersTests.swift in Sources */,
 				AA8A91322B1D865B00CE7185 /* KeyColor.swift in Sources */,
+				AAAE6D6B2B22B77B00079392 /* TranslateGerman.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -521,7 +533,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = TranslateNumbers.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"VietnameseNumbers/Preview Content\"";
 				DEVELOPMENT_TEAM = 8A4DL788W9;
 				ENABLE_PREVIEWS = YES;
@@ -562,7 +574,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = TranslateNumbers.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"VietnameseNumbers/Preview Content\"";
 				DEVELOPMENT_TEAM = 8A4DL788W9;
 				ENABLE_PREVIEWS = YES;

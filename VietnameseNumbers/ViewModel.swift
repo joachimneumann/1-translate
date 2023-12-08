@@ -46,18 +46,6 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @AppStorage("groupingSeparator", store: .standard)
     var groupingSeparator: GroupingSeparator = .none
     
-    @AppStorage("vietnameseThousand", store: .standard)
-    var vietnameseThousand: VietnameseThousand = .nghìn
-    
-    @AppStorage("vietnameseSecondLast", store: .standard)
-    var vietnameseSecondLast: VietnameseSecondLast = .lẻ
-    
-    @AppStorage("vietnameseCompact", store: .standard)
-    var vietnameseCompact: Bool = false
-    
-    @AppStorage("englishUseAndAfterHundred", store: .standard)
-    var englishUseAndAfterHundred: Bool = true
-    
     @AppStorage("language", store: .standard)
     var language: Language = .vietnamese {
         didSet {
@@ -123,15 +111,12 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     
     func setTranslator() {
         switch language {
-        case .vietnamese:
-            translator = VietnameseTranslator(groupingSeparator: groupingSeparator, thousand: vietnameseThousand, secondLast: vietnameseSecondLast, compact: vietnameseCompact)
         case .english:
-            translator = EnglishTranslator(
-                groupingSeparator: groupingSeparator,
-                decimalSeparator: decimalSeparator,
-                useAndAfterHundred: englishUseAndAfterHundred)
+            translator = TranslateEnglish(separators: self)
+        case .vietnamese:
+            translator = TranslateVietnamese(separators: self)
         case .german:
-            translator = GermanTranslator(groupingSeparator: groupingSeparator)
+            translator = TranslateGerman(separators: self)
         }
     }
     
