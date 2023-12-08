@@ -242,9 +242,7 @@ struct Settings: View {
         return HStack {
             Text("\nVersion: \(appVersion ?? "unknown") (build \(buildNumber ?? "unknown"))")
                 .foregroundColor(Color.gray) +
-            Text("\nThis is a hobby project by Joachim Neumann. Although I have done some testing, errors may occur. The App is free and will always be free to use. The code is open source and you may add a feature requestion or report a bug at its ")
-                .foregroundColor(Color.gray) +
-            Text("[github repository](https://github.com/joachimneumann/VietnameseNumbers)")
+            Text("\nThis is a hobby project by Joachim Neumann. Although I have done some testing, errors may occur.")
                 .foregroundColor(Color.white)
         }.accentColor(.white)
     }
