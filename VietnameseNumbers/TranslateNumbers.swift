@@ -63,7 +63,7 @@ struct TranslateNumbers: View {
             .padding(.bottom, 20)
             Spacer(minLength: 0.0)
             TranslatedDisplay(
-                translatedString: viewModel.translated(),
+                translatedString: viewModel.translatedNumber,
                 screen: screen)
                 .padding(.bottom, screen.portraitIPhoneDisplayBottomPadding)
                 .padding(.horizontal, 0)

@@ -7,24 +7,22 @@
 
 import SwiftUI
 
-class TranslateGerman: Translator, ObservableObject {
+class TranslateGerman: Translator {
     var dotString: String
     var negativeString: String
     var andSoOn: String
-    var groupSeparator: String
-    var decimalSeparator: String
+    var groupSeparator: String = ""
+    var decimalSeparator: String = ""
     var useSoftHyphen: Bool = true
 
     private var softHyphen: String {
         useSoftHyphen ? "\u{AD}" : ""
     }
 
-    required init(separators: Separators) {
+    required init() {
         self.dotString = "Komma"
         self.negativeString = "Minus"
         self.andSoOn = "und so weiter"
-        groupSeparator = separators.groupingSeparator.string
-        decimalSeparator = separators.decimalSeparator.string
     }
     
     private func german_0_20(_ intValue: Int) -> String? {

@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 enum VietnameseThousand: String, Codable, CaseIterable {
     case ngàn
     case nghìn
@@ -30,31 +29,23 @@ enum VietnameseSecondLast: String, Codable, CaseIterable {
     }
 }
 
-class TranslateVietnamese: Translator, ObservableObject {
-    
+
+class TranslateVietnamese: Translator {
     var dotString: String
     var negativeString: String
     var andSoOn: String
-    var groupSeparator: String
-    var decimalSeparator: String
+    var groupSeparator: String = ""
+    var decimalSeparator: String = ""
+    var compact: Bool = false
+    var secondLast: VietnameseSecondLast = .lẻ
+    var thousand: VietnameseThousand = .nghìn
     
-    required init(separators: Separators) {
+    required init() {
         self.dotString = "phẩy"
         self.negativeString = "âm"
         self.andSoOn = "và như thế"
-        groupSeparator = separators.groupingSeparator.string
-        decimalSeparator = separators.decimalSeparator.string
     }
-    
-    @AppStorage("vietnameseThousand", store: .standard)
-    var thousand: VietnameseThousand = .nghìn
-    
-    @AppStorage("vietnameseSecondLast", store: .standard)
-    var secondLast: VietnameseSecondLast = .lẻ
-    
-    @AppStorage("vietnameseCompact", store: .standard)
-    var compact: Bool = false
-    
+        
     private let one = "một"
     private let one_with_up_tone = "mốt"
     private let ten = "mười"
@@ -176,20 +167,7 @@ class TranslateVietnamese: Translator, ObservableObject {
     }
 
     func translatePositiveInteger(_ intValue: Int) -> String? {
-        var wasNegative = false
-        if intValue < 0 {
-            wasNegative = true
-        }
-        var ret: String
-        if wasNegative {
-            ret = toString_(-intValue, fromLargerNumber: false)!
-        } else {
-            ret = toString_(intValue, fromLargerNumber: false)!
-        }
-        if wasNegative {
-            ret = "âm " + ret
-        }
-        return ret
+        toString_(intValue, fromLargerNumber: false)!
     }
 
 }

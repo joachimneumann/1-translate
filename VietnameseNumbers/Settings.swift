@@ -12,17 +12,10 @@ struct Settings: View {
     @Environment(\.presentationMode) var presentation /// for dismissing the Settings View
     
     @ObservedObject var viewModel: ViewModel
-    @State var vietnameseThousand: VietnameseThousand = .ngàn
-    @State var vietnameseSecondLast: VietnameseSecondLast = .lẻ
-    @State var vietnameseCompact: Bool = false
-    @State var englishUseAndAfterHundred: Bool = true
     let screen: Screen
     let font: Font
 
     var body: some View {
-        let english = TranslateEnglish(separators: viewModel)
-        let vietnamese = TranslateVietnamese(separators: viewModel)
-        
         let example = "1\(viewModel.groupingSeparator.string)000\(viewModel.groupingSeparator.string)000\(viewModel.decimalSeparator.string)05"
         VStack {
             BackButton(
@@ -96,16 +89,15 @@ struct Settings: View {
                                 .frame(height: 25)
                         }
                         GridRow {
-                            Text(vietnamese.translate(303333)!)
+                            Text(viewModel.settingsVietnameseExample)
                                 .foregroundColor(.white)
-//                                .font(.title)
                                 .padding(.leading, 0)
                                 .gridCellColumns(2)
                                 .gridCellUnsizedAxes(.horizontal)
                         }
                         GridRow {
                             Text("1000")
-                            Picker("", selection: $vietnameseThousand) {
+                            Picker("", selection: $viewModel.vietnameseThousand) {
                                 ForEach(VietnameseThousand.allCases, id: \.self) { value in
                                     Text("\(value.rawValue)")
                                         .tag(value)
@@ -119,7 +111,7 @@ struct Settings: View {
                         }
                         GridRow {
                             Text("1?3")
-                            Picker("", selection: $vietnameseSecondLast) {
+                            Picker("", selection: $viewModel.vietnameseSecondLast) {
                                 ForEach(VietnameseSecondLast.allCases, id: \.self) { value in
                                     Text("\(value.rawValue)")
                                         .tag(value)
@@ -133,7 +125,7 @@ struct Settings: View {
                         }
                         GridRow {
                             Text("Compact")
-                            Toggle("", isOn: $vietnameseCompact)
+                            Toggle("", isOn: $viewModel.vietnameseCompact)
                                 .frame(width: 40)
                                 .toggleStyle(
                                     ColoredToggleStyle(onColor: Color(white: 0.6),
@@ -149,8 +141,7 @@ struct Settings: View {
                                 .frame(height: 25)
                         }
                         GridRow {
-                            let english = TranslateEnglish(separators: viewModel)
-                            Text(english.translate("105")!)
+                            Text(viewModel.settingsEnglishExample)
                                 .foregroundColor(.white)
                                 .padding(.leading, 0)
                                 .gridCellColumns(2)
@@ -158,7 +149,7 @@ struct Settings: View {
                         }
                         GridRow {
                             Text("use and")
-                            Toggle("", isOn: $englishUseAndAfterHundred)
+                            Toggle("", isOn: $viewModel.englishUseAndAfterHundred)
                                 .frame(width: 40)
                                 .toggleStyle(
                                     ColoredToggleStyle(onColor: Color(white: 0.6),
@@ -176,34 +167,20 @@ struct Settings: View {
             }
             .padding(.horizontal)
             .onDisappear() {
-//                if viewModel.decimalSeparator != settingsDecimalSeparator {
-//                    viewModel.decimalSeparator = settingsDecimalSeparator
+//                if vietnamese.thousand != vietnameseThousand {
+//                    vietnamese.thousand = vietnameseThousand
 //                }
-//                if viewModel.groupingSeparator != settingsGroupingSeparator {
-//                    viewModel.groupingSeparator = settingsGroupingSeparator
+//                if vietnamese.secondLast != vietnameseSecondLast {
+//                    vietnamese.secondLast = vietnameseSecondLast
 //                }
-                if vietnamese.thousand != vietnameseThousand {
-                    vietnamese.thousand = vietnameseThousand
-                }
-                if vietnamese.secondLast != vietnameseSecondLast {
-                    vietnamese.secondLast = vietnameseSecondLast
-                }
-                if vietnamese.compact != vietnameseCompact {
-                    vietnamese.compact = vietnameseCompact
-                }
-                if english.useAndAfterHundred != englishUseAndAfterHundred {
-                    english.useAndAfterHundred = englishUseAndAfterHundred
-                }
-//                viewModel.setTranslator()
-//                viewModel.refreshDisplaySync(screen: screen)
+//                if vietnamese.compact != vietnameseCompact {
+//                    vietnamese.compact = vietnameseCompact
+//                }
+//                if english.useAndAfterHundred != englishUseAndAfterHundred {
+//                    english.useAndAfterHundred = englishUseAndAfterHundred
+//                }
+                viewModel.refreshDisplaySync(screen: screen)
             }
-        }
-        .onAppear() {
-//            settingsDecimalSeparator  = viewModel.decimalSeparator
-//            settingsGroupingSeparator = viewModel.groupingSeparator
-//            vietnameseThousand        = viewModel.vietnameseThousand
-//            vietnameseSecondLast      = viewModel.vietnameseSecondLast
-//            vietnameseCompact         = viewModel.vietnameseCompact
         }
         .navigationBarBackButtonHidden(true)
     }

@@ -7,24 +7,20 @@
 
 import SwiftUI
 
-class TranslateEnglish: Translator, ObservableObject {
+class TranslateEnglish: Translator {
     var dotString: String
     var negativeString: String
-    var groupSeparator: String
-    var decimalSeparator: String
+    var groupSeparator: String = ""
+    var decimalSeparator: String = ""
     var andSoOn: String
+    var useAndAfterHundred: Bool = false
 
-    required init(separators: Separators) {
+    init() {
         self.dotString = "point"
         self.negativeString = "minus"
         self.andSoOn = "and so on"
-        groupSeparator = separators.groupingSeparator.string
-        decimalSeparator = separators.decimalSeparator.string
     }
-        
-    @AppStorage("englishUseAndAfterHundred", store: .standard)
-    var useAndAfterHundred: Bool = true
-    
+
     private let zero = "zero"
     private let one = "one"
     private let ten = "ten"

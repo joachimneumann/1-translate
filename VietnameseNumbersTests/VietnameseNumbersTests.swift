@@ -11,6 +11,7 @@ public typealias AppleFont = UIFont
 
 final class VietnameseNumbersTests: XCTestCase {
     
+    
     class SeparatorClass: Separators {
         // we don't have the ViewModel here in the tests
         var decimalSeparator: DecimalSeparator
@@ -20,7 +21,7 @@ final class VietnameseNumbersTests: XCTestCase {
             self.groupingSeparator = groupingSeparator
         }
     }
-    
+
     let separators = SeparatorClass(decimalSeparator: DecimalSeparator.dot, groupingSeparator: GroupingSeparator.comma)
 
 

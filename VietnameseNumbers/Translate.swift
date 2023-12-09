@@ -20,7 +20,6 @@ protocol Translator {
     var groupSeparator: String { get set }
     var decimalSeparator: String { get set }
     func translatePositiveInteger(_ i: Int) -> String?
-    init(separators: Separators)
 }
 
 extension Translator {
