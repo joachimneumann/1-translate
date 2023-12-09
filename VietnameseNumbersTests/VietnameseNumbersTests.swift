@@ -10,30 +10,19 @@ import XCTest
 public typealias AppleFont = UIFont
 
 final class VietnameseNumbersTests: XCTestCase {
-    
-    
-    class SeparatorClass: Separators {
-        // we don't have the ViewModel here in the tests
-        var decimalSeparator: DecimalSeparator
-        var groupingSeparator: GroupingSeparator
-        init(decimalSeparator: DecimalSeparator, groupingSeparator: GroupingSeparator) {
-            self.decimalSeparator = decimalSeparator
-            self.groupingSeparator = groupingSeparator
-        }
-    }
-
-    let separators = SeparatorClass(decimalSeparator: DecimalSeparator.dot, groupingSeparator: GroupingSeparator.comma)
-
 
     func test_english() {
-        let english = TranslateEnglish(separators: separators)
+        let english = TranslateEnglish()
         english.useAndAfterHundred = false
+        english.groupSeparator = ""
+        english.decimalSeparator = "."
         
         XCTAssertEqual(english.translate(-1), "minus one")
         XCTAssertEqual(english.translate("-1"), "minus one")
         XCTAssertEqual(english.translate(-1.5), "minus one point five")
         XCTAssertEqual(english.translate("-1.5"), "minus one point five")
         XCTAssertEqual(english.translate(1.5), "one point five")
+        XCTAssertEqual(english.translate(1.56), "one point five six")
         XCTAssertEqual(english.translate("1.5"), "one point five")
         XCTAssertEqual(english.translate(0), "zero")
         XCTAssertEqual(english.translate(1), "one")
@@ -344,7 +333,7 @@ final class VietnameseNumbersTests: XCTestCase {
     }
     
     func test_Vietnamese() {
-        let vietnamese = TranslateVietnamese(separators: separators)
+        let vietnamese = TranslateVietnamese()
         vietnamese.compact = false
         XCTAssertEqual(vietnamese.translate(0), "không")
         XCTAssertEqual(vietnamese.translate(1), "một")
@@ -676,12 +665,17 @@ final class VietnameseNumbersTests: XCTestCase {
 
 
     func test_german() {
-        let german = TranslateGerman(separators: separators)
+        let german = TranslateGerman()
         german.useSoftHyphen = false
+        german.decimalSeparator = "."
+        german.groupSeparator = ""
         
+        XCTAssertEqual(german.translate(-1.51), "Minus Eins Komma Fünf Eins")
+
         XCTAssertEqual(german.translate(-1), "Minus Eins")
         XCTAssertEqual(german.translate("-1"), "Minus Eins")
         XCTAssertEqual(german.translate(-1.5), "Minus Eins Komma Fünf")
+        XCTAssertEqual(german.translate(-1.51), "Minus Eins Komma Fünf Eins")
         XCTAssertEqual(german.translate(-0.7), "Minus Null Komma Sieben")
         XCTAssertEqual(german.translate("-0.7"), "Minus Null Komma Sieben")
         XCTAssertEqual(german.translate("-1.5"), "Minus Eins Komma Fünf")

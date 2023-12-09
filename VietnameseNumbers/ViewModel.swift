@@ -35,19 +35,18 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @Published var showAC = true
     @Published var backgroundColor: [String: Color] = [:]
     @Published var textColor: [String: Color] = [:]
-    @Published var currentDisplay: Display
+    @Published var currentDisplay: Display {
+        didSet {
+            translatedNumber = translator.translate(currentDisplay.left) ??  "?"
+        }
+    }
     @Published var settingsEnglishExample: String = ""
     @Published var settingsVietnameseExample: String = ""
-
     @Published var translatedNumber: String = ""
     
     var translateEnglish = TranslateEnglish()
     var translateGerman = TranslateGerman()
     var translateVietnamese = TranslateVietnamese()
-    
-    func translate(_ string: String) {
-        translatedNumber = translator.translate(string) ?? "?"
-    }
     
     /// I initialize the decimalSeparator with the locale preference, but
     /// I ignore the value of Locale.current.groupingSeparator
@@ -55,13 +54,29 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     var forceScientific: Bool = false
     
     @AppStorage(AppStorageKeys.decimalSeparator, store: .standard)
-    var decimalSeparator: DecimalSeparator = Locale.current.decimalSeparator == "," ? .comma : .dot
+    var decimalSeparator: DecimalSeparator = Locale.current.decimalSeparator == "," ? .comma : .dot {
+        didSet {
+            translateGerman.decimalSeparator     = decimalSeparator.string
+            translateEnglish.decimalSeparator    = decimalSeparator.string
+            translateVietnamese.decimalSeparator = decimalSeparator.string
+        }
+    }
     
     @AppStorage(AppStorageKeys.groupingSeparator, store: .standard)
-    var groupingSeparator: GroupingSeparator = .none
+    var groupingSeparator: GroupingSeparator = .none {
+        didSet {
+            translateGerman.groupSeparator     = groupingSeparator.string
+            translateEnglish.groupSeparator    = groupingSeparator.string
+            translateVietnamese.groupSeparator = groupingSeparator.string
+        }
+    }
     
     @AppStorage(AppStorageKeys.language, store: .standard)
-    var language: Language = .vietnamese
+    var language: Language = .vietnamese {
+        didSet {
+            translatedNumber = translator.translate(currentDisplay.left)!
+        }
+    }
     
     @AppStorage(AppStorageKeys.englishUseAndAfterHundred, store: .standard)
     var englishUseAndAfterHundred: Bool = true {
@@ -339,6 +354,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             await refreshDisplay(screen: screen)
         }
     }
+    
     func refreshDisplay(screen: Screen) async {
         let tempDisplay = Display(displayNumber, screen: screen, separators: self, showAs: self, forceScientific: forceScientific)
         await MainActor.run() {

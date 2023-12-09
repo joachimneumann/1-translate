@@ -20,20 +20,20 @@ struct TranslateNumbers: View {
         VStack(spacing: 0.0) {
             HStack(spacing: 30.0) {
                 Button(action: {
-                    viewModel.language = .vietnamese
-                }) {
-                Image("flag_vietnam")
-                        .resizable()
-                        .scaledToFit()
-                        .opacity(viewModel.language == .vietnamese ? 1.0 : 0.5)
-                }
-                Button(action: {
                     viewModel.language = .english
                 }) {
                 Image("flag UK")
                         .resizable()
                         .scaledToFit()
                         .opacity(viewModel.language == .english ? 1.0 : 0.5)
+                }
+                Button(action: {
+                    viewModel.language = .vietnamese
+                }) {
+                Image("flag_vietnam")
+                        .resizable()
+                        .scaledToFit()
+                        .opacity(viewModel.language == .vietnamese ? 1.0 : 0.5)
                 }
                 Button(action: {
                     viewModel.language = .german
@@ -51,16 +51,16 @@ struct TranslateNumbers: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .font(Font.title.weight(.thin))
-                        .frame(height: screen.plusIconSize * 0.5)
+                        .frame(height: screen.plusIconSize * 0.6)
                         .foregroundColor(Color.white)
                         .accessibilityIdentifier("settingsButton")
                 }
                 .buttonStyle(TransparentButtonStyle())
-                .opacity(0.8)
+                .opacity(0.9)
             }
             .frame(height: 30.0)
             .padding(.bottom, 20)
-            .padding(.bottom, 20)
+            .padding(.top, 20)
             Spacer(minLength: 0.0)
             TranslatedDisplay(
                 translatedString: viewModel.translatedNumber,

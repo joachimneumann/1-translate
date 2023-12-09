@@ -56,11 +56,12 @@ extension Translator {
                 }
                 if fractionalPart != nil {
                     var count = 0
+                    ret += " " + dotString
                     for char in fractionalPart! {
                         if count < 10 {
                             let digit = Int(String(char))
                             if digit != nil {
-                                ret += " " + dotString + " " + translatePositiveInteger(digit!)!
+                                ret += " " + translatePositiveInteger(digit!)!
                             } else {
                                 ret += "?"
                             }
