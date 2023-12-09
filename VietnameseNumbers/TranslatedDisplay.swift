@@ -10,7 +10,7 @@ struct TranslatedDisplay: View {
     let translatedString: String
     let screen: Screen
     private let font: Font
-
+    
     init(translatedString: String, screen: Screen) {
         self.translatedString = translatedString
         self.screen = screen
@@ -20,16 +20,19 @@ struct TranslatedDisplay: View {
     
     var body: some View {
         //let _ = print(display.data.left)
-        VStack(spacing: 0.0) {
-            Spacer(minLength: 0.0)
-            HStack(alignment: .bottom, spacing: 0.0) {
-                Text(translatedString)
-                    .font(font)
-                    .multilineTextAlignment(.leading)
-                Spacer(minLength: 0.0)
+        GeometryReader { geometry in                    // Get the geometry
+            ScrollView(.vertical) {
+                VStack {
+                    HStack(alignment: .bottom, spacing: 0.0) {
+                        Text(translatedString)
+                        Spacer(minLength: 0.0)
+                    }
+                }
+                .font(font)
+                .frame(width: geometry.size.width)      // Make the scroll view full-width
+                .frame(minHeight: geometry.size.height) // Set the content’s min height to the parent
             }
-            Spacer(minLength: 0.0)
+            .scrollBounceBehavior(.basedOnSize)
         }
-//        .background(Color.yellow)
     }
 }
