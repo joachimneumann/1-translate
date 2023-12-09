@@ -56,21 +56,28 @@ extension Translator {
         if integerPart != nil {
             let integerPartValue = Int(integerPart!)
             if integerPartValue != nil {
-                ret = translate(integerPartValue!)!
                 if integerPart == "-0" {
                     ret = negativeString + " " + translate(0)!
+                } else {
+                    ret = translate(integerPartValue!)!
                 }
                 if fractionalPart != nil {
+                    var count = 0
                     ret += " " + dotString
                     for char in fractionalPart! {
-                        let digit = Int(String(char))
-                        if digit != nil {
-                            ret += " " + translatePositiveInteger(digit!)!
-                        } else {
-                            ret += "?"
+                        if count < 10 {
+                            let digit = Int(String(char))
+                            if digit != nil {
+                                ret += " " + translatePositiveInteger(digit!)!
+                            } else {
+                                ret += "?"
+                            }
                         }
+                        count += 1
                     }
-                    ret += " " + andSoOn
+                    if count >= 10 {
+                        ret += " " + andSoOn
+                    }
                 }
             }
         }
