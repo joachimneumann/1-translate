@@ -12,8 +12,7 @@ protocol StandardTranslatorProtocol: BasicTranslatorProtocol {
     var thousand: String { get set }
     var million: String { get set }
     var billion: String { get set }
-    func translatePositiveInteger_0_20(_ i: Int) -> String?
-    func translatePositiveInteger_21_99(_ i: Int) -> String?
+    func translatePositiveInteger_0_99(_ i: Int) -> String?
 }
 
 
@@ -44,20 +43,13 @@ class StandardTranslator: BasicTranslator, StandardTranslatorProtocol {
                 exponentString: exponentString)
         }
     
-    func translatePositiveInteger_0_20(_ i: Int) -> String? {
-        return nil
-    }
-    
-    func translatePositiveInteger_21_99(_ i: Int) -> String? {
+    func translatePositiveInteger_0_99(_ i: Int) -> String? {
         return nil
     }
     
     override func translatePositiveInteger(_ i: Int) -> String? {
-        if i <= 20 {
-            return translatePositiveInteger_0_20(i)
-        }
         if i <= 99 {
-            return translatePositiveInteger_21_99(i)
+            return translatePositiveInteger_0_99(i)
         }
         if i <= 999 {
             var temp = i
@@ -66,7 +58,7 @@ class StandardTranslator: BasicTranslator, StandardTranslatorProtocol {
             let X0 = temp % 10
             temp = (temp - X0) / 10
             let X00 = temp % 10
-            var ret = translatePositiveInteger_0_20(X00)! + " " + hundred
+            var ret = translatePositiveInteger_0_99(X00)! + " " + hundred
             let leftover = 10 * X0 + X
             if leftover > 0 {
                 if insertAfterHundred != nil { //"useAndAfterHundred {
