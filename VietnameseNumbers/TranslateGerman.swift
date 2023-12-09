@@ -11,6 +11,7 @@ class TranslateGerman: Translator {
     var dotString: String
     var negativeString: String
     var andSoOn: String
+    var exponentString: String
     var groupSeparator: String = ""
     var decimalSeparator: String = ""
     var useSoftHyphen: Bool = true
@@ -20,9 +21,10 @@ class TranslateGerman: Translator {
     }
 
     required init() {
-        self.dotString = "Komma"
-        self.negativeString = "Minus"
+        self.dotString = "komma"
+        self.negativeString = "minus"
         self.andSoOn = "und so weiter"
+        self.exponentString = "mal zehn hoch"
     }
     
     private func german_0_20(_ intValue: Int) -> String? {
@@ -153,7 +155,7 @@ class TranslateGerman: Translator {
     
     func translatePositiveInteger(_ i: Int) -> String? {
         let lowercase = toStringLowercase(i)!
-        return lowercase.firstCapitalized
+        return lowercase //.firstCapitalized
     }
 }
 

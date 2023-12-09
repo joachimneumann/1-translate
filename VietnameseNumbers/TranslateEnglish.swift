@@ -10,6 +10,7 @@ import SwiftUI
 class TranslateEnglish: Translator {
     var dotString: String
     var negativeString: String
+    var exponentString: String
     var groupSeparator: String = ""
     var decimalSeparator: String = ""
     var andSoOn: String
@@ -19,6 +20,7 @@ class TranslateEnglish: Translator {
         self.dotString = "point"
         self.negativeString = "minus"
         self.andSoOn = "and so on"
+        self.exponentString = "times ten to the power of"
     }
 
     private let zero = "zero"

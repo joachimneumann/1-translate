@@ -17,6 +17,7 @@ protocol Translator {
     var dotString: String { get }
     var negativeString: String { get set }
     var andSoOn: String { get set }
+    var exponentString: String { get set }
     var groupSeparator: String { get set }
     var decimalSeparator: String { get set }
     func translatePositiveInteger(_ i: Int) -> String?
@@ -40,8 +41,13 @@ extension Translator {
         let groupSeparator = groupSeparator
         let strippedString = s.replacingOccurrences(of: groupSeparator, with: "")
         
+        // exponent and mantissa part
+        var parts = strippedString.components(separatedBy: "e")
+        let mantissa = (parts.count >= 1) ? parts[0] : nil
+        let exponent: String? = (parts.count == 2) ? parts[1] : nil
+
         // integer part and fractional part
-        let parts = strippedString.components(separatedBy: decimalSeparator)
+        parts = mantissa!.components(separatedBy: decimalSeparator)
         let integerPart = (parts.count >= 1) ? parts[0] : nil
         let fractionalPart: String? = (parts.count == 2) ? parts[1] : nil
         
@@ -55,25 +61,24 @@ extension Translator {
                     ret = negativeString + " " + translate(0)!
                 }
                 if fractionalPart != nil {
-                    var count = 0
                     ret += " " + dotString
                     for char in fractionalPart! {
-                        if count < 10 {
-                            let digit = Int(String(char))
-                            if digit != nil {
-                                ret += " " + translatePositiveInteger(digit!)!
-                            } else {
-                                ret += "?"
-                            }
+                        let digit = Int(String(char))
+                        if digit != nil {
+                            ret += " " + translatePositiveInteger(digit!)!
+                        } else {
+                            ret += "?"
                         }
-                        count += 1
                     }
-                    if count >= 10 {
-                        ret += " " + andSoOn
-                    }
+                    ret += " " + andSoOn
                 }
             }
         }
+
+        if exponent != nil {
+            ret += " " + exponentString + " " + translate(exponent!)!
+        }
+
         return ret;
     }    
 }

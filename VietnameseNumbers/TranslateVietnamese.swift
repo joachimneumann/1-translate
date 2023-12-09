@@ -34,6 +34,7 @@ class TranslateVietnamese: Translator {
     var dotString: String
     var negativeString: String
     var andSoOn: String
+    var exponentString: String
     var groupSeparator: String = ""
     var decimalSeparator: String = ""
     var compact: Bool = false
@@ -44,6 +45,7 @@ class TranslateVietnamese: Translator {
         self.dotString = "phẩy"
         self.negativeString = "âm"
         self.andSoOn = "và như thế"
+        self.exponentString = "nhân mười lũy thừa"
     }
         
     private let one = "một"
