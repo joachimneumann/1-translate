@@ -37,7 +37,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @Published var textColor: [String: Color] = [:]
     @Published var currentDisplay: Display {
         didSet {
-            translatedNumber = translator.translate(currentDisplay.left) ??  "?"
+            translatedNumber = translator.translate(currentDisplay.allInOneLine) ??  "?"
         }
     }
     @Published var settingsEnglishExample: String = ""
@@ -74,7 +74,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @AppStorage(AppStorageKeys.language, store: .standard)
     var language: Language = .vietnamese {
         didSet {
-            translatedNumber = translator.translate(currentDisplay.left)!
+            translatedNumber = translator.translate(currentDisplay.allInOneLine)!
         }
     }
     
@@ -165,6 +165,8 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         backgroundColor["plus"] = keyColor.upColor(for: "+", isPending: false)
         
         /// trigger the didSet action of the persistently stored variables
+        groupingSeparator = groupingSeparator
+        decimalSeparator = decimalSeparator
         englishUseAndAfterHundred = englishUseAndAfterHundred
         vietnameseCompact = vietnameseCompact
         vietnameseThousand = vietnameseThousand
@@ -360,7 +362,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         await MainActor.run() {
             currentDisplay = tempDisplay
             self.showAC = currentDisplay.isZero
-            translatedNumber = translator.translate(currentDisplay.left)!
+            translatedNumber = translator.translate(currentDisplay.allInOneLine)!
         }
     }
     
