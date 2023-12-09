@@ -13,82 +13,33 @@
 
 import Foundation
 
-protocol Translator {
-    var dotString: String { get }
-    var negativeString: String { get set }
-    var andSoOn: String { get set }
-    var exponentString: String { get set }
-    var groupSeparator: String { get set }
-    var decimalSeparator: String { get set }
-    func translatePositiveInteger(_ i: Int) -> String?
+
+protocol StandardTranslator: BasicTranslatorProtocol {
+    var thousand: String { get set }
+    var million: String { get set }
+    var billion: String { get set }
+    func translatePositiveInteger_0_20(_ i: Int) -> String?
+    func translatePositiveInteger_21_99(_ i: Int) -> String?
 }
 
-extension Translator {
-    func translate(_ i: Int) -> String? {
-        if i < 0 {
-            return negativeString + " " + translatePositiveInteger(-i)!
-        } else {
-            return translatePositiveInteger(i)!
-        }
-    }
 
-    func translate(_ d: Double) -> String? {
-        translate(d.string)
-    }
 
-    func translate(_ s: String) -> String? {
-        // lets remove the groupSeparator
-        let groupSeparator = groupSeparator
-        let strippedString = s.replacingOccurrences(of: groupSeparator, with: "")
-        
-        // exponent and mantissa part
-        var parts = strippedString.components(separatedBy: "e")
-        let mantissa = (parts.count >= 1) ? parts[0] : nil
-        let exponent: String? = (parts.count == 2) ? parts[1] : nil
+//extension BasicTranslatorProtocol {
+//    func translate(_ i: Int) -> String? {
+//        if i < 0 {
+//            return negativeString + " " + translatePositiveInteger(-i)!
+//        } else {
+//            return translatePositiveInteger(i)!
+//        }
+//    }
+//    
+//    func translate(_ d: Double) -> String? {
+//        translate(d.string)
+//    }
+//    
+//
+//}
 
-        // integer part and fractional part
-        parts = mantissa!.components(separatedBy: decimalSeparator)
-        let integerPart = (parts.count >= 1) ? parts[0] : nil
-        let fractionalPart: String? = (parts.count == 2) ? parts[1] : nil
-        
-        var ret: String = ""
-
-        if integerPart != nil {
-            let integerPartValue = Int(integerPart!)
-            if integerPartValue != nil {
-                if integerPart == "-0" {
-                    ret = negativeString + " " + translate(0)!
-                } else {
-                    ret = translate(integerPartValue!)!
-                }
-                if fractionalPart != nil {
-                    var count = 0
-                    ret += " " + dotString
-                    for char in fractionalPart! {
-                        if count < 10 {
-                            let digit = Int(String(char))
-                            if digit != nil {
-                                ret += " " + translatePositiveInteger(digit!)!
-                            } else {
-                                ret += "?"
-                            }
-                        }
-                        count += 1
-                    }
-                    if count >= 10 {
-                        ret += " " + andSoOn
-                    }
-                }
-            }
-        }
-
-        if exponent != nil {
-            ret += " " + exponentString + " " + translate(exponent!)!
-        }
-
-        return ret;
-    }    
-}
 
 extension StringProtocol {
     var firstUppercased: String { prefix(1).uppercased() + dropFirst() }

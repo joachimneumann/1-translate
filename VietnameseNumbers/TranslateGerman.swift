@@ -7,24 +7,19 @@
 
 import SwiftUI
 
-class TranslateGerman: Translator {
-    var dotString: String
-    var negativeString: String
-    var andSoOn: String
-    var exponentString: String
-    var groupSeparator: String = ""
-    var decimalSeparator: String = ""
+class TranslateGerman: GeneralTranslator {
     var useSoftHyphen: Bool = true
 
     private var softHyphen: String {
         useSoftHyphen ? "\u{AD}" : ""
     }
 
-    required init() {
-        self.dotString = "komma"
-        self.negativeString = "minus"
-        self.andSoOn = "und so weiter"
-        self.exponentString = "mal zehn hoch"
+    init() {
+        super.init(
+            dotString: "komma",
+            negativeString: "minus",
+            andSoOn: "und so weiter",
+            exponentString: "mal zehn hoch")
     }
     
     private func german_0_20(_ intValue: Int) -> String? {
@@ -153,7 +148,7 @@ class TranslateGerman: Translator {
         return nil
     }
     
-    func translatePositiveInteger(_ i: Int) -> String? {
+    override func translatePositiveInteger(_ i: Int) -> String? {
         let lowercase = toStringLowercase(i)!
         return lowercase //.firstCapitalized
     }

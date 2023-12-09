@@ -173,7 +173,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         vietnameseSecondLast = vietnameseSecondLast
     }
     
-    var translator: Translator {
+    var translator: BasicTranslator {
         switch language {
         case .english:
             return translateEnglish

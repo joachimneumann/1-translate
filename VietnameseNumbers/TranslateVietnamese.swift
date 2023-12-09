@@ -30,22 +30,17 @@ enum VietnameseSecondLast: String, Codable, CaseIterable {
 }
 
 
-class TranslateVietnamese: Translator {
-    var dotString: String
-    var negativeString: String
-    var andSoOn: String
-    var exponentString: String
-    var groupSeparator: String = ""
-    var decimalSeparator: String = ""
+class TranslateVietnamese: GeneralTranslator {
     var compact: Bool = false
     var secondLast: VietnameseSecondLast = .lẻ
     var thousand: VietnameseThousand = .nghìn
     
-    required init() {
-        self.dotString = "phẩy"
-        self.negativeString = "âm"
-        self.andSoOn = "và như thế"
-        self.exponentString = "nhân mười lũy thừa"
+    init() {
+        super.init(
+            dotString: "phẩy",
+            negativeString: "âm",
+            andSoOn: "và như thế",
+            exponentString: "nhân mười lũy thừa")
     }
         
     private let one = "một"
@@ -168,8 +163,8 @@ class TranslateVietnamese: Translator {
         return nil
     }
 
-    func translatePositiveInteger(_ intValue: Int) -> String? {
-        toString_(intValue, fromLargerNumber: false)!
+    override func translatePositiveInteger(_ i: Int) -> String? {
+        toString_(i, fromLargerNumber: false)!
     }
 
 }

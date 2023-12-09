@@ -7,22 +7,7 @@
 
 import SwiftUI
 
-class TranslateEnglish: Translator {
-    var dotString: String
-    var negativeString: String
-    var exponentString: String
-    var groupSeparator: String = ""
-    var decimalSeparator: String = ""
-    var andSoOn: String
-    var useAndAfterHundred: Bool = false
-
-    init() {
-        self.dotString = "point"
-        self.negativeString = "minus"
-        self.andSoOn = "and so on"
-        self.exponentString = "times ten to the power of"
-    }
-
+class TranslateEnglish: GeneralTranslator {
     private let zero = "zero"
     private let one = "one"
     private let ten = "ten"
@@ -30,6 +15,31 @@ class TranslateEnglish: Translator {
     private let thousand = "thousand"
     private let million = "million"
     private let billion = "billion"
+    var useAndAfterHundred: Bool = false
+    
+    init() {
+        super.init(
+            dotString: "point",
+            negativeString: "minus",
+            andSoOn: "and so on",
+            exponentString: "times ten to the power of")
+    }
+
+//    override init(
+//        dotString: String,
+//        negativeString: String,
+//        andSoOn: String,
+//        exponentString: String,
+//        groupSeparator: String,
+//        decimalSeparator: String) {
+//            super.init(
+//                dotString: dotString,
+//                negativeString: negativeString,
+//                andSoOn: andSoOn,
+//                exponentString: exponentString,
+//                groupSeparator: groupSeparator,
+//                decimalSeparator: decimalSeparator)
+//        }
 
     private func english_0_20(_ intValue: Int) -> String? {
         switch intValue {
@@ -73,7 +83,7 @@ class TranslateEnglish: Translator {
         }
     }
     
-    func translatePositiveInteger(_ i: Int) -> String? {
+    override func translatePositiveInteger(_ i: Int) -> String? {
         if i <= 20 {
             return english_0_20(i)
         }
