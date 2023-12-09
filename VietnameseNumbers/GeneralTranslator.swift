@@ -16,6 +16,4 @@ class GeneralTranslator: BasicTranslator, GeneralTranslatorProtocol {
         // placeholder
         return nil
     }
-    
-    
 }

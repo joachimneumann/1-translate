@@ -13,7 +13,7 @@ final class VietnameseNumbersTests: XCTestCase {
 
     func test_english() {
         let english = TranslateEnglish()
-        english.useAndAfterHundred = false
+        english.insertAfterHundred = nil
         english.groupSeparator = ""
         english.decimalSeparator = "."
 
@@ -179,7 +179,7 @@ final class VietnameseNumbersTests: XCTestCase {
         XCTAssertEqual(english.translate(99_000_000_909), "ninety-nine billion nine hundred nine")
         XCTAssertEqual(english.translate(99_999_999_999), "ninety-nine billion nine hundred ninety-nine million nine hundred ninety-nine thousand nine hundred ninety-nine")
         
-        english.useAndAfterHundred = true
+        english.insertAfterHundred = "and"
         XCTAssertEqual(english.translate(0), "zero")
         XCTAssertEqual(english.translate(1), "one")
         XCTAssertEqual(english.translate(2), "two")

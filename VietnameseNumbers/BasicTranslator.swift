@@ -102,3 +102,7 @@ class BasicTranslator: BasicTranslatorProtocol {
         return ret;
     }
 }
+
+extension LosslessStringConvertible {
+    var string: String { .init(self) }
+}

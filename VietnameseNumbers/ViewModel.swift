@@ -78,13 +78,13 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         }
     }
     
-    @AppStorage(AppStorageKeys.englishUseAndAfterHundred, store: .standard)
-    var englishUseAndAfterHundred: Bool = true {
-        didSet {
-            translateEnglish.useAndAfterHundred = englishUseAndAfterHundred
-            settingsEnglishExample = translateEnglish.translate(105)!
-        }
-    }
+//    @AppStorage(AppStorageKeys.englishUseAndAfterHundred, store: .standard)
+//    var englishUseAndAfterHundred: Bool = true {
+//        didSet {
+//            translateEnglish.useAndAfterHundred = englishUseAndAfterHundred
+//            settingsEnglishExample = translateEnglish.translate(105)!
+//        }
+//    }
     
     @AppStorage(AppStorageKeys.vietnameseThousand)
     var vietnameseThousand: VietnameseThousand = .nghìn {
@@ -167,7 +167,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         /// trigger the didSet action of the persistently stored variables
         groupingSeparator = groupingSeparator
         decimalSeparator = decimalSeparator
-        englishUseAndAfterHundred = englishUseAndAfterHundred
+//        englishUseAndAfterHundred = englishUseAndAfterHundred
         vietnameseCompact = vietnameseCompact
         vietnameseThousand = vietnameseThousand
         vietnameseSecondLast = vietnameseSecondLast
