@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol StandardTranslatorProtocol: BasicTranslatorProtocol {
+protocol HundredBasedTranslatorProtocol: TranslatorProtocol {
     var hundred: String { get set }
     var thousand: String { get set }
     var million: String { get set }
@@ -15,8 +15,7 @@ protocol StandardTranslatorProtocol: BasicTranslatorProtocol {
     func translatePositiveInteger_0_99(_ i: Int) -> String?
 }
 
-
-class StandardTranslator: BasicTranslator, StandardTranslatorProtocol {
+class HundredBasedTranslator: BasicTranslator, HundredBasedTranslatorProtocol {
     var hundred: String
     var thousand: String
     var million: String
@@ -24,6 +23,7 @@ class StandardTranslator: BasicTranslator, StandardTranslatorProtocol {
     var insertAfterHundred: String? = nil
     
     init(
+        language: String,
         dotString: String,
         negativeString: String,
         andSoOn: String,
@@ -37,6 +37,7 @@ class StandardTranslator: BasicTranslator, StandardTranslatorProtocol {
             self.million = million
             self.billion = billion
             super.init(
+                language: language,
                 dotString: dotString,
                 negativeString: negativeString,
                 andSoOn: andSoOn,
@@ -44,6 +45,7 @@ class StandardTranslator: BasicTranslator, StandardTranslatorProtocol {
         }
     
     func translatePositiveInteger_0_99(_ i: Int) -> String? {
+        /// to be overridden
         return nil
     }
     

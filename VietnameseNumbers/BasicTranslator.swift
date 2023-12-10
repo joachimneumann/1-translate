@@ -7,23 +7,23 @@
 
 import Foundation
 
-protocol BasicTranslatorProtocol {
-    var dotString: String { get }
-    var negativeString: String { get }
-    var andSoOn: String { get }
-    var exponentString: String { get }
-    var groupSeparator: String { get }
-    var decimalSeparator: String { get }
+protocol TranslatorProtocol {
+    var language: String { get }
+    func translate(_ i: Int) -> String?
+    func translate(_ d: Double) -> String?
+    func translate(_ s: String) -> String?
 }
 
-class BasicTranslator: BasicTranslatorProtocol {
+class BasicTranslator: TranslatorProtocol {
+    var language: String
     var dotString: String
     var negativeString: String
     var andSoOn: String
     var exponentString: String
     var groupSeparator: String
     var decimalSeparator: String
-    init(dotString: String, negativeString: String, andSoOn: String, exponentString: String) {
+    init(language: String, dotString: String, negativeString: String, andSoOn: String, exponentString: String) {
+        self.language = language
         self.dotString = dotString
         self.negativeString = negativeString
         self.andSoOn = andSoOn
@@ -33,15 +33,17 @@ class BasicTranslator: BasicTranslatorProtocol {
     }
 
     func translatePositiveInteger(_ i: Int) -> String? {
-        // placeholder
+        // shall be overridden
         return nil
     }
     
     func translate(_ i: Int) -> String? {
         if i < 0 {
-            return negativeString + " " + translatePositiveInteger(-i)!
+            guard let translation = translatePositiveInteger(-i) else { return nil }
+            return negativeString + " " + translation
         } else {
-            return translatePositiveInteger(i)!
+            guard let translation = translatePositiveInteger(i) else { return nil }
+            return translation
         }
     }
     
@@ -56,47 +58,45 @@ class BasicTranslator: BasicTranslatorProtocol {
         
         // exponent and mantissa part
         var parts = strippedString.components(separatedBy: "e")
-        let mantissa = (parts.count >= 1) ? parts[0] : nil
+        guard parts.count > 0 && parts.count <= 2 else { return nil }
+        let mantissa = parts[0]
         let exponent: String? = (parts.count == 2) ? parts[1] : nil
 
         // integer part and fractional part
-        parts = mantissa!.components(separatedBy: decimalSeparator)
-        let integerPart = (parts.count >= 1) ? parts[0] : nil
+        parts = mantissa.components(separatedBy: decimalSeparator)
+        guard parts.count > 0 && parts.count <= 2 else { return nil }
+        let integerPart = parts[0]
         let fractionalPart: String? = (parts.count == 2) ? parts[1] : nil
         
         var ret: String = ""
 
-        if integerPart != nil {
-            let integerPartValue = Int(integerPart!)
-            if integerPartValue != nil {
-                if integerPart == "-0" {
-                    ret = negativeString + " " + translate(0)!
-                } else {
-                    ret = translate(integerPartValue!)!
+        if integerPart == "-0" {
+            guard let nullString = translate(0) else { return nil }
+            ret = negativeString + " " + nullString
+        } else {
+            guard let integerPartValue = Int(integerPart) else { return nil }
+            guard let integerPartString = translate(integerPartValue) else { return nil }
+            ret = integerPartString
+        }
+        if let fractionalPart = fractionalPart {
+            var count = 0
+            ret += " " + dotString
+            for char in fractionalPart {
+                if count < 10 {
+                    guard let digit = Int(String(char)) else { return nil }
+                    guard let digitString = translate(digit) else { return nil }
+                    ret += " " + digitString
                 }
-                if fractionalPart != nil {
-                    var count = 0
-                    ret += " " + dotString
-                    for char in fractionalPart! {
-                        if count < 10 {
-                            let digit = Int(String(char))
-                            if digit != nil {
-                                ret += " " + translate(digit!)!
-                            } else {
-                                ret += "?"
-                            }
-                        }
-                        count += 1
-                    }
-                    if count >= 10 {
-                        ret += " " + andSoOn
-                    }
-                }
+                count += 1
+            }
+            if count >= 10 {
+                ret += " " + andSoOn
             }
         }
 
-        if exponent != nil {
-            ret += " " + exponentString + " " + translate(exponent!)!
+        if let exponent = exponent {
+            guard let translatedExponent = translate(exponent) else { return nil }
+            ret += " " + exponentString + " " + translatedExponent
         }
 
         return ret;

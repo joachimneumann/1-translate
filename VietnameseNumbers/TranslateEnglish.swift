@@ -7,9 +7,10 @@
 
 import SwiftUI
 
-class TranslateEnglish: StandardTranslator {
+class TranslateEnglish: HundredBasedTranslator {
     init() {
         super.init(
+            language: "English",
             dotString: "point",
             negativeString: "minus",
             andSoOn: "and so on",

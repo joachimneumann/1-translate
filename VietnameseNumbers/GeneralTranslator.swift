@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol GeneralTranslatorProtocol: BasicTranslatorProtocol {
+protocol GeneralTranslatorProtocol: TranslatorProtocol {
     func translatePositiveInteger(_ i: Int) -> String?
 }
 
