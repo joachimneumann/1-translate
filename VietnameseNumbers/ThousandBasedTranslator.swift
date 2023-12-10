@@ -55,18 +55,22 @@ class ThousandBasedTranslator: BasicTranslator, ThousandBasedTranslatorProtocol 
         if i <= 999_999 {
             let XXX_000 = (i - i % 1000) / 1000
             let XXX = i - 1000 * XXX_000
-            var ret = translatePositiveInteger(XXX_000)! + " " + thousand
+            guard let thousands = translatePositiveInteger(XXX_000) else { return nil }
+            var ret = thousands + " " + thousand
             if XXX > 0 {
-                ret += " " + translate(XXX)!
+                guard let leftover = translatePositiveInteger(XXX) else { return nil }
+                ret += " " + leftover
             }
             return ret
         }
         if i <= 999_999_999 {
             let XXX_000_000 = (i - i % 1_000_000) / 1_000_000
             let XXX_000 = i - 1_000_000 * XXX_000_000
-            var ret = translatePositiveInteger(XXX_000_000)! + " " + million
+            guard let millions = translatePositiveInteger(XXX_000_000) else { return nil }
+            var ret = millions + " " + million
             if XXX_000 > 0 {
-                ret += " " + translatePositiveInteger(XXX_000)!
+                guard let leftover = translatePositiveInteger(XXX_000) else { return nil }
+                ret += " " + leftover
             }
             return ret
         }
@@ -74,9 +78,11 @@ class ThousandBasedTranslator: BasicTranslator, ThousandBasedTranslatorProtocol 
         if i <= 999_999_999_999 {
             let XXX_000_000_000 = (i - i % 1_000_000_000) / 1_000_000_000
             let XXX_000_000 = i - 1_000_000_000 * XXX_000_000_000
-            var ret = translatePositiveInteger(XXX_000_000_000)! + " " + billion
+            guard let billions = translatePositiveInteger(XXX_000_000_000) else { return nil }
+            var ret = billions + " " + billion
             if XXX_000_000 > 0 {
-                ret += " " + translatePositiveInteger(XXX_000_000)!
+                guard let leftover = translatePositiveInteger(XXX_000_000) else { return nil }
+                ret += " " + leftover
             }
             return ret
         }

@@ -94,7 +94,11 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     var vietnameseThousand: VietnameseThousand = .nghìn {
         didSet {
             translateVietnamese.thousand = vietnameseThousand
-            settingsVietnameseExample = translateVietnamese.translate(303333)!
+            if let translatedExample = translateVietnamese.translate(303333) {
+                settingsVietnameseExample = translatedExample
+            } else {
+                settingsVietnameseExample = "Error"
+            }
         }
     }
 
@@ -102,7 +106,11 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     var vietnameseSecondLast: VietnameseSecondLast = .lẻ {
         didSet {
             translateVietnamese.secondLast = vietnameseSecondLast
-            settingsVietnameseExample = translateVietnamese.translate(303333)!
+            if let translatedExample = translateVietnamese.translate(303333) {
+                settingsVietnameseExample = translatedExample
+            } else {
+                settingsVietnameseExample = "Error"
+            }
         }
     }
     
@@ -110,7 +118,11 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     var vietnameseCompact: Bool = false {
         didSet {
             translateVietnamese.compact = vietnameseCompact
-            settingsVietnameseExample = translateVietnamese.translate(303333)!
+            if let translatedExample = translateVietnamese.translate(303333) {
+                settingsVietnameseExample = translatedExample
+            } else {
+                settingsVietnameseExample = "Error"
+            }
         }
     }
 

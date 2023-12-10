@@ -65,15 +65,15 @@ class TranslateGerman: GeneralTranslator {
         }
     }
         
-    private func toStringLowercase(_ intValue: Int) -> String? {
-        if intValue == 1 {
+    override func translatePositiveInteger(_ i: Int) -> String? {
+        if i == 1 {
             return "eins"
         }
-        if intValue <= 20 {
-            return german_0_20(intValue)
+        if i <= 20 {
+            return german_0_20(i)
         }
-        if intValue <= 99 {
-            var temp = intValue
+        if i <= 99 {
+            var temp = i
             let X = temp % 10
             temp = (temp - X) / 10
             let X0 = temp % 10
@@ -83,8 +83,8 @@ class TranslateGerman: GeneralTranslator {
                 return german_0_20(X)! + softHyphen + "und" + softHyphen + german_tens(X0)! // softHyphen is a soft hyphen
             }
         }
-        if intValue <= 999 {
-            var temp = intValue
+        if i <= 999 {
+            var temp = i
             let X = temp % 10
             temp = (temp - X) / 10
             let X0 = temp % 10
@@ -93,31 +93,31 @@ class TranslateGerman: GeneralTranslator {
             var ret = german_0_20(X00)! + softHyphen + "hundert" + softHyphen
             let leftover = 10 * X0 + X
             if leftover > 0 {
-                ret += toStringLowercase(leftover)!
+                ret += translatePositiveInteger(leftover)!
             }
             return ret
         }
         
-        if intValue <= 999_999 {
-            let XXX_000 = (intValue - intValue % 1000) / 1000
-            let XXX = intValue - 1000 * XXX_000
+        if i <= 999_999 {
+            let XXX_000 = (i - i % 1000) / 1000
+            let XXX = i - 1000 * XXX_000
             var ret = ""
             if XXX_000 == 1 {
                 ret = "ein"
             } else {
-                ret = toStringLowercase(XXX_000)!
+                ret = translatePositiveInteger(XXX_000)!
             }
             ret += softHyphen + "tausend" + softHyphen
             if XXX > 0 {
-                ret += toStringLowercase(XXX)!
+                ret += translatePositiveInteger(XXX)!
             }
             return ret
         }
         
-        if intValue <= 999_999_999 {
+        if i <= 999_999_999 {
             // Above a million, the number is seperated
-            let XXX_000_000 = (intValue - intValue % 1_000_000) / 1_000_000
-            let XXX_000 = intValue - 1_000_000 * XXX_000_000
+            let XXX_000_000 = (i - i % 1_000_000) / 1_000_000
+            let XXX_000 = i - 1_000_000 * XXX_000_000
             var ret = ""
             if XXX_000_000 == 1 {
                 ret += "eine Million"
@@ -125,23 +125,23 @@ class TranslateGerman: GeneralTranslator {
                 ret += translate(XXX_000_000)! + " Millionen"
             }
             if XXX_000 > 0 {
-                ret += " " + toStringLowercase(XXX_000)!
+                ret += " " + translatePositiveInteger(XXX_000)!
             }
             return ret
         }
         
-        if intValue <= 999_999_999_999 {
-            let XXX_000_000_000 = (intValue - intValue % 1_000_000_000) / 1_000_000_000
-            let XXX_000_000 = intValue - 1_000_000_000 * XXX_000_000_000
+        if i <= 999_999_999_999 {
+            let XXX_000_000_000 = (i - i % 1_000_000_000) / 1_000_000_000
+            let XXX_000_000 = i - 1_000_000_000 * XXX_000_000_000
             var ret = ""
             if XXX_000_000_000 == 1 {
                 ret += "eine Milliarde"
             } else {
-                ret += toStringLowercase(XXX_000_000_000)!
+                ret += translatePositiveInteger(XXX_000_000_000)!
                 ret += " " + "Milliarden"
             }
             if XXX_000_000 > 0 {
-                ret += " " + toStringLowercase(XXX_000_000)!
+                ret += " " + translatePositiveInteger(XXX_000_000)!
             }
             return ret
         }
@@ -149,9 +149,5 @@ class TranslateGerman: GeneralTranslator {
         return nil
     }
     
-    override func translatePositiveInteger(_ i: Int) -> String? {
-        let lowercase = toStringLowercase(i)!
-        return lowercase //.firstCapitalized
-    }
 }
 
