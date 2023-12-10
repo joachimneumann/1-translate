@@ -82,6 +82,7 @@ struct Settings: View {
                             .pickerStyle(.segmented)
                         }
                         .padding(.bottom, 40.0)
+                        
                         GridRow {
                             Image("flag_vietnam")
                                 .resizable()
@@ -147,16 +148,16 @@ struct Settings: View {
                                 .gridCellColumns(2)
                                 .gridCellUnsizedAxes(.horizontal)
                         }
-//                        GridRow {
-//                            Text("use and")
-//                            Toggle("", isOn: $viewModel.englishUseAndAfterHundred)
-//                                .frame(width: 40)
-//                                .toggleStyle(
-//                                    ColoredToggleStyle(onColor: Color(white: 0.6),
-//                                                       offColor: Color(white: 0.25),
-//                                                       thumbColor: .white))
-//                                .padding(.leading, 3)
-//                        }
+                        GridRow {
+                            Text("use \"and\"")
+                            Toggle("", isOn: $viewModel.englishUseAndAfterHundred)
+                                .frame(width: 40)
+                                .toggleStyle(
+                                    ColoredToggleStyle(onColor: Color(white: 0.6),
+                                                       offColor: Color(white: 0.25),
+                                                       thumbColor: .white))
+                                .padding(.leading, 3)
+                        }
                     }
                     hobbyProject
                         .padding(.top, 20)
