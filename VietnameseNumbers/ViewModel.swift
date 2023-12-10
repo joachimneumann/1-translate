@@ -12,14 +12,10 @@ protocol ShowAs {
     var showAsFloat: Bool { get }
 }
 
-enum Language: String, Codable, CaseIterable {
-    case vietnamese, english, german
-}
-
 struct AppStorageKeys {
     static let forceScientific     = "forceScientific"
     static let decimalSeparator    = "decimalSeparator"
-    static let groupingSeparator   = "groupingSeparator"
+    static let groupSeparator      = "groupSeparator"
     static let language            = "language"
     static let englishUseAndAfterHundred = "englishUseAndAfterHundred"
     static let vietnameseThousand        = "vietnameseThousand"
@@ -44,35 +40,37 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @Published var settingsVietnameseExample: String = ""
     @Published var translatedNumber: String = ""
     
-    var translateEnglish = TranslateEnglish()
-    var translateGerman = TranslateGerman()
-    var translateVietnamese = TranslateVietnamese()
+    let translateEnglish = TranslateEnglish()
+    let translateGerman = TranslateGerman()
+    let translateVietnamese = TranslateVietnamese()
+    let translateSpanish = TranslateSpanish()
+    var translators: [BasicTranslator] // set in init()
     
     /// I initialize the decimalSeparator with the locale preference, but
-    /// I ignore the value of Locale.current.groupingSeparator
+    /// I ignore the value of Locale.current.groupSeparator
     @AppStorage(AppStorageKeys.forceScientific, store: .standard)
     var forceScientific: Bool = false
     
     @AppStorage(AppStorageKeys.decimalSeparator, store: .standard)
     var decimalSeparator: DecimalSeparator = Locale.current.decimalSeparator == "," ? .comma : .dot {
         didSet {
-            translateGerman.decimalSeparator     = decimalSeparator.string
-            translateEnglish.decimalSeparator    = decimalSeparator.string
-            translateVietnamese.decimalSeparator = decimalSeparator.string
+            for translator in translators {
+                translator.decimalSeparator = decimalSeparator.string
+            }
         }
     }
     
-    @AppStorage(AppStorageKeys.groupingSeparator, store: .standard)
-    var groupingSeparator: GroupingSeparator = .none {
+    @AppStorage(AppStorageKeys.groupSeparator, store: .standard)
+    var groupSeparator: GroupSeparator = .none {
         didSet {
-            translateGerman.groupSeparator     = groupingSeparator.string
-            translateEnglish.groupSeparator    = groupingSeparator.string
-            translateVietnamese.groupSeparator = groupingSeparator.string
+            for translator in translators {
+                translator.groupSeparator = groupSeparator.string
+            }
         }
     }
     
     @AppStorage(AppStorageKeys.language, store: .standard)
-    var language: Language = .vietnamese {
+    var language: translatorLanguages = .vietnamese {
         didSet {
             translatedNumber = translator.translate(currentDisplay.allInOneLine)!
         }
@@ -101,7 +99,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             }
         }
     }
-
+    
     @AppStorage(AppStorageKeys.vietnameseSecondLast)
     var vietnameseSecondLast: VietnameseSecondLast = .lẻ {
         didSet {
@@ -125,7 +123,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             }
         }
     }
-
+    
     var precisionDescription = "unknown"
     var showPrecision: Bool = false
     var secondActive = false
@@ -167,6 +165,8 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         brain = Brain(precision: _precision.wrappedValue)
         precisionDescription = _precision.wrappedValue.useWords
         
+        translators = [translateEnglish, translateGerman, translateVietnamese, translateSpanish]
+
         for symbol in [
             "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", ",",
             "C", "AC", "±", "%", "/", "x", "-", "+", "=",
@@ -181,7 +181,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         backgroundColor["plus"] = keyColor.upColor(for: "+", isPending: false)
         
         /// trigger the didSet action of the persistently stored variables
-        groupingSeparator = groupingSeparator
+        groupSeparator = groupSeparator
         decimalSeparator = decimalSeparator
         englishUseAndAfterHundred = englishUseAndAfterHundred
         vietnameseCompact = vietnameseCompact
@@ -197,9 +197,11 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             return translateVietnamese
         case .german:
             return translateGerman
+        case .spanish:
+            return translateSpanish
         }
     }
-        
+    
     /// the update of the precision in brain can be slow.
     /// Therefore, I only want to do that when leaving the settings screen
     func updatePrecision(to newPrecision: Int) async {

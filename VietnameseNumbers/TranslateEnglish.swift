@@ -10,7 +10,7 @@ import SwiftUI
 class TranslateEnglish: HundredBasedTranslator {
     init() {
         super.init(
-            language: "English",
+            language: translatorLanguages.english.rawValue,
             dotString: "point",
             negativeString: "minus",
             andSoOn: "and so on",

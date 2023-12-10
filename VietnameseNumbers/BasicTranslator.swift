@@ -7,14 +7,33 @@
 
 import Foundation
 
+enum translatorLanguages: String {
+    case english = "English"
+    case german = "Deutsch"
+    case vietnamese = "Tiếng Việt"
+    case spanish = "Español"
+}
+
 protocol TranslatorProtocol {
     var language: String { get }
+    var groupSeparator: String  { get set }
+    var decimalSeparator: String  { get set }
     func translate(_ i: Int) -> String?
     func translate(_ d: Double) -> String?
     func translate(_ s: String) -> String?
 }
 
-class BasicTranslator: TranslatorProtocol {
+class BasicTranslator: TranslatorProtocol, Hashable {
+    
+    var uid = UUID().uuidString
+    static func == (lhs: BasicTranslator, rhs: BasicTranslator) -> Bool {
+        lhs.language == rhs.language
+    }
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(uid)
+    }
+    
+    
     var language: String
     var dotString: String
     var negativeString: String

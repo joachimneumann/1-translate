@@ -14,9 +14,14 @@ struct Settings: View {
     @ObservedObject var viewModel: ViewModel
     let screen: Screen
     let font: Font
-
+    @State private var selection = "Red"
+    enum AppearanceStyle {
+        case dark, light, auto
+    }
+    @State private var appearance: AppearanceStyle = .auto
+    
     var body: some View {
-        let example = "1\(viewModel.groupingSeparator.string)000\(viewModel.groupingSeparator.string)000\(viewModel.decimalSeparator.string)05"
+        let example = "1\(viewModel.groupSeparator.string)000\(viewModel.groupSeparator.string)000\(viewModel.decimalSeparator.string)05"
         VStack {
             BackButton(
                 screen: screen,
@@ -24,6 +29,31 @@ struct Settings: View {
                 presentationMode: presentation)
             ScrollView {
                 VStack(alignment: .leading, spacing: 0.0) {
+                    Grid(alignment: .leading, horizontalSpacing: 20.0, verticalSpacing: 10.0) {
+                        GridRow {
+                                Section {
+                                    Picker("Appearance", selection: $appearance) {
+                                        Text("Dark").tag(AppearanceStyle.dark)
+                                        Text("Light").tag(AppearanceStyle.light)
+                                        Text("Auto").tag(AppearanceStyle.auto)
+                                    }
+                                    .tint(Color.white)
+                                }
+                            header: { Text("First Language") }
+                        }
+                        GridRow {
+                                Section {
+                                    Picker("Appearance", selection: $appearance) {
+                                        Text("Dark").tag(AppearanceStyle.dark)
+                                        Text("Light").tag(AppearanceStyle.light)
+                                        Text("Auto").tag(AppearanceStyle.auto)
+                                    }
+                                    .tint(Color.white)
+                                }
+                            header: { Text("Second Language") }
+                        }
+                        .padding(.bottom, 40)
+                    }
                     Grid(alignment: .leading, horizontalSpacing: 20.0, verticalSpacing: 10.0) {
                         GridRow {
                             Text("\(example)")
@@ -45,12 +75,12 @@ struct Settings: View {
                             .borderRadius(Color.black, width: 5, cornerRadius: 10, corners: [.topLeft, .bottomLeft, .topRight, .bottomRight])
                             .onChange(of: viewModel.decimalSeparator) { _ in
                                 if viewModel.decimalSeparator == .comma {
-                                    if viewModel.groupingSeparator == .comma {
-                                        viewModel.groupingSeparator = .dot
+                                    if viewModel.groupSeparator == .comma {
+                                        viewModel.groupSeparator = .dot
                                     }
                                 } else if viewModel.decimalSeparator == .dot {
-                                    if viewModel.groupingSeparator == .dot {
-                                        viewModel.groupingSeparator = .comma
+                                    if viewModel.groupSeparator == .dot {
+                                        viewModel.groupSeparator = .comma
                                     }
                                 }
                             }
@@ -58,8 +88,8 @@ struct Settings: View {
                         }
                         GridRow {
                             Text("Grouping")
-                            Picker("", selection: $viewModel.groupingSeparator) {
-                                ForEach(GroupingSeparator.allCases, id: \.self) { value in
+                            Picker("", selection: $viewModel.groupSeparator) {
+                                ForEach(GroupSeparator.allCases, id: \.self) { value in
                                     Text("\(value.rawValue)")
                                         .tag(value)
                                 }
@@ -67,12 +97,12 @@ struct Settings: View {
                             .padding(2)
                             .background(Color(UIColor.darkGray))
                             .borderRadius(Color.black, width: 5, cornerRadius: 10, corners: [.topLeft, .bottomLeft, .topRight, .bottomRight])
-                            .onChange(of: viewModel.groupingSeparator) { _ in
-                                if viewModel.groupingSeparator == .comma {
+                            .onChange(of: viewModel.groupSeparator) { _ in
+                                if viewModel.groupSeparator == .comma {
                                     if viewModel.decimalSeparator == .comma {
                                         viewModel.decimalSeparator = .dot
                                     }
-                                } else if viewModel.groupingSeparator == .dot { /// dot
+                                } else if viewModel.groupSeparator == .dot { /// dot
                                     if viewModel.decimalSeparator == .dot { /// also dot
                                         viewModel.decimalSeparator = .comma
                                     }
@@ -168,18 +198,18 @@ struct Settings: View {
             }
             .padding(.horizontal)
             .onDisappear() {
-//                if vietnamese.thousand != vietnameseThousand {
-//                    vietnamese.thousand = vietnameseThousand
-//                }
-//                if vietnamese.secondLast != vietnameseSecondLast {
-//                    vietnamese.secondLast = vietnameseSecondLast
-//                }
-//                if vietnamese.compact != vietnameseCompact {
-//                    vietnamese.compact = vietnameseCompact
-//                }
-//                if english.useAndAfterHundred != englishUseAndAfterHundred {
-//                    english.useAndAfterHundred = englishUseAndAfterHundred
-//                }
+                //                if vietnamese.thousand != vietnameseThousand {
+                //                    vietnamese.thousand = vietnameseThousand
+                //                }
+                //                if vietnamese.secondLast != vietnameseSecondLast {
+                //                    vietnamese.secondLast = vietnameseSecondLast
+                //                }
+                //                if vietnamese.compact != vietnameseCompact {
+                //                    vietnamese.compact = vietnameseCompact
+                //                }
+                //                if english.useAndAfterHundred != englishUseAndAfterHundred {
+                //                    english.useAndAfterHundred = englishUseAndAfterHundred
+                //                }
                 viewModel.refreshDisplaySync(screen: screen)
             }
         }
@@ -276,7 +306,7 @@ struct ControlCenter_Previews: PreviewProvider {
             viewModel: ViewModel(),
             screen: Screen(CGSize()),
             font: Font(Screen.appleFont(ofSize: 20)))
-        .background(.black)
+        .background(.gray)
     }
 }
 

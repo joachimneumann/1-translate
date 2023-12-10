@@ -197,7 +197,7 @@ extension Display {
             fractionalPart = ""
         }
         
-        if let c = separators.groupingSeparator.character {
+        if let c = separators.groupSeparator.character {
             var count = integerPart.count
             while count >= 4 {
                 count = count - 3

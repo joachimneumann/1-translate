@@ -24,7 +24,7 @@ enum DecimalSeparator: String, Codable, CaseIterable {
         }
     }
 }
-enum GroupingSeparator: String, Codable, CaseIterable {
+enum GroupSeparator: String, Codable, CaseIterable {
     case comma
     case dot
     case none
@@ -47,5 +47,5 @@ enum GroupingSeparator: String, Codable, CaseIterable {
 
 protocol Separators {
     var decimalSeparator: DecimalSeparator   { get }
-    var groupingSeparator: GroupingSeparator { get }
+    var groupSeparator: GroupSeparator { get }
 }

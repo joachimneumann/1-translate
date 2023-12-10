@@ -16,7 +16,7 @@ class TranslateGerman: GeneralTranslator {
 
     init() {
         super.init(
-            language: "Deutsch",
+            language: translatorLanguages.german.rawValue,
             dotString: "komma",
             negativeString: "minus",
             andSoOn: "und so weiter",
