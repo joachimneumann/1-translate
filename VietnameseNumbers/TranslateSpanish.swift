@@ -11,6 +11,7 @@ class TranslateSpanish: GeneralTranslator {
     init() {
         super.init(
             language: translatorLanguages.spanish.rawValue,
+            imageName: "spain flag",
             dotString: "punto",
             negativeString: "menos",
             andSoOn: "y así",

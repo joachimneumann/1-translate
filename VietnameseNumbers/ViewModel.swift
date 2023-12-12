@@ -16,7 +16,10 @@ struct AppStorageKeys {
     static let forceScientific     = "forceScientific"
     static let decimalSeparator    = "decimalSeparator"
     static let groupSeparator      = "groupSeparator"
-    static let language            = "language"
+    static let allowSecondLanguage = "allowSecondLanguage"
+    static let firstTranslatorLanguage   = "firstTranslatorLanguage"
+    static let secondTranslatorLanguage  = "secondTranslatorLanguage"
+    static let selectedTranslatorIndex   = "selectedTranslatorIndex"
     static let englishUseAndAfterHundred = "englishUseAndAfterHundred"
     static let vietnameseThousand        = "vietnameseThousand"
     static let vietnameseSecondLast      = "vietnameseSecondLast"
@@ -33,7 +36,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @Published var textColor: [String: Color] = [:]
     @Published var currentDisplay: Display {
         didSet {
-            translatedNumber = translator.translate(currentDisplay.allInOneLine) ??  "?"
+            translatedNumber = currentTranslator.translate(currentDisplay.allInOneLine) ??  "?"
         }
     }
     @Published var settingsEnglishExample: String = ""
@@ -45,7 +48,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     let translateVietnamese = TranslateVietnamese()
     let translateSpanish = TranslateSpanish()
     var translators: [BasicTranslator] // set in init()
-    
+
     /// I initialize the decimalSeparator with the locale preference, but
     /// I ignore the value of Locale.current.groupSeparator
     @AppStorage(AppStorageKeys.forceScientific, store: .standard)
@@ -69,10 +72,28 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         }
     }
     
-    @AppStorage(AppStorageKeys.language, store: .standard)
-    var language: translatorLanguages = .vietnamese {
+    @AppStorage(AppStorageKeys.allowSecondLanguage, store: .standard)
+    var allowSecondLanguage: Bool = false
+    
+    @AppStorage(AppStorageKeys.firstTranslatorLanguage, store: .standard)
+    var firstTranslatorLanguage: String = translatorLanguages.english.rawValue {
         didSet {
-            translatedNumber = translator.translate(currentDisplay.allInOneLine)!
+            for translator in translators {
+                if translator.language == firstTranslatorLanguage {
+                    firstTranslator = translator
+                }
+            }
+        }
+    }
+
+    @AppStorage(AppStorageKeys.secondTranslatorLanguage, store: .standard)
+    var secondTranslatorLanguage: String = translatorLanguages.vietnamese.rawValue {
+        didSet {
+            for translator in translators {
+                if translator.language == secondTranslatorLanguage {
+                    secondTranslator = translator
+                }
+            }
         }
     }
     
@@ -112,6 +133,23 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         }
     }
     
+    var currentTranslator: BasicTranslator
+    @Published var firstTranslator: BasicTranslator
+    @Published var secondTranslator: BasicTranslator?
+
+    @AppStorage(AppStorageKeys.selectedTranslatorIndex)
+    var selectedTranslatorIndex: Int = 0 {
+        didSet {
+            if selectedTranslatorIndex == 0 || secondTranslator == nil {
+                currentTranslator = firstTranslator
+            } else {
+                currentTranslator = secondTranslator!
+            }
+            translatedNumber = currentTranslator.translate(currentDisplay.allInOneLine)!
+        }
+    }
+    
+    
     @AppStorage(AppStorageKeys.vietnameseCompact)
     var vietnameseCompact: Bool = false {
         didSet {
@@ -123,7 +161,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             }
         }
     }
-    
+        
     var precisionDescription = "unknown"
     var showPrecision: Bool = false
     var secondActive = false
@@ -166,6 +204,21 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         precisionDescription = _precision.wrappedValue.useWords
         
         translators = [translateEnglish, translateGerman, translateVietnamese, translateSpanish]
+        currentTranslator = translateEnglish
+        firstTranslator = translateEnglish
+        secondTranslator = translateEnglish
+
+        for translator in translators {
+            if translator.language == firstTranslatorLanguage {
+                firstTranslator = translator
+            }
+            if translator.language == secondTranslatorLanguage {
+                secondTranslator = translator
+            }
+        }
+        /// trigger the didSet action to set currentTranslator
+        selectedTranslatorIndex = selectedTranslatorIndex
+
 
         for symbol in [
             "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", ",",
@@ -188,20 +241,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         vietnameseThousand = vietnameseThousand
         vietnameseSecondLast = vietnameseSecondLast
     }
-    
-    var translator: TranslatorProtocol {
-        switch language {
-        case .english:
-            return translateEnglish
-        case .vietnamese:
-            return translateVietnamese
-        case .german:
-            return translateGerman
-        case .spanish:
-            return translateSpanish
-        }
-    }
-    
+        
     /// the update of the precision in brain can be slow.
     /// Therefore, I only want to do that when leaving the settings screen
     func updatePrecision(to newPrecision: Int) async {
@@ -380,7 +420,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         await MainActor.run() {
             currentDisplay = tempDisplay
             self.showAC = currentDisplay.isZero
-            translatedNumber = translator.translate(currentDisplay.allInOneLine)!
+            translatedNumber = currentTranslator.translate(currentDisplay.allInOneLine)!
         }
     }
     

@@ -16,11 +16,13 @@ enum translatorLanguages: String {
 
 protocol TranslatorProtocol {
     var language: String { get }
+    var imageName: String { get }
     var groupSeparator: String  { get set }
     var decimalSeparator: String  { get set }
     func translate(_ i: Int) -> String?
     func translate(_ d: Double) -> String?
     func translate(_ s: String) -> String?
+    
 }
 
 class BasicTranslator: TranslatorProtocol, Hashable {
@@ -33,7 +35,7 @@ class BasicTranslator: TranslatorProtocol, Hashable {
         hasher.combine(uid)
     }
     
-    
+    var imageName: String
     var language: String
     var dotString: String
     var negativeString: String
@@ -41,8 +43,9 @@ class BasicTranslator: TranslatorProtocol, Hashable {
     var exponentString: String
     var groupSeparator: String
     var decimalSeparator: String
-    init(language: String, dotString: String, negativeString: String, andSoOn: String, exponentString: String) {
+    init(language: String, imageName: String, dotString: String, negativeString: String, andSoOn: String, exponentString: String) {
         self.language = language
+        self.imageName = imageName
         self.dotString = dotString
         self.negativeString = negativeString
         self.andSoOn = andSoOn

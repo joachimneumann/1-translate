@@ -38,10 +38,11 @@ class TranslateVietnamese: GeneralTranslator {
     init() {
         super.init(
             language: translatorLanguages.vietnamese.rawValue,
+            imageName: "flag_vietnam",
             dotString: "phẩy",
             negativeString: "âm",
             andSoOn: "và như thế",
-            exponentString: "nhân mười lũy thừa")
+            exponentString: "nhân mười mũ")
     }
         
     private let one = "một"

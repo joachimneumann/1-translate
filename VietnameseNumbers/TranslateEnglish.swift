@@ -11,6 +11,7 @@ class TranslateEnglish: HundredBasedTranslator {
     init() {
         super.init(
             language: translatorLanguages.english.rawValue,
+            imageName: "flag UK",
             dotString: "point",
             negativeString: "minus",
             andSoOn: "and so on",

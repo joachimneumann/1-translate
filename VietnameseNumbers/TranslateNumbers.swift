@@ -20,28 +20,22 @@ struct TranslateNumbers: View {
         VStack(spacing: 0.0) {
             HStack(spacing: 30.0) {
                 Button(action: {
-                    viewModel.language = .english
+                    viewModel.selectedTranslatorIndex = 0
                 }) {
-                Image("flag UK")
+                    Image(viewModel.firstTranslator.imageName)
                         .resizable()
                         .scaledToFit()
-                        .opacity(viewModel.language == .english ? 1.0 : 0.5)
+                        .opacity(viewModel.selectedTranslatorIndex == 0 ? 1.0 : 0.5)
                 }
-                Button(action: {
-                    viewModel.language = .vietnamese
-                }) {
-                Image("flag_vietnam")
-                        .resizable()
-                        .scaledToFit()
-                        .opacity(viewModel.language == .vietnamese ? 1.0 : 0.5)
-                }
-                Button(action: {
-                    viewModel.language = .german
-                }) {
-                Image("flag germany")
-                        .resizable()
-                        .scaledToFit()
-                        .opacity(viewModel.language == .german ? 1.0 : 0.5)
+                if viewModel.secondTranslator != nil {
+                    Button(action: {
+                        viewModel.selectedTranslatorIndex = 1
+                    }) {
+                        Image(viewModel.secondTranslator!.imageName)
+                            .resizable()
+                            .scaledToFit()
+                            .opacity(viewModel.selectedTranslatorIndex == 1 ? 1.0 : 0.5)
+                    }
                 }
                 Spacer()
                 NavigationLink {

@@ -14,14 +14,9 @@ struct Settings: View {
     @ObservedObject var viewModel: ViewModel
     let screen: Screen
     let font: Font
-    @State private var selection = "Red"
-    enum AppearanceStyle {
-        case dark, light, auto
-    }
-    @State private var appearance: AppearanceStyle = .auto
     
     var body: some View {
-        let example = "1\(viewModel.groupSeparator.string)000\(viewModel.groupSeparator.string)000\(viewModel.decimalSeparator.string)05"
+        let example =  "1\(viewModel.groupSeparator.string)000\(viewModel.groupSeparator.string)000\(viewModel.decimalSeparator.string)05"
         VStack {
             BackButton(
                 screen: screen,
@@ -31,30 +26,28 @@ struct Settings: View {
                 VStack(alignment: .leading, spacing: 0.0) {
                     Grid(alignment: .leading, horizontalSpacing: 20.0, verticalSpacing: 10.0) {
                         GridRow {
-                                Section {
-                                    Picker("Appearance", selection: $appearance) {
-                                        Text("Dark").tag(AppearanceStyle.dark)
-                                        Text("Light").tag(AppearanceStyle.light)
-                                        Text("Auto").tag(AppearanceStyle.auto)
+                            Text("Languages:")
+                            NavigationLink {
+                                CountryDetailScreen(viewModel: viewModel)
+                            } label: {
+                                HStack {
+                                    Spacer(minLength: 0.0)
+                                    Image(viewModel.firstTranslator.imageName)
+                                        .resizable()
+                                        .scaledToFit()
+                                    if viewModel.secondTranslator != nil {
+                                        Image(viewModel.secondTranslator!.imageName)
+                                            .resizable()
+                                            .scaledToFit()
                                     }
-                                    .tint(Color.white)
+                                    Image(systemName: "chevron.right").bold()
+                                        .padding(.leading, 15)
                                 }
-                            header: { Text("First Language") }
+                                .padding(.trailing, 20)
+                            }
                         }
-                        GridRow {
-                                Section {
-                                    Picker("Appearance", selection: $appearance) {
-                                        Text("Dark").tag(AppearanceStyle.dark)
-                                        Text("Light").tag(AppearanceStyle.light)
-                                        Text("Auto").tag(AppearanceStyle.auto)
-                                    }
-                                    .tint(Color.white)
-                                }
-                            header: { Text("Second Language") }
-                        }
+                        .frame(height: 30.0)
                         .padding(.bottom, 40)
-                    }
-                    Grid(alignment: .leading, horizontalSpacing: 20.0, verticalSpacing: 10.0) {
                         GridRow {
                             Text("\(example)")
                                 .foregroundColor(.white)
@@ -112,106 +105,14 @@ struct Settings: View {
                             .pickerStyle(.segmented)
                         }
                         .padding(.bottom, 40.0)
-                        
-                        GridRow {
-                            Image("flag_vietnam")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(height: 25)
-                        }
-                        GridRow {
-                            Text(viewModel.settingsVietnameseExample)
-                                .foregroundColor(.white)
-                                .padding(.leading, 0)
-                                .gridCellColumns(2)
-                                .gridCellUnsizedAxes(.horizontal)
-                        }
-                        GridRow {
-                            Text("1000")
-                            Picker("", selection: $viewModel.vietnameseThousand) {
-                                ForEach(VietnameseThousand.allCases, id: \.self) { value in
-                                    Text("\(value.rawValue)")
-                                        .tag(value)
-                                }
-                            }
-                            .frame(width: 220)
-                            .padding(2)
-                            .background(Color(UIColor.darkGray))
-                            .borderRadius(Color.black, width: 5, cornerRadius: 10, corners: [.topLeft, .bottomLeft, .topRight, .bottomRight])
-                            .pickerStyle(.segmented)
-                        }
-                        GridRow {
-                            Text("1?3")
-                            Picker("", selection: $viewModel.vietnameseSecondLast) {
-                                ForEach(VietnameseSecondLast.allCases, id: \.self) { value in
-                                    Text("\(value.rawValue)")
-                                        .tag(value)
-                                }
-                            }
-                            .frame(width: 220)
-                            .padding(2)
-                            .background(Color(UIColor.darkGray))
-                            .borderRadius(Color.black, width: 5, cornerRadius: 10, corners: [.topLeft, .bottomLeft, .topRight, .bottomRight])
-                            .pickerStyle(.segmented)
-                        }
-                        GridRow {
-                            Text("Compact")
-                            Toggle("", isOn: $viewModel.vietnameseCompact)
-                                .frame(width: 40)
-                                .toggleStyle(
-                                    ColoredToggleStyle(onColor: Color(white: 0.6),
-                                                       offColor: Color(white: 0.25),
-                                                       thumbColor: .white))
-                                .padding(.leading, 3)
-                        }
-                        .padding(.bottom, 40)
-                        GridRow {
-                            Image("flag UK")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(height: 25)
-                        }
-                        GridRow {
-                            Text(viewModel.settingsEnglishExample)
-                                .foregroundColor(.white)
-                                .padding(.leading, 0)
-                                .gridCellColumns(2)
-                                .gridCellUnsizedAxes(.horizontal)
-                        }
-                        GridRow {
-                            Text("use \"and\"")
-                            Toggle("", isOn: $viewModel.englishUseAndAfterHundred)
-                                .frame(width: 40)
-                                .toggleStyle(
-                                    ColoredToggleStyle(onColor: Color(white: 0.6),
-                                                       offColor: Color(white: 0.25),
-                                                       thumbColor: .white))
-                                .padding(.leading, 3)
-                        }
+                        hobbyProject
+                            .padding(.top, 20)
                     }
-                    hobbyProject
-                        .padding(.top, 20)
-                    
                     Spacer()
                 }
                 .foregroundColor(Color.white)
             }
             .padding(.horizontal)
-            .onDisappear() {
-                //                if vietnamese.thousand != vietnameseThousand {
-                //                    vietnamese.thousand = vietnameseThousand
-                //                }
-                //                if vietnamese.secondLast != vietnameseSecondLast {
-                //                    vietnamese.secondLast = vietnameseSecondLast
-                //                }
-                //                if vietnamese.compact != vietnameseCompact {
-                //                    vietnamese.compact = vietnameseCompact
-                //                }
-                //                if english.useAndAfterHundred != englishUseAndAfterHundred {
-                //                    english.useAndAfterHundred = englishUseAndAfterHundred
-                //                }
-                viewModel.refreshDisplaySync(screen: screen)
-            }
         }
         .navigationBarBackButtonHidden(true)
     }
@@ -255,32 +156,33 @@ struct Settings: View {
         }.accentColor(.white)
     }
     
-    struct ColoredToggleStyle: ToggleStyle {
-        var label = ""
-        var onColor = Color.green
-        var offColor = Color(white: 0.5)
-        var thumbColor = Color.white
-        
-        func makeBody(configuration: Self.Configuration) -> some View {
-            HStack {
-                Text(label)
-                Spacer()
-                Button(action: { configuration.isOn.toggle() } )
-                {
-                    RoundedRectangle(cornerRadius: 16, style: .circular)
-                        .fill(configuration.isOn ? onColor : offColor)
-                        .frame(width: 50, height: 29)
-                        .overlay(
-                            Circle()
-                                .fill(thumbColor)
-                                .shadow(radius: 1, x: 0, y: 1)
-                                .padding(1.5)
-                                .offset(x: configuration.isOn ? 10 : -10))
-                }
+}
+
+struct ColoredToggleStyle: ToggleStyle {
+    var label = ""
+    var onColor = Color.green
+    var offColor = Color(white: 0.5)
+    var thumbColor = Color.white
+    
+    func makeBody(configuration: Self.Configuration) -> some View {
+        HStack {
+            Text(label)
+            Spacer()
+            Button(action: { configuration.isOn.toggle() } )
+            {
+                RoundedRectangle(cornerRadius: 16, style: .circular)
+                    .fill(configuration.isOn ? onColor : offColor)
+                    .frame(width: 50, height: 29)
+                    .overlay(
+                        Circle()
+                            .fill(thumbColor)
+                            .shadow(radius: 1, x: 0, y: 1)
+                            .padding(1.5)
+                            .offset(x: configuration.isOn ? 10 : -10))
             }
-            .font(.title)
-            .padding(.horizontal)
         }
+        .font(.title)
+        .padding(.horizontal)
     }
 }
 
@@ -306,7 +208,7 @@ struct ControlCenter_Previews: PreviewProvider {
             viewModel: ViewModel(),
             screen: Screen(CGSize()),
             font: Font(Screen.appleFont(ofSize: 20)))
-        .background(.gray)
+        .background(.black)
     }
 }
 
