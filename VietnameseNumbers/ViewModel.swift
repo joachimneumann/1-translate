@@ -67,8 +67,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     let translateVietnamese = TranslateVietnamese()
     let translateSpanish = TranslateSpanish()
     var translators: [BasicTranslator] // set in init()
-    var previouslySelectedFirstLanguages = StringPreference()
-    var previouslySelectedSecondLanguages = StringPreference()
+    var previouslySelectedLanguages = StringPreference()
     
     /// I initialize the decimalSeparator with the locale preference, but
     /// I ignore the value of Locale.current.groupSeparator
@@ -119,11 +118,11 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             for translator in translators {
                 if translator.language == firstLanguage {
                     firstTranslator = translator
-                    previouslySelectedFirstLanguages.add(new: translator.language)
+                    previouslySelectedLanguages.add(new: translator.language)
                     /// is the second language the same?
                     if secondLanguageAllowed && (secondLanguage == translator.language) {
                         // OOPS. Find a new second language
-                        secondLanguage = previouslySelectedSecondLanguages.get(except: translator.language)
+                        secondLanguage = previouslySelectedLanguages.get(except: translator.language)
                     }
                 }
             }
@@ -136,11 +135,11 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             for translator in translators {
                 if translator.language == secondLanguage {
                     secondTranslator = translator
-                    previouslySelectedSecondLanguages.add(new: translator.language)
+                    previouslySelectedLanguages.add(new: translator.language)
                     /// is the first language the same?
                     if firstLanguage == translator.language {
                         // OOPS. Find a new first language
-                        firstLanguage = previouslySelectedFirstLanguages.get(except: translator.language)
+                        firstLanguage = previouslySelectedLanguages.get(except: translator.language)
                     }
                 }
             }
@@ -250,8 +249,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             if translator.language == secondLanguage {
                 secondTranslator = translator
             }
-            previouslySelectedFirstLanguages.add(new: translator.language)
-            previouslySelectedSecondLanguages.add(new: translator.language)
+            previouslySelectedLanguages.add(new: translator.language)
         }
 
         for symbol in [

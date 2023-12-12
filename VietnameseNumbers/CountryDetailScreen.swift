@@ -22,7 +22,7 @@ struct languageSelector: View {
                     .scaledToFit()
                     .frame(height: 25)
                     .padding(.trailing, 10)
-                    .opacity(_1_selected ? 1.0 : 0.4)
+                    .opacity(_1_selected ? 1.0 : 0.3)
             }
             if viewModel.secondLanguageAllowed {
                 Button(action: {
@@ -33,7 +33,7 @@ struct languageSelector: View {
                         .scaledToFit()
                         .frame(height: 25)
                         .padding(.trailing, 10)
-                        .opacity(_2_selected ? 1.0 : 0.4)
+                        .opacity(_2_selected ? 1.0 : 0.3)
                 }
             }
             Text(translator.language)
@@ -61,8 +61,8 @@ struct CountryDetailScreen: View {
                         .foregroundColor(Color.white)
                     Spacer()
                 }
-                .padding(.top, 40)
-                .padding(.bottom, 40)
+                .padding(.top, 20)
+                .padding(.bottom, 20)
                 languageSelector(viewModel: viewModel, translator: viewModel.translateEnglish)
                 languageSelector(viewModel: viewModel, translator: viewModel.translateGerman)
                 languageSelector(viewModel: viewModel, translator: viewModel.translateVietnamese)
@@ -85,6 +85,7 @@ struct CountryDetailScreen: View {
 //                    Spacer()
 //                }
             }
+            .padding(20)
             .background(Color(red: 0.3, green: 0.3, blue: 0.3))
 //            .padding(.horizontal, 20)
 //            .padding(.top, 20)
