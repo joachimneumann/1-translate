@@ -16,6 +16,7 @@ struct languageSelector: View {
         HStack {
             Button(action: {
                 viewModel.firstLanguage = translator.language
+                viewModel.currentDisplay = viewModel.currentDisplay
             }) {
                 Image(translator.imageName)
                     .resizable()
@@ -27,6 +28,7 @@ struct languageSelector: View {
             if viewModel.secondLanguageAllowed {
                 Button(action: {
                     viewModel.secondLanguage = translator.language
+                    viewModel.currentDisplay = viewModel.currentDisplay
                 }) {
                     Image(translator.imageName)
                         .resizable()

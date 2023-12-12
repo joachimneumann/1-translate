@@ -37,7 +37,7 @@ struct TranslateNumbers: View {
                                         [.medium, .large],
                                         selection: $settingsDetent
                                     )
-                                Spacer()
+                                    .frame(maxHeight: .infinity)
                             }
                         }
                         Spacer()
@@ -67,9 +67,23 @@ struct TranslateNumbers: View {
                 if viewModel.secondLanguageAllowed {
                     VStack(spacing: 0.0) {
                         HStack(spacing: 30.0) {
-                            Image(viewModel.secondTranslator.imageName)
-                                .resizable()
-                                .scaledToFit()
+                            Button {
+                                showLanguageSelection.toggle()
+                            } label: {
+                                Image(viewModel.secondTranslator.imageName)
+                                    .resizable()
+                                    .scaledToFit()
+                            }
+                            .sheet(isPresented: $showLanguageSelection) {
+                                VStack {
+                                    CountryDetailScreen(viewModel: viewModel)
+                                        .presentationDetents(
+                                            [.medium, .large],
+                                            selection: $settingsDetent
+                                        )
+                                        .frame(maxHeight: .infinity)
+                                }
+                            }
                             Spacer()
                         }
                         .frame(height: 30.0)
