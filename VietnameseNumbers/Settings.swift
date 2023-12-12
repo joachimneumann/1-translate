@@ -35,13 +35,11 @@ struct Settings: View {
                                     Image(viewModel.firstTranslator.imageName)
                                         .resizable()
                                         .scaledToFit()
-                                        .opacity(viewModel.activeIndex == 0 ? 1.0 : 0.5)
                                         .padding(.trailing, 15)
                                     if viewModel.secondLanguageAllowed {
-                                        Image(viewModel.secondTranslator!.imageName)
+                                        Image(viewModel.secondTranslator.imageName)
                                             .resizable()
                                             .scaledToFit()
-                                            .opacity(viewModel.activeIndex == 1 ? 1.0 : 0.5)
                                     }
                                     Image(systemName: "chevron.right").bold()
                                         .padding(.leading, 15)
@@ -211,7 +209,7 @@ struct ControlCenter_Previews: PreviewProvider {
             viewModel: ViewModel(),
             screen: Screen(CGSize()),
             font: Font(Screen.appleFont(ofSize: 20)))
-        .background(.black)
+        .background(.gray)
     }
 }
 

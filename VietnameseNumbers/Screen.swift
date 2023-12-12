@@ -18,7 +18,7 @@ struct Screen: Equatable, DisplayLengthLimiter {
     
     private let isPad: Bool
 
-    let keyboardHeight: CGFloat
+    var keyboardHeight: CGFloat
     let keySpacing: CGFloat
     let keySize: CGSize
     var ePadding: CGFloat /// var and not let, because it is set to 0.0 in the tests
@@ -47,11 +47,16 @@ struct Screen: Equatable, DisplayLengthLimiter {
     let appleFont: AppleFont
     private let calculatorWidth: CGFloat
         
+    mutating func calculate(smaller: Bool) {
+        let keyWidth = isPad ? (calculatorWidth - 9.0 * keySpacing) * 0.1 : (calculatorWidth - 3.0 * keySpacing) * 0.25
+        let keyHeight = keyWidth * (smaller ? 0.5 : 0.7)
+        keyboardHeight = 5 * keyHeight + 4 * keySpacing
+    }
+
     init(_ screenSize: CGSize) {
         //print("Screen INIT", screenSize)
-
         
-        backgroundColor = .black
+        backgroundColor = Color(red: 0.2, green: 0.2, blue: 0.2)
         defaultTextColor = .white
         isPad = UIDevice.current.userInterfaceIdiom == .pad
         let isPortrait = screenSize.height > screenSize.width
@@ -67,7 +72,7 @@ struct Screen: Equatable, DisplayLengthLimiter {
         
         if isPortrait {
             keyWidth = isPad ? (calculatorWidth - 9.0 * keySpacing) * 0.1 : (calculatorWidth - 3.0 * keySpacing) * 0.25
-            keyHeight = keyWidth * 0.7
+            keyHeight = keyWidth * 0.5
             keyboardHeight = 5 * keyHeight + 4 * keySpacing
             bottomPadding = isPad ? 0.0 : keyboardHeight * 0.09
         } else {

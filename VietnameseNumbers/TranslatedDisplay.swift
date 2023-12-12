@@ -30,7 +30,7 @@ struct TranslatedDisplay: View {
                 }
                 .font(font)
                 .frame(width: geometry.size.width)      // Make the scroll view full-width
-                .frame(minHeight: geometry.size.height) // Set the content’s min height to the parent
+//                .frame(minHeight: geometry.size.height) // Set the content’s min height to the parent
             }
             .scrollBounceBehavior(.basedOnSize)
         }

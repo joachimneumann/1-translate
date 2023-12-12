@@ -11,62 +11,85 @@ let testColors = false
 struct TranslateNumbers: View {
     @StateObject private var viewModel: ViewModel = ViewModel()
     var screen: Screen
-
+    
     @State var scrollViewHasScrolled = false
     @State var scrollViewID = UUID()
     @State var isZoomed: Bool = false
-    
+    @State private var showLanguageSelection = false
+    @State private var settingsDetent = PresentationDetent.medium
+
     var portraitView: some View {
         VStack(spacing: 0.0) {
-            HStack(spacing: 30.0) {
-                Button(action: {
-                    viewModel.activeIndex = 0
-                }) {
-                    Image(viewModel.firstTranslator.imageName)
-                        .resizable()
-                        .scaledToFit()
-                        .opacity(viewModel.activeIndex == 0 ? 1.0 : 0.5)
+            VStack(spacing: 0.0) {
+                VStack(spacing: 0.0) {
+                    HStack(spacing: 30.0) {
+                        Button {
+                            showLanguageSelection.toggle()
+                        } label: {
+                            Image(viewModel.firstTranslator.imageName)
+                                .resizable()
+                                .scaledToFit()
+                        }
+                        .sheet(isPresented: $showLanguageSelection) {
+                            VStack {
+                                CountryDetailScreen(viewModel: viewModel)
+                                    .presentationDetents(
+                                        [.medium, .large],
+                                        selection: $settingsDetent
+                                    )
+                                Spacer()
+                            }
+                        }
+                        Spacer()
+                        NavigationLink {
+                            Settings(viewModel: viewModel, screen: screen, font: Font(screen.infoUiFont))
+                        } label: {
+                            Image(systemName: "switch.2")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .font(Font.title.weight(.thin))
+                                .frame(height: screen.plusIconSize * 0.8)
+                                .foregroundColor(Color.white)
+                        }
+                        .buttonStyle(TransparentButtonStyle())
+                        .opacity(0.9)
+                    }
+                    .frame(height: 30.0)
+                    .padding(.bottom, 10)
+                    .padding(.top, 20)
+                    TranslatedDisplay(
+                        translatedString: viewModel.firstTranslatedNumber,
+                        screen: screen)
+                    //.background(Color.yellow).opacity(0.8)
+                    .padding(.horizontal, 0)
+                    Spacer(minLength: 0.0)
                 }
                 if viewModel.secondLanguageAllowed {
-                    Button(action: {
-                        viewModel.activeIndex = 1
-                    }) {
-                        Image(viewModel.secondTranslator!.imageName)
-                            .resizable()
-                            .scaledToFit()
-                            .opacity(viewModel.activeIndex == 1 ? 1.0 : 0.5)
+                    VStack(spacing: 0.0) {
+                        HStack(spacing: 30.0) {
+                            Image(viewModel.secondTranslator.imageName)
+                                .resizable()
+                                .scaledToFit()
+                            Spacer()
+                        }
+                        .frame(height: 30.0)
+                        .padding(.bottom, 10)
+                        .padding(.top, 20)
+                        Spacer(minLength: 0.0)
+                        TranslatedDisplay(
+                            translatedString: viewModel.secondTranslatedNumber,
+                            screen: screen)
+                        .padding(.horizontal, 0)
                     }
                 }
-                Spacer()
-                NavigationLink {
-                    Settings(viewModel: viewModel, screen: screen, font: Font(screen.infoUiFont))
-                } label: {
-                    Image(systemName: "switch.2")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .font(Font.title.weight(.thin))
-                        .frame(height: screen.plusIconSize * 0.6)
-                        .foregroundColor(Color.white)
-                        .accessibilityIdentifier("settingsButton")
-                }
-                .buttonStyle(TransparentButtonStyle())
-                .opacity(0.9)
             }
-            .frame(height: 30.0)
-            .padding(.bottom, 20)
-            .padding(.top, 20)
-            Spacer(minLength: 0.0)
-            TranslatedDisplay(
-                translatedString: viewModel.translatedNumber,
-                screen: screen)
-                .padding(.bottom, screen.portraitIPhoneDisplayBottomPadding)
-                .padding(.horizontal, 0)
+            
             PortraitDisplay(
                 display: viewModel.currentDisplay,
                 screen: screen,
                 backgroundColor: screen.backgroundColor)
-                .padding(.bottom, screen.portraitIPhoneDisplayBottomPadding)
-                .padding(.horizontal, 0)
+            .padding(.bottom, screen.portraitIPhoneDisplayBottomPadding)
+            .padding(.horizontal, 0)
             NonScientificKeyboard(
                 screen: screen,
                 viewModel: viewModel)
@@ -108,7 +131,13 @@ struct TranslateNumbers: View {
                         await viewModel.refreshDisplay(screen: newScreen)
                     }
                 }
+                .background(screen.backgroundColor)
         }
     }
 }
 
+#Preview {
+    GeometryReader { geo in
+        TranslateNumbers(screen: Screen(geo.size))
+    }
+}

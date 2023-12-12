@@ -166,7 +166,7 @@ class TranslateVietnamese: GeneralTranslator {
     }
 
     override func translatePositiveInteger(_ i: Int) -> String? {
-        toString_(i, fromLargerNumber: false)!
+        toString_(i, fromLargerNumber: false) ?? "???"
     }
 
 }

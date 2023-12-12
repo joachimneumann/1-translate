@@ -26,6 +26,23 @@ struct AppStorageKeys {
     static let settingsVietnameseCompact         = "settingsVietnameseCompact"
 }
 
+struct StringPreference {
+    var previously: [String] = []
+    mutating func add(new: String) {
+        previously = previously.filter { $0 != new }
+        previously.insert(new, at: 0)
+    }
+    
+    func get(except notThis: String) -> String {
+        for i in 0..<previously.count {
+            if previously[i] != notThis {
+                return previously[i]
+            }
+        }
+        return ""
+    }
+
+}
 class ViewModel: ObservableObject, ShowAs, Separators {
     @Published var showAsInt = false /// This will update the "-> Int or -> sci button texts
     @Published var showAsFloat = false
@@ -36,21 +53,23 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @Published var textColor: [String: Color] = [:]
     @Published var currentDisplay: Display {
         didSet {
-            translatedNumber = currentTranslator.translate(currentDisplay.allInOneLine) ??  "?"
+            firstTranslatedNumber = firstTranslator.translate(currentDisplay.allInOneLine) ??  "?"
+            secondTranslatedNumber = secondTranslator.translate(currentDisplay.allInOneLine) ??  "?"
         }
     }
     @Published var settingsEnglishExample: String = ""
     @Published var settingsVietnameseExample: String = ""
-    @Published var translatedNumber: String = ""
-    
+    @Published var firstTranslatedNumber: String = ""
+    @Published var secondTranslatedNumber: String = ""
+
     let translateEnglish = TranslateEnglish()
     let translateGerman = TranslateGerman()
     let translateVietnamese = TranslateVietnamese()
     let translateSpanish = TranslateSpanish()
     var translators: [BasicTranslator] // set in init()
-    var previouslySelectedFirstLanguage: String? = nil
-    var previouslySelectedSecondLanguage: String? = nil
-
+    var previouslySelectedFirstLanguages = StringPreference()
+    var previouslySelectedSecondLanguages = StringPreference()
+    
     /// I initialize the decimalSeparator with the locale preference, but
     /// I ignore the value of Locale.current.groupSeparator
     @AppStorage(AppStorageKeys.forceScientific, store: .standard)
@@ -89,9 +108,6 @@ class ViewModel: ObservableObject, ShowAs, Separators {
                         }
                     }
                 }
-            } else {
-                /// make sure that the first languate is active
-                activeIndex = 0
             }
         }
     }
@@ -103,21 +119,11 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             for translator in translators {
                 if translator.language == firstLanguage {
                     firstTranslator = translator
-                    previouslySelectedFirstLanguage = translator.language
+                    previouslySelectedFirstLanguages.add(new: translator.language)
                     /// is the second language the same?
                     if secondLanguageAllowed && (secondLanguage == translator.language) {
                         // OOPS. Find a new second language
-                        if previouslySelectedSecondLanguage != nil && previouslySelectedSecondLanguage != translator.language {
-                            secondLanguage = previouslySelectedSecondLanguage!
-                        } else {
-                            var substituteFound = false
-                            for substituteTranslator in translators {
-                                if !substituteFound && substituteTranslator.language != translator.language {
-                                    secondLanguage = substituteTranslator.language
-                                    substituteFound = true
-                                }
-                            }
-                        }
+                        secondLanguage = previouslySelectedSecondLanguages.get(except: translator.language)
                     }
                 }
             }
@@ -130,21 +136,11 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             for translator in translators {
                 if translator.language == secondLanguage {
                     secondTranslator = translator
-                    previouslySelectedSecondLanguage = translator.language
+                    previouslySelectedSecondLanguages.add(new: translator.language)
                     /// is the first language the same?
                     if firstLanguage == translator.language {
                         // OOPS. Find a new first language
-                        if previouslySelectedFirstLanguage != nil && previouslySelectedFirstLanguage != translator.language {
-                            firstLanguage = previouslySelectedFirstLanguage!
-                        } else {
-                            var substituteFound = false
-                            for substituteTranslator in translators {
-                                if !substituteFound && substituteTranslator.language != translator.language {
-                                    firstLanguage = substituteTranslator.language
-                                    substituteFound = true
-                                }
-                            }
-                        }
+                        firstLanguage = previouslySelectedFirstLanguages.get(except: translator.language)
                     }
                 }
             }
@@ -199,22 +195,9 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         }
     }
         
-    var currentTranslator: BasicTranslator
     @Published var firstTranslator: BasicTranslator
-    @Published var secondTranslator: BasicTranslator?
+    @Published var secondTranslator: BasicTranslator
 
-    @AppStorage(AppStorageKeys.activeIndex)
-    var activeIndex: Int = 0 {
-        didSet {
-            if activeIndex == 0 || secondTranslator == nil {
-                currentTranslator = firstTranslator
-            } else {
-                currentTranslator = secondTranslator!
-            }
-            translatedNumber = currentTranslator.translate(currentDisplay.allInOneLine)!
-        }
-    }
-    
     var precisionDescription = "unknown"
     var showPrecision: Bool = false
     var secondActive = false
@@ -257,7 +240,6 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         precisionDescription = _precision.wrappedValue.useWords
         
         translators = [translateEnglish, translateGerman, translateVietnamese, translateSpanish]
-        currentTranslator = translateEnglish
         firstTranslator = translateEnglish
         secondTranslator = translateEnglish
 
@@ -268,10 +250,9 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             if translator.language == secondLanguage {
                 secondTranslator = translator
             }
+            previouslySelectedFirstLanguages.add(new: translator.language)
+            previouslySelectedSecondLanguages.add(new: translator.language)
         }
-        /// trigger the didSet action to set currentTranslator
-        activeIndex = activeIndex
-
 
         for symbol in [
             "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", ",",
@@ -473,7 +454,8 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         await MainActor.run() {
             currentDisplay = tempDisplay
             self.showAC = currentDisplay.isZero
-            translatedNumber = currentTranslator.translate(currentDisplay.allInOneLine)!
+            firstTranslatedNumber = firstTranslator.translate(currentDisplay.allInOneLine) ??  "?"
+            secondTranslatedNumber = secondTranslator.translate(currentDisplay.allInOneLine) ??  "?"
         }
     }
     

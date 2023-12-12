@@ -22,7 +22,7 @@ struct languageSelector: View {
                     .scaledToFit()
                     .frame(height: 25)
                     .padding(.trailing, 10)
-                    .opacity(_1_selected ? 1.0 : 0.5)
+                    .opacity(_1_selected ? 1.0 : 0.4)
             }
             if viewModel.secondLanguageAllowed {
                 Button(action: {
@@ -33,11 +33,11 @@ struct languageSelector: View {
                         .scaledToFit()
                         .frame(height: 25)
                         .padding(.trailing, 10)
-                        .opacity(_2_selected ? 1.0 : 0.5)
+                        .opacity(_2_selected ? 1.0 : 0.4)
                 }
             }
             Text(translator.language)
-                .bold(_1_selected || _2_selected)
+                .bold(_1_selected || (viewModel.secondLanguageAllowed && _2_selected))
                 .frame(height: 25)
                 .foregroundColor(Color.white)
             Spacer()
@@ -48,17 +48,7 @@ struct languageSelector: View {
 struct CountryDetailScreen: View {
     @ObservedObject var viewModel: ViewModel
     var body: some View {
-        ScrollView {
             VStack(alignment: .leading, spacing: 0.0) {
-                languageSelector(viewModel: viewModel, translator: viewModel.translateEnglish)
-                languageSelector(viewModel: viewModel, translator: viewModel.translateGerman)
-                languageSelector(viewModel: viewModel, translator: viewModel.translateVietnamese)
-                languageSelector(viewModel: viewModel, translator: viewModel.translateSpanish)
-                Text("Settings")
-                    .bold()
-                    .foregroundColor(.white)
-                    .padding(.top, 40)
-                    .padding(.bottom, 20)
                 HStack {
                     Toggle("", isOn: $viewModel.secondLanguageAllowed)
                         .frame(width: 40)
@@ -71,10 +61,34 @@ struct CountryDetailScreen: View {
                         .foregroundColor(Color.white)
                     Spacer()
                 }
+                .padding(.top, 40)
+                .padding(.bottom, 40)
+                languageSelector(viewModel: viewModel, translator: viewModel.translateEnglish)
+                languageSelector(viewModel: viewModel, translator: viewModel.translateGerman)
+                languageSelector(viewModel: viewModel, translator: viewModel.translateVietnamese)
+                languageSelector(viewModel: viewModel, translator: viewModel.translateSpanish)
+//                Text("Settings")
+//                    .bold()
+//                    .foregroundColor(.white)
+//                    .padding(.top, 40)
+//                    .padding(.bottom, 20)
+//                HStack {
+//                    Toggle("", isOn: $viewModel.secondLanguageAllowed)
+//                        .frame(width: 40)
+//                        .toggleStyle(
+//                            ColoredToggleStyle(onColor: Color(white: 0.6),
+//                                               offColor: Color(white: 0.25),
+//                                               thumbColor: .white))
+//                        .padding(.trailing, 15)
+//                    Text("Add second Language")
+//                        .foregroundColor(Color.white)
+//                    Spacer()
+//                }
             }
-            .padding(.horizontal, 20)
-            .padding(.top, 20)
-            .frame(maxWidth: .infinity)
+            .background(Color(red: 0.3, green: 0.3, blue: 0.3))
+//            .padding(.horizontal, 20)
+//            .padding(.top, 20)
+//            .frame(maxWidth: .infinity)
         }
         
             
@@ -144,7 +158,7 @@ struct CountryDetailScreen: View {
 //                                   offColor: Color(white: 0.25),
 //                                   thumbColor: .white))
 //            .padding(.leading, 3)
-    }
+
     //}
     //}
     //    .foregroundColor(Color.white)
