@@ -20,21 +20,21 @@ struct TranslateNumbers: View {
         VStack(spacing: 0.0) {
             HStack(spacing: 30.0) {
                 Button(action: {
-                    viewModel.selectedTranslatorIndex = 0
+                    viewModel.activeIndex = 0
                 }) {
                     Image(viewModel.firstTranslator.imageName)
                         .resizable()
                         .scaledToFit()
-                        .opacity(viewModel.selectedTranslatorIndex == 0 ? 1.0 : 0.5)
+                        .opacity(viewModel.activeIndex == 0 ? 1.0 : 0.5)
                 }
-                if viewModel.secondTranslator != nil {
+                if viewModel.secondLanguageAllowed {
                     Button(action: {
-                        viewModel.selectedTranslatorIndex = 1
+                        viewModel.activeIndex = 1
                     }) {
                         Image(viewModel.secondTranslator!.imageName)
                             .resizable()
                             .scaledToFit()
-                            .opacity(viewModel.selectedTranslatorIndex == 1 ? 1.0 : 0.5)
+                            .opacity(viewModel.activeIndex == 1 ? 1.0 : 0.5)
                     }
                 }
                 Spacer()

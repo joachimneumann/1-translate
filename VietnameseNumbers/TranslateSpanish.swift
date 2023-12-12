@@ -10,7 +10,7 @@ import Foundation
 class TranslateSpanish: GeneralTranslator {
     init() {
         super.init(
-            language: translatorLanguages.spanish.rawValue,
+            language: Languages.spanish.rawValue,
             imageName: "spain flag",
             dotString: "punto",
             negativeString: "menos",

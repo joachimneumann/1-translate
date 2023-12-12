@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum translatorLanguages: String {
+enum Languages: String {
     case english = "English"
     case german = "Deutsch"
     case vietnamese = "Tiếng Việt"

@@ -35,10 +35,13 @@ struct Settings: View {
                                     Image(viewModel.firstTranslator.imageName)
                                         .resizable()
                                         .scaledToFit()
-                                    if viewModel.secondTranslator != nil {
+                                        .opacity(viewModel.activeIndex == 0 ? 1.0 : 0.5)
+                                        .padding(.trailing, 15)
+                                    if viewModel.secondLanguageAllowed {
                                         Image(viewModel.secondTranslator!.imageName)
                                             .resizable()
                                             .scaledToFit()
+                                            .opacity(viewModel.activeIndex == 1 ? 1.0 : 0.5)
                                     }
                                     Image(systemName: "chevron.right").bold()
                                         .padding(.leading, 15)

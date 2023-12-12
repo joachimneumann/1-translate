@@ -13,17 +13,17 @@ protocol ShowAs {
 }
 
 struct AppStorageKeys {
-    static let forceScientific     = "forceScientific"
-    static let decimalSeparator    = "decimalSeparator"
-    static let groupSeparator      = "groupSeparator"
-    static let allowSecondLanguage = "allowSecondLanguage"
-    static let firstTranslatorLanguage   = "firstTranslatorLanguage"
-    static let secondTranslatorLanguage  = "secondTranslatorLanguage"
-    static let selectedTranslatorIndex   = "selectedTranslatorIndex"
-    static let englishUseAndAfterHundred = "englishUseAndAfterHundred"
-    static let vietnameseThousand        = "vietnameseThousand"
-    static let vietnameseSecondLast      = "vietnameseSecondLast"
-    static let vietnameseCompact         = "vietnameseCompact"
+    static let forceScientific                   = "forceScientific"
+    static let decimalSeparator                  = "decimalSeparator"
+    static let groupSeparator                    = "groupSeparator"
+    static let secondLanguageAllowed             = "secondLanguageAllowed"
+    static let firstLanguage                     = "firstLanguage"
+    static let secondLanguage                    = "secondLanguage"
+    static let activeIndex                       = "activeIndex"
+    static let settingsEnglishUseAndAfterHundred = "settingsEnglishUseAndAfterHundred"
+    static let settingsVietnameseThousand        = "settingsVietnameseThousand"
+    static let settingsVietnameseSecondLast      = "settingsVietnameseSecondLast"
+    static let settingsVietnameseCompact         = "settingsVietnameseCompact"
 }
 
 class ViewModel: ObservableObject, ShowAs, Separators {
@@ -48,6 +48,8 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     let translateVietnamese = TranslateVietnamese()
     let translateSpanish = TranslateSpanish()
     var translators: [BasicTranslator] // set in init()
+    var previouslySelectedFirstLanguage: String? = nil
+    var previouslySelectedSecondLanguage: String? = nil
 
     /// I initialize the decimalSeparator with the locale preference, but
     /// I ignore the value of Locale.current.groupSeparator
@@ -72,35 +74,87 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         }
     }
     
-    @AppStorage(AppStorageKeys.allowSecondLanguage, store: .standard)
-    var allowSecondLanguage: Bool = false
+    @AppStorage(AppStorageKeys.secondLanguageAllowed, store: .standard)
+    var secondLanguageAllowed: Bool = false {
+        didSet {
+            if secondLanguageAllowed {
+                /// make sure the first language is not the same
+                if secondLanguage == firstLanguage {
+                    // OOPS. Find a new second language
+                    var substituteFound = false
+                    for substituteTranslator in translators {
+                        if !substituteFound && substituteTranslator.language != firstLanguage {
+                            secondLanguage = substituteTranslator.language
+                            substituteFound = true
+                        }
+                    }
+                }
+            } else {
+                /// make sure that the first languate is active
+                activeIndex = 0
+            }
+        }
+    }
     
-    @AppStorage(AppStorageKeys.firstTranslatorLanguage, store: .standard)
-    var firstTranslatorLanguage: String = translatorLanguages.english.rawValue {
+    
+    @AppStorage(AppStorageKeys.firstLanguage, store: .standard)
+    var firstLanguage: String = Languages.english.rawValue {
         didSet {
             for translator in translators {
-                if translator.language == firstTranslatorLanguage {
+                if translator.language == firstLanguage {
                     firstTranslator = translator
+                    previouslySelectedFirstLanguage = translator.language
+                    /// is the second language the same?
+                    if secondLanguageAllowed && (secondLanguage == translator.language) {
+                        // OOPS. Find a new second language
+                        if previouslySelectedSecondLanguage != nil && previouslySelectedSecondLanguage != translator.language {
+                            secondLanguage = previouslySelectedSecondLanguage!
+                        } else {
+                            var substituteFound = false
+                            for substituteTranslator in translators {
+                                if !substituteFound && substituteTranslator.language != translator.language {
+                                    secondLanguage = substituteTranslator.language
+                                    substituteFound = true
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
     }
 
-    @AppStorage(AppStorageKeys.secondTranslatorLanguage, store: .standard)
-    var secondTranslatorLanguage: String = translatorLanguages.vietnamese.rawValue {
+    @AppStorage(AppStorageKeys.secondLanguage, store: .standard)
+    var secondLanguage: String = Languages.vietnamese.rawValue {
         didSet {
             for translator in translators {
-                if translator.language == secondTranslatorLanguage {
+                if translator.language == secondLanguage {
                     secondTranslator = translator
+                    previouslySelectedSecondLanguage = translator.language
+                    /// is the first language the same?
+                    if firstLanguage == translator.language {
+                        // OOPS. Find a new first language
+                        if previouslySelectedFirstLanguage != nil && previouslySelectedFirstLanguage != translator.language {
+                            firstLanguage = previouslySelectedFirstLanguage!
+                        } else {
+                            var substituteFound = false
+                            for substituteTranslator in translators {
+                                if !substituteFound && substituteTranslator.language != translator.language {
+                                    firstLanguage = substituteTranslator.language
+                                    substituteFound = true
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
     }
     
-    @AppStorage(AppStorageKeys.englishUseAndAfterHundred, store: .standard)
-    var englishUseAndAfterHundred: Bool = true {
+    @AppStorage(AppStorageKeys.settingsEnglishUseAndAfterHundred, store: .standard)
+    var settingsEnglishUseAndAfterHundred: Bool = true {
         didSet {
-            if englishUseAndAfterHundred {
+            if settingsEnglishUseAndAfterHundred {
                 translateEnglish.insertAfterHundred = "and"
             } else {
                 translateEnglish.insertAfterHundred = nil
@@ -109,10 +163,10 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         }
     }
     
-    @AppStorage(AppStorageKeys.vietnameseThousand)
-    var vietnameseThousand: VietnameseThousand = .nghìn {
+    @AppStorage(AppStorageKeys.settingsVietnameseThousand)
+    var settingsVietnameseThousand: VietnameseThousand = .nghìn {
         didSet {
-            translateVietnamese.thousand = vietnameseThousand
+            translateVietnamese.thousand = settingsVietnameseThousand
             if let translatedExample = translateVietnamese.translate(303333) {
                 settingsVietnameseExample = translatedExample
             } else {
@@ -121,10 +175,10 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         }
     }
     
-    @AppStorage(AppStorageKeys.vietnameseSecondLast)
-    var vietnameseSecondLast: VietnameseSecondLast = .lẻ {
+    @AppStorage(AppStorageKeys.settingsVietnameseSecondLast)
+    var settingsVietnameseSecondLast: VietnameseSecondLast = .lẻ {
         didSet {
-            translateVietnamese.secondLast = vietnameseSecondLast
+            translateVietnamese.secondLast = settingsVietnameseSecondLast
             if let translatedExample = translateVietnamese.translate(303333) {
                 settingsVietnameseExample = translatedExample
             } else {
@@ -133,27 +187,10 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         }
     }
     
-    var currentTranslator: BasicTranslator
-    @Published var firstTranslator: BasicTranslator
-    @Published var secondTranslator: BasicTranslator?
-
-    @AppStorage(AppStorageKeys.selectedTranslatorIndex)
-    var selectedTranslatorIndex: Int = 0 {
+    @AppStorage(AppStorageKeys.settingsVietnameseCompact)
+    var settingsVietnameseCompact: Bool = false {
         didSet {
-            if selectedTranslatorIndex == 0 || secondTranslator == nil {
-                currentTranslator = firstTranslator
-            } else {
-                currentTranslator = secondTranslator!
-            }
-            translatedNumber = currentTranslator.translate(currentDisplay.allInOneLine)!
-        }
-    }
-    
-    
-    @AppStorage(AppStorageKeys.vietnameseCompact)
-    var vietnameseCompact: Bool = false {
-        didSet {
-            translateVietnamese.compact = vietnameseCompact
+            translateVietnamese.compact = settingsVietnameseCompact
             if let translatedExample = translateVietnamese.translate(303333) {
                 settingsVietnameseExample = translatedExample
             } else {
@@ -162,6 +199,22 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         }
     }
         
+    var currentTranslator: BasicTranslator
+    @Published var firstTranslator: BasicTranslator
+    @Published var secondTranslator: BasicTranslator?
+
+    @AppStorage(AppStorageKeys.activeIndex)
+    var activeIndex: Int = 0 {
+        didSet {
+            if activeIndex == 0 || secondTranslator == nil {
+                currentTranslator = firstTranslator
+            } else {
+                currentTranslator = secondTranslator!
+            }
+            translatedNumber = currentTranslator.translate(currentDisplay.allInOneLine)!
+        }
+    }
+    
     var precisionDescription = "unknown"
     var showPrecision: Bool = false
     var secondActive = false
@@ -209,15 +262,15 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         secondTranslator = translateEnglish
 
         for translator in translators {
-            if translator.language == firstTranslatorLanguage {
+            if translator.language == firstLanguage {
                 firstTranslator = translator
             }
-            if translator.language == secondTranslatorLanguage {
+            if translator.language == secondLanguage {
                 secondTranslator = translator
             }
         }
         /// trigger the didSet action to set currentTranslator
-        selectedTranslatorIndex = selectedTranslatorIndex
+        activeIndex = activeIndex
 
 
         for symbol in [
@@ -236,10 +289,10 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         /// trigger the didSet action of the persistently stored variables
         groupSeparator = groupSeparator
         decimalSeparator = decimalSeparator
-        englishUseAndAfterHundred = englishUseAndAfterHundred
-        vietnameseCompact = vietnameseCompact
-        vietnameseThousand = vietnameseThousand
-        vietnameseSecondLast = vietnameseSecondLast
+        settingsEnglishUseAndAfterHundred = settingsEnglishUseAndAfterHundred
+        settingsVietnameseCompact = settingsVietnameseCompact
+        settingsVietnameseThousand = settingsVietnameseThousand
+        settingsVietnameseSecondLast = settingsVietnameseSecondLast
     }
         
     /// the update of the precision in brain can be slow.
