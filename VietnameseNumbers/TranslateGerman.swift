@@ -68,7 +68,7 @@ class TranslateGerman: GeneralTranslator {
     }
 
     override func translatePositiveInteger(_ i: Int) -> String? {
-        let lowercase = translateLowerCase(i)
+        let lowercase = translateLowerCase(i) ?? ""
         if capitalisation {
             return lowercase.firstCapitalized
         } else {
@@ -104,7 +104,7 @@ class TranslateGerman: GeneralTranslator {
             var ret = german_0_20(X00)! + softHyphen + "hundert" + softHyphen
             let leftover = 10 * X0 + X
             if leftover > 0 {
-                ret += translatePositiveInteger(leftover)!
+                ret += translateLowerCase(leftover)!
             }
             return ret
         }
@@ -116,11 +116,11 @@ class TranslateGerman: GeneralTranslator {
             if XXX_000 == 1 {
                 ret = "ein"
             } else {
-                ret = translatePositiveInteger(XXX_000)!
+                ret = translateLowerCase(XXX_000)!
             }
             ret += softHyphen + "tausend" + softHyphen
             if XXX > 0 {
-                ret += translatePositiveInteger(XXX)!
+                ret += translateLowerCase(XXX)!
             }
             return ret
         }
@@ -155,6 +155,14 @@ class TranslateGerman: GeneralTranslator {
         }
         return ret
     }
-    
 }
+
+extension StringProtocol {
+    var firstUppercased: String { prefix(1).uppercased() + dropFirst() }
+    var firstCapitalized: String { prefix(1).capitalized + dropFirst() }
+}
+//
+//extension LosslessStringConvertible {
+//    var string: String { .init(self) }
+//}
 
