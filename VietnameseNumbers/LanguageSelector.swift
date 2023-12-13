@@ -78,10 +78,10 @@ struct LanguageSelector: View {
                 }
                 .padding(.top, 20)
                 .padding(.bottom, 20)
-                SelectALanguage(viewModel: viewModel, translator: viewModel.translateEnglish)
-                SelectALanguage(viewModel: viewModel, translator: viewModel.translateGerman)
-                SelectALanguage(viewModel: viewModel, translator: viewModel.translateVietnamese)
-                SelectALanguage(viewModel: viewModel, translator: viewModel.translateSpanish)
+                SelectLanguage(viewModel: viewModel, translator: viewModel.translateEnglish)
+                SelectLanguage(viewModel: viewModel, translator: viewModel.translateGerman)
+                SelectLanguage(viewModel: viewModel, translator: viewModel.translateVietnamese)
+                SelectLanguage(viewModel: viewModel, translator: viewModel.translateSpanish)
             }
             .padding(20)
         }

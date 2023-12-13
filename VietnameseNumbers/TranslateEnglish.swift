@@ -27,7 +27,7 @@ class TranslateEnglish: HundredBasedTranslator {
         case 1:     return "ten"
         case 2:     return "twenty"
         case 3:     return "thirty"
-        case 4:     return "fourty"
+        case 4:     return "forty"
         case 5:     return "fifty"
         case 6:     return "sixty"
         case 7:     return "seventy"
@@ -57,7 +57,7 @@ class TranslateEnglish: HundredBasedTranslator {
         case 15:    return "fifteen"
         case 16:    return "sixteen"
         case 17:    return "seventeen"
-        case 18:    return "eightteen"
+        case 18:    return "eighteen"
         case 19:    return "nineteen"
         case 20:    return "twenty"
         default:
