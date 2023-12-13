@@ -26,18 +26,9 @@ struct Settings: View {
                     Grid(alignment: .leading, horizontalSpacing: 10.0, verticalSpacing: 10.0) {
                         
                         DigitsSettings
-                        
-                        Divider()
-                            .padding(.vertical, 20)
-                        
-                        VietnameseSettings
-                        
-                        Divider()
-                            .padding(.vertical, 20)
-                        
                         EnglishSettings
-
-                        
+                        GermanSettings
+                        VietnameseSettings
                         hobbyProject
                     }
                     Spacer()
@@ -154,6 +145,7 @@ struct Settings: View {
                 }
                 .gridCellColumns(2)
             }
+            .padding(.top, 40)
             GridRow {
                 Text(viewModel.settingsEnglishExample)
                     .padding(.leading, 0)
@@ -162,6 +154,53 @@ struct Settings: View {
             GridRow {
                 Text("use 'and'")
                 Toggle("", isOn: $viewModel.settingsEnglishUseAndAfterHundred)
+                    .frame(width: 40)
+                    .toggleStyle(
+                        ColoredToggleStyle(onColor: Color(white: 0.6),
+                                           offColor: Color(white: 0.25),
+                                           thumbColor: .white))
+                    .padding(.leading, 3)
+            }
+        }
+    }
+    
+    var GermanSettings: some View {
+        return Group {
+            GridRow {
+                HStack {
+                    Image(viewModel.translateGerman.imageName)
+                        .resizable()
+                        .scaledToFit()
+                        .padding(1)
+                        .border(.white)
+                        .frame(height: 25)
+                        .padding(.trailing, 10)
+                    Text(viewModel.translateGerman.language)
+                        .bold()
+                        .frame(height: 25)
+                    Spacer()
+                }
+                .gridCellColumns(2)
+            }
+            .padding(.top, 40)
+            GridRow {
+                Text(viewModel.settingsGermanExample)
+                    .padding(.leading, 0)
+                    .gridCellColumns(2)
+            }
+            GridRow {
+                Text("Trennung")
+                Toggle("", isOn: $viewModel.settingsGermanSoftHyphen)
+                    .frame(width: 40)
+                    .toggleStyle(
+                        ColoredToggleStyle(onColor: Color(white: 0.6),
+                                           offColor: Color(white: 0.25),
+                                           thumbColor: .white))
+                    .padding(.leading, 3)
+            }
+            GridRow {
+                Text("Großschreibung")
+                Toggle("", isOn: $viewModel.settingsGermanCaptalisation)
                     .frame(width: 40)
                     .toggleStyle(
                         ColoredToggleStyle(onColor: Color(white: 0.6),
@@ -189,6 +228,7 @@ struct Settings: View {
                         .frame(height: 25)
                     Spacer()
                 }
+                .padding(.top, 40)
                 .gridCellColumns(2)
             }
             GridRow {
@@ -242,8 +282,11 @@ struct Settings: View {
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
         
-        return HStack {
-            Text("\nVersion: \(appVersion ?? "unknown") (build \(buildNumber ?? "unknown"))\n\nThis is a hobby project by Joachim Neumann. Although I have done some testing, errors may occur.")
+        return VStack(alignment: .leading) {
+            Text("\nVersion: \(appVersion ?? "unknown") (build \(buildNumber ?? "unknown"))")
+                .italic()
+                .padding(.bottom, 3)
+            Text("This is a hobby project by Joachim Neumann. Although I have done some testing, errors may occur.")
         }
     }
     

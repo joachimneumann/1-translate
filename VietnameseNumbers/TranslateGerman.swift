@@ -9,6 +9,7 @@ import SwiftUI
 
 class TranslateGerman: GeneralTranslator {
     var useSoftHyphen: Bool = true
+    var capitalisation: Bool = true
 
     private var softHyphen: String {
         useSoftHyphen ? "\u{AD}" : ""
@@ -65,8 +66,17 @@ class TranslateGerman: GeneralTranslator {
         default: return nil
         }
     }
-        
+
     override func translatePositiveInteger(_ i: Int) -> String? {
+        let lowercase = translateLowerCase(i)
+        if capitalisation {
+            return lowercase.firstCapitalized
+        } else {
+            return lowercase
+        }
+    }
+
+    private func translateLowerCase(_ i: Int) -> String? {
         if i == 1 {
             return "eins"
         }

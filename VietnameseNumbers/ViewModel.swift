@@ -21,6 +21,8 @@ struct AppStorageKeys {
     static let secondLanguage                    = "secondLanguage"
     static let activeIndex                       = "activeIndex"
     static let settingsEnglishUseAndAfterHundred = "settingsEnglishUseAndAfterHundred"
+    static let settingsGermanCaptalisation       = "settingsGermanCaptalisation"
+    static let settingsGermanSoftHyphen          = "settingsGermanSoftHyphen"
     static let settingsVietnameseThousand        = "settingsVietnameseThousand"
     static let settingsVietnameseSecondLast      = "settingsVietnameseSecondLast"
     static let settingsVietnameseCompact         = "settingsVietnameseCompact"
@@ -57,6 +59,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         }
     }
     @Published var settingsEnglishExample: String = ""
+    @Published var settingsGermanExample: String = ""
     @Published var settingsVietnameseExample: String = ""
     @Published var firstTranslatedNumber: String = ""
     @Published var secondTranslatedNumber: String = ""
@@ -162,6 +165,35 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             settingsEnglishExample = translateEnglish.translate(105)!
         }
     }
+    
+    static let settingsGermanCaptalisation       = "settingsGermanCaptalisation"
+    static let settingsGermanTrennung            = "settingsGermanTrennung"
+
+
+    @AppStorage(AppStorageKeys.settingsGermanCaptalisation)
+    var settingsGermanCaptalisation: Bool = false {
+        didSet {
+            translateGerman.capitalisation = settingsGermanCaptalisation
+            if let translatedExample = translateGerman.translate(88) {
+                settingsGermanExample = translatedExample
+            } else {
+                settingsGermanExample = "Error"
+            }
+        }
+    }
+
+    @AppStorage(AppStorageKeys.settingsGermanSoftHyphen)
+    var settingsGermanSoftHyphen: Bool = false {
+        didSet {
+            translateGerman.useSoftHyphen = settingsGermanSoftHyphen
+            if let translatedExample = translateGerman.translate(88) {
+                settingsGermanExample = translatedExample
+            } else {
+                settingsGermanExample = "Error"
+            }
+        }
+    }
+
     
     @AppStorage(AppStorageKeys.settingsVietnameseThousand)
     var settingsVietnameseThousand: VietnameseThousand = .nghìn {
@@ -275,8 +307,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         decimalSeparator = decimalSeparator
         settingsEnglishUseAndAfterHundred = settingsEnglishUseAndAfterHundred
         settingsVietnameseCompact = settingsVietnameseCompact
-        settingsVietnameseThousand = settingsVietnameseThousand
-        settingsVietnameseSecondLast = settingsVietnameseSecondLast
+        settingsGermanCaptalisation = settingsGermanCaptalisation
     }
         
     /// the update of the precision in brain can be slow.
