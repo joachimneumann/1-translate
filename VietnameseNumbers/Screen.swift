@@ -43,13 +43,14 @@ struct Screen: Equatable, DisplayLengthLimiter {
     var eWidth: CGFloat = 0.0
     let backgroundColor: Color
     let defaultTextColor: Color
+    private let keyWidth: CGFloat
+    private var keyHeight: CGFloat
 
     let appleFont: AppleFont
     private let calculatorWidth: CGFloat
         
-    mutating func calculate(smaller: Bool) {
-        let keyWidth = isPad ? (calculatorWidth - 9.0 * keySpacing) * 0.1 : (calculatorWidth - 3.0 * keySpacing) * 0.25
-        let keyHeight = keyWidth * (smaller ? 0.5 : 0.7)
+    mutating func changeKeyboardSize(smaller: Bool) {
+        keyHeight = keyWidth * (smaller ? 0.5 : 0.7)
         keyboardHeight = 5 * keyHeight + 4 * keySpacing
     }
 
@@ -59,7 +60,6 @@ struct Screen: Equatable, DisplayLengthLimiter {
         backgroundColor = .black // Color(red: 0.2, green: 0.2, blue: 0.2)
         defaultTextColor = .white
         isPad = UIDevice.current.userInterfaceIdiom == .pad
-        let isPortrait = screenSize.height > screenSize.width
         keySpacing = 0.034 * screenSize.width
         horizontalPadding = keySpacing
         displayHorizontalPadding = screenSize.width * 0.035
@@ -67,28 +67,12 @@ struct Screen: Equatable, DisplayLengthLimiter {
         portraitIPhoneDisplayBottomPadding = screenSize.height * 0.012
         
         calculatorWidth = screenSize.width - 2 * horizontalPadding
-        let keyWidth: CGFloat
-        let keyHeight: CGFloat
         
-        if isPortrait {
-            keyWidth = isPad ? (calculatorWidth - 9.0 * keySpacing) * 0.1 : (calculatorWidth - 3.0 * keySpacing) * 0.25
-            keyHeight = keyWidth * 0.5
-            keyboardHeight = 5 * keyHeight + 4 * keySpacing
-            bottomPadding = isPad ? 0.0 : keyboardHeight * 0.09
-        } else {
-            /// wider keys
-            keyWidth = (calculatorWidth - 9.0 * keySpacing) * 0.1
-            if isPad {
-                /// landscape iPad: half of the screen is the keyboard
-                keyboardHeight = screenSize.height * 0.5
-            } else {
-                /// iPhone landscape
-                keyboardHeight = 0.8 * screenSize.height
-            }
-            keyHeight = (keyboardHeight - 4.0 * keySpacing) * 0.2
-            bottomPadding = 0.0
-        }
-        
+        keyWidth = isPad ? (calculatorWidth - 9.0 * keySpacing) * 0.1 : (calculatorWidth - 3.0 * keySpacing) * 0.25
+        keyHeight = keyWidth * 0.5
+        keyboardHeight = 5 * keyHeight + 4 * keySpacing
+        bottomPadding = isPad ? 0.0 : keyboardHeight * 0.09
+
         keySize = CGSize(width: keyWidth, height: keyHeight)
         
         plusIconSize = keyboardHeight * 0.13

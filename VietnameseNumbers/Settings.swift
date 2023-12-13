@@ -24,10 +24,9 @@ struct Settings: View {
                 presentationMode: presentation)
             ScrollView {
                 VStack(alignment: .leading, spacing: 0.0) {
-                    Grid(alignment: .leading, horizontalSpacing: 20.0, verticalSpacing: 10.0) {
+                    Grid(alignment: .leading, horizontalSpacing: 10.0, verticalSpacing: 10.0) {
                         GridRow {
                             Text("\(example)")
-                                .foregroundColor(.white)
                                 .padding(.leading, 0)
                                 .gridCellColumns(2)
                         }
@@ -82,14 +81,107 @@ struct Settings: View {
                             .pickerStyle(.segmented)
                         }
                         .padding(.bottom, 40.0)
+                        
+                        GridRow {
+                            HStack {
+                                Image(viewModel.translateVietnamese.imageName)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .padding(1)
+                                    .border(.white)
+                                    .frame(height: 25)
+                                    .padding(.trailing, 10)
+                                Text(viewModel.translateVietnamese.language)
+                                    .frame(height: 25)
+                                Spacer()
+                            }
+                            .gridCellColumns(2)
+                        }
+                        GridRow {
+                            Text(viewModel.settingsVietnameseExample)
+                                .padding(.leading, 0)
+                                .gridCellColumns(2)
+                                .gridCellUnsizedAxes(.horizontal)
+                        }
+                        GridRow {
+                            Text("1000")
+                            Picker("", selection: $viewModel.settingsVietnameseThousand) {
+                                ForEach(VietnameseThousand.allCases, id: \.self) { value in
+                                    Text("\(value.rawValue)")
+                                        .tag(value)
+                                }
+                            }
+                            .frame(width: 220)
+                            .padding(2)
+                            .background(Color(UIColor.darkGray))
+                            .borderRadius(Color.black, width: 5, cornerRadius: 10, corners: [.topLeft, .bottomLeft, .topRight, .bottomRight])
+                            .pickerStyle(.segmented)
+                        }
+                        GridRow {
+                            Text("linh hoặc lẻ")
+                            Picker("", selection: $viewModel.settingsVietnameseSecondLast) {
+                                ForEach(VietnameseSecondLast.allCases, id: \.self) { value in
+                                    Text("\(value.rawValue)")
+                                        .tag(value)
+                                }
+                            }
+                            .frame(width: 220)
+                            .padding(2)
+                            .background(Color(UIColor.darkGray))
+                            .borderRadius(Color.black, width: 5, cornerRadius: 10, corners: [.topLeft, .bottomLeft, .topRight, .bottomRight])
+                            .pickerStyle(.segmented)
+                        }
+                        GridRow {
+                            Text("Compact")
+                            Toggle("", isOn: $viewModel.settingsVietnameseCompact)
+                                .frame(width: 40)
+                                .toggleStyle(
+                                    ColoredToggleStyle(onColor: Color(white: 0.6),
+                                                       offColor: Color(white: 0.25),
+                                                       thumbColor: .white))
+                                .padding(.leading, 3)
+                        }
+                        .padding(.bottom, 40)
+                        
+                        
+                        GridRow {
+                            HStack {
+                                Image(viewModel.translateEnglish.imageName)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .padding(1)
+                                    .border(.white)
+                                    .frame(height: 25)
+                                    .padding(.trailing, 10)
+                                Text(viewModel.translateEnglish.language)
+                                    .frame(height: 25)
+                                Spacer()
+                            }
+                            .gridCellColumns(2)
+                        }
+                        GridRow {
+                            Text(viewModel.settingsEnglishExample)
+                                .padding(.leading, 0)
+                                .gridCellColumns(2)
+                        }
+                        GridRow {
+                            Text("use 'and'")
+                            Toggle("", isOn: $viewModel.settingsEnglishUseAndAfterHundred)
+                                .frame(width: 40)
+                                .toggleStyle(
+                                    ColoredToggleStyle(onColor: Color(white: 0.6),
+                                                       offColor: Color(white: 0.25),
+                                                       thumbColor: .white))
+                                .padding(.leading, 3)
+                        }
+                        
                         hobbyProject
-                            .padding(.top, 20)
                     }
                     Spacer()
                 }
                 .foregroundColor(Color.white)
+                .padding(.horizontal, 15)
             }
-            .padding(.horizontal)
         }
         .navigationBarBackButtonHidden(true)
     }
@@ -114,7 +206,6 @@ struct Settings: View {
                 .buttonStyle(TransparentButtonStyle())
                 Spacer()
             }
-            //            .font(font)
             .foregroundColor(.white)
             .padding()
         }
@@ -129,7 +220,6 @@ struct Settings: View {
             Text("\nVersion: \(appVersion ?? "unknown") (build \(buildNumber ?? "unknown"))")
                 .foregroundColor(Color.gray) +
             Text("\nThis is a hobby project by Joachim Neumann. Although I have done some testing, errors may occur.")
-                .foregroundColor(Color.white)
         }.accentColor(.white)
     }
     
@@ -185,7 +275,7 @@ struct ControlCenter_Previews: PreviewProvider {
             viewModel: ViewModel(),
             screen: Screen(CGSize()),
             font: Font(Screen.appleFont(ofSize: 20)))
-        .background(.gray)
+        .background(.black)
     }
 }
 

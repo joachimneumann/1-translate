@@ -14,7 +14,7 @@ struct TranslatedDisplay: View {
     init(translatedString: String, screen: Screen) {
         self.translatedString = translatedString
         self.screen = screen
-        let uiFont = Screen.appleFont(ofSize: screen.uiFontSize * 0.8)
+        let uiFont = AppleFont.systemFont(ofSize: screen.uiFontSize * 0.7, weight: .regular)
         self.font = Font(uiFont)
     }
     
@@ -25,12 +25,11 @@ struct TranslatedDisplay: View {
                 VStack {
                     HStack(alignment: .bottom, spacing: 0.0) {
                         Text(translatedString)
+                            .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                         Spacer(minLength: 0.0)
                     }
                 }
-                .font(font)
                 .frame(width: geometry.size.width)      // Make the scroll view full-width
-//                .frame(minHeight: geometry.size.height) // Set the content’s min height to the parent
             }
             .scrollBounceBehavior(.basedOnSize)
         }

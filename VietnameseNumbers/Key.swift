@@ -22,13 +22,19 @@ struct Key: View {
          _ viewModel: ViewModel) {
         self.screen = screen
         self.symbol = symbol
+        var keyHeight = screen.keySize.height
+        if !viewModel.secondLanguageAllowed {
+            keyHeight *= 1.5
+        }
         if symbol == "0" {
             self.keySize = CGSize(
                 width: 2.0 * screen.keySize.width + screen.keySpacing,
-                height: screen.keySize.height)
+                height: keyHeight)
             xOffset = self.keySize.width * -0.5 + screen.keySize.width * 0.5
         } else {
-            self.keySize = screen.keySize
+            self.keySize = CGSize(
+                width: screen.keySize.width,
+                height: keyHeight)
             xOffset = 0.0
         }
         self.backgroundColor = viewModel.backgroundColor[symbol] ?? .green
