@@ -68,6 +68,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     let translateGerman = TranslateGerman()
     let translateVietnamese = TranslateVietnamese()
     let translateSpanish = TranslateSpanish()
+    let translateCatalan = TranslateCatalan()
     var translators: [BasicTranslator] // set in init()
     var previouslySelectedLanguages = StringPreference()
     
@@ -275,7 +276,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         brain = Brain(precision: _precision.wrappedValue)
         precisionDescription = _precision.wrappedValue.useWords
         
-        translators = [translateEnglish, translateGerman, translateVietnamese, translateSpanish]
+        translators = [translateEnglish, translateGerman, translateVietnamese, translateSpanish, translateCatalan]
         firstTranslator = translateEnglish
         secondTranslator = translateEnglish
 

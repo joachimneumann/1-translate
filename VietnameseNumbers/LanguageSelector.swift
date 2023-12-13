@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SelectALanguage: View {
+struct SelectLanguage: View {
     @ObservedObject var viewModel: ViewModel
     let translator: BasicTranslator
     var body: some View {

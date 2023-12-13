@@ -81,10 +81,10 @@ struct TranslateNumbers: View {
                             .sheet(isPresented: $showLanguageSelection) {
                                 VStack {
                                     LanguageSelector(viewModel: viewModel)
-                                        .presentationDetents(
-                                            [.height(CGFloat(80 + 50 * viewModel.translators.count))]
-                                        )
-                                        .frame(maxHeight: .infinity)
+//                                        .presentationDetents(
+//                                            [.height(CGFloat(80 + 90 * viewModel.translators.count))]
+//                                        )
+                                        .frame(height: 100)
                                         .background(screen.backgroundColor)
                                 }
                             }
