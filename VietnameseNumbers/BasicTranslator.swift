@@ -12,6 +12,7 @@ enum Languages: String {
     case german = "Deutsch"
     case vietnamese = "Tiếng Việt"
     case spanish = "Español"
+    case catalan = "Català"
 }
 
 protocol TranslatorProtocol {

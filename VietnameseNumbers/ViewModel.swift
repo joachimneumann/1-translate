@@ -171,7 +171,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
 
 
     @AppStorage(AppStorageKeys.settingsGermanCaptalisation)
-    var settingsGermanCaptalisation: Bool = false {
+    var settingsGermanCaptalisation: Bool = true {
         didSet {
             translateGerman.capitalisation = settingsGermanCaptalisation
             if let translatedExample = translateGerman.translate(88) {

@@ -93,21 +93,17 @@ class TranslateSpanish: GeneralTranslator {
             temp = (temp - X0) / 10
             let X00 = temp % 10
             var ret = ""
-            if X00 == 1 {
+            switch X00 {
+            case 1:
                 ret = "ciento"
-            } else {
-                switch X00 {
-                case 1:
-                    ret = "ciento"
-                case 5:
-                    ret = "quinientos"
-                case 7:
-                    ret = "setecientos"
-                case 9:
-                    ret = "novecientos"
-                default:
-                    ret = spanish_0_20(X00)! + "cientos"
-                }
+            case 5:
+                ret = "quinientos"
+            case 7:
+                ret = "setecientos"
+            case 9:
+                ret = "novecientos"
+            default:
+                ret = spanish_0_20(X00)! + "cientos"
             }
             let leftover = 10 * X0 + X
             if leftover > 0 {
