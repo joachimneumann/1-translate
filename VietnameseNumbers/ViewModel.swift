@@ -53,8 +53,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @Published var textColor: [String: Color] = [:]
     @Published var currentDisplay: Display {
         didSet {
-            firstTranslatedNumber = firstTranslator.translate(currentDisplay.allInOneLine) ??  "?"
-            secondTranslatedNumber = secondTranslator.translate(currentDisplay.allInOneLine) ??  "?"
+            updateTranslation()
         }
     }
     @Published var settingsEnglishExample: String = ""
@@ -69,6 +68,10 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     var translators: [BasicTranslator] // set in init()
     var previouslySelectedLanguages = StringPreference()
     
+    func updateTranslation() {
+        firstTranslatedNumber = firstTranslator.translate(currentDisplay.allInOneLine) ??  "?"
+        secondTranslatedNumber = secondTranslator.translate(currentDisplay.allInOneLine) ??  "?"
+    }
     /// I initialize the decimalSeparator with the locale preference, but
     /// I ignore the value of Locale.current.groupSeparator
     @AppStorage(AppStorageKeys.forceScientific, store: .standard)
@@ -118,6 +121,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             for translator in translators {
                 if translator.language == firstLanguage {
                     firstTranslator = translator
+                    updateTranslation()
                     previouslySelectedLanguages.add(new: translator.language)
                     /// is the second language the same?
                     if secondLanguageAllowed && (secondLanguage == translator.language) {
@@ -135,6 +139,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             for translator in translators {
                 if translator.language == secondLanguage {
                     secondTranslator = translator
+                    updateTranslation()
                     previouslySelectedLanguages.add(new: translator.language)
                     /// is the first language the same?
                     if firstLanguage == translator.language {

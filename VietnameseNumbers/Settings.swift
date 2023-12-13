@@ -26,30 +26,6 @@ struct Settings: View {
                 VStack(alignment: .leading, spacing: 0.0) {
                     Grid(alignment: .leading, horizontalSpacing: 20.0, verticalSpacing: 10.0) {
                         GridRow {
-                            Text("Languages:")
-                            NavigationLink {
-                                CountryDetailScreen(viewModel: viewModel)
-                            } label: {
-                                HStack {
-                                    Spacer(minLength: 0.0)
-                                    Image(viewModel.firstTranslator.imageName)
-                                        .resizable()
-                                        .scaledToFit()
-                                        .padding(.trailing, 15)
-                                    if viewModel.secondLanguageAllowed {
-                                        Image(viewModel.secondTranslator.imageName)
-                                            .resizable()
-                                            .scaledToFit()
-                                    }
-                                    Image(systemName: "chevron.right").bold()
-                                        .padding(.leading, 15)
-                                }
-                                .padding(.trailing, 20)
-                            }
-                        }
-                        .frame(height: 30.0)
-                        .padding(.bottom, 40)
-                        GridRow {
                             Text("\(example)")
                                 .foregroundColor(.white)
                                 .padding(.leading, 0)

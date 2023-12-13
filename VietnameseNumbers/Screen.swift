@@ -56,7 +56,7 @@ struct Screen: Equatable, DisplayLengthLimiter {
     init(_ screenSize: CGSize) {
         //print("Screen INIT", screenSize)
         
-        backgroundColor = Color(red: 0.2, green: 0.2, blue: 0.2)
+        backgroundColor = .black // Color(red: 0.2, green: 0.2, blue: 0.2)
         defaultTextColor = .white
         isPad = UIDevice.current.userInterfaceIdiom == .pad
         let isPortrait = screenSize.height > screenSize.width

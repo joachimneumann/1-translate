@@ -30,14 +30,16 @@ struct TranslateNumbers: View {
                                 .resizable()
                                 .scaledToFit()
                         }
+                        .padding(1)
+                        .border(.white)
                         .sheet(isPresented: $showLanguageSelection) {
                             VStack {
                                 CountryDetailScreen(viewModel: viewModel)
                                     .presentationDetents(
-                                        [.medium, .large],
-                                        selection: $settingsDetent
+                                        [.height(CGFloat(80 + 50 * viewModel.translators.count))]
                                     )
                                     .frame(maxHeight: .infinity)
+                                    .background(screen.backgroundColor)
                             }
                         }
                         Spacer()
@@ -74,14 +76,16 @@ struct TranslateNumbers: View {
                                     .resizable()
                                     .scaledToFit()
                             }
+                            .padding(1)
+                            .border(.white)
                             .sheet(isPresented: $showLanguageSelection) {
                                 VStack {
                                     CountryDetailScreen(viewModel: viewModel)
                                         .presentationDetents(
-                                            [.medium, .large],
-                                            selection: $settingsDetent
+                                            [.height(CGFloat(80 + 50 * viewModel.translators.count))]
                                         )
                                         .frame(maxHeight: .infinity)
+                                        .background(screen.backgroundColor)
                                 }
                             }
                             Spacer()

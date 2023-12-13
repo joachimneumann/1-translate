@@ -16,26 +16,28 @@ struct languageSelector: View {
         HStack {
             Button(action: {
                 viewModel.firstLanguage = translator.language
-                viewModel.currentDisplay = viewModel.currentDisplay
             }) {
                 Image(translator.imageName)
                     .resizable()
                     .scaledToFit()
+                    .padding(1)
+                    .border(viewModel.firstLanguage == translator.language ? .white : .black)
                     .frame(height: 25)
                     .padding(.trailing, 10)
-                    .opacity(_1_selected ? 1.0 : 0.3)
+                    .opacity(_1_selected ? 1.0 : 0.5)
             }
             if viewModel.secondLanguageAllowed {
                 Button(action: {
                     viewModel.secondLanguage = translator.language
-                    viewModel.currentDisplay = viewModel.currentDisplay
                 }) {
                     Image(translator.imageName)
                         .resizable()
                         .scaledToFit()
+                        .padding(1)
+                        .border(viewModel.secondLanguage == translator.language ? .white : .black)
                         .frame(height: 25)
+                        .opacity(_2_selected ? 1.0 : 0.5)
                         .padding(.trailing, 10)
-                        .opacity(_2_selected ? 1.0 : 0.3)
                 }
             }
             Text(translator.language)
@@ -59,7 +61,7 @@ struct CountryDetailScreen: View {
                                                offColor: Color(white: 0.25),
                                                thumbColor: .white))
                         .padding(.trailing, 15)
-                    Text("Add second Language")
+                    Text("Second Language")
                         .foregroundColor(Color.white)
                     Spacer()
                 }
@@ -88,7 +90,6 @@ struct CountryDetailScreen: View {
 //                }
             }
             .padding(20)
-            .background(Color(red: 0.3, green: 0.3, blue: 0.3))
 //            .padding(.horizontal, 20)
 //            .padding(.top, 20)
 //            .frame(maxWidth: .infinity)
