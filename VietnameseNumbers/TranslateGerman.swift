@@ -131,23 +131,19 @@ class TranslateGerman: GeneralTranslator {
             return ret
         }
         
-        if i <= 999_999_999_999 {
-            let XXX_000_000_000 = (i - i % 1_000_000_000) / 1_000_000_000
-            let XXX_000_000 = i - 1_000_000_000 * XXX_000_000_000
-            var ret = ""
-            if XXX_000_000_000 == 1 {
-                ret += "eine Milliarde"
-            } else {
-                ret += translatePositiveInteger(XXX_000_000_000)!
-                ret += " " + "Milliarden"
-            }
-            if XXX_000_000 > 0 {
-                ret += " " + translatePositiveInteger(XXX_000_000)!
-            }
-            return ret
+        let XXX_000_000_000 = (i - i % 1_000_000_000) / 1_000_000_000
+        let XXX_000_000 = i - 1_000_000_000 * XXX_000_000_000
+        var ret = ""
+        if XXX_000_000_000 == 1 {
+            ret += "eine Milliarde"
+        } else {
+            ret += translatePositiveInteger(XXX_000_000_000)!
+            ret += " " + "Milliarden"
         }
-        
-        return nil
+        if XXX_000_000 > 0 {
+            ret += " " + translatePositiveInteger(XXX_000_000)!
+        }
+        return ret
     }
     
 }

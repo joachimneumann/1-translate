@@ -13,7 +13,7 @@
 		AA0523422B25447F00DDAAD4 /* ThousandBasedTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0523402B25447F00DDAAD4 /* ThousandBasedTranslator.swift */; };
 		AA0523442B255AF900DDAAD4 /* TranslateSpanish.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0523432B255AF900DDAAD4 /* TranslateSpanish.swift */; };
 		AA0523452B255AF900DDAAD4 /* TranslateSpanish.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0523432B255AF900DDAAD4 /* TranslateSpanish.swift */; };
-		AA0523472B27024800DDAAD4 /* CountryDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0523462B27024800DDAAD4 /* CountryDetailScreen.swift */; };
+		AA0523472B27024800DDAAD4 /* LanguageSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0523462B27024800DDAAD4 /* LanguageSelector.swift */; };
 		AA08C7C6272EDA4A001B8575 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA08C7C5272EDA4A001B8575 /* Assets.xcassets */; };
 		AA08C7C9272EDA4A001B8575 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA08C7C8272EDA4A001B8575 /* Preview Assets.xcassets */; };
 		AA29F58A293CD608001ADF5A /* PortraitDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29F589293CD608001ADF5A /* PortraitDisplay.swift */; };
@@ -77,7 +77,7 @@
 		AA01B9D32957E44300617AFB /* Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Display.swift; sourceTree = "<group>"; };
 		AA0523402B25447F00DDAAD4 /* ThousandBasedTranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThousandBasedTranslator.swift; sourceTree = "<group>"; };
 		AA0523432B255AF900DDAAD4 /* TranslateSpanish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateSpanish.swift; sourceTree = "<group>"; };
-		AA0523462B27024800DDAAD4 /* CountryDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryDetailScreen.swift; sourceTree = "<group>"; };
+		AA0523462B27024800DDAAD4 /* LanguageSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSelector.swift; sourceTree = "<group>"; };
 		AA08C7BE272EDA48001B8575 /* TranslateNumbers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TranslateNumbers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA08C7C5272EDA4A001B8575 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA08C7C8272EDA4A001B8575 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -187,7 +187,7 @@
 				AAAE6D662B22B5CF00079392 /* TranslateVietnamese.swift */,
 				AAAE6D692B22B77B00079392 /* TranslateGerman.swift */,
 				AA0523432B255AF900DDAAD4 /* TranslateSpanish.swift */,
-				AA0523462B27024800DDAAD4 /* CountryDetailScreen.swift */,
+				AA0523462B27024800DDAAD4 /* LanguageSelector.swift */,
 				AAE426F629597AE3005FE365 /* Screen.swift */,
 				AA01B9D32957E44300617AFB /* Display.swift */,
 				AA8A91132B1D7FD000CE7185 /* TranslatedDisplay.swift */,
@@ -380,7 +380,7 @@
 				AAFC9C722B247CDF00F866D8 /* BasicTranslator.swift in Sources */,
 				AAB10B9C292A2222004707E9 /* NonScientificKeyboard.swift in Sources */,
 				AAAE6D6A2B22B77B00079392 /* TranslateGerman.swift in Sources */,
-				AA0523472B27024800DDAAD4 /* CountryDetailScreen.swift in Sources */,
+				AA0523472B27024800DDAAD4 /* LanguageSelector.swift in Sources */,
 				AA92B4C329250827005E43F0 /* ColoredStepper.swift in Sources */,
 				AA0523412B25447F00DDAAD4 /* ThousandBasedTranslator.swift in Sources */,
 				AA8A91122B1D7B7100CE7185 /* TranslateNumbers.swift in Sources */,
@@ -563,7 +563,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = TranslateNumbers.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"VietnameseNumbers/Preview Content\"";
 				DEVELOPMENT_TEAM = 8A4DL788W9;
 				ENABLE_PREVIEWS = YES;
@@ -604,7 +604,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = TranslateNumbers.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"VietnameseNumbers/Preview Content\"";
 				DEVELOPMENT_TEAM = 8A4DL788W9;
 				ENABLE_PREVIEWS = YES;

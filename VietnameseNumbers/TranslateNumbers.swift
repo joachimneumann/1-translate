@@ -34,7 +34,7 @@ struct TranslateNumbers: View {
                         .border(.white)
                         .sheet(isPresented: $showLanguageSelection) {
                             VStack {
-                                CountryDetailScreen(viewModel: viewModel)
+                                LanguageSelector(viewModel: viewModel)
                                     .presentationDetents(
                                         [.height(CGFloat(80 + 50 * viewModel.translators.count))]
                                     )
@@ -80,7 +80,7 @@ struct TranslateNumbers: View {
                             .border(.white)
                             .sheet(isPresented: $showLanguageSelection) {
                                 VStack {
-                                    CountryDetailScreen(viewModel: viewModel)
+                                    LanguageSelector(viewModel: viewModel)
                                         .presentationDetents(
                                             [.height(CGFloat(80 + 50 * viewModel.translators.count))]
                                         )

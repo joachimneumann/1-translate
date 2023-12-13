@@ -152,17 +152,13 @@ class TranslateVietnamese: GeneralTranslator {
             return ret
         }
         
-        if intValue <= 999_999_999_999 {
-            let XXX_XXX_XXX = intValue % 1_000_000_000
-            let XXX_000_000_000 = (intValue - XXX_XXX_XXX) / 1_000_000_000
-            var ret = toString_(XXX_000_000_000, fromLargerNumber: false)! + " " + billion
-            if XXX_XXX_XXX > 0 {
-                ret += " " + toString_(XXX_XXX_XXX, fromLargerNumber: true)!
-            }
-            return ret
+        let XXX_XXX_XXX = intValue % 1_000_000_000
+        let XXX_000_000_000 = (intValue - XXX_XXX_XXX) / 1_000_000_000
+        var ret = toString_(XXX_000_000_000, fromLargerNumber: false)! + " " + billion
+        if XXX_XXX_XXX > 0 {
+            ret += " " + toString_(XXX_XXX_XXX, fromLargerNumber: true)!
         }
-        
-        return nil
+        return ret
     }
 
     override func translatePositiveInteger(_ i: Int) -> String? {

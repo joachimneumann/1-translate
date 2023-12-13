@@ -16,7 +16,6 @@ struct Settings: View {
     let font: Font
     
     var body: some View {
-        let example =  "1\(viewModel.groupSeparator.string)000\(viewModel.groupSeparator.string)000\(viewModel.decimalSeparator.string)05"
         VStack {
             BackButton(
                 screen: screen,
@@ -25,155 +24,19 @@ struct Settings: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 0.0) {
                     Grid(alignment: .leading, horizontalSpacing: 10.0, verticalSpacing: 10.0) {
-                        GridRow {
-                            Text("\(example)")
-                                .padding(.leading, 0)
-                                .gridCellColumns(2)
-                        }
-                        GridRow {
-                            Text("Decimal")
-                            Picker("", selection: $viewModel.decimalSeparator) {
-                                ForEach(DecimalSeparator.allCases, id: \.self) { value in
-                                    Text("\(value.rawValue)")
-                                        .tag(value)
-                                }
-                            }
-                            .padding(2)
-                            .frame(width: 220)
-                            .background(Color(UIColor.darkGray))
-                            .borderRadius(Color.black, width: 5, cornerRadius: 10, corners: [.topLeft, .bottomLeft, .topRight, .bottomRight])
-                            .onChange(of: viewModel.decimalSeparator) { _ in
-                                if viewModel.decimalSeparator == .comma {
-                                    if viewModel.groupSeparator == .comma {
-                                        viewModel.groupSeparator = .dot
-                                    }
-                                } else if viewModel.decimalSeparator == .dot {
-                                    if viewModel.groupSeparator == .dot {
-                                        viewModel.groupSeparator = .comma
-                                    }
-                                }
-                            }
-                            .pickerStyle(.segmented)
-                        }
-                        GridRow {
-                            Text("Grouping")
-                            Picker("", selection: $viewModel.groupSeparator) {
-                                ForEach(GroupSeparator.allCases, id: \.self) { value in
-                                    Text("\(value.rawValue)")
-                                        .tag(value)
-                                }
-                            }
-                            .padding(2)
-                            .background(Color(UIColor.darkGray))
-                            .borderRadius(Color.black, width: 5, cornerRadius: 10, corners: [.topLeft, .bottomLeft, .topRight, .bottomRight])
-                            .onChange(of: viewModel.groupSeparator) { _ in
-                                if viewModel.groupSeparator == .comma {
-                                    if viewModel.decimalSeparator == .comma {
-                                        viewModel.decimalSeparator = .dot
-                                    }
-                                } else if viewModel.groupSeparator == .dot { /// dot
-                                    if viewModel.decimalSeparator == .dot { /// also dot
-                                        viewModel.decimalSeparator = .comma
-                                    }
-                                }
-                            }
-                            .frame(width: 220)
-                            .pickerStyle(.segmented)
-                        }
-                        .padding(.bottom, 40.0)
                         
-                        GridRow {
-                            HStack {
-                                Image(viewModel.translateVietnamese.imageName)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .padding(1)
-                                    .border(.white)
-                                    .frame(height: 25)
-                                    .padding(.trailing, 10)
-                                Text(viewModel.translateVietnamese.language)
-                                    .frame(height: 25)
-                                Spacer()
-                            }
-                            .gridCellColumns(2)
-                        }
-                        GridRow {
-                            Text(viewModel.settingsVietnameseExample)
-                                .padding(.leading, 0)
-                                .gridCellColumns(2)
-                                .gridCellUnsizedAxes(.horizontal)
-                        }
-                        GridRow {
-                            Text("1000")
-                            Picker("", selection: $viewModel.settingsVietnameseThousand) {
-                                ForEach(VietnameseThousand.allCases, id: \.self) { value in
-                                    Text("\(value.rawValue)")
-                                        .tag(value)
-                                }
-                            }
-                            .frame(width: 220)
-                            .padding(2)
-                            .background(Color(UIColor.darkGray))
-                            .borderRadius(Color.black, width: 5, cornerRadius: 10, corners: [.topLeft, .bottomLeft, .topRight, .bottomRight])
-                            .pickerStyle(.segmented)
-                        }
-                        GridRow {
-                            Text("linh hoặc lẻ")
-                            Picker("", selection: $viewModel.settingsVietnameseSecondLast) {
-                                ForEach(VietnameseSecondLast.allCases, id: \.self) { value in
-                                    Text("\(value.rawValue)")
-                                        .tag(value)
-                                }
-                            }
-                            .frame(width: 220)
-                            .padding(2)
-                            .background(Color(UIColor.darkGray))
-                            .borderRadius(Color.black, width: 5, cornerRadius: 10, corners: [.topLeft, .bottomLeft, .topRight, .bottomRight])
-                            .pickerStyle(.segmented)
-                        }
-                        GridRow {
-                            Text("Compact")
-                            Toggle("", isOn: $viewModel.settingsVietnameseCompact)
-                                .frame(width: 40)
-                                .toggleStyle(
-                                    ColoredToggleStyle(onColor: Color(white: 0.6),
-                                                       offColor: Color(white: 0.25),
-                                                       thumbColor: .white))
-                                .padding(.leading, 3)
-                        }
-                        .padding(.bottom, 40)
+                        DigitsSettings
                         
+                        Divider()
+                            .padding(.vertical, 20)
                         
-                        GridRow {
-                            HStack {
-                                Image(viewModel.translateEnglish.imageName)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .padding(1)
-                                    .border(.white)
-                                    .frame(height: 25)
-                                    .padding(.trailing, 10)
-                                Text(viewModel.translateEnglish.language)
-                                    .frame(height: 25)
-                                Spacer()
-                            }
-                            .gridCellColumns(2)
-                        }
-                        GridRow {
-                            Text(viewModel.settingsEnglishExample)
-                                .padding(.leading, 0)
-                                .gridCellColumns(2)
-                        }
-                        GridRow {
-                            Text("use 'and'")
-                            Toggle("", isOn: $viewModel.settingsEnglishUseAndAfterHundred)
-                                .frame(width: 40)
-                                .toggleStyle(
-                                    ColoredToggleStyle(onColor: Color(white: 0.6),
-                                                       offColor: Color(white: 0.25),
-                                                       thumbColor: .white))
-                                .padding(.leading, 3)
-                        }
+                        VietnameseSettings
+                        
+                        Divider()
+                            .padding(.vertical, 20)
+                        
+                        EnglishSettings
+
                         
                         hobbyProject
                     }
@@ -211,16 +74,177 @@ struct Settings: View {
         }
     }
     
+    var DigitsSettings: some View {
+        let example =  "1\(viewModel.groupSeparator.string)000\(viewModel.groupSeparator.string)000\(viewModel.decimalSeparator.string)05"
+        return Group {
+            GridRow {
+                Text("\(example)")
+                    .bold()
+                    .padding(.leading, 0)
+                    .gridCellColumns(2)
+            }
+            GridRow {
+                Text("Decimal")
+                Picker("", selection: $viewModel.decimalSeparator) {
+                    ForEach(DecimalSeparator.allCases, id: \.self) { value in
+                        Text("\(value.rawValue)")
+                            .tag(value)
+                    }
+                }
+                .padding(2)
+                .frame(width: 220)
+                .background(Color(UIColor.darkGray))
+                .borderRadius(Color.black, width: 5, cornerRadius: 10, corners: [.topLeft, .bottomLeft, .topRight, .bottomRight])
+                .onChange(of: viewModel.decimalSeparator) { _ in
+                    if viewModel.decimalSeparator == .comma {
+                        if viewModel.groupSeparator == .comma {
+                            viewModel.groupSeparator = .dot
+                        }
+                    } else if viewModel.decimalSeparator == .dot {
+                        if viewModel.groupSeparator == .dot {
+                            viewModel.groupSeparator = .comma
+                        }
+                    }
+                }
+                .pickerStyle(.segmented)
+            }
+            GridRow {
+                Text("Grouping")
+                Picker("", selection: $viewModel.groupSeparator) {
+                    ForEach(GroupSeparator.allCases, id: \.self) { value in
+                        Text("\(value.rawValue)")
+                            .tag(value)
+                    }
+                }
+                .padding(2)
+                .background(Color(UIColor.darkGray))
+                .borderRadius(Color.black, width: 5, cornerRadius: 10, corners: [.topLeft, .bottomLeft, .topRight, .bottomRight])
+                .onChange(of: viewModel.groupSeparator) { _ in
+                    if viewModel.groupSeparator == .comma {
+                        if viewModel.decimalSeparator == .comma {
+                            viewModel.decimalSeparator = .dot
+                        }
+                    } else if viewModel.groupSeparator == .dot { /// dot
+                        if viewModel.decimalSeparator == .dot { /// also dot
+                            viewModel.decimalSeparator = .comma
+                        }
+                    }
+                }
+                .frame(width: 220)
+                .pickerStyle(.segmented)
+            }
+        }
+    }
+    
+    var EnglishSettings: some View {
+        return Group {
+            GridRow {
+                HStack {
+                    Image(viewModel.translateEnglish.imageName)
+                        .resizable()
+                        .scaledToFit()
+                        .padding(1)
+                        .border(.white)
+                        .frame(height: 25)
+                        .padding(.trailing, 10)
+                    Text(viewModel.translateEnglish.language)
+                        .bold()
+                        .frame(height: 25)
+                    Spacer()
+                }
+                .gridCellColumns(2)
+            }
+            GridRow {
+                Text(viewModel.settingsEnglishExample)
+                    .padding(.leading, 0)
+                    .gridCellColumns(2)
+            }
+            GridRow {
+                Text("use 'and'")
+                Toggle("", isOn: $viewModel.settingsEnglishUseAndAfterHundred)
+                    .frame(width: 40)
+                    .toggleStyle(
+                        ColoredToggleStyle(onColor: Color(white: 0.6),
+                                           offColor: Color(white: 0.25),
+                                           thumbColor: .white))
+                    .padding(.leading, 3)
+            }
+        }
+    }
+    
+    
+    var VietnameseSettings: some View {
+        return Group {
+            GridRow {
+                HStack {
+                    Image(viewModel.translateVietnamese.imageName)
+                        .resizable()
+                        .scaledToFit()
+                        .padding(1)
+                        .border(.white)
+                        .frame(height: 25)
+                        .padding(.trailing, 10)
+                    Text(viewModel.translateVietnamese.language)
+                        .bold()
+                        .frame(height: 25)
+                    Spacer()
+                }
+                .gridCellColumns(2)
+            }
+            GridRow {
+                Text(viewModel.settingsVietnameseExample)
+                    .padding(.leading, 0)
+                    .gridCellColumns(2)
+                    .gridCellUnsizedAxes(.horizontal)
+            }
+            GridRow {
+                Text("1000")
+                Picker("", selection: $viewModel.settingsVietnameseThousand) {
+                    ForEach(VietnameseThousand.allCases, id: \.self) { value in
+                        Text("\(value.rawValue)")
+                            .tag(value)
+                    }
+                }
+                .frame(width: 220)
+                .padding(2)
+                .background(Color(UIColor.darkGray))
+                .borderRadius(Color.black, width: 5, cornerRadius: 10, corners: [.topLeft, .bottomLeft, .topRight, .bottomRight])
+                .pickerStyle(.segmented)
+            }
+            GridRow {
+                Text("linh hoặc lẻ")
+                Picker("", selection: $viewModel.settingsVietnameseSecondLast) {
+                    ForEach(VietnameseSecondLast.allCases, id: \.self) { value in
+                        Text("\(value.rawValue)")
+                            .tag(value)
+                    }
+                }
+                .frame(width: 220)
+                .padding(2)
+                .background(Color(UIColor.darkGray))
+                .borderRadius(Color.black, width: 5, cornerRadius: 10, corners: [.topLeft, .bottomLeft, .topRight, .bottomRight])
+                .pickerStyle(.segmented)
+            }
+            GridRow {
+                Text("gọn")
+                Toggle("", isOn: $viewModel.settingsVietnameseCompact)
+                    .frame(width: 40)
+                    .toggleStyle(
+                        ColoredToggleStyle(onColor: Color(white: 0.6),
+                                           offColor: Color(white: 0.25),
+                                           thumbColor: .white))
+                    .padding(.leading, 3)
+            }
+        }
+    }
     
     var hobbyProject: some View {
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
         
         return HStack {
-            Text("\nVersion: \(appVersion ?? "unknown") (build \(buildNumber ?? "unknown"))")
-                .foregroundColor(Color.gray) +
-            Text("\nThis is a hobby project by Joachim Neumann. Although I have done some testing, errors may occur.")
-        }.accentColor(.white)
+            Text("\nVersion: \(appVersion ?? "unknown") (build \(buildNumber ?? "unknown"))\n\nThis is a hobby project by Joachim Neumann. Although I have done some testing, errors may occur.")
+        }
     }
     
 }

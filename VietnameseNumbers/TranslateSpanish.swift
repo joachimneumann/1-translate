@@ -148,22 +148,19 @@ class TranslateSpanish: GeneralTranslator {
             return ret
         }
 
-        if i <= 999_999_999_999 {
-            // Above a million, the number is seperated
-            let XXX_000_000_000 = (i - i % 1_000_000_000) / 1_000_000_000
-            let XXX_000_000 = i - 1_000_000_000 * XXX_000_000_000
-            var ret = ""
-            if XXX_000_000_000 == 1 {
-                ret += "un billion"
-            } else {
-                ret += translate(XXX_000_000_000)! + " billion"
-            }
-            if XXX_000_000 > 0 {
-                ret += " " + translatePositiveInteger(XXX_000_000)!
-            }
-            return ret
+        // Above a million, the number is seperated
+        let XXX_000_000_000 = (i - i % 1_000_000_000) / 1_000_000_000
+        let XXX_000_000 = i - 1_000_000_000 * XXX_000_000_000
+        var ret = ""
+        if XXX_000_000_000 == 1 {
+            ret += "un billion"
+        } else {
+            ret += translate(XXX_000_000_000)! + " billion"
         }
-        return nil
+        if XXX_000_000 > 0 {
+            ret += " " + translatePositiveInteger(XXX_000_000)!
+        }
+        return ret
     }
         
 }

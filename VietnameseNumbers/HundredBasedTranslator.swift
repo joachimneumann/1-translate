@@ -93,15 +93,12 @@ class HundredBasedTranslator: BasicTranslator, HundredBasedTranslatorProtocol {
             return ret
         }
         
-        if i <= 999_999_999_999 {
-            let XXX_000_000_000 = (i - i % 1_000_000_000) / 1_000_000_000
-            let XXX_000_000 = i - 1_000_000_000 * XXX_000_000_000
-            var ret = translatePositiveInteger(XXX_000_000_000)! + " " + billion
-            if XXX_000_000 > 0 {
-                ret += " " + translatePositiveInteger(XXX_000_000)!
-            }
-            return ret
+        let XXX_000_000_000 = (i - i % 1_000_000_000) / 1_000_000_000
+        let XXX_000_000 = i - 1_000_000_000 * XXX_000_000_000
+        var ret = translatePositiveInteger(XXX_000_000_000)! + " " + billion
+        if XXX_000_000 > 0 {
+            ret += " " + translatePositiveInteger(XXX_000_000)!
         }
-        return nil
+        return ret
     }
 }

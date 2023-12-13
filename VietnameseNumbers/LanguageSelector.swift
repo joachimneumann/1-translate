@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct languageSelector: View {
+struct SelectALanguage: View {
     @ObservedObject var viewModel: ViewModel
     let translator: BasicTranslator
     var body: some View {
@@ -60,7 +60,7 @@ struct languageSelector: View {
         .padding(.bottom, 15)
     }
 }
-struct CountryDetailScreen: View {
+struct LanguageSelector: View {
     @ObservedObject var viewModel: ViewModel
     var body: some View {
             VStack(alignment: .leading, spacing: 0.0) {
@@ -78,16 +78,16 @@ struct CountryDetailScreen: View {
                 }
                 .padding(.top, 20)
                 .padding(.bottom, 20)
-                languageSelector(viewModel: viewModel, translator: viewModel.translateEnglish)
-                languageSelector(viewModel: viewModel, translator: viewModel.translateGerman)
-                languageSelector(viewModel: viewModel, translator: viewModel.translateVietnamese)
-                languageSelector(viewModel: viewModel, translator: viewModel.translateSpanish)
+                SelectALanguage(viewModel: viewModel, translator: viewModel.translateEnglish)
+                SelectALanguage(viewModel: viewModel, translator: viewModel.translateGerman)
+                SelectALanguage(viewModel: viewModel, translator: viewModel.translateVietnamese)
+                SelectALanguage(viewModel: viewModel, translator: viewModel.translateSpanish)
             }
             .padding(20)
         }
 }
 
 #Preview {
-    CountryDetailScreen(viewModel: ViewModel())
+    LanguageSelector(viewModel: ViewModel())
         .background(Color.black)
 }
