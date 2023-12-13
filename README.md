@@ -4,7 +4,7 @@ License
 The app is open source.
 
 Warranty
-No warrently is provided. The translation has been tested for [these cases](https://github.com/joachimneumann/VietnameseNumbers/blob/main/VietnameseNumbersTests/VietnameseNumbersTests.swift).
+No warrently is provided. The calculator and the translations could be wrong.
 
 
 Privacy policy
