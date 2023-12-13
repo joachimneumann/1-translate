@@ -21,7 +21,7 @@ class TranslateCatalan: GeneralTranslator {
     private func catalan_0_20(_ intValue: Int) -> String? {
         switch intValue {
         case 0:     return "zero"
-        case 1:     return "un"
+        case 1:     return "u"
         case 2:     return "dos"
         case 3:     return "tres"
         case 4:     return "quatre"

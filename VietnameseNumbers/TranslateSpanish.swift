@@ -51,7 +51,7 @@ class TranslateSpanish: GeneralTranslator {
         case 2:     return "veinte"
         case 3:     return "treinta"
         case 4:     return "cuarenta"
-        case 5:     return "cinquenta"
+        case 5:     return "cincuenta"
         case 6:     return "sesenta"
         case 7:     return "setenta"
         case 8:     return "ochenta"
@@ -134,9 +134,9 @@ class TranslateSpanish: GeneralTranslator {
             let XXX_000 = i - 1_000_000 * XXX_000_000
             var ret = ""
             if XXX_000_000 == 1 {
-                ret += "un million"
+                ret += "un millón"
             } else {
-                ret += translate(XXX_000_000)! + " million"
+                ret += translate(XXX_000_000)! + " millones"
             }
             if XXX_000 > 0 {
                 ret += " " + translatePositiveInteger(XXX_000)!
