@@ -19,23 +19,22 @@ struct PortraitDisplay: View {
         self.backgroundColor = backgroundColor
         
         /// calculate possibly expanded font
-//        var availableDisplayWidth = screen.displayWidth
-//        if display.right != nil {
-//            availableDisplayWidth -= screen.ePadding
-//        }
-//        let text = display.left + (display.right ?? "")
-//        let n = CGFloat(text.count)
-//        let lengthOfNulls = n * screen.digitWidth
-//        var factor: CGFloat = 1.0
-//        let expandLimit = screen.displayWidth - screen.digitWidth * 0.9
-//        if lengthOfNulls < expandLimit {
-//            /// scale up
-//            factor = expandLimit / lengthOfNulls
-//            if factor > 2.0 { factor = 2.0 }
-//            if factor < 1.0 { factor = 1.0 }
-//            factor = 1.0
-//        }
-        let uiFont = Screen.appleFont(ofSize: screen.uiFontSize)
+        var availableDisplayWidth = screen.displayWidth
+        if display.right != nil {
+            availableDisplayWidth -= screen.ePadding
+        }
+        let text = display.left + (display.right ?? "")
+        let n = CGFloat(text.count)
+        let lengthOfNulls = n * screen.digitWidth
+        var factor: CGFloat = 1.0
+        let expandLimit = screen.displayWidth - screen.digitWidth * 0.9
+        if lengthOfNulls < expandLimit {
+            /// scale up
+            factor = expandLimit / lengthOfNulls
+            if factor > 2.0 { factor = 2.0 }
+            if factor < 1.0 { factor = 1.0 }
+        }
+        let uiFont = Screen.appleFont(ofSize: screen.uiFontSize * factor)
         font = Font(uiFont)
     }
     
