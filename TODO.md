@@ -1,5 +1,5 @@
-- Only one language: larger font in translation and higher keyboard
 - German settings: Geschützte Trennung, Grossschreibung
+- very large numbers
 - Settings in local language
 - Add Catalan
 - Check Spanish and Catalan
