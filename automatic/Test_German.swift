@@ -1,14 +1,14 @@
 //
-//  Test_Automatic_German.swift
+//  Test_German.swift
 //
 //  Created by automatic.py
 //
 
 import XCTest
 
-final class TranslationsTestsAutomaticGerman: XCTestCase {
+final class TestGerman: XCTestCase {
 
-    func test_automatic_german() {
+    func test_german() {
         let german = TranslateGerman()
         german.useSoftHyphen = false
         german.capitalisation = false

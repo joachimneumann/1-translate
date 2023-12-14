@@ -37,10 +37,11 @@
 		AA8A911E2B1D815C00CE7185 /* TranslationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8A911D2B1D815C00CE7185 /* TranslationsTests.swift */; };
 		AA8A91322B1D865B00CE7185 /* KeyColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABEFC122972A8780023A3C9 /* KeyColor.swift */; };
 		AA8A91352B1D870B00CE7185 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA370C2C293352960041AE4E /* Extensions.swift */; };
+		AA8B614E2B2AFC9A00D2152A /* Test_Spanish.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8B614D2B2AFC9A00D2152A /* Test_Spanish.swift */; };
 		AA92B4C329250827005E43F0 /* ColoredStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA92B4C229250827005E43F0 /* ColoredStepper.swift */; };
 		AA95612D2B2A1C1900648915 /* TranslateCatalan.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA95612C2B2A1C1900648915 /* TranslateCatalan.swift */; };
 		AA95612E2B2A1C1900648915 /* TranslateCatalan.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA95612C2B2A1C1900648915 /* TranslateCatalan.swift */; };
-		AA9561362B2AAFEB00648915 /* Test_Automatic_German.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9561352B2AAFEB00648915 /* Test_Automatic_German.swift */; };
+		AA9561362B2AAFEB00648915 /* Test_German.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9561352B2AAFEB00648915 /* Test_German.swift */; };
 		AAAE6D642B228B7300079392 /* TranslateEnglish.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAE6D632B228B7300079392 /* TranslateEnglish.swift */; };
 		AAAE6D652B228B7300079392 /* TranslateEnglish.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAE6D632B228B7300079392 /* TranslateEnglish.swift */; };
 		AAAE6D672B22B5CF00079392 /* TranslateVietnamese.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAE6D662B22B5CF00079392 /* TranslateVietnamese.swift */; };
@@ -116,10 +117,11 @@
 		AA8A91132B1D7FD000CE7185 /* TranslatedDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatedDisplay.swift; sourceTree = "<group>"; };
 		AA8A911B2B1D815C00CE7185 /* TranslateNumbersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TranslateNumbersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA8A911D2B1D815C00CE7185 /* TranslationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationsTests.swift; sourceTree = "<group>"; };
+		AA8B614D2B2AFC9A00D2152A /* Test_Spanish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_Spanish.swift; sourceTree = "<group>"; };
 		AA92B4C229250827005E43F0 /* ColoredStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoredStepper.swift; sourceTree = "<group>"; };
 		AA92B4C829273A58005E43F0 /* TranslateNumbers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateNumbers.swift; sourceTree = "<group>"; };
 		AA95612C2B2A1C1900648915 /* TranslateCatalan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateCatalan.swift; sourceTree = "<group>"; };
-		AA9561352B2AAFEB00648915 /* Test_Automatic_German.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Test_Automatic_German.swift; path = automatic/Test_Automatic_German.swift; sourceTree = SOURCE_ROOT; };
+		AA9561352B2AAFEB00648915 /* Test_German.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Test_German.swift; path = automatic/Test_German.swift; sourceTree = SOURCE_ROOT; };
 		AAAE6D632B228B7300079392 /* TranslateEnglish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateEnglish.swift; sourceTree = "<group>"; };
 		AAAE6D662B22B5CF00079392 /* TranslateVietnamese.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateVietnamese.swift; sourceTree = "<group>"; };
 		AAAE6D692B22B77B00079392 /* TranslateGerman.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateGerman.swift; sourceTree = "<group>"; };
@@ -273,7 +275,8 @@
 		AA8A911C2B1D815C00CE7185 /* VietnameseNumbersTests */ = {
 			isa = PBXGroup;
 			children = (
-				AA9561352B2AAFEB00648915 /* Test_Automatic_German.swift */,
+				AA9561352B2AAFEB00648915 /* Test_German.swift */,
+				AA8B614D2B2AFC9A00D2152A /* Test_Spanish.swift */,
 				AA8A911D2B1D815C00CE7185 /* TranslationsTests.swift */,
 			);
 			path = VietnameseNumbersTests;
@@ -424,6 +427,7 @@
 			files = (
 				AA8A91352B1D870B00CE7185 /* Extensions.swift in Sources */,
 				AAAE6D652B228B7300079392 /* TranslateEnglish.swift in Sources */,
+				AA8B614E2B2AFC9A00D2152A /* Test_Spanish.swift in Sources */,
 				AAEF2FBA2B20D5500012DDDD /* Separators.swift in Sources */,
 				AAAE6D682B22B5CF00079392 /* TranslateVietnamese.swift in Sources */,
 				AA8A911E2B1D815C00CE7185 /* TranslationsTests.swift in Sources */,
@@ -435,7 +439,7 @@
 				AA95612E2B2A1C1900648915 /* TranslateCatalan.swift in Sources */,
 				AAFC9C792B24817900F866D8 /* HundredBasedTranslator.swift in Sources */,
 				AA0523452B255AF900DDAAD4 /* TranslateSpanish.swift in Sources */,
-				AA9561362B2AAFEB00648915 /* Test_Automatic_German.swift in Sources */,
+				AA9561362B2AAFEB00648915 /* Test_German.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
