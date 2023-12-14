@@ -18,15 +18,15 @@ class TranslateSpanish: GeneralTranslator {
             exponentString: "por diez elevado a")
     }
     
-    private func spanish_0_20(_ intValue: Int) -> String? {
+    private func spanish_0_20(_ intValue: Int, fromLargerNumber: Bool = false) -> String? {
         switch intValue {
         case 0:     return "cero"
         case 1:     return "uno"
-        case 2:     return "dos"
-        case 3:     return "tres"
+        case 2:     return fromLargerNumber ? "dós" : "dos"
+        case 3:     return fromLargerNumber ? "trés" : "tres"
         case 4:     return "cuatro"
         case 5:     return "cinco"
-        case 6:     return "seis"
+        case 6:     return fromLargerNumber ? "séis" : "seis"
         case 7:     return "siete"
         case 8:     return "ocho"
         case 9:     return "nueve"
@@ -74,7 +74,7 @@ class TranslateSpanish: GeneralTranslator {
                 return spanish_tens(X0)!
             } else {
                 if X0 == 2 {
-                    return "veinti" + spanish_0_20(X)!
+                    return "veinti" + spanish_0_20(X, fromLargerNumber: true)!
                 } else {
                     return spanish_tens(X0)! + " y " + spanish_0_20(X)!
                 }
@@ -149,9 +149,9 @@ class TranslateSpanish: GeneralTranslator {
         let XXX_000_000 = i - 1_000_000_000 * XXX_000_000_000
         var ret = ""
         if XXX_000_000_000 == 1 {
-            ret += "un billion"
+            ret += "mil millones"
         } else {
-            ret += translate(XXX_000_000_000)! + " billion"
+            ret += translate(XXX_000_000_000)! + " mil millones"
         }
         if XXX_000_000 > 0 {
             ret += " " + translatePositiveInteger(XXX_000_000)!

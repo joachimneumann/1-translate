@@ -128,7 +128,7 @@ class TranslateCatalan: GeneralTranslator {
             if XXX_000_000 == 1 {
                 ret += "un milió"
             } else {
-                ret += translate(XXX_000_000)! + " milió"
+                ret += translate(XXX_000_000)! + " milions"
             }
             if XXX_000 > 0 {
                 ret += " " + translatePositiveInteger(XXX_000)!

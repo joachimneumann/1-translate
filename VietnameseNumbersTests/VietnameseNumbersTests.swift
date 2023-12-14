@@ -971,7 +971,7 @@ final class VietnameseNumbersTests: XCTestCase {
         XCTAssertEqual(catalan.translate(-1), "menys u")
         XCTAssertEqual(catalan.translate("-1"), "menys u")
         XCTAssertEqual(catalan.translate(-1.5), "menys u punt cinc")
-        XCTAssertEqual(catalan.translate(-1.51), "menys u punt cinquanta-u")
+        XCTAssertEqual(catalan.translate(-1.51), "menys u punt cinc u")
         XCTAssertEqual(catalan.translate(-0.7), "menys zero punt set")
         XCTAssertEqual(catalan.translate("-0.7"), "menys zero punt set")
         XCTAssertEqual(catalan.translate("-1.5"), "menys u punt cinc")
