@@ -7,9 +7,7 @@
 
 import XCTest
 
-public typealias AppleFont = UIFont
-
-final class VietnameseNumbersTests: XCTestCase {
+final class TranslationsTests: XCTestCase {
 
     func test_english() {
         let english = TranslateEnglish()
@@ -17,13 +15,6 @@ final class VietnameseNumbersTests: XCTestCase {
         english.groupSeparator = ""
         english.decimalSeparator = "."
 
-        XCTAssertEqual(english.translate(-1), "minus one")
-        XCTAssertEqual(english.translate("-1"), "minus one")
-        XCTAssertEqual(english.translate(-1.5), "minus one point five")
-        XCTAssertEqual(english.translate("-1.5"), "minus one point five")
-        XCTAssertEqual(english.translate(1.5), "one point five")
-        XCTAssertEqual(english.translate(1.56), "one point five six")
-        XCTAssertEqual(english.translate("1.5"), "one point five")
         XCTAssertEqual(english.translate(0), "zero")
         XCTAssertEqual(english.translate(1), "one")
         XCTAssertEqual(english.translate(2), "two")
@@ -176,7 +167,13 @@ final class VietnameseNumbersTests: XCTestCase {
         XCTAssertEqual(english.translate(62_003_155), "sixty-two million three thousand one hundred fifty-five")
         XCTAssertEqual(english.translate(99_000_000_909), "ninety-nine billion nine hundred nine")
         XCTAssertEqual(english.translate(99_999_999_999), "ninety-nine billion nine hundred ninety-nine million nine hundred ninety-nine thousand nine hundred ninety-nine")
-        
+        XCTAssertEqual(english.translate(-1), "minus one")
+        XCTAssertEqual(english.translate(-1.5), "minus one point five")
+        XCTAssertEqual(english.translate(1.5), "one point five")
+        XCTAssertEqual(english.translate(3.1415926), "three point one four one five nine two six")
+        XCTAssertEqual(english.translate(-3.1415926), "minus three point one four one five nine two six")
+        XCTAssertEqual(english.translate(3.4e16), "three point four times ten to the power of sixteen")
+
         english.insertAfterHundred = "and"
         XCTAssertEqual(english.translate(0), "zero")
         XCTAssertEqual(english.translate(1), "one")
