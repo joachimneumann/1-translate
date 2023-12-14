@@ -129,7 +129,6 @@ class TranslateSpanish: GeneralTranslator {
         }
 
         if i <= 999_999_999 {
-            // Above a million, the number is seperated
             let XXX_000_000 = (i - i % 1_000_000) / 1_000_000
             let XXX_000 = i - 1_000_000 * XXX_000_000
             var ret = ""
@@ -144,17 +143,31 @@ class TranslateSpanish: GeneralTranslator {
             return ret
         }
 
-        // Above a million, the number is seperated
-        let XXX_000_000_000 = (i - i % 1_000_000_000) / 1_000_000_000
-        let XXX_000_000 = i - 1_000_000_000 * XXX_000_000_000
-        var ret = ""
-        if XXX_000_000_000 == 1 {
-            ret += "mil millones"
-        } else {
-            ret += translate(XXX_000_000_000)! + " mil millones"
+        if i <= 999_999_999_999 {
+            let XXX_000_000_000 = (i - i % 1_000_000_000) / 1_000_000_000
+            let XXX_000_000 = i - 1_000_000_000 * XXX_000_000_000
+            var ret = ""
+            if XXX_000_000_000 == 1 {
+                ret += "mil millones"
+            } else {
+                ret += translate(XXX_000_000_000)! + " mil millones"
+            }
+            if XXX_000_000 > 0 {
+                ret += " " + translatePositiveInteger(XXX_000_000)!
+            }
+            return ret
         }
-        if XXX_000_000 > 0 {
-            ret += " " + translatePositiveInteger(XXX_000_000)!
+
+        let XXX_000_000_000_000 = (i - i % 1_000_000_000_000) / 1_000_000_000_000
+        let XXX_000_000_000 = i - 1_000_000_000_000 * XXX_000_000_000_000
+        var ret = ""
+        if XXX_000_000_000_000 == 1 {
+            ret += "un billón"
+        } else {
+            ret += translate(XXX_000_000_000_000)! + " billone"
+        }
+        if XXX_000_000_000 > 0 {
+            ret += " " + translatePositiveInteger(XXX_000_000_000)!
         }
         return ret
     }

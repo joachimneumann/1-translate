@@ -770,6 +770,7 @@ final class TranslationsTests: XCTestCase {
         XCTAssertEqual(spanish.translate(20_000_000_700), "veinte mil millones setecientos")
         XCTAssertEqual(spanish.translate(100_000_000_000), "cien mil millones")
         XCTAssertEqual(spanish.translate(400_000_000_000), "cuatrocientos mil millones")
+        XCTAssertEqual(spanish.translate(1_000_000_000_000), "un billón")
 
         XCTAssertEqual(spanish.translate(-1), "menos uno")
         XCTAssertEqual(spanish.translate(-74), "menos setenta y cuatro")
