@@ -1,0 +1,25 @@
+#!/usr/bin/env python3
+import sys
+
+if len(sys.argv) != 2:
+    print("Usage: translate.py language.txt")
+    print("language.txt is a comma seperated file with line like \"1, uno\", etc.")
+    exit(0)
+
+with open(sys.argv[1]) as file:
+    lines = file.readlines()
+
+outputFileName = sys.argv[1].replace(".txt", ".swift")
+
+with open(outputFileName, 'w') as outputFile:
+    for line in lines:
+        split = line.split(" ", 1)
+        first = split[0].replace(" ", "")
+        first = first.replace(",", "")
+        second = split[1].replace("\n", "")
+        if not len(split) == 2:
+            print("\nerror: wrong format in this line: " + line)
+            print(split)
+            exit(0)
+        outputFile.write("        XCTAssertEqual(english.translate(" + first + "), \"" + second + "\")\n")
+# outputFile.close()
