@@ -19,7 +19,7 @@ class TranslateGerman: GeneralTranslator {
         super.init(
             language: Languages.german.rawValue,
             imageName: "flag germany",
-            dotString: "komma",
+            dotString: "Komma",
             negativeString: "minus",
             andSoOn: "und so weiter",
             exponentString: "mal zehn hoch")

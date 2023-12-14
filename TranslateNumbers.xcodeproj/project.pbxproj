@@ -41,7 +41,6 @@
 		AA95612D2B2A1C1900648915 /* TranslateCatalan.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA95612C2B2A1C1900648915 /* TranslateCatalan.swift */; };
 		AA95612E2B2A1C1900648915 /* TranslateCatalan.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA95612C2B2A1C1900648915 /* TranslateCatalan.swift */; };
 		AA9561362B2AAFEB00648915 /* Test_Automatic_German.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9561352B2AAFEB00648915 /* Test_Automatic_German.swift */; };
-		AA9561382B2ABE3200648915 /* xx.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9561372B2ABE3200648915 /* xx.swift */; };
 		AAAE6D642B228B7300079392 /* TranslateEnglish.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAE6D632B228B7300079392 /* TranslateEnglish.swift */; };
 		AAAE6D652B228B7300079392 /* TranslateEnglish.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAE6D632B228B7300079392 /* TranslateEnglish.swift */; };
 		AAAE6D672B22B5CF00079392 /* TranslateVietnamese.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAE6D662B22B5CF00079392 /* TranslateVietnamese.swift */; };
@@ -121,7 +120,6 @@
 		AA92B4C829273A58005E43F0 /* TranslateNumbers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateNumbers.swift; sourceTree = "<group>"; };
 		AA95612C2B2A1C1900648915 /* TranslateCatalan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateCatalan.swift; sourceTree = "<group>"; };
 		AA9561352B2AAFEB00648915 /* Test_Automatic_German.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Test_Automatic_German.swift; path = automatic/Test_Automatic_German.swift; sourceTree = SOURCE_ROOT; };
-		AA9561372B2ABE3200648915 /* xx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = xx.swift; sourceTree = "<group>"; };
 		AAAE6D632B228B7300079392 /* TranslateEnglish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateEnglish.swift; sourceTree = "<group>"; };
 		AAAE6D662B22B5CF00079392 /* TranslateVietnamese.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateVietnamese.swift; sourceTree = "<group>"; };
 		AAAE6D692B22B77B00079392 /* TranslateGerman.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateGerman.swift; sourceTree = "<group>"; };
@@ -159,7 +157,6 @@
 		AA08C7B5272EDA48001B8575 = {
 			isa = PBXGroup;
 			children = (
-				AA9561372B2ABE3200648915 /* xx.swift */,
 				AA6352B02B296C3B00CABC0C /* TODO.md */,
 				AAAE6D6C2B22C97900079392 /* README.md */,
 				AA08C7EB272F1241001B8575 /* TranslateNumbers.entitlements */,
@@ -432,7 +429,6 @@
 				AA8A911E2B1D815C00CE7185 /* TranslationsTests.swift in Sources */,
 				AA8A91322B1D865B00CE7185 /* KeyColor.swift in Sources */,
 				AA0523422B25447F00DDAAD4 /* ThousandBasedTranslator.swift in Sources */,
-				AA9561382B2ABE3200648915 /* xx.swift in Sources */,
 				AAFC9C732B247CDF00F866D8 /* BasicTranslator.swift in Sources */,
 				AAFC9C762B247D0700F866D8 /* GeneralTranslator.swift in Sources */,
 				AAAE6D6B2B22B77B00079392 /* TranslateGerman.swift in Sources */,
