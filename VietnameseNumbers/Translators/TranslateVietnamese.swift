@@ -25,8 +25,7 @@ class TranslateVietnamese: GeneralTranslator {
     
     init() {
         super.init(
-            language: Languages.vietnamese.rawValue,
-            imageName: "flag_vietnam",
+            language: "Tiếng Việt",
             dotString: "phẩy",
             negativeString: "âm",
             andSoOn: "và như thế",

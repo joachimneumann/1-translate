@@ -10,8 +10,7 @@ import Foundation
 class TranslateCatalan: GeneralTranslator {
     init() {
         super.init(
-            language: Languages.catalan.rawValue,
-            imageName: "catalan flag",
+            language: "Català",
             dotString: "coma",
             negativeString: "menys",
             andSoOn: "etcètera",

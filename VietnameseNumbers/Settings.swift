@@ -24,7 +24,6 @@ struct Settings: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 0.0) {
                     Grid(alignment: .leading, horizontalSpacing: 10.0, verticalSpacing: 10.0) {
-                        
                         DigitsSettings
                         EnglishSettings
                         GermanSettings
@@ -132,7 +131,7 @@ struct Settings: View {
         return Group {
             GridRow {
                 HStack {
-                    Image(viewModel.translateEnglish.imageName)
+                    Image(viewModel.translateEnglish.language)
                         .resizable()
                         .scaledToFit()
                         .padding(1)
@@ -169,7 +168,7 @@ struct Settings: View {
         return Group {
             GridRow {
                 HStack {
-                    Image(viewModel.translateGerman.imageName)
+                    Image(viewModel.translateGerman.language)
                         .resizable()
                         .scaledToFit()
                         .padding(1)
@@ -216,7 +215,7 @@ struct Settings: View {
         return Group {
             GridRow {
                 HStack {
-                    Image(viewModel.translateSpanish.imageName)
+                    Image(viewModel.translateSpanish.language)
                         .resizable()
                         .scaledToFit()
                         .padding(1)
@@ -257,7 +256,7 @@ struct Settings: View {
         return Group {
             GridRow {
                 HStack {
-                    Image(viewModel.translateVietnamese.imageName)
+                    Image(viewModel.translateVietnamese.language)
                         .resizable()
                         .scaledToFit()
                         .padding(1)

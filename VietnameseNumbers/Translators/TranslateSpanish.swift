@@ -15,8 +15,7 @@ enum PuntoComma: String, Codable, CaseIterable {
 class TranslateSpanish: GeneralTranslator {
     init() {
         super.init(
-            language: Languages.spanish.rawValue,
-            imageName: "spain flag",
+            language: "Español",
             dotString: "coma", // will be overwritten in the settings
             negativeString: "menos",
             andSoOn: "y así",

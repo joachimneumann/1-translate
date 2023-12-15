@@ -32,6 +32,7 @@
 		AA689125295E681400129593 /* Brain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA689124295E681400129593 /* Brain.swift */; };
 		AA715CA82B2BE367009335B7 /* Test_Polish.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA715CA72B2BE367009335B7 /* Test_Polish.swift */; };
 		AA715CAA2B2BE3C4009335B7 /* TranslatePolish.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA715CA92B2BE3C4009335B7 /* TranslatePolish.swift */; };
+		AA715CAC2B2BE4C9009335B7 /* TranslatePolish.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA715CA92B2BE3C4009335B7 /* TranslatePolish.swift */; };
 		AA8453E8294D872300A50B74 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8453E7294D872300A50B74 /* Icons.swift */; };
 		AA8A91112B1D7B5F00CE7185 /* TranslateNumbersApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FABFF272F2348006DE4C8 /* TranslateNumbersApp.swift */; };
 		AA8A91122B1D7B7100CE7185 /* TranslateNumbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA92B4C829273A58005E43F0 /* TranslateNumbers.swift */; };
@@ -424,6 +425,7 @@
 				AABEFC132972A8780023A3C9 /* KeyColor.swift in Sources */,
 				AAB10B9A292A2222004707E9 /* Label.swift in Sources */,
 				AAE426F729597AE3005FE365 /* Screen.swift in Sources */,
+				AA715CAC2B2BE4C9009335B7 /* TranslatePolish.swift in Sources */,
 				AA2FAC23272F2349006DE4C8 /* OperatorStack.swift in Sources */,
 				AAAE6D642B228B7300079392 /* TranslateEnglish.swift in Sources */,
 				AA370C31293352D60041AE4E /* Key.swift in Sources */,

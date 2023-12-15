@@ -10,8 +10,7 @@ import SwiftUI
 class TranslateEnglish: HundredBasedTranslator {
     init() {
         super.init(
-            language: Languages.english.rawValue,
-            imageName: "flag UK",
+            language: "English",
             dotString: "point",
             negativeString: "minus",
             andSoOn: "and so on",

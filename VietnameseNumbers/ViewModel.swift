@@ -71,6 +71,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     let translateVietnamese = TranslateVietnamese()
     let translateSpanish = TranslateSpanish()
     let translateCatalan = TranslateCatalan()
+    let translatePolish = TranslatePolish()
     var translators: [BasicTranslator] // set in init()
     var previouslySelectedLanguages = StringPreference()
     
@@ -121,7 +122,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     }
     
     @AppStorage(AppStorageKeys.firstLanguage, store: .standard)
-    var firstLanguage: String = Languages.english.rawValue {
+    var firstLanguage: String = "" { //translateEnglish.language {
         didSet {
             for translator in translators {
                 if translator.language == firstLanguage {
@@ -139,7 +140,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     }
 
     @AppStorage(AppStorageKeys.secondLanguage, store: .standard)
-    var secondLanguage: String = Languages.vietnamese.rawValue {
+    var secondLanguage: String = "" { //translateEnglish.language {
         didSet {
             for translator in translators {
                 if translator.language == secondLanguage {
@@ -274,15 +275,19 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     private var previouslyPendingOperator: String? = nil
     
     init() {
-        //print("ViewModel INIT")
-        
         /// currentDisplay will be updated shortly by refreshDisplay in onAppear() of Calculator
-        /// I just set some values here
+        /// I set some values here
         currentDisplay = Display(left: "0", right: nil, canBeInteger: false, canBeFloat: false)
         brain = Brain(precision: _precision.wrappedValue)
         precisionDescription = _precision.wrappedValue.useWords
         
-        translators = [translateEnglish, translateGerman, translateVietnamese, translateSpanish, translateCatalan]
+        translators = [
+            translateEnglish,
+            translateGerman,
+            translateVietnamese,
+            translateSpanish,
+            translateCatalan,
+            translatePolish]
         firstTranslator = translateEnglish
         secondTranslator = translateEnglish
 

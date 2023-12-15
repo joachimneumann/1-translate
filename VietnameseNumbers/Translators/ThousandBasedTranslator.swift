@@ -23,7 +23,6 @@ class ThousandBasedTranslator: BasicTranslator, ThousandBasedTranslatorProtocol 
     
     init(
         language: String,
-        imagename: String,
         dotString: String,
         negativeString: String,
         andSoOn: String,
@@ -38,7 +37,6 @@ class ThousandBasedTranslator: BasicTranslator, ThousandBasedTranslatorProtocol 
             self.billion = billion
             super.init(
                 language: language,
-                imageName: imagename,
                 dotString: dotString,
                 negativeString: negativeString,
                 andSoOn: andSoOn,

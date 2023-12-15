@@ -18,7 +18,7 @@ struct SelectLanguage: View {
                 viewModel.firstLanguage = translator.language
             }) {
                 HStack {
-                    Image(translator.imageName)
+                    Image(translator.language)
                         .resizable()
                         .scaledToFit()
                         .padding(1)
@@ -40,7 +40,7 @@ struct SelectLanguage: View {
                     viewModel.secondLanguage = translator.language
                 }) {
                     HStack {
-                        Image(translator.imageName)
+                        Image(translator.language)
                             .resizable()
                             .scaledToFit()
                             .padding(1)
@@ -57,7 +57,7 @@ struct SelectLanguage: View {
                 }
             }
         }
-        .padding(.bottom, 15)
+        .padding(.top, 15)
     }
 }
 struct LanguageSelector: View {
@@ -76,15 +76,12 @@ struct LanguageSelector: View {
                         .foregroundColor(Color.white)
                     Spacer()
                 }
-                .padding(.top, 20)
-                .padding(.bottom, 20)
-                SelectLanguage(viewModel: viewModel, translator: viewModel.translateEnglish)
-                SelectLanguage(viewModel: viewModel, translator: viewModel.translateGerman)
-                SelectLanguage(viewModel: viewModel, translator: viewModel.translateVietnamese)
-                SelectLanguage(viewModel: viewModel, translator: viewModel.translateSpanish)
-                SelectLanguage(viewModel: viewModel, translator: viewModel.translateCatalan)
+                .padding(.top, 0)
+                .padding(.bottom, 10)
+                ForEach(viewModel.translators, id:\.self) { t in
+                    SelectLanguage(viewModel: viewModel, translator: t)
+                }
             }
-            .padding(20)
         }
 }
 

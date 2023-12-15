@@ -26,20 +26,25 @@ struct TranslateNumbers: View {
                         Button {
                             showLanguageSelection.toggle()
                         } label: {
-                            Image(viewModel.firstTranslator.imageName)
+                            Image(viewModel.firstTranslator.language)
                                 .resizable()
                                 .scaledToFit()
                         }
                         .padding(1)
                         .border(.white)
                         .sheet(isPresented: $showLanguageSelection) {
-                            VStack {
-                                LanguageSelector(viewModel: viewModel)
-                                    .presentationDetents(
-                                        [.height(CGFloat(80 + 50 * viewModel.translators.count))]
-                                    )
-                                    .frame(maxHeight: .infinity)
-                                    .background(screen.backgroundColor)
+                            ScrollView {
+                                VStack{
+                                    LanguageSelector(viewModel: viewModel)
+                                    Button(action: {
+                                        showLanguageSelection = false
+                                    }) {
+                                        Text("close")
+                                            .foregroundColor(.white)
+                                    }
+                                }
+                                .padding(20)
+                                .presentationDetents([.height(140.0 + CGFloat(viewModel.translators.count) * 40.0)])
                             }
                         }
                         Spacer()
@@ -72,22 +77,30 @@ struct TranslateNumbers: View {
                             Button {
                                 showLanguageSelection.toggle()
                             } label: {
-                                Image(viewModel.secondTranslator.imageName)
+                                Image(viewModel.secondTranslator.language)
                                     .resizable()
                                     .scaledToFit()
                             }
                             .padding(1)
                             .border(.white)
                             .sheet(isPresented: $showLanguageSelection) {
-                                VStack {
-                                    LanguageSelector(viewModel: viewModel)
+                                        VStack{
+                                            Text("Hello, I'm a modal!")
+                                            Button("Dismiss") {
+                                                showLanguageSelection = false
+                                            }
+                                        }.presentationDetents([.height(250)])
+                                    }
+//                            .sheet(isPresented: $showLanguageSelection) {
+//                                VStack {
+//                                    LanguageSelector(viewModel: viewModel)
 //                                        .presentationDetents(
-//                                            [.height(CGFloat(80 + 90 * viewModel.translators.count))]
+//                                            [.height(CGFloat(80 + 190 * viewModel.translators.count))]
 //                                        )
-                                        .frame(height: 100)
-                                        .background(screen.backgroundColor)
-                                }
-                            }
+//                                        .frame(height: .infinity)
+//                                        .background(screen.backgroundColor)
+//                                }
+//                            }
                             Spacer()
                         }
                         .frame(height: 30.0)
