@@ -211,6 +211,42 @@ struct Settings: View {
         }
     }
     
+    var SpanishSettings: some View {
+        return Group {
+            GridRow {
+                HStack {
+                    Image(viewModel.translateSpanish.imageName)
+                        .resizable()
+                        .scaledToFit()
+                        .padding(1)
+                        .border(.white)
+                        .frame(height: 25)
+                        .padding(.trailing, 10)
+                    Text(viewModel.translateSpanish.language)
+                        .bold()
+                        .frame(height: 25)
+                    Spacer()
+                }
+                .gridCellColumns(2)
+            }
+            .padding(.top, 40)
+            GridRow {
+                Text(viewModel.settingsSpanishExample)
+                    .padding(.leading, 0)
+                    .gridCellColumns(2)
+            }
+            GridRow {
+                Text("coma o punto")
+                Toggle("", isOn: $viewModel.settingsSpanishUsePunto)
+                    .frame(width: 40)
+                    .toggleStyle(
+                        ColoredToggleStyle(onColor: Color(white: 0.6),
+                                           offColor: Color(white: 0.25),
+                                           thumbColor: .white))
+                    .padding(.leading, 3)
+            }
+        }
+    }
     
     var VietnameseSettings: some View {
         return Group {

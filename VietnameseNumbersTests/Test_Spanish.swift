@@ -8,7 +8,6 @@
 import XCTest
 
 final class Test_Spanish: XCTestCase {
-    
     func test_spanish() {
         let spanish = TranslateSpanish()
         spanish.decimalSeparator = "."

@@ -21,6 +21,7 @@ struct AppStorageKeys {
     static let secondLanguage                    = "secondLanguage"
     static let activeIndex                       = "activeIndex"
     static let settingsEnglishUseAndAfterHundred = "settingsEnglishUseAndAfterHundred"
+    static let settingsSpanishUsePunto           = "settingsSpanishUsePunto"
     static let settingsGermanCaptalisation       = "settingsGermanCaptalisation"
     static let settingsGermanSoftHyphen          = "settingsGermanSoftHyphen"
     static let settingsVietnameseThousand        = "settingsVietnameseThousand"
@@ -61,6 +62,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @Published var settingsEnglishExample: String = ""
     @Published var settingsGermanExample: String = ""
     @Published var settingsVietnameseExample: String = ""
+    @Published var settingsSpanishExample: String = ""
     @Published var firstTranslatedNumber: String = ""
     @Published var secondTranslatedNumber: String = ""
 
@@ -118,7 +120,6 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         }
     }
     
-    
     @AppStorage(AppStorageKeys.firstLanguage, store: .standard)
     var firstLanguage: String = Languages.english.rawValue {
         didSet {
@@ -156,7 +157,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     }
     
     @AppStorage(AppStorageKeys.settingsEnglishUseAndAfterHundred, store: .standard)
-    var settingsEnglishUseAndAfterHundred: Bool = true {
+    var settingsEnglishUseAndAfterHundred: Bool = false {
         didSet {
             if settingsEnglishUseAndAfterHundred {
                 translateEnglish.insertAfterHundred = "and"
@@ -166,7 +167,19 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             settingsEnglishExample = translateEnglish.translate(105)!
         }
     }
-    
+
+    @AppStorage(AppStorageKeys.settingsSpanishUsePunto, store: .standard)
+    var settingsSpanishUsePunto: Bool = true {
+        didSet {
+            if settingsSpanishUsePunto {
+                translateSpanish.dotString = "punto"
+            } else {
+                translateSpanish.dotString = "comma"
+            }
+            settingsSpanishExample = translateSpanish.translate(1.5)!
+        }
+    }
+
     static let settingsGermanCaptalisation       = "settingsGermanCaptalisation"
     static let settingsGermanTrennung            = "settingsGermanTrennung"
 
