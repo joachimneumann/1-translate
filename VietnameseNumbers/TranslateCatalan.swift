@@ -12,7 +12,7 @@ class TranslateCatalan: GeneralTranslator {
         super.init(
             language: Languages.catalan.rawValue,
             imageName: "catalan flag",
-            dotString: "punt",
+            dotString: "coma",
             negativeString: "menys",
             andSoOn: "etcètera",
             exponentString: "vegades deu a la potència de")
