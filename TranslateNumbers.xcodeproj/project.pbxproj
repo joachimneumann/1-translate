@@ -30,6 +30,8 @@
 		AA3FB8272920E0E5002ECCEB /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3FB8262920E0E5002ECCEB /* Settings.swift */; };
 		AA672B0A295189950044DC08 /* ScrollViewConditionalAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672B09295189950044DC08 /* ScrollViewConditionalAnimation.swift */; };
 		AA689125295E681400129593 /* Brain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA689124295E681400129593 /* Brain.swift */; };
+		AA715CA82B2BE367009335B7 /* Test_Polish.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA715CA72B2BE367009335B7 /* Test_Polish.swift */; };
+		AA715CAA2B2BE3C4009335B7 /* TranslatePolish.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA715CA92B2BE3C4009335B7 /* TranslatePolish.swift */; };
 		AA8453E8294D872300A50B74 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8453E7294D872300A50B74 /* Icons.swift */; };
 		AA8A91112B1D7B5F00CE7185 /* TranslateNumbersApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FABFF272F2348006DE4C8 /* TranslateNumbersApp.swift */; };
 		AA8A91122B1D7B7100CE7185 /* TranslateNumbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA92B4C829273A58005E43F0 /* TranslateNumbers.swift */; };
@@ -113,6 +115,8 @@
 		AA6352B02B296C3B00CABC0C /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		AA672B09295189950044DC08 /* ScrollViewConditionalAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewConditionalAnimation.swift; sourceTree = "<group>"; };
 		AA689124295E681400129593 /* Brain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brain.swift; sourceTree = "<group>"; };
+		AA715CA72B2BE367009335B7 /* Test_Polish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Test_Polish.swift; path = automatic/Test_Polish.swift; sourceTree = SOURCE_ROOT; };
+		AA715CA92B2BE3C4009335B7 /* TranslatePolish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatePolish.swift; sourceTree = "<group>"; };
 		AA8453E7294D872300A50B74 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		AA8A91132B1D7FD000CE7185 /* TranslatedDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatedDisplay.swift; sourceTree = "<group>"; };
 		AA8A911B2B1D815C00CE7185 /* TranslateNumbersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TranslateNumbersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -182,19 +186,11 @@
 		AA08C7C0272EDA48001B8575 /* VietnameseNumbers */ = {
 			isa = PBXGroup;
 			children = (
+				AA715CAB2B2BE3D3009335B7 /* Translators */,
 				AA1B007B294772980054C851 /* Brain */,
 				AA2FABFF272F2348006DE4C8 /* TranslateNumbersApp.swift */,
 				AA32853A297248B800D86CB4 /* ViewModel.swift */,
 				AA92B4C829273A58005E43F0 /* TranslateNumbers.swift */,
-				AAFC9C712B247CDF00F866D8 /* BasicTranslator.swift */,
-				AAFC9C742B247D0700F866D8 /* GeneralTranslator.swift */,
-				AAFC9C772B24817900F866D8 /* HundredBasedTranslator.swift */,
-				AA0523402B25447F00DDAAD4 /* ThousandBasedTranslator.swift */,
-				AAAE6D632B228B7300079392 /* TranslateEnglish.swift */,
-				AAAE6D662B22B5CF00079392 /* TranslateVietnamese.swift */,
-				AAAE6D692B22B77B00079392 /* TranslateGerman.swift */,
-				AA0523432B255AF900DDAAD4 /* TranslateSpanish.swift */,
-				AA95612C2B2A1C1900648915 /* TranslateCatalan.swift */,
 				AA0523462B27024800DDAAD4 /* LanguageSelector.swift */,
 				AAE426F629597AE3005FE365 /* Screen.swift */,
 				AA01B9D32957E44300617AFB /* Display.swift */,
@@ -272,9 +268,27 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		AA715CAB2B2BE3D3009335B7 /* Translators */ = {
+			isa = PBXGroup;
+			children = (
+				AAFC9C712B247CDF00F866D8 /* BasicTranslator.swift */,
+				AAFC9C742B247D0700F866D8 /* GeneralTranslator.swift */,
+				AAFC9C772B24817900F866D8 /* HundredBasedTranslator.swift */,
+				AA0523402B25447F00DDAAD4 /* ThousandBasedTranslator.swift */,
+				AAAE6D632B228B7300079392 /* TranslateEnglish.swift */,
+				AAAE6D662B22B5CF00079392 /* TranslateVietnamese.swift */,
+				AAAE6D692B22B77B00079392 /* TranslateGerman.swift */,
+				AA0523432B255AF900DDAAD4 /* TranslateSpanish.swift */,
+				AA95612C2B2A1C1900648915 /* TranslateCatalan.swift */,
+				AA715CA92B2BE3C4009335B7 /* TranslatePolish.swift */,
+			);
+			path = Translators;
+			sourceTree = "<group>";
+		};
 		AA8A911C2B1D815C00CE7185 /* VietnameseNumbersTests */ = {
 			isa = PBXGroup;
 			children = (
+				AA715CA72B2BE367009335B7 /* Test_Polish.swift */,
 				AA9561352B2AAFEB00648915 /* Test_German.swift */,
 				AA8B614D2B2AFC9A00D2152A /* Test_Spanish.swift */,
 				AA8A911D2B1D815C00CE7185 /* TranslationsTests.swift */,
@@ -432,9 +446,11 @@
 				AAAE6D682B22B5CF00079392 /* TranslateVietnamese.swift in Sources */,
 				AA8A911E2B1D815C00CE7185 /* TranslationsTests.swift in Sources */,
 				AA8A91322B1D865B00CE7185 /* KeyColor.swift in Sources */,
+				AA715CAA2B2BE3C4009335B7 /* TranslatePolish.swift in Sources */,
 				AA0523422B25447F00DDAAD4 /* ThousandBasedTranslator.swift in Sources */,
 				AAFC9C732B247CDF00F866D8 /* BasicTranslator.swift in Sources */,
 				AAFC9C762B247D0700F866D8 /* GeneralTranslator.swift in Sources */,
+				AA715CA82B2BE367009335B7 /* Test_Polish.swift in Sources */,
 				AAAE6D6B2B22B77B00079392 /* TranslateGerman.swift in Sources */,
 				AA95612E2B2A1C1900648915 /* TranslateCatalan.swift in Sources */,
 				AAFC9C792B24817900F866D8 /* HundredBasedTranslator.swift in Sources */,

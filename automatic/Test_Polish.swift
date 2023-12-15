@@ -1,14 +1,14 @@
 //
-//  Test_Automatic_Polish.swift
+//  Test_Polish.swift
 //
 //  Created by automatic.py
 //
 
 import XCTest
 
-final class TranslationsTestsAutomaticPolish: XCTestCase {
+final class TestsPolish: XCTestCase {
 
-    func test_automatic_polish() {
+    func test_polish() {
         let polish = TranslatePolish()
         polish.groupSeparator = ""
         polish.decimalSeparator = "."
