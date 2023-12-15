@@ -169,19 +169,12 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     }
 
     @AppStorage(AppStorageKeys.settingsSpanishUsePunto, store: .standard)
-    var settingsSpanishUsePunto: Bool = true {
+    var settingsSpanishUsePunto: PuntoComma = .coma {
         didSet {
-            if settingsSpanishUsePunto {
-                translateSpanish.dotString = "punto"
-            } else {
-                translateSpanish.dotString = "comma"
-            }
-            settingsSpanishExample = translateSpanish.translate(1.5)!
+            translateSpanish.dotString = settingsSpanishUsePunto.rawValue
+            settingsSpanishExample = translateSpanish.translate(1.5) ?? "Error"
         }
     }
-
-    static let settingsGermanCaptalisation       = "settingsGermanCaptalisation"
-    static let settingsGermanTrennung            = "settingsGermanTrennung"
 
 
     @AppStorage(AppStorageKeys.settingsGermanCaptalisation)
@@ -322,6 +315,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         settingsEnglishUseAndAfterHundred = settingsEnglishUseAndAfterHundred
         settingsVietnameseCompact = settingsVietnameseCompact
         settingsGermanCaptalisation = settingsGermanCaptalisation
+        settingsSpanishUsePunto = settingsSpanishUsePunto
     }
         
     /// the update of the precision in brain can be slow.

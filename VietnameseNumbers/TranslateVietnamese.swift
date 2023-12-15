@@ -10,23 +10,11 @@ import SwiftUI
 enum VietnameseThousand: String, Codable, CaseIterable {
     case ngàn
     case nghìn
-    var string: String {
-        switch self {
-        case .ngàn: return "ngàn"
-        case .nghìn: return "nghìn"
-        }
-    }
 }
 
 enum VietnameseSecondLast: String, Codable, CaseIterable {
     case linh
     case lẻ
-    var string: String {
-        switch self {
-        case .linh: return "linh"
-        case .lẻ: return "lẻ"
-        }
-    }
 }
 
 
@@ -123,7 +111,7 @@ class TranslateVietnamese: GeneralTranslator {
                 // lẻ?
                 if ret.count > 0 { ret += " " }
                 if X > 0 {
-                    ret += secondLast.string + " "
+                    ret += secondLast.rawValue + " "
                     ret += toString_(X, fromLargerNumber: false)!
                 } else {
                     ret += toString_(0, fromLargerNumber: false)!
@@ -135,7 +123,7 @@ class TranslateVietnamese: GeneralTranslator {
         if intValue <= 999_999 {
             let XXX = intValue % 1_000
             let XXX_000 = (intValue - XXX) / 1_000
-            var ret = toString_(XXX_000, fromLargerNumber: fromLargerNumber)! + " " + thousand.string
+            var ret = toString_(XXX_000, fromLargerNumber: fromLargerNumber)! + " " + thousand.rawValue
             if XXX > 0 {
                 ret += " " + toString_(XXX, fromLargerNumber: true)!
             }

@@ -28,6 +28,7 @@ struct Settings: View {
                         DigitsSettings
                         EnglishSettings
                         GermanSettings
+                        SpanishSettings
                         VietnameseSettings
                         hobbyProject
                     }
@@ -236,14 +237,18 @@ struct Settings: View {
                     .gridCellColumns(2)
             }
             GridRow {
-                Text("coma o punto")
-                Toggle("", isOn: $viewModel.settingsSpanishUsePunto)
-                    .frame(width: 40)
-                    .toggleStyle(
-                        ColoredToggleStyle(onColor: Color(white: 0.6),
-                                           offColor: Color(white: 0.25),
-                                           thumbColor: .white))
-                    .padding(.leading, 3)
+                Text("Coma o punto")
+                Picker("", selection: $viewModel.settingsSpanishUsePunto) {
+                    ForEach(PuntoComma.allCases, id: \.self) { value in
+                        Text("\(value.rawValue)")
+                            .tag(value)
+                    }
+                }
+                .frame(width: 220)
+                .padding(2)
+                .background(Color(UIColor.darkGray))
+                .borderRadius(Color.black, width: 5, cornerRadius: 10, corners: [.topLeft, .bottomLeft, .topRight, .bottomRight])
+                .pickerStyle(.segmented)
             }
         }
     }

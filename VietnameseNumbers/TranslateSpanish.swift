@@ -7,12 +7,17 @@
 
 import Foundation
 
+enum PuntoComma: String, Codable, CaseIterable {
+    case coma
+    case punto
+}
+
 class TranslateSpanish: GeneralTranslator {
     init() {
         super.init(
             language: Languages.spanish.rawValue,
             imageName: "spain flag",
-            dotString: "punto",
+            dotString: "coma", // will be overwritten in the settings
             negativeString: "menos",
             andSoOn: "y así",
             exponentString: "por diez elevado a")
