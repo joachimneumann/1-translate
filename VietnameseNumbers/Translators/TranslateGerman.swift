@@ -24,7 +24,7 @@ class TranslateGerman: GeneralTranslator {
             exponentString: "mal zehn hoch")
     }
     
-    private func german_0_20(_ intValue: Int, fromLargerNumber: Bool = false) -> String? {
+    private func translate_0_20(_ intValue: Int, fromLargerNumber: Bool = false) -> String? {
         switch intValue {
         case 0:     return "null"
         case 1:     return fromLargerNumber ? "ein" : "eins"
@@ -51,7 +51,7 @@ class TranslateGerman: GeneralTranslator {
         }
     }
     
-    private func german_tens(_ intValue: Int) -> String? {
+    private func tens(_ intValue: Int) -> String? {
         switch intValue {
         case 1:     return "zehn"
         case 2:     return "zwanzig"
@@ -77,7 +77,7 @@ class TranslateGerman: GeneralTranslator {
 
     private func translateLowerCase(_ i: Int, fromLargerNumber: Bool = false) -> String? {
         if i <= 20 {
-            return german_0_20(i, fromLargerNumber: fromLargerNumber)
+            return translate_0_20(i, fromLargerNumber: fromLargerNumber)
         }
         if i <= 99 {
             var temp = i
@@ -85,9 +85,9 @@ class TranslateGerman: GeneralTranslator {
             temp = (temp - X) / 10
             let X0 = temp % 10
             if X == 0 {
-                return german_tens(X0)!
+                return tens(X0)!
             } else {
-                return german_0_20(X, fromLargerNumber: true)! + softHyphen + "und" + softHyphen + german_tens(X0)! // softHyphen is a soft hyphen
+                return translate_0_20(X, fromLargerNumber: true)! + softHyphen + "und" + softHyphen + tens(X0)! // softHyphen is a soft hyphen
             }
         }
         if i <= 999 {
@@ -97,7 +97,7 @@ class TranslateGerman: GeneralTranslator {
             let X0 = temp % 10
             temp = (temp - X0) / 10
             let X00 = temp % 10
-            var ret = german_0_20(X00, fromLargerNumber: true)! + softHyphen + "hundert" + softHyphen
+            var ret = translate_0_20(X00, fromLargerNumber: true)! + softHyphen + "hundert" + softHyphen
             let leftover = 10 * X0 + X
             if leftover > 0 {
                 ret += translateLowerCase(leftover, fromLargerNumber: fromLargerNumber)!
