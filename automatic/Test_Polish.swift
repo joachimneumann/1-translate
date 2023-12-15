@@ -213,11 +213,21 @@ final class TestsPolish: XCTestCase {
         XCTAssertEqual(polish.translate(209_000), "dwieście dziewięć tysięcy")
         XCTAssertEqual(polish.translate(212_000), "dwieście dwanaście tysięcy")
         
-        XCTAssertEqual(polish.translate(1_000_000), "miliony")
-        XCTAssertEqual(polish.translate(1_000_000_000), "miliardów")
-        XCTAssertEqual(polish.translate(1_000_000_000_000), "tysiąc miliardów") // biliony?
-        XCTAssertEqual(polish.translate(1_000_000_000_000_000), "???")
-        
+        XCTAssertEqual(polish.translate(1_000_000), "jeden milion")
+        XCTAssertEqual(polish.translate(2_000_000), "dwa miliony")
+        XCTAssertEqual(polish.translate(6_000_000), "sześć milionów")
+        XCTAssertEqual(polish.translate(304_000_000), "trzysta cztery miliony")
+        XCTAssertEqual(polish.translate(306_000_000), "trzysta sześć milionów")
+        XCTAssertEqual(polish.translate(312_000_000), "trzysta dwanaście milionów")
+        XCTAssertEqual(polish.translate(316_000_000), "trzysta szesnaście milionów")
+
+        XCTAssertEqual(polish.translate(1_000_000_000), "jeden miliard")
+        XCTAssertEqual(polish.translate(2_000_000_000), "dwa miliardy")
+        XCTAssertEqual(polish.translate(6_000_000_000), "sześć miliardów")
+        XCTAssertEqual(polish.translate(1_000_000_000_000), "jeden bilion")
+        XCTAssertEqual(polish.translate(2_000_000_000_000), "dwa biliony")
+        XCTAssertEqual(polish.translate(6_000_000_000_000), "sześć bilionów")
+
         // scrientific notation for large numbers
         XCTAssertEqual(polish.translate(3.4e22), "trzy przecinek cztery razy dziesięć do potęgi dwudziestej drugiej") // ?
         }

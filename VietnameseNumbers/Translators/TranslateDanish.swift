@@ -1,71 +1,65 @@
 //
-//  TranslatePolish.swift
+//  TranslateDanish.swift
 //  TranslateNumbersTests
 //
 //  Created by Joachim Neumann on 12/15/23.
 //
 
-import Foundation
-
 import SwiftUI
 
-class TranslatePolish: GeneralTranslator {
-    let hundred        = "sto"
-    let thousand       = "tysiąc"
-    let thousandTo4    = "tysiące"
-    let thousandFrom5  = "tysięcy"
-    let million        = "milion"
-    let millionTo4     = "miliony"
-    let millionFrom5   = "miliony"
+class TranslateDanish: GeneralTranslator {
+    let hundred        = "hundrede"
+    let thousand       = "tusind"
+    let million        = "million"
     let billion        = "miliardów"
 
     init() {
         super.init(
-            language: "Polski",
-            dotString: "przecinek",
+            language: "Dansk",
+            dotString: "komma",
             negativeString: "minus",
-            andSoOn: "and so on",
-            exponentString: "times ten to the power of")
+            andSoOn: "og så videre",
+            exponentString: "gange ti i")
     }
 
     private func tens(_ intValue: Int) -> String? {
         switch intValue {
-        case 1:     return "dziesięć"
-        case 2:     return "dwadzieścia"
-        case 3:     return "trzydzieści"
-        case 4:     return "czterdzieści"
-        case 5:     return "pięćdziesiąt"
-        case 6:     return "sześćdziesiąt"
-        case 7:     return "siedemdziesiąt"
-        case 8:     return "osiemdziesiąt"
-        case 9:     return "dziewięćdziesiąt"
+        case 1:     return "ti"
+        case 2:     return "tyve"
+        case 3:     return "tredive"
+        case 4:     return "fyrre"
+        case 5:     return "halvtreds"
+        case 6:     return "tres"
+        case 7:     return "halvfjerds"
+        case 8:     return "firs"
+        case 9:     return "halvfems"
         default: return nil
         }
     }
 
     func translate_0_20(_ i: Int) -> String? {
         switch i {
-        case 0:     return "zero"
-        case 1:     return "jeden"
-        case 2:     return "dwa"
-        case 3:     return "trzy"
-        case 4:     return "cztery"
-        case 5:     return "pięć"
-        case 6:     return "sześć"
-        case 7:     return "siedem"
-        case 8:     return "osiem"
-        case 9:     return "dziewięć"
-        case 10:    return "dziesięć"
-        case 11:    return "jedenaście"
-        case 12:    return "dwanaście"
-        case 13:    return "trzynaście"
-        case 14:    return "czternaście"
-        case 15:    return "piętnaście"
-        case 16:    return "szesnaście"
-        case 17:    return "siedemnaście"
-        case 18:    return "osiemnaście"
-        case 19:    return "dziewiętnaście"
-        case 20:    return "dwadzieścia"
+        case 0:     return "nul"
+        case 1:     return "en"
+        case 2:     return "to"
+        case 3:     return "tre"
+        case 4:     return "fire"
+        case 5:     return "fem"
+        case 6:     return "seks"
+        case 7:     return "syv"
+        case 8:     return "otte"
+        case 9:     return "ni"
+        case 10:    return "ti"
+        case 11:    return "elleve"
+        case 12:    return "tolv"
+        case 13:    return "tretten"
+        case 14:    return "fjorten"
+        case 15:    return "femten"
+        case 16:    return "seksten"
+        case 17:    return "sytten"
+        case 18:    return "atten"
+        case 19:    return "nitten"
+        case 20:    return "tyve"
         default:
             var temp = i
             let X = temp % 10
@@ -91,7 +85,7 @@ class TranslatePolish: GeneralTranslator {
             if X == 0 {
                 return tens(X0)!
             } else {
-                return tens(X0)! + " " + translate_0_20(X)!
+                return translate_0_20(X)! + "og" + tens(X0)!
             }
         }
         if i <= 999 {
@@ -102,21 +96,14 @@ class TranslatePolish: GeneralTranslator {
             temp = (temp - X0) / 10
             let X00 = temp % 10
             var ret = ""
-            switch X00 {
-            case 1:
+            if X00 == 1 {
                 ret = hundred
-            case 2:
-                ret = "dwieście"
-            case 3, 4:
-                ret = translate_0_20(X00)! + "sta"
-            case 9:
-                ret = "dziewięćset"
-            default:
-                ret = translate_0_20(X00)! + "set"
+            } else {
+                ret = translate_0_20(X00)! + hundred
             }
             let leftover = 10 * X0 + X
             if leftover > 0 {
-                ret += " " + translatePositiveInteger(leftover)!//, fromLargerNumber: fromLargerNumber)!
+                ret += translatePositiveInteger(leftover)!//, fromLargerNumber: fromLargerNumber)!
             }
             return ret
         }
@@ -127,29 +114,13 @@ class TranslatePolish: GeneralTranslator {
             
             let lastDigitOfTousands = XXX_000 % 10
             let secondDigitOfTousands = XXX_000 % 100 - lastDigitOfTousands
-
-            var polishThousand = ""
-            if secondDigitOfTousands == 0 {
-                switch lastDigitOfTousands {
-                case 0:
-                    polishThousand = thousandFrom5
-                case 1:
-                    polishThousand = XXX_000 == 1 ? thousand : thousandFrom5
-                case 2, 3, 4:
-                    polishThousand = thousandTo4
-                default:
-                    polishThousand = thousandFrom5
-                }
-            } else {
-                polishThousand = thousandFrom5
-            }
             
             var ret = ""
             switch XXX_000 {
             case 1:
-                ret = polishThousand
+                ret = thousand
             default:
-                ret = translatePositiveInteger(XXX_000)! + " " + polishThousand
+                ret = translatePositiveInteger(XXX_000)! + " " + thousand
             }
             if XXX > 0 {
                 ret += " " + translatePositiveInteger(XXX)!
@@ -185,6 +156,7 @@ class TranslatePolish: GeneralTranslator {
         if XXX_000_000 > 0 {
             ret += " " + translatePositiveInteger(XXX_000_000)!
         }
-        return ret    }
+        return ret
+    }
         
 }

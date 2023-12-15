@@ -193,5 +193,6 @@ final class Test_Spanish: XCTestCase {
         XCTAssertEqual(spanish.translate(3.1415926), "tres coma uno cuatro uno cinco nueve dos seis")
         XCTAssertEqual(spanish.translate(-3.1415926), "menos tres coma uno cuatro uno cinco nueve dos seis")
         XCTAssertEqual(spanish.translate(3.4e16), "tres coma cuatro por diez elevado a dieciséis")
+        XCTAssertEqual(spanish.translate(3.5e26), "tres coma cinco por diez elevado a veintiséis")
     }
 }
