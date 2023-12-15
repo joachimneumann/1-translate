@@ -14,7 +14,7 @@ class TranslateCatalan: GeneralTranslator {
             dotString: "coma",
             negativeString: "menys",
             andSoOn: "etcètera",
-            exponentString: "vegades deu a la potència de")
+            exponentString: "por diez elevat a")
     }
     
     private func catalan_0_20(_ intValue: Int) -> String? {
