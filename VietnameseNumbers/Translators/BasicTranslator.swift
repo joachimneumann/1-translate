@@ -19,6 +19,19 @@ protocol TranslatorProtocol {
 
 class BasicTranslator: TranslatorProtocol, Hashable {
     
+    func doubleToString(_ d: Double) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.decimalSeparator = decimalSeparator
+        numberFormatter.groupingSeparator = groupSeparator
+        numberFormatter.maximumFractionDigits = 20
+        if let result =  numberFormatter.string(from: d as NSNumber) {
+            return result
+        } else {
+            return "SSSS"
+        }
+    }
+
+    
     var uid = UUID().uuidString
     static func == (lhs: BasicTranslator, rhs: BasicTranslator) -> Bool {
         lhs.language == rhs.language
@@ -60,7 +73,7 @@ class BasicTranslator: TranslatorProtocol, Hashable {
     }
     
     func translate(_ d: Double) -> String? {
-        translate(d.string)
+        translate(doubleToString(d))
     }
     
     func translate(_ s: String) -> String? {
