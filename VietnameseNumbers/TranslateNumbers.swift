@@ -23,30 +23,7 @@ struct TranslateNumbers: View {
             VStack(spacing: 0.0) {
                 VStack(spacing: 0.0) {
                     HStack(spacing: 30.0) {
-                        Button {
-                            showLanguageSelection.toggle()
-                        } label: {
-                            Image(viewModel.firstTranslator.language)
-                                .resizable()
-                                .scaledToFit()
-                        }
-                        .padding(1)
-                        .border(.white)
-                        .sheet(isPresented: $showLanguageSelection) {
-                            ScrollView {
-                                VStack{
-                                    LanguageSelector(viewModel: viewModel)
-                                    Button(action: {
-                                        showLanguageSelection = false
-                                    }) {
-                                        Text("close")
-                                            .foregroundColor(.white)
-                                    }
-                                }
-                                .padding(20)
-                                .presentationDetents([.height(140.0 + CGFloat(viewModel.translators.count) * 40.0)])
-                            }
-                        }
+                        LanguageButton(language: viewModel.firstTranslator.language, viewModel: viewModel)
                         Spacer()
                         NavigationLink {
                             Settings(viewModel: viewModel, screen: screen, font: Font(screen.infoUiFont))
@@ -67,40 +44,13 @@ struct TranslateNumbers: View {
                     TranslatedDisplay(
                         translatedString: viewModel.firstTranslatedNumber,
                         screen: screen)
-                    //.background(Color.yellow).opacity(0.8)
                     .padding(.horizontal, 0)
                     Spacer(minLength: 0.0)
                 }
                 if viewModel.secondLanguageAllowed {
                     VStack(spacing: 0.0) {
                         HStack(spacing: 30.0) {
-                            Button {
-                                showLanguageSelection.toggle()
-                            } label: {
-                                Image(viewModel.secondTranslator.language)
-                                    .resizable()
-                                    .scaledToFit()
-                            }
-                            .padding(1)
-                            .border(.white)
-                            .sheet(isPresented: $showLanguageSelection) {
-                                        VStack{
-                                            Text("Hello, I'm a modal!")
-                                            Button("Dismiss") {
-                                                showLanguageSelection = false
-                                            }
-                                        }.presentationDetents([.height(250)])
-                                    }
-//                            .sheet(isPresented: $showLanguageSelection) {
-//                                VStack {
-//                                    LanguageSelector(viewModel: viewModel)
-//                                        .presentationDetents(
-//                                            [.height(CGFloat(80 + 190 * viewModel.translators.count))]
-//                                        )
-//                                        .frame(height: .infinity)
-//                                        .background(screen.backgroundColor)
-//                                }
-//                            }
+                            LanguageButton(language: viewModel.secondTranslator.language, viewModel: viewModel)
                             Spacer()
                         }
                         .frame(height: 30.0)
@@ -127,28 +77,49 @@ struct TranslateNumbers: View {
         }
     }
     
-    var infoView: some View {
-        let leadingPaddingToCenterRad = 0.5 * (screen.iconsWidth - screen.plusIconSize) + 0.5 * screen.plusIconSize - 0.5 * screen.radWidth + screen.displayHorizontalPadding
-        return HStack(spacing: 0.0) {
-            let info = "\(viewModel.showPrecision ? "Precision: "+viewModel.precisionDescription+" digits" : "\(viewModel.rad ? "Rad" : "")")"
-            Text(info)
-                .foregroundColor(screen.defaultTextColor)
-                .font(Font(screen.infoUiFont))
-                .accessibilityIdentifier("infoText")
-            Spacer()
+    struct LanguageButton: View {
+        @State var showSheet = false
+        private let language: String
+        private let viewModel: ViewModel
+
+        init(language: String, viewModel: ViewModel) {
+            self.language = language
+            self.viewModel = viewModel
         }
-        .padding(.leading, leadingPaddingToCenterRad)
+        
+        var body: some View {
+            Button {
+                showSheet.toggle()
+            } label: {
+                Image(language)
+                    .resizable()
+                    .scaledToFit()
+            }
+            .padding(1)
+            .border(.white)
+            .sheet(isPresented: $showSheet) {
+                ScrollView {
+                    VStack{
+                        LanguageSelector(viewModel: viewModel)
+                        Button(action: {
+                            showSheet = false
+                        }) {
+                            Text("Close")
+                                .foregroundColor(.white)
+                                .padding(.top, 10)
+                        }
+                    }
+                    .padding(20)
+                    .presentationDetents([.height(140.0 + CGFloat(viewModel.translators.count) * 40.0)])
+                }
+                .background(Color(red: 0.15, green: 0.15, blue: 0.15))
+            }
+        }
     }
-    
-    @ViewBuilder
-    var content: some View {
-        portraitView
-    }
-    
+        
     var body: some View {
         NavigationView {
-            //let _ = print("Calculator body isPortraitPhone", screen.isPortraitPhone)
-            content
+            portraitView
                 .padding(.bottom, screen.bottomPadding)
                 .padding(.horizontal, screen.horizontalPadding)
                 .preferredColorScheme(.dark)
