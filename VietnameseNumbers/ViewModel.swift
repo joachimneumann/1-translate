@@ -176,7 +176,11 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     var settingsSpanishUsePunto: PuntoComma = .coma {
         didSet {
             translateSpanish.dotString = settingsSpanishUsePunto.rawValue
-            settingsSpanishExample = translateSpanish.translate(1.5) ?? "Error"
+            // make sure that the selected decimal and group seperator do not mess up the example
+            let tempSpanish = TranslateSpanish()
+            tempSpanish.decimalSeparator = "."
+            tempSpanish.groupSeparator = ""
+            settingsSpanishExample = tempSpanish.translate(1.5) ?? "Error"
         }
     }
 

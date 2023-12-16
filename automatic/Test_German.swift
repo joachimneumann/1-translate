@@ -226,6 +226,6 @@ final class TestGerman: XCTestCase {
         XCTAssertEqual(german.translate(-3.1415926), "minus drei Komma eins vier eins fünf neun zwei sechs")
         XCTAssertEqual(german.translate(-74), "minus vierundsiebzig")
         XCTAssertEqual(german.translate(-1_000_000), "minus eine Million")
-        XCTAssertEqual(german.translate(3.4e16), "drei Komma vier mal zehn hoch sechzehn")
+        XCTAssertEqual(german.translate(3.4e22), "drei Komma vier mal zehn hoch zweiundzwanzig")
     }
 }

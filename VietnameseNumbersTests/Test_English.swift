@@ -171,7 +171,7 @@ final class TestEnglish: XCTestCase {
         XCTAssertEqual(english.translate(1.5), "one point five")
         XCTAssertEqual(english.translate(3.1415926), "three point one four one five nine two six")
         XCTAssertEqual(english.translate(-3.1415926), "minus three point one four one five nine two six")
-        XCTAssertEqual(english.translate(3.4e16), "three point four times ten to the power of sixteen")
+        XCTAssertEqual(english.translate(3.4e22), "three point four times ten to the power of twenty-two")
 
         english.insertAfterHundred = "and"
         XCTAssertEqual(english.translate(0), "zero")

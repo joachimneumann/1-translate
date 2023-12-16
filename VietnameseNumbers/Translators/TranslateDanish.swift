@@ -8,10 +8,12 @@
 import SwiftUI
 
 class TranslateDanish: GeneralTranslator {
-    let hundred        = "hundrede"
-    let thousand       = "tusind"
-    let million        = "million"
-    let billion        = "miliardów"
+    let oneHundred  = "hundred"
+    let hundred     = "hundrede"
+    let oneThousand = "ettusind"
+    let thousand    = "tusind"
+    let million     = "million"
+    let billion     = "milliard"
 
     init() {
         super.init(
@@ -97,13 +99,13 @@ class TranslateDanish: GeneralTranslator {
             let X00 = temp % 10
             var ret = ""
             if X00 == 1 {
-                ret = hundred
+                ret = oneHundred
             } else {
-                ret = translate_0_20(X00)! + hundred
+                ret = translate_0_20(X00)! + " " + hundred
             }
             let leftover = 10 * X0 + X
             if leftover > 0 {
-                ret += translatePositiveInteger(leftover)!//, fromLargerNumber: fromLargerNumber)!
+                ret += " og "+translatePositiveInteger(leftover)!//, fromLargerNumber: fromLargerNumber)!
             }
             return ret
         }
@@ -112,18 +114,15 @@ class TranslateDanish: GeneralTranslator {
             let XXX_000 = (i - i % 1000) / 1000
             let XXX = i - 1000 * XXX_000
             
-            let lastDigitOfTousands = XXX_000 % 10
-            let secondDigitOfTousands = XXX_000 % 100 - lastDigitOfTousands
-            
             var ret = ""
             switch XXX_000 {
             case 1:
-                ret = thousand
+                ret = oneThousand
             default:
                 ret = translatePositiveInteger(XXX_000)! + " " + thousand
             }
             if XXX > 0 {
-                ret += " " + translatePositiveInteger(XXX)!
+                ret += " og " + translatePositiveInteger(XXX)!
             }
             return ret
         }
@@ -139,7 +138,7 @@ class TranslateDanish: GeneralTranslator {
                 ret += translate(XXX_000_000)! + " " + million
             }
             if XXX_000 > 0 {
-                ret += " " + translatePositiveInteger(XXX_000)!
+                ret += " og " + translatePositiveInteger(XXX_000)!
             }
             return ret
         }
@@ -154,7 +153,7 @@ class TranslateDanish: GeneralTranslator {
             ret += " " + billion
         }
         if XXX_000_000 > 0 {
-            ret += " " + translatePositiveInteger(XXX_000_000)!
+            ret += " og " + translatePositiveInteger(XXX_000_000)!
         }
         return ret
     }

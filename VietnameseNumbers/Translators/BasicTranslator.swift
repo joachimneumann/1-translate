@@ -73,7 +73,7 @@ class BasicTranslator: TranslatorProtocol, Hashable {
     }
     
     func translate(_ d: Double) -> String? {
-        translate(doubleToString(d))
+        translate(d.string)
     }
     
     func translate(_ s: String) -> String? {
