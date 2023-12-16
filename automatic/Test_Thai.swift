@@ -6,9 +6,9 @@
 
 import XCTest
 
-final class TranslationsTestsAutomaticThai: XCTestCase {
+final class TestsThai: XCTestCase {
 
-    func test_automatic_thai() {
+    func test_thai() {
         let thai = TranslateThai()
         thai.groupSeparator = ""
         thai.decimalSeparator = "."
@@ -42,7 +42,7 @@ final class TranslationsTestsAutomaticThai: XCTestCase {
         XCTAssertEqual(thai.translate(27), "ยี่สิบเจ็ด")
         XCTAssertEqual(thai.translate(28), "ยี่สิบแปด")
         XCTAssertEqual(thai.translate(29), "ยี่สิบเก้า")
-        XCTAssertEqual(thai.translate(20), "ยี่สิบ")
+        XCTAssertEqual(thai.translate(30), "สามสิบ") 
         XCTAssertEqual(thai.translate(31), "สามสิบเอ็ด")
         XCTAssertEqual(thai.translate(32), "สามสิบสอง")
         XCTAssertEqual(thai.translate(33), "สามสิบสาม")
@@ -110,7 +110,7 @@ final class TranslationsTestsAutomaticThai: XCTestCase {
         XCTAssertEqual(thai.translate(95), "เก้าสิบห้า")
         XCTAssertEqual(thai.translate(96), "เก้าสิบหก")
         XCTAssertEqual(thai.translate(97), "เก้าสิบเจ็ด")
-        XCTAssertEqual(thai.translate(98), "เก้าสิบแปด")
+        XCTAssertEqual(thai.translate(98), "เก้าสิบแปด") 
         XCTAssertEqual(thai.translate(99), "เก้าสิบเก้า")
         XCTAssertEqual(thai.translate(100), "หนึ่งร้อย")
         XCTAssertEqual(thai.translate(101), "หนึ่งร้อยหนึ่ง")

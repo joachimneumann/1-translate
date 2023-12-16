@@ -19,6 +19,9 @@ class TranslateEnglish: HundredBasedTranslator {
             thousand: "thousand",
             million: "million",
             billion: "billion")
+        beforeOneHundred = "one "
+        beforeHundred = " "
+        afterHundred = " "
     }
 
     private func english_tens(_ intValue: Int) -> String? {

@@ -23,6 +23,9 @@
 		AA2FAC12272F2349006DE4C8 /* NumberStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FABFB272F2348006DE4C8 /* NumberStack.swift */; };
 		AA2FAC17272F2349006DE4C8 /* BrainEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FAC01272F2348006DE4C8 /* BrainEngine.swift */; };
 		AA2FAC23272F2349006DE4C8 /* OperatorStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FAC0D272F2349006DE4C8 /* OperatorStack.swift */; };
+		AA30E9E02B2DAD4C00F7FDEA /* Test_Thai.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA30E9DF2B2DAD4C00F7FDEA /* Test_Thai.swift */; };
+		AA30E9E22B2DAD7500F7FDEA /* TranslateThai.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA30E9E12B2DAD7500F7FDEA /* TranslateThai.swift */; };
+		AA30E9E32B2DB02200F7FDEA /* TranslateThai.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA30E9E12B2DAD7500F7FDEA /* TranslateThai.swift */; };
 		AA32853B297248B800D86CB4 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA32853A297248B800D86CB4 /* ViewModel.swift */; };
 		AA32853D29724D5700D86CB4 /* FlexibleNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA32853C29724D5700D86CB4 /* FlexibleNavigation.swift */; };
 		AA370C2D293352960041AE4E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA370C2C293352960041AE4E /* Extensions.swift */; };
@@ -113,6 +116,8 @@
 		AA2FAC01272F2348006DE4C8 /* BrainEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrainEngine.swift; sourceTree = "<group>"; };
 		AA2FAC04272F2348006DE4C8 /* CalculatorCommands.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorCommands.swift; sourceTree = "<group>"; };
 		AA2FAC0D272F2349006DE4C8 /* OperatorStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperatorStack.swift; sourceTree = "<group>"; };
+		AA30E9DF2B2DAD4C00F7FDEA /* Test_Thai.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Test_Thai.swift; path = automatic/Test_Thai.swift; sourceTree = SOURCE_ROOT; };
+		AA30E9E12B2DAD7500F7FDEA /* TranslateThai.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateThai.swift; sourceTree = "<group>"; };
 		AA32853A297248B800D86CB4 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		AA32853C29724D5700D86CB4 /* FlexibleNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlexibleNavigation.swift; sourceTree = "<group>"; };
 		AA370C2C293352960041AE4E /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -292,6 +297,7 @@
 				AA95612C2B2A1C1900648915 /* TranslateCatalan.swift */,
 				AA715CA92B2BE3C4009335B7 /* TranslatePolish.swift */,
 				AA715CAF2B2C262A009335B7 /* TranslateDanish.swift */,
+				AA30E9E12B2DAD7500F7FDEA /* TranslateThai.swift */,
 			);
 			path = Translators;
 			sourceTree = "<group>";
@@ -299,6 +305,7 @@
 		AA8A911C2B1D815C00CE7185 /* VietnameseNumbersTests */ = {
 			isa = PBXGroup;
 			children = (
+				AA30E9DF2B2DAD4C00F7FDEA /* Test_Thai.swift */,
 				AA715CB62B2C3ABE009335B7 /* Test_English.swift */,
 				AA9561352B2AAFEB00648915 /* Test_German.swift */,
 				AA8B614D2B2AFC9A00D2152A /* Test_Spanish.swift */,
@@ -420,6 +427,7 @@
 				AA95612D2B2A1C1900648915 /* TranslateCatalan.swift in Sources */,
 				AAAE6D6A2B22B77B00079392 /* TranslateGerman.swift in Sources */,
 				AA0523472B27024800DDAAD4 /* LanguageSelector.swift in Sources */,
+				AA30E9E32B2DB02200F7FDEA /* TranslateThai.swift in Sources */,
 				AA92B4C329250827005E43F0 /* ColoredStepper.swift in Sources */,
 				AA0523412B25447F00DDAAD4 /* ThousandBasedTranslator.swift in Sources */,
 				AA8A91122B1D7B7100CE7185 /* TranslateNumbers.swift in Sources */,
@@ -462,6 +470,7 @@
 				AA715CB32B2C39EE009335B7 /* Test_Catalan.swift in Sources */,
 				AAAE6D682B22B5CF00079392 /* TranslateVietnamese.swift in Sources */,
 				AA8A91322B1D865B00CE7185 /* KeyColor.swift in Sources */,
+				AA30E9E02B2DAD4C00F7FDEA /* Test_Thai.swift in Sources */,
 				AA715CB72B2C3ABE009335B7 /* Test_English.swift in Sources */,
 				AA715CAA2B2BE3C4009335B7 /* TranslatePolish.swift in Sources */,
 				AA0523422B25447F00DDAAD4 /* ThousandBasedTranslator.swift in Sources */,
@@ -469,6 +478,7 @@
 				AAFC9C762B247D0700F866D8 /* GeneralTranslator.swift in Sources */,
 				AA715CA82B2BE367009335B7 /* Test_Polish.swift in Sources */,
 				AA715CB52B2C3A60009335B7 /* Test_Vietnamese.swift in Sources */,
+				AA30E9E22B2DAD7500F7FDEA /* TranslateThai.swift in Sources */,
 				AA715CAE2B2C22DB009335B7 /* Test_Danish.swift in Sources */,
 				AAAE6D6B2B22B77B00079392 /* TranslateGerman.swift in Sources */,
 				AA95612E2B2A1C1900648915 /* TranslateCatalan.swift in Sources */,

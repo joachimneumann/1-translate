@@ -10,7 +10,6 @@ import XCTest
 final class TestEnglish: XCTestCase {
     func test_english() {
         let english = TranslateEnglish()
-        english.insertAfterHundred = nil
         english.groupSeparator = ""
         english.decimalSeparator = "."
 
@@ -173,7 +172,7 @@ final class TestEnglish: XCTestCase {
         XCTAssertEqual(english.translate(-3.1415926), "minus three point one four one five nine two six")
         XCTAssertEqual(english.translate(3.4e22), "three point four times ten to the power of twenty-two")
 
-        english.insertAfterHundred = "and"
+        english.afterHundred = " and "
         XCTAssertEqual(english.translate(0), "zero")
         XCTAssertEqual(english.translate(1), "one")
         XCTAssertEqual(english.translate(2), "two")

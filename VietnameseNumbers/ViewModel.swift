@@ -73,6 +73,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     let translateCatalan = TranslateCatalan()
     let translatePolish = TranslatePolish()
     let translateDanish = TranslateDanish()
+    let translateThai = TranslateThai()
 
     var translators: [BasicTranslator] // set in init()
 
@@ -164,9 +165,9 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     var settingsEnglishUseAndAfterHundred: Bool = false {
         didSet {
             if settingsEnglishUseAndAfterHundred {
-                translateEnglish.insertAfterHundred = "and"
+                translateEnglish.afterHundred = " and "
             } else {
-                translateEnglish.insertAfterHundred = nil
+                translateEnglish.afterHundred = " "
             }
             settingsEnglishExample = translateEnglish.translate(105)!
         }
@@ -295,7 +296,8 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             translateSpanish,
             translateCatalan,
             translatePolish,
-            translateDanish]
+            translateDanish,
+            translateThai]
         firstTranslator = translateEnglish
         secondTranslator = translateEnglish
 

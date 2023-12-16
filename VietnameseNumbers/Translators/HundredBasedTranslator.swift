@@ -20,8 +20,10 @@ class HundredBasedTranslator: BasicTranslator, HundredBasedTranslatorProtocol {
     var thousand: String
     var million: String
     var billion: String
-    var insertAfterHundred: String? = nil
-    
+    var beforeHundred: String = ""
+    var beforeOneHundred: String = ""
+    var afterHundred: String = ""
+
     init(
         language: String,
         dotString: String,
@@ -60,15 +62,15 @@ class HundredBasedTranslator: BasicTranslator, HundredBasedTranslatorProtocol {
             let X0 = temp % 10
             temp = (temp - X0) / 10
             let X00 = temp % 10
-            var ret = translatePositiveInteger_0_99(X00)! + " " + hundred
+            var ret = ""
+            if X00 == 1 {
+                ret = beforeOneHundred + hundred
+            } else {
+                ret = translatePositiveInteger_0_99(X00)! + beforeHundred + hundred
+            }
             let leftover = 10 * X0 + X
             if leftover > 0 {
-                if insertAfterHundred != nil { //"useAndAfterHundred {
-                    ret += " " + insertAfterHundred! + " "
-                } else {
-                    ret += " "
-                }
-                ret += translate(leftover)!
+                ret +=  afterHundred + translate(leftover)!
             }
             return ret
         }
