@@ -157,6 +157,7 @@ final class TestDanish: XCTestCase {
         XCTAssertEqual(danish.translate(1_121), "ettusind og hundred og enogtyve")
         XCTAssertEqual(danish.translate(1_125), "ettusind og hundred og femogtyve")
         XCTAssertEqual(danish.translate(3_142), "tre tusind og hundred og toogfyrre")
+        XCTAssertEqual(danish.translate(9_999), "ni tusind og ni hundrede og nioghalvfems")
         XCTAssertEqual(danish.translate(10_000), "ti tusind")
         XCTAssertEqual(danish.translate(10_001), "ti tusind og en")
         XCTAssertEqual(danish.translate(10_002), "ti tusind og to")
