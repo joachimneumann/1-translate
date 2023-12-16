@@ -11,13 +11,13 @@ import SwiftUI
 
 class TranslatePolish: GeneralTranslator {
     let hundred        = "sto"
-    let thousand       = "tysiąc"
+    let thousand1      = "tysiąc"
     let thousandTo4    = "tysiące"
     let thousandFrom5  = "tysięcy"
-    let million        = "milion"
+    let million1       = "milion"
     let millionTo4     = "miliony"
-    let millionFrom5   = "miliony"
-    let billion        = "miliardów"
+    let millionFrom5   = "milionów"
+    let billion        = "billion"
 
     init() {
         super.init(
@@ -79,6 +79,21 @@ class TranslatePolish: GeneralTranslator {
         }
     }
     
+    func determineThousand(forNumber number: Int) -> String {
+        let thousands = Int(number / 1000)
+        guard thousands >= 1 && thousands <= 999 else {
+            return "Number out of range (1000 - 999000)"
+        }
+
+        let lastTwoDigits = thousands % 100
+        if thousands == 1 { return thousand1 }
+        if (lastTwoDigits >= 12 && lastTwoDigits <= 14) || (lastTwoDigits % 10 >= 5 || lastTwoDigits % 10 == 0) {
+            return thousandFrom5 // tysięcy
+        } else {
+            return thousandTo4 // tysiące
+        }
+    }
+    
     override func translatePositiveInteger(_ i: Int) -> String? {
         if i <= 20 {
             return translate_0_20(i)//, fromLargerNumber: fromLargerNumber)
@@ -125,25 +140,8 @@ class TranslatePolish: GeneralTranslator {
             let XXX_000 = (i - i % 1000) / 1000
             let XXX = i - 1000 * XXX_000
             
-            let lastDigitOfTousands = XXX_000 % 10
-            let secondDigitOfTousands = XXX_000 % 100 - lastDigitOfTousands
+            let polishThousand = determineThousand(forNumber: i)
 
-            var polishThousand = ""
-            if secondDigitOfTousands == 0 {
-                switch lastDigitOfTousands {
-                case 0:
-                    polishThousand = thousandFrom5
-                case 1:
-                    polishThousand = XXX_000 == 1 ? thousand : thousandFrom5
-                case 2, 3, 4:
-                    polishThousand = thousandTo4
-                default:
-                    polishThousand = thousandFrom5
-                }
-            } else {
-                polishThousand = thousandFrom5
-            }
-            
             var ret = ""
             switch XXX_000 {
             case 1:
@@ -158,15 +156,34 @@ class TranslatePolish: GeneralTranslator {
         }
         
         if i <= 999_999_999 {
-            // Above a million, the number is seperated
             let XXX_000_000 = (i - i % 1_000_000) / 1_000_000
             let XXX_000 = i - 1_000_000 * XXX_000_000
-            var ret = ""
-            if XXX_000_000 == 1 {
-                ret += million
+            
+            let lastDigitOfMillions = XXX_000_000 % 10
+            let secondLastDigitOfMillions = (XXX_000_000 - lastDigitOfMillions) % 10 
+
+            var polishMillion = ""
+            if secondLastDigitOfMillions == 0 {
+                switch lastDigitOfMillions {
+                case 0:
+                    polishMillion = millionFrom5
+                case 1:
+                    polishMillion = XXX_000_000 == 1 ? million1 : millionFrom5
+                case 2, 3, 4:
+                    polishMillion = millionTo4
+                default:
+                    polishMillion = millionFrom5
+                }
             } else {
-                ret += translate(XXX_000_000)! + " " + million
+                polishMillion = millionFrom5
             }
+
+            var ret = ""
+//            if XXX_000_000 == 1 {
+//                ret += polishMillion
+//            } else {
+                ret += translate(XXX_000_000)! + " " + polishMillion
+//            }
             if XXX_000 > 0 {
                 ret += " " + translatePositiveInteger(XXX_000)!
             }
