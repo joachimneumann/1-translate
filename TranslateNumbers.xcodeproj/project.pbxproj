@@ -42,6 +42,8 @@
 		AA715CB32B2C39EE009335B7 /* Test_Catalan.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA715CB22B2C39EE009335B7 /* Test_Catalan.swift */; };
 		AA715CB52B2C3A60009335B7 /* Test_Vietnamese.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA715CB42B2C3A60009335B7 /* Test_Vietnamese.swift */; };
 		AA715CB72B2C3ABE009335B7 /* Test_English.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA715CB62B2C3ABE009335B7 /* Test_English.swift */; };
+		AA739C942B2EBEF900A32478 /* TranslateThaiTraditional.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA739C932B2EBEF900A32478 /* TranslateThaiTraditional.swift */; };
+		AA739C952B2EBEF900A32478 /* TranslateThaiTraditional.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA739C932B2EBEF900A32478 /* TranslateThaiTraditional.swift */; };
 		AA8453E8294D872300A50B74 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8453E7294D872300A50B74 /* Icons.swift */; };
 		AA8A91112B1D7B5F00CE7185 /* TranslateNumbersApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FABFF272F2348006DE4C8 /* TranslateNumbersApp.swift */; };
 		AA8A91122B1D7B7100CE7185 /* TranslateNumbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA92B4C829273A58005E43F0 /* TranslateNumbers.swift */; };
@@ -133,6 +135,7 @@
 		AA715CB22B2C39EE009335B7 /* Test_Catalan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_Catalan.swift; sourceTree = "<group>"; };
 		AA715CB42B2C3A60009335B7 /* Test_Vietnamese.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_Vietnamese.swift; sourceTree = "<group>"; };
 		AA715CB62B2C3ABE009335B7 /* Test_English.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_English.swift; sourceTree = "<group>"; };
+		AA739C932B2EBEF900A32478 /* TranslateThaiTraditional.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslateThaiTraditional.swift; sourceTree = "<group>"; };
 		AA8453E7294D872300A50B74 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		AA8A91132B1D7FD000CE7185 /* TranslatedDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatedDisplay.swift; sourceTree = "<group>"; };
 		AA8A911B2B1D815C00CE7185 /* TranslateNumbersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TranslateNumbersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -298,6 +301,7 @@
 				AA715CA92B2BE3C4009335B7 /* TranslatePolish.swift */,
 				AA715CAF2B2C262A009335B7 /* TranslateDanish.swift */,
 				AA30E9E12B2DAD7500F7FDEA /* TranslateThai.swift */,
+				AA739C932B2EBEF900A32478 /* TranslateThaiTraditional.swift */,
 			);
 			path = Translators;
 			sourceTree = "<group>";
@@ -451,6 +455,7 @@
 				AAAE6D642B228B7300079392 /* TranslateEnglish.swift in Sources */,
 				AA370C31293352D60041AE4E /* Key.swift in Sources */,
 				AAAE6D672B22B5CF00079392 /* TranslateVietnamese.swift in Sources */,
+				AA739C942B2EBEF900A32478 /* TranslateThaiTraditional.swift in Sources */,
 				AA8A91112B1D7B5F00CE7185 /* TranslateNumbersApp.swift in Sources */,
 				AA3FB8272920E0E5002ECCEB /* Settings.swift in Sources */,
 				AA715CB12B2C2D86009335B7 /* TranslateDanish.swift in Sources */,
@@ -471,6 +476,7 @@
 				AAAE6D682B22B5CF00079392 /* TranslateVietnamese.swift in Sources */,
 				AA8A91322B1D865B00CE7185 /* KeyColor.swift in Sources */,
 				AA30E9E02B2DAD4C00F7FDEA /* Test_Thai.swift in Sources */,
+				AA739C952B2EBEF900A32478 /* TranslateThaiTraditional.swift in Sources */,
 				AA715CB72B2C3ABE009335B7 /* Test_English.swift in Sources */,
 				AA715CAA2B2BE3C4009335B7 /* TranslatePolish.swift in Sources */,
 				AA0523422B25447F00DDAAD4 /* ThousandBasedTranslator.swift in Sources */,
