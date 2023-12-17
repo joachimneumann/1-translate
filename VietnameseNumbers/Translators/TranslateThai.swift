@@ -19,10 +19,13 @@ class TranslateThai: TwentyBasedTranslator {
             andSoOn: "XXX",
             exponentString: "XXX",
             hundred: "ร้อย",
-            thousand: "หนึ่งพัน",
-            million: "XXX",
-            billion: "XXX")
+            thousand: "พัน",
+            _e6: "XXX",
+            _e9: "XXX")
         beforeOneChunk = "หนึ่ง"
+        onlyOne = "หนึ่ง"
+        tenThousand = "หมื่น"
+        hundredThousand = "แสน"
     }
     
     override func translate_0_20(_ intValue: Int) -> String {

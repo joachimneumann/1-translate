@@ -17,8 +17,8 @@ class TranslateEnglish: TwentyBasedTranslator {
             exponentString: "times ten to the power of",
             hundred: "hundred",
             thousand: "thousand",
-            million: "million",
-            billion: "billion")
+            _e6: "million",
+            _e9: "billion")
         beforeOneChunk = "one "
         beforeChunk = " "
         afterChunk = " "
