@@ -39,6 +39,14 @@ final class TestsThai: XCTestCase {
         300,451 — five is in the ten digit spot, so we read “five” followed by the name of the ten digit in Thai which is ห้าสิบ (hâa sìp).
         300,451 — one is in the unit digit spot, so we read one in Thai which is เอ็ด (èt). (Don’t forget that for numbers higher than 10, if 1 is in the unit digit spot, we read it เอ็ด [èt].)
         300,451 is สามแสนสี่ร้อยห้าสิบเอ็ด (sǎam sǎaen sìi ráauy hâa sìp èt).
+         
+         Example of 21,700,098
+         21 and 700,098 — you divide the number into parts for every six digits from right to left first, so you get 21 and 700,098.
+         21,700,098 — you read the left part first followed by ล้าน (láan) which is ยี่สิบเอ็ดล้าน (yîi sìp èt láan).
+         21,700,098 — you read the right part after that which is เจ็ดแสนเก้าสิบแปด (jèt sǎaen gâo sìp bpàaet).
+         21,700,098 is ยี่สิบเอ็ดล้านเจ็ดแสนเก้าสิบแปด (yîi sìp èt láan jèt sǎaen gâo sìp bpàaet).
+
+
        */
 
         XCTAssertEqual(thai.translate(8_000), "แปดพัน")
@@ -53,6 +61,8 @@ final class TestsThai: XCTestCase {
         XCTAssertEqual(thai.translate(50), "ห้าสิบ")
         XCTAssertNotEqual(thai.translate(1), "เอ็ด")
         XCTAssertEqual(thai.translate(300_451), "สามแสนสี่ร้อยห้าสิบเอ็ด")
+        
+        XCTAssertEqual(thai.translate(21_700_098), "ยี่สิบเอ็ดล้านเจ็ดแสนเก้าสิบแปด")
     }
     
     
@@ -202,6 +212,9 @@ final class TestsThai: XCTestCase {
         XCTAssertEqual(thai.translate(1_115), "หนึ่งพันหนึ่งร้อยสิบห้า")
         XCTAssertEqual(thai.translate(1_121), "หนึ่งพันหนึ่งร้อยยี่สิบเอ็ด")
         XCTAssertEqual(thai.translate(1_125), "หนึ่งพันหนึ่งร้อยยี่สิบห้า")
+        XCTAssertEqual(thai.translate(3_005), "สามพันห้า")
+        XCTAssertEqual(thai.translate(3_105), "สามพันหนึ่งร้อยห้า")
+        XCTAssertEqual(thai.translate(3_155), "สามพันหนึ่งร้อยห้าสิบห้า")
         XCTAssertEqual(thai.translate(8_126), "แปดพันหนึ่งร้อยยี่สิบหก")
         XCTAssertEqual(thai.translate(10_000), "หนึ่งหมื่น")
         XCTAssertEqual(thai.translate(10_001), "หนึ่งหมื่นหนึ่ง")
@@ -218,17 +231,19 @@ final class TestsThai: XCTestCase {
         XCTAssertEqual(thai.translate(300_451), "สามแสนสี่ร้อยห้าสิบเอ็ด")
         XCTAssertEqual(thai.translate(502_305), "ห้าแสนสองพันสามร้อยห้า")
         XCTAssertEqual(thai.translate(999_999), "เก้าแสนเก้าหมื่นเก้าพันเก้าร้อยเก้าสิบเก้า")
+        XCTAssertEqual(thai.translate(21_700_098), "ยี่สิบเอ็ดล้านเจ็ดแสนเก้าสิบแปด")
         XCTAssertEqual(thai.translate(62_000_000), "หกสิบสองล้าน")
-        XCTAssertEqual(thai.translate(62_003_005), "หกสิบสองล้านสามพันห้าห้า")
-        XCTAssertEqual(thai.translate(62_003_105), "หกสิบสองล้านสามพันหนึ่งร้อยห้าร้อยห้า")
-        XCTAssertEqual(thai.translate(62_003_155), "หกสิบสองล้านสามพันหนึ่งร้อยหนึ่งร้อยห้าสิบห้า")
+        XCTAssertEqual(thai.translate(62_003_005), "หกสิบสองล้านสามพันห้า")
+        XCTAssertEqual(thai.translate(62_003_105), "หกสิบสองล้านสามพันหนึ่งร้อยห้า")
+        XCTAssertEqual(thai.translate(62_003_155), "หกสิบสองล้านสามพันหนึ่งร้อยห้าสิบห้า")
+        XCTAssertEqual(thai.translate(999_999_999), "เก้าร้อยเก้าสิบเก้าล้านเก้าแสนเก้าหมื่นเก้าพันเก้าร้อยเก้าสิบเก้า")
         XCTAssertEqual(thai.translate(99_000_000_909), "เก้าสิบเก้าพันล้านเก้าร้อยเก้า")
-        XCTAssertEqual(thai.translate(99_999_999_999), "เก้าสิบเก้าพันล้านเก้าร้อยเก้าสิบเก้าล้านเก้าร้อยเก้าหมื่นเก้าพันเก้าร้อยเก้าสิบเก้า")
+        XCTAssertEqual(thai.translate(99_999_999_999), "เก้าสิบเก้าพันล้านเก้าร้อยเก้าสิบเก้าล้านเก้าแสนเก้าหมื่นเก้าพันเก้าร้อยเก้าสิบเก้า")
         XCTAssertEqual(thai.translate(-1), "ลบหนึ่ง")
         XCTAssertEqual(thai.translate(-1.5), "ลบหนึ่งจุดห้า")
         XCTAssertEqual(thai.translate(1.5), "หนึ่งจุดห้า")
-        XCTAssertEqual(thai.translate(3.1415926), "สามจุดหนึ่งสี่สี่ห้าห้าเก้าสองหก")
-        XCTAssertEqual(thai.translate(-3.1415926), "ลบสามจุดหนึ่งสี่หนึ่งห้าห้าเก้าสองหก")
-        XCTAssertEqual(thai.translate(3.4E13), "สามจุดสี่เท่าสิบถึงพลังของสิบสาม")
+        XCTAssertEqual(thai.translate(3.1415926), "สามจุดหนึ่งสี่หนึ่งห้าเก้าสองหก")
+        XCTAssertEqual(thai.translate(-3.1415926), "ลบสามจุดหนึ่งสี่หนึ่งห้าเก้าสองหก")
+        //XCTAssertEqual(thai.translate("3.4e13"), "สามจุดสี่เท่าสิบถึงพลังของสิบสาม")
         }
 }

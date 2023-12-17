@@ -14,14 +14,16 @@ class TranslateThai: TwentyBasedTranslator {
     init() {
         super.init(
             language: "ภาษาไทย",
-            dotString: "XXX",
-            negativeString: "XXX",
+            dotString: "จุด",
+            negativeString: "ลบ",
             andSoOn: "XXX",
             exponentString: "XXX",
             hundred: "ร้อย",
             thousand: "พัน",
-            _e6: "XXX",
-            _e9: "XXX")
+            _e6: "ล้าน",
+            _e9: "พันล้าน")
+        beforeMinus = ""
+        beforeAndfterDotString = ""
         beforeOneChunk = "หนึ่ง"
         onlyOne = "หนึ่ง"
         tenThousand = "หมื่น"
@@ -69,23 +71,5 @@ class TranslateThai: TwentyBasedTranslator {
         default: return " 10s outside range "
         }
     }
-
-//    override func translate_0_20(_ i: Int) -> String? {
-//        if i == 1 {
-//            return "หนึ่ง"
-//        }
-//        if i <= 20 {
-//            return translate_0_20(i)
-//        }
-//        var temp = i
-//        let X = temp % 10
-//        temp = (temp - X) / 10
-//        let X0 = temp % 10
-//        if X == 0 {
-//            return tens(X0)!
-//        } else {
-//            return tens(X0)! + translate_0_20(X)!
-//        }
-//    }
 }
 

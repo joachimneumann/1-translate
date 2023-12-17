@@ -18,7 +18,9 @@ protocol TranslatorProtocol {
 }
 
 class BasicTranslator: TranslatorProtocol, Hashable {
-    
+    var beforeMinus: String = " "
+    var beforeAndfterDotString: String = " "
+
     func doubleToString(_ d: Double) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.decimalSeparator = decimalSeparator
@@ -65,7 +67,7 @@ class BasicTranslator: TranslatorProtocol, Hashable {
     func translate(_ i: Int) -> String? {
         if i < 0 {
             guard let translation = translatePositiveInteger(-i) else { return nil }
-            return negativeString + " " + translation
+            return negativeString + beforeMinus + translation
         } else {
             guard let translation = translatePositiveInteger(i) else { return nil }
             return translation
@@ -105,12 +107,12 @@ class BasicTranslator: TranslatorProtocol, Hashable {
         }
         if let fractionalPart = fractionalPart {
             var count = 0
-            ret += " " + dotString
+            ret += beforeAndfterDotString + dotString
             for char in fractionalPart {
                 if count < 10 {
                     guard let digit = Int(String(char)) else { return nil }
                     guard let digitString = translate(digit) else { return nil }
-                    ret += " " + digitString
+                    ret += beforeAndfterDotString + digitString
                 }
                 count += 1
             }
