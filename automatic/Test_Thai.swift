@@ -8,10 +8,26 @@ import XCTest
 
 final class TestsThai: XCTestCase {
 
+    func test_lanta() {
+        let thai = TranslateThai()
+        thai.groupSeparator = ""
+        thai.decimalSeparator = "."
+        XCTAssertEqual(thai.translate(100), "หนึ่งร้อย")
+        XCTAssertEqual(thai.translate(101), "หนึ่งร้อยหนึ่ง")
+        XCTAssertEqual(thai.translate(102), "หนึ่งร้อยสอง")
+        XCTAssertEqual(thai.translate(1_000), "หนึ่งพัน")
+        XCTAssertEqual(thai.translate(1_001), "หนึ่งพันหนึ่ง")
+        XCTAssertEqual(thai.translate(1_005), "หนึ่งพันห้า")
+    }
     func test_thai() {
         let thai = TranslateThai()
         thai.groupSeparator = ""
         thai.decimalSeparator = "."
+        XCTAssertEqual(thai.translate(8_000), "แปดพัน")
+        XCTAssertEqual(thai.translate(100), "หนึ่งร้อย")
+        XCTAssertEqual(thai.translate(20), "ยี่สิบ")
+        XCTAssertEqual(thai.translate(6), "หก")
+        XCTAssertEqual(thai.translate(126), "แปดพันหนึ่งร้อยยี่สิบหก")
         XCTAssertEqual(thai.translate(8_126), "แปดพันหนึ่งร้อยยี่สิบหก")
         XCTAssertEqual(thai.translate(300_451), "สามแสนสี่ร้อยห้าสิบเอ็ด")
         XCTAssertEqual(thai.translate(0), "ศูนย์")
@@ -132,6 +148,7 @@ final class TestsThai: XCTestCase {
         XCTAssertEqual(thai.translate(120), "หนึ่งร้อยยี่สิบ")
         XCTAssertEqual(thai.translate(121), "หนึ่งร้อยยี่สิบเอ็ด")
         XCTAssertEqual(thai.translate(190), "หนึ่งร้อยเก้าสิบ")
+        XCTAssertEqual(thai.translate(200), "สี่ร้อยสี่สิบสี่")
         XCTAssertEqual(thai.translate(444), "สี่ร้อยสี่สิบสี่")
         XCTAssertEqual(thai.translate(500), "ห้าร้อย")
         XCTAssertEqual(thai.translate(580), "ห้าร้อยแปดสิบ")
