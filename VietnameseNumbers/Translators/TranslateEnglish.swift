@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class TranslateEnglish: HundredBasedTranslator {
+class TranslateEnglish: TwentyBasedTranslator {
     init() {
         super.init(
             language: "English",
@@ -23,9 +23,10 @@ class TranslateEnglish: HundredBasedTranslator {
         beforeChunk = " "
         afterChunk = " "
         afterHundred = nil
+        betweenTenAndOne = "-"
     }
 
-    private func english_tens(_ intValue: Int) -> String? {
+    override func translate_10s(_ intValue: Int) -> String {
         switch intValue {
         case 1:     return "ten"
         case 2:     return "twenty"
@@ -36,11 +37,11 @@ class TranslateEnglish: HundredBasedTranslator {
         case 7:     return "seventy"
         case 8:     return "eighty"
         case 9:     return "ninety"
-        default: return nil
+        default: return " 10s outside range "
         }
     }
 
-    override func translatePositiveInteger_0_99(_ i: Int) -> String? {
+    override func translate_0_20(_ i: Int) -> String {
         switch i {
         case 0:     return "zero"
         case 1:     return "one"
@@ -64,15 +65,7 @@ class TranslateEnglish: HundredBasedTranslator {
         case 19:    return "nineteen"
         case 20:    return "twenty"
         default:
-            var temp = i
-            let X = temp % 10
-            temp = (temp - X) / 10
-            let X0 = temp % 10
-            var ret = english_tens(X0)!
-            if X > 0 {
-                ret += "-" + translatePositiveInteger_0_99(X)!
-            }
-            return ret
+            return " 0_20 outside range "
         }
     }
 }

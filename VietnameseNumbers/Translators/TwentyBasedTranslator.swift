@@ -7,15 +7,16 @@
 
 import Foundation
 
-protocol HundredBasedTranslatorProtocol: TranslatorProtocol {
+protocol TwentyBasedTranslatorProtocol: TranslatorProtocol {
     var hundred: String { get set }
     var thousand: String { get set }
     var million: String { get set }
     var billion: String { get set }
-    func translatePositiveInteger_0_99(_ i: Int) -> String?
+    func translate_0_20(_ i: Int) -> String
+    func translate_10s(_ i: Int) -> String
 }
 
-class HundredBasedTranslator: BasicTranslator, HundredBasedTranslatorProtocol {
+class TwentyBasedTranslator: BasicTranslator, TwentyBasedTranslatorProtocol {
     var hundred: String
     var thousand: String
     var million: String
@@ -24,6 +25,7 @@ class HundredBasedTranslator: BasicTranslator, HundredBasedTranslatorProtocol {
     var beforeOneChunk: String = ""
     var afterChunk: String = ""
     var afterHundred: String? = nil
+    var betweenTenAndOne: String? = nil
 
     init(
         language: String,
@@ -47,14 +49,30 @@ class HundredBasedTranslator: BasicTranslator, HundredBasedTranslatorProtocol {
                 exponentString: exponentString)
         }
     
-    func translatePositiveInteger_0_99(_ i: Int) -> String? {
+    func translate_0_20(_ i: Int) -> String {
         /// to be overridden
-        return nil
+        return "Error: not implemented"
     }
-    
+    func translate_10s(_ i: Int) -> String {
+        /// to be overridden
+        return "Error: not implemented"
+    }
+
     override func translatePositiveInteger(_ i: Int) -> String? {
+        if i <= 20 {
+            return translate_0_20(i)
+        }
         if i <= 99 {
-            return translatePositiveInteger_0_99(i)
+            var temp = i
+            let X = temp % 10
+            temp = (temp - X) / 10
+            let X0 = temp % 10
+            var ret = translate_10s(X0)
+            if X > 0 {
+                ret += (betweenTenAndOne != nil ? betweenTenAndOne! : "")
+                ret += translate_0_20(X)
+            }
+            return ret
         }
         if i <= 999 {
             var temp = i
@@ -67,7 +85,7 @@ class HundredBasedTranslator: BasicTranslator, HundredBasedTranslatorProtocol {
             if X00 == 1 {
                 ret = beforeOneChunk + hundred
             } else {
-                ret = translatePositiveInteger_0_99(X00)! + beforeChunk + hundred
+                ret = translate_0_20(X00) + beforeChunk + hundred
             }
             let leftover = 10 * X0 + X
             if leftover > 0 {

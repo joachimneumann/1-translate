@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class TranslateThai: HundredBasedTranslator {
+class TranslateThai: TwentyBasedTranslator {
     var useSoftHyphen: Bool = true
     var capitalisation: Bool = true
 
@@ -25,7 +25,7 @@ class TranslateThai: HundredBasedTranslator {
         beforeOneChunk = "หนึ่ง"
     }
     
-    private func translate_0_20(_ intValue: Int, fromLargerNumber: Bool = false) -> String? {
+    override func translate_0_20(_ intValue: Int) -> String {
         switch intValue {
         case 0:     return "ศูนย์"
         case 1:     return "เอ็ด"
@@ -48,11 +48,11 @@ class TranslateThai: HundredBasedTranslator {
         case 18:    return "สิบแปด"
         case 19:    return "สิบเก้า"
         case 20:    return "ยี่สิบ"
-        default: return nil
+        default: return " 10s outside range "
         }
     }
     
-    private func tens(_ intValue: Int) -> String? {
+    override func translate_10s(_ intValue: Int) -> String {
         switch intValue {
         case 1:     return "สิบ"
         case 2:     return "ยี่สิบ"
@@ -63,26 +63,26 @@ class TranslateThai: HundredBasedTranslator {
         case 7:     return "เจ็ดสิบ"
         case 8:     return "แปดสิบ"
         case 9:     return "เก้าสิบ"
-        default: return nil
+        default: return " 10s outside range "
         }
     }
 
-    override func translatePositiveInteger_0_99(_ i: Int) -> String? {
-        if i == 1 {
-            return "หนึ่ง"
-        }
-        if i <= 20 {
-            return translate_0_20(i)
-        }
-        var temp = i
-        let X = temp % 10
-        temp = (temp - X) / 10
-        let X0 = temp % 10
-        if X == 0 {
-            return tens(X0)!
-        } else {
-            return tens(X0)! + translate_0_20(X)!
-        }
-    }
+//    override func translate_0_20(_ i: Int) -> String? {
+//        if i == 1 {
+//            return "หนึ่ง"
+//        }
+//        if i <= 20 {
+//            return translate_0_20(i)
+//        }
+//        var temp = i
+//        let X = temp % 10
+//        temp = (temp - X) / 10
+//        let X0 = temp % 10
+//        if X == 0 {
+//            return tens(X0)!
+//        } else {
+//            return tens(X0)! + translate_0_20(X)!
+//        }
+//    }
 }
 

@@ -144,7 +144,7 @@ final class TestEnglish: XCTestCase {
         XCTAssertEqual(english.translate(1_035), "one thousand thirty-five")
         XCTAssertEqual(english.translate(1_099), "one thousand ninety-nine")
         XCTAssertEqual(english.translate(1_100), "one thousand one hundred")
-        XCTAssertEqual(english.translate(1_101), "one thousand one hundred one")
+        XCTAssertEqual(english.translate(1_101), "one thousand one hundred one") 
         XCTAssertEqual(english.translate(1_105), "one thousand one hundred five")
         XCTAssertEqual(english.translate(1_110), "one thousand one hundred ten")
         XCTAssertEqual(english.translate(1_111), "one thousand one hundred eleven")
