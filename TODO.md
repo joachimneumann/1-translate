@@ -1,4 +1,6 @@
 - very large numbers
 - Polish Tests
-- Thai
+- all: large numbers...
+- Thai trennung, 1e5
 - Vietnamese: compact?
+

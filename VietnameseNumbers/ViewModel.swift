@@ -295,7 +295,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             translateVietnamese,
             translateSpanish,
             translateCatalan,
-            translatePolish,
+//            translatePolish,
             translateDanish,
             translateThai]
         firstTranslator = translateEnglish
