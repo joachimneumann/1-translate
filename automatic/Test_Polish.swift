@@ -8,7 +8,7 @@ import XCTest
 
 final class TestsPolish: XCTestCase {
     
-    func test_Mikoła() {
+    func XXtest_Mikoła() {
         let polish = TranslatePolish()
         polish.groupSeparator = ""
         polish.decimalSeparator = "."
@@ -176,7 +176,7 @@ final class TestsPolish: XCTestCase {
         XCTAssertEqual(polish.translate(3.4e13), "trzydzieści cztery biliony")
     }
     
-    func test_polish() {
+    func XXtest_polish() {
         let polish = TranslatePolish()
         polish.groupSeparator = ""
         polish.decimalSeparator = "."

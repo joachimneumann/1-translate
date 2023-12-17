@@ -44,6 +44,9 @@
 		AA715CB72B2C3ABE009335B7 /* Test_English.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA715CB62B2C3ABE009335B7 /* Test_English.swift */; };
 		AA739C942B2EBEF900A32478 /* TranslateThaiTraditional.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA739C932B2EBEF900A32478 /* TranslateThaiTraditional.swift */; };
 		AA739C952B2EBEF900A32478 /* TranslateThaiTraditional.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA739C932B2EBEF900A32478 /* TranslateThaiTraditional.swift */; };
+		AA739C982B2F4ECC00A32478 /* Test_Roman.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA739C962B2F4ECC00A32478 /* Test_Roman.swift */; };
+		AA739C9A2B2F4FB700A32478 /* TranslateRoman.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA739C992B2F4FB700A32478 /* TranslateRoman.swift */; };
+		AA739C9B2B2F4FB700A32478 /* TranslateRoman.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA739C992B2F4FB700A32478 /* TranslateRoman.swift */; };
 		AA8453E8294D872300A50B74 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8453E7294D872300A50B74 /* Icons.swift */; };
 		AA8A91112B1D7B5F00CE7185 /* TranslateNumbersApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FABFF272F2348006DE4C8 /* TranslateNumbersApp.swift */; };
 		AA8A91122B1D7B7100CE7185 /* TranslateNumbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA92B4C829273A58005E43F0 /* TranslateNumbers.swift */; };
@@ -136,6 +139,8 @@
 		AA715CB42B2C3A60009335B7 /* Test_Vietnamese.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_Vietnamese.swift; sourceTree = "<group>"; };
 		AA715CB62B2C3ABE009335B7 /* Test_English.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_English.swift; sourceTree = "<group>"; };
 		AA739C932B2EBEF900A32478 /* TranslateThaiTraditional.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslateThaiTraditional.swift; sourceTree = "<group>"; };
+		AA739C962B2F4ECC00A32478 /* Test_Roman.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_Roman.swift; sourceTree = "<group>"; };
+		AA739C992B2F4FB700A32478 /* TranslateRoman.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateRoman.swift; sourceTree = "<group>"; };
 		AA8453E7294D872300A50B74 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		AA8A91132B1D7FD000CE7185 /* TranslatedDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatedDisplay.swift; sourceTree = "<group>"; };
 		AA8A911B2B1D815C00CE7185 /* TranslateNumbersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TranslateNumbersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -302,6 +307,7 @@
 				AA715CAF2B2C262A009335B7 /* TranslateDanish.swift */,
 				AA30E9E12B2DAD7500F7FDEA /* TranslateThai.swift */,
 				AA739C932B2EBEF900A32478 /* TranslateThaiTraditional.swift */,
+				AA739C992B2F4FB700A32478 /* TranslateRoman.swift */,
 			);
 			path = Translators;
 			sourceTree = "<group>";
@@ -317,6 +323,7 @@
 				AA715CB42B2C3A60009335B7 /* Test_Vietnamese.swift */,
 				AA715CA72B2BE367009335B7 /* Test_Polish.swift */,
 				AA715CAD2B2C22DB009335B7 /* Test_Danish.swift */,
+				AA739C962B2F4ECC00A32478 /* Test_Roman.swift */,
 			);
 			path = VietnameseNumbersTests;
 			sourceTree = "<group>";
@@ -446,6 +453,7 @@
 				AA8A91142B1D7FD000CE7185 /* TranslatedDisplay.swift in Sources */,
 				AA2FAC17272F2349006DE4C8 /* BrainEngine.swift in Sources */,
 				AA2FAC12272F2349006DE4C8 /* NumberStack.swift in Sources */,
+				AA739C9A2B2F4FB700A32478 /* TranslateRoman.swift in Sources */,
 				AA2FABF2272F217F006DE4C8 /* Gmp.swift in Sources */,
 				AABEFC132972A8780023A3C9 /* KeyColor.swift in Sources */,
 				AAB10B9A292A2222004707E9 /* Label.swift in Sources */,
@@ -478,6 +486,7 @@
 				AA30E9E02B2DAD4C00F7FDEA /* Test_Thai.swift in Sources */,
 				AA739C952B2EBEF900A32478 /* TranslateThaiTraditional.swift in Sources */,
 				AA715CB72B2C3ABE009335B7 /* Test_English.swift in Sources */,
+				AA739C9B2B2F4FB700A32478 /* TranslateRoman.swift in Sources */,
 				AA715CAA2B2BE3C4009335B7 /* TranslatePolish.swift in Sources */,
 				AA0523422B25447F00DDAAD4 /* ThousandBasedTranslator.swift in Sources */,
 				AAFC9C732B247CDF00F866D8 /* BasicTranslator.swift in Sources */,
@@ -488,6 +497,7 @@
 				AA715CAE2B2C22DB009335B7 /* Test_Danish.swift in Sources */,
 				AAAE6D6B2B22B77B00079392 /* TranslateGerman.swift in Sources */,
 				AA95612E2B2A1C1900648915 /* TranslateCatalan.swift in Sources */,
+				AA739C982B2F4ECC00A32478 /* Test_Roman.swift in Sources */,
 				AA715CB02B2C262A009335B7 /* TranslateDanish.swift in Sources */,
 				AAFC9C792B24817900F866D8 /* TwentyBasedTranslator.swift in Sources */,
 				AA0523452B255AF900DDAAD4 /* TranslateSpanish.swift in Sources */,

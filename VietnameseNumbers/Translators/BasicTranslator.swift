@@ -20,6 +20,7 @@ protocol TranslatorProtocol {
 class BasicTranslator: TranslatorProtocol, Hashable {
     var beforeMinus: String = " "
     var beforeAndfterDotString: String = " "
+    var allowNegativeNumbers = true
 
     func doubleToString(_ d: Double) -> String {
         let numberFormatter = NumberFormatter()
@@ -66,6 +67,7 @@ class BasicTranslator: TranslatorProtocol, Hashable {
     
     func translate(_ i: Int) -> String? {
         if i < 0 {
+            guard allowNegativeNumbers else { return "negative: unknown" }
             guard let translation = translatePositiveInteger(-i) else { return nil }
             return negativeString + beforeMinus + translation
         } else {
