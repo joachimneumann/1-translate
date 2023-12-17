@@ -167,7 +167,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             if settingsEnglishUseAndAfterHundred {
                 translateEnglish.afterHundred = " and "
             } else {
-                translateEnglish.afterHundred = " "
+                translateEnglish.afterHundred = nil
             }
             settingsEnglishExample = translateEnglish.translate(105)!
         }

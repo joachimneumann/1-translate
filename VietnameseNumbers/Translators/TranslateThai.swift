@@ -18,10 +18,11 @@ class TranslateThai: HundredBasedTranslator {
             negativeString: "XXX",
             andSoOn: "XXX",
             exponentString: "XXX",
-            hundred: "หนึ่งร้อย",
+            hundred: "ร้อย",
             thousand: "หนึ่งพัน",
             million: "XXX",
             billion: "XXX")
+        beforeOneChunk = "หนึ่ง"
     }
     
     private func translate_0_20(_ intValue: Int, fromLargerNumber: Bool = false) -> String? {

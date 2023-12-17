@@ -20,9 +20,10 @@ class HundredBasedTranslator: BasicTranslator, HundredBasedTranslatorProtocol {
     var thousand: String
     var million: String
     var billion: String
-    var beforeHundred: String = ""
-    var beforeOneHundred: String = ""
-    var afterHundred: String = ""
+    var beforeChunk: String = ""
+    var beforeOneChunk: String = ""
+    var afterChunk: String = ""
+    var afterHundred: String? = nil
 
     init(
         language: String,
@@ -64,40 +65,59 @@ class HundredBasedTranslator: BasicTranslator, HundredBasedTranslatorProtocol {
             let X00 = temp % 10
             var ret = ""
             if X00 == 1 {
-                ret = beforeOneHundred + hundred
+                ret = beforeOneChunk + hundred
             } else {
-                ret = translatePositiveInteger_0_99(X00)! + beforeHundred + hundred
+                ret = translatePositiveInteger_0_99(X00)! + beforeChunk + hundred
             }
             let leftover = 10 * X0 + X
             if leftover > 0 {
-                ret +=  afterHundred + translate(leftover)!
+                if let afterHundred = afterHundred {
+                    ret +=  afterHundred + translate(leftover)!
+                } else {
+                    ret +=  afterChunk + translate(leftover)!
+                }
             }
             return ret
         }
         if i <= 999_999 {
             let XXX_000 = (i - i % 1000) / 1000
             let XXX = i - 1000 * XXX_000
-            var ret = translatePositiveInteger(XXX_000)! + " " + thousand
+            var ret = ""
+            if XXX_000 == 1 {
+                ret = beforeOneChunk + thousand
+            } else {
+                ret = translatePositiveInteger(XXX_000)! + beforeChunk + thousand
+            }
             if XXX > 0 {
-                ret += " " + translate(XXX)!
+                ret += afterChunk + translate(XXX)!
             }
             return ret
         }
         if i <= 999_999_999 {
             let XXX_000_000 = (i - i % 1_000_000) / 1_000_000
             let XXX_000 = i - 1_000_000 * XXX_000_000
-            var ret = translatePositiveInteger(XXX_000_000)! + " " + million
+            var ret = ""
+            if XXX_000_000 == 1 {
+                ret = beforeOneChunk + million
+            } else {
+                ret = translatePositiveInteger(XXX_000_000)! + beforeChunk + million
+            }
             if XXX_000 > 0 {
-                ret += " " + translatePositiveInteger(XXX_000)!
+                ret += afterChunk + translate(XXX_000)!
             }
             return ret
         }
         
         let XXX_000_000_000 = (i - i % 1_000_000_000) / 1_000_000_000
         let XXX_000_000 = i - 1_000_000_000 * XXX_000_000_000
-        var ret = translatePositiveInteger(XXX_000_000_000)! + " " + billion
+        var ret = ""
+        if XXX_000_000_000 == 1 {
+            ret = beforeOneChunk + billion
+        } else {
+            ret = translatePositiveInteger(XXX_000_000_000)! + beforeChunk + billion
+        }
         if XXX_000_000 > 0 {
-            ret += " " + translatePositiveInteger(XXX_000_000)!
+            ret += afterChunk + translate(XXX_000_000)!
         }
         return ret
     }
