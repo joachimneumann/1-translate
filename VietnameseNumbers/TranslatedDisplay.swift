@@ -17,7 +17,7 @@ struct TopBorder: Shape {
 
     func path(in rect: CGRect) -> Path {
         edges.map { _ in
-            return Path(.init(x: rect.minX, y: rect.minY+5, width: rect.width, height: 2))
+            return Path(.init(x: rect.minX, y: rect.minY+3, width: rect.width, height: 2))
         }.reduce(into: Path()) { $0.addPath($1) }
     }
 }
