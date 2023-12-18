@@ -7,8 +7,11 @@
 
 import SwiftUI
 
+
 class TranslateRoman: BasicTranslator {
-    
+
+    static let TOUSANDS = "__RomanThousand__"
+
     init() {
         super.init(language: "roman",
                    dotString: "",
@@ -19,13 +22,13 @@ class TranslateRoman: BasicTranslator {
     }
     
     override func translatePositiveInteger(_ num: Int) -> String? {
-        if num < 3_999 {
+        if num <= 3_999 {
             return translate_1_999(num)
         } else {
             if num < 3_999_999 {
                 let XXX = num % 1000
                 let XXX_000 = num / 1000
-                var ret = translate_1_999(XXX_000)! + "OVERLINE"
+                var ret = translate_1_999(XXX_000)! + TranslateRoman.TOUSANDS
                 if XXX > 0 {
                     ret += translate_1_999(XXX)!
                 }
@@ -35,7 +38,7 @@ class TranslateRoman: BasicTranslator {
         return "too large"
     }
     
-    private func translate_1_999(_ num: Int, useOverline: Bool = false) -> String? {
+    private func translate_1_999(_ num: Int) -> String? {
         if num == 0 {
             return "zero: unknown"
         }

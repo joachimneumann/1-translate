@@ -86,8 +86,8 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     func updateTranslation() {
         firstTranslatedNumber = firstTranslator.translate(currentDisplay.allInOneLine) ??  "?"
         firstTranslatedNumberTopBorder = nil
-        if firstTranslatedNumber.contains("OVERLINE") {
-            let split = firstTranslatedNumber.split(separator: "OVERLINE")
+        if firstTranslatedNumber.contains(TranslateRoman.TOUSANDS) {
+            let split = firstTranslatedNumber.split(separator: TranslateRoman.TOUSANDS)
             firstTranslatedNumberTopBorder = String(split[0])
             if split.count == 2 {
                 firstTranslatedNumber = String(split[1])
@@ -96,8 +96,8 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             
         secondTranslatedNumber = secondTranslator.translate(currentDisplay.allInOneLine) ??  "?"
         secondTranslatedNumberTopBorder = nil
-        if secondTranslatedNumber.contains("OVERLINE") {
-            let split = secondTranslatedNumber.split(separator: "OVERLINE")
+        if secondTranslatedNumber.contains(TranslateRoman.TOUSANDS) {
+            let split = secondTranslatedNumber.split(separator: TranslateRoman.TOUSANDS)
             secondTranslatedNumberTopBorder = String(split[0])
             if split.count == 2 {
                 secondTranslatedNumber = String(split[1])
