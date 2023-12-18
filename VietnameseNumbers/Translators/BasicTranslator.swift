@@ -21,6 +21,8 @@ class BasicTranslator: TranslatorProtocol, Hashable {
     var beforeMinus: String = " "
     var beforeAndfterDotString: String = " "
     var allowNegativeNumbers = true
+    var allowExponent = true
+    var allowFraction = true
 
     func doubleToString(_ d: Double) -> String {
         let numberFormatter = NumberFormatter()
@@ -90,12 +92,15 @@ class BasicTranslator: TranslatorProtocol, Hashable {
         guard parts.count > 0 && parts.count <= 2 else { return nil }
         let mantissa = parts[0]
         let exponent: String? = (parts.count == 2) ? parts[1] : nil
+        guard allowExponent || parts.count == 1 else { return "scientific notation not known" }
 
         // integer part and fractional part
         parts = mantissa.components(separatedBy: decimalSeparator)
         guard parts.count > 0 && parts.count <= 2 else { return nil }
         let integerPart = parts[0]
         let fractionalPart: String? = (parts.count == 2) ? parts[1] : nil
+        guard allowFraction || fractionalPart == nil else { return "fractions not known" }
+
         
         var ret: String = ""
 

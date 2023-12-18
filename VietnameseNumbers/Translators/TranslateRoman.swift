@@ -19,6 +19,8 @@ class TranslateRoman: BasicTranslator {
                    andSoOn: "",
                    exponentString: "")
         allowNegativeNumbers = false
+        allowExponent = false
+        allowFraction = false
     }
     
     override func translatePositiveInteger(_ num: Int) -> String? {
