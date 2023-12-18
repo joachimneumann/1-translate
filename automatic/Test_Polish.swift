@@ -8,10 +8,45 @@ import XCTest
 
 final class TestsPolish: XCTestCase {
     
-    func XXtest_Mikoła() {
-        let polish = TranslatePolish()
+    let polish = TranslatePolish()
+
+    override func setUpWithError() throws {
         polish.groupSeparator = ""
         polish.decimalSeparator = "."
+    }
+    
+    func test_Sebastian() {
+        XCTAssertEqual(polish.translate(0), "zero")
+        XCTAssertEqual(polish.translate(1), "jeden")
+        XCTAssertEqual(polish.translate(2), "dwa")
+        XCTAssertEqual(polish.translate(3), "trzy")
+        XCTAssertEqual(polish.translate(4), "cztery")
+        XCTAssertEqual(polish.translate(5), "pięć")
+        XCTAssertEqual(polish.translate(6), "sześć")
+        XCTAssertEqual(polish.translate(7), "siedem")
+        XCTAssertEqual(polish.translate(8), "osiem")
+        XCTAssertEqual(polish.translate(9), "dziewięć")
+        XCTAssertEqual(polish.translate(10), "dziesięć")
+        XCTAssertEqual(polish.translate(12), "dwanaście")
+        XCTAssertEqual(polish.translate(13), "trzynaście")
+        XCTAssertEqual(polish.translate(14), "czternaście")
+        XCTAssertEqual(polish.translate(15), "piętnaście")
+        XCTAssertEqual(polish.translate(16), "szesnaście")
+        XCTAssertEqual(polish.translate(17), "siedemnaście")
+        XCTAssertEqual(polish.translate(18), "osiemnaście")
+        XCTAssertEqual(polish.translate(19), "dziewiętnaście")
+        XCTAssertEqual(polish.translate(20), "dwadzieścia")
+        XCTAssertEqual(polish.translate(40), "czterdzieści")
+        XCTAssertEqual(polish.translate(50), "pięćdziesiąt")
+        XCTAssertEqual(polish.translate(60), "sześćdziesiąt")
+        XCTAssertEqual(polish.translate(70), "siedemdziesiąt")
+        XCTAssertEqual(polish.translate(80), "osiemdziesiąt")
+        XCTAssertEqual(polish.translate(90), "dziewięćdziesiąt")
+        XCTAssertEqual(polish.translate(100), "sto")
+        XCTAssertEqual(polish.translate(1_000), "tysiąc")
+    }
+    
+    func XXtest_Mikoła() {
         XCTAssertEqual(polish.translate(0), "zero")
         XCTAssertEqual(polish.translate(1), "jeden")
         XCTAssertEqual(polish.translate(2), "dwa")
@@ -177,9 +212,6 @@ final class TestsPolish: XCTestCase {
     }
     
     func XXtest_polish() {
-        let polish = TranslatePolish()
-        polish.groupSeparator = ""
-        polish.decimalSeparator = "."
         XCTAssertEqual(polish.translate(0), "zero")
         XCTAssertEqual(polish.translate(1), "jeden")
         XCTAssertEqual(polish.translate(2), "dwa")

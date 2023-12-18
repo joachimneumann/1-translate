@@ -9,11 +9,16 @@ import XCTest
 
 final class TestRoman: XCTestCase {
     
-    func test_Wikipedia() {
-        /// https://en.wikipedia.org/wiki/Roman_numerals
-        let roman = TranslateRoman()
+    let roman = TranslateRoman()
+
+    override func setUpWithError() throws {
         roman.groupSeparator = ""
         roman.decimalSeparator = "."
+    }
+
+    
+    func test_Wikipedia() {
+        /// https://en.wikipedia.org/wiki/Roman_numerals
         XCTAssertEqual(roman.translate(39), "XXXIX")
         XCTAssertEqual(roman.translate(246), "CCXLVI")
         XCTAssertEqual(roman.translate(789), "DCCLXXXIX")
@@ -27,9 +32,6 @@ final class TestRoman: XCTestCase {
     
     func test_rapidTables() {
         /// https://www.rapidtables.com/convert/number/roman-numerals-converter.html?x1=&x2=888
-        let roman = TranslateRoman()
-        roman.groupSeparator = ""
-        roman.decimalSeparator = "."
         XCTAssertEqual(roman.translate(1), "I") // 1
         XCTAssertEqual(roman.translate(2), "II") // 1+1
         XCTAssertEqual(roman.translate(3), "III") // 1+1+1
@@ -148,9 +150,6 @@ final class TestRoman: XCTestCase {
     }
     
     func test_roman() {
-        let roman = TranslateRoman()
-        roman.groupSeparator = ""
-        roman.decimalSeparator = "."
         XCTAssertEqual(roman.translate(14), "XIV")
         XCTAssertEqual(roman.translate(19), "XIX")
         XCTAssertEqual(roman.translate(50), "L")
