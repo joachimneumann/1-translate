@@ -6,7 +6,7 @@
 
 import XCTest
 
-final class TestsPolish: XCTestCase {
+final class TestPolish: XCTestCase {
     
     let polish = TranslatePolish()
 
