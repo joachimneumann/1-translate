@@ -19,11 +19,11 @@ class TranslateFrench: GeneralTranslator {
 
     init() {
         super.init(
-            language: "French",
-            dotString: "XXX",
-            negativeString: "XXX",
-            andSoOn: "XXX",
-            exponentString: "XXX")
+            language: "Française",
+            dotString: "virgule",
+            negativeString: "moins",
+            andSoOn: "et ainsi de suite",
+            exponentString: "fois dix à la puissance")
     }
     
     private func translate_0_20(_ intValue: Int) -> String {

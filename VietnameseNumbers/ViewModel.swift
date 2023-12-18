@@ -78,6 +78,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     let translateThai = TranslateThai()
     let translateThaiTraditional = TranslateThaiTraditional()
     let translateRoman = TranslateRoman()
+    let translateFrench = TranslateFrench()
 
     var translators: [BasicTranslator] // set in init()
 
@@ -318,6 +319,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             translateVietnamese,
             translateSpanish,
             translateCatalan,
+            translateFrench,
 //            translatePolish,
             translateDanish,
             translateThai,
