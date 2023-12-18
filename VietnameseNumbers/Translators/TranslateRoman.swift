@@ -19,6 +19,23 @@ class TranslateRoman: BasicTranslator {
     }
     
     override func translatePositiveInteger(_ num: Int) -> String? {
+        if num < 3_999 {
+            return translate_1_999(num)
+        } else {
+            if num < 3_999_999 {
+                let XXX = num % 1000
+                let XXX_000 = num / 1000
+                var ret = translate_1_999(XXX_000)! + "OVERLINE"
+                if XXX > 0 {
+                    ret += translate_1_999(XXX)!
+                }
+                return ret
+            }
+        }
+        return "too large"
+    }
+    
+    private func translate_1_999(_ num: Int, useOverline: Bool = false) -> String? {
         if num == 0 {
             return "zero: unknown"
         }
@@ -38,7 +55,6 @@ class TranslateRoman: BasicTranslator {
                 remaining -= value
             }
         }
-        
         return result
     }
 }

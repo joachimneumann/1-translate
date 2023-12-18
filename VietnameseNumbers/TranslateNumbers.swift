@@ -43,6 +43,7 @@ struct TranslateNumbers: View {
                     .padding(.top, 20)
                     TranslatedDisplay(
                         translatedString: viewModel.firstTranslatedNumber,
+                        translatedStringTopBorder: viewModel.firstTranslatedNumberTopBorder,
                         screen: screen)
                     .padding(.horizontal, 0)
                     Spacer(minLength: 0.0)
@@ -59,7 +60,7 @@ struct TranslateNumbers: View {
                         Spacer(minLength: 0.0)
                         TranslatedDisplay(
                             translatedString: viewModel.secondTranslatedNumber,
-                            screen: screen)
+                            translatedStringTopBorder: viewModel.secondTranslatedNumberTopBorder,                            screen: screen)
                         .padding(.horizontal, 0)
                     }
                 }

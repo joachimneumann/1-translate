@@ -65,6 +65,8 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @Published var settingsSpanishExample: String = ""
     @Published var firstTranslatedNumber: String = ""
     @Published var secondTranslatedNumber: String = ""
+    @Published var firstTranslatedNumberTopBorder: String? = nil
+    @Published var secondTranslatedNumberTopBorder: String? = nil
 
     let translateEnglish = TranslateEnglish()
     let translateGerman = TranslateGerman()
@@ -83,7 +85,26 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     
     func updateTranslation() {
         firstTranslatedNumber = firstTranslator.translate(currentDisplay.allInOneLine) ??  "?"
+        firstTranslatedNumberTopBorder = nil
+        if firstTranslatedNumber.contains("OVERLINE") {
+            let split = firstTranslatedNumber.split(separator: "OVERLINE")
+            firstTranslatedNumberTopBorder = String(split[0])
+            if split.count == 2 {
+                firstTranslatedNumber = String(split[1])
+            }
+        }
+            
         secondTranslatedNumber = secondTranslator.translate(currentDisplay.allInOneLine) ??  "?"
+        secondTranslatedNumberTopBorder = nil
+        if secondTranslatedNumber.contains("OVERLINE") {
+            let split = secondTranslatedNumber.split(separator: "OVERLINE")
+            secondTranslatedNumberTopBorder = String(split[0])
+            if split.count == 2 {
+                secondTranslatedNumber = String(split[1])
+            } else {
+                secondTranslatedNumber = ""
+            }
+        }
     }
     /// I initialize the decimalSeparator with the locale preference, but
     /// I ignore the value of Locale.current.groupSeparator
@@ -515,8 +536,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         await MainActor.run() {
             currentDisplay = tempDisplay
             self.showAC = currentDisplay.isZero
-            firstTranslatedNumber = firstTranslator.translate(currentDisplay.allInOneLine) ??  "?"
-            secondTranslatedNumber = secondTranslator.translate(currentDisplay.allInOneLine) ??  "?"
+            updateTranslation()
         }
     }
     
