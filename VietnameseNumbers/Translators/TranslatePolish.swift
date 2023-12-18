@@ -79,15 +79,15 @@ class TranslatePolish: GeneralTranslator {
         }
     }
     
-    func determineThousand(forNumber number: Int) -> String {
-        let thousands = Int(number / 1000)
+    func determineThousand(forThousands thousands: Int) -> String {
         guard thousands >= 1 && thousands <= 999 else {
             return "Number out of range (1000 - 999000)"
         }
 
         let lastTwoDigits = thousands % 100
+        let lastDigit = lastTwoDigits % 10
         if thousands == 1 { return thousand1 }
-        if (lastTwoDigits >= 12 && lastTwoDigits <= 14) || (lastTwoDigits % 10 >= 5 || lastTwoDigits % 10 == 0) {
+        if (lastTwoDigits >= 12 && lastTwoDigits <= 14) || (lastTwoDigits % 10 >= 5 || lastTwoDigits % 10 == 0  || lastDigit == 1) {
             return thousandFrom5 // tysięcy
         } else {
             return thousandTo4 // tysiące
@@ -140,7 +140,7 @@ class TranslatePolish: GeneralTranslator {
             let XXX_000 = (i - i % 1000) / 1000
             let XXX = i - 1000 * XXX_000
             
-            let polishThousand = determineThousand(forNumber: i)
+            let polishThousand = determineThousand(forThousands: XXX_000)
 
             var ret = ""
             switch XXX_000 {
