@@ -27,6 +27,7 @@ final class TestsPolish: XCTestCase {
         XCTAssertEqual(polish.translate(8), "osiem")
         XCTAssertEqual(polish.translate(9), "dziewięć")
         XCTAssertEqual(polish.translate(10), "dziesięć")
+        XCTAssertEqual(polish.translate(11), "jedenaście")
         XCTAssertEqual(polish.translate(12), "dwanaście")
         XCTAssertEqual(polish.translate(13), "trzynaście")
         XCTAssertEqual(polish.translate(14), "czternaście")
@@ -46,7 +47,7 @@ final class TestsPolish: XCTestCase {
         XCTAssertEqual(polish.translate(1_000), "tysiąc")
     }
     
-    func XXtest_Mikoła() {
+    func test_Mikoła() {
         XCTAssertEqual(polish.translate(0), "zero")
         XCTAssertEqual(polish.translate(1), "jeden")
         XCTAssertEqual(polish.translate(2), "dwa")
@@ -211,7 +212,7 @@ final class TestsPolish: XCTestCase {
         XCTAssertEqual(polish.translate(3.4e13), "trzydzieści cztery biliony")
     }
     
-    func XXtest_polish() {
+    func test_polish() {
         XCTAssertEqual(polish.translate(0), "zero")
         XCTAssertEqual(polish.translate(1), "jeden")
         XCTAssertEqual(polish.translate(2), "dwa")
