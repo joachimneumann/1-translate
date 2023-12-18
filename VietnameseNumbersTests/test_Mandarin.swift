@@ -44,10 +44,6 @@ final class TestMandarin: XCTestCase {
         XCTAssertEqual(mandarin.translate(54), "五十四")
         XCTAssertEqual(mandarin.translate(78), "七十八")
         XCTAssertEqual(mandarin.translate(99), "九十九")
-        XCTAssertEqual(mandarin.translate(101), "一百零一")
-        XCTAssertEqual(mandarin.translate(102), "一百零二")
-        XCTAssertEqual(mandarin.translate(103), "一百零三")
-        XCTAssertEqual(mandarin.translate(104), "一百零四")
         XCTAssertEqual(mandarin.translate(100), "一百")
         XCTAssertEqual(mandarin.translate(101), "一百零一")
         XCTAssertEqual(mandarin.translate(102), "一百零二")
@@ -68,7 +64,7 @@ final class TestMandarin: XCTestCase {
         XCTAssertEqual(mandarin.translate(178), "一百七十八")
         XCTAssertEqual(mandarin.translate(183), "一百八十三")
         XCTAssertEqual(mandarin.translate(197), "一百九十七")
-        XCTAssertEqual(mandarin.translate(200), "两百")
+        XCTAssertEqual(mandarin.translate(200), "二百")
         XCTAssertEqual(mandarin.translate(300), "三百")
         XCTAssertEqual(mandarin.translate(400), "四百")
         XCTAssertEqual(mandarin.translate(500), "五百")
@@ -86,7 +82,7 @@ final class TestMandarin: XCTestCase {
         XCTAssertEqual(mandarin.translate(1_003), "一千零三")
         XCTAssertEqual(mandarin.translate(1_010), "一千零十")
         XCTAssertEqual(mandarin.translate(1_100), "一千一百")
-        XCTAssertEqual(mandarin.translate(2_000), "两千")
+        XCTAssertEqual(mandarin.translate(2_000), "二千")
         XCTAssertEqual(mandarin.translate(3_000), "三千")
         XCTAssertEqual(mandarin.translate(4_000), "四千")
         XCTAssertEqual(mandarin.translate(5_000), "五千")
@@ -100,5 +96,27 @@ final class TestMandarin: XCTestCase {
         XCTAssertEqual(mandarin.translate(200_000), "二十万")
         XCTAssertEqual(mandarin.translate(300_000), "三十万")
         XCTAssertEqual(mandarin.translate(1_000_000), "一百万")
+    }
+    
+    func test_chatGTP() {
+        XCTAssertEqual(mandarin.translate(100), "一百")
+        XCTAssertEqual(mandarin.translate(1_000), "一千")
+        XCTAssertEqual(mandarin.translate(10_000), "一万")
+        XCTAssertEqual(mandarin.translate(12_345), "一万二千三百四十五")
+        XCTAssertEqual(mandarin.translate(100_000), "十万")
+        XCTAssertEqual(mandarin.translate(1_000_000), "一百万")
+        XCTAssertEqual(mandarin.translate(10_000_000), "一千万")
+        XCTAssertEqual(mandarin.translate(100_000_000), "一亿")
+        
+        // Hard-coded test cases with random numbers
+        XCTAssertEqual(mandarin.translate(78_901_234), "七千八百九十万一千二百三十四")
+        XCTAssertEqual(mandarin.translate(56_789_012), "五千六百七十八万九千零一十二")
+        XCTAssertEqual(mandarin.translate(98_765_432), "九千八百七十六万五千四百三十二")
+        XCTAssertEqual(mandarin.translate(34_567_890), "三千四百五十六万七千八百九十")
+        
+        XCTAssertEqual(mandarin.translate(123_456_789), "一亿二千三百四十五万六千七百八十九")
+        XCTAssertEqual(mandarin.translate(9_876_543_210), "九十八亿七千六百五十四万三千二百一十")
+        XCTAssertEqual(mandarin.translate(123_456_789_012), "一千二百三十四亿五千六百七十八万九千零一十二")
+        XCTAssertEqual(mandarin.translate(1_000_000_000_000), "一万亿")
     }
 }

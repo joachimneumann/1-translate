@@ -8,13 +8,11 @@
 import SwiftUI
 
 class TranslateMandarin: GeneralTranslator {
-    let hundred   = "cent"
-    let hundreds  = "cents"
-    let thousand  = "mille"
-    let million   = "million"
-    let millions  = "millions"
-    let milliard  = "milliard"
-    let milliards = "milliards"
+    let hundred     = "百"
+    let filler      = "零"
+    let thousand    = "千"
+    let tenThousand = "万"
+    let hundredMillion     = "亿"
 
 
     init() {
@@ -57,7 +55,7 @@ class TranslateMandarin: GeneralTranslator {
     
     private func tens(_ intValue: Int) -> String {
         switch intValue {
-        case 1:     return "十"
+        case 1:     return "一十"
         case 2:     return "二十"
         case 3:     return "三十"
         case 4:     return "四十"
@@ -71,91 +69,108 @@ class TranslateMandarin: GeneralTranslator {
     }
     
     override func translatePositiveInteger(_ i: Int) -> String? {
+        let secondLastDigit = (i / 10) % 10
+        let thirdLastDigit = (i / 100) % 10
+
+        var fillerCharacter = ""
         if i <= 20 {
             return translate_0_20(i)//, fromLargerNumber: fromLargerNumber)
         }
         if i <= 99 {
-            var temp = i
-            var X = temp % 10
-            temp = (temp - X) / 10
-            var X0 = temp % 10
-            if X0 == 7 || X0 == 9 {
-                X0 -= 1
-                X += 10
-            }
-            var tens = tens(X0)
-            if X0 == 8 && X > 0 {
-                tens = "quatre-vingt" // no tailing s
-            }
-            if X == 0 {
-                return tens
-            } else if X0 < 8 && (X == 1 || X == 11) {
-                return tens + " et " + translate_0_20(X)
+            let X0 = i / 10
+            let leftover = i - X0 * 10
+
+            if leftover > 0 {
+                return tens(X0) + translate_0_20(leftover)
             } else {
-                return tens + "-" + translate_0_20(X)
+                return tens(X0)
             }
         }
 
         if i <= 999 {
             let X00 = i / 100
             let leftover = i - X00 * 100
-            
-            var ret = ""
-            if X00 == 1 {
-                ret += hundred
-            } else {
-                ret += translate_0_20(X00) + " " + ((leftover > 0) ? hundred : hundreds)
+            if secondLastDigit == 0 {
+                fillerCharacter = filler
+            } else if secondLastDigit == 1 {
+                fillerCharacter = translate_0_20(1)
             }
+            
+            var ret = translate(X00)! + hundred
             if leftover > 0 {
-                ret += " " + translate(leftover)!
+                ret += fillerCharacter + translate(leftover)!
             }
             return ret
         }
         
-        if i <= 999_999 {
+        if i <= 9_999 {
             let X000 = i / 1000
             let leftover = i - X000 * 1000
             
-            var ret = ""
-            if X000 == 1 {
-                ret += thousand
-            } else {
-                ret += translate(X000)! + " " + thousand
+            if thirdLastDigit == 0 {
+                fillerCharacter = filler
             }
+            var ret = ""
+            ret += translate(X000)! + thousand
             if leftover > 0 {
-                ret += " " + translate(leftover)!
+                ret += fillerCharacter + translate(leftover)!
             }
             return ret
         }
 
-        if i <= 999_999_999 {
-            let X000_000 = i / 1_000_000
-            let leftover = i - X000_000 * 1_000_000
+        if i <= 99_999_999 {
+            let X0_000 = i / 10_000
+            let leftover = i - X0_000 * 10_000
             
             var ret = ""
-            if X000_000 == 1 {
-                ret += translate(X000_000)! + " " + million
-            } else {
-                ret += translate(X000_000)! + " " + millions
-            }
+            ret += translate(X0_000)! + tenThousand
             if leftover > 0 {
-                ret += " " + translate(leftover)!
+                ret += translate(leftover)!
             }
             return ret
         }
-
-        let X000_000_000 = i / 1_000_000_000
-        let leftover = i - X000_000_000 * 1_000_000_000
         
-        var ret = ""
-        if X000_000_000 == 1 {
-            ret += translate(X000_000_000)! + " " + milliard
-        } else {
-            ret += translate(X000_000_000)! + " " + milliards
+        if i <= 999_999_999_999 {
+            let X00_000_000 = i / 100_000_000
+            let leftover = i - X00_000_000 * 100_000_000
+            
+            var ret = ""
+            ret += translate(X00_000_000)! + hundredMillion
+            if leftover > 0 {
+                ret += translate(leftover)!
+            }
+            return ret
         }
-        if leftover > 0 {
-            ret += " " + translate(leftover)!
-        }
-        return ret
+        
+
+//        if i <= 999_999_999 {
+//            let X000_000 = i / 1_000_000
+//            let leftover = i - X000_000 * 1_000_000
+//            
+//            var ret = ""
+//            if X000_000 == 1 {
+//                ret += translate(X000_000)! + " " + million
+//            } else {
+//                ret += translate(X000_000)! + " " + millions
+//            }
+//            if leftover > 0 {
+//                ret += " " + translate(leftover)!
+//            }
+//            return ret
+//        }
+//
+//        let X000_000_000 = i / 1_000_000_000
+//        let leftover = i - X000_000_000 * 1_000_000_000
+//        
+//        var ret = ""
+//        if X000_000_000 == 1 {
+//            ret += translate(X000_000_000)! + " " + milliard
+//        } else {
+//            ret += translate(X000_000_000)! + " " + milliards
+//        }
+//        if leftover > 0 {
+//            ret += " " + translate(leftover)!
+//        }
+        return "ret"
     }
 }
