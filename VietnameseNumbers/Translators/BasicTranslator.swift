@@ -9,6 +9,7 @@ import Foundation
 
 protocol TranslatorProtocol {
     var language: String { get }
+    var languageEnglish: String? { get }
     var groupSeparator: String  { get set }
     var decimalSeparator: String  { get set }
     func translate(_ i: Int) -> String?
@@ -46,14 +47,16 @@ class BasicTranslator: TranslatorProtocol, Hashable {
     }
     
     var language: String
+    var languageEnglish: String?
     var dotString: String
     var negativeString: String
     var andSoOn: String
     var exponentString: String
     var groupSeparator: String
     var decimalSeparator: String
-    init(language: String, dotString: String, negativeString: String, andSoOn: String, exponentString: String) {
+    init(language: String, languageEnglish: String? = nil, dotString: String, negativeString: String, andSoOn: String, exponentString: String) {
         self.language = language
+        self.languageEnglish = languageEnglish
         self.dotString = dotString
         self.negativeString = negativeString
         self.andSoOn = andSoOn

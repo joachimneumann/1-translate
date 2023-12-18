@@ -26,6 +26,7 @@ class TranslateVietnamese: GeneralTranslator {
     init() {
         super.init(
             language: "Tiếng Việt",
+            languageEnglish: "Vietnamese",
             dotString: "phẩy",
             negativeString: "âm",
             andSoOn: "và như thế",

@@ -14,6 +14,7 @@ class TranslateThai: TwentyBasedTranslator {
     init() {
         super.init(
             language: "ภาษาไทย",
+            languageEnglish: "Thai",
             dotString: "จุด",
             negativeString: "ลบ",
             andSoOn: "XXX",

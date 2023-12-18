@@ -13,7 +13,7 @@ class TranslateRoman: BasicTranslator {
     static let TOUSANDS = "__RomanThousand__"
 
     init() {
-        super.init(language: "roman",
+        super.init(language: "Roman",
                    dotString: "",
                    negativeString: "",
                    andSoOn: "",

@@ -8,6 +8,23 @@
 import SwiftUI
 
 struct SelectLanguage: View {
+    
+    struct LanguageText: View {
+        let translator: BasicTranslator
+        let bold: Bool
+        var body: some View {
+            HStack {
+                Text(translator.language)
+                if translator.languageEnglish != nil {
+                    Text(" ("+translator.languageEnglish!+")")
+                }
+                Spacer()
+            }
+            .bold(bold)
+            .frame(height: 25)
+            .foregroundColor(Color.white)
+        }
+    }
     @ObservedObject var viewModel: ViewModel
     let translator: BasicTranslator
     var body: some View {
@@ -27,10 +44,7 @@ struct SelectLanguage: View {
                         .padding(.trailing, 10)
                         .opacity(_1_selected ? 1.0 : 0.5)
                     if !viewModel.secondLanguageAllowed {
-                        Text(translator.language)
-                            .bold(_1_selected || (viewModel.secondLanguageAllowed && _2_selected))
-                            .frame(height: 25)
-                            .foregroundColor(Color.white)
+                        LanguageText(translator: translator, bold: _1_selected || (viewModel.secondLanguageAllowed && _2_selected))
                         Spacer()
                     }
                 }
@@ -48,10 +62,7 @@ struct SelectLanguage: View {
                             .frame(height: 25)
                             .opacity(_2_selected ? 1.0 : 0.5)
                             .padding(.trailing, 10)
-                        Text(translator.language)
-                            .bold(_1_selected || (viewModel.secondLanguageAllowed && _2_selected))
-                            .frame(height: 25)
-                            .foregroundColor(Color.white)
+                        LanguageText(translator: translator, bold: _1_selected || (viewModel.secondLanguageAllowed && _2_selected))
                         Spacer()
                     }
                 }

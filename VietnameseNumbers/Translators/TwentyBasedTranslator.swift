@@ -34,6 +34,7 @@ class TwentyBasedTranslator: BasicTranslator, TwentyBasedTranslatorProtocol {
 
     init(
         language: String,
+        languageEnglish: String? = nil,
         dotString: String,
         negativeString: String,
         andSoOn: String,
@@ -48,6 +49,7 @@ class TwentyBasedTranslator: BasicTranslator, TwentyBasedTranslatorProtocol {
             self._e9 = _e9
             super.init(
                 language: language,
+                languageEnglish: languageEnglish,
                 dotString: dotString,
                 negativeString: negativeString,
                 andSoOn: andSoOn,

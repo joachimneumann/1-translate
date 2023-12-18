@@ -11,6 +11,7 @@ class TranslateThaiTraditional: BasicTranslator {
     
     init() {
         super.init(language: "แบบดั้งเดิม",
+                   languageEnglish: "trad. Thai",
                    dotString: "",
                    negativeString: "",
                    andSoOn: "",
