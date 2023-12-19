@@ -328,15 +328,20 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             translateEnglish,
             translateFrench,
             translateGerman,
-            translateTraditionalChinese,
-            translateSimplifiedChinese,
-            translateFinancialChinese,
             translatePolish,
             translateRoman,
             translateSpanish,
             translateThai,
             translateThaiTraditional,
             translateVietnamese]
+        
+        let testing = false
+        if testing {
+            translators.append(translateTraditionalChinese)
+            translators.append(translateSimplifiedChinese)
+            translators.append(translateFinancialChinese)
+        }
+        
         firstTranslator = translateEnglish
         secondTranslator = translateEnglish
 
