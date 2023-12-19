@@ -19,6 +19,9 @@ class TranslatePolish: GeneralTranslator {
     let millionFrom5   = "milionów"
     let billion        = "billion"
 
+    // 1_000_000_000_000 --> this is billion in polish
+    // 1_000_000_000 --> this is milliard in polish
+
     init() {
         super.init(
             language: "Polski",
