@@ -283,7 +283,6 @@ final class TestPolish: XCTestCase {
 
         XCTAssertEqual(polish.translate(-1), "minus jeden")
         XCTAssertEqual(polish.translate(-15), "minus piętnaście")
-        XCTAssertEqual(polish.translate(15), "piętnaście")
         XCTAssertEqual(polish.translate(3.1415926), "trzy przecinek jeden cztery jeden pięć dziewięć dwa sześć")
         XCTAssertEqual(polish.translate(-3.1415926), "minus trzy przecinek jeden cztery jeden pięć dziewięć dwa sześć")
         

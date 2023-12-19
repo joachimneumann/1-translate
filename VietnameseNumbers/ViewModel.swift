@@ -158,9 +158,12 @@ class ViewModel: ObservableObject, ShowAs, Separators {
                     updateTranslation()
                     previouslySelectedLanguages.add(new: translator.language)
                     /// is the second language the same?
-                    if secondLanguageAllowed && (secondLanguage == translator.language) {
+                    if secondLanguage == translator.language {
                         // OOPS. Find a new second language
-                        secondLanguage = previouslySelectedLanguages.get(except: translator.language)
+                        let newLanguage = previouslySelectedLanguages.get(except: translator.language)
+                        if newLanguage != "" {
+                            secondLanguage = newLanguage
+                        }
                     }
                 }
             }
@@ -178,7 +181,10 @@ class ViewModel: ObservableObject, ShowAs, Separators {
                     /// is the first language the same?
                     if firstLanguage == translator.language {
                         // OOPS. Find a new first language
-                        firstLanguage = previouslySelectedLanguages.get(except: translator.language)
+                        let newLanguage = previouslySelectedLanguages.get(except: translator.language)
+                        if newLanguage != "" {
+                            firstLanguage = newLanguage
+                        }
                     }
                 }
             }
@@ -320,7 +326,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             translateSpanish,
             translateCatalan,
             translateFrench,
-//            translatePolish,
+            translatePolish,
             translateDanish,
             translateThai,
             translateThaiTraditional,

@@ -38,7 +38,7 @@ struct TranslateNumbers: View {
                         .buttonStyle(TransparentButtonStyle())
                         .opacity(0.9)
                     }
-                    .frame(height: 30.0)
+                    .frame(height: 4+30.0)
                     .padding(.bottom, 10)
                     .padding(.top, 20)
                     TranslatedDisplay(
@@ -89,6 +89,7 @@ struct TranslateNumbers: View {
         }
         
         var body: some View {
+            let borderWidth = 2.0
             Button {
                 showSheet.toggle()
             } label: {
@@ -96,8 +97,8 @@ struct TranslateNumbers: View {
                     .resizable()
                     .scaledToFit()
             }
-            .padding(1)
-            .border(.white)
+            .padding(borderWidth)
+            .border(.white, width: borderWidth)
             .sheet(isPresented: $showSheet) {
                 ScrollView {
                     VStack{
@@ -111,7 +112,7 @@ struct TranslateNumbers: View {
                         }
                     }
                     .padding(20)
-                    .presentationDetents([.height(140.0 + CGFloat(viewModel.translators.count) * 40.0)])
+                    .presentationDetents([.height(140.0 + CGFloat(viewModel.translators.count) * 44.0)])
                 }
                 .background(Color(red: 0.15, green: 0.15, blue: 0.15))
             }
