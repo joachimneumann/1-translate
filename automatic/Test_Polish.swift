@@ -277,7 +277,6 @@ final class TestPolish: XCTestCase {
         XCTAssertEqual(polish.translate(66_000_000_000), "sześćdziesiąt sześć miliardów") //?
 
         XCTAssertEqual(polish.translate(99_000_000_909), "dziewięćdziesiąt dziewięć miliardów dziewięćset dziewięć") //?
-        XCTAssertEqual(polish.translate(99_000_000_909), "dziewięćdziesiąt dziewięć miliardów dziewięćset tysięcy dziewięćset dziewięć") // ?
 
         XCTAssertEqual(polish.translate(302_000_000_000), "trzysta dwa miliardy") //?
         XCTAssertEqual(polish.translate(362_000_000_000), "trzysta sześćdziesiąt dwa miliardy")
@@ -297,6 +296,6 @@ final class TestPolish: XCTestCase {
         XCTAssertEqual(polish.translate(3.14159265258979323846), "trzy przecinek jeden cztery jeden pięć dziewięć dwa sześć pięć dwa pięć...")
 
         // scientific notation
-        XCTAssertEqual(polish.translate(3.4e22), "trzy przecinek cztery razy dziesięć do potęgi dwudziestej dwa")
+        XCTAssertEqual(polish.translate(3.4e22), "trzy przecinek cztery razy dziesięć do potęgi dwadzieścia dwa")
     }
 }
