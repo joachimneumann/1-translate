@@ -10,8 +10,7 @@ import Foundation
 import SwiftUI
 
 class TranslatePolish: GeneralTranslator {
-    let hundred        = "sto"
-    
+
     init() {
         super.init(
             language: "Polski",
@@ -71,74 +70,78 @@ class TranslatePolish: GeneralTranslator {
         }
     }
     
-    func _e3(for e3: Int) -> String {
-        guard e3 >= 1 && e3 <= 999 else {
+    func polish(power: Int, for number: Int) -> String {
+        guard number >= 1 && number <= 999 else {
             return "Number out of range (1000 - 999000)"
         }
-
-        let lastTwoDigits = e3 % 100
-        let lastDigit = lastTwoDigits % 10
-        if e3 == 1 {
-            return "tysiąc"
+        
+        if number == 1 {
+            switch power {
+            case 3:
+                return "tysiąc"
+            case 6:
+                return "milion"
+            case 9:
+                return "miliard"
+            case 12:
+                return "bilion"
+            default:
+                return "Error"
+            }
         }
+        let lastTwoDigits = number % 100
+        let lastDigit = lastTwoDigits % 10
+        
         if (lastTwoDigits >= 12 && lastTwoDigits <= 14) || (lastTwoDigits % 10 >= 5 || lastTwoDigits % 10 == 0  || lastDigit == 1) {
-            return "tysięcy"
+            switch power {
+            case 3:
+                return "tysięcy"
+            case 6:
+                return "milionów"
+            case 9:
+                return "miliardów"
+            case 12:
+                return "bilionów"
+            default:
+                return "Error"
+            }
         } else {
-            return "tysiące"
+            switch power {
+            case 3:
+                return "tysiące"
+            case 6:
+                return "miliony"
+            case 9:
+                return "miliardy"
+            case 12:
+                return "biliony"
+            default:
+                return "Error"
+            }
         }
     }
-
-    func _e6(for e6: Int) -> String {
-        guard e6 >= 1 && e6 <= 999 else {
-            return "Number out of range (1000 - 999000)"
-        }
-
-        let lastTwoDigits = e6 % 100
-        let lastDigit = lastTwoDigits % 10
-        if e6 == 1 {
-            return "milion"
-        }
-        if (lastTwoDigits >= 12 && lastTwoDigits <= 14) || (lastTwoDigits % 10 >= 5 || lastTwoDigits % 10 == 0  || lastDigit == 1) {
-            return "milionów"
-        } else {
-            return "miliony"
-        }
+    
+    private func _10(to exponent: Int) -> Int {
+        return Int(pow(10.0, Double(exponent)))
     }
-
-    func _e9(for e9: Int) -> String {
-        guard e9 >= 1 && e9 <= 999 else {
-            return "Number out of range (1000 - 999000)"
-        }
-
-        let lastTwoDigits = e9 % 100
-        let lastDigit = lastTwoDigits % 10
-        if e9 == 1 {
-            return "miliard"
-        }
-        if (lastTwoDigits >= 12 && lastTwoDigits <= 14) || (lastTwoDigits % 10 >= 5 || lastTwoDigits % 10 == 0  || lastDigit == 1) {
-            return "miliardów"
+    
+    private func topThree(number: Int, power: Int, useOne: Bool = true) -> String {
+        let powerNumber = _10(to: power)
+        let topThree = number / powerNumber
+        let leftover = number - topThree * powerNumber
+        let topName = polish(power: power, for: topThree)
+        var ret: String
+        if !useOne && topThree == 1 {
+            ret = topName
         } else {
-            return "miliardy"
+            ret = translatePositiveInteger(topThree)! + " " + topName
         }
+        if leftover > 0 {
+            ret += " " + translatePositiveInteger(leftover)!
+        }
+        return ret
     }
-
-
-    func _e12(for e12: Int) -> String {
-        guard e12 >= 1 && e12 <= 999 else {
-            return "Number out of range (1000 - 999000)"
-        }
-
-        let lastTwoDigits = e12 % 100
-        let lastDigit = lastTwoDigits % 10
-        if e12 == 1 {
-            return "bilion"
-        }
-        if (lastTwoDigits >= 12 && lastTwoDigits <= 14) || (lastTwoDigits % 10 >= 5 || lastTwoDigits % 10 == 0  || lastDigit == 1) {
-            return "bilionów"
-        } else {
-            return "biliony"
-        }
-    }
+    
     override func translatePositiveInteger(_ i: Int) -> String? {
         if i <= 20 {
             return translate_0_20(i)//, fromLargerNumber: fromLargerNumber)
@@ -155,26 +158,20 @@ class TranslatePolish: GeneralTranslator {
             }
         }
         if i <= 999 {
-            var temp = i
-            let X = temp % 10
-            temp = (temp - X) / 10
-            let X0 = temp % 10
-            temp = (temp - X0) / 10
-            let X00 = temp % 10
+            let hundreds = i / 100
+            let leftover = i - hundreds * 100
+
             var ret = ""
-            switch X00 {
+            switch hundreds {
             case 1:
-                ret = hundred
+                ret = "sto"
             case 2:
                 ret = "dwieście"
             case 3, 4:
-                ret = translate_0_20(X00)! + "sta"
-            case 9:
-                ret = "dziewięćset"
+                ret = translate_0_20(hundreds)! + "sta"
             default:
-                ret = translate_0_20(X00)! + "set"
+                ret = translate_0_20(hundreds)! + "set"
             }
-            let leftover = 10 * X0 + X
             if leftover > 0 {
                 ret += " " + translatePositiveInteger(leftover)!//, fromLargerNumber: fromLargerNumber)!
             }
@@ -182,52 +179,18 @@ class TranslatePolish: GeneralTranslator {
         }
         
         if i <= 999_999 {
-            let XXX_000 = i / 1_000
-            let leftover = i - XXX_000 * 1_000
-            let _e3 = _e3(for: XXX_000)
-            var ret = ""
-            switch XXX_000 {
-            case 1:
-                ret = _e3
-            default:
-                ret = translatePositiveInteger(XXX_000)! + " " + _e3
-            }
-            if leftover > 0 {
-                ret += " " + translatePositiveInteger(leftover)!
-            }
-            return ret
+            return topThree(number: i, power: 3, useOne: false)
         }
         
         if i <= 999_999_999 {
-            let XXX_000_000 = i / 1_000_000
-            let leftover = i - XXX_000_000 * 1_000_000
-            let _e6 = _e6(for: XXX_000_000)
-            var ret = translatePositiveInteger(XXX_000_000)! + " " + _e6
-            if leftover > 0 {
-                ret += " " + translatePositiveInteger(leftover)!
-            }
-            return ret
+            return topThree(number: i, power: 6)
         }
 
         if i <= 999_999_999_999 {
-            let XXX_000_000_000 = i / 1_000_000_000
-            let leftover = i - XXX_000_000_000 * 1_000_000_000
-            let _e9 = _e9(for: XXX_000_000_000)
-            var ret = translatePositiveInteger(XXX_000_000_000)! + " " + _e9
-            if leftover > 0 {
-                ret += " " + translatePositiveInteger(leftover)!
-            }
-            return ret
+            return topThree(number: i, power: 9)
         }
         
-        let XXX_000_000_000_000 = i / 1_000_000_000_000
-        let leftover = i - XXX_000_000_000_000 * 1_000_000_000_000
-        let _e12 = _e12(for: XXX_000_000_000_000)
-        var ret = translatePositiveInteger(XXX_000_000_000_000)! + " " + _e12
-        if leftover > 0 {
-            ret += " " + translatePositiveInteger(leftover)!
-        }
-        return ret
+        return topThree(number: i, power: 12)
     }
         
 }
