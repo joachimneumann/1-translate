@@ -110,6 +110,16 @@ final class TestSimplifiedChinese: XCTestCase {
         XCTAssertEqual(simplified.translate(8_000), "八千")
         XCTAssertEqual(simplified.translate(9_000), "九千")
         XCTAssertEqual(simplified.translate(10_000), "一万")
+        
+        XCTAssertEqual(simplified.translate(10_001), "一万零一")
+        XCTAssertEqual(simplified.translate(101), "一百零一")
+        XCTAssertEqual(simplified.translate(208), "两百零八")
+        XCTAssertEqual(simplified.translate(1_005), "一千零五")
+        XCTAssertEqual(simplified.translate(10_003), "一万 零 三")
+        XCTAssertEqual(simplified.translate(10_207), "一万 零 两百 零 七")
+        XCTAssertEqual(simplified.translate(10_509), "一万 零 五百 零 九")
+        XCTAssertEqual(simplified.translate(100_070), "十万 零 七十")
+        
         XCTAssertEqual(simplified.translate(10_207), "一万 二百 零七")
         XCTAssertEqual(simplified.translate(10_207), "一万 零 两百 零 七")
         XCTAssertEqual(simplified.translate(12_000), "一万 二千")
@@ -157,5 +167,27 @@ final class TestSimplifiedChinese: XCTestCase {
         XCTAssertEqual(simplified.translate(25_158_367_200), "两百 五十一 亿 五千 八百 三十六 万 七千 二百")
         XCTAssertEqual(simplified.translate(123_456_789_012), "一千二百三十四亿五千六百七十八万九千零一十二")
         XCTAssertEqual(simplified.translate(1_000_000_000_000), "一万亿")
+    }
+    
+    func test_flexiclasses() {
+        /// https://flexiclasses.com/chinese-grammar-bank/big-chinese-numbers/
+        XCTAssertEqual(simplified.translate(10_000), "一万")
+        XCTAssertEqual(simplified.translate(18_000), "一万 八千")
+        XCTAssertEqual(simplified.translate(40_000), "四万")
+        XCTAssertEqual(simplified.translate(40_005), "四万 零五")
+        XCTAssertEqual(simplified.translate(40_050), "四万 零五十")
+        XCTAssertEqual(simplified.translate(40_500), "四万 零五百")
+        XCTAssertEqual(simplified.translate(45_000), "四万 五千")
+        XCTAssertEqual(simplified.translate(31_240), "三万 一千两百四十")
+        XCTAssertEqual(simplified.translate(300_000_000), "三亿")
+        XCTAssertEqual(simplified.translate(240_500_000), "两亿四千五十万")
+        XCTAssertEqual(simplified.translate(1_200_080_000), "十二亿零八万")
+        XCTAssertEqual(simplified.translate(7_300_500_040), "七十三亿五十万零四十")
+        XCTAssertEqual(simplified.translate(34_054), "三万四千三百五十四")
+        XCTAssertEqual(simplified.translate(5_670_890), "五百六十七万一千八百九十")
+        XCTAssertEqual(simplified.translate(9_560_435), "九百五十六万四千四百三十五")
+        XCTAssertEqual(simplified.translate(30_456_720), "三千零四十五万六千二十")
+        XCTAssertEqual(simplified.translate(200_800_000), "两亿零八十万")
+        XCTAssertEqual(simplified.translate(2_400_360_899), "二十四亿三十六万零八百九十九")
     }
 }
