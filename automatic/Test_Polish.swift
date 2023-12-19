@@ -175,6 +175,7 @@ final class TestPolish: XCTestCase {
         XCTAssertEqual(polish.translate(1_121), "tysiąc sto dwadzieścia jeden")
         XCTAssertEqual(polish.translate(1_125), "tysiąc sto dwadzieścia pięć")
         XCTAssertEqual(polish.translate(2_000), "dwa tysiące")
+        XCTAssertEqual(polish.translate(2_600), "dwa tysiące sześćset")
         XCTAssertEqual(polish.translate(3_000), "trzy tysiące")
         XCTAssertEqual(polish.translate(4_000), "cztery tysiące")
         XCTAssertEqual(polish.translate(5_000), "pięć tysięcy")
@@ -239,8 +240,13 @@ final class TestPolish: XCTestCase {
         XCTAssertEqual(polish.translate(1_000_000), "jeden milion")
         XCTAssertEqual(polish.translate(2_000_000), "dwa miliony")
         XCTAssertEqual(polish.translate(6_000_000), "sześć milionów")
-        XCTAssertEqual(polish.translate(12_000_000), "")  //?
-        XCTAssertEqual(polish.translate(16_000_000), "")  //?
+        XCTAssertEqual(polish.translate(11_000_000), "jedenaście milionów")  //?
+        XCTAssertEqual(polish.translate(12_000_000), "dwanaście milionów")  //?
+        XCTAssertEqual(polish.translate(13_000_000), "trzynaście milionów")  //?
+        XCTAssertEqual(polish.translate(14_000_000), "czternaście milionów")  //?
+        XCTAssertEqual(polish.translate(15_000_000), "piętnaście milionów")  //?
+        XCTAssertEqual(polish.translate(16_000_000), "szesnaście milionów")  //?
+        XCTAssertEqual(polish.translate(17_000_000), "siedemnaście milionów")  //?
         XCTAssertEqual(polish.translate(61_000_000), "sześćdziesiąt jeden milionów")
         XCTAssertEqual(polish.translate(62_000_000), "sześćdziesiąt dwa miliony")
         XCTAssertEqual(polish.translate(62_003_005), "sześćdziesiąt dwa miliony trzy tysiące pięć")
@@ -259,8 +265,8 @@ final class TestPolish: XCTestCase {
         XCTAssertEqual(polish.translate(306_000_000), "trzysta sześć milionów")
         XCTAssertEqual(polish.translate(312_000_000), "trzysta dwanaście milionów") //?
         XCTAssertEqual(polish.translate(316_000_000), "trzysta szesnaście milionów")
-        XCTAssertEqual(polish.translate(362_000_000), "")
-        XCTAssertEqual(polish.translate(366_000_000), "")
+        XCTAssertEqual(polish.translate(362_000_000), "trzysta sześćdziesiąt dwa miliony")
+        XCTAssertEqual(polish.translate(366_000_000), "trzysta sześćdziesiąt sześć milionów")
 
         XCTAssertEqual(polish.translate(1_000_000_000), "jeden miliard") //?
         XCTAssertEqual(polish.translate(2_000_000_000), "dwa miliardy") //?
@@ -274,8 +280,9 @@ final class TestPolish: XCTestCase {
         XCTAssertEqual(polish.translate(99_000_000_909), "dziewięćdziesiąt dziewięć miliardów dziewięćset tysięcy dziewięćset dziewięć") // ?
 
         XCTAssertEqual(polish.translate(302_000_000_000), "trzysta dwa miliardy") //?
-        XCTAssertEqual(polish.translate(362_000_000_000), "")
-        XCTAssertEqual(polish.translate(366_000_000_000), "")
+        XCTAssertEqual(polish.translate(362_000_000_000), "trzysta sześćdziesiąt dwa miliardy")
+        XCTAssertEqual(polish.translate(312_000_000_000), "trzysta dwanaście miliardów")
+        XCTAssertEqual(polish.translate(366_000_000_000), "trzysta sześćdziesiąt sześć miliardów")
 
         XCTAssertEqual(polish.translate(1_000_000_000_000), "jeden bilion") //?
         XCTAssertEqual(polish.translate(2_000_000_000_000), "dwa biliony") //?
@@ -286,7 +293,10 @@ final class TestPolish: XCTestCase {
         XCTAssertEqual(polish.translate(3.1415926), "trzy przecinek jeden cztery jeden pięć dziewięć dwa sześć")
         XCTAssertEqual(polish.translate(-3.1415926), "minus trzy przecinek jeden cztery jeden pięć dziewięć dwa sześć")
         
+        // ...and so on
+        XCTAssertEqual(polish.translate(3.14159265258979323846), "trzy przecinek jeden cztery jeden pięć dziewięć dwa sześć pięć dwa pięć...")
+
         // scientific notation
-        XCTAssertEqual(polish.translate(3.4e22), "trzy przecinek cztery razy dziesięć do potęgi dwudziestej drugiej") // ?
+        XCTAssertEqual(polish.translate(3.4e22), "trzy przecinek cztery razy dziesięć do potęgi dwudziestej dwa")
     }
 }
