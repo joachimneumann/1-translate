@@ -38,7 +38,7 @@ struct TranslateNumbers: View {
                         .buttonStyle(TransparentButtonStyle())
                         .opacity(0.9)
                     }
-                    .frame(height: 4+30.0)
+                    .frame(height: 34.0)
                     .padding(.bottom, 10)
                     .padding(.top, 20)
                     TranslatedDisplay(
@@ -54,7 +54,7 @@ struct TranslateNumbers: View {
                             LanguageButton(language: viewModel.secondTranslator.language, viewModel: viewModel)
                             Spacer()
                         }
-                        .frame(height: 30.0)
+                        .frame(height: 34.0)
                         .padding(.bottom, 10)
                         .padding(.top, 20)
                         Spacer(minLength: 0.0)

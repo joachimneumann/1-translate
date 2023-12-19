@@ -7,64 +7,77 @@
 
 import SwiftUI
 
+enum Variant {
+    case simplified
+    case financial
+}
+
 class TranslateMandarin: GeneralTranslator {
-    let hundred     = "百"
-    let filler      = "零"
-    let thousand    = "千"
-    let tenThousand = "万"
-    let hundredMillion     = "亿"
+    var hundred        = "百"
+    var thousand       = "千"
+    var tenThousand    = "万"
+    var hundredMillion = "亿"
+    let filler         = "零"
 
+    let variant: Variant
 
-    init() {
+    init(variant: Variant) {
+        self.variant = variant
         super.init(
-            language: "普通话",
-            languageEnglish: "Mandarin",
+            language: variant == .simplified ? "普通话" : "金融的",
+            languageEnglish: variant == .simplified ? "Mandarin" : "Financial Mandarin",
             dotString: "点",
             negativeString: "减",
             andSoOn: "依此类推",
             exponentString: " e ")
+        if variant == .financial {
+            hundred        = "佰"
+            thousand       = "仟"
+            tenThousand    = "萬"
+            hundredMillion = "億"
+        }
     }
     
-    private func translate_0_20(_ intValue: Int) -> String {
-        switch intValue {
-        case 0:     return "零"
-        case 1:     return "一"
-        case 2:     return "二"
-        case 3:     return "三"
-        case 4:     return "四"
-        case 5:     return "五"
-        case 6:     return "六"
-        case 7:     return "七"
-        case 8:     return "八"
-        case 9:     return "九"
-        case 10:    return "十"
-        case 11:    return "十一"
-        case 12:    return "十二"
-        case 13:    return "十三"
-        case 14:    return "十四"
-        case 15:    return "十五"
-        case 16:    return "十六"
-        case 17:    return "十七"
-        case 18:    return "十八"
-        case 19:    return "十九"
-        case 20:    return "二十"
-        default: return "not implemented"
+    private func translate_0_10(_ intValue: Int) -> String {
+        if variant == .simplified {
+            switch intValue {
+            case 0:     return "零"
+            case 1:     return "一"
+            case 2:     return "二"
+            case 3:     return "三"
+            case 4:     return "四"
+            case 5:     return "五"
+            case 6:     return "六"
+            case 7:     return "七"
+            case 8:     return "八"
+            case 9:     return "九"
+            case 10:    return "十"
+            default: return "not implemented"
+            }
+        } else {
+            switch intValue {
+            case 0:     return "零"
+            case 1:     return "壹"
+            case 2:     return "壹"
+            case 3:     return "叁"
+            case 4:     return "肆"
+            case 5:     return "伍"
+            case 6:     return "陆"
+            case 7:     return "柒"
+            case 8:     return "捌"
+            case 9:     return "玖"
+            case 10:    return "拾"
+            default: return "not implemented"
+            }
         }
     }
     
     
     private func tens(_ intValue: Int) -> String {
-        switch intValue {
-        case 1:     return "一十"
-        case 2:     return "二十"
-        case 3:     return "三十"
-        case 4:     return "四十"
-        case 5:     return "五十"
-        case 6:     return "六十"
-        case 7:     return "七十"
-        case 8:     return "八十"
-        case 9:     return "九十"
-        default: return "not implemented"
+        if intValue == 1 {
+            return translate_0_10(10)
+        } else {
+            return translate_0_10(intValue) + translate_0_10(10)
         }
     }
     
@@ -73,15 +86,15 @@ class TranslateMandarin: GeneralTranslator {
         let thirdLastDigit = (i / 100) % 10
 
         var fillerCharacter = ""
-        if i <= 20 {
-            return translate_0_20(i)//, fromLargerNumber: fromLargerNumber)
+        if i <= 10 {
+            return translate_0_10(i)//, fromLargerNumber: fromLargerNumber)
         }
         if i <= 99 {
             let X0 = i / 10
             let leftover = i - X0 * 10
 
             if leftover > 0 {
-                return tens(X0) + translate_0_20(leftover)
+                return tens(X0) + translate_0_10(leftover)
             } else {
                 return tens(X0)
             }
@@ -93,7 +106,7 @@ class TranslateMandarin: GeneralTranslator {
             if secondLastDigit == 0 {
                 fillerCharacter = filler
             } else if secondLastDigit == 1 {
-                fillerCharacter = translate_0_20(1)
+                fillerCharacter = translate_0_10(1)
             }
             
             var ret = translate(X00)! + hundred

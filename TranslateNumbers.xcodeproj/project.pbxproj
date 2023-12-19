@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA0093812B31428F00CC24B0 /* test_FinancialMandarin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0093802B31428F00CC24B0 /* test_FinancialMandarin.swift */; };
 		AA01B9D42957E44300617AFB /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA01B9D32957E44300617AFB /* Display.swift */; };
 		AA03B1F2298F639100A7837A /* gmp.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA2FABEE272F2141006DE4C8 /* gmp.xcframework */; };
 		AA0523412B25447F00DDAAD4 /* ThousandBasedTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0523402B25447F00DDAAD4 /* ThousandBasedTranslator.swift */; };
@@ -100,6 +101,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AA0093802B31428F00CC24B0 /* test_FinancialMandarin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test_FinancialMandarin.swift; sourceTree = "<group>"; };
 		AA01B9D32957E44300617AFB /* Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Display.swift; sourceTree = "<group>"; };
 		AA0523402B25447F00DDAAD4 /* ThousandBasedTranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThousandBasedTranslator.swift; sourceTree = "<group>"; };
 		AA0523432B255AF900DDAAD4 /* TranslateSpanish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateSpanish.swift; sourceTree = "<group>"; };
@@ -338,6 +340,7 @@
 				AA739C962B2F4ECC00A32478 /* Test_Roman.swift */,
 				AA739C9C2B30014800A32478 /* Test_Frensh.swift */,
 				AA739CA22B302D7100A32478 /* test_Mandarin.swift */,
+				AA0093802B31428F00CC24B0 /* test_FinancialMandarin.swift */,
 			);
 			path = VietnameseNumbersTests;
 			sourceTree = "<group>";
@@ -506,6 +509,7 @@
 				AA715CB72B2C3ABE009335B7 /* Test_English.swift in Sources */,
 				AA739C9B2B2F4FB700A32478 /* TranslateRoman.swift in Sources */,
 				AA715CAA2B2BE3C4009335B7 /* TranslatePolish.swift in Sources */,
+				AA0093812B31428F00CC24B0 /* test_FinancialMandarin.swift in Sources */,
 				AA0523422B25447F00DDAAD4 /* ThousandBasedTranslator.swift in Sources */,
 				AAFC9C732B247CDF00F866D8 /* BasicTranslator.swift in Sources */,
 				AAFC9C762B247D0700F866D8 /* GeneralTranslator.swift in Sources */,

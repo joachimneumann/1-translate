@@ -8,8 +8,7 @@
 import XCTest
 
 final class TestMandarin: XCTestCase {
-    
-    let mandarin = TranslateMandarin()
+    let mandarin = TranslateMandarin(variant: .simplified)
     override func setUpWithError() throws {
         mandarin.groupSeparator = ""
         mandarin.decimalSeparator = "."
