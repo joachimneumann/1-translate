@@ -156,6 +156,7 @@ final class TestPolish: XCTestCase {
         XCTAssertEqual(polish.translate(900), "dziewięćset")
         XCTAssertEqual(polish.translate(944), "dziewięćset czterdzieści cztery")
         XCTAssertEqual(polish.translate(999), "dziewięćset dziewięćdziesiąt dziewięć")
+        
         XCTAssertEqual(polish.translate(1_000), "tysiąc")
         XCTAssertEqual(polish.translate(1_001), "tysiąc jeden")
         XCTAssertEqual(polish.translate(1_005), "tysiąc pięć")
@@ -260,7 +261,6 @@ final class TestPolish: XCTestCase {
         XCTAssertEqual(polish.translate(67_000_000), "sześćdziesiąt siedem milionów")
         XCTAssertEqual(polish.translate(68_000_000), "sześćdziesiąt osiem milionów")
         XCTAssertEqual(polish.translate(69_000_000), "sześćdziesiąt dziewięć milionów")
-        
         XCTAssertEqual(polish.translate(304_000_000), "trzysta cztery miliony")
         XCTAssertEqual(polish.translate(306_000_000), "trzysta sześć milionów")
         XCTAssertEqual(polish.translate(312_000_000), "trzysta dwanaście milionów") //?
@@ -275,12 +275,11 @@ final class TestPolish: XCTestCase {
         XCTAssertEqual(polish.translate(16_000_000_000), "szesnaście miliardów") //?
         XCTAssertEqual(polish.translate(62_000_000_000), "sześćdziesiąt dwa miliardy") //?
         XCTAssertEqual(polish.translate(66_000_000_000), "sześćdziesiąt sześć miliardów") //?
-
         XCTAssertEqual(polish.translate(99_000_000_909), "dziewięćdziesiąt dziewięć miliardów dziewięćset dziewięć") //?
-
+        XCTAssertEqual(polish.translate(99_000_900_909), "dziewięćdziesiąt dziewięć miliardów dziewięćset tysięcy dziewięćset dziewięć")
         XCTAssertEqual(polish.translate(302_000_000_000), "trzysta dwa miliardy") //?
-        XCTAssertEqual(polish.translate(362_000_000_000), "trzysta sześćdziesiąt dwa miliardy")
         XCTAssertEqual(polish.translate(312_000_000_000), "trzysta dwanaście miliardów")
+        XCTAssertEqual(polish.translate(362_000_000_000), "trzysta sześćdziesiąt dwa miliardy")
         XCTAssertEqual(polish.translate(366_000_000_000), "trzysta sześćdziesiąt sześć miliardów")
 
         XCTAssertEqual(polish.translate(1_000_000_000_000), "jeden bilion") //?
