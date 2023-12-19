@@ -19,8 +19,8 @@ class TranslateChinese: GeneralTranslator {
     var tenThousand: String
     var hundredMillion: String
     let filler = "零"
-    
     let variant: Variant
+    let surroundingSpace = " "
     
     init(variant: Variant) {
         self.variant = variant
@@ -29,21 +29,21 @@ class TranslateChinese: GeneralTranslator {
         switch variant {
         case .traditional:
             language = "傳統中國"
-            languageEnglish = "Traditional"
+            languageEnglish = "Traditional Chinese"
             hundred        = "百"
             thousand       = "千"
             tenThousand    = "萬"
             hundredMillion = "億"
         case .simplified:
             language = "简体中文"
-            languageEnglish = "Simplified"
+            languageEnglish = "Simplified Chinese"
             hundred        = "百"
             thousand       = "千"
             tenThousand    = "万"
             hundredMillion = "亿"
         case .financial:
             language = "金融的"
-            languageEnglish = "Financial"
+            languageEnglish = "Financial Chinese"
             hundred        = "佰"
             thousand       = "仟"
             tenThousand    = "萬"
@@ -55,10 +55,9 @@ class TranslateChinese: GeneralTranslator {
             dotString: "点",
             negativeString: "负",
             andSoOn: "依此类推",
-            exponentString: " e ")
+            exponentString: " 乘以 十的 ")
+        exponentString2 = "次冪"
     }
-    
-    五 乘以 十的 十二次冪
     
     private func translate_0_10(_ intValue: Int) -> String {
         switch variant {
@@ -149,7 +148,7 @@ class TranslateChinese: GeneralTranslator {
             
             var ret = translate(X00)! + hundred
             if leftover > 0 {
-                ret += fillerCharacter + translate(leftover)!
+                ret += surroundingSpace + fillerCharacter + translate(leftover)!
             }
             return ret
         }
@@ -164,7 +163,7 @@ class TranslateChinese: GeneralTranslator {
             var ret = ""
             ret += translate(X000)! + thousand
             if leftover > 0 {
-                ret += fillerCharacter + translate(leftover)!
+                ret += surroundingSpace + fillerCharacter + translate(leftover)!
             }
             return ret
         }
@@ -176,7 +175,7 @@ class TranslateChinese: GeneralTranslator {
             var ret = ""
             ret += translate(X0_000)! + tenThousand
             if leftover > 0 {
-                ret += translate(leftover)!
+                ret += surroundingSpace + translate(leftover)!
             }
             return ret
         }
@@ -187,7 +186,7 @@ class TranslateChinese: GeneralTranslator {
         var ret = ""
         ret += translate(X00_000_000)! + hundredMillion
         if leftover > 0 {
-            ret += translate(leftover)!
+            ret += surroundingSpace + translate(leftover)!
         }
         return ret
     }

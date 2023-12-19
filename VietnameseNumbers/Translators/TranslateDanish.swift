@@ -21,7 +21,7 @@ class TranslateDanish: GeneralTranslator {
             dotString: "komma",
             negativeString: "minus",
             andSoOn: "og så videre",
-            exponentString: "gange ti i")
+            exponentString: " gange ti i ")
     }
 
     private func tens(_ intValue: Int) -> String? {

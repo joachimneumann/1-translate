@@ -30,7 +30,7 @@ class TranslateVietnamese: GeneralTranslator {
             dotString: "phẩy",
             negativeString: "âm",
             andSoOn: "và như thế",
-            exponentString: "nhân mười mũ")
+            exponentString: " nhân mười mũ ")
     }
         
     private let one = "một"

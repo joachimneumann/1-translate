@@ -19,7 +19,7 @@ class TranslateSpanish: GeneralTranslator {
             dotString: "coma", // will be overwritten in the settings
             negativeString: "menos",
             andSoOn: "y así",
-            exponentString: "por diez elevado a")
+            exponentString: " por diez elevado a ")
     }
     
     private func spanish_0_20(_ intValue: Int, fromLargerNumber: Bool = false) -> String? {

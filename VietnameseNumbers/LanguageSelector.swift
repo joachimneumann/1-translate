@@ -13,10 +13,11 @@ struct SelectLanguage: View {
         let translator: BasicTranslator
         let bold: Bool
         var body: some View {
-            HStack {
+            HStack(spacing: 0.0) {
                 Text(translator.language)
                 if translator.languageEnglish != nil {
-                    Text(" ("+translator.languageEnglish!+")")
+                    Text(" "+translator.languageEnglish!)
+                        .minimumScaleFactor(0.01)
                 }
                 Spacer()
             }

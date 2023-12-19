@@ -23,7 +23,7 @@ class TranslateFrench: GeneralTranslator {
             dotString: "virgule",
             negativeString: "moins",
             andSoOn: "et ainsi de suite",
-            exponentString: "fois dix à la puissance")
+            exponentString: " fois dix à la puissance ")
     }
     
     private func translate_0_20(_ intValue: Int) -> String {

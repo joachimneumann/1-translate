@@ -21,7 +21,7 @@ class TranslateGerman: GeneralTranslator {
             dotString: "Komma",
             negativeString: "minus",
             andSoOn: "und so weiter",
-            exponentString: "mal zehn hoch")
+            exponentString: " mal zehn hoch ")
     }
     
     private func translate_0_20(_ intValue: Int, fromLargerNumber: Bool = false) -> String? {

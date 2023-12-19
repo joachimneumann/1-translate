@@ -52,6 +52,7 @@ class BasicTranslator: TranslatorProtocol, Hashable {
     var negativeString: String
     var andSoOn: String
     var exponentString: String
+    var exponentString2: String? = nil
     var groupSeparator: String
     var decimalSeparator: String
     init(language: String, languageEnglish: String? = nil, dotString: String, negativeString: String, andSoOn: String, exponentString: String) {
@@ -133,7 +134,10 @@ class BasicTranslator: TranslatorProtocol, Hashable {
 
         if let exponent = exponent {
             guard let translatedExponent = translate(exponent) else { return nil }
-            ret += " " + exponentString + " " + translatedExponent
+            ret += exponentString + translatedExponent
+            if exponentString2 != nil {
+                ret += exponentString2!
+            }
         }
 
         return ret;
