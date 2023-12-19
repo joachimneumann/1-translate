@@ -1,5 +1,5 @@
 //
-// Test_SimplifiedChinese.swift
+// Test_Chinese.swift
 // TranslateNumbers
 //
 // Created by), "Joachim Neumann on 12/18/23.
@@ -7,7 +7,7 @@
 
 import XCTest
 
-final class TestSimplifiedChinese: XCTestCase {
+final class TestChinese: XCTestCase {
     let simplified = TranslateChinese(variant: .simplified)
     let traditional = TranslateChinese(variant: .traditional)
     let financial = TranslateChinese(variant: .financial)

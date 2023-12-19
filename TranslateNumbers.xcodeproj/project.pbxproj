@@ -50,7 +50,7 @@
 		AA739C9E2B30014800A32478 /* Test_Frensh.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA739C9C2B30014800A32478 /* Test_Frensh.swift */; };
 		AA739CA02B3004F200A32478 /* TranslateFrench.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA739C9F2B3004F200A32478 /* TranslateFrench.swift */; };
 		AA739CA12B3004F200A32478 /* TranslateFrench.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA739C9F2B3004F200A32478 /* TranslateFrench.swift */; };
-		AA739CA42B302D7100A32478 /* Test_SimplifiedChinese.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA739CA22B302D7100A32478 /* Test_SimplifiedChinese.swift */; };
+		AA739CA42B302D7100A32478 /* Test_Chinese.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA739CA22B302D7100A32478 /* Test_Chinese.swift */; };
 		AA739CA62B3030C200A32478 /* TranslateChinese.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA739CA52B3030C200A32478 /* TranslateChinese.swift */; };
 		AA739CA72B3030C200A32478 /* TranslateChinese.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA739CA52B3030C200A32478 /* TranslateChinese.swift */; };
 		AA8453E8294D872300A50B74 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8453E7294D872300A50B74 /* Icons.swift */; };
@@ -149,7 +149,7 @@
 		AA739C992B2F4FB700A32478 /* TranslateRoman.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateRoman.swift; sourceTree = "<group>"; };
 		AA739C9C2B30014800A32478 /* Test_Frensh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_Frensh.swift; sourceTree = "<group>"; };
 		AA739C9F2B3004F200A32478 /* TranslateFrench.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateFrench.swift; sourceTree = "<group>"; };
-		AA739CA22B302D7100A32478 /* Test_SimplifiedChinese.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_SimplifiedChinese.swift; sourceTree = "<group>"; };
+		AA739CA22B302D7100A32478 /* Test_Chinese.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_Chinese.swift; sourceTree = "<group>"; };
 		AA739CA52B3030C200A32478 /* TranslateChinese.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateChinese.swift; sourceTree = "<group>"; };
 		AA8453E7294D872300A50B74 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		AA8A91132B1D7FD000CE7185 /* TranslatedDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatedDisplay.swift; sourceTree = "<group>"; };
@@ -337,7 +337,7 @@
 				AA715CAD2B2C22DB009335B7 /* Test_Danish.swift */,
 				AA739C962B2F4ECC00A32478 /* Test_Roman.swift */,
 				AA739C9C2B30014800A32478 /* Test_Frensh.swift */,
-				AA739CA22B302D7100A32478 /* Test_SimplifiedChinese.swift */,
+				AA739CA22B302D7100A32478 /* Test_Chinese.swift */,
 			);
 			path = VietnameseNumbersTests;
 			sourceTree = "<group>";
@@ -521,7 +521,7 @@
 				AAFC9C792B24817900F866D8 /* TwentyBasedTranslator.swift in Sources */,
 				AA0523452B255AF900DDAAD4 /* TranslateSpanish.swift in Sources */,
 				AA9561362B2AAFEB00648915 /* Test_German.swift in Sources */,
-				AA739CA42B302D7100A32478 /* Test_SimplifiedChinese.swift in Sources */,
+				AA739CA42B302D7100A32478 /* Test_Chinese.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

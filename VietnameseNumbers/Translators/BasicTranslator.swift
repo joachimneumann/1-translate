@@ -18,7 +18,7 @@ protocol TranslatorProtocol {
     
 }
 
-class BasicTranslator: TranslatorProtocol, Hashable {
+class BasicTranslator: TranslatorProtocol, Hashable, Identifiable {
     var beforeMinus: String = " "
     var beforeAndfterDotString: String = " "
     var allowNegativeNumbers = true

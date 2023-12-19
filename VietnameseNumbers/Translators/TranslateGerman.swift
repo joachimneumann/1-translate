@@ -8,6 +8,7 @@
 import SwiftUI
 
 class TranslateGerman: GeneralTranslator {
+    static let language = "Deutsch"
     var useSoftHyphen: Bool = true
     var capitalisation: Bool = true
 
@@ -17,7 +18,7 @@ class TranslateGerman: GeneralTranslator {
 
     init() {
         super.init(
-            language: "Deutsch",
+            language: TranslateGerman.language,
             dotString: "Komma",
             negativeString: "minus",
             exponentString: " mal zehn hoch ")

@@ -153,7 +153,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     }
     
     @AppStorage(AppStorageKeys.firstLanguage, store: .standard)
-    var firstLanguage: String = "" { //translateEnglish.language {
+    var firstLanguage: String = TranslateEnglish.language {
         didSet {
             for translator in translators {
                 if translator.language == firstLanguage {
@@ -174,7 +174,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     }
 
     @AppStorage(AppStorageKeys.secondLanguage, store: .standard)
-    var secondLanguage: String = "" { //translateEnglish.language {
+    var secondLanguage: String = TranslateGerman.language {
         didSet {
             for translator in translators {
                 if translator.language == secondLanguage {
@@ -280,8 +280,8 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         }
     }
         
-    @Published var firstTranslator: BasicTranslator
-    @Published var secondTranslator: BasicTranslator
+    @Published var firstTranslator: BasicTranslator = TranslateEnglish()
+    @Published var secondTranslator: BasicTranslator = TranslateGerman()
 
     var precisionDescription = "unknown"
     var showPrecision: Bool = false
@@ -342,19 +342,6 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             translators.append(translateFinancialChinese)
         }
         
-        firstTranslator = translateEnglish
-        secondTranslator = translateEnglish
-
-        for translator in translators {
-            if translator.language == firstLanguage {
-                firstTranslator = translator
-            }
-            if translator.language == secondLanguage {
-                secondTranslator = translator
-            }
-            previouslySelectedLanguages.add(new: translator.language)
-        }
-
         for symbol in [
             "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", ",",
             "C", "AC", "±", "%", "/", "x", "-", "+", "=",
@@ -369,6 +356,8 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         backgroundColor["plus"] = keyColor.upColor(for: "+", isPending: false)
         
         /// trigger the didSet action of the persistently stored variables
+        firstLanguage = firstLanguage
+        secondLanguage = secondLanguage
         groupSeparator = groupSeparator
         decimalSeparator = decimalSeparator
         settingsEnglishUseAndAfterHundred = settingsEnglishUseAndAfterHundred

@@ -8,9 +8,10 @@
 import SwiftUI
 
 class TranslateEnglish: TwentyBasedTranslator {
+    static let language = "English"
     init() {
         super.init(
-            language: "English",
+            language: TranslateEnglish.language,
             dotString: "point",
             negativeString: "minus",
             andSoOn: "and so on",
