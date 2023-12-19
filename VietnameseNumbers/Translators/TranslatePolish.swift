@@ -24,8 +24,8 @@ class TranslatePolish: GeneralTranslator {
             language: "Polski",
             dotString: "przecinek",
             negativeString: "minus",
-            andSoOn: "and so on",
-            exponentString: " times ten to the power of ")
+            andSoOn: "...",
+            exponentString: " razy dziesięć do potęgi ")
     }
 
     private func tens(_ intValue: Int) -> String? {
