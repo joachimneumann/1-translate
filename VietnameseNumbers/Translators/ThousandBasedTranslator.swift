@@ -39,7 +39,6 @@ class ThousandBasedTranslator: BasicTranslator, ThousandBasedTranslatorProtocol 
                 language: language,
                 dotString: dotString,
                 negativeString: negativeString,
-                andSoOn: andSoOn,
                 exponentString: exponentString)
         }
     

@@ -24,7 +24,6 @@ class TranslatePolish: GeneralTranslator {
             language: "Polski",
             dotString: "przecinek",
             negativeString: "minus",
-            andSoOn: "...",
             exponentString: " razy dziesięć do potęgi ")
     }
 

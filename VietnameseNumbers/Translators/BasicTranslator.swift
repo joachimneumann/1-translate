@@ -50,17 +50,15 @@ class BasicTranslator: TranslatorProtocol, Hashable {
     var languageEnglish: String?
     var dotString: String
     var negativeString: String
-    var andSoOn: String
     var exponentString: String
     var exponentString2: String? = nil
     var groupSeparator: String
     var decimalSeparator: String
-    init(language: String, languageEnglish: String? = nil, dotString: String, negativeString: String, andSoOn: String, exponentString: String) {
+    init(language: String, languageEnglish: String? = nil, dotString: String, negativeString: String, exponentString: String) {
         self.language = language
         self.languageEnglish = languageEnglish
         self.dotString = dotString
         self.negativeString = negativeString
-        self.andSoOn = andSoOn
         self.exponentString = exponentString
         self.groupSeparator = "" // will be set later
         self.decimalSeparator = ""
@@ -128,7 +126,7 @@ class BasicTranslator: TranslatorProtocol, Hashable {
                 count += 1
             }
             if count >= 10 {
-                ret += " " + andSoOn
+                ret += "..."
             }
         }
 

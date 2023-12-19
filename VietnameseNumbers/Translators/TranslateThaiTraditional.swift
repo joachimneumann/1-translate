@@ -14,7 +14,6 @@ class TranslateThaiTraditional: BasicTranslator {
                    languageEnglish: "trad. Thai",
                    dotString: "",
                    negativeString: "",
-                   andSoOn: "",
                    exponentString: "")
     }
     

@@ -16,7 +16,6 @@ class TranslateRoman: BasicTranslator {
         super.init(language: "Roman",
                    dotString: "",
                    negativeString: "",
-                   andSoOn: "",
                    exponentString: "")
         allowNegativeNumbers = false
         allowExponent = false

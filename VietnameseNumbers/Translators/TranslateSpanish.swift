@@ -18,7 +18,6 @@ class TranslateSpanish: GeneralTranslator {
             language: "Español",
             dotString: "coma", // will be overwritten in the settings
             negativeString: "menos",
-            andSoOn: "y así",
             exponentString: " por diez elevado a ")
     }
     

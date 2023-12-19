@@ -20,7 +20,6 @@ class TranslateDanish: GeneralTranslator {
             language: "Dansk",
             dotString: "komma",
             negativeString: "minus",
-            andSoOn: "og så videre",
             exponentString: " gange ti i ")
     }
 

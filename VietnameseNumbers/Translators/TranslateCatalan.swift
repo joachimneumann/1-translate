@@ -13,7 +13,6 @@ class TranslateCatalan: GeneralTranslator {
             language: "Català",
             dotString: "coma",
             negativeString: "menys",
-            andSoOn: "etcètera",
             exponentString: " por diez elevat a ")
     }
     

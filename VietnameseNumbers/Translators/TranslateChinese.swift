@@ -54,7 +54,6 @@ class TranslateChinese: GeneralTranslator {
             languageEnglish: languageEnglish,
             dotString: "点",
             negativeString: "负",
-            andSoOn: "依此类推",
             exponentString: " 乘以 十的 ")
         exponentString2 = "次冪"
     }

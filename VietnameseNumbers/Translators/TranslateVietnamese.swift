@@ -29,7 +29,6 @@ class TranslateVietnamese: GeneralTranslator {
             languageEnglish: "Vietnamese",
             dotString: "phẩy",
             negativeString: "âm",
-            andSoOn: "và như thế",
             exponentString: " nhân mười mũ ")
     }
         

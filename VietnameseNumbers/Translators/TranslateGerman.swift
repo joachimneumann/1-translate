@@ -20,7 +20,6 @@ class TranslateGerman: GeneralTranslator {
             language: "Deutsch",
             dotString: "Komma",
             negativeString: "minus",
-            andSoOn: "und so weiter",
             exponentString: " mal zehn hoch ")
     }
     

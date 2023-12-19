@@ -22,7 +22,6 @@ class TranslateFrench: GeneralTranslator {
             language: "Française",
             dotString: "virgule",
             negativeString: "moins",
-            andSoOn: "et ainsi de suite",
             exponentString: " fois dix à la puissance ")
     }
     

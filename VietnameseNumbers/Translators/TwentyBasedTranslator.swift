@@ -52,7 +52,6 @@ class TwentyBasedTranslator: BasicTranslator, TwentyBasedTranslatorProtocol {
                 languageEnglish: languageEnglish,
                 dotString: dotString,
                 negativeString: negativeString,
-                andSoOn: andSoOn,
                 exponentString: exponentString)
         }
     
