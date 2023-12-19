@@ -45,6 +45,7 @@ struct TranslateNumbers: View {
                         translatedString: viewModel.firstTranslatedNumber,
                         translatedStringTopBorder: viewModel.firstTranslatedNumberTopBorder,
                         screen: screen)
+                    .font(viewModel.secondLanguageAllowed ? /*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/ : .largeTitle)
                     .padding(.horizontal, 0)
                     Spacer(minLength: 0.0)
                 }
@@ -61,6 +62,7 @@ struct TranslateNumbers: View {
                         TranslatedDisplay(
                             translatedString: viewModel.secondTranslatedNumber,
                             translatedStringTopBorder: viewModel.secondTranslatedNumberTopBorder,                            screen: screen)
+                        .font(.title)
                         .padding(.horizontal, 0)
                     }
                 }

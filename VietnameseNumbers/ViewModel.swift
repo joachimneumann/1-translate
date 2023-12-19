@@ -322,19 +322,19 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         precisionDescription = _precision.wrappedValue.useWords
         
         translators = [
-            translateEnglish,
-            translateGerman,
-            translateVietnamese,
-            translateSpanish,
             translateCatalan,
-            translateFrench,
-            translatePolish,
             translateDanish,
+            translateEnglish,
+            translateFrench,
+            translateGerman,
             translateMandarin,
             translateFinancialMandarin,
+            translatePolish,
+            translateRoman,
+            translateSpanish,
             translateThai,
             translateThaiTraditional,
-            translateRoman]
+            translateVietnamese]
         firstTranslator = translateEnglish
         secondTranslator = translateEnglish
 

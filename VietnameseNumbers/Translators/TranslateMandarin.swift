@@ -25,7 +25,7 @@ class TranslateMandarin: GeneralTranslator {
         self.variant = variant
         super.init(
             language: variant == .simplified ? "普通话" : "金融的",
-            languageEnglish: variant == .simplified ? "Mandarin" : "Financial Mandarin",
+            languageEnglish: variant == .simplified ? "Chinese" : "Financial",
             dotString: "点",
             negativeString: "减",
             andSoOn: "依此类推",

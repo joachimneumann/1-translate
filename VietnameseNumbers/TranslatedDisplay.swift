@@ -26,33 +26,26 @@ struct TranslatedDisplay: View {
     let translatedString: String
     let translatedStringTopBorder: String?
     let screen: Screen
-    private let font: Font
     
     init(translatedString: String, translatedStringTopBorder: String?, screen: Screen) {
         self.translatedString = translatedString
         self.translatedStringTopBorder = translatedStringTopBorder
         self.screen = screen
-        let uiFont = AppleFont.systemFont(ofSize: screen.uiFontSize * 0.7, weight: .regular)
-        self.font = Font(uiFont)
     }
     
     var body: some View {
-        
-        //let _ = print(display.data.left)
-        GeometryReader { geometry in                    // Get the geometry
+        GeometryReader { geometry in
             ScrollView(.vertical) {
                 VStack {
                     if translatedStringTopBorder != nil {
                         HStack(alignment: .bottom, spacing: 0.0) {
                             Text(translatedStringTopBorder!)
-                                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                                 .topBorder()
                             Spacer(minLength: 0.0)
                         }
                     }
                     HStack(alignment: .bottom, spacing: 0.0) {
                         Text(translatedString)
-                            .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                         Spacer(minLength: 0.0)
                     }
                 }
