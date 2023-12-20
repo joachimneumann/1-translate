@@ -9,7 +9,6 @@ import Foundation
 
 class Thai: TenBasedLanguage {
     let hundred = "ร้อย"
-    let onlyOne = "หนึ่ง"
 
     init() {
         super.init(
@@ -19,6 +18,7 @@ class Thai: TenBasedLanguage {
             exponentString: "e",
             groupSeparator: "",
             decimalSeparator: ".")
+        onlyOne = "หนึ่ง"
     }
     
     override func read_0_9(_ i: Int) -> String {
@@ -53,12 +53,6 @@ class Thai: TenBasedLanguage {
     }
 
     override func readPeriod(_ p: Period) -> String {
-        if p.value == 1 {
-            return onlyOne
-        }
-        if p.value == 0 {
-            return read_0_9(0)
-        }
         var ret = ""
         if p.x__ != 0 {
             ret += read_0_9(p.x__)
