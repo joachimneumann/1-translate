@@ -14,7 +14,6 @@ class TranslateThai: TwentyBasedTranslator {
             languageEnglish: "Thai",
             dotString: "จุด",
             negativeString: "ลบ",
-            andSoOn: "XXX",
             exponentString: "XXX",
             hundred: "ร้อย",
             thousand: "พัน",

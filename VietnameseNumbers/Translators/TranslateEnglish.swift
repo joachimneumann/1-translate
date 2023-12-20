@@ -14,7 +14,6 @@ class TranslateEnglish: TwentyBasedTranslator {
             language: TranslateEnglish.language,
             dotString: "point",
             negativeString: "minus",
-            andSoOn: "and so on",
             exponentString: " times ten to the power of ",
             hundred: "hundred",
             thousand: "thousand",

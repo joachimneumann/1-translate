@@ -15,22 +15,26 @@ protocol TenBasedLanguageProtocol: LanguageProtocol {
 typealias TenBasedLanguage = TenBasedLanguageProtocol & TenBasedLanguageClass
 
 class TenBasedLanguageClass: LanguageClass {
-    var tenBasedLanguage: (any TenBasedLanguage)? = nil
+    var subClassX: TenBasedLanguage? = nil
+    var onlyOne: String? = nil
     override init() {
         super.init()
-        self.tenBasedLanguage = self as? (any TenBasedLanguage)
+        guard let temp = self as? TenBasedLanguage else { return }
+        self.subClassX = temp
     }
     
     private func readPeriod(_ p: Period, leadingZeros: Bool = true) -> String {
-        guard let tenBasedLanguage = tenBasedLanguage else { return error }
+        if leadingZeros == false && p.isOne && onlyOne != nil {
+            return onlyOne!
+        }
         var ret = ""
         if leadingZeros || p.x__ != 0 {
-            ret += tenBasedLanguage.read_0_9(p.x__)
+            ret += subClassX!.read_0_9(p.x__)
         }
         if leadingZeros || p._x_ != 0 || p.x__ != 0 {
-            ret += tenBasedLanguage.read_0_9(p._x_)
+            ret += subClassX!.read_0_9(p._x_)
         }
-        ret += tenBasedLanguage.read_0_9(p.__x)
+        ret += subClassX!.read_0_9(p.__x)
         return ret
     }
 

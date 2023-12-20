@@ -28,21 +28,21 @@ class LanguageClass {
     var allowFraction = true
     let error = "ERROR"
     var englishName: String? = nil
-    var language: Language? = nil
+    var subClass: Language? = nil
     
     init() {
-        self.language = self as? Language
+        guard let temp = self as? Language else { return }
+        self.subClass = temp
     }
     
     func read(_ i: Int) -> String {
         if i < 0 {
-            return language!.negativeString + language!.afterNegative +  language!.readPositive(-i)
+            return subClass!.negativeString + subClass!.afterNegative +  subClass!.readPositive(-i)
         } else {
-            return language!.readPositive(i)
+            return subClass!.readPositive(i)
         }
     }
     func read(_ s: String) -> String {
-        guard let language = language else { return error }
         // lets remove the groupSeparator
         let strippedString = s.replacingOccurrences(of: groupSeparator, with: "")
 
@@ -64,14 +64,14 @@ class LanguageClass {
         var ret: String = ""
 
         if integerPart == "-0" {
-            ret = language.negativeString + afterNegative + read(0)
+            ret = subClass!.negativeString + afterNegative + read(0)
         } else {
             guard let integerPartValue = Int(integerPart) else { return error }
             ret = read(integerPartValue)
         }
         if let fractionalPart = fractionalPart {
             var count = 0
-            ret += beforeAndAfterDotString + language.dotString
+            ret += beforeAndAfterDotString + subClass!.dotString
             for char in fractionalPart {
                 if count < 10 {
                     guard let digit = Int(String(char)) else { return error }
@@ -85,7 +85,7 @@ class LanguageClass {
         }
 
         if let exponent = exponent {
-            ret += language.exponentString + read(exponent)
+            ret += subClass!.exponentString + read(exponent)
             if exponentString2 != nil {
                 ret += exponentString2!
             }

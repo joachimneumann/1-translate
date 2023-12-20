@@ -13,8 +13,12 @@ class Period {
     let x__: Int
     let _xx: Int
     
-    var zero: Bool {
+    var isZero: Bool {
         return __x == 0 && _x_ == 0 && x__ == 0
+    }
+
+    var isOne: Bool {
+        return __x == 1 && _x_ == 0 && x__ == 0
     }
 
     init(_ integer: Int) {

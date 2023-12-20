@@ -25,7 +25,6 @@ class ThousandBasedTranslator: BasicTranslator, ThousandBasedTranslatorProtocol 
         language: String,
         dotString: String,
         negativeString: String,
-        andSoOn: String,
         exponentString: String,
         hundred: String,
         thousand: String,

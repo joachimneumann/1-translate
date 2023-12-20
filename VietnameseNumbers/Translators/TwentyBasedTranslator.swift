@@ -37,7 +37,6 @@ class TwentyBasedTranslator: BasicTranslator, TwentyBasedTranslatorProtocol {
         languageEnglish: String? = nil,
         dotString: String,
         negativeString: String,
-        andSoOn: String,
         exponentString: String,
         hundred: String,
         thousand: String,
@@ -65,9 +64,9 @@ class TwentyBasedTranslator: BasicTranslator, TwentyBasedTranslatorProtocol {
     }
 
     override func translatePositiveInteger(_ i: Int) -> String? {
-        if i == 1 && onlyOne != nil {
-            return onlyOne!
-        }
+//        if i == 1 && onlyOne != nil {
+//            return onlyOne!
+//        }
         if i <= 20 {
             return translate_0_20(i)
         }

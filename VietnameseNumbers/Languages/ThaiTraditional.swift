@@ -13,11 +13,11 @@ class ThaiTraditional: TenBasedLanguage {
     var exponentString = "e"
     var name: String = "แบบดั้งเดิม"
     
-    override init() {
-        super.init()
-        englishName = "trad. Thai"
-        afterNegative = ""
-    }
+//    override init() {
+//        super.init()
+//        englishName = "trad. Thai"
+//        afterNegative = ""
+//    }
     
     func read_0_9(_ i: Int) -> String {
         switch i {
