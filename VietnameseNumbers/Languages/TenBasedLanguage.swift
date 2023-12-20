@@ -10,7 +10,6 @@ import Foundation
 
 class TenBasedLanguage: Language {
     var e0: String? = nil
-    var e0_remove_s = false
     var e2: String? = nil
     var e3: String? = nil
     var e4: String? = nil
@@ -29,6 +28,7 @@ class TenBasedLanguage: Language {
     var _17: String? = nil
     var _18: String? = nil
     var _19: String? = nil
+
     var eSpace: String? = nil
     var eSpace_: String { eSpace == nil ? "" : eSpace! }
     var e69Space: String? = nil
@@ -42,13 +42,12 @@ class TenBasedLanguage: Language {
             ""
         }
     }
-    var correctOrder: Bool = true
     
     func read_0_9(_ i: Int) -> String {
         fatalError("not implmented")
     }
     
-    private func privateRead_0_9(_ i: Int) -> String {
+    func privateRead_0_9(_ i: Int) -> String {
         if i == 1 && e0 != nil {
             return e0!
         } else {
@@ -60,6 +59,24 @@ class TenBasedLanguage: Language {
         fatalError("not implmented")
     }
     
+    func read_21_99(_ i: Int) -> String {
+        let tens = i / 10
+        let leftOver = i - tens * 10
+        var ret = read_10s(tens)
+        if leftOver > 0 {
+            ret += tensConnector_ + read_0_9(leftOver)
+        }
+        return ret
+    }
+
+    func hundredsString(_ i: Int) -> String {
+        privateRead_0_9(i)
+    }
+
+    func thousandString(_ i: Int) -> String {
+        readPositive(i)
+    }
+
     override func readPositive(_ i: Int) -> String {
         guard i >= 0 && i < 999_999_999_999_999 else { fatalError("TenBasedLanguage readPositive out of range") }
         
@@ -76,36 +93,17 @@ class TenBasedLanguage: Language {
         if i == 17 && _17 != nil { return _17! }
         if i == 18 && _18 != nil { return _18! }
         if i == 19 && _19 != nil { return _19! }
-        
-        var ret = ""
+
         if i <= 99 {
-            let tens = i / 10
-            let leftOver = i - tens * 10
-            
-            if correctOrder {
-                ret += read_10s(tens)
-                if leftOver > 0 {
-                    ret += tensConnector_ + read_0_9(leftOver)
-                }
-            } else {
-                if leftOver > 0 {
-                    ret += read_0_9(leftOver) + tensConnector_
-                }
-                ret += read_10s(tens)
-            }
-            return ret
+            return read_21_99(i)
         }
         
+        var ret = ""
         if i < 1_000 {
             if e2 != nil {
                 let hundreds = i / 100
                 let leftOver = i - hundreds * 100
-                ret += privateRead_0_9(hundreds)
-                if e0_remove_s {
-                    if ret.hasSuffix("eins") {
-                        ret.removeLast()
-                    }
-                }
+                ret += hundredsString(hundreds)
                 ret += eSpace_ + e2!
                 if leftOver > 0 {
                     ret += eSpace_ + readPositive(leftOver)
@@ -149,12 +147,7 @@ class TenBasedLanguage: Language {
                 let thousands = i / 1_000
                 let leftOver = i - thousands * 1_000
                 
-                ret += readPositive(thousands)
-                if e0_remove_s {
-                    if ret.hasSuffix("eins") {
-                        ret.removeLast()
-                    }
-                }
+                ret += thousandString(thousands)
                 ret += eSpace_ + e3!
                 if leftOver > 0 {
                     ret += eSpace_ + readPositive(leftOver)

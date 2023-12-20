@@ -28,7 +28,6 @@ class German: TenBasedLanguage {
         _19 = "neunzehn"
 
         e0 = "eins"
-        e0_remove_s = true
         e2 = "hundert"
         e3 = "tausend"
         e6 = "Millionen"
@@ -40,9 +39,37 @@ class German: TenBasedLanguage {
         tensConnector = "und"
         eSpace = ""
         e69Space = " "
-        correctOrder = false
     }
     
+    override func read_21_99(_ i: Int) -> String {
+        let tens = i / 10
+        let leftOver = i - tens * 10
+
+        var ret = ""
+        if leftOver > 0 {
+            ret += read_0_9(leftOver) + tensConnector_
+        }
+        ret += read_10s(tens)
+        return ret
+    }
+    
+    override func hundredsString(_ i: Int) -> String {
+        var ret = super.hundredsString(i)
+        if ret.hasSuffix("eins") {
+            ret.removeLast()
+        }
+        return ret
+    }
+    
+    override func thousandString(_ i: Int) -> String {
+        var ret = super.thousandString(i)
+        if ret.hasSuffix("eins") {
+            ret.removeLast()
+        }
+        return ret
+    }
+
+
     override func read_0_9(_ i: Int) -> String {
         switch i {
         case 0:     return "null"

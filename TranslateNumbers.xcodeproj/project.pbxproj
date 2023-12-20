@@ -47,6 +47,8 @@
 		AA370C2D293352960041AE4E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA370C2C293352960041AE4E /* Extensions.swift */; };
 		AA370C31293352D60041AE4E /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA370C30293352D60041AE4E /* Key.swift */; };
 		AA3FB8272920E0E5002ECCEB /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3FB8262920E0E5002ECCEB /* Settings.swift */; };
+		AA5020262B333C280080E00C /* Spanish.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5020252B333C280080E00C /* Spanish.swift */; };
+		AA5020272B333C280080E00C /* Spanish.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5020252B333C280080E00C /* Spanish.swift */; };
 		AA672B0A295189950044DC08 /* ScrollViewConditionalAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672B09295189950044DC08 /* ScrollViewConditionalAnimation.swift */; };
 		AA689125295E681400129593 /* Brain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA689124295E681400129593 /* Brain.swift */; };
 		AA715CA82B2BE367009335B7 /* Test_Polish.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA715CA72B2BE367009335B7 /* Test_Polish.swift */; };
@@ -77,7 +79,7 @@
 		AA8A91142B1D7FD000CE7185 /* TranslatedDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8A91132B1D7FD000CE7185 /* TranslatedDisplay.swift */; };
 		AA8A91322B1D865B00CE7185 /* KeyColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABEFC122972A8780023A3C9 /* KeyColor.swift */; };
 		AA8A91352B1D870B00CE7185 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA370C2C293352960041AE4E /* Extensions.swift */; };
-		AA8B614E2B2AFC9A00D2152A /* Test_Spanish.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8B614D2B2AFC9A00D2152A /* Test_Spanish.swift */; };
+		AA8B614E2B2AFC9A00D2152A /* TestSpanish.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8B614D2B2AFC9A00D2152A /* TestSpanish.swift */; };
 		AA92B4C329250827005E43F0 /* ColoredStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA92B4C229250827005E43F0 /* ColoredStepper.swift */; };
 		AA95612D2B2A1C1900648915 /* TranslateCatalan.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA95612C2B2A1C1900648915 /* TranslateCatalan.swift */; };
 		AA95612E2B2A1C1900648915 /* TranslateCatalan.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA95612C2B2A1C1900648915 /* TranslateCatalan.swift */; };
@@ -163,6 +165,7 @@
 		AA370C2C293352960041AE4E /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AA370C30293352D60041AE4E /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		AA3FB8262920E0E5002ECCEB /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		AA5020252B333C280080E00C /* Spanish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spanish.swift; sourceTree = "<group>"; };
 		AA6352B02B296C3B00CABC0C /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		AA672B09295189950044DC08 /* ScrollViewConditionalAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewConditionalAnimation.swift; sourceTree = "<group>"; };
 		AA689124295E681400129593 /* Brain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brain.swift; sourceTree = "<group>"; };
@@ -184,7 +187,7 @@
 		AA8453E7294D872300A50B74 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		AA8A91132B1D7FD000CE7185 /* TranslatedDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatedDisplay.swift; sourceTree = "<group>"; };
 		AA8A911B2B1D815C00CE7185 /* TranslateNumbersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TranslateNumbersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AA8B614D2B2AFC9A00D2152A /* Test_Spanish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_Spanish.swift; sourceTree = "<group>"; };
+		AA8B614D2B2AFC9A00D2152A /* TestSpanish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSpanish.swift; sourceTree = "<group>"; };
 		AA92B4C229250827005E43F0 /* ColoredStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoredStepper.swift; sourceTree = "<group>"; };
 		AA92B4C829273A58005E43F0 /* TranslateNumbers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateNumbers.swift; sourceTree = "<group>"; };
 		AA95612C2B2A1C1900648915 /* TranslateCatalan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateCatalan.swift; sourceTree = "<group>"; };
@@ -344,8 +347,9 @@
 				AA3565B22B325D4B009B58D2 /* Digits.swift */,
 				AA7988B32B32B07700608906 /* Thai.swift */,
 				AA326E482B32F0430092E8E6 /* English.swift */,
-				AA1B007B294772980054C851 /* Brain */,
 				AA326E4B2B332DCC0092E8E6 /* German.swift */,
+				AA5020252B333C280080E00C /* Spanish.swift */,
+				AA1B007B294772980054C851 /* Brain */,
 			);
 			path = Languages;
 			sourceTree = "<group>";
@@ -379,7 +383,7 @@
 				AA30E9DF2B2DAD4C00F7FDEA /* TestThai.swift */,
 				AA715CB62B2C3ABE009335B7 /* TestEnglish.swift */,
 				AA9561352B2AAFEB00648915 /* TestGerman.swift */,
-				AA8B614D2B2AFC9A00D2152A /* Test_Spanish.swift */,
+				AA8B614D2B2AFC9A00D2152A /* TestSpanish.swift */,
 				AA715CB22B2C39EE009335B7 /* Test_Catalan.swift */,
 				AA715CB42B2C3A60009335B7 /* Test_Vietnamese.swift */,
 				AA715CA72B2BE367009335B7 /* Test_Polish.swift */,
@@ -522,6 +526,7 @@
 				AA29F58A293CD608001ADF5A /* PortraitDisplay.swift in Sources */,
 				AA3565B02B32588B009B58D2 /* TenBasedLanguage.swift in Sources */,
 				AA8A91142B1D7FD000CE7185 /* TranslatedDisplay.swift in Sources */,
+				AA5020262B333C280080E00C /* Spanish.swift in Sources */,
 				AA2FAC17272F2349006DE4C8 /* BrainEngine.swift in Sources */,
 				AA739CA62B3030C200A32478 /* TranslateChinese.swift in Sources */,
 				AA2FAC12272F2349006DE4C8 /* NumberStack.swift in Sources */,
@@ -552,6 +557,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA5020272B333C280080E00C /* Spanish.swift in Sources */,
 				AA739CA12B3004F200A32478 /* TranslateFrench.swift in Sources */,
 				AA8A91352B1D870B00CE7185 /* Extensions.swift in Sources */,
 				AA326E4A2B32F0430092E8E6 /* English.swift in Sources */,
@@ -560,7 +566,7 @@
 				AAFBD8A82B32A36D00175197 /* ThaiTraditional.swift in Sources */,
 				AA7988B52B32B07700608906 /* Thai.swift in Sources */,
 				AA3565B12B32588B009B58D2 /* TenBasedLanguage.swift in Sources */,
-				AA8B614E2B2AFC9A00D2152A /* Test_Spanish.swift in Sources */,
+				AA8B614E2B2AFC9A00D2152A /* TestSpanish.swift in Sources */,
 				AAEF2FBA2B20D5500012DDDD /* Separators.swift in Sources */,
 				AA715CB32B2C39EE009335B7 /* Test_Catalan.swift in Sources */,
 				AAAE6D682B22B5CF00079392 /* TranslateVietnamese.swift in Sources */,
