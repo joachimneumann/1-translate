@@ -1,16 +1,16 @@
 //
-//  Test_Automatic_Thai.swift
+//  TestThai.swift
 //
 //  Created by automatic.py
 //
 
 import XCTest
 
-final class TestsThai: XCTestCase {
+final class TestThai: XCTestCase {
     let thai = Thai()
     let traditional = ThaiTraditional()
 
-    func XXtest_traditionalThai() {
+    func test_traditionalThai() {
         XCTAssertEqual(traditional.read(0),  "๐")
         XCTAssertEqual(traditional.read(1),  "๑")
         XCTAssertEqual(traditional.read(2),  "๒")
@@ -33,7 +33,7 @@ final class TestsThai: XCTestCase {
 
     }
     
-    func XXtest_lanta() {
+    func test_lanta() {
         thai.groupSeparator = ""
         thai.decimalSeparator = "."
         XCTAssertEqual(thai.read(100), "หนึ่งร้อย")
@@ -44,7 +44,7 @@ final class TestsThai: XCTestCase {
         XCTAssertEqual(thai.read(1_005), "หนึ่งพันห้า")
     }
     
-    func XXtest_webpage() {
+    func test_webpage() {
         /// https://www.thaipod101.com/blog/2019/10/24/thai-numbers
         
         /*

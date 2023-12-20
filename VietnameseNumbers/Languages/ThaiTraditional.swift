@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ThaiTraditional: TenBasedLanguage {
+class ThaiTraditional: DigitBasedLanguage {
     init() {
         super.init(
             name: "แบบดั้งเดิม",
@@ -17,22 +17,7 @@ class ThaiTraditional: TenBasedLanguage {
             groupSeparator: "",
             decimalSeparator: ".")
     }
-    
-//    override func readPeriod(_ p: Period) -> String {
-//        var ret = ""
-//        let allDigits = !p.isLargest
-//        if p.x__ > 0 || allDigits {
-//            ret += read_0_9(p.x__)
-//        }
-//        if p._x_ > 0 || p.x__ > 0 || allDigits {
-//            ret += read_0_9(p._x_)
-//        }
-//        if p.value > 0 || allDigits {
-//            ret += read_0_9(p.__x)
-//        }
-//        return ret
-//    }
-    
+        
     override func read_0_9(_ i: Int) -> String {
         switch i {
         case 0: return "๐"

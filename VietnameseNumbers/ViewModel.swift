@@ -68,9 +68,10 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @Published var firstTranslatedNumberTopBorder: String? = nil
     @Published var secondTranslatedNumberTopBorder: String? = nil
 
-    let digits = Digits()
+    let digits          = Digits()
     let thaiTraditional = ThaiTraditional()
-    
+    let thai            = Thai()
+
     //-----//
     
     let translateEnglish = TranslateEnglish()
@@ -313,7 +314,8 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         
         languages = [
             digits,
-            thaiTraditional]
+            thaiTraditional,
+        thai]
         
         for language in languages {
             previouslySelectedLanguages.add(new: language.name)
