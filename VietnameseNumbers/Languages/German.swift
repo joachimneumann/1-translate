@@ -17,7 +17,6 @@ class German: TenBasedLanguage {
             groupSeparator: "",
             decimalSeparator: ".")
 
-        e2 = "hundert"
         e3 = "tausend"
         e6 = "Millionen"
         e6_single = "eine Million"
@@ -59,10 +58,17 @@ class German: TenBasedLanguage {
         return ret
     }
     
-    override func hundredsString(_ i: Int) -> String {
-        var ret = super.hundredsString(i)
+    override func read_100_999(_ i: Int) -> String {
+        let hundreds = i / 100
+        let leftOver = i - hundreds * 100
+        
+        var ret = readPositive(hundreds)
         if ret.hasSuffix("eins") {
             ret.removeLast()
+        }
+        ret += "hundert"
+        if leftOver > 0 {
+            ret += eSpace_ + readPositive(leftOver)
         }
         return ret
     }

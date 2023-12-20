@@ -9,7 +9,6 @@ import Foundation
 
 
 class TenBasedLanguage: Language {
-    var e2: String? = nil
     var e3: String? = nil
     var e4: String? = nil
     var e5: String? = nil
@@ -41,7 +40,9 @@ class TenBasedLanguage: Language {
     }
     
     func read_11_19(_ i: Int) -> String {
-        return readPositive(i)
+        let tens = i / 10
+        let leftOver = i - tens * 10
+        return read_10s(1)+readPositive(leftOver)
     }
     
     func read_21_99(_ i: Int) -> String {
@@ -54,8 +55,8 @@ class TenBasedLanguage: Language {
         return ret
     }
 
-    func hundredsString(_ i: Int) -> String {
-        readPositive(i)
+    func read_100_999(_ i: Int) -> String {
+        fatalError("not implmented")
     }
 
     func thousandString(_ i: Int) -> String {
@@ -65,36 +66,13 @@ class TenBasedLanguage: Language {
     override func readPositive(_ i: Int) -> String {
         guard i >= 0 && i < 999_999_999_999_999 else { fatalError("TenBasedLanguage readPositive out of range") }
         
-        if i < 10 {
-            return read_0_9(i)
-        }
-        
-        if i == 10 {
-            return read_10s(1)
-        }
-        
-        if i <= 19 {
-            return read_11_19(i)
-        }
-        
-        if i <= 99 {
-            return read_21_99(i)
-        }
+        if i < 10    { return read_0_9(i)     }
+        if i == 10   { return read_10s(1)     }
+        if i <= 19   { return read_11_19(i)   }
+        if i <= 99   { return read_21_99(i)   }
+        if i < 1_000 { return read_100_999(i) }
         
         var ret = ""
-        if i < 1_000 {
-            if e2 != nil {
-                let hundreds = i / 100
-                let leftOver = i - hundreds * 100
-                ret += hundredsString(hundreds)
-                ret += eSpace_ + e2!
-                if leftOver > 0 {
-                    ret += eSpace_ + readPositive(leftOver)
-                }
-                return ret
-            }
-        }
-        
         if i < 1_000_000 {
             if e5 != nil {
                 if i >= 100_000 {

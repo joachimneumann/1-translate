@@ -17,7 +17,6 @@ class Spanish: TenBasedLanguage {
             groupSeparator: "",
             decimalSeparator: ".")
 
-        e2 = "cientos"
         e3 = "thousand"
         e6 = "million"
         e9 = "billion"
@@ -62,22 +61,30 @@ class Spanish: TenBasedLanguage {
         return ret
     }
     
-    override func hundredsString(_ i: Int) -> String {
+    override func read_100_999(_ i: Int) -> String {
         if i == 100 { return "cien" }
 
         let hundreds = i / 100
+        let leftOver = i - hundreds * 100
+        
+        var ret = ""
         switch hundreds {
         case 1:
-            return "ciento"
+            ret = "ciento"
         case 5:
-            return "quinientos"
+            ret = "quinientos"
         case 7:
-            return "setecientos"
+            ret = "setecientos"
         case 9:
-            return "novecientos"
+            ret = "novecientos"
         default:
-            return read_0_9(hundreds) + "cientos"
+            ret = readPositive(hundreds) + "cientos"
         }
+
+        if leftOver > 0 {
+            ret += " " + readPositive(leftOver)
+        }
+        return ret
     }
 
     override func read_0_9(_ i: Int) -> String {

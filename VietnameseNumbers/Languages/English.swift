@@ -17,7 +17,6 @@ class English: TenBasedLanguage {
             groupSeparator: "",
             decimalSeparator: ".")
 
-        e2 = "hundred"
         e3 = "thousand"
         e6 = "million"
         e9 = "billion"
@@ -27,6 +26,18 @@ class English: TenBasedLanguage {
         eSpace = " "
     }
     
+    override func read_100_999(_ i: Int) -> String {
+        let hundreds = i / 100
+        let leftOver = i - hundreds * 100
+        
+        var ret = readPositive(hundreds)
+        ret += " hundred"
+        if leftOver > 0 {
+            ret += " " + readPositive(leftOver)
+        }
+        return ret
+    }
+
     override func read_11_19(_ i: Int) -> String {
         if i == 11 { return "eleven" }
         if i == 12 { return "twelve" }
