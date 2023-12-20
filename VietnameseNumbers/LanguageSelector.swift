@@ -26,21 +26,22 @@ struct SelectLanguage: View {
             .foregroundColor(Color.white)
         }
     }
+    
     @ObservedObject var viewModel: ViewModel
     let language: Language
     var body: some View {
-        let _1_selected = viewModel.firstLanguageName == language.name
-        let _2_selected = viewModel.secondLanguageName == language.name
+        let _1_selected = (language.name == viewModel.firstLanguage.name)
+        let _2_selected = (language.name == viewModel.secondLanguage.name)
         HStack {
             Button(action: {
-                viewModel.firstLanguageName = language.name
+                viewModel.firstLanguage = language
             }) {
                 HStack {
                     Image(language.name)
                         .resizable()
                         .scaledToFit()
                         .padding(2)
-                        .border(.white, width: viewModel.firstLanguageName == language.name ? 2 : 0)
+                        .border(.white, width: viewModel.firstLanguage.name == language.name ? 2 : 0)
                         .frame(height: 30)
                         .padding(.trailing, 10)
                         .opacity(_1_selected ? 1.0 : 0.5)
@@ -52,14 +53,14 @@ struct SelectLanguage: View {
             }
             if viewModel.secondLanguageAllowed {
                 Button(action: {
-                    viewModel.secondLanguageName = language.name
+                    viewModel.secondLanguage = language
                 }) {
                     HStack {
                         Image(language.name)
                             .resizable()
                             .scaledToFit()
                             .padding(2)
-                            .border(.white, width: viewModel.secondLanguageName == language.name ? 2 : 0)
+                            .border(.white, width: viewModel.secondLanguage.name == language.name ? 2 : 0)
                             .frame(height: 30)
                             .opacity(_2_selected ? 1.0 : 0.5)
                             .padding(.trailing, 10)

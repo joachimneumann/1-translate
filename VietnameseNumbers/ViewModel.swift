@@ -103,7 +103,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             }
         }
             
-        secondTranslatedNumber = firstLanguage.read(currentDisplay.allInOneLine)
+        secondTranslatedNumber = secondLanguage.read(currentDisplay.allInOneLine)
         secondTranslatedNumberTopBorder = nil
         if secondTranslatedNumber.contains(TranslateRoman.TOUSANDS) {
             let split = secondTranslatedNumber.split(separator: TranslateRoman.TOUSANDS)
@@ -139,55 +139,14 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     }
     
     @AppStorage(AppStorageKeys.secondLanguageAllowed, store: .standard)
-    var secondLanguageAllowed: Bool = false {
-        didSet {
-            if firstLanguageName == secondLanguageName {
-                /// make sure the languages are not the same
-                var substituteFound = false
-                for substituteLanguage in languages {
-                    if !substituteFound && substituteLanguage.name != firstLanguageName {
-                        secondLanguage = substituteLanguage
-                        substituteFound = true
-                    }
-                }
-            }
-        }
-    }
+    var secondLanguageAllowed: Bool = false
     
     @AppStorage(AppStorageKeys.firstLanguage, store: .standard)
-    var firstLanguageName: String = "digits" {
-        didSet {
-            previouslySelectedLanguages.add(new: firstLanguageName)
-            if firstLanguageName == secondLanguageName {
-                /// make sure the languages are not the same
-                let newLanguageName = previouslySelectedLanguages.get(except: firstLanguageName)
-                for language in languages {
-                    if language.name == newLanguageName {
-                        secondLanguage = language
-                        updateTranslation()
-                    }
-                }
-            }
-        }
-    }
+    private var firstLanguageName: String = "digits"
 
     @AppStorage(AppStorageKeys.secondLanguage, store: .standard)
-    var secondLanguageName: String = "digits" {
-        didSet {
-            previouslySelectedLanguages.add(new: secondLanguageName)
-            if firstLanguageName == secondLanguageName {
-                /// make sure the languages are not the same
-                let newLanguageName = previouslySelectedLanguages.get(except: firstLanguageName)
-                for language in languages {
-                    if language.name == newLanguageName {
-                        firstLanguage = language
-                        updateTranslation()
-                    }
-                }
-            }
-        }
-    }
-    
+    private var secondLanguageName: String = "แบบดั้งเดิม"
+
     @AppStorage(AppStorageKeys.settingsEnglishUseAndAfterHundred, store: .standard)
     var settingsEnglishUseAndAfterHundred: Bool = false {
         didSet {
@@ -274,8 +233,44 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         }
     }
         
-    @Published var firstLanguage: Language = Digits()
-    @Published var secondLanguage: Language = Digits()
+    @Published var firstLanguage: Language = Digits() {
+        didSet {
+            previouslySelectedLanguages.add(new: firstLanguage.name)
+            if firstLanguage.name == secondLanguage.name {
+                /// make sure the languages are not the same
+                let newLanguageName = previouslySelectedLanguages.get(except: firstLanguage.name)
+                if newLanguageName != "" {
+                    for newLanguage in languages {
+                        if newLanguage.name == newLanguageName {
+                            secondLanguage = newLanguage
+                        }
+                    }
+                }
+            }
+            updateTranslation()
+            firstLanguageName  = firstLanguage.name
+            secondLanguageName = secondLanguage.name
+        }
+    }
+    @Published var secondLanguage: Language = Digits() {
+        didSet {
+            previouslySelectedLanguages.add(new: secondLanguage.name)
+            if firstLanguage.name == secondLanguage.name {
+                /// make sure the languages are not the same
+                let newLanguageName = previouslySelectedLanguages.get(except: secondLanguage.name)
+                if newLanguageName != "" {
+                    for newLanguage in languages {
+                        if newLanguage.name == newLanguageName {
+                            firstLanguage = newLanguage
+                        }
+                    }
+                }
+            }
+            updateTranslation()
+            firstLanguageName  = firstLanguage.name
+            secondLanguageName = secondLanguage.name
+        }
+    }
 
     var precisionDescription = "unknown"
     var showPrecision: Bool = false
@@ -319,6 +314,10 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         languages = [
             digits,
             thaiTraditional]
+        
+        for language in languages {
+            previouslySelectedLanguages.add(new: language.name)
+        }
         
 //        translators = [
 //            translateCatalan,
