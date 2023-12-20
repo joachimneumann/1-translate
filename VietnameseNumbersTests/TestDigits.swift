@@ -36,7 +36,7 @@ final class TestDigits: XCTestCase {
         XCTAssertEqual(digits.read(903_945_873_498), "903945873498")
         XCTAssertEqual(digits.read(23_903_945_873_498), "23903945873498")
         XCTAssertEqual(digits.read(123_903_945_873_498), "123903945873498")
-        XCTAssertEqual(digits.read(2_123_903_945_873_498), "ERROR")
+        XCTAssertEqual(digits.read(2_123_903_945_873_498), "ERRORvi")
     }
 }
 

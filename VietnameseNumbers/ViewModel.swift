@@ -68,6 +68,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @Published var firstTranslatedNumberTopBorder: String? = nil
     @Published var secondTranslatedNumberTopBorder: String? = nil
 
+    let digits = Digits(groupSeparator: "", decimalSeparator: "")
     let translateEnglish = TranslateEnglish()
     let translateGerman = TranslateGerman()
     let translateVietnamese = TranslateVietnamese()
@@ -84,6 +85,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     let translateFinancialChinese = TranslateChinese(variant: .financial)
 
     var translators: [BasicTranslator] // set in init()
+    var languages: [Language] // set in init()
 
     var previouslySelectedLanguages = StringPreference()
     
@@ -321,6 +323,8 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         currentDisplay = Display(left: "0", right: nil, canBeInteger: false, canBeFloat: false)
         brain = Brain(precision: _precision.wrappedValue)
         precisionDescription = _precision.wrappedValue.useWords
+        
+        languages = [digits]
         
         translators = [
             translateCatalan,
