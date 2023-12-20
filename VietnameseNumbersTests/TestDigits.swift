@@ -29,11 +29,14 @@ final class TestDigits: XCTestCase {
         XCTAssertEqual(digits.read(110), "110")
         XCTAssertEqual(digits.read(199), "199")
         XCTAssertEqual(digits.read(200), "200")
-        XCTAssertEqual(digits.read(432), "345")
+        XCTAssertEqual(digits.read(432), "432")
         XCTAssertEqual(digits.read(1_000), "1000")
         XCTAssertEqual(digits.read(1_254), "1254")
         XCTAssertEqual(digits.read(23_423_423), "23423423")
         XCTAssertEqual(digits.read(903_945_873_498), "903945873498")
+        XCTAssertEqual(digits.read(23_903_945_873_498), "23903945873498")
+        XCTAssertEqual(digits.read(123_903_945_873_498), "123903945873498")
+        XCTAssertEqual(digits.read(2_123_903_945_873_498), "ERROR")
     }
 }
 

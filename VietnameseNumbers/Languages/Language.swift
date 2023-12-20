@@ -35,10 +35,8 @@ class LanguageClass {
         self.language = self as? Language
     }
     
-    func read(_ i: Int) -> String {
-        return "XX"
-    }
-
+    func read(_ i: Int) -> String { return "?" }
+    
     func read(_ s: String) -> String {
         guard let language = language else { return error }
         // lets remove the groupSeparator
