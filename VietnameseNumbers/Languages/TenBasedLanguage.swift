@@ -10,7 +10,8 @@ import Foundation
 
 class TenBasedLanguage: Language {
     var onlyOne: String? = nil
-
+    var e3String: String? = nil
+    
     func read_0_9(_ i: Int) -> String {
         fatalError("not implmented")
     }
@@ -21,20 +22,19 @@ class TenBasedLanguage: Language {
 
     override func readPositive(_ i: Int) -> String {
         guard i >= 0 && i < 999_999_999_999_999 else { fatalError("TenBasedLanguage readPositive out of range") }
-        
-        if (onlyOne != nil) && i == 1 { return onlyOne! }
-        
-        if i < 10 { return read_0_9(i) }
+                
+        if i == 0 { return read_0_9(0) }
         
         var ret = ""
         let e0 = i.e0
+        
         guard let e3 = i.e3  else {
             return readPeriod(e0)
         }
         ret = readPeriod(e0)
 
         guard let e6 = i.e6  else {
-            return readPeriod(e3) + ret
+            return readPeriod(e3) + (e3String ?? "") + ret
         }
         ret = readPeriod(e3) + ret
 
