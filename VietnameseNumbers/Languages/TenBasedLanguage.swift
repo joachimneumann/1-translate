@@ -9,7 +9,6 @@ import Foundation
 
 
 class TenBasedLanguage: Language {
-    var e0: String? = nil
     var e2: String? = nil
     var e3: String? = nil
     var e4: String? = nil
@@ -47,14 +46,6 @@ class TenBasedLanguage: Language {
         fatalError("not implmented")
     }
     
-    func privateRead_0_9(_ i: Int) -> String {
-        if i == 1 && e0 != nil {
-            return e0!
-        } else {
-            return read_0_9(i)
-        }
-    }
-    
     func read_10s(_ i: Int) -> String {
         fatalError("not implmented")
     }
@@ -70,7 +61,7 @@ class TenBasedLanguage: Language {
     }
 
     func hundredsString(_ i: Int) -> String {
-        privateRead_0_9(i)
+        readPositive(i)
     }
 
     func thousandString(_ i: Int) -> String {
@@ -81,7 +72,7 @@ class TenBasedLanguage: Language {
         guard i >= 0 && i < 999_999_999_999_999 else { fatalError("TenBasedLanguage readPositive out of range") }
         
         if i < 10 {
-            return privateRead_0_9(i)
+            return read_0_9(i)
         }
         
         if i == 11 && _11 != nil { return _11! }
@@ -118,11 +109,7 @@ class TenBasedLanguage: Language {
                     let hundredThousands = i / 100_000
                     let leftOver = i - hundredThousands * 100_000
                     
-                    if hundredThousands == 1 {
-                        ret += e0!
-                    } else {
-                        ret += read_0_9(hundredThousands)
-                    }
+                    ret += read_0_9(hundredThousands)
                     ret += e5!
                     if leftOver > 0 {
                         ret += readPositive(leftOver)
@@ -135,7 +122,7 @@ class TenBasedLanguage: Language {
                     let tenThousands = i / 10_000
                     let leftOver = i - tenThousands * 10_000
                     
-                    ret += privateRead_0_9(tenThousands)
+                    ret += readPositive(tenThousands)
                     ret += e4!
                     if leftOver > 0 {
                         ret += readPositive(leftOver)

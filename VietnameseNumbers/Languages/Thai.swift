@@ -16,7 +16,10 @@ class Thai: TenBasedLanguage {
             exponentString: "e",
             groupSeparator: "",
             decimalSeparator: ".")
-        e0 = "หนึ่ง"
+        
+        _11 = "สิบเอ็ด"
+
+        //e0 = "หนึ่ง"
         e2 = "ร้อย"
         e3 = "พัน"
         e4 = "หมื่น"
@@ -29,7 +32,7 @@ class Thai: TenBasedLanguage {
     override func read_0_9(_ i: Int) -> String {
         switch i {
         case 0: return "ศูนย์"
-        case 1: return "เอ็ด"
+        case 1: return "หนึ่ง" // "เอ็ด"
         case 2: return "สอง"
         case 3: return "สาม"
         case 4: return "สี่"
@@ -42,6 +45,17 @@ class Thai: TenBasedLanguage {
         }
     }
     
+    override func read_21_99(_ i: Int) -> String {
+        var ret = super.read_21_99(i)
+        if ret.hasSuffix("หนึ่ง") {
+            ret.removeLast()
+            ret.removeLast()
+            ret.removeLast()
+            ret += "เอ็ด"
+        }
+        return ret
+    }
+
     
     override func read_10s(_ intValue: Int) -> String {
         switch intValue {
