@@ -17,16 +17,6 @@ class German: TenBasedLanguage {
             groupSeparator: "",
             decimalSeparator: ".")
 
-        _11 = "elf"
-        _12 = "zwölf"
-        _13 = "dreizehn"
-        _14 = "vierzehn"
-        _15 = "fünfzehn"
-        _16 = "sechzehn"
-        _17 = "siebzehn"
-        _18 = "achtzehn"
-        _19 = "neunzehn"
-
         e2 = "hundert"
         e3 = "tausend"
         e6 = "Millionen"
@@ -38,6 +28,19 @@ class German: TenBasedLanguage {
         tensConnector = "und"
         eSpace = ""
         e69Space = " "
+    }
+    
+    override func read_11_19(_ i: Int) -> String {
+        if i == 11 { return "elf" }
+        if i == 12 { return "zwölf" }
+        if i == 13 { return "dreizehn" }
+        if i == 14 { return "vierzehn" }
+        if i == 15 { return "fünfzehn" }
+        if i == 16 { return "sechzehn" }
+        if i == 17 { return "siebzehn" }
+        if i == 18 { return "achtzehn" }
+        if i == 19 { return "neunzehn" }
+        return ""
     }
     
     override func read_21_99(_ i: Int) -> String {

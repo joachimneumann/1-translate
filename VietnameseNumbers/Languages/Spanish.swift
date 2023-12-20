@@ -17,16 +17,6 @@ class Spanish: TenBasedLanguage {
             groupSeparator: "",
             decimalSeparator: ".")
 
-        _11 = "once"
-        _12 = "doce"
-        _13 = "trece"
-        _14 = "catorce"
-        _15 = "quince"
-        _16 = "dieciséis"
-        _17 = "diecisiete"
-        _18 = "dieciocho"
-        _19 = "diecinueve"
-
         e2 = "cientos"
         e3 = "thousand"
         e6 = "million"
@@ -36,6 +26,20 @@ class Spanish: TenBasedLanguage {
         tensConnector = " y "
         eSpace = ""
     }
+    
+    override func read_11_19(_ i: Int) -> String {
+        if i == 11 { return "once" }
+        if i == 12 { return "doce" }
+        if i == 13 { return "trece" }
+        if i == 14 { return "catorce" }
+        if i == 15 { return "quince" }
+        if i == 16 { return "dieciséis" }
+        if i == 17 { return "diecisiete" }
+        if i == 18 { return "dieciocho" }
+        if i == 19 { return "diecinueve" }
+        return ""
+    }
+
     
     override func read_21_99(_ i: Int) -> String {
         if i == 21 { return "veintiuno" }
@@ -47,34 +51,33 @@ class Spanish: TenBasedLanguage {
         if i == 27 { return "veintisiete" }
         if i == 28 { return "veintiocho" }
         if i == 29 { return "veintinueve" }
-
+        
         let tens = i / 10
         let leftOver = i - tens * 10
-
+        
         var ret = read_10s(tens)
         if leftOver > 0 {
             ret += tensConnector_ + read_0_9(leftOver)
         }
         return ret
+    }
+    
+    override func hundredsString(_ i: Int) -> String {
+        if i == 100 { return "cien" }
 
-//        if tens == 1 && leftOver == 0 { return "cien" }
-//        var ret = ""
-//        switch tens {
-//        case 1:
-//            ret = "ciento"
-//        case 5:
-//            ret = "quinientos"
-//        case 7:
-//            ret = "setecientos"
-//        case 9:
-//            ret = "novecientos"
-//        default:
-//            ret = read_0_9(tens) + "cientos"
-//        }
-//        if leftOver > 0 {
-//            ret += " " + read(leftOver)
-//        }
-//        return ret
+        let hundreds = i / 100
+        switch hundreds {
+        case 1:
+            return "ciento"
+        case 5:
+            return "quinientos"
+        case 7:
+            return "setecientos"
+        case 9:
+            return "novecientos"
+        default:
+            return read_0_9(hundreds) + "cientos"
+        }
     }
 
     override func read_0_9(_ i: Int) -> String {

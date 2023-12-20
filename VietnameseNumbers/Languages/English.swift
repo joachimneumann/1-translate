@@ -17,16 +17,6 @@ class English: TenBasedLanguage {
             groupSeparator: "",
             decimalSeparator: ".")
 
-        _11 = "eleven"
-        _12 = "twelve"
-        _13 = "thirteen"
-        _14 = "fourteen"
-        _15 = "fifteen"
-        _16 = "sixteen"
-        _17 = "seventeen"
-        _18 = "eighteen"
-        _19 = "nineteen"
-
         e2 = "hundred"
         e3 = "thousand"
         e6 = "million"
@@ -37,6 +27,19 @@ class English: TenBasedLanguage {
         eSpace = " "
     }
     
+    override func read_11_19(_ i: Int) -> String {
+        if i == 11 { return "eleven" }
+        if i == 12 { return "twelve" }
+        if i == 13 { return "thirteen" }
+        if i == 14 { return "fourteen" }
+        if i == 15 { return "fifteen" }
+        if i == 16 { return "sixteen" }
+        if i == 17 { return "seventeen" }
+        if i == 18 { return "eighteen" }
+        if i == 19 { return "nineteen" }
+        return ""
+    }
+
     override func read_0_9(_ i: Int) -> String {
         switch i {
         case 0:     return "zero"
@@ -52,7 +55,6 @@ class English: TenBasedLanguage {
         default: return " translate_0_10: outside range "
         }
     }
-    
     
     override func read_10s(_ i: Int) -> String {
         switch i {

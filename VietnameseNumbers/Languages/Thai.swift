@@ -17,8 +17,6 @@ class Thai: TenBasedLanguage {
             groupSeparator: "",
             decimalSeparator: ".")
         
-        _11 = "สิบเอ็ด"
-
         //e0 = "หนึ่ง"
         e2 = "ร้อย"
         e3 = "พัน"
@@ -29,6 +27,19 @@ class Thai: TenBasedLanguage {
         afterNegative = ""
     }
     
+    override func read_11_19(_ i: Int) -> String {
+        if i == 11 { return "สิบเอ็ด" }
+        if i == 12 { return "สิบสอง" }
+        if i == 13 { return "สิบสาม" }
+        if i == 14 { return "สิบสี่" }
+        if i == 15 { return "สิบห้า" }
+        if i == 16 { return "สิบหก" }
+        if i == 17 { return "สิบเจ็ด" }
+        if i == 18 { return "สิบแปด" }
+        if i == 19 { return "สิบเก้า" }
+        return ""
+    }
+
     override func read_0_9(_ i: Int) -> String {
         switch i {
         case 0: return "ศูนย์"

@@ -18,16 +18,6 @@ class TenBasedLanguage: Language {
     var e6_single: String? = nil
     var e9_single: String? = nil
     
-    var _11: String? = nil
-    var _12: String? = nil
-    var _13: String? = nil
-    var _14: String? = nil
-    var _15: String? = nil
-    var _16: String? = nil
-    var _17: String? = nil
-    var _18: String? = nil
-    var _19: String? = nil
-
     var eSpace: String? = nil
     var eSpace_: String { eSpace == nil ? "" : eSpace! }
     var e69Space: String? = nil
@@ -48,6 +38,10 @@ class TenBasedLanguage: Language {
     
     func read_10s(_ i: Int) -> String {
         fatalError("not implmented")
+    }
+    
+    func read_11_19(_ i: Int) -> String {
+        return readPositive(i)
     }
     
     func read_21_99(_ i: Int) -> String {
@@ -75,16 +69,14 @@ class TenBasedLanguage: Language {
             return read_0_9(i)
         }
         
-        if i == 11 && _11 != nil { return _11! }
-        if i == 12 && _12 != nil { return _12! }
-        if i == 13 && _13 != nil { return _13! }
-        if i == 14 && _14 != nil { return _14! }
-        if i == 15 && _15 != nil { return _15! }
-        if i == 16 && _16 != nil { return _16! }
-        if i == 17 && _17 != nil { return _17! }
-        if i == 18 && _18 != nil { return _18! }
-        if i == 19 && _19 != nil { return _19! }
-
+        if i == 10 {
+            return read_10s(1)
+        }
+        
+        if i <= 19 {
+            return read_11_19(i)
+        }
+        
         if i <= 99 {
             return read_21_99(i)
         }
