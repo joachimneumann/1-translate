@@ -12,31 +12,35 @@ protocol LanguageProtocol {
     var negativeString: String { get }
     var dotString: String { get }
     var exponentString: String { get }
-    func read(_ i: Int) -> String
-    func read(_ s: String) -> String
+    func readPositive(_ i: Int) -> String    // implemented in subclasses of LanguageClass
+    func read(_ s: String) -> String // implemented in LanguageClass
 }
 
 typealias Language = LanguageProtocol & LanguageClass
 
 class LanguageClass {
-    var groupSeparator: String
-    var decimalSeparator: String
+    var groupSeparator: String = ""
+    var decimalSeparator: String = "."
     var afterNegative = " "
     var beforeAndAfterDotString = ""
     var exponentString2: String? = nil
     var allowExponent = true
     var allowFraction = true
     let error = "ERROR"
+    var englishName: String? = nil
     var language: Language? = nil
     
-    init(groupSeparator: String, decimalSeparator: String) {
-        self.groupSeparator = groupSeparator
-        self.decimalSeparator = decimalSeparator
+    init() {
         self.language = self as? Language
     }
     
-    func read(_ i: Int) -> String { return "?" }
-    
+    func read(_ i: Int) -> String {
+        if i < 0 {
+            return language!.negativeString + language!.afterNegative +  language!.readPositive(-i)
+        } else {
+            return language!.readPositive(i)
+        }
+    }
     func read(_ s: String) -> String {
         guard let language = language else { return error }
         // lets remove the groupSeparator

@@ -10,13 +10,13 @@ import SwiftUI
 struct SelectLanguage: View {
     
     struct LanguageText: View {
-        let translator: BasicTranslator
+        let language: Language
         let bold: Bool
         var body: some View {
             HStack(spacing: 0.0) {
-                Text(translator.language)
-                if translator.languageEnglish != nil {
-                    Text(" "+translator.languageEnglish!)
+                Text(language.name)
+                if language.englishName != nil {
+                    Text(" "+language.englishName!)
                         .minimumScaleFactor(0.01)
                 }
                 Spacer()
@@ -27,43 +27,43 @@ struct SelectLanguage: View {
         }
     }
     @ObservedObject var viewModel: ViewModel
-    let translator: BasicTranslator
+    let language: Language
     var body: some View {
-        let _1_selected = viewModel.firstTranslator == translator
-        let _2_selected = viewModel.secondTranslator == translator
+        let _1_selected = viewModel.firstLanguageName == language.name
+        let _2_selected = viewModel.secondLanguageName == language.name
         HStack {
             Button(action: {
-                viewModel.firstLanguage = translator.language
+                viewModel.firstLanguageName = language.name
             }) {
                 HStack {
-                    Image(translator.language)
+                    Image(language.name)
                         .resizable()
                         .scaledToFit()
                         .padding(2)
-                        .border(.white, width: viewModel.firstLanguage == translator.language ? 2 : 0)
+                        .border(.white, width: viewModel.firstLanguageName == language.name ? 2 : 0)
                         .frame(height: 30)
                         .padding(.trailing, 10)
                         .opacity(_1_selected ? 1.0 : 0.5)
                     if !viewModel.secondLanguageAllowed {
-                        LanguageText(translator: translator, bold: _1_selected || (viewModel.secondLanguageAllowed && _2_selected))
+                        LanguageText(language: language, bold: _1_selected || (viewModel.secondLanguageAllowed && _2_selected))
                         Spacer()
                     }
                 }
             }
             if viewModel.secondLanguageAllowed {
                 Button(action: {
-                    viewModel.secondLanguage = translator.language
+                    viewModel.secondLanguageName = language.name
                 }) {
                     HStack {
-                        Image(translator.language)
+                        Image(language.name)
                             .resizable()
                             .scaledToFit()
                             .padding(2)
-                            .border(.white, width: viewModel.secondLanguage == translator.language ? 2 : 0)
+                            .border(.white, width: viewModel.secondLanguageName == language.name ? 2 : 0)
                             .frame(height: 30)
                             .opacity(_2_selected ? 1.0 : 0.5)
                             .padding(.trailing, 10)
-                        LanguageText(translator: translator, bold: _1_selected || (viewModel.secondLanguageAllowed && _2_selected))
+                        LanguageText(language: language, bold: _1_selected || (viewModel.secondLanguageAllowed && _2_selected))
                         Spacer()
                     }
                 }
@@ -90,8 +90,8 @@ struct LanguageSelector: View {
                 }
                 .padding(.top, 0)
                 .padding(.bottom, 10)
-                ForEach(viewModel.translators, id:\.self) { t in
-                    SelectLanguage(viewModel: viewModel, translator: t)
+                ForEach(0 ..< viewModel.languages.count, id: \.self) { index in
+                    SelectLanguage(viewModel: viewModel, language: viewModel.languages[index])
                 }
             }
         }

@@ -13,6 +13,11 @@ class Digits: TenBasedLanguage {
     var exponentString = "e"
     var name: String = "Digits"
     
+    override init() {
+        super.init()
+        afterNegative = ""
+    }
+    
     func read_0_9(_ i: Int) -> String {
         switch i {
         case 0:     return "0"

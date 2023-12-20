@@ -8,7 +8,7 @@
 import XCTest
 
 final class TestDigits: XCTestCase {
-    let digits = Digits(groupSeparator: "", decimalSeparator: ".")
+    let digits = Digits()
     
     func test_digits() {
         XCTAssertEqual(digits.read(0), "0")
@@ -36,7 +36,16 @@ final class TestDigits: XCTestCase {
         XCTAssertEqual(digits.read(903_945_873_498), "903945873498")
         XCTAssertEqual(digits.read(23_903_945_873_498), "23903945873498")
         XCTAssertEqual(digits.read(123_903_945_873_498), "123903945873498")
-        XCTAssertEqual(digits.read(2_123_903_945_873_498), "ERRORvi")
+        XCTAssertEqual(digits.read(2_123_903_945_873_498), "ERROR")
+
+        XCTAssertEqual(digits.read("1.5"), "1.5")
+        XCTAssertEqual(digits.read("12224.543"), "12224.543")
+
+        XCTAssertEqual(digits.read(-1), "-1")
+        XCTAssertEqual(digits.read(-12), "-12")
+        XCTAssertEqual(digits.read("-1"), "-1")
+        XCTAssertEqual(digits.read("0"), "0")
+        XCTAssertEqual(digits.read("-0"), "-0")
     }
 }
 

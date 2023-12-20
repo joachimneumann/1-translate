@@ -68,7 +68,8 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @Published var firstTranslatedNumberTopBorder: String? = nil
     @Published var secondTranslatedNumberTopBorder: String? = nil
 
-    let digits = Digits(groupSeparator: "", decimalSeparator: "")
+    let digits = Digits()
+    let digits2 = Digits()
     let translateEnglish = TranslateEnglish()
     let translateGerman = TranslateGerman()
     let translateVietnamese = TranslateVietnamese()
@@ -84,13 +85,12 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     let translateSimplifiedChinese = TranslateChinese(variant: .simplified)
     let translateFinancialChinese = TranslateChinese(variant: .financial)
 
-    var translators: [BasicTranslator] // set in init()
     var languages: [Language] // set in init()
 
     var previouslySelectedLanguages = StringPreference()
     
     func updateTranslation() {
-        firstTranslatedNumber = firstTranslator.translate(currentDisplay.allInOneLine) ??  "?"
+        firstTranslatedNumber = firstLanguage.read(currentDisplay.allInOneLine)
         firstTranslatedNumberTopBorder = nil
         if firstTranslatedNumber.contains(TranslateRoman.TOUSANDS) {
             let split = firstTranslatedNumber.split(separator: TranslateRoman.TOUSANDS)
@@ -100,7 +100,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             }
         }
             
-        secondTranslatedNumber = secondTranslator.translate(currentDisplay.allInOneLine) ??  "?"
+        secondTranslatedNumber = firstLanguage.read(currentDisplay.allInOneLine)
         secondTranslatedNumberTopBorder = nil
         if secondTranslatedNumber.contains(TranslateRoman.TOUSANDS) {
             let split = secondTranslatedNumber.split(separator: TranslateRoman.TOUSANDS)
@@ -120,8 +120,8 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @AppStorage(AppStorageKeys.decimalSeparator, store: .standard)
     var decimalSeparator: DecimalSeparator = Locale.current.decimalSeparator == "," ? .comma : .dot {
         didSet {
-            for translator in translators {
-                translator.decimalSeparator = decimalSeparator.string
+            for language in languages {
+                language.decimalSeparator = decimalSeparator.string
             }
         }
     }
@@ -129,8 +129,8 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @AppStorage(AppStorageKeys.groupSeparator, store: .standard)
     var groupSeparator: GroupSeparator = .none {
         didSet {
-            for translator in translators {
-                translator.groupSeparator = groupSeparator.string
+            for language in languages {
+                language.groupSeparator = groupSeparator.string
             }
         }
     }
@@ -138,16 +138,13 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @AppStorage(AppStorageKeys.secondLanguageAllowed, store: .standard)
     var secondLanguageAllowed: Bool = false {
         didSet {
-            if secondLanguageAllowed {
-                /// make sure the first language is not the same
-                if secondLanguage == firstLanguage {
-                    // OOPS. Find a new second language
-                    var substituteFound = false
-                    for substituteTranslator in translators {
-                        if !substituteFound && substituteTranslator.language != firstLanguage {
-                            secondLanguage = substituteTranslator.language
-                            substituteFound = true
-                        }
+            if firstLanguageName == secondLanguageName {
+                /// make sure the languages are not the same
+                var substituteFound = false
+                for substituteLanguage in languages {
+                    if !substituteFound && substituteLanguage.name != firstLanguageName {
+                        secondLanguage = substituteLanguage
+                        substituteFound = true
                     }
                 }
             }
@@ -155,20 +152,16 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     }
     
     @AppStorage(AppStorageKeys.firstLanguage, store: .standard)
-    var firstLanguage: String = TranslateEnglish.language {
+    var firstLanguageName: String = "digits" {
         didSet {
-            for translator in translators {
-                if translator.language == firstLanguage {
-                    firstTranslator = translator
-                    updateTranslation()
-                    previouslySelectedLanguages.add(new: translator.language)
-                    /// is the second language the same?
-                    if secondLanguage == translator.language {
-                        // OOPS. Find a new second language
-                        let newLanguage = previouslySelectedLanguages.get(except: translator.language)
-                        if newLanguage != "" {
-                            secondLanguage = newLanguage
-                        }
+            previouslySelectedLanguages.add(new: firstLanguageName)
+            if firstLanguageName == secondLanguageName {
+                /// make sure the languages are not the same
+                let newLanguageName = previouslySelectedLanguages.get(except: firstLanguageName)
+                for language in languages {
+                    if language.name == newLanguageName {
+                        secondLanguage = language
+                        updateTranslation()
                     }
                 }
             }
@@ -176,20 +169,16 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     }
 
     @AppStorage(AppStorageKeys.secondLanguage, store: .standard)
-    var secondLanguage: String = TranslateGerman.language {
+    var secondLanguageName: String = "digits" {
         didSet {
-            for translator in translators {
-                if translator.language == secondLanguage {
-                    secondTranslator = translator
-                    updateTranslation()
-                    previouslySelectedLanguages.add(new: translator.language)
-                    /// is the first language the same?
-                    if firstLanguage == translator.language {
-                        // OOPS. Find a new first language
-                        let newLanguage = previouslySelectedLanguages.get(except: translator.language)
-                        if newLanguage != "" {
-                            firstLanguage = newLanguage
-                        }
+            previouslySelectedLanguages.add(new: secondLanguageName)
+            if firstLanguageName == secondLanguageName {
+                /// make sure the languages are not the same
+                let newLanguageName = previouslySelectedLanguages.get(except: firstLanguageName)
+                for language in languages {
+                    if language.name == newLanguageName {
+                        firstLanguage = language
+                        updateTranslation()
                     }
                 }
             }
@@ -282,8 +271,8 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         }
     }
         
-    @Published var firstTranslator: BasicTranslator = TranslateEnglish()
-    @Published var secondTranslator: BasicTranslator = TranslateGerman()
+    @Published var firstLanguage: Language = Digits()
+    @Published var secondLanguage: Language = Digits()
 
     var precisionDescription = "unknown"
     var showPrecision: Bool = false
@@ -324,23 +313,23 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         brain = Brain(precision: _precision.wrappedValue)
         precisionDescription = _precision.wrappedValue.useWords
         
-        languages = [digits]
+        languages = [digits, digits2]
         
-        translators = [
-            translateCatalan,
-            translateTraditionalChinese,
-            translateSimplifiedChinese,
-            translateFinancialChinese,
-            translateDanish,
-            translateEnglish,
-            translateFrench,
-            translateGerman,
-            translatePolish,
-            translateRoman,
-            translateSpanish,
-            translateThai,
-            translateThaiTraditional,
-            translateVietnamese]
+//        translators = [
+//            translateCatalan,
+//            translateTraditionalChinese,
+//            translateSimplifiedChinese,
+//            translateFinancialChinese,
+//            translateDanish,
+//            translateEnglish,
+//            translateFrench,
+//            translateGerman,
+//            translatePolish,
+//            translateRoman,
+//            translateSpanish,
+//            translateThai,
+//            translateThaiTraditional,
+//            translateVietnamese]
         
         
         for symbol in [

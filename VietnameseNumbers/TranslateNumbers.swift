@@ -23,7 +23,7 @@ struct TranslateNumbers: View {
             VStack(spacing: 0.0) {
                 VStack(spacing: 0.0) {
                     HStack(spacing: 30.0) {
-                        LanguageButton(language: viewModel.firstTranslator.language, viewModel: viewModel)
+                        LanguageButton(language: viewModel.firstLanguage.name, viewModel: viewModel)
                         Spacer()
                         NavigationLink {
                             Settings(viewModel: viewModel, screen: screen, font: Font(screen.infoUiFont))
@@ -52,7 +52,7 @@ struct TranslateNumbers: View {
                 if viewModel.secondLanguageAllowed {
                     VStack(spacing: 0.0) {
                         HStack(spacing: 30.0) {
-                            LanguageButton(language: viewModel.secondTranslator.language, viewModel: viewModel)
+                            LanguageButton(language: viewModel.secondLanguage.name, viewModel: viewModel)
                             Spacer()
                         }
                         .frame(height: 34.0)
@@ -114,7 +114,7 @@ struct TranslateNumbers: View {
                         }
                     }
                     .padding(20)
-                    .presentationDetents([.height(140.0 + CGFloat(viewModel.translators.count) * 44.0)])
+                    .presentationDetents([.height(140.0 + CGFloat(viewModel.languages.count) * 44.0)])
                 }
                 .background(Color(red: 0.15, green: 0.15, blue: 0.15))
             }
