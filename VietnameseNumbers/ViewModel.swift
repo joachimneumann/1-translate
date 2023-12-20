@@ -324,6 +324,9 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         
         translators = [
             translateCatalan,
+            translateTraditionalChinese,
+            translateSimplifiedChinese,
+            translateFinancialChinese,
             translateDanish,
             translateEnglish,
             translateFrench,
@@ -335,12 +338,6 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             translateThaiTraditional,
             translateVietnamese]
         
-        let testing = false
-        if testing {
-            translators.append(translateTraditionalChinese)
-            translators.append(translateSimplifiedChinese)
-            translators.append(translateFinancialChinese)
-        }
         
         for symbol in [
             "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", ",",

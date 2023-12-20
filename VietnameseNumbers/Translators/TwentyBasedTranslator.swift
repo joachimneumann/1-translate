@@ -1,5 +1,5 @@
 //
-//  StandardTranslator.swift
+//  TwentyBasedTranslator.swift
 //  TranslateNumbers
 //
 //  Created by Joachim Neumann on 12/9/23.

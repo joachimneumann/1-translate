@@ -28,6 +28,16 @@
 		AA30E9E32B2DB02200F7FDEA /* TranslateThai.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA30E9E12B2DAD7500F7FDEA /* TranslateThai.swift */; };
 		AA32853B297248B800D86CB4 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA32853A297248B800D86CB4 /* ViewModel.swift */; };
 		AA32853D29724D5700D86CB4 /* FlexibleNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA32853C29724D5700D86CB4 /* FlexibleNavigation.swift */; };
+		AA3565AA2B32420A009B58D2 /* LanguageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3565A92B32420A009B58D2 /* LanguageExtensions.swift */; };
+		AA3565AB2B32420A009B58D2 /* LanguageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3565A92B32420A009B58D2 /* LanguageExtensions.swift */; };
+		AA3565AE2B3247C4009B58D2 /* Test_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3565AC2B3247C4009B58D2 /* Test_Extensions.swift */; };
+		AA3565B02B32588B009B58D2 /* TenBasedLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3565AF2B32588B009B58D2 /* TenBasedLanguage.swift */; };
+		AA3565B12B32588B009B58D2 /* TenBasedLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3565AF2B32588B009B58D2 /* TenBasedLanguage.swift */; };
+		AA3565B32B325D4B009B58D2 /* Digits.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3565B22B325D4B009B58D2 /* Digits.swift */; };
+		AA3565B42B325D4B009B58D2 /* Digits.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3565B22B325D4B009B58D2 /* Digits.swift */; };
+		AA3565B62B326205009B58D2 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3565B52B326205009B58D2 /* Language.swift */; };
+		AA3565B72B326205009B58D2 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3565B52B326205009B58D2 /* Language.swift */; };
+		AA3565BA2B326B01009B58D2 /* TestDigits.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3565B82B326B01009B58D2 /* TestDigits.swift */; };
 		AA370C2D293352960041AE4E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA370C2C293352960041AE4E /* Extensions.swift */; };
 		AA370C31293352D60041AE4E /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA370C30293352D60041AE4E /* Key.swift */; };
 		AA3FB8272920E0E5002ECCEB /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3FB8262920E0E5002ECCEB /* Settings.swift */; };
@@ -131,6 +141,12 @@
 		AA30E9E12B2DAD7500F7FDEA /* TranslateThai.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateThai.swift; sourceTree = "<group>"; };
 		AA32853A297248B800D86CB4 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		AA32853C29724D5700D86CB4 /* FlexibleNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlexibleNavigation.swift; sourceTree = "<group>"; };
+		AA3565A92B32420A009B58D2 /* LanguageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageExtensions.swift; sourceTree = "<group>"; };
+		AA3565AC2B3247C4009B58D2 /* Test_Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_Extensions.swift; sourceTree = "<group>"; };
+		AA3565AF2B32588B009B58D2 /* TenBasedLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenBasedLanguage.swift; sourceTree = "<group>"; };
+		AA3565B22B325D4B009B58D2 /* Digits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Digits.swift; sourceTree = "<group>"; };
+		AA3565B52B326205009B58D2 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
+		AA3565B82B326B01009B58D2 /* TestDigits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDigits.swift; sourceTree = "<group>"; };
 		AA370C2C293352960041AE4E /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AA370C30293352D60041AE4E /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		AA3FB8262920E0E5002ECCEB /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -219,6 +235,7 @@
 		AA08C7C0272EDA48001B8575 /* VietnameseNumbers */ = {
 			isa = PBXGroup;
 			children = (
+				AA3565BB2B326DE9009B58D2 /* Languages */,
 				AA715CAB2B2BE3D3009335B7 /* Translators */,
 				AA1B007B294772980054C851 /* Brain */,
 				AA2FABFF272F2348006DE4C8 /* TranslateNumbersApp.swift */,
@@ -301,13 +318,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		AA3565BB2B326DE9009B58D2 /* Languages */ = {
+			isa = PBXGroup;
+			children = (
+				AA3565B22B325D4B009B58D2 /* Digits.swift */,
+				AA3565B52B326205009B58D2 /* Language.swift */,
+				AA3565A92B32420A009B58D2 /* LanguageExtensions.swift */,
+				AA3565AF2B32588B009B58D2 /* TenBasedLanguage.swift */,
+			);
+			path = Languages;
+			sourceTree = "<group>";
+		};
 		AA715CAB2B2BE3D3009335B7 /* Translators */ = {
 			isa = PBXGroup;
 			children = (
 				AAFC9C712B247CDF00F866D8 /* BasicTranslator.swift */,
-				AAFC9C742B247D0700F866D8 /* GeneralTranslator.swift */,
 				AAFC9C772B24817900F866D8 /* TwentyBasedTranslator.swift */,
 				AA0523402B25447F00DDAAD4 /* ThousandBasedTranslator.swift */,
+				AAFC9C742B247D0700F866D8 /* GeneralTranslator.swift */,
 				AAAE6D632B228B7300079392 /* TranslateEnglish.swift */,
 				AAAE6D662B22B5CF00079392 /* TranslateVietnamese.swift */,
 				AAAE6D692B22B77B00079392 /* TranslateGerman.swift */,
@@ -338,6 +366,8 @@
 				AA739C962B2F4ECC00A32478 /* Test_Roman.swift */,
 				AA739C9C2B30014800A32478 /* Test_Frensh.swift */,
 				AA739CA22B302D7100A32478 /* Test_Chinese.swift */,
+				AA3565AC2B3247C4009B58D2 /* Test_Extensions.swift */,
+				AA3565B82B326B01009B58D2 /* TestDigits.swift */,
 			);
 			path = VietnameseNumbersTests;
 			sourceTree = "<group>";
@@ -457,6 +487,7 @@
 				AA0523412B25447F00DDAAD4 /* ThousandBasedTranslator.swift in Sources */,
 				AA8A91122B1D7B7100CE7185 /* TranslateNumbers.swift in Sources */,
 				AA739CA02B3004F200A32478 /* TranslateFrench.swift in Sources */,
+				AA3565AA2B32420A009B58D2 /* LanguageExtensions.swift in Sources */,
 				AA32853B297248B800D86CB4 /* ViewModel.swift in Sources */,
 				AAFC9C752B247D0700F866D8 /* GeneralTranslator.swift in Sources */,
 				AA672B0A295189950044DC08 /* ScrollViewConditionalAnimation.swift in Sources */,
@@ -464,7 +495,9 @@
 				AA0523442B255AF900DDAAD4 /* TranslateSpanish.swift in Sources */,
 				AA2FAC0F272F2349006DE4C8 /* Number.swift in Sources */,
 				AA370C2D293352960041AE4E /* Extensions.swift in Sources */,
+				AA3565B62B326205009B58D2 /* Language.swift in Sources */,
 				AA29F58A293CD608001ADF5A /* PortraitDisplay.swift in Sources */,
+				AA3565B02B32588B009B58D2 /* TenBasedLanguage.swift in Sources */,
 				AA8A91142B1D7FD000CE7185 /* TranslatedDisplay.swift in Sources */,
 				AA2FAC17272F2349006DE4C8 /* BrainEngine.swift in Sources */,
 				AA739CA62B3030C200A32478 /* TranslateChinese.swift in Sources */,
@@ -477,6 +510,7 @@
 				AA715CAC2B2BE4C9009335B7 /* TranslatePolish.swift in Sources */,
 				AA2FAC23272F2349006DE4C8 /* OperatorStack.swift in Sources */,
 				AAAE6D642B228B7300079392 /* TranslateEnglish.swift in Sources */,
+				AA3565B32B325D4B009B58D2 /* Digits.swift in Sources */,
 				AA370C31293352D60041AE4E /* Key.swift in Sources */,
 				AAAE6D672B22B5CF00079392 /* TranslateVietnamese.swift in Sources */,
 				AA739C942B2EBEF900A32478 /* TranslateThaiTraditional.swift in Sources */,
@@ -496,10 +530,12 @@
 				AA8A91352B1D870B00CE7185 /* Extensions.swift in Sources */,
 				AA739CA72B3030C200A32478 /* TranslateChinese.swift in Sources */,
 				AAAE6D652B228B7300079392 /* TranslateEnglish.swift in Sources */,
+				AA3565B12B32588B009B58D2 /* TenBasedLanguage.swift in Sources */,
 				AA8B614E2B2AFC9A00D2152A /* Test_Spanish.swift in Sources */,
 				AAEF2FBA2B20D5500012DDDD /* Separators.swift in Sources */,
 				AA715CB32B2C39EE009335B7 /* Test_Catalan.swift in Sources */,
 				AAAE6D682B22B5CF00079392 /* TranslateVietnamese.swift in Sources */,
+				AA3565B42B325D4B009B58D2 /* Digits.swift in Sources */,
 				AA8A91322B1D865B00CE7185 /* KeyColor.swift in Sources */,
 				AA30E9E02B2DAD4C00F7FDEA /* Test_Thai.swift in Sources */,
 				AA739C952B2EBEF900A32478 /* TranslateThaiTraditional.swift in Sources */,
@@ -511,7 +547,9 @@
 				AAFC9C762B247D0700F866D8 /* GeneralTranslator.swift in Sources */,
 				AA715CA82B2BE367009335B7 /* Test_Polish.swift in Sources */,
 				AA715CB52B2C3A60009335B7 /* Test_Vietnamese.swift in Sources */,
+				AA3565AB2B32420A009B58D2 /* LanguageExtensions.swift in Sources */,
 				AA30E9E22B2DAD7500F7FDEA /* TranslateThai.swift in Sources */,
+				AA3565BA2B326B01009B58D2 /* TestDigits.swift in Sources */,
 				AA715CAE2B2C22DB009335B7 /* Test_Danish.swift in Sources */,
 				AAAE6D6B2B22B77B00079392 /* TranslateGerman.swift in Sources */,
 				AA739C9E2B30014800A32478 /* Test_Frensh.swift in Sources */,
@@ -520,8 +558,10 @@
 				AA715CB02B2C262A009335B7 /* TranslateDanish.swift in Sources */,
 				AAFC9C792B24817900F866D8 /* TwentyBasedTranslator.swift in Sources */,
 				AA0523452B255AF900DDAAD4 /* TranslateSpanish.swift in Sources */,
+				AA3565B72B326205009B58D2 /* Language.swift in Sources */,
 				AA9561362B2AAFEB00648915 /* Test_German.swift in Sources */,
 				AA739CA42B302D7100A32478 /* Test_Chinese.swift in Sources */,
+				AA3565AE2B3247C4009B58D2 /* Test_Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,9 +8,6 @@
 import SwiftUI
 
 class TranslateThai: TwentyBasedTranslator {
-    var useSoftHyphen: Bool = true
-    var capitalisation: Bool = true
-
     init() {
         super.init(
             language: "ภาษาไทย",
