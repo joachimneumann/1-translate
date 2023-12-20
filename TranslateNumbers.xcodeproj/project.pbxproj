@@ -88,6 +88,8 @@
 		AAE426F729597AE3005FE365 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE426F629597AE3005FE365 /* Screen.swift */; };
 		AAEF2FB92B20D54B0012DDDD /* Separators.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEF2FB82B20D54B0012DDDD /* Separators.swift */; };
 		AAEF2FBA2B20D5500012DDDD /* Separators.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEF2FB82B20D54B0012DDDD /* Separators.swift */; };
+		AAFBD8A72B32A36D00175197 /* ThaiTraditional.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFBD8A62B32A36D00175197 /* ThaiTraditional.swift */; };
+		AAFBD8A82B32A36D00175197 /* ThaiTraditional.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFBD8A62B32A36D00175197 /* ThaiTraditional.swift */; };
 		AAFC9C722B247CDF00F866D8 /* BasicTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFC9C712B247CDF00F866D8 /* BasicTranslator.swift */; };
 		AAFC9C732B247CDF00F866D8 /* BasicTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFC9C712B247CDF00F866D8 /* BasicTranslator.swift */; };
 		AAFC9C752B247D0700F866D8 /* GeneralTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFC9C742B247D0700F866D8 /* GeneralTranslator.swift */; };
@@ -184,6 +186,7 @@
 		AABEFC122972A8780023A3C9 /* KeyColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyColor.swift; sourceTree = "<group>"; };
 		AAE426F629597AE3005FE365 /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
 		AAEF2FB82B20D54B0012DDDD /* Separators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Separators.swift; sourceTree = "<group>"; };
+		AAFBD8A62B32A36D00175197 /* ThaiTraditional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThaiTraditional.swift; sourceTree = "<group>"; };
 		AAFC9C712B247CDF00F866D8 /* BasicTranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicTranslator.swift; sourceTree = "<group>"; };
 		AAFC9C742B247D0700F866D8 /* GeneralTranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralTranslator.swift; sourceTree = "<group>"; };
 		AAFC9C772B24817900F866D8 /* TwentyBasedTranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwentyBasedTranslator.swift; sourceTree = "<group>"; };
@@ -325,6 +328,7 @@
 				AA3565B52B326205009B58D2 /* Language.swift */,
 				AA3565A92B32420A009B58D2 /* LanguageExtensions.swift */,
 				AA3565AF2B32588B009B58D2 /* TenBasedLanguage.swift */,
+				AAFBD8A62B32A36D00175197 /* ThaiTraditional.swift */,
 			);
 			path = Languages;
 			sourceTree = "<group>";
@@ -519,6 +523,7 @@
 				AA715CB12B2C2D86009335B7 /* TranslateDanish.swift in Sources */,
 				AA689125295E681400129593 /* Brain.swift in Sources */,
 				AA32853D29724D5700D86CB4 /* FlexibleNavigation.swift in Sources */,
+				AAFBD8A72B32A36D00175197 /* ThaiTraditional.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -530,6 +535,7 @@
 				AA8A91352B1D870B00CE7185 /* Extensions.swift in Sources */,
 				AA739CA72B3030C200A32478 /* TranslateChinese.swift in Sources */,
 				AAAE6D652B228B7300079392 /* TranslateEnglish.swift in Sources */,
+				AAFBD8A82B32A36D00175197 /* ThaiTraditional.swift in Sources */,
 				AA3565B12B32588B009B58D2 /* TenBasedLanguage.swift in Sources */,
 				AA8B614E2B2AFC9A00D2152A /* Test_Spanish.swift in Sources */,
 				AAEF2FBA2B20D5500012DDDD /* Separators.swift in Sources */,

@@ -8,7 +8,7 @@
 import SwiftUI
 
 class TranslateThaiTraditional: BasicTranslator {
-    
+    /// https://www.wikiwand.com/en/Thai_numerals
     init() {
         super.init(language: "แบบดั้งเดิม",
                    languageEnglish: "trad. Thai",
@@ -31,7 +31,7 @@ class TranslateThaiTraditional: BasicTranslator {
             case "0": res += "๐"
             case "1": res += "๑"
             case "2": res += "๒"
-            case "3": res += "๔"
+            case "3": res += "๓"
             case "4": res += "๔"
             case "5": res += "๕"
             case "6": res += "๖"

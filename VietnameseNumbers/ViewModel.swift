@@ -69,7 +69,10 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @Published var secondTranslatedNumberTopBorder: String? = nil
 
     let digits = Digits()
-    let digits2 = Digits()
+    let thaiTraditional = ThaiTraditional()
+    
+    //-----//
+    
     let translateEnglish = TranslateEnglish()
     let translateGerman = TranslateGerman()
     let translateVietnamese = TranslateVietnamese()
@@ -313,7 +316,9 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         brain = Brain(precision: _precision.wrappedValue)
         precisionDescription = _precision.wrappedValue.useWords
         
-        languages = [digits, digits2]
+        languages = [
+            digits,
+            thaiTraditional]
         
 //        translators = [
 //            translateCatalan,

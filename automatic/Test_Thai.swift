@@ -7,9 +7,31 @@
 import XCTest
 
 final class TestsThai: XCTestCase {
+    let thai = TranslateThai()
+    let traditional = ThaiTraditional()
 
+    func test_traditionalThai() {
+        XCTAssertEqual(traditional.read(0),  "๐")
+        XCTAssertEqual(traditional.read(1),  "๑")
+        XCTAssertEqual(traditional.read(2),  "๒")
+        XCTAssertEqual(traditional.read(3),  "๓")
+        XCTAssertEqual(traditional.read(4),  "๔")
+        XCTAssertEqual(traditional.read(5),  "๕")
+        XCTAssertEqual(traditional.read(6),  "๖")
+        XCTAssertEqual(traditional.read(7),  "๗")
+        XCTAssertEqual(traditional.read(8),  "๘")
+        XCTAssertEqual(traditional.read(9),  "๙")
+        XCTAssertEqual(traditional.read(10), "๑๐")
+        XCTAssertEqual(traditional.read(11), "๑๑")
+        XCTAssertEqual(traditional.read(12), "๑๒")
+        XCTAssertEqual(traditional.read(13), "๑๓")
+        XCTAssertEqual(traditional.read(14), "๑๔")
+        XCTAssertEqual(traditional.read(114), "๑๑๔")
+        XCTAssertEqual(traditional.read("114.7"), "๑๑๔.๗")
+
+    }
+    
     func test_lanta() {
-        let thai = TranslateThai()
         thai.groupSeparator = ""
         thai.decimalSeparator = "."
         XCTAssertEqual(thai.translate(100), "หนึ่งร้อย")
@@ -21,12 +43,10 @@ final class TestsThai: XCTestCase {
     }
     
     func test_webpage() {
-        let thai = TranslateThai()
-        thai.groupSeparator = ""
-        thai.decimalSeparator = "."
+        /// https://www.thaipod101.com/blog/2019/10/24/thai-numbers
         
         /*
-         https://www.thaipod101.com/blog/2019/10/24/thai-numbers
+         
          8,126 — eight is in the thousand digit spot, so we read “eight” followed by the name of the thousand digit in Thai which is แปดพัน (bpàaet phan).
         8,126 — one is in the hundred digit spot, so we read “one” in Thai followed by the name of the hundred digit in Thai which is หนึ่งร้อย (nùeng ráauy).
         8,126 — two is in the ten digit spot, so we read “two” followed by the name of the ten digit in Thai which is ยี่สิบ (yîi sìp). (Don’t forget that for 20, Thai people read it ยี่สิบ [yîi sìp]).
@@ -45,8 +65,6 @@ final class TestsThai: XCTestCase {
          21,700,098 — you read the left part first followed by ล้าน (láan) which is ยี่สิบเอ็ดล้าน (yîi sìp èt láan).
          21,700,098 — you read the right part after that which is เจ็ดแสนเก้าสิบแปด (jèt sǎaen gâo sìp bpàaet).
          21,700,098 is ยี่สิบเอ็ดล้านเจ็ดแสนเก้าสิบแปด (yîi sìp èt láan jèt sǎaen gâo sìp bpàaet).
-
-
        */
 
         XCTAssertEqual(thai.translate(8_000), "แปดพัน")
