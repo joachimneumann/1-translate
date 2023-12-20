@@ -8,17 +8,34 @@
 import Foundation
 
 class Digits: TenBasedLanguage {
-    var negativeString = "-"
-    var dotString = "."
-    var exponentString = "e"
-    var name: String = "Digits"
+    init() {
+        super.init(
+            name: "Digits",
+            negativeString: "-",
+            dotString: ".",
+            exponentString: "e",
+            groupSeparator: "",
+            decimalSeparator: ".")
+        afterNegative = ""
+    }
     
-//    override init() {
-//        super.init()
-//        afterNegative = ""
-//    }
+    override func readPeriod(_ p: Period) -> String {
+        var ret = ""
+        let allDigits = !p.isLargest
+        if p.x__ > 0 || allDigits {
+            ret += read_0_9(p.x__)
+        }
+        if p._x_ > 0 || p.x__ > 0 || allDigits {
+            ret += read_0_9(p._x_)
+        }
+        if p.value > 0 || allDigits {
+            ret += read_0_9(p.__x)
+        }
+        return ret
+    }
+
     
-    func read_0_9(_ i: Int) -> String {
+    override func read_0_9(_ i: Int) -> String {
         switch i {
         case 0:     return "0"
         case 1:     return "1"

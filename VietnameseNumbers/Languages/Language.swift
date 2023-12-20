@@ -7,18 +7,12 @@
 
 import Foundation
 
-protocol LanguageProtocol {
-    var name: String { get }
-    var negativeString: String { get }
-    var dotString: String { get }
-    var exponentString: String { get }
-    func readPositive(_ i: Int) -> String    // implemented in subclasses of LanguageClass
-    func read(_ s: String) -> String // implemented in LanguageClass
-}
+class Language {
+    var name: String
+    var negativeString: String
+    var dotString: String
+    var exponentString: String
 
-typealias Language = LanguageProtocol & LanguageClass
-
-class LanguageClass {
     var groupSeparator: String = ""
     var decimalSeparator: String = "."
     var afterNegative = " "
@@ -28,18 +22,25 @@ class LanguageClass {
     var allowFraction = true
     let error = "ERROR"
     var englishName: String? = nil
-    var subClass: Language? = nil
     
-    init() {
-        guard let temp = self as? Language else { return }
-        self.subClass = temp
+    init(name: String, negativeString: String, dotString: String, exponentString: String, groupSeparator: String, decimalSeparator: String) {
+        self.name = name
+        self.negativeString = negativeString
+        self.dotString = dotString
+        self.exponentString = exponentString
+        self.groupSeparator = groupSeparator
+        self.decimalSeparator = decimalSeparator
+    }
+    
+    func readPositive(_ i: Int) -> String {
+        fatalError("not implemented")
     }
     
     func read(_ i: Int) -> String {
         if i < 0 {
-            return subClass!.negativeString + subClass!.afterNegative +  subClass!.readPositive(-i)
+            return negativeString + afterNegative + readPositive(-i)
         } else {
-            return subClass!.readPositive(i)
+            return readPositive(i)
         }
     }
     func read(_ s: String) -> String {
@@ -64,14 +65,14 @@ class LanguageClass {
         var ret: String = ""
 
         if integerPart == "-0" {
-            ret = subClass!.negativeString + afterNegative + read(0)
+            ret = negativeString + afterNegative + read(0)
         } else {
             guard let integerPartValue = Int(integerPart) else { return error }
             ret = read(integerPartValue)
         }
         if let fractionalPart = fractionalPart {
             var count = 0
-            ret += beforeAndAfterDotString + subClass!.dotString
+            ret += beforeAndAfterDotString + dotString
             for char in fractionalPart {
                 if count < 10 {
                     guard let digit = Int(String(char)) else { return error }
@@ -85,7 +86,7 @@ class LanguageClass {
         }
 
         if let exponent = exponent {
-            ret += subClass!.exponentString + read(exponent)
+            ret += exponentString + read(exponent)
             if exponentString2 != nil {
                 ret += exponentString2!
             }

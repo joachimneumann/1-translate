@@ -28,6 +28,8 @@ final class TestsThai: XCTestCase {
         XCTAssertEqual(traditional.read(14), "๑๔")
         XCTAssertEqual(traditional.read(114), "๑๑๔")
         XCTAssertEqual(traditional.read("114.7"), "๑๑๔.๗")
+        XCTAssertEqual(traditional.read(1147), "๑๑๔๗")
+        XCTAssertEqual(traditional.read(1000), "๑๐๐๐")
 
     }
     

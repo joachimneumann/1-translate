@@ -243,7 +243,6 @@
 			children = (
 				AA3565BB2B326DE9009B58D2 /* Languages */,
 				AA715CAB2B2BE3D3009335B7 /* Translators */,
-				AA1B007B294772980054C851 /* Brain */,
 				AA2FABFF272F2348006DE4C8 /* TranslateNumbersApp.swift */,
 				AA32853A297248B800D86CB4 /* ViewModel.swift */,
 				AA92B4C829273A58005E43F0 /* TranslateNumbers.swift */,
@@ -313,6 +312,7 @@
 				AA2FAC01272F2348006DE4C8 /* BrainEngine.swift */,
 			);
 			name = Brain;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		AA2FABE9272F2135006DE4C8 /* Frameworks */ = {
@@ -327,12 +327,13 @@
 		AA3565BB2B326DE9009B58D2 /* Languages */ = {
 			isa = PBXGroup;
 			children = (
-				AA3565B22B325D4B009B58D2 /* Digits.swift */,
 				AA3565B52B326205009B58D2 /* Language.swift */,
 				AA3565A92B32420A009B58D2 /* LanguageExtensions.swift */,
 				AA3565AF2B32588B009B58D2 /* TenBasedLanguage.swift */,
 				AAFBD8A62B32A36D00175197 /* ThaiTraditional.swift */,
+				AA3565B22B325D4B009B58D2 /* Digits.swift */,
 				AA7988B32B32B07700608906 /* Thai.swift */,
+				AA1B007B294772980054C851 /* Brain */,
 			);
 			path = Languages;
 			sourceTree = "<group>";

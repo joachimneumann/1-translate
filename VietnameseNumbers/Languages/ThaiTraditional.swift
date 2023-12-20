@@ -8,18 +8,32 @@
 import Foundation
 
 class ThaiTraditional: TenBasedLanguage {
-    var negativeString = "-"
-    var dotString = "."
-    var exponentString = "e"
-    var name: String = "แบบดั้งเดิม"
+    init() {
+        super.init(
+            name: "แบบดั้งเดิม",
+            negativeString: "-",
+            dotString: ".",
+            exponentString: "e",
+            groupSeparator: "",
+            decimalSeparator: ".")
+    }
     
-//    override init() {
-//        super.init()
-//        englishName = "trad. Thai"
-//        afterNegative = ""
-//    }
+    override func readPeriod(_ p: Period) -> String {
+        var ret = ""
+        let allDigits = !p.isLargest
+        if p.x__ > 0 || allDigits {
+            ret += read_0_9(p.x__)
+        }
+        if p._x_ > 0 || p.x__ > 0 || allDigits {
+            ret += read_0_9(p._x_)
+        }
+        if p.value > 0 || allDigits {
+            ret += read_0_9(p.__x)
+        }
+        return ret
+    }
     
-    func read_0_9(_ i: Int) -> String {
+    override func read_0_9(_ i: Int) -> String {
         switch i {
         case 0: return "๐"
         case 1: return "๑"
