@@ -76,13 +76,10 @@ class Thai: TenBasedLanguage {
     }
     
     override func read_100_999(_ i: Int) -> String {
-        let hundreds = i / 100
-        let leftOver = i - hundreds * 100
-        
-        var ret = readPositive(hundreds)
+        var ret = readPositive(i._100)
         ret += "ร้อย"
-        if leftOver > 0 {
-            ret += readPositive(leftOver)
+        if i._100x > 0 {
+            ret += readPositive(i._100x)
         }
         return ret
     }

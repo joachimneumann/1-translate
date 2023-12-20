@@ -7,58 +7,21 @@
 
 import Foundation
 
-class Period {
-    let __x: Int
-    let _x_: Int
-    let x__: Int
-    let _xx: Int
-    let value: Int
-    let isLargest: Bool
-    
-    init(_ integer: Int, isLargest: Bool) {
-        guard integer >= 0 && integer <= 999 else {
-            fatalError("Period init() out of range")
-        }
-        __x = integer % 10
-        _x_ = (integer / 10) % 10
-        x__ = integer / 100
-        _xx = __x + 10 * _x_
-        value = integer
-        self.isLargest = isLargest
-    }
-}
-
 extension Int {
-    
-    var e0: Period {
-        return Period(self % 1_000, isLargest: self < 1000)
-    }
-    var e3: Period? {
-        if self >= 1000 {
-            return Period((self / 1_000) % 1_000, isLargest: self < 1000_000)
-        } else {
-            return nil
-        }
-    }
-    var e6: Period? {
-        if self >= 1_000_000 {
-            return Period((self / 1_000_000) % 1_000, isLargest: self < 1000_000_000)
-        } else {
-            return nil
-        }
-    }
-    var e9: Period? {
-        if self >= 1_000_000_000 {
-            return Period((self / 1_000_000_000) % 1_000, isLargest: self < 1000_000_000_000)
-        } else {
-            return nil
-        }
-    }
-    var e12: Period? {
-        if self >= 1_000_000_000_000 {
-            return Period((self / 1_000_000_000_000) % 1_000, isLargest: self < 1000_000_000_000_000)
-        } else {
-            return nil
-        }
-    }
+    var _10: Int { self / 10 }
+    var _10x: Int { self - self / 10 }
+    var _100: Int { self / 100 }
+    var _100x: Int { self - self / 100 }
+    var _1_000: Int { self / 1_000 }
+    var _1_000x: Int { self - self / 1_000 }
+    var _10_000: Int { self / 10_000 }
+    var _10_000x: Int { self - self / 10_000 }
+    var _100_000: Int { self / 100_000 }
+    var _100_000x: Int { self - self / 100_000 }
+    var _E6: Int { self / 1_000_000 }
+    var _E6x: Int { self - self / 1_000_000 }
+    var _E9: Int { self / 1_000_000_000 }
+    var _E9x: Int { self - self / 1_000_000_000 }
+    var _E12: Int { self / 1_000_000_000_000 }
+    var _Ę12x: Int { self - self / 1_000_000_000_000 }
 }

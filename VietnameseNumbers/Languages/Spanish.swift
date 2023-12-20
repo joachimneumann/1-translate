@@ -51,24 +51,18 @@ class Spanish: TenBasedLanguage {
         if i == 28 { return "veintiocho" }
         if i == 29 { return "veintinueve" }
         
-        let tens = i / 10
-        let leftOver = i - tens * 10
-        
-        var ret = read_10s(tens)
-        if leftOver > 0 {
-            ret += tensConnector_ + read_0_9(leftOver)
+        var ret = read_10s(i._10)
+        if i._10x > 0 {
+            ret += tensConnector_ + read_0_9(i._10x)
         }
         return ret
     }
     
     override func read_100_999(_ i: Int) -> String {
         if i == 100 { return "cien" }
-
-        let hundreds = i / 100
-        let leftOver = i - hundreds * 100
         
         var ret = ""
-        switch hundreds {
+        switch i._100 {
         case 1:
             ret = "ciento"
         case 5:
@@ -78,11 +72,11 @@ class Spanish: TenBasedLanguage {
         case 9:
             ret = "novecientos"
         default:
-            ret = readPositive(hundreds) + "cientos"
+            ret = readPositive(i._100) + "cientos"
         }
 
-        if leftOver > 0 {
-            ret += " " + readPositive(leftOver)
+        if i._100x > 0 {
+            ret += " " + readPositive(i._100x)
         }
         return ret
     }

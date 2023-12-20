@@ -40,17 +40,13 @@ class TenBasedLanguage: Language {
     }
     
     func read_11_19(_ i: Int) -> String {
-        let tens = i / 10
-        let leftOver = i - tens * 10
-        return read_10s(1)+readPositive(leftOver)
+        return read_10s(1)+readPositive(i._10x)
     }
     
     func read_21_99(_ i: Int) -> String {
-        let tens = i / 10
-        let leftOver = i - tens * 10
-        var ret = read_10s(tens)
-        if leftOver > 0 {
-            ret += tensConnector_ + read_0_9(leftOver)
+        var ret = read_10s(i._10)
+        if i._10x > 0 {
+            ret += tensConnector_ + read_0_9(i._10x)
         }
         return ret
     }
@@ -76,38 +72,29 @@ class TenBasedLanguage: Language {
         if i < 1_000_000 {
             if e5 != nil {
                 if i >= 100_000 {
-                    let hundredThousands = i / 100_000
-                    let leftOver = i - hundredThousands * 100_000
-                    
-                    ret += read_0_9(hundredThousands)
+                    ret += read_0_9(i._100_000)
                     ret += e5!
-                    if leftOver > 0 {
-                        ret += readPositive(leftOver)
+                    if i._100_000x > 0 {
+                        ret += readPositive(i._100_000x)
                     }
                     return ret
                 }
             }
             if e4 != nil {
                 if i >= 10_000 {
-                    let tenThousands = i / 10_000
-                    let leftOver = i - tenThousands * 10_000
-                    
-                    ret += readPositive(tenThousands)
+                    ret += readPositive(i._10_000)
                     ret += e4!
-                    if leftOver > 0 {
-                        ret += readPositive(leftOver)
+                    if i._10_000x > 0 {
+                        ret += readPositive(i._10_000x)
                     }
                     return ret
                 }
             }
             if e3 != nil {
-                let thousands = i / 1_000
-                let leftOver = i - thousands * 1_000
-                
-                ret += thousandString(thousands)
+                ret += thousandString(i._1_000)
                 ret += eSpace_ + e3!
-                if leftOver > 0 {
-                    ret += eSpace_ + readPositive(leftOver)
+                if i._1_000x > 0 {
+                    ret += eSpace_ + readPositive(i._1_000x)
                 }
                 return ret
             }
@@ -116,34 +103,28 @@ class TenBasedLanguage: Language {
         
         if i < 1_000_000_000 {
             if e6 != nil {
-                let millions = i / 1_000_000
-                let leftOver = i - millions * 1_000_000
-                
-                if millions == 1 && e6_single != nil {
+                if i._E6 == 1 && e6_single != nil {
                     ret += e6_single!
                 } else {
-                    ret += readPositive(millions)
+                    ret += readPositive(i._E6)
                     ret += eSpace_ + e69Space_ + e6!
                 }
-                if leftOver > 0 {
-                    ret += eSpace_ + e69Space_ + readPositive(leftOver)
+                if i._E6x > 0 {
+                    ret += eSpace_ + e69Space_ + readPositive(i._E6x)
                 }
                 return ret
             }
         }
         
         if e9 != nil {
-            let billions = i / 1_000_000_000
-            let leftOver = i - billions * 1_000_000_000
-            
-            if billions == 1 && e9_single != nil {
+            if i._E9 == 1 && e9_single != nil {
                 ret += e9_single!
             } else {
-                ret += readPositive(billions)
+                ret += readPositive(i._E9)
                 ret += eSpace_ + e69Space_ + e9!
             }
-            if leftOver > 0 {
-                ret += eSpace_ + e69Space_ + readPositive(leftOver)
+            if i._E9x > 0 {
+                ret += eSpace_ + e69Space_ + readPositive(i._E9x)
             }
             return ret
         }

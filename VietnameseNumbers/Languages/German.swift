@@ -43,32 +43,26 @@ class German: TenBasedLanguage {
     }
     
     override func read_21_99(_ i: Int) -> String {
-        let tens = i / 10
-        let leftOver = i - tens * 10
-
         var ret = ""
-        if leftOver > 0 {
-            var temp = read_0_9(leftOver)
+        if i._10x > 0 {
+            var temp = read_0_9(i._10x)
             if temp.hasSuffix("eins") {
                 temp.removeLast()
             }
             ret += temp + tensConnector_
         }
-        ret += read_10s(tens)
+        ret += read_10s(i._10)
         return ret
     }
     
     override func read_100_999(_ i: Int) -> String {
-        let hundreds = i / 100
-        let leftOver = i - hundreds * 100
-        
-        var ret = readPositive(hundreds)
+        var ret = readPositive(i._100)
         if ret.hasSuffix("eins") {
             ret.removeLast()
         }
         ret += "hundert"
-        if leftOver > 0 {
-            ret += eSpace_ + readPositive(leftOver)
+        if i._100x > 0 {
+            ret += eSpace_ + readPositive(i._100x)
         }
         return ret
     }
