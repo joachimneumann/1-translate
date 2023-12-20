@@ -10,13 +10,16 @@ import Foundation
 
 class TenBasedLanguage: Language {
     var e0: String? = nil
+    var e0_remove_s = false
     var e2: String? = nil
     var e3: String? = nil
     var e4: String? = nil
     var e5: String? = nil
     var e6: String? = nil
     var e9: String? = nil
-
+    var e6_single: String? = nil
+    var e9_single: String? = nil
+    
     var _11: String? = nil
     var _12: String? = nil
     var _13: String? = nil
@@ -27,13 +30,10 @@ class TenBasedLanguage: Language {
     var _18: String? = nil
     var _19: String? = nil
     var eSpace: String? = nil
-    var eSpace_: String {
-        if eSpace != nil {
-            eSpace!
-        } else {
-            ""
-        }
-    }
+    var eSpace_: String { eSpace == nil ? "" : eSpace! }
+    var e69Space: String? = nil
+    var e69Space_: String { e69Space == nil ? "" : e69Space! }
+    
     var tensConnector: String? = nil
     var tensConnector_: String {
         if tensConnector != nil {
@@ -42,11 +42,12 @@ class TenBasedLanguage: Language {
             ""
         }
     }
-
+    var correctOrder: Bool = true
+    
     func read_0_9(_ i: Int) -> String {
         fatalError("not implmented")
     }
-
+    
     private func privateRead_0_9(_ i: Int) -> String {
         if i == 1 && e0 != nil {
             return e0!
@@ -61,11 +62,10 @@ class TenBasedLanguage: Language {
     
     override func readPositive(_ i: Int) -> String {
         guard i >= 0 && i < 999_999_999_999_999 else { fatalError("TenBasedLanguage readPositive out of range") }
+        
         if i < 10 {
             return privateRead_0_9(i)
         }
-        
-        var ret = ""
         
         if i == 11 && _11 != nil { return _11! }
         if i == 12 && _12 != nil { return _12! }
@@ -76,28 +76,44 @@ class TenBasedLanguage: Language {
         if i == 17 && _17 != nil { return _17! }
         if i == 18 && _18 != nil { return _18! }
         if i == 19 && _19 != nil { return _19! }
-
+        
+        var ret = ""
         if i <= 99 {
-            let p = i.e0
-            ret += read_10s(p._x_)
-            if p.__x > 0 {
-                ret += tensConnector_ + read_0_9(p.__x)
+            let tens = i / 10
+            let leftOver = i - tens * 10
+            
+            if correctOrder {
+                ret += read_10s(tens)
+                if leftOver > 0 {
+                    ret += tensConnector_ + read_0_9(leftOver)
+                }
+            } else {
+                if leftOver > 0 {
+                    ret += read_0_9(leftOver) + tensConnector_
+                }
+                ret += read_10s(tens)
             }
             return ret
         }
         
         if i < 1_000 {
             if e2 != nil {
-                let p = i.e0
-                ret += privateRead_0_9(p.x__)
+                let hundreds = i / 100
+                let leftOver = i - hundreds * 100
+                ret += privateRead_0_9(hundreds)
+                if e0_remove_s {
+                    if ret.hasSuffix("eins") {
+                        ret.removeLast()
+                    }
+                }
                 ret += eSpace_ + e2!
-                if p._xx > 0 {
-                    ret += eSpace_ + readPositive(p._xx)
+                if leftOver > 0 {
+                    ret += eSpace_ + readPositive(leftOver)
                 }
                 return ret
             }
         }
-
+        
         if i < 1_000_000 {
             if e5 != nil {
                 if i >= 100_000 {
@@ -132,8 +148,13 @@ class TenBasedLanguage: Language {
             if e3 != nil {
                 let thousands = i / 1_000
                 let leftOver = i - thousands * 1_000
-
+                
                 ret += readPositive(thousands)
+                if e0_remove_s {
+                    if ret.hasSuffix("eins") {
+                        ret.removeLast()
+                    }
+                }
                 ret += eSpace_ + e3!
                 if leftOver > 0 {
                     ret += eSpace_ + readPositive(leftOver)
@@ -142,34 +163,42 @@ class TenBasedLanguage: Language {
             }
             return ret
         }
-
+        
         if i < 1_000_000_000 {
             if e6 != nil {
                 let millions = i / 1_000_000
                 let leftOver = i - millions * 1_000_000
-
-                ret += readPositive(millions)
-                ret += eSpace_ + e6!
+                
+                if millions == 1 && e6_single != nil {
+                    ret += e6_single!
+                } else {
+                    ret += readPositive(millions)
+                    ret += eSpace_ + e69Space_ + e6!
+                }
                 if leftOver > 0 {
-                    ret += eSpace_ + readPositive(leftOver)
+                    ret += eSpace_ + e69Space_ + readPositive(leftOver)
                 }
                 return ret
             }
         }
-
+        
         if e9 != nil {
             let billions = i / 1_000_000_000
             let leftOver = i - billions * 1_000_000_000
-
-            ret += readPositive(billions)
-            ret += eSpace_ + e9!
+            
+            if billions == 1 && e9_single != nil {
+                ret += e9_single!
+            } else {
+                ret += readPositive(billions)
+                ret += eSpace_ + e69Space_ + e9!
+            }
             if leftOver > 0 {
-                ret += eSpace_ + readPositive(leftOver)
+                ret += eSpace_ + e69Space_ + readPositive(leftOver)
             }
             return ret
         }
-
+        
         return ret
     }
-
+    
 }
