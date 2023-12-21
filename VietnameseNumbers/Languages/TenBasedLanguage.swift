@@ -9,6 +9,7 @@ import Foundation
 
 
 class TenBasedLanguage: Language {
+    var e2: String? = nil
     var e3: String? = nil
     var e4: String? = nil
     var e5: String? = nil
@@ -52,15 +53,31 @@ class TenBasedLanguage: Language {
     }
 
     func read_100_999(_ i: Int) -> String {
-        fatalError("not implmented")
+        if let e2 = e2 {
+            var ret = readPositive(i._100) + eSpace_ + e2
+            if i._100x > 0 {
+                ret += eSpace_ + readPositive(i._100x)
+            }
+            return ret
+        } else {
+            fatalError("not implmented")
+        }
     }
-
-    func thousandString(_ i: Int) -> String {
-        readPositive(i)
+    
+    func read_1000_999_999(_ i: Int) -> String {
+        if let e3 = e3 {
+            var ret = readPositive(i._1_000) + eSpace_ + e3
+            if i._1_000x > 0 {
+                ret += eSpace_ + readPositive(i._1_000x)
+            }
+            return ret
+        } else {
+            fatalError("not implmented")
+        }
     }
 
     override func readPositive(_ i: Int) -> String {
-        guard i >= 0 && i < 999_999_999_999_999 else { fatalError("TenBasedLanguage readPositive out of range") }
+        guard i >= 0 && i < 999_999_999_999_999 else { fatalError("too large") }
         
         if i < 10    { return read_0_9(i)     }
         if i == 10   { return read_10s(1)     }
@@ -91,12 +108,7 @@ class TenBasedLanguage: Language {
                 }
             }
             if e3 != nil {
-                ret += thousandString(i._1_000)
-                ret += eSpace_ + e3!
-                if i._1_000x > 0 {
-                    ret += eSpace_ + readPositive(i._1_000x)
-                }
-                return ret
+                return read_1000_999_999(i)
             }
             return ret
         }

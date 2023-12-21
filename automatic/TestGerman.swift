@@ -191,6 +191,7 @@ final class TestGerman: XCTestCase {
         XCTAssertEqual(german.read(20_101), "zwanzigtausendeinhunderteins")
         XCTAssertEqual(german.read(70_000), "siebzigtausend")
         XCTAssertEqual(german.read(100_000), "einhunderttausend")
+        XCTAssertEqual(german.read(101_101), "einhunderteintausendeinhunderteins")
         XCTAssertEqual(german.read(187_372), "einhundertsiebenundachtzigtausenddreihundertzweiundsiebzig")
         XCTAssertEqual(german.read(200_000), "zweihunderttausend")
         XCTAssertEqual(german.read(201_001), "zweihunderteintausendeins")

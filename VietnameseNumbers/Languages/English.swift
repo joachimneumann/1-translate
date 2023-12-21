@@ -16,7 +16,7 @@ class English: TenBasedLanguage {
             exponentString: " times ten to the power of ",
             groupSeparator: "",
             decimalSeparator: ".")
-
+        e2 = "hundred"
         e3 = "thousand"
         e6 = "million"
         e9 = "billion"
@@ -26,15 +26,6 @@ class English: TenBasedLanguage {
         eSpace = " "
     }
     
-    override func read_100_999(_ i: Int) -> String {
-        var ret = readPositive(i._100)
-        ret += " hundred"
-        if i._100x > 0 {
-            ret += " " + readPositive(i._100x)
-        }
-        return ret
-    }
-
     override func read_11_19(_ i: Int) -> String {
         if i == 11 { return "eleven" }
         if i == 12 { return "twelve" }

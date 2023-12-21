@@ -50,12 +50,7 @@ class Spanish: TenBasedLanguage {
         if i == 27 { return "veintisiete" }
         if i == 28 { return "veintiocho" }
         if i == 29 { return "veintinueve" }
-        
-        var ret = read_10s(i._10)
-        if i._10x > 0 {
-            ret += tensConnector_ + read_0_9(i._10x)
-        }
-        return ret
+        return super.read_21_99(i)
     }
     
     override func read_100_999(_ i: Int) -> String {
