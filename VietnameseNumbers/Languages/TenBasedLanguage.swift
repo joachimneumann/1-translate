@@ -76,13 +76,17 @@ class TenBasedLanguage: Language {
         }
     }
 
-    override func readPositive(_ i: Int) -> String {
-        guard i >= 0 && i < 999_999_999_999_999 else { fatalError("too large") }
-        
+    func read_0_99(_ i: Int) -> String {
         if i < 10    { return read_0_9(i)     }
         if i == 10   { return read_10s(1)     }
         if i <= 19   { return read_11_19(i)   }
         if i <= 99   { return read_21_99(i)   }
+        fatalError("out of range")
+    }
+    override func readPositive(_ i: Int) -> String {
+        guard i >= 0 && i < 999_999_999_999_999 else { fatalError("too large") }
+        
+        if i <= 99   { return read_0_99(i)   }
         if i < 1_000 { return read_100_999(i) }
         
         var ret = ""

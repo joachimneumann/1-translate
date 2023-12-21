@@ -44,28 +44,18 @@ class German: TenBasedLanguage {
     }
     
     override func read_21_99(_ i: Int) -> String {
-        var ret = ""
-        if i.E1x > 0 {
-            var temp = read_0_9(i.E1x)
-            if temp.hasSuffix("eins") {
-                temp.removeLast()
-            }
-            ret += temp + tensConnector_
-        }
-        ret += read_10s(i.E1)
+        // reversed order
+        return (i.E1x > 0 ? read_0_9(i.E1x) + tensConnector_ : "") + read_10s(i.E1)
+    }
+    
+    override func readPositive(_ i: Int) -> String {
+        var ret = super.readPositive(i)
+        ret = ret.replacingOccurrences(of: "einsund", with: "einund")
+        ret = ret.replacingOccurrences(of: "einshundert", with: "einhundert")
+        ret = ret.replacingOccurrences(of: "einstausend", with: "eintausend")
         return ret
     }
-    
-    override func read_100_999(_ i: Int) -> String {
-        let ret = super.read_100_999(i)
-        return ret.replacingOccurrences(of: "einshundert", with: "einhundert")
-    }
-    
-    override func read_1000_999_999(_ i: Int) -> String {
-        let ret = super.read_1000_999_999(i)
-        return ret.replacingOccurrences(of: "einstausend", with: "eintausend")
-    }
-    
+        
     override func read_0_9(_ i: Int) -> String {
         switch i {
         case 0:     return "null"

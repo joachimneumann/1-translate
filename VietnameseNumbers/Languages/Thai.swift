@@ -26,11 +26,6 @@ class Thai: TenBasedLanguage {
         afterNegative = ""
     }
     
-    override func read_11_19(_ i: Int) -> String {
-        if i == 11 { return "สิบเอ็ด" }
-        return super.read_11_19(i)
-    }
-    
     override func read_0_9(_ i: Int) -> String {
         switch i {
         case 0: return "ศูนย์"
@@ -47,14 +42,13 @@ class Thai: TenBasedLanguage {
         }
     }
     
-    override func read_21_99(_ i: Int) -> String {
-        let ret = super.read_21_99(i)
-        if ret.hasSuffix("หนึ่ง") {
+    override func read_0_99(_ i: Int) -> String {
+        let ret = super.read_0_99(i)
+        if i > 1 && ret.hasSuffix("หนึ่ง") {
             return ret.replacingOccurrences(of: "หนึ่ง", with: "เอ็ด")
         }
         return ret
     }
-    
     
     override func read_10s(_ intValue: Int) -> String {
         switch intValue {
