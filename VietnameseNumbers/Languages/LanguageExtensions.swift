@@ -8,20 +8,20 @@
 import Foundation
 
 extension Int {
-    var _10: Int { self / 10 }
-    var _10x: Int { self - self / 10 * 10 }
-    var _100: Int { self / 100 }
-    var _100x: Int { self - self / 100 * 100 }
-    var _1_000: Int { self / 1_000 }
-    var _1_000x: Int { self - self / 1_000 * 1_000}
-    var _10_000: Int { self / 10_000 }
-    var _10_000x: Int { self - self / 10_000 * 10_000 }
-    var _100_000: Int { self / 100_000 }
-    var _100_000x: Int { self - self / 100_000 * 100_000 }
-    var _E6: Int { self / 1_000_000 }
-    var _E6x: Int { self - self / 1_000_000 * 1_000_000 }
-    var _E9: Int { self / 1_000_000_000 }
-    var _E9x: Int { self - self / 1_000_000_000 * 1_000_000_000 }
-    var _E12: Int { self / 1_000_000_000_000 }
-    var _Ę12x: Int { self - self / 1_000_000_000_000 * 1_000_000_000_000 }
+    var E1: Int { self / 10 }
+    var E1x: Int { self - self / 10 * 10 }
+    var E2: Int { self / 100 }
+    var E2x: Int { self - self / 100 * 100 }
+    var E3: Int { self / 1_000 }
+    var E3x: Int { self - self / 1_000 * 1_000}
+    var E4: Int { self / 10_000 }
+    var E4x: Int { self - self / 10_000 * 10_000 }
+    var E5: Int { self / 100_000 }
+    var E5x: Int { self - self / 100_000 * 100_000 }
+    var E6: Int { self / 1_000_000 }
+    var E6x: Int { self - self / 1_000_000 * 1_000_000 }
+    var E9: Int { self / 1_000_000_000 }
+    var E9x: Int { self - self / 1_000_000_000 * 1_000_000_000 }
+    var E12: Int { self / 1_000_000_000_000 }
+    var Ę12x: Int { self - self / 1_000_000_000_000 * 1_000_000_000_000 }
 }

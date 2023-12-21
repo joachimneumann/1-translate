@@ -41,22 +41,22 @@ class TenBasedLanguage: Language {
     }
     
     func read_11_19(_ i: Int) -> String {
-        return read_10s(1)+readPositive(i._10x)
+        return read_10s(1)+readPositive(i.E1x)
     }
     
     func read_21_99(_ i: Int) -> String {
-        var ret = read_10s(i._10)
-        if i._10x > 0 {
-            ret += tensConnector_ + read_0_9(i._10x)
+        var ret = read_10s(i.E1)
+        if i.E1x > 0 {
+            ret += tensConnector_ + read_0_9(i.E1x)
         }
         return ret
     }
 
     func read_100_999(_ i: Int) -> String {
         if let e2 = e2 {
-            var ret = readPositive(i._100) + eSpace_ + e2
-            if i._100x > 0 {
-                ret += eSpace_ + readPositive(i._100x)
+            var ret = readPositive(i.E2) + eSpace_ + e2
+            if i.E2x > 0 {
+                ret += eSpace_ + readPositive(i.E2x)
             }
             return ret
         } else {
@@ -66,9 +66,9 @@ class TenBasedLanguage: Language {
     
     func read_1000_999_999(_ i: Int) -> String {
         if let e3 = e3 {
-            var ret = readPositive(i._1_000) + eSpace_ + e3
-            if i._1_000x > 0 {
-                ret += eSpace_ + readPositive(i._1_000x)
+            var ret = readPositive(i.E3) + eSpace_ + e3
+            if i.E3x > 0 {
+                ret += eSpace_ + readPositive(i.E3x)
             }
             return ret
         } else {
@@ -89,20 +89,20 @@ class TenBasedLanguage: Language {
         if i < 1_000_000 {
             if e5 != nil {
                 if i >= 100_000 {
-                    ret += read_0_9(i._100_000)
+                    ret += read_0_9(i.E5)
                     ret += e5!
-                    if i._100_000x > 0 {
-                        ret += readPositive(i._100_000x)
+                    if i.E5x > 0 {
+                        ret += readPositive(i.E5x)
                     }
                     return ret
                 }
             }
             if e4 != nil {
                 if i >= 10_000 {
-                    ret += readPositive(i._10_000)
+                    ret += readPositive(i.E4)
                     ret += e4!
-                    if i._10_000x > 0 {
-                        ret += readPositive(i._10_000x)
+                    if i.E4x > 0 {
+                        ret += readPositive(i.E4x)
                     }
                     return ret
                 }
@@ -115,28 +115,28 @@ class TenBasedLanguage: Language {
         
         if i < 1_000_000_000 {
             if e6 != nil {
-                if i._E6 == 1 && e6_single != nil {
+                if i.E6 == 1 && e6_single != nil {
                     ret += e6_single!
                 } else {
-                    ret += readPositive(i._E6)
+                    ret += readPositive(i.E6)
                     ret += eSpace_ + e69Space_ + e6!
                 }
-                if i._E6x > 0 {
-                    ret += eSpace_ + e69Space_ + readPositive(i._E6x)
+                if i.E6x > 0 {
+                    ret += eSpace_ + e69Space_ + readPositive(i.E6x)
                 }
                 return ret
             }
         }
         
         if e9 != nil {
-            if i._E9 == 1 && e9_single != nil {
+            if i.E9 == 1 && e9_single != nil {
                 ret += e9_single!
             } else {
-                ret += readPositive(i._E9)
+                ret += readPositive(i.E9)
                 ret += eSpace_ + e69Space_ + e9!
             }
-            if i._E9x > 0 {
-                ret += eSpace_ + e69Space_ + readPositive(i._E9x)
+            if i.E9x > 0 {
+                ret += eSpace_ + e69Space_ + readPositive(i.E9x)
             }
             return ret
         }

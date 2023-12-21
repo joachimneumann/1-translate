@@ -48,7 +48,7 @@ class Thai: TenBasedLanguage {
     }
     
     override func read_21_99(_ i: Int) -> String {
-        var ret = super.read_21_99(i)
+        let ret = super.read_21_99(i)
         if ret.hasSuffix("หนึ่ง") {
             return ret.replacingOccurrences(of: "หนึ่ง", with: "เอ็ด")
         }

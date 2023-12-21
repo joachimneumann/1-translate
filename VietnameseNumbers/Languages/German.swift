@@ -45,14 +45,14 @@ class German: TenBasedLanguage {
     
     override func read_21_99(_ i: Int) -> String {
         var ret = ""
-        if i._10x > 0 {
-            var temp = read_0_9(i._10x)
+        if i.E1x > 0 {
+            var temp = read_0_9(i.E1x)
             if temp.hasSuffix("eins") {
                 temp.removeLast()
             }
             ret += temp + tensConnector_
         }
-        ret += read_10s(i._10)
+        ret += read_10s(i.E1)
         return ret
     }
     

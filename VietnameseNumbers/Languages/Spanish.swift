@@ -57,7 +57,7 @@ class Spanish: TenBasedLanguage {
         if i == 100 { return "cien" }
         
         var ret = ""
-        switch i._100 {
+        switch i.E2 {
         case 1:
             ret = "ciento"
         case 5:
@@ -67,11 +67,11 @@ class Spanish: TenBasedLanguage {
         case 9:
             ret = "novecientos"
         default:
-            ret = readPositive(i._100) + "cientos"
+            ret = readPositive(i.E2) + "cientos"
         }
 
-        if i._100x > 0 {
-            ret += " " + readPositive(i._100x)
+        if i.E2x > 0 {
+            ret += " " + readPositive(i.E2x)
         }
         return ret
     }
