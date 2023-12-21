@@ -15,9 +15,11 @@ class TenBasedLanguage: Language {
     var e5: String? = nil
     var e6: String? = nil
     var e9: String? = nil
+    var e12: String? = nil
     var e6_single: String? = nil
     var e9_single: String? = nil
-    
+    var e12_single: String? = nil
+
     var eSpace: String? = nil
     var eSpace_: String { eSpace == nil ? "" : eSpace! }
     var e69Space: String? = nil
@@ -40,6 +42,15 @@ class TenBasedLanguage: Language {
         fatalError("not implmented")
     }
     
+    func read_0_99(_ i: Int) -> String {
+        if i < 10    { return read_0_9(i)     }
+        var ret = read_10s(i.E1)
+        if i.E1x > 0 {
+            ret += tensConnector_ + read_0_9(i.E1x)
+        }
+        return ret
+    }
+
     func read_100_999(_ i: Int) -> String {
         if let e2 = e2 {
             var ret = readPositive(i.E2) + eSpace_ + e2
@@ -52,7 +63,7 @@ class TenBasedLanguage: Language {
         }
     }
     
-    func read_1000_999_999(_ i: Int) -> String {
+    func read_e3_e6(_ i: Int) -> String {
         if let e3 = e3 {
             var ret = readPositive(i.E3) + eSpace_ + e3
             if i.E3x > 0 {
@@ -64,16 +75,43 @@ class TenBasedLanguage: Language {
         }
     }
 
-    func read_0_99(_ i: Int) -> String {
-        if i < 10    { return read_0_9(i)     }
-        if i == 10   { return read_10s(1)     }
-        var ret = read_10s(i.E1)
-        if i.E1x > 0 {
-            ret += tensConnector_ + read_0_9(i.E1x)
-        }
-        return ret
-    }
     
+    func read_e6_e9(_ i: Int) -> String {
+        if e6 != nil {
+            var ret = ""
+            if i.E6 == 1 && e6_single != nil {
+                ret += e6_single!
+            } else {
+                ret += readPositive(i.E6)
+                ret += eSpace_ + e69Space_ + e6!
+            }
+            if i.E6x > 0 {
+                ret += eSpace_ + e69Space_ + readPositive(i.E6x)
+            }
+            return ret
+        } else {
+            fatalError("not implmented")
+        }
+    }
+
+    func read_e9_e12(_ i: Int) -> String {
+        if e9 != nil {
+            var ret = ""
+            if i.E9 == 1 && e9_single != nil {
+                ret += e9_single!
+            } else {
+                ret += readPositive(i.E9)
+                ret += eSpace_ + e69Space_ + e9!
+            }
+            if i.E9x > 0 {
+                ret += eSpace_ + e69Space_ + readPositive(i.E9x)
+            }
+            return ret
+        } else {
+            fatalError("not implmented")
+        }
+    }
+
 
     override func readPositive(_ i: Int) -> String {
         guard i >= 0 && i < 999_999_999_999_999 else { fatalError("too large") }
@@ -104,35 +142,27 @@ class TenBasedLanguage: Language {
                 }
             }
             if e3 != nil {
-                return read_1000_999_999(i)
+                return read_e3_e6(i)
             }
             return ret
         }
         
         if i < 1_000_000_000 {
-            if e6 != nil {
-                if i.E6 == 1 && e6_single != nil {
-                    ret += e6_single!
-                } else {
-                    ret += readPositive(i.E6)
-                    ret += eSpace_ + e69Space_ + e6!
-                }
-                if i.E6x > 0 {
-                    ret += eSpace_ + e69Space_ + readPositive(i.E6x)
-                }
-                return ret
-            }
+            return read_e6_e9(i)
         }
         
-        if e9 != nil {
-            if i.E9 == 1 && e9_single != nil {
-                ret += e9_single!
+        if i < 1_000_000_000_000 {
+            return read_e9_e12(i)
+        }
+        if e12 != nil {
+            if i.E12 == 1 && e12_single != nil {
+                ret += e12_single!
             } else {
-                ret += readPositive(i.E9)
-                ret += eSpace_ + e69Space_ + e9!
+                ret += readPositive(i.E12)
+                ret += eSpace_ + e69Space_ + e12!
             }
-            if i.E9x > 0 {
-                ret += eSpace_ + e69Space_ + readPositive(i.E9x)
+            if i.E12x > 0 {
+                ret += eSpace_ + e69Space_ + readPositive(i.E12x)
             }
             return ret
         }

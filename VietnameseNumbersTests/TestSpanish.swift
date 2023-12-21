@@ -184,6 +184,7 @@ final class Test_Spanish: XCTestCase {
         XCTAssertEqual(spanish.read(100_000_000_000), "cien mil millones")
         XCTAssertEqual(spanish.read(400_000_000_000), "cuatrocientos mil millones")
         XCTAssertEqual(spanish.read(1_000_000_000_000), "un billón")
+        XCTAssertEqual(spanish.read(3_000_000_000_000), "tres billiones")
 
         XCTAssertEqual(spanish.read(-1), "menos uno")
         XCTAssertEqual(spanish.read(-74), "menos setenta y cuatro")

@@ -17,13 +17,17 @@ class Spanish: TenBasedLanguage {
             groupSeparator: "",
             decimalSeparator: ".")
 
-        e3 = "thousand"
-        e6 = "million"
-        e9 = "billion"
+        e3 = "mil"
+        e6_single = "un millón"
+        e6 = "millones"
+        e9_single = "mil millones"
+        e9 = "mil millones"
+        e12_single = "un billón"
+        e12 = "billiones"
         afterNegative = " "
         beforeAndAfterDotString = " "
         tensConnector = " y "
-        eSpace = ""
+        eSpace = " "
     }
 
     override func read_0_9(_ i: Int) -> String {
@@ -57,20 +61,17 @@ class Spanish: TenBasedLanguage {
         }
     }
 
-//    override func read_11_19(_ i: Int) -> String {
-//        if i == 11 { return "once" }
-//        if i == 12 { return "doce" }
-//        if i == 13 { return "trece" }
-//        if i == 14 { return "catorce" }
-//        if i == 15 { return "quince" }
-//        if i == 16 { return "dieciséis" }
-//        if i == 17 { return "diecisiete" }
-//        if i == 18 { return "dieciocho" }
-//        if i == 19 { return "diecinueve" }
-//        return ""
-//    }
-    
-    override func read_100_999(_ i: Int) -> String {
+    override func read_0_99(_ i: Int) -> String {
+        if i == 11 { return "once" }
+        if i == 12 { return "doce" }
+        if i == 13 { return "trece" }
+        if i == 14 { return "catorce" }
+        if i == 15 { return "quince" }
+        if i == 16 { return "dieciséis" }
+        if i == 17 { return "diecisiete" }
+        if i == 18 { return "dieciocho" }
+        if i == 19 { return "diecinueve" }
+
         if i == 21 { return "veintiuno" }
         if i == 22 { return "veintidós" }
         if i == 23 { return "veintitrés" }
@@ -80,6 +81,10 @@ class Spanish: TenBasedLanguage {
         if i == 27 { return "veintisiete" }
         if i == 28 { return "veintiocho" }
         if i == 29 { return "veintinueve" }
+        return super.read_0_99(i)
+    }
+    
+    override func read_100_999(_ i: Int) -> String {
         if i == 100 { return "cien" }
         
         var ret = ""
@@ -100,6 +105,11 @@ class Spanish: TenBasedLanguage {
             ret += " " + readPositive(i.E2x)
         }
         return ret
+    }
+    
+    override func read_e3_e6(_ i: Int) -> String {
+        if i == 1_000 { return "mil" }
+        return super.read_e3_e6(i)
     }
 
 }
