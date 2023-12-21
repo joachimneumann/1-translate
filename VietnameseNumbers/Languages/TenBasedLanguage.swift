@@ -40,18 +40,6 @@ class TenBasedLanguage: Language {
         fatalError("not implmented")
     }
     
-    func read_11_19(_ i: Int) -> String {
-        return read_10s(1)+readPositive(i.E1x)
-    }
-    
-    func read_21_99(_ i: Int) -> String {
-        var ret = read_10s(i.E1)
-        if i.E1x > 0 {
-            ret += tensConnector_ + read_0_9(i.E1x)
-        }
-        return ret
-    }
-
     func read_100_999(_ i: Int) -> String {
         if let e2 = e2 {
             var ret = readPositive(i.E2) + eSpace_ + e2
@@ -79,10 +67,14 @@ class TenBasedLanguage: Language {
     func read_0_99(_ i: Int) -> String {
         if i < 10    { return read_0_9(i)     }
         if i == 10   { return read_10s(1)     }
-        if i <= 19   { return read_11_19(i)   }
-        if i <= 99   { return read_21_99(i)   }
-        fatalError("out of range")
+        var ret = read_10s(i.E1)
+        if i.E1x > 0 {
+            ret += tensConnector_ + read_0_9(i.E1x)
+        }
+        return ret
     }
+    
+
     override func readPositive(_ i: Int) -> String {
         guard i >= 0 && i < 999_999_999_999_999 else { fatalError("too large") }
         

@@ -30,32 +30,6 @@ class German: TenBasedLanguage {
         e69Space = " "
     }
     
-    override func read_11_19(_ i: Int) -> String {
-        if i == 11 { return "elf" }
-        if i == 12 { return "zwölf" }
-        if i == 13 { return "dreizehn" }
-        if i == 14 { return "vierzehn" }
-        if i == 15 { return "fünfzehn" }
-        if i == 16 { return "sechzehn" }
-        if i == 17 { return "siebzehn" }
-        if i == 18 { return "achtzehn" }
-        if i == 19 { return "neunzehn" }
-        return ""
-    }
-    
-    override func read_21_99(_ i: Int) -> String {
-        // reversed order
-        return (i.E1x > 0 ? read_0_9(i.E1x) + tensConnector_ : "") + read_10s(i.E1)
-    }
-    
-    override func readPositive(_ i: Int) -> String {
-        var ret = super.readPositive(i)
-        ret = ret.replacingOccurrences(of: "einsund", with: "einund")
-        ret = ret.replacingOccurrences(of: "einshundert", with: "einhundert")
-        ret = ret.replacingOccurrences(of: "einstausend", with: "eintausend")
-        return ret
-    }
-        
     override func read_0_9(_ i: Int) -> String {
         switch i {
         case 0:     return "null"
@@ -86,4 +60,28 @@ class German: TenBasedLanguage {
         default: return " 10s outside range "
         }
     }
+    
+    override func read_0_99(_ i: Int) -> String {
+        if i <= 10 { return super.read_0_99(i) }
+        if i == 11 { return "elf" }
+        if i == 12 { return "zwölf" }
+        if i == 13 { return "dreizehn" }
+        if i == 14 { return "vierzehn" }
+        if i == 15 { return "fünfzehn" }
+        if i == 16 { return "sechzehn" }
+        if i == 17 { return "siebzehn" }
+        if i == 18 { return "achtzehn" }
+        if i == 19 { return "neunzehn" }
+        // reversed order
+        return (i.E1x > 0 ? read_0_9(i.E1x) + tensConnector_ : "") + read_10s(i.E1)
+    }
+    
+    override func readPositive(_ i: Int) -> String {
+        var ret = super.readPositive(i)
+        ret = ret.replacingOccurrences(of: "einsund", with: "einund")
+        ret = ret.replacingOccurrences(of: "einshundert", with: "einhundert")
+        ret = ret.replacingOccurrences(of: "einstausend", with: "eintausend")
+        return ret
+    }
+        
 }
