@@ -380,10 +380,11 @@
 		AA8A911C2B1D815C00CE7185 /* VietnameseNumbersTests */ = {
 			isa = PBXGroup;
 			children = (
-				AA30E9DF2B2DAD4C00F7FDEA /* TestThai.swift */,
+				AA3565B82B326B01009B58D2 /* TestDigits.swift */,
 				AA715CB62B2C3ABE009335B7 /* TestEnglish.swift */,
 				AA9561352B2AAFEB00648915 /* TestGerman.swift */,
 				AA8B614D2B2AFC9A00D2152A /* TestSpanish.swift */,
+				AA30E9DF2B2DAD4C00F7FDEA /* TestThai.swift */,
 				AA715CB22B2C39EE009335B7 /* Test_Catalan.swift */,
 				AA715CB42B2C3A60009335B7 /* Test_Vietnamese.swift */,
 				AA715CA72B2BE367009335B7 /* Test_Polish.swift */,
@@ -392,7 +393,6 @@
 				AA739C9C2B30014800A32478 /* Test_Frensh.swift */,
 				AA739CA22B302D7100A32478 /* Test_Chinese.swift */,
 				AA3565AC2B3247C4009B58D2 /* Test_Extensions.swift */,
-				AA3565B82B326B01009B58D2 /* TestDigits.swift */,
 			);
 			path = VietnameseNumbersTests;
 			sourceTree = "<group>";

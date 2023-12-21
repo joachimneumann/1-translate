@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ThaiTraditional: DigitBasedLanguage {
+class ThaiTraditional: TenBasedLanguage {
     init() {
         super.init(
             name: "แบบดั้งเดิม",
@@ -18,19 +18,20 @@ class ThaiTraditional: DigitBasedLanguage {
             decimalSeparator: ".")
     }
         
-    override func read_0_9(_ i: Int) -> String {
-        switch i {
-        case 0: return "๐"
-        case 1: return "๑"
-        case 2: return "๒"
-        case 3: return "๓"
-        case 4: return "๔"
-        case 5: return "๕"
-        case 6: return "๖"
-        case 7: return "๗"
-        case 8: return "๘"
-        case 9: return "๙"
-        default: return " translate_0_10: outside range "
-        }
+    override func readPositive(_ i: Int) -> String {
+        var ret = i.string
+        ret = ret.replacingOccurrences(of: "0", with: "๐")
+        ret = ret.replacingOccurrences(of: "1", with: "๑")
+        ret = ret.replacingOccurrences(of: "2", with: "๒")
+        ret = ret.replacingOccurrences(of: "3", with: "๓")
+        ret = ret.replacingOccurrences(of: "4", with: "๔")
+        ret = ret.replacingOccurrences(of: "5", with: "๕")
+        ret = ret.replacingOccurrences(of: "6", with: "๖")
+        ret = ret.replacingOccurrences(of: "7", with: "๗")
+        ret = ret.replacingOccurrences(of: "8", with: "๘")
+        ret = ret.replacingOccurrences(of: "9", with: "๙")
+        ret = ret.replacingOccurrences(of: decimalSeparator, with: dotString)
+        return ret
     }
+
 }
