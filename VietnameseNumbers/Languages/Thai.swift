@@ -50,18 +50,11 @@ class Thai: TenBasedLanguage {
         return ret
     }
     
-    override func read_10s(_ intValue: Int) -> String {
-        switch intValue {
+    override func read_10s(_ i: Int) -> String {
+        switch i {
         case 1:     return "สิบ"
         case 2:     return "ยี่สิบ"
-        case 3:     return "สามสิบ"
-        case 4:     return "สี่สิบ"
-        case 5:     return "ห้าสิบ"
-        case 6:     return "หกสิบ"
-        case 7:     return "เจ็ดสิบ"
-        case 8:     return "แปดสิบ"
-        case 9:     return "เก้าสิบ"
-        default: return " 10s outside range "
+        default: return read_0_9(i) + "สิบ"
         }
     }
 }

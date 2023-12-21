@@ -26,19 +26,6 @@ class English: TenBasedLanguage {
         eSpace = " "
     }
     
-    override func read_11_19(_ i: Int) -> String {
-        if i == 11 { return "eleven" }
-        if i == 12 { return "twelve" }
-        if i == 13 { return "thirteen" }
-        if i == 14 { return "fourteen" }
-        if i == 15 { return "fifteen" }
-        if i == 16 { return "sixteen" }
-        if i == 17 { return "seventeen" }
-        if i == 18 { return "eighteen" }
-        if i == 19 { return "nineteen" }
-        return ""
-    }
-
     override func read_0_9(_ i: Int) -> String {
         switch i {
         case 0:     return "zero"
@@ -55,6 +42,19 @@ class English: TenBasedLanguage {
         }
     }
     
+    override func read_11_19(_ i: Int) -> String {
+        if i == 11 { return "eleven" }
+        if i == 12 { return "twelve" }
+        if i == 13 { return "thirteen" }
+        if i == 14 { return "fourteen" }
+        if i == 15 { return "fifteen" }
+        if i == 16 { return "sixteen" }
+        if i == 17 { return "seventeen" }
+        if i == 18 { return "eighteen" }
+        if i == 19 { return "nineteen" }
+        return ""
+    }
+
     override func read_10s(_ i: Int) -> String {
         switch i {
         case 1:     return "ten"
