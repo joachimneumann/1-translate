@@ -7,7 +7,7 @@
 
 import Foundation
 
-class German: TenBasedLanguage {
+class German: Language {
     init() {
         super.init(
             name: "Deutsch",

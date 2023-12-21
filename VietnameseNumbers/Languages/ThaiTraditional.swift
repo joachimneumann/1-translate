@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ThaiTraditional: TenBasedLanguage {
+class ThaiTraditional: Language {
     init() {
         super.init(
             name: "แบบดั้งเดิม",

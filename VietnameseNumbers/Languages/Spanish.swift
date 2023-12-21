@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Spanish: TenBasedLanguage {
+class Spanish: Language {
     init() {
         super.init(
             name: "Español",

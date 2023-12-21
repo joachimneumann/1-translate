@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Digits: TenBasedLanguage {
+class Digits: Language {
     init() {
         super.init(
             name: "Digits",
