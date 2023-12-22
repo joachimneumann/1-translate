@@ -70,6 +70,8 @@ class Polish: Language {
     override func read_e2_e3(_ i: Int) -> String {
         var ret = ""
         switch i.E2 {
+        case 0:
+            ret = ""
         case 1:
             ret = "sto"
         case 2:
@@ -80,16 +82,32 @@ class Polish: Language {
             ret = read_0_9(i.E2) + "set"
         }
         if i.E2x > 0 {
-            ret += " " + read(i.E2x)
+            if ret.count > 0 { ret += " " }
+            ret += read(i.E2x)
         }
         return ret
     }
     
     override func read_e3_e6(_ i: Int) -> String {
         var ret = ""
-        switch i.E2 {
+        var use_tysiące = false
+        switch i.E3 % 10 {
+        case 2, 3, 4:
+            use_tysiące = true
         default:
-            ret = read_0_9(i.E2) + "set"
+            use_tysiące = false
+        }
+        switch i.E3 % 100 {
+        case 11, 12, 13, 14:
+            use_tysiące = false
+        default:
+            break
+        }
+        ret = read(i.E3) + " " + (use_tysiące ? "tysiące" : "tysięcy")
+        if i.E3 == 1 { ret = "tysiąc" }
+
+        if i.E3x > 0 {
+            ret += " " + read_e2_e3(i.E3x)
         }
         return ret
     }

@@ -169,10 +169,7 @@ class Language: LanguageString {
                     return ret
                 }
             }
-            if e3 != nil {
-                return read_e3_e6(i)
-            }
-            return ret
+            return read_e3_e6(i)
         }
         
         if i < 1_000_000_000 {
