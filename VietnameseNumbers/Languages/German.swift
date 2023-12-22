@@ -8,6 +8,9 @@
 import Foundation
 
 class German: Language {
+    var useSoftHyphen: Bool = true
+    var capitalisation: Bool = true
+
     init() {
         super.init(
             name: "Deutsch",

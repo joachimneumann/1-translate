@@ -8,9 +8,20 @@
 import Foundation
 
 class Vietnamese: Language {
+    
+    enum Thousand: String, Codable, CaseIterable {
+        case ngàn
+        case nghìn
+    }
+
+    enum SecondLast: String, Codable, CaseIterable {
+        case linh
+        case lẻ
+    }
+    
     var compact: Bool = false
-    var secondLast: VietnameseSecondLast = .lẻ
-    var thousand: VietnameseThousand = .nghìn
+    var secondLast: SecondLast = .lẻ
+    var thousand: Thousand = .nghìn
 
     init() {
         super.init(

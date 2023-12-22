@@ -25,6 +25,7 @@ class Language: LanguageString {
     var e2_cleanPlural: String? = nil
     var beforeHundred: String? = nil
     var afterHundred: String? = nil
+    var allowNegativeNumbers = true
 
 
     var eSpace: String? = nil
@@ -140,6 +141,7 @@ class Language: LanguageString {
 
     override func read(_ i: Int) -> String {
         if i < 0 {
+            guard allowNegativeNumbers else { return "negative: unknown" }
             return negativeString + afterNegative + read(-i)
         }
         guard i >= 0 && i < 999_999_999_999_999 else { fatalError("too large") }

@@ -131,14 +131,14 @@ struct Settings: View {
         return Group {
             GridRow {
                 HStack {
-                    Image(viewModel.translateEnglish.language)
+                    Image(viewModel.english.name)
                         .resizable()
                         .scaledToFit()
                         .padding(1)
                         .border(.white)
                         .frame(height: 25)
                         .padding(.trailing, 10)
-                    Text(viewModel.translateEnglish.language)
+                    Text(viewModel.english.name)
                         .bold()
                         .frame(height: 25)
                     Spacer()
@@ -168,14 +168,14 @@ struct Settings: View {
         return Group {
             GridRow {
                 HStack {
-                    Image(viewModel.translateGerman.language)
+                    Image(viewModel.german.name)
                         .resizable()
                         .scaledToFit()
                         .padding(1)
                         .border(.white)
                         .frame(height: 25)
                         .padding(.trailing, 10)
-                    Text(viewModel.translateGerman.language)
+                    Text(viewModel.german.name)
                         .bold()
                         .frame(height: 25)
                     Spacer()
@@ -215,14 +215,14 @@ struct Settings: View {
         return Group {
             GridRow {
                 HStack {
-                    Image(viewModel.translateSpanish.language)
+                    Image(viewModel.spanish.name)
                         .resizable()
                         .scaledToFit()
                         .padding(1)
                         .border(.white)
                         .frame(height: 25)
                         .padding(.trailing, 10)
-                    Text(viewModel.translateSpanish.language)
+                    Text(viewModel.spanish.name)
                         .bold()
                         .frame(height: 25)
                     Spacer()
@@ -238,7 +238,7 @@ struct Settings: View {
             GridRow {
                 Text("Coma o punto")
                 Picker("", selection: $viewModel.settingsSpanishUsePunto) {
-                    ForEach(PuntoComma.allCases, id: \.self) { value in
+                    ForEach(Spanish.PuntoComma.allCases, id: \.self) { value in
                         Text("\(value.rawValue)")
                             .tag(value)
                     }
@@ -256,14 +256,14 @@ struct Settings: View {
         return Group {
             GridRow {
                 HStack {
-                    Image(viewModel.translateVietnamese.language)
+                    Image(viewModel.vietnamese.name)
                         .resizable()
                         .scaledToFit()
                         .padding(1)
                         .border(.white)
                         .frame(height: 25)
                         .padding(.trailing, 10)
-                    Text(viewModel.translateVietnamese.language)
+                    Text(viewModel.vietnamese.name)
                         .bold()
                         .frame(height: 25)
                     Spacer()
@@ -280,7 +280,7 @@ struct Settings: View {
             GridRow {
                 Text("1000")
                 Picker("", selection: $viewModel.settingsVietnameseThousand) {
-                    ForEach(VietnameseThousand.allCases, id: \.self) { value in
+                    ForEach(Vietnamese.Thousand.allCases, id: \.self) { value in
                         Text("\(value.rawValue)")
                             .tag(value)
                     }
@@ -294,7 +294,7 @@ struct Settings: View {
             GridRow {
                 Text("linh hoặc lẻ")
                 Picker("", selection: $viewModel.settingsVietnameseSecondLast) {
-                    ForEach(VietnameseSecondLast.allCases, id: \.self) { value in
+                    ForEach(Vietnamese.SecondLast.allCases, id: \.self) { value in
                         Text("\(value.rawValue)")
                             .tag(value)
                     }

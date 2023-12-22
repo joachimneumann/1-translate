@@ -8,6 +8,12 @@
 import Foundation
 
 class Spanish: Language {
+    
+    enum PuntoComma: String, Codable, CaseIterable {
+        case coma
+        case punto
+    }
+
     init() {
         super.init(
             name: "Español",

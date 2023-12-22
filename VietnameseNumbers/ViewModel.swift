@@ -71,20 +71,18 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     let digits          = Digits()
     let thaiTraditional = ThaiTraditional()
     let thai            = Thai()
+    let english         = English()
+    let german          = German()
+    let vietnamese      = Vietnamese()
+    let spanish         = Spanish()
+    let catalan         = Catalan()
+    let roman           = Roman()
+    let french          = French()
 
     //-----//
     
-    let translateEnglish = TranslateEnglish()
-    let translateGerman = TranslateGerman()
-    let translateVietnamese = TranslateVietnamese()
-    let translateSpanish = TranslateSpanish()
-    let translateCatalan = TranslateCatalan()
     let translatePolish = TranslatePolish()
     let translateDanish = TranslateDanish()
-    let translateThai = TranslateThai()
-    let translateThaiTraditional = TranslateThaiTraditional()
-    let translateRoman = TranslateRoman()
-    let translateFrench = TranslateFrench()
     let translateTraditionalChinese = TranslateChinese(variant: .traditional)
     let translateSimplifiedChinese = TranslateChinese(variant: .simplified)
     let translateFinancialChinese = TranslateChinese(variant: .financial)
@@ -96,8 +94,8 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     func updateTranslation() {
         firstTranslatedNumber = firstLanguage.read(currentDisplay.allInOneLine)
         firstTranslatedNumberTopBorder = nil
-        if firstTranslatedNumber.contains(TranslateRoman.TOUSANDS) {
-            let split = firstTranslatedNumber.split(separator: TranslateRoman.TOUSANDS)
+        if firstTranslatedNumber.contains(Roman.TOUSANDS) {
+            let split = firstTranslatedNumber.split(separator: Roman.TOUSANDS)
             firstTranslatedNumberTopBorder = String(split[0])
             if split.count == 2 {
                 firstTranslatedNumber = String(split[1])
@@ -106,8 +104,8 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             
         secondTranslatedNumber = secondLanguage.read(currentDisplay.allInOneLine)
         secondTranslatedNumberTopBorder = nil
-        if secondTranslatedNumber.contains(TranslateRoman.TOUSANDS) {
-            let split = secondTranslatedNumber.split(separator: TranslateRoman.TOUSANDS)
+        if secondTranslatedNumber.contains(Roman.TOUSANDS) {
+            let split = secondTranslatedNumber.split(separator: Roman.TOUSANDS)
             secondTranslatedNumberTopBorder = String(split[0])
             if split.count == 2 {
                 secondTranslatedNumber = String(split[1])
@@ -152,23 +150,23 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     var settingsEnglishUseAndAfterHundred: Bool = false {
         didSet {
             if settingsEnglishUseAndAfterHundred {
-                translateEnglish.afterHundred = " and "
+                english.afterHundred = " and "
             } else {
-                translateEnglish.afterHundred = nil
+                english.afterHundred = nil
             }
-            settingsEnglishExample = translateEnglish.translate(105)!
+            settingsEnglishExample = english.read(105)
         }
     }
 
     @AppStorage(AppStorageKeys.settingsSpanishUsePunto, store: .standard)
-    var settingsSpanishUsePunto: PuntoComma = .coma {
+    var settingsSpanishUsePunto: Spanish.PuntoComma = .coma {
         didSet {
-            translateSpanish.dotString = settingsSpanishUsePunto.rawValue
+            spanish.dotString = settingsSpanishUsePunto.rawValue
             // make sure that the selected decimal and group seperator do not mess up the example
-            let tempSpanish = TranslateSpanish()
+            let tempSpanish = Spanish()
             tempSpanish.decimalSeparator = "."
             tempSpanish.groupSeparator = ""
-            settingsSpanishExample = tempSpanish.translate(1.5) ?? "Error"
+            settingsSpanishExample = tempSpanish.read("1.5")
         }
     }
 
@@ -176,61 +174,41 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @AppStorage(AppStorageKeys.settingsGermanCaptalisation)
     var settingsGermanCaptalisation: Bool = true {
         didSet {
-            translateGerman.capitalisation = settingsGermanCaptalisation
-            if let translatedExample = translateGerman.translate(88) {
-                settingsGermanExample = translatedExample
-            } else {
-                settingsGermanExample = "Error"
-            }
+            german.capitalisation = settingsGermanCaptalisation
+            settingsGermanExample = german.read(88)
         }
     }
 
     @AppStorage(AppStorageKeys.settingsGermanSoftHyphen)
     var settingsGermanSoftHyphen: Bool = false {
         didSet {
-            translateGerman.useSoftHyphen = settingsGermanSoftHyphen
-            if let translatedExample = translateGerman.translate(88) {
-                settingsGermanExample = translatedExample
-            } else {
-                settingsGermanExample = "Error"
-            }
+            german.useSoftHyphen = settingsGermanSoftHyphen
+            settingsGermanExample = german.read(88)
         }
     }
 
     
     @AppStorage(AppStorageKeys.settingsVietnameseThousand)
-    var settingsVietnameseThousand: VietnameseThousand = .nghìn {
+    var settingsVietnameseThousand: Vietnamese.Thousand = .nghìn {
         didSet {
-            translateVietnamese.thousand = settingsVietnameseThousand
-            if let translatedExample = translateVietnamese.translate(303333) {
-                settingsVietnameseExample = translatedExample
-            } else {
-                settingsVietnameseExample = "Error"
-            }
+            vietnamese.thousand = settingsVietnameseThousand
+            settingsVietnameseExample = vietnamese.read(303333)
         }
     }
     
     @AppStorage(AppStorageKeys.settingsVietnameseSecondLast)
-    var settingsVietnameseSecondLast: VietnameseSecondLast = .lẻ {
+    var settingsVietnameseSecondLast: Vietnamese.SecondLast = .lẻ {
         didSet {
-            translateVietnamese.secondLast = settingsVietnameseSecondLast
-            if let translatedExample = translateVietnamese.translate(303333) {
-                settingsVietnameseExample = translatedExample
-            } else {
-                settingsVietnameseExample = "Error"
-            }
+            vietnamese.secondLast = settingsVietnameseSecondLast
+            settingsVietnameseExample = vietnamese.read(303333)
         }
     }
     
     @AppStorage(AppStorageKeys.settingsVietnameseCompact)
     var settingsVietnameseCompact: Bool = false {
         didSet {
-            translateVietnamese.compact = settingsVietnameseCompact
-            if let translatedExample = translateVietnamese.translate(303333) {
-                settingsVietnameseExample = translatedExample
-            } else {
-                settingsVietnameseExample = "Error"
-            }
+            vietnamese.compact = settingsVietnameseCompact
+            settingsVietnameseExample = vietnamese.read(303333)
         }
     }
         
