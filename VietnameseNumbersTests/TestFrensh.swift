@@ -49,7 +49,7 @@ class TestFrench: XCTestCase {
         XCTAssertEqual(french.read(111), "cent onze")
         XCTAssertEqual(french.read(120), "cent vingt")
         XCTAssertEqual(french.read(200), "deux cents")
-        XCTAssertEqual(french.read(201), "deux cents")
+        XCTAssertEqual(french.read(201), "deux cent un")
         XCTAssertEqual(french.read(500), "cinq cents")
         XCTAssertEqual(french.read(999), "neuf cent quatre-vingt-dix-neuf")
         XCTAssertEqual(french.read(1_000), "mille")

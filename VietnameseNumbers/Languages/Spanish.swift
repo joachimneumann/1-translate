@@ -18,12 +18,12 @@ class Spanish: Language {
             decimalSeparator: ".")
 
         e3 = "mil"
-        e3_single = "mil"
-        e6_single = "un millón"
+        e3_one = "mil"
+        e6_one = "un millón"
         e6 = "millones"
-        e9_single = "mil millones"
+        e9_one = "mil millones"
         e9 = "mil millones"
-        e12_single = "un billón"
+        e12_one = "un billón"
         e12 = "billiones"
         afterNegative = " "
         beforeAndAfterDotString = " "

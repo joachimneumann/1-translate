@@ -16,11 +16,14 @@ class Language: LanguageString {
     var e6: String? = nil
     var e9: String? = nil
     var e12: String? = nil
-    var e2_single: String? = nil
-    var e3_single: String? = nil
-    var e6_single: String? = nil
-    var e9_single: String? = nil
-    var e12_single: String? = nil
+    var e2_one: String? = nil
+    var e3_one: String? = nil
+    var e6_one: String? = nil
+    var e9_one: String? = nil
+    var e12_one: String? = nil
+    var e2_cleanPlural: String? = nil
+    var e6_cleanPlural: String? = nil
+    
 
     var eSpace: String? = nil
     var eSpace_: String { eSpace == nil ? "" : eSpace! }
@@ -54,12 +57,17 @@ class Language: LanguageString {
     
     func read_e2_e3(_ i: Int) -> String {
         var ret = read(i.E2)
-        if i.E2 == 1 && e2_single != nil {
-            ret = e2_single!
+        if i.E2 == 1 && e2_one != nil {
+            ret = e2_one!
         } else {
             if let e2 = e2 {
                 ret = read(i.E2)
-                ret += eSpace_ + e2
+                ret += eSpace_
+                if i.E2 > 1 && i.E2x == 0 && e2_cleanPlural != nil {
+                    ret += e2_cleanPlural!
+                } else {
+                    ret += e2
+                }
             }
         }
         if i.E2x > 0 {
@@ -70,8 +78,8 @@ class Language: LanguageString {
     
     func read_e3_e6(_ i: Int) -> String {
         var ret = read(i.E3)
-        if i.E3 == 1 && e3_single != nil {
-            ret = e3_single!
+        if i.E3 == 1 && e3_one != nil {
+            ret = e3_one!
         } else {
             if let e3 = e3 {
                 ret = read(i.E3)
@@ -86,12 +94,16 @@ class Language: LanguageString {
 
     func read_e6_e9(_ i: Int) -> String {
         var ret = read(i.E6)
-        if i.E6 == 1 && e6_single != nil {
-            ret = e6_single!
+        if i.E6 == 1 && e6_one != nil {
+            ret = e6_one!
         } else {
             if let e6 = e6 {
                 ret = read(i.E6)
-                ret += eSpace_ + e69Space_ + e6
+                ret += eSpace_ + e69Space_
+                if i.E6 > 1 && i.E6x == 0 && e6_cleanPlural != nil {
+                } else {
+                    ret += e6
+                }
             }
         }
         if i.E6x > 0 {
@@ -102,8 +114,8 @@ class Language: LanguageString {
 
     func read_e9_e12(_ i: Int) -> String {
         var ret = read(i.E9)
-        if i.E9 == 1 && e9_single != nil {
-            ret = e9_single!
+        if i.E9 == 1 && e9_one != nil {
+            ret = e9_one!
         } else {
             if let e9 = e9 {
                 ret = read(i.E9)
@@ -162,8 +174,8 @@ class Language: LanguageString {
             return read_e9_e12(i)
         }
         if e12 != nil {
-            if i.E12 == 1 && e12_single != nil {
-                ret += e12_single!
+            if i.E12 == 1 && e12_one != nil {
+                ret += e12_one!
             } else {
                 ret += read(i.E12)
                 ret += eSpace_ + e69Space_ + e12!

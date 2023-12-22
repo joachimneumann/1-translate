@@ -17,13 +17,16 @@ class French: Language {
             groupSeparator: "",
             decimalSeparator: ".")
 
-        e2_single = "cent"
-        e2 = "cents"
+        e2 = "cent"
+        e2_one = "cent"
+        e2_cleanPlural = "cents"
         e3 = "mille"
-        e6_single = "million"
+        e3_one = "mille"
         e6 = "millions"
-        e9_single = "milliard"
+        e6_one = "un million"
         e9 = "milliards"
+        e9_one = "un milliard"
+
         afterNegative = " "
         beforeAndAfterDotString = " "
         tensConnector = "-"
@@ -55,7 +58,7 @@ class French: Language {
         case 5:     return "cinquante"
         case 6:     return "soixante"
         case 7:     return "soixante-dix"
-        case 8:     return "quatre-vingts"
+        case 8:     return "quatre-vingt"
         case 9:     return "quatre-vingt-dix"
         default: return " 10s outside range "
         }
@@ -68,33 +71,35 @@ class French: Language {
         if i == 14 { return "quatorze" }
         if i == 15 { return "quinze" }
         if i == 16 { return "seize" }
-        if i == 17 { return "dix-sept" }
-        if i == 18 { return "dix-huit" }
-        if i == 19 { return "dix-neuf" }
-        var temp = i
-        var X = temp % 10
-        temp = (temp - X) / 10
-        var X0 = temp % 10
+        
+        var X0 = i.E1
+        var X = i.E1x
         if X0 == 7 || X0 == 9 {
             X0 -= 1
             X += 10
         }
-        var tens = read_10s(X0)
-        if X0 == 8 && X > 0 {
-            tens = "quatre-vingt" // no tailing s
+        
+        var ret = read_10s(X0)
+        if X0 == 8 && X == 0 {
+            ret += "s" // quatre-vingts
         }
-        if X == 0 {
-            return tens
-        } else if X0 < 8 && (X == 1 || X == 11) {
-            return tens + " et " + (X < 10 ? read_0_9(X) : read_10_99(X))
-        } else {
-            return tens + "-" + (X < 10 ? read_0_9(X) : read_10_99(X))
+        if X > 0 {
+            let connector = X0 < 8 && (X == 1 || X == 11) ? " et " : "-"
+            ret += connector + (X < 10 ? read_0_9(X) : read_10_99(X))
+
         }
+        return ret
     }
     
-    override func read_e3_e6(_ i: Int) -> String {
-        if i == 1_000 { return e3! }
-        return super.read_e3_e6(i)
-    }
+//    override func read_e2_e3(_ i: Int) -> String {
+//        var ret = super.read_e2_e3(i)
+//        if i.E2 > 1 && i.E2x == 0 { ret += "s" }
+//        return ret
+//    }
 
+//    override func read_e6_e9(_ i: Int) -> String {
+//        var ret = super.read_e6_e9(i)
+//        if i.E6 > 1 { ret += "s" }
+//        return ret
+//    }
 }
