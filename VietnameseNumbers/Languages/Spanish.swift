@@ -98,17 +98,17 @@ class Spanish: Language {
         case 9:
             ret = "novecientos"
         default:
-            ret = readPositive(i.E2) + "cientos"
+            ret = read(i.E2) + "cientos"
         }
 
         if i.E2x > 0 {
-            ret += " " + readPositive(i.E2x)
+            ret += " " + read(i.E2x)
         }
         return ret
     }
     
     override func read_e3_e6(_ i: Int) -> String {
-        if i == 1_000 { return "mil" }
+        if i == 1_000 { return e3! }
         return super.read_e3_e6(i)
     }
 

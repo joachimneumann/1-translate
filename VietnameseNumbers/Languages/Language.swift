@@ -8,7 +8,7 @@
 import Foundation
 
 
-class Language: BasisLanguage {
+class Language: LanguageString {
     var e2: String? = nil
     var e3: String? = nil
     var e4: String? = nil
@@ -53,9 +53,9 @@ class Language: BasisLanguage {
 
     func read_100_999(_ i: Int) -> String {
         if let e2 = e2 {
-            var ret = readPositive(i.E2) + eSpace_ + e2
+            var ret = read(i.E2) + eSpace_ + e2
             if i.E2x > 0 {
-                ret += eSpace_ + readPositive(i.E2x)
+                ret += eSpace_ + read(i.E2x)
             }
             return ret
         } else {
@@ -65,9 +65,9 @@ class Language: BasisLanguage {
     
     func read_e3_e6(_ i: Int) -> String {
         if let e3 = e3 {
-            var ret = readPositive(i.E3) + eSpace_ + e3
+            var ret = read(i.E3) + eSpace_ + e3
             if i.E3x > 0 {
-                ret += eSpace_ + readPositive(i.E3x)
+                ret += eSpace_ + read(i.E3x)
             }
             return ret
         } else {
@@ -77,43 +77,46 @@ class Language: BasisLanguage {
 
     
     func read_e6_e9(_ i: Int) -> String {
-        if e6 != nil {
+        if let e6 = e6 {
             var ret = ""
             if i.E6 == 1 && e6_single != nil {
                 ret += e6_single!
             } else {
-                ret += readPositive(i.E6)
-                ret += eSpace_ + e69Space_ + e6!
+                ret += read(i.E6)
+                ret += eSpace_ + e69Space_ + e6
             }
             if i.E6x > 0 {
-                ret += eSpace_ + e69Space_ + readPositive(i.E6x)
+                ret += eSpace_ + e69Space_ + read(i.E6x)
             }
             return ret
         } else {
-            fatalError("not implmented")
+            return read(i.E6) + read(i.E6x)
         }
     }
 
     func read_e9_e12(_ i: Int) -> String {
-        if e9 != nil {
+        if let e9 = e9 {
             var ret = ""
             if i.E9 == 1 && e9_single != nil {
                 ret += e9_single!
             } else {
-                ret += readPositive(i.E9)
-                ret += eSpace_ + e69Space_ + e9!
+                ret += read(i.E9)
+                ret += eSpace_ + e69Space_ + e9
             }
             if i.E9x > 0 {
-                ret += eSpace_ + e69Space_ + readPositive(i.E9x)
+                ret += eSpace_ + e69Space_ + read(i.E9x)
             }
             return ret
         } else {
-            fatalError("not implmented")
+            return read(i.E9) + read(i.E9x)
         }
     }
 
 
-    override func readPositive(_ i: Int) -> String {
+    override func read(_ i: Int) -> String {
+        if i < 0 {
+            return negativeString + afterNegative + read(-i)
+        }
         guard i >= 0 && i < 999_999_999_999_999 else { fatalError("too large") }
         
         if i <= 99   { return read_0_99(i)   }
@@ -126,17 +129,17 @@ class Language: BasisLanguage {
                     ret += read_0_9(i.E5)
                     ret += e5!
                     if i.E5x > 0 {
-                        ret += readPositive(i.E5x)
+                        ret += read(i.E5x)
                     }
                     return ret
                 }
             }
             if e4 != nil {
                 if i >= 10_000 {
-                    ret += readPositive(i.E4)
+                    ret += read(i.E4)
                     ret += e4!
                     if i.E4x > 0 {
-                        ret += readPositive(i.E4x)
+                        ret += read(i.E4x)
                     }
                     return ret
                 }
@@ -158,11 +161,11 @@ class Language: BasisLanguage {
             if i.E12 == 1 && e12_single != nil {
                 ret += e12_single!
             } else {
-                ret += readPositive(i.E12)
+                ret += read(i.E12)
                 ret += eSpace_ + e69Space_ + e12!
             }
             if i.E12x > 0 {
-                ret += eSpace_ + e69Space_ + readPositive(i.E12x)
+                ret += eSpace_ + e69Space_ + read(i.E12x)
             }
             return ret
         }

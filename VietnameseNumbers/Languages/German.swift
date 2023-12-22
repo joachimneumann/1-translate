@@ -76,8 +76,8 @@ class German: Language {
         return (i.E1x > 0 ? read_0_9(i.E1x) + tensConnector_ : "") + read_10s(i.E1)
     }
     
-    override func readPositive(_ i: Int) -> String {
-        var ret = super.readPositive(i)
+    override func read(_ i: Int) -> String {
+        var ret = super.read(i)
         ret = ret.replacingOccurrences(of: "einsund", with: "einund")
         ret = ret.replacingOccurrences(of: "einshundert", with: "einhundert")
         ret = ret.replacingOccurrences(of: "einstausend", with: "eintausend")

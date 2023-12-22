@@ -18,7 +18,7 @@ class ThaiTraditional: Language {
             decimalSeparator: ".")
     }
         
-    override func readPositive(_ i: Int) -> String {
+    override func read(_ i: Int) -> String {
         var ret = i.string
         ret = ret.replacingOccurrences(of: "0", with: "๐")
         ret = ret.replacingOccurrences(of: "1", with: "๑")

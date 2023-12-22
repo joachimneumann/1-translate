@@ -19,7 +19,7 @@ class Digits: Language {
         afterNegative = ""
     }
     
-    override func readPositive(_ i: Int) -> String {
+    override func read(_ i: Int) -> String {
         i.string
     }
 }

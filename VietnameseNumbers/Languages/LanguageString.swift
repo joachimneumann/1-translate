@@ -7,7 +7,7 @@
 
 import Foundation
 
-class BasisLanguage {
+class LanguageString {
     var name: String
     var negativeString: String
     var dotString: String
@@ -32,17 +32,10 @@ class BasisLanguage {
         self.decimalSeparator = decimalSeparator
     }
     
-    func readPositive(_ i: Int) -> String {
+    func read(_ i: Int) -> String {
         fatalError("not implemented")
     }
     
-    func read(_ i: Int) -> String {
-        if i < 0 {
-            return negativeString + afterNegative + readPositive(-i)
-        } else {
-            return readPositive(i)
-        }
-    }
     func read(_ s: String) -> String {
         // lets remove the groupSeparator
         let strippedString = s.replacingOccurrences(of: groupSeparator, with: "")
