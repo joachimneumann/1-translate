@@ -135,6 +135,22 @@ class Language: LanguageString {
         }
         return ret
     }
+    
+    func read_e12_e15(_ i: Int) -> String {
+        var ret = read(i.E12)
+        if i.E12 == 1 && e12_one != nil {
+            ret = e12_one!
+        } else {
+            if let e12 = e12 {
+                ret = read(i.E12)
+                ret += eSpace_ + e69Space_ + e12
+            }
+        }
+        if i.E12x > 0 {
+            ret += afterGroup + eSpace_ + e69Space_ + read(i.E12x)
+        }
+        return ret
+    }
 
     override func read(_ i: Int) -> String {
         if i < 0 {
@@ -179,20 +195,7 @@ class Language: LanguageString {
         if i < 1_000_000_000_000 {
             return read_e9_e12(i)
         }
-        if e12 != nil {
-            if i.E12 == 1 && e12_one != nil {
-                ret += e12_one!
-            } else {
-                ret += read(i.E12)
-                ret += eSpace_ + e69Space_ + e12!
-            }
-            if i.E12x > 0 {
-                ret += eSpace_ + e69Space_ + read(i.E12x)
-            }
-            return ret
-        }
-        
-        return ret
+        return read_e12_e15(i)
     }
     
 }

@@ -21,35 +21,36 @@ class Polish: Language {
         e2_one = "sto"
         afterGroup = " "
         tensConnector = " "
+        beforeAndAfterDotString = " "
     }
     
     override func read_0_9(_ i: Int) -> String {
         switch i {
-        case 0:     return "zero"
-        case 1:     return "jeden"
-        case 2:     return "dwa"
-        case 3:     return "trzy"
-        case 4:     return "cztery"
-        case 5:     return "pięć"
-        case 6:     return "sześć"
-        case 7:     return "siedem"
-        case 8:     return "osiem"
-        case 9:     return "dziewięć"
+        case 0:         return "zero"
+        case 1:         return "jeden"
+        case 2:         return "dwa"
+        case 3:         return "trzy"
+        case 4:         return "cztery"
+        case 5:         return "pięć"
+        case 6:         return "sześć"
+        case 7:         return "siedem"
+        case 8:         return "osiem"
+        case 9:         return "dziewięć"
         default: return "read_0_9: outside range"
         }
     }
     
     override func read_10s(_ i: Int) -> String {
         switch i {
-        case 1:     return "dziesięć"
-        case 2:     return "dwadzieścia"
-        case 3:     return "trzydzieści"
-        case 4:     return "czterdzieści"
-        case 5:     return "pięćdziesiąt"
-        case 6:     return "sześćdziesiąt"
-        case 7:     return "siedemdziesiąt"
-        case 8:     return "osiemdziesiąt"
-        case 9:     return "dziewięćdziesiąt"
+        case 1:         return "dziesięć"
+        case 2:         return "dwadzieścia"
+        case 3:         return "trzydzieści"
+        case 4:         return "czterdzieści"
+        case 5:         return "pięćdziesiąt"
+        case 6:         return "sześćdziesiąt"
+        case 7:         return "siedemdziesiąt"
+        case 8:         return "osiemdziesiąt"
+        case 9:         return "dziewięćdziesiąt"
         default: return "read_10s outside range"
         }
     }
@@ -88,27 +89,48 @@ class Polish: Language {
         return ret
     }
     
-    override func read_e3_e6(_ i: Int) -> String {
-        var ret = ""
-        var use_tysiące = false
-        switch i.E3 % 10 {
+    private func use(_ i: Int, _ s1: String, _ s2: String) -> String {
+        var use1 = false
+        switch i % 10 {
         case 2, 3, 4:
-            use_tysiące = true
+            use1 = true
         default:
-            use_tysiące = false
+            use1 = false
         }
-        switch i.E3 % 100 {
+        switch i % 100 {
         case 11, 12, 13, 14:
-            use_tysiące = false
+            use1 = false
         default:
             break
         }
-        ret = read(i.E3) + " " + (use_tysiące ? "tysiące" : "tysięcy")
+        return use1 ? s1 : s2
+    }
+    
+    override func read_e3_e6(_ i: Int) -> String {
+        var ret = read(i.E3) + " " + use(i.E3, "tysiące", "tysięcy")
         if i.E3 == 1 { ret = "tysiąc" }
-
-        if i.E3x > 0 {
-            ret += " " + read_e2_e3(i.E3x)
-        }
+        if i.E3x > 0 { ret += " " + read(i.E3x) }
+        return ret
+    }
+    
+    override func read_e6_e9(_ i: Int) -> String {
+        var ret = read(i.E6) + " " + use(i.E6, "miliony", "milionów")
+        if i.E6 == 1 { ret = "jeden milion" }
+        if i.E6x > 0 { ret += " " + read(i.E6x) }
+        return ret
+    }
+    
+    override func read_e9_e12(_ i: Int) -> String {
+        var ret = read(i.E9) + " " + use(i.E9, "miliardy", "miliardów")
+        if i.E9 == 1 { ret = "jeden miliard" }
+        if i.E9x > 0 { ret += " " + read(i.E9x) }
+        return ret
+    }
+    
+    override func read_e12_e15(_ i: Int) -> String {
+        var ret = read(i.E12) + " " + use(i.E12, "biliony", "bilionów")
+        if i.E12 == 1 { ret = "jeden bilion" }
+        if i.E12x > 0 { ret += " " + read(i.E12x) }
         return ret
     }
 }
