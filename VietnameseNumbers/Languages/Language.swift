@@ -23,6 +23,7 @@ class Language: LanguageString {
     var e9_one: String? = nil
     var e12_one: String? = nil
     var e2_cleanPlural: String? = nil
+    var afterHundred: String? = nil
     
 
     var eSpace: String? = nil
@@ -75,6 +76,9 @@ class Language: LanguageString {
             }
         }
         if i.E2x > 0 {
+            if let afterHundred = afterHundred {
+                ret += eSpace_ + afterHundred
+            }
             ret += eSpace_ + read(i.E2x)
         }
         return ret
