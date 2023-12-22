@@ -22,7 +22,6 @@ class Language: LanguageString {
     var e9_one: String? = nil
     var e12_one: String? = nil
     var e2_cleanPlural: String? = nil
-    var e6_cleanPlural: String? = nil
     
 
     var eSpace: String? = nil
@@ -99,11 +98,7 @@ class Language: LanguageString {
         } else {
             if let e6 = e6 {
                 ret = read(i.E6)
-                ret += eSpace_ + e69Space_
-                if i.E6 > 1 && i.E6x == 0 && e6_cleanPlural != nil {
-                } else {
-                    ret += e6
-                }
+                ret += eSpace_ + e69Space_ + e6
             }
         }
         if i.E6x > 0 {
