@@ -23,14 +23,17 @@ class Language: LanguageString {
     var e9_one: String? = nil
     var e12_one: String? = nil
     var e2_cleanPlural: String? = nil
+    var beforeHundred: String? = nil
     var afterHundred: String? = nil
-    
+
 
     var eSpace: String? = nil
-    var eSpace_: String { eSpace == nil ? "" : eSpace! }
+    var e3Space: String? = nil
     var e69Space: String? = nil
-    var e69Space_: String { e69Space == nil ? "" : e69Space! }
-    
+    private var eSpace_: String { eSpace == nil ? "" : eSpace! }
+    private var e3Space_: String { e3Space == nil ? "" : e3Space! }
+    private var e69Space_: String { e69Space == nil ? "" : e69Space! }
+
     var tensConnector: String? = nil
     var tensConnector_: String {
         if tensConnector != nil {
@@ -71,13 +74,16 @@ class Language: LanguageString {
                 if i.E2 > 1 && i.E2x == 0 && e2_cleanPlural != nil {
                     ret += e2_cleanPlural!
                 } else {
+                    if let beforeHundred = beforeHundred {
+                        ret += beforeHundred
+                    }
                     ret += e2
                 }
             }
         }
         if i.E2x > 0 {
             if let afterHundred = afterHundred {
-                ret += eSpace_ + afterHundred
+                ret += afterHundred
             }
             ret += eSpace_ + read(i.E2x)
         }
@@ -91,11 +97,11 @@ class Language: LanguageString {
         } else {
             if let e3 = e3 {
                 ret = read(i.E3)
-                ret += eSpace_ + e3
+                ret += eSpace_ + e3Space_ + e3
             }
         }
         if i.E3x > 0 {
-            ret += eSpace_ + read(i.E3x)
+            ret += eSpace_ + e3Space_ + read(i.E3x)
         }
         return ret
     }
