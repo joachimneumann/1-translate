@@ -8,6 +8,10 @@
 import Foundation
 
 class Vietnamese: Language {
+    var compact: Bool = false
+    var secondLast: VietnameseSecondLast = .lẻ
+    var thousand: VietnameseThousand = .nghìn
+
     init() {
         super.init(
             name: "Tiếng Việt",
@@ -17,7 +21,7 @@ class Vietnamese: Language {
             groupSeparator: "",
             decimalSeparator: ".")
         e2 = "trăm"
-        e3 = "nghìn"
+        e3 = thousand.rawValue
         e6 = "triệu"
         e9 = "tỷ"
         afterNegative = " "
@@ -47,7 +51,8 @@ class Vietnamese: Language {
         if i.E1 == 1 {
             ret = "mười"
         } else {
-            ret = read_0_9(i.E1) + " " + "mươi"
+            ret = read_0_9(i.E1)
+            if !compact || i.E1x == 0 { ret += " mươi" }
         }
         if i.E1x > 0 {
             ret += " " + read_0_9(i.E1x)
@@ -57,38 +62,27 @@ class Vietnamese: Language {
             ret = String(ret.dropLast(3))
             ret += "lăm"
         }
-        if ret.hasSuffix("một") {
-            if i.E1 > 1 {
-                ret = String(ret.dropLast(3))
-                ret += "mốt"
-            }
+        if i.E1 > 1 && ret.hasSuffix("một") {
+            ret = String(ret.dropLast(3))
+            ret += "mốt"
         }
         return ret
     }
     
-    override func read_e2_e3(_ i: Int) -> String {
-        var ret = super.read_e2_e3(i)
-        if i.lastDigit > 0 && i.secondLastDigit == 0 {
-            var array = ret.split(separator: " ")
-            array.insert("lẻ", at:array.count-1)
-            ret = array.joined(separator: " ")
-        }
-        return ret
-    }
 
     func read_trailing_tens(_ i: Int) -> String {
         var ret = ""
         if i > 0 {
             ret = read(i)
             if i.lastDigit > 0 && i.secondLastDigit == 0 {
-                ret = "lẻ" + " " + ret
+                ret = secondLast.rawValue + " " + ret
             }
             ret = " " + ret
         }
         return ret
     }
     
-    func read_trailing_3digits(_ i: Int) -> String {
+    func read_trailing_3digits(_ i: Int, _ name: String = "") -> String {
         var ret = ""
         if i > 0 {
             ret = " "
@@ -98,19 +92,22 @@ class Vietnamese: Language {
                 ret += read_0_9(i.E2) + " " + "trăm"
             }
             ret += read_trailing_tens(i.E2x)
+            ret += name
         }
         return ret
     }
     
+    override func read_e2_e3(_ i: Int) -> String {
+        return read_0_9(i.E2) + " trăm" + read_trailing_tens(i.E2x)
+    }
+
     override func read_e3_e6(_ i: Int) -> String {
         return read(i.E3) + " " + e3! + read_trailing_3digits(i.E3x)
     }
 
     override func read_e6_e9(_ i: Int) -> String {
         var ret = read(i.E6s) + " " + e6!
-        if i.E3s > 0 {
-            ret += read_trailing_3digits(i.E3s) + " " + e3!
-        }
+        ret += read_trailing_3digits(i.E3s, " " + thousand.rawValue)
         ret += read_trailing_3digits(i.E0s)
         return ret
     }
