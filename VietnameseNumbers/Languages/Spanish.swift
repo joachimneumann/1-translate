@@ -18,6 +18,7 @@ class Spanish: Language {
             decimalSeparator: ".")
 
         e3 = "mil"
+        e3_single = "mil"
         e6_single = "un millón"
         e6 = "millones"
         e9_single = "mil millones"
@@ -61,7 +62,7 @@ class Spanish: Language {
         }
     }
 
-    override func read_0_99(_ i: Int) -> String {
+    override func read_10_99(_ i: Int) -> String {
         if i == 11 { return "once" }
         if i == 12 { return "doce" }
         if i == 13 { return "trece" }
@@ -81,16 +82,14 @@ class Spanish: Language {
         if i == 27 { return "veintisiete" }
         if i == 28 { return "veintiocho" }
         if i == 29 { return "veintinueve" }
-        return super.read_0_99(i)
+        return super.read_10_99(i)
     }
     
-    override func read_100_999(_ i: Int) -> String {
-        if i == 100 { return "cien" }
-        
+    override func read_e2_e3(_ i: Int) -> String {
         var ret = ""
         switch i.E2 {
         case 1:
-            ret = "ciento"
+            ret = i.E2x == 0 ? "cien" : "ciento"
         case 5:
             ret = "quinientos"
         case 7:
@@ -100,16 +99,9 @@ class Spanish: Language {
         default:
             ret = read(i.E2) + "cientos"
         }
-
         if i.E2x > 0 {
             ret += " " + read(i.E2x)
         }
         return ret
     }
-    
-    override func read_e3_e6(_ i: Int) -> String {
-        if i == 1_000 { return e3! }
-        return super.read_e3_e6(i)
-    }
-
 }

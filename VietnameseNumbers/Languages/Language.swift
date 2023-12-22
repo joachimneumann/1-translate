@@ -16,6 +16,8 @@ class Language: LanguageString {
     var e6: String? = nil
     var e9: String? = nil
     var e12: String? = nil
+    var e2_single: String? = nil
+    var e3_single: String? = nil
     var e6_single: String? = nil
     var e9_single: String? = nil
     var e12_single: String? = nil
@@ -42,76 +44,77 @@ class Language: LanguageString {
         fatalError("not implmented")
     }
     
-    func read_0_99(_ i: Int) -> String {
-        if i < 10    { return read_0_9(i)     }
+    func read_10_99(_ i: Int) -> String {
         var ret = read_10s(i.E1)
         if i.E1x > 0 {
             ret += tensConnector_ + read_0_9(i.E1x)
         }
         return ret
     }
-
-    func read_100_999(_ i: Int) -> String {
-        if let e2 = e2 {
-            var ret = read(i.E2) + eSpace_ + e2
-            if i.E2x > 0 {
-                ret += eSpace_ + read(i.E2x)
-            }
-            return ret
+    
+    func read_e2_e3(_ i: Int) -> String {
+        var ret = read(i.E2)
+        if i.E2 == 1 && e2_single != nil {
+            ret = e2_single!
         } else {
-            fatalError("not implmented")
+            if let e2 = e2 {
+                ret = read(i.E2)
+                ret += eSpace_ + e2
+            }
         }
+        if i.E2x > 0 {
+            ret += eSpace_ + read(i.E2x)
+        }
+        return ret
     }
     
     func read_e3_e6(_ i: Int) -> String {
-        if let e3 = e3 {
-            var ret = read(i.E3) + eSpace_ + e3
-            if i.E3x > 0 {
-                ret += eSpace_ + read(i.E3x)
-            }
-            return ret
+        var ret = read(i.E3)
+        if i.E3 == 1 && e3_single != nil {
+            ret = e3_single!
         } else {
-            fatalError("not implmented")
+            if let e3 = e3 {
+                ret = read(i.E3)
+                ret += eSpace_ + e3
+            }
         }
+        if i.E3x > 0 {
+            ret += eSpace_ + read(i.E3x)
+        }
+        return ret
     }
 
-    
     func read_e6_e9(_ i: Int) -> String {
-        if let e6 = e6 {
-            var ret = ""
-            if i.E6 == 1 && e6_single != nil {
-                ret += e6_single!
-            } else {
-                ret += read(i.E6)
+        var ret = read(i.E6)
+        if i.E6 == 1 && e6_single != nil {
+            ret = e6_single!
+        } else {
+            if let e6 = e6 {
+                ret = read(i.E6)
                 ret += eSpace_ + e69Space_ + e6
             }
-            if i.E6x > 0 {
-                ret += eSpace_ + e69Space_ + read(i.E6x)
-            }
-            return ret
-        } else {
-            return read(i.E6) + read(i.E6x)
         }
+        if i.E6x > 0 {
+            ret += eSpace_ + e69Space_ + read(i.E6x)
+        }
+        return ret
     }
 
     func read_e9_e12(_ i: Int) -> String {
-        if let e9 = e9 {
-            var ret = ""
-            if i.E9 == 1 && e9_single != nil {
-                ret += e9_single!
-            } else {
-                ret += read(i.E9)
+        var ret = read(i.E9)
+        if i.E9 == 1 && e9_single != nil {
+            ret = e9_single!
+        } else {
+            if let e9 = e9 {
+                ret = read(i.E9)
                 ret += eSpace_ + e69Space_ + e9
             }
-            if i.E9x > 0 {
-                ret += eSpace_ + e69Space_ + read(i.E9x)
-            }
-            return ret
-        } else {
-            return read(i.E9) + read(i.E9x)
         }
+        if i.E9x > 0 {
+            ret += eSpace_ + e69Space_ + read(i.E9x)
+        }
+        return ret
     }
-
 
     override func read(_ i: Int) -> String {
         if i < 0 {
@@ -119,8 +122,9 @@ class Language: LanguageString {
         }
         guard i >= 0 && i < 999_999_999_999_999 else { fatalError("too large") }
         
-        if i <= 99   { return read_0_99(i)   }
-        if i < 1_000 { return read_100_999(i) }
+        if i < 10    { return read_0_9(i) }
+        if i <= 99   { return read_10_99(i)   }
+        if i < 1_000 { return read_e2_e3(i) }
         
         var ret = ""
         if i < 1_000_000 {

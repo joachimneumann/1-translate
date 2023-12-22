@@ -57,7 +57,7 @@ class English: Language {
         }
     }
     
-    override func read_0_99(_ i: Int) -> String {
+    override func read_10_99(_ i: Int) -> String {
         if i == 11 { return "eleven" }
         if i == 12 { return "twelve" }
         if i == 13 { return "thirteen" }
@@ -67,6 +67,6 @@ class English: Language {
         if i == 17 { return "seventeen" }
         if i == 18 { return "eighteen" }
         if i == 19 { return "nineteen" }
-        return super.read_0_99(i)
+        return super.read_10_99(i)
     }
 }

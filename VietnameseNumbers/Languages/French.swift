@@ -17,7 +17,7 @@ class French: Language {
             groupSeparator: "",
             decimalSeparator: ".")
 
-        //e2_single = "cent"
+        e2_single = "cent"
         e2 = "cents"
         e3 = "mille"
         e6_single = "million"
@@ -61,7 +61,7 @@ class French: Language {
         }
     }
 
-    override func read_0_99(_ i: Int) -> String {
+    override func read_10_99(_ i: Int) -> String {
         if i == 11 { return "onze" }
         if i == 12 { return "douze" }
         if i == 13 { return "treize" }
@@ -86,11 +86,10 @@ class French: Language {
         if X == 0 {
             return tens
         } else if X0 < 8 && (X == 1 || X == 11) {
-            return tens + " et " + (X < 10 ? read_0_9(X) : read_0_99(X))
+            return tens + " et " + (X < 10 ? read_0_9(X) : read_10_99(X))
         } else {
-            return tens + "-" + (X < 10 ? read_0_9(X) : read_0_99(X))
+            return tens + "-" + (X < 10 ? read_0_9(X) : read_10_99(X))
         }
-//        return super.read_0_99(i)
     }
     
     override func read_e3_e6(_ i: Int) -> String {

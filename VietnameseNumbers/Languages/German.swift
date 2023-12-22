@@ -61,8 +61,7 @@ class German: Language {
         }
     }
     
-    override func read_0_99(_ i: Int) -> String {
-        if i <= 10 { return super.read_0_99(i) }
+    override func read_10_99(_ i: Int) -> String {
         if i == 11 { return "elf" }
         if i == 12 { return "zwölf" }
         if i == 13 { return "dreizehn" }

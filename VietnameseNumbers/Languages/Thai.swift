@@ -42,8 +42,8 @@ class Thai: Language {
         }
     }
     
-    override func read_0_99(_ i: Int) -> String {
-        let ret = super.read_0_99(i)
+    override func read_10_99(_ i: Int) -> String {
+        let ret = super.read_10_99(i)
         if i > 1 && ret.hasSuffix("หนึ่ง") {
             return ret.replacingOccurrences(of: "หนึ่ง", with: "เอ็ด")
         }
