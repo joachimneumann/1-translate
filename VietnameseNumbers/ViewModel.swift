@@ -78,11 +78,12 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     let catalan         = Catalan()
     let roman           = Roman()
     let french          = French()
+    let danish          = Danish()
+
 
     //-----//
     
     let translatePolish = TranslatePolish()
-    let translateDanish = TranslateDanish()
     let translateTraditionalChinese = TranslateChinese(variant: .traditional)
     let translateSimplifiedChinese = TranslateChinese(variant: .simplified)
     let translateFinancialChinese = TranslateChinese(variant: .financial)
