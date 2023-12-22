@@ -16,6 +16,7 @@ class Language: LanguageString {
     var e6: String? = nil
     var e9: String? = nil
     var e12: String? = nil
+    var e1_one: String? = nil
     var e2_one: String? = nil
     var e3_one: String? = nil
     var e6_one: String? = nil
@@ -48,8 +49,12 @@ class Language: LanguageString {
     
     func read_10_99(_ i: Int) -> String {
         var ret = read_10s(i.E1)
-        if i.E1x > 0 {
-            ret += tensConnector_ + read_0_9(i.E1x)
+        if i.E1 == 1 && e1_one != nil {
+            ret = e1_one!
+        } else {
+            if i.E1x > 0 {
+                ret += tensConnector_ + read_0_9(i.E1x)
+            }
         }
         return ret
     }
