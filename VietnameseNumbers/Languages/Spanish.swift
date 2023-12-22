@@ -43,7 +43,7 @@ class Spanish: Language {
         case 7:     return "siete"
         case 8:     return "ocho"
         case 9:     return "nueve"
-        default: return " translate_0_10: outside range "
+        default: return "read_0_9: outside range"
         }
     }
     
@@ -58,7 +58,7 @@ class Spanish: Language {
         case 7:     return "setenta"
         case 8:     return "ochenta"
         case 9:     return "noventa"
-        default: return " 10s outside range "
+        default: return "read_10s: outside range"
         }
     }
 

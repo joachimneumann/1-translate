@@ -38,7 +38,7 @@ class Thai: Language {
         case 7: return "เจ็ด"
         case 8: return "แปด"
         case 9: return "เก้า"
-        default: return " translate_0_10: outside range "
+        default: return "read_0_9: outside range"
         }
     }
     

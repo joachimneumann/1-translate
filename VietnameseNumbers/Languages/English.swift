@@ -38,7 +38,7 @@ class English: Language {
         case 7:     return "seven"
         case 8:     return "eight"
         case 9:     return "nine"
-        default: return " translate_0_10: outside range "
+        default: return "read_0_9: outside range"
         }
     }
     
@@ -53,7 +53,7 @@ class English: Language {
         case 7:     return "seventy"
         case 8:     return "eighty"
         case 9:     return "ninety"
-        default: return " 10s outside range "
+        default: return "read_10s outside range"
         }
     }
     

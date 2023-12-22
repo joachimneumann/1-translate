@@ -45,7 +45,7 @@ class French: Language {
         case 7:     return "sept"
         case 8:     return "huit"
         case 9:     return "neuf"
-        default: return " translate_0_10: outside range "
+        default: return "read_0_9: outside range"
         }
     }
     
@@ -60,7 +60,7 @@ class French: Language {
         case 7:     return "soixante-dix"
         case 8:     return "quatre-vingt"
         case 9:     return "quatre-vingt-dix"
-        default: return " 10s outside range "
+        default: return "read_10s: outside range "
         }
     }
 

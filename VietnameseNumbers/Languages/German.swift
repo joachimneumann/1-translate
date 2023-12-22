@@ -42,7 +42,7 @@ class German: Language {
         case 7:     return "sieben"
         case 8:     return "acht"
         case 9:     return "neun"
-        default: return " translate_0_10: outside range "
+        default: return "read_0_9: outside range"
         }
     }
     
@@ -57,7 +57,7 @@ class German: Language {
         case 7:     return "siebzig"
         case 8:     return "achtzig"
         case 9:     return "neunzig"
-        default: return " 10s outside range "
+        default: return "read_10s: outside range"
         }
     }
     
