@@ -23,8 +23,9 @@ class Language: LanguageString {
     var e9_one: String? = nil
     var e12_one: String? = nil
     var e2_cleanPlural: String? = nil
-    var beforeHundred: String? = nil
-    var afterHundred: String? = nil
+    var beforeHundred = ""
+    var afterHundred = ""
+    var afterGroup = ""
     var allowNegativeNumbers = true
 
 
@@ -75,17 +76,13 @@ class Language: LanguageString {
                 if i.E2 > 1 && i.E2x == 0 && e2_cleanPlural != nil {
                     ret += e2_cleanPlural!
                 } else {
-                    if let beforeHundred = beforeHundred {
-                        ret += beforeHundred
-                    }
+                    ret += beforeHundred
                     ret += e2
                 }
             }
         }
         if i.E2x > 0 {
-            if let afterHundred = afterHundred {
-                ret += afterHundred
-            }
+            ret += afterHundred + afterGroup
             ret += eSpace_ + read(i.E2x)
         }
         return ret
@@ -102,7 +99,7 @@ class Language: LanguageString {
             }
         }
         if i.E3x > 0 {
-            ret += eSpace_ + e3Space_ + read(i.E3x)
+            ret += afterGroup + eSpace_ + e3Space_ + read(i.E3x)
         }
         return ret
     }
@@ -118,7 +115,7 @@ class Language: LanguageString {
             }
         }
         if i.E6x > 0 {
-            ret += eSpace_ + e69Space_ + read(i.E6x)
+            ret += afterGroup + eSpace_ + e69Space_ + read(i.E6x)
         }
         return ret
     }
@@ -134,7 +131,7 @@ class Language: LanguageString {
             }
         }
         if i.E9x > 0 {
-            ret += eSpace_ + e69Space_ + read(i.E9x)
+            ret += afterGroup + eSpace_ + e69Space_ + read(i.E9x)
         }
         return ret
     }

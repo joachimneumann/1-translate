@@ -28,7 +28,6 @@ class German: Language {
         e9_one = "eine Milliarde"
         afterNegative = " "
         beforeAndAfterDotString = " "
-        tensConnector = "und"
         eSpace = ""
         e69Space = " "
     }
@@ -75,7 +74,7 @@ class German: Language {
         if i == 18 { return "achtzehn" }
         if i == 19 { return "neunzehn" }
         // reversed order
-        return (i.E1x > 0 ? read_0_9(i.E1x) + tensConnector_ : "") + read_10s(i.E1)
+        return (i.E1x > 0 ? read_0_9(i.E1x) + "und" : "") + read_10s(i.E1)
     }
     
     override func read(_ i: Int) -> String {
