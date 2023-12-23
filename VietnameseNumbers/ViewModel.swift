@@ -83,7 +83,6 @@ class ViewModel: ObservableObject, ShowAs, Separators {
 
     //-----//
     
-    let translatePolish = TranslatePolish()
     let translateTraditionalChinese = TranslateChinese(variant: .traditional)
     let translateSimplifiedChinese = TranslateChinese(variant: .simplified)
     let translateFinancialChinese = TranslateChinese(variant: .financial)

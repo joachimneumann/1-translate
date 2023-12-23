@@ -24,4 +24,5 @@ extension Int {
     var E9x: Int { self - self / 1_000_000_000 * 1_000_000_000 }
     var E12: Int { self / 1_000_000_000_000 }
     var E12x: Int { self - self / 1_000_000_000_000 * 1_000_000_000_000 }
+    var secondLastDigit: Int { (self /  10) % 10 }
 }

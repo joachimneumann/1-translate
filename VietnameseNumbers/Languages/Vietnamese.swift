@@ -131,6 +131,5 @@ fileprivate extension Int {
     var E3s: Int { (self / 1_000) % 1_000 }
     var E6s: Int { (self / 1_000_000) % 1_000 }
     var lastDigit: Int { self % 10 }
-    var secondLastDigit: Int { (self /  10) % 10 }
     var thirdLastDigit:  Int { (self / 100) % 10 }
 }

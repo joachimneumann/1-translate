@@ -46,15 +46,13 @@
 		AA672B0A295189950044DC08 /* ScrollViewConditionalAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA672B09295189950044DC08 /* ScrollViewConditionalAnimation.swift */; };
 		AA689125295E681400129593 /* Brain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA689124295E681400129593 /* Brain.swift */; };
 		AA715CA82B2BE367009335B7 /* TestPolish.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA715CA72B2BE367009335B7 /* TestPolish.swift */; };
-		AA715CAA2B2BE3C4009335B7 /* TranslatePolish.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA715CA92B2BE3C4009335B7 /* TranslatePolish.swift */; };
-		AA715CAC2B2BE4C9009335B7 /* TranslatePolish.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA715CA92B2BE3C4009335B7 /* TranslatePolish.swift */; };
 		AA715CAE2B2C22DB009335B7 /* TestDanish.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA715CAD2B2C22DB009335B7 /* TestDanish.swift */; };
 		AA715CB32B2C39EE009335B7 /* TestCatalan.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA715CB22B2C39EE009335B7 /* TestCatalan.swift */; };
 		AA715CB52B2C3A60009335B7 /* TestVietnamese.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA715CB42B2C3A60009335B7 /* TestVietnamese.swift */; };
 		AA715CB72B2C3ABE009335B7 /* TestEnglish.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA715CB62B2C3ABE009335B7 /* TestEnglish.swift */; };
 		AA739C982B2F4ECC00A32478 /* TestRoman.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA739C962B2F4ECC00A32478 /* TestRoman.swift */; };
 		AA739C9E2B30014800A32478 /* TestFrensh.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA739C9C2B30014800A32478 /* TestFrensh.swift */; };
-		AA739CA42B302D7100A32478 /* Test_Chinese.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA739CA22B302D7100A32478 /* Test_Chinese.swift */; };
+		AA739CA42B302D7100A32478 /* TestChinese.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA739CA22B302D7100A32478 /* TestChinese.swift */; };
 		AA739CA62B3030C200A32478 /* TranslateChinese.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA739CA52B3030C200A32478 /* TranslateChinese.swift */; };
 		AA739CA72B3030C200A32478 /* TranslateChinese.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA739CA52B3030C200A32478 /* TranslateChinese.swift */; };
 		AA7988B42B32B07700608906 /* Thai.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7988B32B32B07700608906 /* Thai.swift */; };
@@ -72,6 +70,8 @@
 		AA8B614E2B2AFC9A00D2152A /* TestSpanish.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8B614D2B2AFC9A00D2152A /* TestSpanish.swift */; };
 		AA92B4C329250827005E43F0 /* ColoredStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA92B4C229250827005E43F0 /* ColoredStepper.swift */; };
 		AA9561362B2AAFEB00648915 /* TestGerman.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9561352B2AAFEB00648915 /* TestGerman.swift */; };
+		AAA180AA2B365A9300B149E5 /* Chinese.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA180A92B365A9300B149E5 /* Chinese.swift */; };
+		AAA180AB2B365A9300B149E5 /* Chinese.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA180A92B365A9300B149E5 /* Chinese.swift */; };
 		AAAE6D6D2B22C97900079392 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = AAAE6D6C2B22C97900079392 /* README.md */; };
 		AAAE6D6E2B22C97900079392 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = AAAE6D6C2B22C97900079392 /* README.md */; };
 		AAB10B9A292A2222004707E9 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB10B94292A2222004707E9 /* Label.swift */; };
@@ -157,14 +157,13 @@
 		AA672B09295189950044DC08 /* ScrollViewConditionalAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewConditionalAnimation.swift; sourceTree = "<group>"; };
 		AA689124295E681400129593 /* Brain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brain.swift; sourceTree = "<group>"; };
 		AA715CA72B2BE367009335B7 /* TestPolish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestPolish.swift; path = automatic/TestPolish.swift; sourceTree = SOURCE_ROOT; };
-		AA715CA92B2BE3C4009335B7 /* TranslatePolish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatePolish.swift; sourceTree = "<group>"; };
 		AA715CAD2B2C22DB009335B7 /* TestDanish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestDanish.swift; path = automatic/TestDanish.swift; sourceTree = SOURCE_ROOT; };
 		AA715CB22B2C39EE009335B7 /* TestCatalan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCatalan.swift; sourceTree = "<group>"; };
 		AA715CB42B2C3A60009335B7 /* TestVietnamese.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVietnamese.swift; sourceTree = "<group>"; };
 		AA715CB62B2C3ABE009335B7 /* TestEnglish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestEnglish.swift; sourceTree = "<group>"; };
 		AA739C962B2F4ECC00A32478 /* TestRoman.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRoman.swift; sourceTree = "<group>"; };
 		AA739C9C2B30014800A32478 /* TestFrensh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFrensh.swift; sourceTree = "<group>"; };
-		AA739CA22B302D7100A32478 /* Test_Chinese.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_Chinese.swift; sourceTree = "<group>"; };
+		AA739CA22B302D7100A32478 /* TestChinese.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestChinese.swift; sourceTree = "<group>"; };
 		AA739CA52B3030C200A32478 /* TranslateChinese.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateChinese.swift; sourceTree = "<group>"; };
 		AA7988B32B32B07700608906 /* Thai.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thai.swift; sourceTree = "<group>"; };
 		AA831B9B2B3462D9003307A2 /* French.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = French.swift; sourceTree = "<group>"; };
@@ -176,6 +175,7 @@
 		AA92B4C229250827005E43F0 /* ColoredStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoredStepper.swift; sourceTree = "<group>"; };
 		AA92B4C829273A58005E43F0 /* TranslateNumbers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateNumbers.swift; sourceTree = "<group>"; };
 		AA9561352B2AAFEB00648915 /* TestGerman.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestGerman.swift; path = automatic/TestGerman.swift; sourceTree = SOURCE_ROOT; };
+		AAA180A92B365A9300B149E5 /* Chinese.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chinese.swift; sourceTree = "<group>"; };
 		AAAE6D6C2B22C97900079392 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		AAB10B94292A2222004707E9 /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		AAB10B96292A2222004707E9 /* NonScientificKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonScientificKeyboard.swift; sourceTree = "<group>"; };
@@ -339,6 +339,7 @@
 				AAB990502B35703500BD5A24 /* Roman.swift */,
 				AAB990532B35749700BD5A24 /* Danish.swift */,
 				AAB990562B35793100BD5A24 /* Polish.swift */,
+				AAA180A92B365A9300B149E5 /* Chinese.swift */,
 			);
 			path = Languages;
 			sourceTree = "<group>";
@@ -350,7 +351,6 @@
 				AAFC9C772B24817900F866D8 /* TwentyBasedTranslator.swift */,
 				AA0523402B25447F00DDAAD4 /* ThousandBasedTranslator.swift */,
 				AAFC9C742B247D0700F866D8 /* GeneralTranslator.swift */,
-				AA715CA92B2BE3C4009335B7 /* TranslatePolish.swift */,
 				AA739CA52B3030C200A32478 /* TranslateChinese.swift */,
 			);
 			path = Translators;
@@ -370,7 +370,7 @@
 				AA715CAD2B2C22DB009335B7 /* TestDanish.swift */,
 				AA739C962B2F4ECC00A32478 /* TestRoman.swift */,
 				AA715CA72B2BE367009335B7 /* TestPolish.swift */,
-				AA739CA22B302D7100A32478 /* Test_Chinese.swift */,
+				AA739CA22B302D7100A32478 /* TestChinese.swift */,
 				AA3565AC2B3247C4009B58D2 /* Test_Extensions.swift */,
 			);
 			path = VietnameseNumbersTests;
@@ -491,6 +491,7 @@
 				AA831BA02B35238C003307A2 /* Vietnamese.swift in Sources */,
 				AA326E492B32F0430092E8E6 /* English.swift in Sources */,
 				AA8A91122B1D7B7100CE7185 /* TranslateNumbers.swift in Sources */,
+				AAA180AA2B365A9300B149E5 /* Chinese.swift in Sources */,
 				AA3565AA2B32420A009B58D2 /* LanguageExtensions.swift in Sources */,
 				AA32853B297248B800D86CB4 /* ViewModel.swift in Sources */,
 				AAFC9C752B247D0700F866D8 /* GeneralTranslator.swift in Sources */,
@@ -511,7 +512,6 @@
 				AABEFC132972A8780023A3C9 /* KeyColor.swift in Sources */,
 				AAB10B9A292A2222004707E9 /* Label.swift in Sources */,
 				AAE426F729597AE3005FE365 /* Screen.swift in Sources */,
-				AA715CAC2B2BE4C9009335B7 /* TranslatePolish.swift in Sources */,
 				AAB990572B35793100BD5A24 /* Polish.swift in Sources */,
 				AA2FAC23272F2349006DE4C8 /* OperatorStack.swift in Sources */,
 				AA7988B42B32B07700608906 /* Thai.swift in Sources */,
@@ -551,7 +551,6 @@
 				AA715CB72B2C3ABE009335B7 /* TestEnglish.swift in Sources */,
 				AAB990522B35703500BD5A24 /* Roman.swift in Sources */,
 				AA326E4D2B332DCC0092E8E6 /* German.swift in Sources */,
-				AA715CAA2B2BE3C4009335B7 /* TranslatePolish.swift in Sources */,
 				AA0523422B25447F00DDAAD4 /* ThousandBasedTranslator.swift in Sources */,
 				AAFC9C732B247CDF00F866D8 /* BasicTranslator.swift in Sources */,
 				AAFC9C762B247D0700F866D8 /* GeneralTranslator.swift in Sources */,
@@ -566,7 +565,8 @@
 				AAFC9C792B24817900F866D8 /* TwentyBasedTranslator.swift in Sources */,
 				AA3565B72B326205009B58D2 /* LanguageString.swift in Sources */,
 				AA9561362B2AAFEB00648915 /* TestGerman.swift in Sources */,
-				AA739CA42B302D7100A32478 /* Test_Chinese.swift in Sources */,
+				AA739CA42B302D7100A32478 /* TestChinese.swift in Sources */,
+				AAA180AB2B365A9300B149E5 /* Chinese.swift in Sources */,
 				AA3565AE2B3247C4009B58D2 /* Test_Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
