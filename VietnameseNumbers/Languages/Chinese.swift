@@ -8,7 +8,7 @@
 import Foundation
 
 class Chinese: Language {
-
+    
     enum Variant {
         case traditional
         case simplified
@@ -50,6 +50,12 @@ class Chinese: Language {
             case .traditional: "萬"
             case .simplified:  "万"
             case .financial:   "萬"
+            }
+        }
+        var e8: String {
+            switch self {
+            case .traditional, .financial: "億"
+            case .simplified:  "亿"
             }
         }
         func read_0_9(_ i: Int) -> String {
@@ -108,10 +114,10 @@ class Chinese: Language {
             }
         }
     }
-
+    
     let variant: Variant
     let filler = "零"
-
+    
     init(variant: Variant) {
         self.variant = variant
         
@@ -139,75 +145,83 @@ class Chinese: Language {
         }
     }
     
+    func read_trailing_tens(_ i: Int) -> String {
+        var ret = ""
+        if i.E1 > 0 {
+            ret += read_0_9(i.E1)
+            ret += variant.e1
+        }
+        if i.E1x > 0 {
+            ret += read_0_9(i.E1x)
+        }
+        return ret
+    }
+    
+    override func read_10_99(_ i: Int) -> String {
+        var ret = ""
+        if i.E1 > 1 {
+            ret = read_0_9(i.E1)
+        }
+        ret += variant.e1
+        if i.E1x > 0 {
+            ret += read_0_9(i.E1x)
+        }
+        return ret
+    }
+    
     override func read_e2_e3(_ i: Int) -> String {
-        var ret = read_0_9(i.E2) + e2!
-
+        var ret = read_0_9(i.E2) + variant.e2
+        
         if i.E2x > 0 {
             ret += " "
             if i.secondLastDigit == 0 {
                 ret += filler
             }
-            ret += read(i.E2x)
+            ret += read_trailing_tens(i.E2x)
         }
-//        
-//        let X00 = i / 100
-//        let leftover = i - X00 * 100
-//        if secondLastDigit == 0 {
-//            fillerCharacter = filler
-//        } else if secondLastDigit == 1 {
-//            fillerCharacter = translate_0_10(1)
-//        }
-//        
-//        var ret = translate(X00)! + hundred
-//        if leftover > 0 {
-//            ret += surroundingSpace + fillerCharacter + translate(leftover)!
-//        }
+        return ret
+    }
+
+    override func read_e3_e6(_ i: Int) -> String {
+        var ret = read(i.E3) + variant.e3
+        
+        if i.E3x > 0 {
+            ret += " "
+            if i.thirdLastDigit == 0 {
+                ret += filler
+            }
+            ret += read(i.E3x)
+        }
+        return ret
+    }
+    
+    override func read(_ i: Int) -> String {
+        if i <= 1_000 { return super.read(i) }
+        
+        var ret = ""
+        if i < 100_000_000 {
+            ret += read_0_9(i.E4)
+            ret += variant.e4
+            if i.E4x > 0 {
+                ret += " "
+                if i.E4x < 100 {
+                    ret += filler
+                }
+                ret += read(i.E4x)
+            }
+        }
+        ret += read_0_9(i.E8)
+        ret += variant.e8
+        if i.E8x > 0 {
+            ret += " "
+            if i.E8x < 100 {
+                ret += filler
+            }
+            ret += read(i.E8x)
+        }
 
         return ret
     }
-//    
-//    private func use(_ i: Int, _ s1: String, _ s2: String) -> String {
-//        var use1 = false
-//        switch i % 10 {
-//        case 2, 3, 4:
-//            use1 = true
-//        default:
-//            use1 = false
-//        }
-//        switch i % 100 {
-//        case 11, 12, 13, 14:
-//            use1 = false
-//        default:
-//            break
-//        }
-//        return use1 ? s1 : s2
-//    }
-//    
-//    override func read_e3_e6(_ i: Int) -> String {
-//        var ret = read(i.E3) + " " + use(i.E3, "tysiące", "tysięcy")
-//        if i.E3 == 1 { ret = "tysiąc" }
-//        if i.E3x > 0 { ret += " " + read(i.E3x) }
-//        return ret
-//    }
-//    
-//    override func read_e6_e9(_ i: Int) -> String {
-//        var ret = read(i.E6) + " " + use(i.E6, "miliony", "milionów")
-//        if i.E6 == 1 { ret = "jeden milion" }
-//        if i.E6x > 0 { ret += " " + read(i.E6x) }
-//        return ret
-//    }
-//    
-//    override func read_e9_e12(_ i: Int) -> String {
-//        var ret = read(i.E9) + " " + use(i.E9, "miliardy", "miliardów")
-//        if i.E9 == 1 { ret = "jeden miliard" }
-//        if i.E9x > 0 { ret += " " + read(i.E9x) }
-//        return ret
-//    }
-//    
-//    override func read_e12_e15(_ i: Int) -> String {
-//        var ret = read(i.E12) + " " + use(i.E12, "biliony", "bilionów")
-//        if i.E12 == 1 { ret = "jeden bilion" }
-//        if i.E12x > 0 { ret += " " + read(i.E12x) }
-//        return ret
-//    }
+
+
 }

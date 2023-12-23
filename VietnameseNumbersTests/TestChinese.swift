@@ -121,17 +121,17 @@ final class TestChinese: XCTestCase {
         XCTAssertEqual(simplified.read(9_000), "九千")
         XCTAssertEqual(simplified.read(10_000), "一万")
         
-        XCTAssertEqual(simplified.read(10_001), "一万零一")
-        XCTAssertEqual(simplified.read(101), "一百零一")
-        XCTAssertEqual(simplified.read(208), "两百零八")
-        XCTAssertEqual(simplified.read(1_005), "一千零五")
-        XCTAssertEqual(simplified.read(10_003), "一万 零 三")
-        XCTAssertEqual(simplified.read(10_207), "一万 零 两百 零 七")
-        XCTAssertEqual(simplified.read(10_509), "一万 零 五百 零 九")
-        XCTAssertEqual(simplified.read(100_070), "十万 零 七十")
-        
+        XCTAssertEqual(simplified.read(10_001), "一万 零一")
+        XCTAssertEqual(simplified.read(101), "一百 零一")
+        XCTAssertEqual(simplified.read(208), "二百 零八")
+        XCTAssertEqual(simplified.read(1_005), "一千 零五")
+        XCTAssertEqual(simplified.read(10_003), "一万 零三")
         XCTAssertEqual(simplified.read(10_207), "一万 二百 零七")
-        XCTAssertEqual(simplified.read(10_207), "一万 零 两百 零 七")
+        XCTAssertEqual(simplified.read(10_509), "一万 五百 零九")
+        XCTAssertEqual(simplified.read(100_070), "十万 零七十")
+        
+        XCTAssertEqual(simplified.read(10_207), "一万 二百 零七") // email conformation: correct
+        XCTAssertNotEqual(simplified.read(10_207), "一万 零 两百 零 七") // email conformation: not correct
         XCTAssertEqual(simplified.read(12_000), "一万 二千")
         XCTAssertEqual(simplified.read(12_345), "一万 二千 三百 四十五")
         XCTAssertEqual(simplified.read(13_200), "一万 三千 二百")

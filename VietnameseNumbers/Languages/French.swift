@@ -91,15 +91,4 @@ class French: Language {
         return ret
     }
     
-//    override func read_e2_e3(_ i: Int) -> String {
-//        var ret = super.read_e2_e3(i)
-//        if i.E2 > 1 && i.E2x == 0 { ret += "s" }
-//        return ret
-//    }
-
-//    override func read_e6_e9(_ i: Int) -> String {
-//        var ret = super.read_e6_e9(i)
-//        if i.E6 > 1 { ret += "s" }
-//        return ret
-//    }
 }
