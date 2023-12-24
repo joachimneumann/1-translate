@@ -64,15 +64,28 @@ extension Display {
         right = nil
         canBeInteger = false
         canBeFloat = false
-        self = fromNumber(number, displayLengthLimiter: noLimits ? nil : screen, separators: separators, showAs: showAs, forceScientific: forceScientific)
+        self = fromNumber(number, displayLengthLimiter: noLimits ? nil : screen, separators: separators, showAs: showAs, forceScientific: scientific(number))
     }
     init(_ stringNumber: String, screen: Screen, separators: Separators, showAs: ShowAs, forceScientific: Bool) {
         self.left = "0"
         right = nil
         canBeInteger = false
         canBeFloat = false
-        self = fromStringNumber(stringNumber, displayLengthLimiter: screen, separators: separators, showAs: showAs, forceScientific: forceScientific)
+        self = fromStringNumber(stringNumber, displayLengthLimiter: screen, separators: separators, showAs: showAs, forceScientific: scientific(Number(stringNumber, precision: 10000)))
     }
+    
+    func scientific(_ number: Number) -> Bool {
+        var ret = false
+        let me: Number = number
+        me.toGmp()
+        let limitNumber = Number("1_000", precision: 1000)
+        limitNumber.toGmp()
+        if me.gmp!.toDouble() > limitNumber.gmp!.toDouble() {
+            ret = true
+        }
+        return ret
+    }
+    
 }
 
 extension Display {
