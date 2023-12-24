@@ -291,30 +291,13 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         precisionDescription = _precision.wrappedValue.useWords
         
         languages = [
-            digits,
-            thaiTraditional,
+            english,
+            german,
         thai]
         
         for language in languages {
             previouslySelectedLanguages.add(new: language.name)
         }
-        
-//        translators = [
-//            translateCatalan,
-//            translateTraditionalChinese,
-//            translateSimplifiedChinese,
-//            translateFinancialChinese,
-//            translateDanish,
-//            translateEnglish,
-//            translateFrench,
-//            translateGerman,
-//            translatePolish,
-//            translateRoman,
-//            translateSpanish,
-//            translateThai,
-//            translateThaiTraditional,
-//            translateVietnamese]
-        
         
         for symbol in [
             "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", ",",
