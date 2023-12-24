@@ -17,8 +17,8 @@ struct AppStorageKeys {
     static let decimalSeparator                  = "decimalSeparator"
     static let groupSeparator                    = "groupSeparator"
     static let secondLanguageAllowed             = "secondLanguageAllowed"
-    static let firstLanguage                     = "firstLanguage"
-    static let secondLanguage                    = "secondLanguage"
+    static let firstLanguageKey                  = "firstLanguage"
+    static let secondLanguageKey                 = "secondLanguage"
     static let activeIndex                       = "activeIndex"
     static let settingsEnglishUseAndAfterHundred = "settingsEnglishUseAndAfterHundred"
     static let settingsSpanishUsePunto           = "settingsSpanishUsePunto"
@@ -140,10 +140,10 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @AppStorage(AppStorageKeys.secondLanguageAllowed, store: .standard)
     var secondLanguageAllowed: Bool = false
     
-    @AppStorage(AppStorageKeys.firstLanguage, store: .standard)
+    @AppStorage(AppStorageKeys.firstLanguageKey, store: .standard)
     private var firstLanguageName: String = "digits"
 
-    @AppStorage(AppStorageKeys.secondLanguage, store: .standard)
+    @AppStorage(AppStorageKeys.secondLanguageKey, store: .standard)
     private var secondLanguageName: String = "แบบดั้งเดิม"
 
     @AppStorage(AppStorageKeys.settingsEnglishUseAndAfterHundred, store: .standard)
@@ -293,7 +293,11 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         languages = [
             english,
             german,
-        thai]
+            vietnamese,
+            spanish,
+            catalan,
+            thai,
+            thaiTraditional]
         
         for language in languages {
             previouslySelectedLanguages.add(new: language.name)

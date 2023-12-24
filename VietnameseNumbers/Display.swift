@@ -76,11 +76,10 @@ extension Display {
     
     func scientific(_ number: Number) -> Bool {
         var ret = false
-        let me: Number = number
+        let me: Number = number.copy()
         me.toGmp()
-        let limitNumber = Number("1_000", precision: 1000)
-        limitNumber.toGmp()
-        if me.gmp!.toDouble() > limitNumber.gmp!.toDouble() {
+        let limitNumber = 100_000_000_000_000.0
+        if me.gmp!.toDouble() > limitNumber {
             ret = true
         }
         return ret
