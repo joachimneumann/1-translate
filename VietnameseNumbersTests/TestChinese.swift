@@ -127,14 +127,15 @@ final class TestChinese: XCTestCase {
         XCTAssertEqual(simplified.read(5_000).x, "五千".x)
         XCTAssertEqual(simplified.read(6_000).x, "六千".x)
         XCTAssertEqual(simplified.read(7_000).x, "七千".x)
+        XCTAssertEqual(simplified.read(7_045).x, "七千零四十五".x)
         XCTAssertEqual(simplified.read(8_000).x, "八千".x)
         XCTAssertEqual(simplified.read(9_000).x, "九千".x)
         
         XCTAssertEqual(simplified.read(10_000).x, "一万".x)
         XCTAssertEqual(simplified.read(10_001).x, "一万 零一".x)
         XCTAssertEqual(simplified.read(10_003).x, "一万 零三".x)
-        XCTAssertEqual(simplified.read(10_207).x, "一万 二百 零七") // email conformation: correct
-        XCTAssertNotEqual(simplified.read(10_207).x, "一万 零 二百 零 七") // email conformation: not correct
+        XCTAssertEqual(simplified.read(10_207).x, "一万二百零七") // email conformation: correct
+        XCTAssertNotEqual(simplified.read(10_207).x, "一万零二百零七") // email conformation: not correct
         XCTAssertEqual(simplified.read(10_509).x, "一万 五百 零九".x)
         XCTAssertEqual(simplified.read(11_000).x, "一万 一千".x)
         XCTAssertEqual(simplified.read(11_050).x, "一万 一千 零五十".x)
@@ -143,7 +144,7 @@ final class TestChinese: XCTestCase {
         XCTAssertEqual(simplified.read(12_345).x, "一万 二千 三百 四十五".x)
         XCTAssertEqual(simplified.read(13_200).x, "一万 三千 二百".x)
         XCTAssertEqual(simplified.read(18_000).x, "一万 八千".x)
-        XCTAssertEqual(simplified.read(20_000).x, "二万 三千".x)
+        XCTAssertEqual(simplified.read(20_000).x, "二万".x)
         XCTAssertEqual(simplified.read(23_456).x, "二万 三千 四百 五十六".x)
         XCTAssertEqual(simplified.read(31_240).x, "三万 一千 二百 四十".x)
         XCTAssertEqual(simplified.read(40_000).x, "四万".x)
