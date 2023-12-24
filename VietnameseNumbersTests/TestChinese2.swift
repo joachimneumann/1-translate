@@ -23,12 +23,12 @@ https://www.chineseconverter.com/en/convert/arabic-numbers-to-chinese-numbers
  
  
 
- Which one is most natural / correct? A), B) or C)?
- 2_010     A) 二千 零十            b) 二千 零一十
- 10_207    A) 一万 零二百 零七     B) 一万 二百 零七  C) 一万二百 零七
- 10_509    A) 一万 零五百 零九     B) 一万 五百 零九  C) 一万五百 零九
+ Which one is most natural / correct? A) or B)?
+ 2_010     A) 二千 零十           B) 二千 零一十
+ 10_207    A) 一万 零二百 零七     B) 一万 二百 零七
+ 10_509    A) 一万 零五百 零九     B) 一万 五百 零九
  40_500    A) 四万 五百           B) 四万 零五百
- 31_240    A) 三万 一千 二百 四十  B) 三万 一千 二百四十 C) 三万一千二百四十
+ 31_240    A) 三万 一千 二百 四十  B) 三万 一千 二百四十
 
  7_890_298      A) 七百 八十九万 〇 二百 九十八   B) 七百 八十九万 二百 九十八  C) 七百 八十九万 零二百 九十八
  27_214_000     A) 二千 七百 二十一万            B) 二千 七百 二十一万
@@ -42,5 +42,5 @@ https://www.chineseconverter.com/en/convert/arabic-numbers-to-chinese-numbers
  123_456_789 一亿 二千 三百 四十五万 六千 七百 八十九
  240_500_000 二亿 四千 零五十万
 
- is 兆 the same in tranditional chinese, simplified chinese and financial chinese?
+ Is 兆 (english: one trillion) the same in tranditional chinese, simplified chinese and financial chinese?
 */
