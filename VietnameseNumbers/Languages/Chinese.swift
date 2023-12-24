@@ -196,11 +196,11 @@ class Chinese: Language {
     }
     
     override func read(_ i: Int) -> String {
-        if i <= 1_000 { return super.read(i) }
+        if i < 10_000 { return super.read(i) }
         
         var ret = ""
         if i < 100_000_000 {
-            ret += read_0_9(i.E4)
+            ret += read(i.E4)
             ret += variant.e4
             if i.E4x > 0 {
                 ret += " "
@@ -209,8 +209,10 @@ class Chinese: Language {
                 }
                 ret += read(i.E4x)
             }
+            return ret
         }
-        ret += read_0_9(i.E8)
+
+        ret += read(i.E8)
         ret += variant.e8
         if i.E8x > 0 {
             ret += " "
