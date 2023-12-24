@@ -20,6 +20,7 @@ class English: Language {
         e3 = "thousand"
         e6 = "million"
         e9 = "billion"
+        e12 = "trillion"
         afterNegative = " "
         beforeAndAfterDotString = " "
         tensConnector = "-"

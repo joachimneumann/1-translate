@@ -26,6 +26,8 @@ class French: Language {
         e6_one = "un million"
         e9 = "milliards"
         e9_one = "un milliard"
+        e12 = "billions"
+        e12_one = "un billion"
 
         afterNegative = " "
         beforeAndAfterDotString = " "

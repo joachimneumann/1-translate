@@ -23,6 +23,7 @@ class Thai: Language {
         e5 = "แสน"
         e6 = "ล้าน"
         e9 = "พันล้าน"
+        e12 = "ล้านล้าน"
         afterNegative = ""
     }
     

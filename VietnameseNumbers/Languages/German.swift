@@ -26,6 +26,8 @@ class German: Language {
         e6_one = "eine Million"
         e9 = "Milliarden"
         e9_one = "eine Milliarde"
+        e12 = "Billionen"
+        e12_one = "eine Billion"
         afterNegative = " "
         beforeAndAfterDotString = " "
         eSpace = ""

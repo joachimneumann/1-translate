@@ -78,7 +78,7 @@ extension Display {
         var ret = false
         let me: Number = number.copy()
         me.toGmp()
-        let limitNumber = 100_000_000_000_000.0
+        let limitNumber = 999_999_999_999_999.0
         if me.gmp!.toDouble() > limitNumber {
             ret = true
         }

@@ -111,7 +111,9 @@ final class TestCatalan: XCTestCase {
         XCTAssertEqual(catalan.read(20_000_000_700), "vint mil milions set-cents")
         XCTAssertEqual(catalan.read(100_000_000_000), "cent mil milions")
         XCTAssertEqual(catalan.read(400_000_000_000), "quatre-cents mil milions")
-        
+        XCTAssertEqual(catalan.read(1_000_000_000_000), "un bilió")
+        XCTAssertEqual(catalan.read(999_000_000_000_000), "nou-cents noranta-nou bilions")
+
         XCTAssertEqual(catalan.read(-1), "menys u")
         XCTAssertEqual(catalan.read(-74), "menys setanta-quatre")
         XCTAssertEqual(catalan.read(-1_000_000), "menys un milió")

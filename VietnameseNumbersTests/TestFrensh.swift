@@ -73,6 +73,8 @@ class TestFrench: XCTestCase {
         XCTAssertEqual(french.read(987_654_321_987), "neuf cent quatre-vingt-sept milliards six cent cinquante-quatre millions trois cent vingt et un mille neuf cent quatre-vingt-sept")
         XCTAssertEqual(french.read(876_543_210_876), "huit cent soixante-seize milliards cinq cent quarante-trois millions deux cent dix mille huit cent soixante-seize")
         XCTAssertEqual(french.read(999_999_999_999), "neuf cent quatre-vingt-dix-neuf milliards neuf cent quatre-vingt-dix-neuf millions neuf cent quatre-vingt-dix-neuf mille neuf cent quatre-vingt-dix-neuf")
+        XCTAssertEqual(french.read(1_000_000_000_000), "un billion")
+        XCTAssertEqual(french.read(100_000_000_000_000), "cent billions")
     }
     
     func test_languageatlas() {

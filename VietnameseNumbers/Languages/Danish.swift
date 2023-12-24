@@ -21,10 +21,14 @@ class Danish: Language {
         e2 = "hundrede"
         e2_one = "hundred"
         afterGroup = " og"
-        e3 = "tusind"
+        e3 = "tusinde"
         e3_one = "ettusind"
-        e6 = "million"
-        e9 = "milliard"
+        e6 = "millioner"
+        e6_one = "en million"
+        e9 = "milliarder"
+        e9_one = "en milliard"
+        e12 = "billioner"
+        e12_one = "en billion"
         eSpace = " "
         beforeAndAfterDotString = " "
     }
@@ -73,6 +77,73 @@ class Danish: Language {
         // reversed order
         return (i.E1x > 0 ? read_0_9(i.E1x) + "og" : "") + read_10s(i.E1)
     }
+    
+    override func read_e3_e6(_ i: Int) -> String {
+        var ret = ""
+        if i.E3 == 1 {
+            ret = e3_one!
+        } else {
+            ret = read(i.E3)
+            if i.E3 >= 100 && i.E3 < 200 {
+                ret += "e"
+            }
+            ret += " " + e3!
+        }
+        if i.E3x > 0 {
+            ret += " og " + read(i.E3x)
+        }
+        return ret
+    }
 
+    override func read_e6_e9(_ i: Int) -> String {
+        var ret = ""
+        if i.E6 == 1 {
+            ret = e6_one!
+        } else {
+            ret = read(i.E6)
+            if i.E6 >= 100 && i.E6 < 200 {
+                ret += "e"
+            }
+            ret += " " + e6!
+        }
+        if i.E6x > 0 {
+            ret += " og " + read(i.E6x)
+        }
+        return ret
+    }
+
+    override func read_e9_e12(_ i: Int) -> String {
+        var ret = ""
+        if i.E9 == 1 {
+            ret = e9_one!
+        } else {
+            ret = read(i.E9)
+            if i.E9 >= 100 && i.E9 < 200 {
+                ret += "e"
+            }
+            ret += " " + e9!
+        }
+        if i.E9x > 0 {
+            ret += " og " + read(i.E9x)
+        }
+        return ret
+    }
+    
+    override func read_e12_e15(_ i: Int) -> String {
+        var ret = ""
+        if i.E12 == 1 {
+            ret = e12_one!
+        } else {
+            ret = read(i.E12)
+            if i.E12 >= 100 && i.E12 < 200 {
+                ret += "e"
+            }
+            ret += " " + e12!
+        }
+        if i.E12x > 0 {
+            ret += " og " + read(i.E12x)
+        }
+        return ret
+    }
 }
 

@@ -218,6 +218,8 @@ final class TestGerman: XCTestCase {
         XCTAssertEqual(german.read(99_000_000_909), "neunundneunzig Milliarden neunhundertneun")
         XCTAssertEqual(german.read(100_000_000_000), "einhundert Milliarden")
         XCTAssertEqual(german.read(400_000_000_000), "vierhundert Milliarden")
+        XCTAssertEqual(german.read(1_000_000_000_000), "eine Billion")
+        XCTAssertEqual(german.read(100_000_000_000_000), "einhundert Billionen")
         XCTAssertEqual(german.read(-1), "minus eins")
         XCTAssertEqual(german.read("-1.5"), "minus eins Komma fünf")
         XCTAssertEqual(german.read("-1.51"), "minus eins Komma fünf eins")
