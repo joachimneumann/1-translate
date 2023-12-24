@@ -124,8 +124,7 @@ class Vietnamese: Language {
     }
     
     override func read_e12_e15(_ i: Int) -> String {
-        var ret = read(i.E9) + " " + e9!
-        return ret
+        return read(i.E9) + " " + e9!
     }
     
 
