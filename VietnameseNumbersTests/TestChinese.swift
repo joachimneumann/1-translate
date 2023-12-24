@@ -282,6 +282,26 @@ final class TestChinese: XCTestCase {
         XCTAssertEqual(simplified.read(200_800_000).x, "二亿零八十万".x)
         XCTAssertEqual(simplified.read(2_400_360_899).x, "二十四亿三十六万零八百九十九".x)
     }
+    
+    func test_neigbor() {
+        XCTAssertEqual(simplified.read(2010).x, "二千 零一十".x)
+        XCTAssertEqual(simplified.read(1_0207).x, "一万 零二百 零七".x)
+        XCTAssertEqual(simplified.read(1_0509).x, "一万 零五百 零九".x)
+        XCTAssertEqual(simplified.read(4_0500).x, "四万 零五百".x)
+        XCTAssertEqual(simplified.read(3_1240).x, "三万 一千 二百 四十".x)
+        XCTAssertEqual(simplified.read(100_0100).x, "一百万 零一百".x)
+        XCTAssertEqual(simplified.read(100_1000).x, "一百万 零一千".x)
+        XCTAssertEqual(simplified.read(670_9123).x, "六百 七十万 九千 一百二十三".x)
+        XCTAssertEqual(simplified.read(670_0123).x, "六百七十万零一百二十三".x)
+        XCTAssertEqual(simplified.read(600_9123).x, "六百万 零九千一百二十三".x)
+        XCTAssertEqual(simplified.read(608_9123).x, "六百零八万九千一百二十三".x)
+        XCTAssertEqual(simplified.read(789_0298).x, "七百 八十九万 零二百 九十八".x)
+        XCTAssertEqual(simplified.read(2772_1000).x, "二千 七百 二十一万".x)
+        XCTAssertEqual(simplified.read(1_2345_6789).x, "一亿 二千 三百 四十五万 六千 七百 八十九".x)
+        XCTAssertEqual(simplified.read(2_4050_0000).x, "二亿 四千 零五十万".x)
+        XCTAssertEqual(simplified.read(12_0008_0000).x, "十二亿 零八万".x)
+
+    }
 }
 
 fileprivate extension String {
