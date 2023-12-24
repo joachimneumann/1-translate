@@ -58,6 +58,9 @@ class Chinese: Language {
             case .simplified:  "亿"
             }
         }
+        var e12: String {
+           "兆"
+        }
         func read_0_9(_ i: Int) -> String {
             switch i {
             case 0:
@@ -212,16 +215,28 @@ class Chinese: Language {
             return ret
         }
 
-        ret += read(i.E8)
-        ret += variant.e8
-        if i.E8x > 0 {
-            ret += " "
-            if i.E8x < 100 {
-                ret += filler
+        if i < 1_000_000_000_000 {
+            ret += read(i.E8)
+            ret += variant.e8
+            if i.E8x > 0 {
+                ret += " "
+                if i.E8x < 100 {
+                    ret += filler
+                }
+                ret += read(i.E8x)
             }
-            ret += read(i.E8x)
+            return ret
         }
 
+        ret += read(i.E12)
+        ret += variant.e12
+        if i.E12x > 0 {
+            ret += " "
+            if i.E12x < 100 {
+                ret += filler
+            }
+            ret += read(i.E12x)
+        }
         return ret
     }
 

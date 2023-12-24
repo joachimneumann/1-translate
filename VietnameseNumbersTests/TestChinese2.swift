@@ -22,6 +22,7 @@ https://www.chineseconverter.com/en/convert/arabic-numbers-to-chinese-numbers
 6009123 六百万零九千一百二十三
  
  
+
  Which one is most natural / correct? A), B) or C)?
  1_010     A) 一千 零十           B) 一千 零一十
  10_207    A) 一万 零二百 零七     B) 一万 二百 零七  C) 一万二百 零七
@@ -41,4 +42,5 @@ https://www.chineseconverter.com/en/convert/arabic-numbers-to-chinese-numbers
  123_456_789 一亿 二千 三百 四十五万 六千 七百 八十九
  240_500_000 二亿 四千 零五十万
 
+ is 兆 the same in tranditional chinese, simplified chinese and financial chinese?
 */

@@ -219,7 +219,7 @@ final class TestChinese: XCTestCase {
         XCTAssertEqual(simplified.read(9_876_543_210), "九十八亿七千六百五十四万三千二百一十")
         XCTAssertEqual(simplified.read(25_158_367_200), "二百 五十一 亿 五千 八百 三十六 万 七千 二百")
         XCTAssertEqual(simplified.read(123_456_789_012), "一千二百三十四亿五千六百七十八万九千零一十二")
-        XCTAssertEqual(simplified.read(1_000_000_000_000), "一万亿")
+        XCTAssertEqual(simplified.read(1_000_000_000_000), "一兆")
         
 //    https://www.youtube.com/watch?v=JG4m-UehKY4
         XCTAssertEqual(simplified.read(10_101), "一万 一百 零一")
