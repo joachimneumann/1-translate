@@ -24,7 +24,7 @@ https://www.chineseconverter.com/en/convert/arabic-numbers-to-chinese-numbers
  
 
  Which one is most natural / correct? A), B) or C)?
- 1_010     A) 一千 零十           B) 一千 零一十
+ 2_010     A) 二千 零十            b) 二千 零一十
  10_207    A) 一万 零二百 零七     B) 一万 二百 零七  C) 一万二百 零七
  10_509    A) 一万 零五百 零九     B) 一万 五百 零九  C) 一万五百 零九
  40_500    A) 四万 五百           B) 四万 零五百
