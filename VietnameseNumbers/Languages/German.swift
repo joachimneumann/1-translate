@@ -7,6 +7,12 @@
 
 import Foundation
 
+extension StringProtocol {
+    var firstUppercased: String { prefix(1).uppercased() + dropFirst() }
+    var firstCapitalized: String { prefix(1).capitalized + dropFirst() }
+}
+
+
 class German: Language {
     var useSoftHyphen: Bool = true
     var capitalisation: Bool = true
@@ -84,6 +90,10 @@ class German: Language {
         ret = ret.replacingOccurrences(of: "einsund", with: "einund")
         ret = ret.replacingOccurrences(of: "einshundert", with: "einhundert")
         ret = ret.replacingOccurrences(of: "einstausend", with: "eintausend")
+
+        if capitalisation {
+            ret = ret.capitalized
+        }
         return ret
     }
         
