@@ -23,7 +23,7 @@ struct TranslateNumbers: View {
             VStack(spacing: 0.0) {
                 VStack(spacing: 0.0) {
                     HStack(spacing: 30.0) {
-                        LanguageButton(language: viewModel.firstLanguage.name, viewModel: viewModel)
+                        LanguageButton(language: viewModel.firstLanguage, viewModel: viewModel)
                         Spacer()
                         NavigationLink {
                             Settings(viewModel: viewModel, screen: screen, font: Font(screen.infoUiFont))
@@ -44,7 +44,8 @@ struct TranslateNumbers: View {
                     TranslatedDisplay(
                         translatedString: viewModel.firstTranslatedNumber,
                         translatedStringTopBorder: viewModel.firstTranslatedNumberTopBorder,
-                        screen: screen)
+                        screen: screen,
+                        rightToLeft: viewModel.firstLanguage.englishName == viewModel.arabNumerals.englishName)
                     .font(viewModel.secondLanguageAllowed ? /*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/ : .largeTitle)
                     .padding(.horizontal, 0)
                     Spacer(minLength: 0.0)
@@ -52,7 +53,7 @@ struct TranslateNumbers: View {
                 if viewModel.secondLanguageAllowed {
                     VStack(spacing: 0.0) {
                         HStack(spacing: 30.0) {
-                            LanguageButton(language: viewModel.secondLanguage.name, viewModel: viewModel)
+                            LanguageButton(language: viewModel.secondLanguage, viewModel: viewModel)
                             Spacer()
                         }
                         .frame(height: 34.0)
@@ -61,7 +62,8 @@ struct TranslateNumbers: View {
                         Spacer(minLength: 0.0)
                         TranslatedDisplay(
                             translatedString: viewModel.secondTranslatedNumber,
-                            translatedStringTopBorder: viewModel.secondTranslatedNumberTopBorder,                            screen: screen)
+                            translatedStringTopBorder: viewModel.secondTranslatedNumberTopBorder,                            screen: screen,
+                            rightToLeft: viewModel.secondLanguage.englishName == viewModel.arabNumerals.englishName)
                         .font(.title)
                         .padding(.horizontal, 0)
                     }
@@ -82,10 +84,10 @@ struct TranslateNumbers: View {
     
     struct LanguageButton: View {
         @State var showSheet = false
-        private let language: String
+        private let language: Language
         private let viewModel: ViewModel
 
-        init(language: String, viewModel: ViewModel) {
+        init(language: Language, viewModel: ViewModel) {
             self.language = language
             self.viewModel = viewModel
         }
@@ -95,7 +97,7 @@ struct TranslateNumbers: View {
             Button {
                 showSheet.toggle()
             } label: {
-                Image(language)
+                Image(language.englishName != nil ? language.englishName! : language.name)
                     .resizable()
                     .scaledToFit()
             }

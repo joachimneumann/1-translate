@@ -7,14 +7,14 @@
 
 import Foundation
 
-class ThaiTraditional: Language {
+class ThaiNumerals: Language {
     init() {
         super.init(
             name: "แบบดั้งเดิม",
             negativeString: "-",
             dotString: ".",
             exponentString: "e")
-        englishName = "Thai Numbers"
+        englishName = "Thai Numerals"
     }
         
     override func read(_ i: Int) -> String {

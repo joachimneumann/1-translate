@@ -40,7 +40,7 @@ struct SelectLanguage: View {
                 viewModel.firstLanguageName = language.name
             }) {
                 HStack {
-                    Image(language.name)
+                    Image(language.englishName != nil ? language.englishName! : language.name)
                         .resizable()
                         .scaledToFit()
                         .padding(2)
@@ -60,7 +60,7 @@ struct SelectLanguage: View {
                     viewModel.secondLanguageName = language.name
                 }) {
                     HStack {
-                        Image(language.name)
+                        Image(language.englishName != nil ? language.englishName! : language.name)
                             .resizable()
                             .scaledToFit()
                             .padding(2)

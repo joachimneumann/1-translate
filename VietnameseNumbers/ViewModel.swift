@@ -70,6 +70,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @Published var firstTranslatedNumberTopBorder: String? = nil
     @Published var secondTranslatedNumberTopBorder: String? = nil
 
+    let arabNumerals    = ArabNumerals()
     let catalan         = Catalan()
     let chineseFinancial   = Chinese(variant: .financial)
     let chineseSimplified  = Chinese(variant: .simplified)
@@ -83,7 +84,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     let roman           = Roman()
     let spanish         = Spanish()
     let thai            = Thai()
-    let thaiTraditional = ThaiTraditional()
+    let thaiNumerals    = ThaiNumerals()
     let vietnamese      = Vietnamese()
 
     var languages: [Language] // set in init()
@@ -289,6 +290,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         precisionDescription = _precision.wrappedValue.useWords
         
         languages = [
+            arabNumerals,
             catalan,
             chineseSimplified,
             chineseTraditional,
@@ -302,7 +304,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             roman,
             spanish,
             thai,
-            thaiTraditional,
+            thaiNumerals,
             vietnamese]
 
         english.afterHundred  = settingsEnglishUseAndAfterHundred ? " and" : ""
