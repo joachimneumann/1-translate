@@ -133,7 +133,7 @@ struct Settings: View {
                 .padding(2)
                 .background(Color(UIColor.darkGray))
                 .borderRadius(Color.black, width: 5, cornerRadius: 10, corners: [.topLeft, .bottomLeft, .topRight, .bottomRight])
-                .frame(width: 220)
+                .frame(width: 150)
                 .pickerStyle(.segmented)
             }
         }

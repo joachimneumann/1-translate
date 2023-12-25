@@ -15,6 +15,7 @@ class Thai: Language {
             dotString: "จุด",
             exponentString: "e")
         
+        englishName = "Thai"
         e2 = "ร้อย"
         e3 = "พัน"
         e4 = "หมื่น"

@@ -14,6 +14,7 @@ class ThaiTraditional: Language {
             negativeString: "-",
             dotString: ".",
             exponentString: "e")
+        englishName = "Thai Numbers"
     }
         
     override func read(_ i: Int) -> String {

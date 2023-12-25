@@ -15,13 +15,15 @@ struct SelectLanguage: View {
         var body: some View {
             HStack(spacing: 0.0) {
                 Text(language.name)
+                    .bold(bold)
+                Spacer(minLength: 0)
                 if language.englishName != nil {
                     Text(" "+language.englishName!)
+                        .italic()
+                        .foregroundColor(.gray)
                         .minimumScaleFactor(0.01)
                 }
-                Spacer()
             }
-            .bold(bold)
             .frame(height: 25)
             .foregroundColor(Color.white)
         }

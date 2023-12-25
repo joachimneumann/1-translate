@@ -290,9 +290,9 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         
         languages = [
             catalan,
-            chineseFinancial,
             chineseSimplified,
             chineseTraditional,
+            chineseFinancial,
             danish,
             digits,
             english,

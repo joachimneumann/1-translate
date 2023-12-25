@@ -14,7 +14,7 @@ extension View {
 
 struct TopBorder: Shape {
     var edges: [Edge] = [.top]
-
+    
     func path(in rect: CGRect) -> Path {
         edges.map { _ in
             return Path(.init(x: rect.minX, y: rect.minY+3, width: rect.width, height: 2))
@@ -46,6 +46,7 @@ struct TranslatedDisplay: View {
                     }
                     HStack(alignment: .bottom, spacing: 0.0) {
                         Text(translatedString)
+                            .textSelection(.enabled)
                         Spacer(minLength: 0.0)
                     }
                 }
