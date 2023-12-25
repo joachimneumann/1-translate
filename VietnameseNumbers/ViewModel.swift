@@ -70,7 +70,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @Published var firstTranslatedNumberTopBorder: String? = nil
     @Published var secondTranslatedNumberTopBorder: String? = nil
 
-    let arabNumerals       = ArabNumerals()
+    let arabNumerals       = ArabicNumerals()
     let armenianNumerals   = ArmenianNumerals()
     let armenian           = Armenian()
     let catalan            = Catalan()

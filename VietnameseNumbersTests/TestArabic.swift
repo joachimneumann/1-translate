@@ -345,7 +345,7 @@ final class TestArabic: XCTestCase {
         XCTAssertEqual(arabic.read(330), "ثَلَاثُمِئَة و ثَلَاثُونَ")
         XCTAssertEqual(arabic.read(331), "ثَلَاثُمِئَة و وَاحِد و ثَلَاثُونَ")
         XCTAssertEqual(arabic.read(332), "ثَلَاثُمِئَة و اِثْنَان و ثَلَاثُونَ")
-        XCTAssertEqual(arabic.read(333), "ثَلَاثُمِئَة و ثَلَاثَة و ثَلَاثُونَ athun")
+        XCTAssertEqual(arabic.read(333), "ثَلَاثُمِئَة و ثَلَاثَة و ثَلَاثُونَ")
         XCTAssertEqual(arabic.read(334), "ثَلَاثُمِئَة و أَرْبَعَة و ثَلَاثُونَ")
         XCTAssertEqual(arabic.read(335), "ثَلَاثُمِئَة و خَمْسَة و ثَلَاثُونَ")
         XCTAssertEqual(arabic.read(336), "ثَلَاثُمِئَة و سِتَّة و ثَلَاثُونَ")

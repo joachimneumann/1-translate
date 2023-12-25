@@ -7,14 +7,14 @@
 
 import Foundation
 
-class ArabNumerals: Language {
+class ArabicNumerals: Language {
     init() {
         super.init(
             name: "الترقيم العربي",
             negativeString: "-",
             dotString: ".",
             exponentString: "e")
-        englishName = "Arab Numerals"
+        englishName = "Arabic Numerals"
     }
     
     override func read(_ i: Int) -> String {
