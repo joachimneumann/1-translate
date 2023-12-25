@@ -13,9 +13,7 @@ class English: Language {
             name: "English",
             negativeString: "minus",
             dotString: "point",
-            exponentString: " times ten to the power of ",
-            groupSeparator: "",
-            decimalSeparator: ".")
+            exponentString: " times ten to the power of ")
         e2 = "hundred"
         e3 = "thousand"
         e6 = "million"

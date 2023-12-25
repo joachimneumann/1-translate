@@ -13,9 +13,7 @@ class French: Language {
             name: "Française",
             negativeString: "moins",
             dotString: "virgule",
-            exponentString: " fois dix à la puissance ",
-            groupSeparator: "",
-            decimalSeparator: ".")
+            exponentString: " fois dix à la puissance ")
 
         e2 = "cent"
         e2_one = "cent"

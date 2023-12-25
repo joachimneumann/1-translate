@@ -13,9 +13,7 @@ class Polish: Language {
             name: "Polski",
             negativeString: "minus",
             dotString: "przecinek",
-            exponentString: " razy dziesięć do potęgi ",
-            groupSeparator: "",
-            decimalSeparator: ".")
+            exponentString: " razy dziesięć do potęgi ")
         
         e2 = "sto"
         e2_one = "sto"

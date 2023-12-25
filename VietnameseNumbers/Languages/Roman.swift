@@ -16,9 +16,7 @@ class Roman: Language {
             name: "Roman",
             negativeString: "",
             dotString: "",
-            exponentString: "",
-            groupSeparator: "",
-            decimalSeparator: ".")
+            exponentString: "")
         allowNegativeNumbers = false
         allowExponent = false
         allowFraction = false

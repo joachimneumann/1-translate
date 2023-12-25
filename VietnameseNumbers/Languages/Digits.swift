@@ -13,9 +13,7 @@ class Digits: Language {
             name: "Digits",
             negativeString: "-",
             dotString: ".",
-            exponentString: "e",
-            groupSeparator: "",
-            decimalSeparator: ".")
+            exponentString: "e")
         afterNegative = ""
     }
     

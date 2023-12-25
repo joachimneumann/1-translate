@@ -13,9 +13,7 @@ class Catalan: Language {
             name: "Català",
             negativeString: "menys",
             dotString: "coma",
-            exponentString: " por diez elevat a ",
-            groupSeparator: "",
-            decimalSeparator: ".")
+            exponentString: " por diez elevat a ")
 
         e2 = "cent"
         e2_one = "cent"

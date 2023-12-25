@@ -23,13 +23,11 @@ class LanguageString {
     let error = "ERROR"
     var englishName: String? = nil
     
-    init(name: String, negativeString: String, dotString: String, exponentString: String, groupSeparator: String, decimalSeparator: String) {
+    init(name: String, negativeString: String, dotString: String, exponentString: String) {
         self.name = name
         self.negativeString = negativeString
         self.dotString = dotString
         self.exponentString = exponentString
-        self.groupSeparator = groupSeparator
-        self.decimalSeparator = decimalSeparator
     }
     
     func read(_ i: Int) -> String {

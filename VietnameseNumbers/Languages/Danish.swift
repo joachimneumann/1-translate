@@ -14,9 +14,7 @@ class Danish: Language {
             name: "Dansk",
             negativeString: "minus",
             dotString: "komma",
-            exponentString: " gange ti i ",
-            groupSeparator: "",
-            decimalSeparator: ".")
+            exponentString: " gange ti i ")
         
         e2 = "hundrede"
         e2_one = "hundred"

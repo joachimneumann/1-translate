@@ -19,9 +19,7 @@ class Spanish: Language {
             name: "Español",
             negativeString: "menos",
             dotString: "coma",
-            exponentString: " por diez elevado a ",
-            groupSeparator: "",
-            decimalSeparator: ".")
+            exponentString: " por diez elevado a ")
 
         e3 = "mil"
         e3_one = "mil"

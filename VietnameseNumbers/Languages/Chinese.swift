@@ -128,9 +128,7 @@ class Chinese: Language {
             name: variant.name,
             negativeString: "负",
             dotString: "点",
-            exponentString: " 乘以 十的 ",
-            groupSeparator: "",
-            decimalSeparator: ".")
+            exponentString: " 乘以 十的 ")
         e2 = variant.e2
         e3 = variant.e3
         e4 = variant.e4

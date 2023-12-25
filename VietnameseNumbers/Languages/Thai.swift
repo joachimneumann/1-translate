@@ -13,9 +13,7 @@ class Thai: Language {
             name: "ภาษาไทย",
             negativeString: "ลบ",
             dotString: "จุด",
-            exponentString: "e",
-            groupSeparator: "",
-            decimalSeparator: ".")
+            exponentString: "e")
         
         e2 = "ร้อย"
         e3 = "พัน"

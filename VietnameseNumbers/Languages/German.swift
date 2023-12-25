@@ -22,9 +22,7 @@ class German: Language {
             name: "Deutsch",
             negativeString: "minus",
             dotString: "Komma",
-            exponentString: " mal zehn hoch ",
-            groupSeparator: "",
-            decimalSeparator: ".")
+            exponentString: " mal zehn hoch ")
 
         e2 = "hundert"
         e3 = "tausend"
