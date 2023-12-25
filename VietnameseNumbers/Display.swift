@@ -21,6 +21,7 @@ struct Display {
     var right: String?
     var canBeInteger: Bool
     var canBeFloat: Bool
+    var groupSize: Int = 3
 
 #if os(macOS)
     var color: Color = Color(white: 230.0/255.0)
@@ -59,15 +60,17 @@ extension Display {
         canBeInteger = false
         canBeFloat = false
     }
-    init(_ number: Number, screen: Screen, separators: Separators, noLimits: Bool = false, showAs: ShowAs, forceScientific: Bool) {
+    init(_ number: Number, screen: Screen, separators: Separators, noLimits: Bool = false, showAs: ShowAs, forceScientific: Bool, groupSize: Int) {
         self.left = "0"
+        self.groupSize = groupSize
         right = nil
         canBeInteger = false
         canBeFloat = false
         self = fromNumber(number, displayLengthLimiter: noLimits ? nil : screen, separators: separators, showAs: showAs, forceScientific: scientific(number))
     }
-    init(_ stringNumber: String, screen: Screen, separators: Separators, showAs: ShowAs, forceScientific: Bool) {
+    init(_ stringNumber: String, screen: Screen, separators: Separators, showAs: ShowAs, forceScientific: Bool, groupSize: Int) {
         self.left = "0"
+        self.groupSize = groupSize
         right = nil
         canBeInteger = false
         canBeFloat = false
@@ -211,8 +214,8 @@ extension Display {
         
         if let c = separators.groupSeparator.character {
             var count = integerPart.count
-            while count >= 4 {
-                count = count - 3
+            while count >= groupSize+1 {
+                count = count - groupSize
                 integerPart.insert(c, at: integerPart.index(integerPart.startIndex, offsetBy: count))
             }
         }

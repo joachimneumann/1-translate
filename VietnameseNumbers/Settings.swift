@@ -124,6 +124,18 @@ struct Settings: View {
                 .frame(width: 220)
                 .pickerStyle(.segmented)
             }
+            GridRow {
+                Text("GroupSize")
+                Picker("", selection: $viewModel.groupSize) {
+                    Text("3").tag(3)
+                    Text("4").tag(4)
+                }
+                .padding(2)
+                .background(Color(UIColor.darkGray))
+                .borderRadius(Color.black, width: 5, cornerRadius: 10, corners: [.topLeft, .bottomLeft, .topRight, .bottomRight])
+                .frame(width: 220)
+                .pickerStyle(.segmented)
+            }
         }
     }
     

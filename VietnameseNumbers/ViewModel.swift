@@ -16,6 +16,7 @@ struct AppStorageKeys {
     static let forceScientific                   = "forceScientific"
     static let decimalSeparator                  = "decimalSeparator"
     static let groupSeparator                    = "groupSeparator"
+    static let groupSize                         = "groupSize"
     static let secondLanguageAllowed             = "secondLanguageAllowed"
     static let firstLanguageKey                  = "firstLanguage"
     static let secondLanguageKey                 = "secondLanguage"
@@ -62,6 +63,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @Published var settingsEnglishExample: String = ""
     @Published var settingsGermanExample: String = ""
     @Published var settingsVietnameseExample: String = ""
+    @Published var settingsChineseExample: String = ""
     @Published var settingsSpanishExample: String = ""
     @Published var firstTranslatedNumber: String = ""
     @Published var secondTranslatedNumber: String = ""
@@ -83,7 +85,6 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     let thai            = Thai()
     let thaiTraditional = ThaiTraditional()
     let vietnamese      = Vietnamese()
-
 
     var languages: [Language] // set in init()
 
@@ -134,7 +135,10 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             }
         }
     }
-    
+
+    @AppStorage(AppStorageKeys.groupSize, store: .standard)
+    var groupSize: Int = 3
+
     @AppStorage(AppStorageKeys.secondLanguageAllowed, store: .standard)
     var secondLanguageAllowed: Bool = false
     
@@ -520,7 +524,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     }
     
     func refreshDisplay(screen: Screen) async {
-        let tempDisplay = Display(displayNumber, screen: screen, separators: self, showAs: self, forceScientific: forceScientific)
+        let tempDisplay = Display(displayNumber, screen: screen, separators: self, showAs: self, forceScientific: forceScientific, groupSize: groupSize)
         await MainActor.run() {
             currentDisplay = tempDisplay
             self.showAC = currentDisplay.isZero
