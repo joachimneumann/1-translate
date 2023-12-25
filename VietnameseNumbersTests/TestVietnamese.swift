@@ -344,8 +344,11 @@ final class TestVietnames: XCTestCase {
         XCTAssertEqual(vietnamese.read(99_000_000_909), "chín chín tỷ chín trăm lẻ chín")
         XCTAssertEqual(vietnamese.read(99_999_999_999), "chín chín tỷ chín trăm chín chín triệu chín trăm chín chín nghìn chín trăm chín chín")
         
-        vietnamese.thousand = .ngàn
+        vietnamese.e3 = Vietnamese.Thousand.nghìn.rawValue
         XCTAssertEqual(vietnamese.read(1_000_000_000_000), "một nghìn tỷ")
         XCTAssertEqual(vietnamese.read(999_000_000_000_000), "chín trăm chín chín nghìn tỷ")
+        vietnamese.e3 = Vietnamese.Thousand.ngàn.rawValue
+        XCTAssertEqual(vietnamese.read(1_000_000_000_000), "một ngàn tỷ")
+        XCTAssertEqual(vietnamese.read(999_000_000_000_000), "chín trăm chín chín ngàn tỷ")
     }
 }

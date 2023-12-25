@@ -39,16 +39,13 @@ struct TranslatedDisplay: View {
         GeometryReader { geometry in
             ScrollView(.vertical) {
                 VStack {
-                    if translatedStringTopBorder != nil {
-                        HStack(alignment: .bottom, spacing: 0.0) {
-                            Text(translatedStringTopBorder!)
-                                .topBorder()
-                            Spacer(minLength: 0.0)
-                        }
-                    }
                     HStack(alignment: .bottom, spacing: 0.0) {
                         if rightToLeft {
                             Spacer(minLength: 0.0)
+                        }
+                        if translatedStringTopBorder != nil {
+                            Text(translatedStringTopBorder!)
+                                .topBorder()
                         }
                         Text(translatedString)
                             .textSelection(.enabled)

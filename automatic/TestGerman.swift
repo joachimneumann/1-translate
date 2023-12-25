@@ -11,7 +11,7 @@ final class TestGerman: XCTestCase {
     func test_german() {
         let german = German()
 //        german.useSoftHyphen = false
-//        german.capitalisation = false
+        german.capitalisation = false
         german.groupSeparator = ""
         german.decimalSeparator = "."
         XCTAssertEqual(german.read(0), "null")

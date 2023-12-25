@@ -71,6 +71,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @Published var secondTranslatedNumberTopBorder: String? = nil
 
     let arabNumerals    = ArabNumerals()
+    let armenian        = Armenian()
     let catalan         = Catalan()
     let chineseFinancial   = Chinese(variant: .financial)
     let chineseSimplified  = Chinese(variant: .simplified)
@@ -116,18 +117,20 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     func updateTranslation() {
         firstTranslatedNumber = firstLanguage.read(currentDisplay.allInOneLine)
         firstTranslatedNumberTopBorder = nil
-        if firstTranslatedNumber.contains(Roman.TOUSANDS) {
-            let split = firstTranslatedNumber.split(separator: Roman.TOUSANDS)
+        if firstTranslatedNumber.contains(OVERLINE) {
+            let split = firstTranslatedNumber.split(separator: OVERLINE)
             firstTranslatedNumberTopBorder = String(split[0])
             if split.count == 2 {
                 firstTranslatedNumber = String(split[1])
+            } else {
+                firstTranslatedNumber = ""
             }
         }
             
         secondTranslatedNumber = secondLanguage.read(currentDisplay.allInOneLine)
         secondTranslatedNumberTopBorder = nil
-        if secondTranslatedNumber.contains(Roman.TOUSANDS) {
-            let split = secondTranslatedNumber.split(separator: Roman.TOUSANDS)
+        if secondTranslatedNumber.contains(OVERLINE) {
+            let split = secondTranslatedNumber.split(separator: OVERLINE)
             secondTranslatedNumberTopBorder = String(split[0])
             if split.count == 2 {
                 secondTranslatedNumber = String(split[1])
@@ -313,6 +316,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         
         languages = [
             arabNumerals,
+            armenian,
             catalan,
             chineseSimplified,
             chineseTraditional,

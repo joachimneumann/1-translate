@@ -7,9 +7,9 @@
 
 import Foundation
 
-class Roman: Language {
+let OVERLINE = "__OVERLINE__"
 
-    static let TOUSANDS = "__RomanThousand__"
+class Roman: Language {
 
     init() {
         super.init(
@@ -22,11 +22,11 @@ class Roman: Language {
         allowFraction = false
     }
     
-    private func read_1_999(_ num: Int) -> String {
-        if num == 0 {
+    private func read_1_999(_ i: Int) -> String {
+        if i == 0 {
             return "zero: unknown"
         }
-        if num > 3999 {
+        if i > 3_999 {
             return "too large"
         }
 
@@ -34,7 +34,7 @@ class Roman: Language {
         let numerals = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
         
         var result = ""
-        var remaining = num
+        var remaining = i
         
         for (index, value) in values.enumerated() {
             while remaining >= value {
@@ -52,7 +52,7 @@ class Roman: Language {
             if num < 3_999_999 {
                 let XXX = num % 1000
                 let XXX_000 = num / 1000
-                var ret = read_1_999(XXX_000) + Roman.TOUSANDS
+                var ret = read_1_999(XXX_000) + OVERLINE
                 if XXX > 0 {
                     ret += read_1_999(XXX)
                 }
@@ -61,7 +61,6 @@ class Roman: Language {
         }
         return "too large"
     }
-    
 
 }
 
