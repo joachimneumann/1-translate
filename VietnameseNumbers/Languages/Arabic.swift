@@ -48,7 +48,7 @@ class Arabic: Language {
         }
     }
 
-    func read_10s_compound(_ i: Int) -> String {
+    func read_arabic10s(_ i: Int) -> String {
         switch i {
         case 1:     return "عَشَرَ"
         case 2:     return "عِشْرُونَ"
@@ -63,7 +63,7 @@ class Arabic: Language {
         }
     }
 
-    func read_100s_compound(_ i: Int) -> String {
+    func read_arabic_100s(_ i: Int) -> String {
         switch i {
         case 1:     return "مِئَة"
         case 2:     return "مِا۟ئَتَان"
@@ -78,6 +78,14 @@ class Arabic: Language {
         }
     }
 
+    func read_arabic_1000s(_ i: Int) -> String {
+        switch i {
+        case 1:     return "أَلف"
+        case 2:     return "أَلفين"
+        default:    return read_0_9(i) + " " + "أَلاف"
+        }
+    }
+    
     override func read_10_99(_ i: Int) -> String {
         var ret = ""
         if i == 10 { return "عَشَرَة" }
@@ -90,20 +98,33 @@ class Arabic: Language {
             if i.E1 > 1 {
                 ret += "و "
             }
-            ret += read_10s_compound(i.E1)
+            ret += read_arabic10s(i.E1)
         } else {
-            ret += read_10s_compound(i.E1)
+            ret += read_arabic10s(i.E1)
         }
         return ret
     }
     
     override func read_e2_e3(_ i: Int) -> String {
         var ret = ""
-        ret += read_100s_compound(i.E2)
+        ret += read_arabic_100s(i.E2)
         if i.E2x > 0 {
             ret += " و "
             ret += read(i.E2x)
         }
         return ret
+    }
+    
+    override func read_e3_e6(_ i: Int) -> String {
+        var ret = ""
+        if i <= 9_999 {
+            ret += read_arabic_1000s(i.E3)
+            if i.E3x > 0 {
+                ret += " و "
+                ret += read(i.E3x)
+            }
+            return ret
+        }
+        return "too big"
     }
 }
