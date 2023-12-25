@@ -35,6 +35,7 @@ struct SelectLanguage: View {
         HStack {
             Button(action: {
                 viewModel.firstLanguage = language
+                viewModel.firstLanguageName = language.name
             }) {
                 HStack {
                     Image(language.name)
@@ -54,6 +55,7 @@ struct SelectLanguage: View {
             if viewModel.secondLanguageAllowed {
                 Button(action: {
                     viewModel.secondLanguage = language
+                    viewModel.secondLanguageName = language.name
                 }) {
                     HStack {
                         Image(language.name)

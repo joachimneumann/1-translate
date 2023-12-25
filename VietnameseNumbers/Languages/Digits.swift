@@ -23,3 +23,7 @@ class Digits: Language {
         i.string
     }
 }
+
+extension LosslessStringConvertible {
+    var string: String { .init(self) }
+}

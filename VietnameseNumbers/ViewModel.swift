@@ -68,24 +68,22 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @Published var firstTranslatedNumberTopBorder: String? = nil
     @Published var secondTranslatedNumberTopBorder: String? = nil
 
-    let digits          = Digits()
-    let thaiTraditional = ThaiTraditional()
-    let thai            = Thai()
-    let english         = English()
-    let german          = German()
-    let vietnamese      = Vietnamese()
-    let spanish         = Spanish()
     let catalan         = Catalan()
-    let roman           = Roman()
-    let french          = French()
+    let chineseFinancial   = Chinese(variant: .financial)
+    let chineseSimplified  = Chinese(variant: .simplified)
+    let chineseTraditional = Chinese(variant: .traditional)
     let danish          = Danish()
+    let digits          = Digits()
+    let english         = English()
+    let french          = French()
+    let german          = German()
+    let polish          = Polish()
+    let roman           = Roman()
+    let spanish         = Spanish()
+    let thai            = Thai()
+    let thaiTraditional = ThaiTraditional()
+    let vietnamese      = Vietnamese()
 
-
-    //-----//
-    
-    let translateTraditionalChinese = TranslateChinese(variant: .traditional)
-    let translateSimplifiedChinese = TranslateChinese(variant: .simplified)
-    let translateFinancialChinese = TranslateChinese(variant: .financial)
 
     var languages: [Language] // set in init()
 
@@ -141,16 +139,16 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     var secondLanguageAllowed: Bool = false
     
     @AppStorage(AppStorageKeys.firstLanguageKey, store: .standard)
-    private var firstLanguageName: String = "digits"
+    var firstLanguageName: String = "English"
 
     @AppStorage(AppStorageKeys.secondLanguageKey, store: .standard)
-    private var secondLanguageName: String = "แบบดั้งเดิม"
+    var secondLanguageName: String = "German"
 
     @AppStorage(AppStorageKeys.settingsEnglishUseAndAfterHundred, store: .standard)
     var settingsEnglishUseAndAfterHundred: Bool = false {
         didSet {
             if settingsEnglishUseAndAfterHundred {
-                english.afterHundred = " and "
+                english.afterHundred = " and"
             } else {
                 english.afterHundred = ""
             }
@@ -212,7 +210,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         }
     }
         
-    @Published var firstLanguage: Language = Digits() {
+    @Published var firstLanguage: Language = English() {
         didSet {
             previouslySelectedLanguages.add(new: firstLanguage.name)
             if firstLanguage.name == secondLanguage.name {
@@ -231,7 +229,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             secondLanguageName = secondLanguage.name
         }
     }
-    @Published var secondLanguage: Language = Digits() {
+    @Published var secondLanguage: Language = German() {
         didSet {
             previouslySelectedLanguages.add(new: secondLanguage.name)
             if firstLanguage.name == secondLanguage.name {
@@ -291,13 +289,21 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         precisionDescription = _precision.wrappedValue.useWords
         
         languages = [
-            english,
-            german,
-            vietnamese,
-            spanish,
             catalan,
+            chineseFinancial,
+            chineseSimplified,
+            chineseTraditional,
+            danish,
+            digits,
+            english,
+            french,
+            german,
+            polish,
+            roman,
+            spanish,
             thai,
-            thaiTraditional]
+            thaiTraditional,
+            vietnamese]
         
         for language in languages {
             previouslySelectedLanguages.add(new: language.name)
@@ -317,8 +323,16 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         backgroundColor["plus"] = keyColor.upColor(for: "+", isPending: false)
         
         /// trigger the didSet action of the persistently stored variables
-        firstLanguage = firstLanguage
-        secondLanguage = secondLanguage
+        for l in languages {
+            if secondLanguageName == l.name {
+                secondLanguage = l
+            }
+        }
+        for l in languages {
+            if firstLanguageName == l.name {
+                firstLanguage = l
+            }
+        }
         groupSeparator = groupSeparator
         decimalSeparator = decimalSeparator
         settingsEnglishUseAndAfterHundred = settingsEnglishUseAndAfterHundred
