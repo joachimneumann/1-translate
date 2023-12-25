@@ -147,11 +147,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @AppStorage(AppStorageKeys.settingsEnglishUseAndAfterHundred, store: .standard)
     var settingsEnglishUseAndAfterHundred: Bool = false {
         didSet {
-            if settingsEnglishUseAndAfterHundred {
-                english.afterHundred = " and"
-            } else {
-                english.afterHundred = ""
-            }
+            english.afterHundred = settingsEnglishUseAndAfterHundred ? " and" : ""
             settingsEnglishExample = english.read(105)
         }
     }
@@ -189,7 +185,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @AppStorage(AppStorageKeys.settingsVietnameseThousand)
     var settingsVietnameseThousand: Vietnamese.Thousand = .nghìn {
         didSet {
-            vietnamese.thousand = settingsVietnameseThousand
+            vietnamese.e3 = settingsVietnameseThousand.rawValue
             settingsVietnameseExample = vietnamese.read(303333)
         }
     }
@@ -304,7 +300,15 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             thai,
             thaiTraditional,
             vietnamese]
-        
+
+        english.afterHundred  = settingsEnglishUseAndAfterHundred ? " and" : ""
+        spanish.dotString     = settingsSpanishUsePunto.rawValue
+        german.capitalisation = settingsGermanCaptalisation
+        german.useSoftHyphen  = settingsGermanSoftHyphen
+        vietnamese.e3         = settingsVietnameseThousand.rawValue
+        vietnamese.secondLast = settingsVietnameseSecondLast
+        vietnamese.compact    = settingsVietnameseCompact
+
         for language in languages {
             previouslySelectedLanguages.add(new: language.name)
         }
@@ -337,7 +341,8 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         decimalSeparator = decimalSeparator
         settingsEnglishUseAndAfterHundred = settingsEnglishUseAndAfterHundred
         settingsVietnameseCompact = settingsVietnameseCompact
-        settingsGermanCaptalisation = settingsGermanCaptalisation
+        vietnamese.e3 = settingsVietnameseThousand.rawValue
+        german.capitalisation = settingsGermanCaptalisation
         settingsSpanishUsePunto = settingsSpanishUsePunto
     }
         

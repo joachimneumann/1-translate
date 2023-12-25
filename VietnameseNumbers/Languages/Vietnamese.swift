@@ -21,7 +21,6 @@ class Vietnamese: Language {
     
     var compact: Bool = false
     var secondLast: SecondLast = .lẻ
-    var thousand: Thousand = .nghìn
 
     init() {
         super.init(
@@ -32,7 +31,7 @@ class Vietnamese: Language {
             groupSeparator: "",
             decimalSeparator: ".")
         e2 = "trăm"
-        e3 = thousand.rawValue
+        e3 = "nghìn"
         e6 = "triệu"
         e9 = "tỷ"
         afterNegative = " "
@@ -118,7 +117,7 @@ class Vietnamese: Language {
 
     override func read_e6_e9(_ i: Int) -> String {
         var ret = read(i.E6s) + " " + e6!
-        ret += read_trailing_3digits(i.E3s, " " + thousand.rawValue)
+        ret += read_trailing_3digits(i.E3s, " " + e3!)
         ret += read_trailing_3digits(i.E0s)
         return ret
     }
