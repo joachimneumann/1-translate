@@ -90,7 +90,29 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     var languages: [Language] // set in init()
 
     var previouslySelectedLanguages = StringPreference()
-    
+    var firstFont: Font {
+        if firstLanguage.englishName == arabNumerals.englishName {
+            Font(UIFont(name: "Avenir", size: secondLanguageAllowed ? 40 : 60)!)
+        } else {
+            secondLanguageAllowed ? Font.title : Font.largeTitle
+        }
+    }
+    var secondFont: Font {
+        if firstLanguage.englishName == arabNumerals.englishName {
+            Font(UIFont(name: "Avenir", size: 40)!)
+        } else {
+            Font.title
+        }
+    }
+    var firstRightToLeft: Bool {
+        firstLanguage.englishName == arabNumerals.englishName ||
+        firstLanguage.englishName == thaiNumerals.englishName
+    }
+    var secondRightToLeft: Bool {
+        firstLanguage.englishName == arabNumerals.englishName ||
+        firstLanguage.englishName == thaiNumerals.englishName
+    }
+
     func updateTranslation() {
         firstTranslatedNumber = firstLanguage.read(currentDisplay.allInOneLine)
         firstTranslatedNumberTopBorder = nil
