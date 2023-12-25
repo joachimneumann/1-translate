@@ -10,7 +10,7 @@ import Foundation
 class ArmenianNumerals: Language {
     init() {
         super.init(
-            name: "թվանշաններ", 
+            name: "թիվ", 
             negativeString: "-",
             dotString: ".",
             exponentString: "e")

@@ -70,23 +70,24 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @Published var firstTranslatedNumberTopBorder: String? = nil
     @Published var secondTranslatedNumberTopBorder: String? = nil
 
-    let arabNumerals    = ArabNumerals()
-    let armenian        = ArmenianNumerals()
-    let catalan         = Catalan()
+    let arabNumerals       = ArabNumerals()
+    let armenianNumerals   = ArmenianNumerals()
+    let armenian           = Armenian()
+    let catalan            = Catalan()
     let chineseFinancial   = Chinese(variant: .financial)
     let chineseSimplified  = Chinese(variant: .simplified)
     let chineseTraditional = Chinese(variant: .traditional)
-    let danish          = Danish()
-    let digits          = Digits()
-    let english         = English()
-    let french          = French()
-    let german          = German()
-    let polish          = Polish()
-    let roman           = Roman()
-    let spanish         = Spanish()
-    let thai            = Thai()
-    let thaiNumerals    = ThaiNumerals()
-    let vietnamese      = Vietnamese()
+    let danish             = Danish()
+    let digits             = Digits()
+    let english            = English()
+    let french             = French()
+    let german             = German()
+    let polish             = Polish()
+    let roman              = Roman()
+    let spanish            = Spanish()
+    let thai               = Thai()
+    let thaiNumerals       = ThaiNumerals()
+    let vietnamese         = Vietnamese()
 
     var languages: [Language] // set in init()
 
@@ -317,18 +318,18 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         languages = [
             arabNumerals,
             armenian,
+            armenianNumerals,
             catalan,
             chineseSimplified,
             chineseTraditional,
             chineseFinancial,
             danish,
-            digits,
-            english,
-            french,
             german,
+            english,
+            spanish,
+            french,
             polish,
             roman,
-            spanish,
             thai,
             thaiNumerals,
             vietnamese]
