@@ -20,8 +20,8 @@
 		AA2FAC17272F2349006DE4C8 /* BrainEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FAC01272F2348006DE4C8 /* BrainEngine.swift */; };
 		AA2FAC23272F2349006DE4C8 /* OperatorStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FAC0D272F2349006DE4C8 /* OperatorStack.swift */; };
 		AA30E9E02B2DAD4C00F7FDEA /* TestThai.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA30E9DF2B2DAD4C00F7FDEA /* TestThai.swift */; };
-		AA326E492B32F0430092E8E6 /* English.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA326E482B32F0430092E8E6 /* English.swift */; };
-		AA326E4A2B32F0430092E8E6 /* English.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA326E482B32F0430092E8E6 /* English.swift */; };
+		AA326E492B32F0430092E8E6 /* EnglishImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA326E482B32F0430092E8E6 /* EnglishImpl.swift */; };
+		AA326E4A2B32F0430092E8E6 /* EnglishImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA326E482B32F0430092E8E6 /* EnglishImpl.swift */; };
 		AA326E4C2B332DCC0092E8E6 /* German.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA326E4B2B332DCC0092E8E6 /* German.swift */; };
 		AA326E4D2B332DCC0092E8E6 /* German.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA326E4B2B332DCC0092E8E6 /* German.swift */; };
 		AA32853B297248B800D86CB4 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA32853A297248B800D86CB4 /* ViewModel.swift */; };
@@ -141,7 +141,7 @@
 		AA2FAC01272F2348006DE4C8 /* BrainEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrainEngine.swift; sourceTree = "<group>"; };
 		AA2FAC0D272F2349006DE4C8 /* OperatorStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperatorStack.swift; sourceTree = "<group>"; };
 		AA30E9DF2B2DAD4C00F7FDEA /* TestThai.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestThai.swift; path = automatic/TestThai.swift; sourceTree = SOURCE_ROOT; };
-		AA326E482B32F0430092E8E6 /* English.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = English.swift; sourceTree = "<group>"; };
+		AA326E482B32F0430092E8E6 /* EnglishImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnglishImpl.swift; sourceTree = "<group>"; };
 		AA326E4B2B332DCC0092E8E6 /* German.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = German.swift; sourceTree = "<group>"; };
 		AA32853A297248B800D86CB4 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		AA32853C29724D5700D86CB4 /* FlexibleNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlexibleNavigation.swift; sourceTree = "<group>"; };
@@ -343,7 +343,7 @@
 				AAA180A92B365A9300B149E5 /* Chinese.swift */,
 				AAB990532B35749700BD5A24 /* Danish.swift */,
 				AA3565B22B325D4B009B58D2 /* Digits.swift */,
-				AA326E482B32F0430092E8E6 /* English.swift */,
+				AA326E482B32F0430092E8E6 /* EnglishImpl.swift */,
 				AA831B9B2B3462D9003307A2 /* French.swift */,
 				AA326E4B2B332DCC0092E8E6 /* German.swift */,
 				AAB990562B35793100BD5A24 /* Polish.swift */,
@@ -496,7 +496,7 @@
 				AA831B9C2B3462D9003307A2 /* French.swift in Sources */,
 				AA893A072B395C2D00BE2772 /* Armenian.swift in Sources */,
 				AA831BA02B35238C003307A2 /* Vietnamese.swift in Sources */,
-				AA326E492B32F0430092E8E6 /* English.swift in Sources */,
+				AA326E492B32F0430092E8E6 /* EnglishImpl.swift in Sources */,
 				AA8A91122B1D7B7100CE7185 /* TranslateNumbers.swift in Sources */,
 				AAA180AA2B365A9300B149E5 /* Chinese.swift in Sources */,
 				AA3565AA2B32420A009B58D2 /* LanguageExtensions.swift in Sources */,
@@ -542,7 +542,7 @@
 				AAB9904F2B356B5C00BD5A24 /* Catalan.swift in Sources */,
 				AAE3DA3D2B39865F005F8414 /* TestArabic.swift in Sources */,
 				AA5020272B333C280080E00C /* Spanish.swift in Sources */,
-				AA326E4A2B32F0430092E8E6 /* English.swift in Sources */,
+				AA326E4A2B32F0430092E8E6 /* EnglishImpl.swift in Sources */,
 				AAD343BD2B3AD82600EFFABF /* TestArabic2.swift in Sources */,
 				AAFBD8A82B32A36D00175197 /* ThaiNumerals.swift in Sources */,
 				AA7988B52B32B07700608906 /* Thai.swift in Sources */,

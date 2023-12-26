@@ -8,11 +8,9 @@
 import XCTest
 
 final class TestEnglish: XCTestCase {
-    func test_english() {
-        let english = English()
-        english.groupSeparator = ""
-        english.decimalSeparator = "."
+    var english = TranslateNumber().english
 
+    func test_english() {
         XCTAssertEqual(english.read(0), "zero")
         XCTAssertEqual(english.read(1), "one")
         XCTAssertEqual(english.read(2), "two")

@@ -79,7 +79,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     let chineseTraditional = Chinese(variant: .traditional)
     let danish             = Danish()
     let digits             = Digits()
-    let english            = English()
+    let english            = EnglishImpl()
     let french             = French()
     let german             = German()
     let polish             = Polish()
@@ -146,22 +146,10 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     var forceScientific: Bool = false
     
     @AppStorage(AppStorageKeys.decimalSeparator, store: .standard)
-    var decimalSeparator: DecimalSeparator = Locale.current.decimalSeparator == "," ? .comma : .dot {
-        didSet {
-            for language in languages {
-                language.decimalSeparator = decimalSeparator.string
-            }
-        }
-    }
+    var decimalSeparator: DecimalSeparator = Locale.current.decimalSeparator == "," ? .comma : .dot
     
     @AppStorage(AppStorageKeys.groupSeparator, store: .standard)
-    var groupSeparator: GroupSeparator = .none {
-        didSet {
-            for language in languages {
-                language.groupSeparator = groupSeparator.string
-            }
-        }
-    }
+    var groupSeparator: GroupSeparator = .none
 
     @AppStorage(AppStorageKeys.groupSize, store: .standard)
     var groupSize: Int = 3
@@ -189,8 +177,6 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             spanish.dotString = settingsSpanishUsePunto.rawValue
             // make sure that the selected decimal and group seperator do not mess up the example
             let tempSpanish = Spanish()
-            tempSpanish.decimalSeparator = "."
-            tempSpanish.groupSeparator = ""
             settingsSpanishExample = tempSpanish.read("1.5")
         }
     }
@@ -237,7 +223,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         }
     }
         
-    @Published var firstLanguage: Language = English() {
+    @Published var firstLanguage: Language = EnglishImpl() {
         didSet {
             previouslySelectedLanguages.add(new: firstLanguage.name)
             if firstLanguage.name == secondLanguage.name {

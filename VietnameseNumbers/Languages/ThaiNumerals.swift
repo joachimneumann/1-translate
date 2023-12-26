@@ -29,7 +29,6 @@ class ThaiNumerals: Language {
         ret = ret.replacingOccurrences(of: "7", with: "๗")
         ret = ret.replacingOccurrences(of: "8", with: "๘")
         ret = ret.replacingOccurrences(of: "9", with: "๙")
-        ret = ret.replacingOccurrences(of: decimalSeparator, with: dotString)
         return ret
     }
 

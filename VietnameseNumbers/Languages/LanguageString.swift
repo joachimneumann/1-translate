@@ -13,8 +13,6 @@ class LanguageString {
     var dotString: String
     var exponentString: String
 
-    var groupSeparator: String = ""
-    var decimalSeparator: String = "."
     var afterNegative = " "
     var beforeAndAfterDotString = ""
     var exponentString2: String? = nil
@@ -35,18 +33,15 @@ class LanguageString {
     }
     
     func read(_ s: String) -> String {
-        // lets remove the groupSeparator
-        let strippedString = s.replacingOccurrences(of: groupSeparator, with: "")
-
         // exponent and mantissa part
-        var parts = strippedString.components(separatedBy: "e")
+        var parts = s.components(separatedBy: "e")
         guard parts.count > 0 && parts.count <= 2 else { return error }
         let mantissa = parts[0]
         let exponent: String? = (parts.count == 2) ? parts[1] : nil
         guard allowExponent || parts.count == 1 else { return "scientific notation not known" }
 
         // integer part and fractional part
-        parts = mantissa.components(separatedBy: decimalSeparator)
+        parts = mantissa.components(separatedBy: ".")
         guard parts.count > 0 && parts.count <= 2 else { return error }
         let integerPart = parts[0]
         let fractionalPart: String? = (parts.count == 2) ? parts[1] : nil

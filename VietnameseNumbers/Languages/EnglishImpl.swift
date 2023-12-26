@@ -7,7 +7,8 @@
 
 import Foundation
 
-class English: Language {
+class EnglishImpl: Language, English {
+    
     init() {
         super.init(
             name: "English",

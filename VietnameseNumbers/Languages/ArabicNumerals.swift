@@ -29,7 +29,6 @@ class ArabicNumerals: Language {
         ret = ret.replacingOccurrences(of: "7", with: "٧‎")
         ret = ret.replacingOccurrences(of: "8", with: "٨‎")
         ret = ret.replacingOccurrences(of: "9", with: "٩")
-        ret = ret.replacingOccurrences(of: decimalSeparator, with: dotString)
         return ret
     }
 
