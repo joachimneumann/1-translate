@@ -230,6 +230,7 @@ final class TestArabic: XCTestCase {
         XCTAssertEqual(arabic.read(215), "مِا۟ئَتَان و خَمْسَةَ عَشَرَ")
         XCTAssertEqual(arabic.read(216), "مِا۟ئَتَان و سِتَّةَ عَشَرَ")
         XCTAssertEqual(arabic.read(217), "مِا۟ئَتَان و سَبْعَةَ عَشَرَ")
+        XCTAssertEqual(arabic.read(217), "مِئتين و سَبعةَ عَشَرَ")
         XCTAssertEqual(arabic.read(218), "مِا۟ئَتَان و ثَمَانِيَةَ عَشَرَ")
         XCTAssertEqual(arabic.read(219), "مِا۟ئَتَان و تِسْعَةَ عَشَرَ")
         XCTAssertEqual(arabic.read(220), "مِا۟ئَتَان و عِشْرُونَ")
@@ -1043,5 +1044,17 @@ final class TestArabic: XCTestCase {
         XCTAssertEqual(arabic.read(9999), "تِسْعَة أَلاف و تِسْعُمِئَة و تِسْعَة و تِسْعُونَ")
         XCTAssertEqual(arabic.read(10_000), "عَشَرَة أَلاف")
         XCTAssertEqual(arabic.read(10_021), "عَشَرَة أَلاف و وَاحِد و عِشْرُونَ")
+        XCTAssertEqual(arabic.read(234_566), "مِا۟ئَتَان و أَرْبَعَة و ثَلَاثُونَ أَلاف و خُمْسُمِئَة و سِتَّة و سِتُّونَ")
+        XCTAssertEqual(arabic.read(999_999), "تِسْعُمِئَة و تِسْعَة و تِسْعُونَ أَلاف و تِسْعُمِئَة و تِسْعَة و تِسْعُونَ")
+        XCTAssertEqual(arabic.read(1_000_000), "مليون")
+        XCTAssertEqual(arabic.read(2_000_000), "مليونان")
+        XCTAssertEqual(arabic.read(3_000_000), "ثلاثة ملايين")
+        XCTAssertEqual(arabic.read(5_000_000), "خمسة ملايين")
+        XCTAssertEqual(arabic.read(1_755_830), "مليون وسبع مئة وخمسة وخمسون ألفاً وثمان مئة وثلاثون")
+        XCTAssertEqual(arabic.read(5_800_130), "خمسة ملايين وثمان مئة ألف ومئة وثلاثون")
+        XCTAssertEqual(arabic.read(1_960_320_000), "مليار وتسع مئة وستون مليوناً وثلاث مئة وعشرون ألفاً")
+        XCTAssertEqual(arabic.read(3_600_123_990), "ثلاثة مليارات وستة ملايين ومئة وثلاثة وعشرون ألفاً وتسع مئة وتسعون")
+        XCTAssertEqual(arabic.read(30_000_000_000), "ثلاثون مِلْيار")
+
     }
 }
