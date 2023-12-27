@@ -16,6 +16,7 @@ protocol Language {
     var rightToLeft: Bool { get }
 }
 
+// Languages with parameters
 protocol English: Language {
     var useAndAfterHundred: Bool { get set }
 }
@@ -34,7 +35,7 @@ protocol Spanish: Language {
 
 class Languages {
     var list: [Language] = []
-    let arabic: Language              = ArabicImpl()
+    let arabic: Language              = ArabicImpl() // not working
     let arabicNumerals: Language      = ArabicNumeralsImpl()
     let armenianNumerals: Language    = ArmenianNumeralsImpl()
     let armenian: Language            = ArmenianImpl()
@@ -55,7 +56,8 @@ class Languages {
     var vietnamese: Vietnamese        = VietnameseImpl()
 
     init() {
-        list = [arabicNumerals,
+        list = [
+        arabicNumerals,
         armenianNumerals,
         armenian,
         catalan,

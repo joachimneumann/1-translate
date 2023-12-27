@@ -231,16 +231,8 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             secondLanguageName = secondLanguage.name
         }
     }
-    
-    var precisionDescription = "unknown"
-    var showPrecision: Bool = false
-    var secondActive = false
-    
-    @AppStorage("precision", store: .standard) private (set) var precision: Int = 1000
-    @AppStorage("rad", store: .standard) var rad: Bool = false
-    
-    private let brain: Brain /// initialized later with _precision.wrappedValue
-    private var stupidBrain = BrainEngine(precision: 100) /// I want to call fast sync functions
+        
+    private var stupidBrain = BrainEngine(precision: 1_000) /// I want to call fast sync functions
     
     private let keysThatRequireValidNumber = ["±", "%", "/", "x", "-", "+", "=", "( ", " )", "m+", "m-", "x^2", "x^3", "x^y", "e^x", "y^x", "2^x", "10^x", "One_x", "√", "3√", "y√", "logy", "ln", "log2", "log10", "x!", "sin", "cos", "tan", "asin", "acos", "atan", "EE", "sinh", "cosh", "tanh", "asinh", "acosh", "atanh"]
     private static let MAX_DISPLAY_LEN = 10_000 /// too long strings in Text() crash the app
@@ -268,9 +260,6 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         /// currentDisplay will be updated shortly by refreshDisplay in onAppear() of Calculator
         /// I set some values here
         currentDisplay = Display(left: "0", right: nil, canBeInteger: false, canBeFloat: false)
-        brain = Brain(precision: _precision.wrappedValue)
-        precisionDescription = _precision.wrappedValue.useWords
-        
         
         for language in languages.list {
             previouslySelectedLanguages.add(new: language.name)
@@ -313,24 +302,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         settingsSpanishUsePunto = settingsSpanishUsePunto
 
     }
-    
-    /// the update of the precision in brain can be slow.
-    /// Therefore, I only want to do that when leaving the settings screen
-    func updatePrecision(to newPrecision: Int) async {
-        await MainActor.run {
-            precision = newPrecision
-            precisionDescription = self.precision.useWords
-        }
-        let _ = await brain.setPrecision(newPrecision)
         
-        /// also change the precision in the displayNumber
-        let new = Number("0", precision: newPrecision)
-        new.setValue(other: displayNumber)
-        await MainActor.run {
-            displayNumber = new
-        }
-    }
-    
     ///  To give a clear visual feedback to the user that the button has been pressed,
     ///  the animation will always wait for the downAnimation to finish
     func showDisabledColors(for symbol: String) async {
@@ -403,34 +375,12 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             return
         }
         
-        let calculatorSymbol = ["sin", "cos", "tan", "asin", "acos", "atan"].contains(symbol) && !rad ? symbol+"D" : symbol
         switch symbol {
-        case "2nd":
-            secondActive.toggle()
-            backgroundColor["2nd"] = keyColor.secondColor(active: secondActive)
-        case "Rad":
-            rad = true
-            Task(priority: .high) {
-                await showUpColors(for: symbol)
-            }
-            showPrecision = false
-        case "Deg":
-            rad = false
-            Task(priority: .high) {
-                await showUpColors(for: symbol)
-            }
-            showPrecision = false
         default:
             guard keyState == .notPressed else { return }
             
             let valid = displayNumber.isValid || !keysThatRequireValidNumber.contains(symbol)
             guard valid else { return }
-            
-            if symbol == "AC" {
-                showPrecision.toggle()
-            } else {
-                showPrecision = false
-            }
             
             keyState = .pressed
             upHasHappended = true
@@ -441,7 +391,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
                 await setPendingColors(for: symbol)
             }
             Task.detached(priority: .low) {
-                await self.defaultTask(for: calculatorSymbol, screen: screen)
+                await self.defaultTask(for: symbol, screen: screen)
                 self.keyState = .notPressed
             }
         }
@@ -476,7 +426,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         }
         
         keyState = .highPrecisionProcessing
-        displayNumber = await brain.operation(symbol)
+        displayNumber = stupidBrain.operation(symbol)
         await refreshDisplay(screen: screen)
     }
     
