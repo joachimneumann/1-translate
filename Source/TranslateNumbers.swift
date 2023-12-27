@@ -41,13 +41,13 @@ struct TranslateNumbers: View {
                     .frame(height: 34.0)
                     .padding(.bottom, 10)
                     .padding(.top, 20)
-                    TranslatedDisplay(
-                        translatedString: viewModel.firstTranslatedNumber,
-                        translatedStringTopBorder: viewModel.firstTranslatedNumberTopBorder,
-                        screen: screen,
-                        rightToLeft: viewModel.firstLanguage.rightToLeft)
-                    .font(viewModel.firstFont)
-                    .padding(.horizontal, 0)
+                        TranslatedDisplay(
+                            translatedString: viewModel.firstTranslatedNumber,
+                            translatedStringTopBorder: viewModel.firstTranslatedNumberTopBorder,
+                            screen: screen,
+                            rightToLeft: viewModel.firstLanguage.rightToLeft)
+                        .font(viewModel.firstFont)
+                        .padding(.horizontal, 0)
                     Spacer(minLength: 0.0)
                 }
                 if viewModel.secondLanguageAllowed {

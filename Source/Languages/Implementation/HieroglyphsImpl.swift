@@ -92,7 +92,7 @@ class HieroglyphsImpl: LanguageImpl {
         }
         
         let without = readHieroglyphs(i, newLine: "")
-        if without.count < 10 {
+        if without.count < 17 {
             return without
         } else {
             return readHieroglyphs(i, newLine: "\n")
