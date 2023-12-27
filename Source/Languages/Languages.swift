@@ -48,6 +48,7 @@ class Languages {
     var english: English              = EnglishImpl()
     let french: Language              = FrenchImpl()
     var german: German                = GermanImpl()
+    var hieroglyphs: Language         = HieroglyphsImpl()
     let polish: Language              = PolishImpl()
     let roman: Language               = RomanImpl()
     var spanish: Spanish              = SpanishImpl()
@@ -68,6 +69,7 @@ class Languages {
         english,
         french,
         german,
+        hieroglyphs,
         polish,
         roman,
         spanish,

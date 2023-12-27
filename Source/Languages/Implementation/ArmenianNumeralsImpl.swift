@@ -11,9 +11,9 @@ class ArmenianNumeralsImpl: LanguageImpl {
     init() {
         super.init(
             name: "թիվ", 
-            negativeString: "-",
-            dotString: ".",
-            exponentString: "e")
+            negativeString: "",
+            dotString: "",
+            exponentString: "")
         englishName = "Armenian Numerals"
         allowNegativeNumbers = false
         allowExponent = false
