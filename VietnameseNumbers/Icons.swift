@@ -115,11 +115,6 @@ struct Icons : View {
         }
         .frame(width: screen.iconsWidth)
         .padding(.trailing, screen.plusIconTrailingPadding)
-        .onChange(of: scenePhase) { newPhase in
-            if newPhase == .active {
-                self.isValidPasteContent = true
-            }
-        }
     }
     @MainActor func setIsCopying(to isCopying: Bool) {
         viewModel.isCopying = isCopying

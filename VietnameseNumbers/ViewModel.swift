@@ -88,7 +88,14 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     }
     
     func updateTranslation() {
-        firstTranslatedNumber = firstLanguage.read(currentDisplay.allInOneLine)
+        var allInOneLine = currentDisplay.allInOneLine
+        if groupSeparator != .none {
+            allInOneLine = allInOneLine.replacingOccurrences(of: groupSeparator.string, with: "")
+        }
+        if decimalSeparator != .dot {
+            allInOneLine = allInOneLine.replacingOccurrences(of: decimalSeparator.string, with: ".")
+        }
+        firstTranslatedNumber = firstLanguage.read(allInOneLine)
         firstTranslatedNumberTopBorder = nil
         if firstTranslatedNumber.contains(OVERLINE) {
             let split = firstTranslatedNumber.split(separator: OVERLINE)
@@ -100,7 +107,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             }
         }
         
-        secondTranslatedNumber = secondLanguage.read(currentDisplay.allInOneLine)
+        secondTranslatedNumber = secondLanguage.read(allInOneLine)
         secondTranslatedNumberTopBorder = nil
         if secondTranslatedNumber.contains(OVERLINE) {
             let split = secondTranslatedNumber.split(separator: OVERLINE)

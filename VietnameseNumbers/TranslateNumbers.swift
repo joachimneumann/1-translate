@@ -134,11 +134,6 @@ struct TranslateNumbers: View {
                         await viewModel.refreshDisplay(screen: screen)
                     }
                 }
-                .onChange(of: screen) { newScreen in /// e.g., rotation
-                    Task {
-                        await viewModel.refreshDisplay(screen: newScreen)
-                    }
-                }
                 .background(screen.backgroundColor)
         }
     }

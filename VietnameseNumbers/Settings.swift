@@ -338,7 +338,7 @@ struct Settings: View {
             Text("\nVersion: \(appVersion ?? "unknown") (build \(buildNumber ?? "unknown"))")
                 .italic()
                 .padding(.bottom, 3)
-            Text("This is a hobby project by Joachim Neumann. Although I have done some testing, errors may occur. If you have feedback, for example a wrong translations or ideas for improvement, drop me an email at joachim@joachimneumann.com")
+            Text("This is a hobby project by Joachim Neumann. Although I have done some testing, errors may occur. If you have feedback, for example a wrong translations or ideas for improvement, drop me an email at joachim@joachimneumann.com").tint(.white)
         }
     }
     

@@ -36,6 +36,7 @@ struct Display {
     var allInOneLine: String {
         left + (right ?? "")
     }
+    
     var length: Int {
         var ret = left.count
         if right != nil { ret += right!.count }
