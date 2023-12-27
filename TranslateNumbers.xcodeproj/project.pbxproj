@@ -325,24 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				AAB253B42B3AE79400860F93 /* Languages.swift */,
-				AA3565AF2B32588B009B58D2 /* LanguageImpl.swift */,
-				AA5CF9162B39318D004BB6BB /* ArabicNumeralsImpl.swift */,
-				AAE3DA3E2B3988DA005F8414 /* ArabicImpl.swift */,
-				AA893A052B395C2700BE2772 /* ArmenianImpl.swift */,
-				AA5CF9192B3944AD004BB6BB /* ArmenianNumeralsImpl.swift */,
-				AAB9904D2B356B5C00BD5A24 /* CatalanImpl.swift */,
-				AAA180A92B365A9300B149E5 /* ChineseImpl.swift */,
-				AAB990532B35749700BD5A24 /* DanishImpl.swift */,
-				AA3565B22B325D4B009B58D2 /* DigitsImpl.swift */,
-				AA326E482B32F0430092E8E6 /* EnglishImpl.swift */,
-				AA831B9B2B3462D9003307A2 /* FrenchImpl.swift */,
-				AA326E4B2B332DCC0092E8E6 /* GermanImpl.swift */,
-				AAB990562B35793100BD5A24 /* PolishImpl.swift */,
-				AAB990502B35703500BD5A24 /* RomanImpl.swift */,
-				AA5020252B333C280080E00C /* SpanishImpl.swift */,
-				AA7988B32B32B07700608906 /* ThaiImpl.swift */,
-				AAFBD8A62B32A36D00175197 /* ThaiNumeralsImpl.swift */,
-				AA831B9F2B35238C003307A2 /* VietnameseImpl.swift */,
+				AAB253BB2B3BBAD400860F93 /* Implementation */,
 			);
 			path = Languages;
 			sourceTree = "<group>";
@@ -371,6 +354,31 @@
 				AAD343BB2B3AD7DB00EFFABF /* TestArabic2.swift */,
 			);
 			path = VietnameseNumbersTests;
+			sourceTree = "<group>";
+		};
+		AAB253BB2B3BBAD400860F93 /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				AA3565AF2B32588B009B58D2 /* LanguageImpl.swift */,
+				AA5CF9162B39318D004BB6BB /* ArabicNumeralsImpl.swift */,
+				AAE3DA3E2B3988DA005F8414 /* ArabicImpl.swift */,
+				AA893A052B395C2700BE2772 /* ArmenianImpl.swift */,
+				AA5CF9192B3944AD004BB6BB /* ArmenianNumeralsImpl.swift */,
+				AAB9904D2B356B5C00BD5A24 /* CatalanImpl.swift */,
+				AAA180A92B365A9300B149E5 /* ChineseImpl.swift */,
+				AAB990532B35749700BD5A24 /* DanishImpl.swift */,
+				AA3565B22B325D4B009B58D2 /* DigitsImpl.swift */,
+				AA326E482B32F0430092E8E6 /* EnglishImpl.swift */,
+				AA831B9B2B3462D9003307A2 /* FrenchImpl.swift */,
+				AA326E4B2B332DCC0092E8E6 /* GermanImpl.swift */,
+				AAB990562B35793100BD5A24 /* PolishImpl.swift */,
+				AAB990502B35703500BD5A24 /* RomanImpl.swift */,
+				AA5020252B333C280080E00C /* SpanishImpl.swift */,
+				AA7988B32B32B07700608906 /* ThaiImpl.swift */,
+				AAFBD8A62B32A36D00175197 /* ThaiNumeralsImpl.swift */,
+				AA831B9F2B35238C003307A2 /* VietnameseImpl.swift */,
+			);
+			path = Implementation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
