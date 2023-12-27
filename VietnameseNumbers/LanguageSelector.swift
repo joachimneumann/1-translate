@@ -10,7 +10,7 @@ import SwiftUI
 struct SelectLanguage: View {
     
     struct LanguageText: View {
-        let language: LanguageBaseClass
+        let language: Language
         let bold: Bool
         var body: some View {
             HStack(spacing: 0.0) {
@@ -30,7 +30,7 @@ struct SelectLanguage: View {
     }
     
     @ObservedObject var viewModel: ViewModel
-    let language: LanguageBaseClass
+    let language: Language
     var body: some View {
         let _1_selected = (language.name == viewModel.firstLanguage.name)
         let _2_selected = (language.name == viewModel.secondLanguage.name)
@@ -40,7 +40,7 @@ struct SelectLanguage: View {
                 viewModel.firstLanguageName = language.name
             }) {
                 HStack {
-                    Image(language.englishName != nil ? language.englishName! : language.name)
+                    Image(language.flagName)
                         .resizable()
                         .scaledToFit()
                         .padding(2)
@@ -60,7 +60,7 @@ struct SelectLanguage: View {
                     viewModel.secondLanguageName = language.name
                 }) {
                     HStack {
-                        Image(language.englishName != nil ? language.englishName! : language.name)
+                        Image(language.flagName)
                             .resizable()
                             .scaledToFit()
                             .padding(2)
@@ -95,8 +95,8 @@ struct LanguageSelector: View {
                 }
                 .padding(.top, 0)
                 .padding(.bottom, 10)
-                ForEach(0 ..< viewModel.languages.count, id: \.self) { index in
-                    SelectLanguage(viewModel: viewModel, language: viewModel.languages[index])
+                ForEach(0 ..< viewModel.tn.languages.count, id: \.self) { index in
+                    SelectLanguage(viewModel: viewModel, language: viewModel.tn.languages[index])
                 }
             }
         }

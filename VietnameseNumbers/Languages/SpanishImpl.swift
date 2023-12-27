@@ -7,7 +7,12 @@
 
 import Foundation
 
-class SpanishImpl: LanguageBaseClass {
+class SpanishImpl: LanguageBaseClass, Spanish {
+    var puntoComma: PuntoComma {
+        didSet {
+            dotString = puntoComma.rawValue
+        }
+    }
     
     enum PuntoComma: String, Codable, CaseIterable {
         case coma
@@ -15,6 +20,7 @@ class SpanishImpl: LanguageBaseClass {
     }
 
     init() {
+        puntoComma = .coma
         super.init(
             name: "Español",
             negativeString: "menos",

@@ -13,21 +13,20 @@ protocol ShowAs {
 }
 
 struct AppStorageKeys {
-    static let forceScientific                   = "forceScientific"
-    static let decimalSeparator                  = "decimalSeparator"
-    static let groupSeparator                    = "groupSeparator"
-    static let groupSize                         = "groupSize"
-    static let secondLanguageAllowed             = "secondLanguageAllowed"
-    static let firstLanguageKey                  = "firstLanguage"
-    static let secondLanguageKey                 = "secondLanguage"
-    static let activeIndex                       = "activeIndex"
-    static let settingsEnglishUseAndAfterHundred = "settingsEnglishUseAndAfterHundred"
-    static let settingsSpanishUsePunto           = "settingsSpanishUsePunto"
-    static let settingsGermanCaptalisation       = "settingsGermanCaptalisation"
-    static let settingsGermanSoftHyphen          = "settingsGermanSoftHyphen"
-    static let settingsVietnameseThousand        = "settingsVietnameseThousand"
-    static let settingsVietnameseSecondLast      = "settingsVietnameseSecondLast"
-    static let settingsVietnameseCompact         = "settingsVietnameseCompact"
+    static let forceScientificKey                   = "forceScientificKey"
+    static let decimalSeparatorKey                  = "decimalSeparatorKey"
+    static let groupSeparatorKey                    = "groupSeparatorKey"
+    static let groupSizeKey                         = "groupSizeKey"
+    static let secondLanguageAllowedKey             = "secondLanguageAllowedKey"
+    static let firstLanguageKey                     = "firstLanguageKey"
+    static let secondLanguageKey                    = "secondLanguageKey"
+    static let settingsEnglishUseAndAfterHundredKey = "settingsEnglishUseAndAfterHundredKey"
+    static let settingsSpanishUsePuntoKey           = "settingsSpanishUsePuntoKey"
+    static let settingsGermanCaptalisationKey       = "settingsGermanCaptalisationKey"
+    static let settingsGermanSoftHyphenKey          = "settingsGermanSoftHyphenKey"
+    static let settingsVietnameseThousandKey        = "settingsVietnameseThousandKey"
+    static let settingsVietnameseSecondLastKey      = "settingsVietnameseSecondLastKey"
+    static let settingsVietnameseCompactKey         = "settingsVietnameseCompactKey"
 }
 
 struct StringPreference {
@@ -45,7 +44,7 @@ struct StringPreference {
         }
         return ""
     }
-
+    
 }
 class ViewModel: ObservableObject, ShowAs, Separators {
     @Published var showAsInt = false /// This will update the "-> Int or -> sci button texts
@@ -69,52 +68,25 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @Published var secondTranslatedNumber: String = ""
     @Published var firstTranslatedNumberTopBorder: String? = nil
     @Published var secondTranslatedNumberTopBorder: String? = nil
-
-    let arabNumerals       = ArabicNumeralsImpl()
-    let armenianNumerals   = ArmenianNumerals()
-    let armenian           = ArmenianImpl()
-    let catalan            = CatalanImpl()
-    let chineseFinancial   = ChineseImpl(variant: .financial)
-    let chineseSimplified  = ChineseImpl(variant: .simplified)
-    let chineseTraditional = ChineseImpl(variant: .traditional)
-    let danish             = DanishImpl()
-    let digits             = DigitsImpl()
-    let english            = EnglishImpl()
-    let french             = FrenchImpl()
-    let german             = GermanImpl()
-    let polish             = PolishImpl()
-    let roman              = RomanImpl()
-    let spanish            = SpanishImpl()
-    let thai               = ThaiImpl()
-    let thaiNumerals       = ThaiNumeralsImpl()
-    let vietnamese         = VietnameseImpl()
-
-    var languages: [LanguageBaseClass] // set in init()
-
+    
+    let tn = TranslateNumber()
+    
     var previouslySelectedLanguages = StringPreference()
     var firstFont: Font {
-        if firstLanguage.englishName == arabNumerals.englishName {
+        if firstLanguage.englishName == tn.arabicNumerals.englishName {
             Font(UIFont(name: "Avenir", size: secondLanguageAllowed ? 40 : 60)!)
         } else {
             secondLanguageAllowed ? Font.title : Font.largeTitle
         }
     }
     var secondFont: Font {
-        if firstLanguage.englishName == arabNumerals.englishName {
+        if firstLanguage.englishName == tn.arabicNumerals.englishName {
             Font(UIFont(name: "Avenir", size: 40)!)
         } else {
             Font.title
         }
     }
-    var firstRightToLeft: Bool {
-        firstLanguage.englishName == arabNumerals.englishName ||
-        firstLanguage.englishName == thaiNumerals.englishName
-    }
-    var secondRightToLeft: Bool {
-        firstLanguage.englishName == arabNumerals.englishName ||
-        firstLanguage.englishName == thaiNumerals.englishName
-    }
-
+    
     func updateTranslation() {
         firstTranslatedNumber = firstLanguage.read(currentDisplay.allInOneLine)
         firstTranslatedNumberTopBorder = nil
@@ -127,7 +99,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
                 firstTranslatedNumber = ""
             }
         }
-            
+        
         secondTranslatedNumber = secondLanguage.read(currentDisplay.allInOneLine)
         secondTranslatedNumberTopBorder = nil
         if secondTranslatedNumber.contains(OVERLINE) {
@@ -142,95 +114,93 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     }
     /// I initialize the decimalSeparator with the locale preference, but
     /// I ignore the value of Locale.current.groupSeparator
-    @AppStorage(AppStorageKeys.forceScientific, store: .standard)
+    @AppStorage(AppStorageKeys.forceScientificKey, store: .standard)
     var forceScientific: Bool = false
     
-    @AppStorage(AppStorageKeys.decimalSeparator, store: .standard)
+    @AppStorage(AppStorageKeys.decimalSeparatorKey, store: .standard)
     var decimalSeparator: DecimalSeparator = Locale.current.decimalSeparator == "," ? .comma : .dot
     
-    @AppStorage(AppStorageKeys.groupSeparator, store: .standard)
+    @AppStorage(AppStorageKeys.groupSeparatorKey, store: .standard)
     var groupSeparator: GroupSeparator = .none
-
-    @AppStorage(AppStorageKeys.groupSize, store: .standard)
+    
+    @AppStorage(AppStorageKeys.groupSizeKey, store: .standard)
     var groupSize: Int = 3
-
-    @AppStorage(AppStorageKeys.secondLanguageAllowed, store: .standard)
+    
+    @AppStorage(AppStorageKeys.secondLanguageAllowedKey, store: .standard)
     var secondLanguageAllowed: Bool = false
     
     @AppStorage(AppStorageKeys.firstLanguageKey, store: .standard)
     var firstLanguageName: String = "English"
-
+    
     @AppStorage(AppStorageKeys.secondLanguageKey, store: .standard)
     var secondLanguageName: String = "German"
-
-    @AppStorage(AppStorageKeys.settingsEnglishUseAndAfterHundred, store: .standard)
+    
+    @AppStorage(AppStorageKeys.settingsEnglishUseAndAfterHundredKey, store: .standard)
     var settingsEnglishUseAndAfterHundred: Bool = false {
         didSet {
-            english.afterHundred = settingsEnglishUseAndAfterHundred ? " and" : ""
-            settingsEnglishExample = english.read(105)
+            tn.english.useAndAfterHundred = settingsEnglishUseAndAfterHundred
+            settingsEnglishExample = tn.english.read(105)
         }
     }
-
-    @AppStorage(AppStorageKeys.settingsSpanishUsePunto, store: .standard)
+    
+    @AppStorage(AppStorageKeys.settingsSpanishUsePuntoKey, store: .standard)
     var settingsSpanishUsePunto: SpanishImpl.PuntoComma = .coma {
         didSet {
-            spanish.dotString = settingsSpanishUsePunto.rawValue
-            // make sure that the selected decimal and group seperator do not mess up the example
-            let tempSpanish = SpanishImpl()
-            settingsSpanishExample = tempSpanish.read("1.5")
+            tn.spanish.puntoComma = settingsSpanishUsePunto
+            settingsSpanishExample = tn.spanish.read("1.5")
         }
     }
-
-
-    @AppStorage(AppStorageKeys.settingsGermanCaptalisation)
+    
+    
+    @AppStorage(AppStorageKeys.settingsGermanCaptalisationKey)
     var settingsGermanCaptalisation: Bool = true {
         didSet {
-            german.capitalisation = settingsGermanCaptalisation
-            settingsGermanExample = german.read(88)
+            tn.german.capitalisation = settingsGermanCaptalisation
+            settingsGermanExample = tn.german.read(88)
         }
     }
-
-    @AppStorage(AppStorageKeys.settingsGermanSoftHyphen)
+    
+    @AppStorage(AppStorageKeys.settingsGermanSoftHyphenKey)
     var settingsGermanSoftHyphen: Bool = false {
         didSet {
-            german.useSoftHyphen = settingsGermanSoftHyphen
-            settingsGermanExample = german.read(88)
+            tn.german.useSoftHyphen = settingsGermanSoftHyphen
+            settingsGermanExample = tn.german.read(88)
         }
     }
-
     
-    @AppStorage(AppStorageKeys.settingsVietnameseThousand)
+    
+    @AppStorage(AppStorageKeys.settingsVietnameseThousandKey)
     var settingsVietnameseThousand: VietnameseImpl.Thousand = .nghìn {
         didSet {
-            vietnamese.e3 = settingsVietnameseThousand.rawValue
-            settingsVietnameseExample = vietnamese.read(303333)
+            tn.vietnamese.thousand = settingsVietnameseThousand
+            settingsVietnameseExample = tn.vietnamese.read(303333)
         }
     }
     
-    @AppStorage(AppStorageKeys.settingsVietnameseSecondLast)
+    @AppStorage(AppStorageKeys.settingsVietnameseSecondLastKey)
     var settingsVietnameseSecondLast: VietnameseImpl.SecondLast = .lẻ {
         didSet {
-            vietnamese.secondLast = settingsVietnameseSecondLast
-            settingsVietnameseExample = vietnamese.read(303333)
+            tn.vietnamese.secondLast = settingsVietnameseSecondLast
+            settingsVietnameseExample = tn.vietnamese.read(303333)
         }
     }
     
-    @AppStorage(AppStorageKeys.settingsVietnameseCompact)
+    @AppStorage(AppStorageKeys.settingsVietnameseCompactKey)
     var settingsVietnameseCompact: Bool = false {
         didSet {
-            vietnamese.compact = settingsVietnameseCompact
-            settingsVietnameseExample = vietnamese.read(303333)
+            tn.vietnamese.compact = settingsVietnameseCompact
+            settingsVietnameseExample = tn.vietnamese.read(303333)
         }
     }
-        
-    @Published var firstLanguage: LanguageBaseClass = EnglishImpl() {
+    
+    @Published var firstLanguage: Language = EnglishImpl() {
         didSet {
             previouslySelectedLanguages.add(new: firstLanguage.name)
             if firstLanguage.name == secondLanguage.name {
                 /// make sure the languages are not the same
                 let newLanguageName = previouslySelectedLanguages.get(except: firstLanguage.name)
                 if newLanguageName != "" {
-                    for newLanguage in languages {
+                    for newLanguage in tn.languages {
                         if newLanguage.name == newLanguageName {
                             secondLanguage = newLanguage
                         }
@@ -242,14 +212,14 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             secondLanguageName = secondLanguage.name
         }
     }
-    @Published var secondLanguage: LanguageBaseClass = GermanImpl() {
+    @Published var secondLanguage: Language = GermanImpl() {
         didSet {
             previouslySelectedLanguages.add(new: secondLanguage.name)
             if firstLanguage.name == secondLanguage.name {
                 /// make sure the languages are not the same
                 let newLanguageName = previouslySelectedLanguages.get(except: secondLanguage.name)
                 if newLanguageName != "" {
-                    for newLanguage in languages {
+                    for newLanguage in tn.languages {
                         if newLanguage.name == newLanguageName {
                             firstLanguage = newLanguage
                         }
@@ -261,7 +231,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             secondLanguageName = secondLanguage.name
         }
     }
-
+    
     var precisionDescription = "unknown"
     var showPrecision: Bool = false
     var secondActive = false
@@ -301,34 +271,8 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         brain = Brain(precision: _precision.wrappedValue)
         precisionDescription = _precision.wrappedValue.useWords
         
-        languages = [
-            arabNumerals,
-            armenian,
-            armenianNumerals,
-            catalan,
-            chineseSimplified,
-            chineseTraditional,
-            chineseFinancial,
-            danish,
-            german,
-            english,
-            spanish,
-            french,
-            polish,
-            roman,
-            thai,
-            thaiNumerals,
-            vietnamese]
-
-        english.afterHundred  = settingsEnglishUseAndAfterHundred ? " and" : ""
-        spanish.dotString     = settingsSpanishUsePunto.rawValue
-        german.capitalisation = settingsGermanCaptalisation
-        german.useSoftHyphen  = settingsGermanSoftHyphen
-        vietnamese.e3         = settingsVietnameseThousand.rawValue
-        vietnamese.secondLast = settingsVietnameseSecondLast
-        vietnamese.compact    = settingsVietnameseCompact
-
-        for language in languages {
+        
+        for language in tn.languages {
             previouslySelectedLanguages.add(new: language.name)
         }
         
@@ -346,25 +290,30 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         backgroundColor["plus"] = keyColor.upColor(for: "+", isPending: false)
         
         /// trigger the didSet action of the persistently stored variables
-        for l in languages {
+        for l in tn.languages {
             if secondLanguageName == l.name {
                 secondLanguage = l
             }
         }
-        for l in languages {
+        for l in tn.languages {
             if firstLanguageName == l.name {
                 firstLanguage = l
             }
         }
         groupSeparator = groupSeparator
         decimalSeparator = decimalSeparator
+
+        // get the AppStorage values into the languages
         settingsEnglishUseAndAfterHundred = settingsEnglishUseAndAfterHundred
         settingsVietnameseCompact = settingsVietnameseCompact
-        vietnamese.e3 = settingsVietnameseThousand.rawValue
-        german.capitalisation = settingsGermanCaptalisation
+        settingsVietnameseThousand = settingsVietnameseThousand
+        settingsVietnameseSecondLast = settingsVietnameseSecondLast
+        settingsGermanCaptalisation = settingsGermanCaptalisation
+        settingsGermanSoftHyphen = settingsGermanSoftHyphen
         settingsSpanishUsePunto = settingsSpanishUsePunto
+
     }
-        
+    
     /// the update of the precision in brain can be slow.
     /// Therefore, I only want to do that when leaving the settings screen
     func updatePrecision(to newPrecision: Int) async {
@@ -521,7 +470,6 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     }
     
     func defaultTask(for symbol: String, screen: Screen) async {
-        
         await MainActor.run() {
             showAsInt = false
             showAsFloat = false
@@ -547,24 +495,4 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         }
     }
     
-    func copyFromPasteBin(screen: Screen) async -> Bool {
-        //        if UIPasteboard.general.hasStrings {
-        //            if let pasteString = UIPasteboard.general.string {
-        //                print("pasteString", pasteString, pasteString.count)
-        //                if pasteString.count > 0 {
-        //                    if Gmp.isValidGmpString(pasteString, bits: 1000) {
-        //                        displayNumber = await brain.replaceLast(withString: pasteString)
-        //                        await refreshDisplay(screen: screen)
-        //                        return true
-        //                    }
-        //                }
-        //            }
-        //        }
-        return false
-    }
-    
-    func copyToPastBin(screen: Screen) async {
-        //        let copyData = Display(displayNumber, screen: screen, noLimits: true, showAs: self, forceScientific: screen.forceScientific)
-        //        UIPasteboard.general.string = copyData.allInOneLine
-    }
 }

@@ -8,6 +8,11 @@
 import Foundation
 
 class EnglishImpl: LanguageBaseClass, English {
+    var useAndAfterHundred: Bool = false {
+        didSet {
+            afterHundred = useAndAfterHundred ? " and" : ""
+        }
+    }
     
     init() {
         super.init(

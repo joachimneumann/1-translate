@@ -29,7 +29,7 @@ struct Settings: View {
                         GermanSettings
                         SpanishSettings
                         VietnameseSettings
-                        hobbyProject
+                        HobbyProject
                     }
                     Spacer()
                 }
@@ -143,21 +143,21 @@ struct Settings: View {
         return Group {
             GridRow {
                 HStack {
-                    Image(viewModel.english.name)
+                    Image(viewModel.tn.english.flagName)
                         .resizable()
                         .scaledToFit()
                         .padding(1)
                         .border(.white)
                         .frame(height: 25)
                         .padding(.trailing, 10)
-                    Text(viewModel.english.name)
+                    Text(viewModel.tn.english.name)
                         .bold()
                         .frame(height: 25)
                     Spacer()
                 }
                 .gridCellColumns(2)
+                .padding(.top, 40)
             }
-            .padding(.top, 40)
             GridRow {
                 Text(viewModel.settingsEnglishExample)
                     .padding(.leading, 0)
@@ -180,21 +180,21 @@ struct Settings: View {
         return Group {
             GridRow {
                 HStack {
-                    Image(viewModel.german.name)
+                    Image(viewModel.tn.german.flagName)
                         .resizable()
                         .scaledToFit()
                         .padding(1)
                         .border(.white)
                         .frame(height: 25)
                         .padding(.trailing, 10)
-                    Text(viewModel.german.name)
+                    Text(viewModel.tn.german.name)
                         .bold()
                         .frame(height: 25)
                     Spacer()
                 }
                 .gridCellColumns(2)
+                .padding(.top, 40)
             }
-            .padding(.top, 40)
             GridRow {
                 Text(viewModel.settingsGermanExample)
                     .padding(.leading, 0)
@@ -227,21 +227,21 @@ struct Settings: View {
         return Group {
             GridRow {
                 HStack {
-                    Image(viewModel.spanish.name)
+                    Image(viewModel.tn.spanish.flagName)
                         .resizable()
                         .scaledToFit()
                         .padding(1)
                         .border(.white)
                         .frame(height: 25)
                         .padding(.trailing, 10)
-                    Text(viewModel.spanish.name)
+                    Text(viewModel.tn.spanish.name)
                         .bold()
                         .frame(height: 25)
                     Spacer()
                 }
                 .gridCellColumns(2)
+                .padding(.top, 40)
             }
-            .padding(.top, 40)
             GridRow {
                 Text(viewModel.settingsSpanishExample)
                     .padding(.leading, 0)
@@ -268,14 +268,14 @@ struct Settings: View {
         return Group {
             GridRow {
                 HStack {
-                    Image(viewModel.vietnamese.name)
+                    Image(viewModel.tn.vietnamese.flagName)
                         .resizable()
                         .scaledToFit()
                         .padding(1)
                         .border(.white)
                         .frame(height: 25)
                         .padding(.trailing, 10)
-                    Text(viewModel.vietnamese.name)
+                    Text(viewModel.tn.vietnamese.name)
                         .bold()
                         .frame(height: 25)
                     Spacer()
@@ -330,7 +330,7 @@ struct Settings: View {
         }
     }
     
-    var hobbyProject: some View {
+    var HobbyProject: some View {
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
         
@@ -338,7 +338,7 @@ struct Settings: View {
             Text("\nVersion: \(appVersion ?? "unknown") (build \(buildNumber ?? "unknown"))")
                 .italic()
                 .padding(.bottom, 3)
-            Text("This is a hobby project by Joachim Neumann. Although I have done some testing, errors may occur.")
+            Text("This is a hobby project by Joachim Neumann. Although I have done some testing, errors may occur. If you have feedback, for example a wrong translations or ideas for improvement, drop me an email at joachim@joachimneumann.com")
         }
     }
     

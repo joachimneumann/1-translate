@@ -11,19 +11,25 @@ protocol Language {
     func read(_ numberString: String) -> String
     func read(_ i: Int) -> String
     var name: String { get }
+    var flagName: String { get }
     var englishName: String? { get }
     var rightToLeft: Bool { get }
 }
+
 protocol English: Language {
-    var afterHundred: String { get set }
+    var useAndAfterHundred: Bool { get set }
 }
 protocol German: Language {
     var capitalisation: Bool { get set }
+    var useSoftHyphen: Bool { get set }
 }
 protocol Vietnamese: Language {
     var thousand: VietnameseImpl.Thousand { get set }
     var secondLast: VietnameseImpl.SecondLast { get set }
     var compact: Bool { get set }
+}
+protocol Spanish: Language {
+    var puntoComma: SpanishImpl.PuntoComma { get set }
 }
 
 class TranslateNumber {
@@ -38,33 +44,33 @@ class TranslateNumber {
     let chineseTraditional: Language  = ChineseImpl(variant: .traditional)
     let danish: Language              = DanishImpl()
     let digits: Language              = DigitsImpl()
-    let english: English              = EnglishImpl()
+    var english: English              = EnglishImpl()
     let french: Language              = FrenchImpl()
-    let german: German                = GermanImpl()
+    var german: German                = GermanImpl()
     let polish: Language              = PolishImpl()
     let roman: Language               = RomanImpl()
-    let spanish: Language             = SpanishImpl()
+    var spanish: Spanish              = SpanishImpl()
     let thai: Language                = ThaiImpl()
     let thaiNumerals: Language        = ThaiNumeralsImpl()
-    let vietnamese: Vietnamese        = VietnameseImpl()
+    var vietnamese: Vietnamese        = VietnameseImpl()
 
     init() {
-        languages.append(arabicNumerals)
-        languages.append(armenianNumerals)
-        languages.append(armenian)
-        languages.append(catalan)
-        languages.append(chineseFinancial)
-        languages.append(chineseSimplified)
-        languages.append(chineseTraditional)
-        languages.append(danish)
-        languages.append(english)
-        languages.append(french)
-        languages.append(german)
-        languages.append(polish)
-        languages.append(roman)
-        languages.append(spanish)
-        languages.append(thai)
-        languages.append(thaiNumerals)
-        languages.append(vietnamese)
+        languages = [arabicNumerals,
+        armenianNumerals,
+        armenian,
+        catalan,
+        chineseFinancial,
+        chineseSimplified,
+        chineseTraditional,
+        danish,
+        english,
+        french,
+        german,
+        polish,
+        roman,
+        spanish,
+        thai,
+        thaiNumerals,
+        vietnamese]
     }
 }

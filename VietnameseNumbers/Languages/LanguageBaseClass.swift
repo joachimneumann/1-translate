@@ -9,8 +9,10 @@ import Foundation
 
 
 class LanguageBaseClass: Language {
+    
     var name: String
     var englishName: String? = nil
+    var flagName: String { englishName != nil ? englishName! : name }
     var negativeString: String
     var dotString: String
     var exponentString: String

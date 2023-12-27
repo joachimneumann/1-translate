@@ -45,7 +45,7 @@ struct TranslateNumbers: View {
                         translatedString: viewModel.firstTranslatedNumber,
                         translatedStringTopBorder: viewModel.firstTranslatedNumberTopBorder,
                         screen: screen,
-                        rightToLeft: viewModel.firstRightToLeft)
+                        rightToLeft: viewModel.firstLanguage.rightToLeft)
                     .font(viewModel.firstFont)
                     .padding(.horizontal, 0)
                     Spacer(minLength: 0.0)
@@ -63,7 +63,7 @@ struct TranslateNumbers: View {
                         TranslatedDisplay(
                             translatedString: viewModel.secondTranslatedNumber,
                             translatedStringTopBorder: viewModel.secondTranslatedNumberTopBorder,                            screen: screen,
-                            rightToLeft: viewModel.secondRightToLeft)
+                            rightToLeft: viewModel.secondLanguage.rightToLeft)
                         .font(viewModel.secondFont)
                         .padding(.horizontal, 0)
                     }
@@ -84,10 +84,10 @@ struct TranslateNumbers: View {
     
     struct LanguageButton: View {
         @State var showSheet = false
-        private let language: LanguageBaseClass
+        private let language: Language
         private let viewModel: ViewModel
 
-        init(language: LanguageBaseClass, viewModel: ViewModel) {
+        init(language: Language, viewModel: ViewModel) {
             self.language = language
             self.viewModel = viewModel
         }
@@ -97,7 +97,7 @@ struct TranslateNumbers: View {
             Button {
                 showSheet.toggle()
             } label: {
-                Image(language.englishName != nil ? language.englishName! : language.name)
+                Image(language.flagName)
                     .resizable()
                     .scaledToFit()
             }
@@ -116,7 +116,7 @@ struct TranslateNumbers: View {
                         }
                     }
                     .padding(20)
-                    .presentationDetents([.height(150.0 + CGFloat(viewModel.languages.count) * 44.0)])
+                    .presentationDetents([.height(150.0 + CGFloat(viewModel.tn.languages.count) * 44.0)])
                 }
                 .background(Color(red: 0.15, green: 0.15, blue: 0.15))
             }
