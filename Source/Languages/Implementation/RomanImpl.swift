@@ -45,7 +45,7 @@ class RomanImpl: LanguageImpl {
         return result
     }
     
-    override func read(_ num: Int) -> String {
+    override func readInteger(_ num: Int) -> String {
         if num <= 3_999 {
             return read_1_999(num)
         } else {

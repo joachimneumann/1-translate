@@ -14,7 +14,17 @@ extension StringProtocol {
 
 
 class GermanImpl: LanguageImpl, German {
-    var useSoftHyphen: Bool = true
+    var useSoftHyphen: Bool = true {
+        didSet {
+            if useSoftHyphen {
+                e2 = "hundert" + Languages.soft_hyphen
+                e3 = "tausend" + Languages.soft_hyphen
+            } else {
+                e2 = "hundert"
+                e3 = "tausend"
+            }
+        }
+    }
     var capitalisation: Bool = true
 
     init() {
@@ -36,6 +46,27 @@ class GermanImpl: LanguageImpl, German {
         beforeAndAfterDotString = " "
         eSpace = ""
         e69Space = " "
+        postProcessing = germanPostProcessing
+    }
+    
+    func germanPostProcessing(_ unprocessed: String) -> String {
+        var ret = unprocessed
+        ret = ret.replacingOccurrences(of: "einsund", with: "einund")
+        ret = ret.replacingOccurrences(of: "einshundert", with: "einhundert")
+        ret = ret.replacingOccurrences(of: "einstausend", with: "eintausend")
+
+        if capitalisation {
+            let words = ret.split(separator: " ")
+            ret = ""
+            for word in words {
+                ret += word.prefix(1).uppercased() + word.dropFirst() + " "
+            }
+            if ret.hasSuffix(" ") {
+                ret = String(ret.dropLast())
+            }
+        }
+
+        return ret
     }
     
     override func read_0_9(_ i: Int) -> String {
@@ -80,19 +111,7 @@ class GermanImpl: LanguageImpl, German {
         if i == 18 { return "achtzehn" }
         if i == 19 { return "neunzehn" }
         // reversed order
-        return (i.E1x > 0 ? read_0_9(i.E1x) + "und" : "") + read_10s(i.E1)
+        return (i.E1x > 0 ? read_0_9(i.E1x) + Languages.soft_hyphen + "und" + Languages.soft_hyphen : "") + read_10s(i.E1)
     }
-    
-    override func read(_ i: Int) -> String {
-        var ret = super.read(i)
-        ret = ret.replacingOccurrences(of: "einsund", with: "einund")
-        ret = ret.replacingOccurrences(of: "einshundert", with: "einhundert")
-        ret = ret.replacingOccurrences(of: "einstausend", with: "eintausend")
-
-        if capitalisation {
-            ret = ret.capitalized
-        }
-        return ret
-    }
-        
+            
 }

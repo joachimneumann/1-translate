@@ -43,7 +43,7 @@ class LanguageImpl: Language {
     var afterHundred = ""
     var afterGroup = ""
     var allowNegativeNumbers = true
-
+    var postProcessing: ((String) -> String)? = nil
 
     var eSpace: String? = nil
     var e3Space: String? = nil
@@ -92,12 +92,12 @@ class LanguageImpl: Language {
     }
     
     func read_e2_e3(_ i: Int) -> String {
-        var ret = read(i.E2)
+        var ret = readInteger(i.E2)
         if i.E2 == 1 && e2_one != nil {
             ret = e2_one!
         } else {
             if let e2 = e2 {
-                ret = read(i.E2)
+                ret = readInteger(i.E2)
                 ret += eSpace_
                 if i.E2 > 1 && i.E2x == 0 && e2_cleanPlural != nil {
                     ret += e2_cleanPlural!
@@ -109,79 +109,87 @@ class LanguageImpl: Language {
         }
         if i.E2x > 0 {
             ret += afterHundred + afterGroup
-            ret += eSpace_ + read(i.E2x)
+            ret += eSpace_ + readInteger(i.E2x)
         }
         return ret
     }
     
     func read_e3_e6(_ i: Int) -> String {
-        var ret = read(i.E3)
+        var ret = readInteger(i.E3)
         if i.E3 == 1 && e3_one != nil {
             ret = e3_one!
         } else {
             if let e3 = e3 {
-                ret = read(i.E3)
+                ret = readInteger(i.E3)
                 ret += eSpace_ + e3Space_ + e3
             }
         }
         if i.E3x > 0 {
-            ret += afterGroup + eSpace_ + e3Space_ + read(i.E3x)
+            ret += afterGroup + eSpace_ + e3Space_ + readInteger(i.E3x)
         }
         return ret
     }
 
     func read_e6_e9(_ i: Int) -> String {
-        var ret = read(i.E6)
+        var ret = readInteger(i.E6)
         if i.E6 == 1 && e6_one != nil {
             ret = e6_one!
         } else {
             if let e6 = e6 {
-                ret = read(i.E6)
+                ret = readInteger(i.E6)
                 ret += eSpace_ + e69Space_ + e6
             }
         }
         if i.E6x > 0 {
-            ret += afterGroup + eSpace_ + e69Space_ + read(i.E6x)
+            ret += afterGroup + eSpace_ + e69Space_ + readInteger(i.E6x)
         }
         return ret
     }
 
     func read_e9_e12(_ i: Int) -> String {
-        var ret = read(i.E9)
+        var ret = readInteger(i.E9)
         if i.E9 == 1 && e9_one != nil {
             ret = e9_one!
         } else {
             if let e9 = e9 {
-                ret = read(i.E9)
+                ret = readInteger(i.E9)
                 ret += eSpace_ + e69Space_ + e9
             }
         }
         if i.E9x > 0 {
-            ret += afterGroup + eSpace_ + e69Space_ + read(i.E9x)
+            ret += afterGroup + eSpace_ + e69Space_ + readInteger(i.E9x)
         }
         return ret
     }
     
     func read_e12_e15(_ i: Int) -> String {
-        var ret = read(i.E12)
+        var ret = readInteger(i.E12)
         if i.E12 == 1 && e12_one != nil {
             ret = e12_one!
         } else {
             if let e12 = e12 {
-                ret = read(i.E12)
+                ret = readInteger(i.E12)
                 ret += eSpace_ + e69Space_ + e12
             }
         }
         if i.E12x > 0 {
-            ret += afterGroup + eSpace_ + e69Space_ + read(i.E12x)
+            ret += afterGroup + eSpace_ + e69Space_ + readInteger(i.E12x)
         }
         return ret
     }
 
     func read(_ i: Int) -> String {
+        var ret = readInteger(i)
+        if let postProcessing = postProcessing {
+            ret = postProcessing(ret)
+        }
+        return ret
+    }
+
+    func readInteger(_ i: Int) -> String {
         if i < 0 {
             guard allowNegativeNumbers else { return "negative: unknown" }
-            return negativeString + afterNegative + read(-i)
+            return negativeString + afterNegative + readInteger(-i)
         }
         guard i >= 0 && i < 999_999_999_999_999 else { fatalError("too large") }
         
@@ -196,17 +204,17 @@ class LanguageImpl: Language {
                     ret += read_0_9(i.E5)
                     ret += e5!
                     if i.E5x > 0 {
-                        ret += read(i.E5x)
+                        ret += readInteger(i.E5x)
                     }
                     return ret
                 }
             }
             if e4 != nil {
                 if i >= 10_000 {
-                    ret += read(i.E4)
+                    ret += readInteger(i.E4)
                     ret += e4!
                     if i.E4x > 0 {
-                        ret += read(i.E4x)
+                        ret += readInteger(i.E4x)
                     }
                     return ret
                 }
@@ -229,7 +237,7 @@ class LanguageImpl: Language {
         var parts = s.components(separatedBy: "e")
         guard parts.count > 0 && parts.count <= 2 else { return error }
         let mantissa = parts[0]
-        let exponent: String? = (parts.count == 2) ? parts[1] : nil
+        let exponentAsString: String? = (parts.count == 2) ? parts[1] : nil
         guard allowExponent || parts.count == 1 else { return "scientific notation not known" }
 
         // integer part and fractional part
@@ -243,10 +251,10 @@ class LanguageImpl: Language {
         var ret: String = ""
 
         if integerPart == "-0" {
-            ret = negativeString + afterNegative + read(0)
+            ret = negativeString + afterNegative + readInteger(0)
         } else {
             guard let integerPartValue = Int(integerPart) else { return error }
-            ret = read(integerPartValue)
+            ret = readInteger(integerPartValue)
         }
         if let fractionalPart = fractionalPart {
             var count = 0
@@ -254,7 +262,7 @@ class LanguageImpl: Language {
             for char in fractionalPart {
                 if count < 10 {
                     guard let digit = Int(String(char)) else { return error }
-                    ret += beforeAndAfterDotString + read(digit)
+                    ret += beforeAndAfterDotString + readInteger(digit)
                 }
                 count += 1
             }
@@ -263,13 +271,16 @@ class LanguageImpl: Language {
             }
         }
 
-        if let exponent = exponent {
-            ret += exponentString + read(exponent)
+        if let exponentAsString = exponentAsString {
+            ret += exponentString + read(exponentAsString)
             if exponentString2 != nil {
                 ret += exponentString2!
             }
         }
 
+        if let postProcessing = postProcessing {
+            ret = postProcessing(ret)
+        }
         return ret;
     }
 }

@@ -17,7 +17,7 @@ class ArabicNumeralsImpl: LanguageImpl {
         englishName = "Arabic Numerals"
     }
     
-    override func read(_ i: Int) -> String {
+    override func readInteger(_ i: Int) -> String {
         var ret = i.string
         ret = ret.replacingOccurrences(of: "0", with: "٠")
         ret = ret.replacingOccurrences(of: "1", with: "١")

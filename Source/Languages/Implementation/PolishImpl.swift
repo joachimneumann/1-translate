@@ -82,7 +82,7 @@ class PolishImpl: LanguageImpl {
         }
         if i.E2x > 0 {
             if ret.count > 0 { ret += " " }
-            ret += read(i.E2x)
+            ret += readInteger(i.E2x)
         }
         return ret
     }
@@ -105,30 +105,30 @@ class PolishImpl: LanguageImpl {
     }
     
     override func read_e3_e6(_ i: Int) -> String {
-        var ret = read(i.E3) + " " + use(i.E3, "tysiące", "tysięcy")
+        var ret = readInteger(i.E3) + " " + use(i.E3, "tysiące", "tysięcy")
         if i.E3 == 1 { ret = "tysiąc" }
-        if i.E3x > 0 { ret += " " + read(i.E3x) }
+        if i.E3x > 0 { ret += " " + readInteger(i.E3x) }
         return ret
     }
     
     override func read_e6_e9(_ i: Int) -> String {
-        var ret = read(i.E6) + " " + use(i.E6, "miliony", "milionów")
+        var ret = readInteger(i.E6) + " " + use(i.E6, "miliony", "milionów")
         if i.E6 == 1 { ret = "jeden milion" }
-        if i.E6x > 0 { ret += " " + read(i.E6x) }
+        if i.E6x > 0 { ret += " " + readInteger(i.E6x) }
         return ret
     }
     
     override func read_e9_e12(_ i: Int) -> String {
-        var ret = read(i.E9) + " " + use(i.E9, "miliardy", "miliardów")
+        var ret = readInteger(i.E9) + " " + use(i.E9, "miliardy", "miliardów")
         if i.E9 == 1 { ret = "jeden miliard" }
-        if i.E9x > 0 { ret += " " + read(i.E9x) }
+        if i.E9x > 0 { ret += " " + readInteger(i.E9x) }
         return ret
     }
     
     override func read_e12_e15(_ i: Int) -> String {
-        var ret = read(i.E12) + " " + use(i.E12, "biliony", "bilionów")
+        var ret = readInteger(i.E12) + " " + use(i.E12, "biliony", "bilionów")
         if i.E12 == 1 { ret = "jeden bilion" }
-        if i.E12x > 0 { ret += " " + read(i.E12x) }
+        if i.E12x > 0 { ret += " " + readInteger(i.E12x) }
         return ret
     }
 }

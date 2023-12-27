@@ -197,11 +197,11 @@ class ChineseImpl: LanguageImpl {
     private func readChinese(_ i: Int) -> String {
         var ret = ""
         if i < 10_000 {
-            return super.read(i)
+            return super.readInteger(i)
         }
 
         if i < 100_000_000 {
-            ret += read(i.E4)
+            ret += readInteger(i.E4)
             ret += variant.e4
             if i.E4x > 0 {
                 ret += " "
@@ -214,7 +214,7 @@ class ChineseImpl: LanguageImpl {
         }
 
         if i < 1_000_000_000_000 {
-            ret += read(i.E8)
+            ret += readInteger(i.E8)
             ret += variant.e8
             if i.E8x > 0 {
                 ret += " "
@@ -238,10 +238,10 @@ class ChineseImpl: LanguageImpl {
         return ret
     }
     
-    override func read(_ i: Int) -> String {
+    override func readInteger(_ i: Int) -> String {
         if i >= 10 && i < 20 {
             var ret = ""
-            ret = super.read(i)
+            ret = super.readInteger(i)
             ret = String(ret.dropFirst())
             return ret
         } else {

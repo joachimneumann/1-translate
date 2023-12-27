@@ -87,7 +87,7 @@ class CatalanImpl: LanguageImpl {
             ret = read_0_9(i.E2) + "-cents"
         }
         if i.E2x > 0 {
-            ret += " " + read(i.E2x)
+            ret += " " + readInteger(i.E2x)
         }
         return ret
     }

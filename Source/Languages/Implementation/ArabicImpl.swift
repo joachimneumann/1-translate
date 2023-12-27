@@ -153,7 +153,7 @@ class ArabicImpl: LanguageImpl {
         switch i {
         case 1:     return "أَلف"
         case 2:     return "أَلفين"
-        default:    return read(i) + " " + "أَلاف"
+        default:    return readInteger(i) + " " + "أَلاف"
         }
     }
     
@@ -161,7 +161,7 @@ class ArabicImpl: LanguageImpl {
         switch i {
         case 1:     return "مليون"
         case 2:     return "مليونان"
-        default:    return read(i) + " " + "ملايين"
+        default:    return readInteger(i) + " " + "ملايين"
         }
     }
 
@@ -169,7 +169,7 @@ class ArabicImpl: LanguageImpl {
         switch i {
         case 1:     return "مِلْيار"
         case 2:     return "مليارين"
-        default:    return read(i) + " " + "مِلْيار"
+        default:    return readInteger(i) + " " + "مِلْيار"
         }
     }
 
@@ -204,7 +204,7 @@ class ArabicImpl: LanguageImpl {
         ret += read_arabic_100s(i.E2)
         if i.E2x > 0 {
             ret += " و"
-            ret += read(i.E2x)
+            ret += readInteger(i.E2x)
         }
         return ret
     }
@@ -214,7 +214,7 @@ class ArabicImpl: LanguageImpl {
         ret += read_arabic_1000s(i.E3)
         if i.E3x > 0 {
             ret += " و "
-            ret += read(i.E3x)
+            ret += readInteger(i.E3x)
         }
         return ret
     }
@@ -224,7 +224,7 @@ class ArabicImpl: LanguageImpl {
         ret += read_arabic_1000_000s(i.E6)
         if i.E6x > 0 {
             ret += " و "
-            ret += read(i.E6x)
+            ret += readInteger(i.E6x)
         }
         return ret
     }
@@ -234,7 +234,7 @@ class ArabicImpl: LanguageImpl {
         ret += read_arabic_1000_000_000s(i.E9)
         if i.E9x > 0 {
             ret += " و "
-            ret += read(i.E9x)
+            ret += readInteger(i.E9x)
         }
         return ret
     }

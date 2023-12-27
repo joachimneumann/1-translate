@@ -86,7 +86,7 @@ class VietnameseImpl: LanguageImpl, Vietnamese {
     func read_trailing_tens(_ i: Int) -> String {
         var ret = ""
         if i > 0 {
-            ret = read(i)
+            ret = readInteger(i)
             if i.lastDigit > 0 && i.secondLastDigit == 0 {
                 ret = secondLast.rawValue + " " + ret
             }
@@ -115,18 +115,18 @@ class VietnameseImpl: LanguageImpl, Vietnamese {
     }
 
     override func read_e3_e6(_ i: Int) -> String {
-        return read(i.E3) + " " + e3! + read_trailing_3digits(i.E3x)
+        return readInteger(i.E3) + " " + e3! + read_trailing_3digits(i.E3x)
     }
 
     override func read_e6_e9(_ i: Int) -> String {
-        var ret = read(i.E6s) + " " + e6!
+        var ret = readInteger(i.E6s) + " " + e6!
         ret += read_trailing_3digits(i.E3s, " " + e3!)
         ret += read_trailing_3digits(i.E0s)
         return ret
     }
     
     override func read_e12_e15(_ i: Int) -> String {
-        return read(i.E9) + " " + e9!
+        return readInteger(i.E9) + " " + e9!
     }
     
 

@@ -79,4 +79,6 @@ class Languages {
         thaiNumerals,
         vietnamese]
     }
+    
+    static let soft_hyphen = "\u{200A}"
 }

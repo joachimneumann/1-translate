@@ -81,14 +81,14 @@ class DanishImpl: LanguageImpl {
         if i.E3 == 1 {
             ret = e3_one!
         } else {
-            ret = read(i.E3)
+            ret = readInteger(i.E3)
             if i.E3 >= 100 && i.E3 < 200 {
                 ret += "e"
             }
             ret += " " + e3!
         }
         if i.E3x > 0 {
-            ret += " og " + read(i.E3x)
+            ret += " og " + readInteger(i.E3x)
         }
         return ret
     }
@@ -98,14 +98,14 @@ class DanishImpl: LanguageImpl {
         if i.E6 == 1 {
             ret = e6_one!
         } else {
-            ret = read(i.E6)
+            ret = readInteger(i.E6)
             if i.E6 >= 100 && i.E6 < 200 {
                 ret += "e"
             }
             ret += " " + e6!
         }
         if i.E6x > 0 {
-            ret += " og " + read(i.E6x)
+            ret += " og " + readInteger(i.E6x)
         }
         return ret
     }
@@ -115,14 +115,14 @@ class DanishImpl: LanguageImpl {
         if i.E9 == 1 {
             ret = e9_one!
         } else {
-            ret = read(i.E9)
+            ret = readInteger(i.E9)
             if i.E9 >= 100 && i.E9 < 200 {
                 ret += "e"
             }
             ret += " " + e9!
         }
         if i.E9x > 0 {
-            ret += " og " + read(i.E9x)
+            ret += " og " + readInteger(i.E9x)
         }
         return ret
     }
@@ -132,14 +132,14 @@ class DanishImpl: LanguageImpl {
         if i.E12 == 1 {
             ret = e12_one!
         } else {
-            ret = read(i.E12)
+            ret = readInteger(i.E12)
             if i.E12 >= 100 && i.E12 < 200 {
                 ret += "e"
             }
             ret += " " + e12!
         }
         if i.E12x > 0 {
-            ret += " og " + read(i.E12x)
+            ret += " og " + readInteger(i.E12x)
         }
         return ret
     }

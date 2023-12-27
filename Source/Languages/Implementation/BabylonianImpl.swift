@@ -61,7 +61,7 @@ class BabylonianImpl: LanguageImpl {
         return ret
     }
     
-    override func read(_ i: Int) -> String {
+    override func readInteger(_ i: Int) -> String {
         if i > 60*60*60*60 {
             return "too big"
         }

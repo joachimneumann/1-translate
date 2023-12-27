@@ -107,10 +107,10 @@ class SpanishImpl: LanguageImpl, Spanish {
         case 9:
             ret = "novecientos"
         default:
-            ret = read(i.E2) + "cientos"
+            ret = readInteger(i.E2) + "cientos"
         }
         if i.E2x > 0 {
-            ret += " " + read(i.E2x)
+            ret += " " + readInteger(i.E2x)
         }
         return ret
     }
