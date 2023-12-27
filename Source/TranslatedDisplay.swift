@@ -24,11 +24,16 @@ struct TopBorder: Shape {
 
 struct TranslatedDisplay: View {
     let translatedString: String
+    let forCopyTranslatedNumber: String
     let translatedStringTopBorder: String?
     let screen: Screen
 
-    init(translatedString: String, translatedStringTopBorder: String?, screen: Screen) {
+    init(translatedString: String,
+         forCopyTranslatedNumber: String,
+         translatedStringTopBorder: String?,
+         screen: Screen) {
         self.translatedString = translatedString
+        self.forCopyTranslatedNumber = forCopyTranslatedNumber
         self.translatedStringTopBorder = translatedStringTopBorder
         self.screen = screen
     }
@@ -45,8 +50,12 @@ struct TranslatedDisplay: View {
                                 .multilineTextAlignment(.trailing)
                         }
                         Text(translatedString)
-                            .textSelection(.enabled)
                             .multilineTextAlignment(.trailing)
+                    }
+                    .contextMenu {
+                        Button("Copy to Clipboard") {
+                            UIPasteboard.general.string = forCopyTranslatedNumber
+                        }
                     }
                 }
                 .frame(width: geometry.size.width) // Make the scroll view full-width

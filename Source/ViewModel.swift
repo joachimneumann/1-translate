@@ -61,9 +61,11 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     }
     @Published var firstTranslatedNumber: String = ""
     @Published var secondTranslatedNumber: String = ""
+    @Published var forCopyFirstTranslatedNumber: String = ""
     @Published var firstTranslatedNumberTopBorder: String? = nil
     @Published var secondTranslatedNumberTopBorder: String? = nil
-    
+    @Published var forCopySecondTranslatedNumber: String = ""
+
     let languages = Languages()
     
     var previouslySelectedLanguages = StringPreference()
@@ -111,17 +113,23 @@ class ViewModel: ObservableObject, ShowAs, Separators {
                 firstTranslatedNumber = ""
             }
         }
-        
-        secondTranslatedNumber = secondLanguage.read(allInOneLine)
-        secondTranslatedNumberTopBorder = nil
-        if secondTranslatedNumber.contains(OVERLINE) {
-            let split = secondTranslatedNumber.split(separator: OVERLINE)
-            secondTranslatedNumberTopBorder = String(split[0])
-            if split.count == 2 {
-                secondTranslatedNumber = String(split[1])
-            } else {
-                secondTranslatedNumber = ""
+        forCopyFirstTranslatedNumber = (firstTranslatedNumberTopBorder != nil ? "<overline>" + firstTranslatedNumberTopBorder! + "</overline>" : "") + firstTranslatedNumber
+        forCopyFirstTranslatedNumber = forCopyFirstTranslatedNumber.replacingOccurrences(of: Languages.soft_hyphen, with: "")
+
+        if secondLanguageAllowed {
+            secondTranslatedNumber = secondLanguage.read(allInOneLine)
+            secondTranslatedNumberTopBorder = nil
+            if secondTranslatedNumber.contains(OVERLINE) {
+                let split = secondTranslatedNumber.split(separator: OVERLINE)
+                secondTranslatedNumberTopBorder = String(split[0])
+                if split.count == 2 {
+                    secondTranslatedNumber = String(split[1])
+                } else {
+                    secondTranslatedNumber = ""
+                }
             }
+            forCopySecondTranslatedNumber = (secondTranslatedNumberTopBorder != nil ? "<overline>" + secondTranslatedNumberTopBorder! + "</overline>" : "") + secondTranslatedNumber
+            forCopySecondTranslatedNumber = forCopySecondTranslatedNumber.replacingOccurrences(of: Languages.soft_hyphen, with: "")
         }
     }
     /// I initialize the decimalSeparator with the locale preference, but

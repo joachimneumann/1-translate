@@ -31,6 +31,7 @@ struct TranslateNumbers: View {
                     .padding(.top, 20)
                         TranslatedDisplay(
                             translatedString: viewModel.firstTranslatedNumber,
+                            forCopyTranslatedNumber: viewModel.forCopyFirstTranslatedNumber,
                             translatedStringTopBorder: viewModel.firstTranslatedNumberTopBorder,
                             screen: screen)
                         .font(viewModel.firstFont)
@@ -49,6 +50,7 @@ struct TranslateNumbers: View {
                         Spacer(minLength: 0.0)
                         TranslatedDisplay(
                             translatedString: viewModel.secondTranslatedNumber,
+                            forCopyTranslatedNumber: viewModel.forCopySecondTranslatedNumber,
                             translatedStringTopBorder: viewModel.secondTranslatedNumberTopBorder,                            screen: screen)
                         .font(viewModel.secondFont)
                         .padding(.horizontal, 0)
