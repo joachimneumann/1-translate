@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Vietnamese: Language {
+class VietnameseImpl: LanguageBaseClass, Vietnamese {
     
     enum Thousand: String, Codable, CaseIterable {
         case ngàn
@@ -19,8 +19,13 @@ class Vietnamese: Language {
         case lẻ
     }
     
-    var compact: Bool = false
+    var thousand: Thousand = .nghìn {
+        didSet {
+            e3 = thousand.rawValue
+        }
+    }
     var secondLast: SecondLast = .lẻ
+    var compact: Bool = false
 
     init() {
         super.init(

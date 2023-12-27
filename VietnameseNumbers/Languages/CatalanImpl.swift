@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Catalan: Language {
+class CatalanImpl: LanguageBaseClass {
     init() {
         super.init(
             name: "Català",

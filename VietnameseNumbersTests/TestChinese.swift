@@ -8,17 +8,9 @@
 import XCTest
 
 final class TestChinese: XCTestCase{
-    let simplified=Chinese(variant:.simplified)
-    let traditional=Chinese(variant:.traditional)
-    let financial=Chinese(variant:.financial)
-    override func setUpWithError() throws {
-        simplified.groupSeparator=""
-        simplified.decimalSeparator="."
-        traditional.groupSeparator=""
-        traditional.decimalSeparator="."
-        financial.groupSeparator=""
-        financial.decimalSeparator="."
-    }
+    let simplified  = TranslateNumber().chineseSimplified
+    let traditional = TranslateNumber().chineseTraditional
+    let financial   = TranslateNumber().chineseFinancial
     
     func test_traditional() {
         XCTAssertEqual(traditional.read(0), "零")

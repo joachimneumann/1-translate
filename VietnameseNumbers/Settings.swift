@@ -250,7 +250,7 @@ struct Settings: View {
             GridRow {
                 Text("Coma o punto")
                 Picker("", selection: $viewModel.settingsSpanishUsePunto) {
-                    ForEach(Spanish.PuntoComma.allCases, id: \.self) { value in
+                    ForEach(SpanishImpl.PuntoComma.allCases, id: \.self) { value in
                         Text("\(value.rawValue)")
                             .tag(value)
                     }
@@ -292,7 +292,7 @@ struct Settings: View {
             GridRow {
                 Text("1000")
                 Picker("", selection: $viewModel.settingsVietnameseThousand) {
-                    ForEach(Vietnamese.Thousand.allCases, id: \.self) { value in
+                    ForEach(VietnameseImpl.Thousand.allCases, id: \.self) { value in
                         Text("\(value.rawValue)")
                             .tag(value)
                     }
@@ -306,7 +306,7 @@ struct Settings: View {
             GridRow {
                 Text("linh hoặc lẻ")
                 Picker("", selection: $viewModel.settingsVietnameseSecondLast) {
-                    ForEach(Vietnamese.SecondLast.allCases, id: \.self) { value in
+                    ForEach(VietnameseImpl.SecondLast.allCases, id: \.self) { value in
                         Text("\(value.rawValue)")
                             .tag(value)
                     }

@@ -9,11 +9,9 @@ import XCTest
 final class TestGerman: XCTestCase {
 
     func test_german() {
-        let german = German()
+        var german = TranslateNumber().german
 //        german.useSoftHyphen = false
         german.capitalisation = false
-        german.groupSeparator = ""
-        german.decimalSeparator = "."
         XCTAssertEqual(german.read(0), "null")
         XCTAssertEqual(german.read(1), "eins")
         XCTAssertEqual(german.read(2), "zwei")

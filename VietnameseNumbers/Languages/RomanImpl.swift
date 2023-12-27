@@ -9,7 +9,7 @@ import Foundation
 
 let OVERLINE = "__OVERLINE__"
 
-class Roman: Language {
+class RomanImpl: LanguageBaseClass {
 
     init() {
         super.init(

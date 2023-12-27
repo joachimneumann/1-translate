@@ -8,13 +8,8 @@ import XCTest
 
 final class TestPolish: XCTestCase {
     
-    let polish = Polish()
+    let polish = TranslateNumber().polish
 
-    override func setUpWithError() throws {
-        polish.groupSeparator = ""
-        polish.decimalSeparator = "."
-    }
-    
     func test_polish() {
         XCTAssertEqual(polish.read(0), "zero")
         XCTAssertEqual(polish.read(1), "jeden")

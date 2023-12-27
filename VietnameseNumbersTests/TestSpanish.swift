@@ -9,9 +9,7 @@ import XCTest
 
 final class Test_Spanish: XCTestCase {
     func test_spanish() {
-        let spanish = Spanish()
-        spanish.decimalSeparator = "."
-        spanish.groupSeparator = ""
+        let spanish = TranslateNumber().spanish
         
         XCTAssertEqual(spanish.read(-1), "menos uno")
         XCTAssertEqual(spanish.read(-1), "menos uno")

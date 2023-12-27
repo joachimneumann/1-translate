@@ -8,7 +8,7 @@
 import XCTest
 
 final class TestArmenianNumerals: XCTestCase{
-    let armenianNumerals=ArmenianNumerals()
+    let armenianNumerals = TranslateNumber().armenianNumerals
     
     func test() {
         XCTAssertEqual(armenianNumerals.read(0), "zero: unknown")

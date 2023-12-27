@@ -10,7 +10,7 @@ import SwiftUI
 struct SelectLanguage: View {
     
     struct LanguageText: View {
-        let language: Language
+        let language: LanguageBaseClass
         let bold: Bool
         var body: some View {
             HStack(spacing: 0.0) {
@@ -30,7 +30,7 @@ struct SelectLanguage: View {
     }
     
     @ObservedObject var viewModel: ViewModel
-    let language: Language
+    let language: LanguageBaseClass
     var body: some View {
         let _1_selected = (language.name == viewModel.firstLanguage.name)
         let _2_selected = (language.name == viewModel.secondLanguage.name)

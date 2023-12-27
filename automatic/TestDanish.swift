@@ -9,9 +9,7 @@ import XCTest
 final class TestDanish: XCTestCase {
 
     func test_danish() {
-        let danish = Danish()
-        danish.groupSeparator = ""
-        danish.decimalSeparator = "."
+        let danish = TranslateNumber().danish
         
         XCTAssertEqual(danish.read(1_100), "ettusind og hundred")
         XCTAssertEqual(danish.read(2_500), "to tusinde og fem hundrede")

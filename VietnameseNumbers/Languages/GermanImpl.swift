@@ -13,7 +13,7 @@ extension StringProtocol {
 }
 
 
-class German: Language {
+class GermanImpl: LanguageBaseClass, German {
     var useSoftHyphen: Bool = true
     var capitalisation: Bool = true
 

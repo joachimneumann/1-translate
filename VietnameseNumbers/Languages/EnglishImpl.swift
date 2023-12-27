@@ -7,7 +7,7 @@
 
 import Foundation
 
-class EnglishImpl: Language, English {
+class EnglishImpl: LanguageBaseClass, English {
     
     init() {
         super.init(

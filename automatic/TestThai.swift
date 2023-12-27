@@ -7,35 +7,33 @@
 import XCTest
 
 final class TestThai: XCTestCase {
-    let thai = Thai()
-    let thai1 = ThaiNumerals()
+    let thai = TranslateNumber().thai
+    let thaiNumerals = TranslateNumber().thaiNumerals
 
     func test_traditionalThai() {
-        XCTAssertEqual(thai1.read(0),  "๐")
-        XCTAssertEqual(thai1.read(1),  "๑")
-        XCTAssertEqual(thai1.read(2),  "๒")
-        XCTAssertEqual(thai1.read(3),  "๓")
-        XCTAssertEqual(thai1.read(4),  "๔")
-        XCTAssertEqual(thai1.read(5),  "๕")
-        XCTAssertEqual(thai1.read(6),  "๖")
-        XCTAssertEqual(thai1.read(7),  "๗")
-        XCTAssertEqual(thai1.read(8),  "๘")
-        XCTAssertEqual(thai1.read(9),  "๙")
-        XCTAssertEqual(thai1.read(10), "๑๐")
-        XCTAssertEqual(thai1.read(11), "๑๑")
-        XCTAssertEqual(thai1.read(12), "๑๒")
-        XCTAssertEqual(thai1.read(13), "๑๓")
-        XCTAssertEqual(thai1.read(14), "๑๔")
-        XCTAssertEqual(thai1.read(114), "๑๑๔")
-        XCTAssertEqual(thai1.read("114.7"), "๑๑๔.๗")
-        XCTAssertEqual(thai1.read(1147), "๑๑๔๗")
-        XCTAssertEqual(thai1.read(1000), "๑๐๐๐")
+        XCTAssertEqual(thaiNumerals.read(0),  "๐")
+        XCTAssertEqual(thaiNumerals.read(1),  "๑")
+        XCTAssertEqual(thaiNumerals.read(2),  "๒")
+        XCTAssertEqual(thaiNumerals.read(3),  "๓")
+        XCTAssertEqual(thaiNumerals.read(4),  "๔")
+        XCTAssertEqual(thaiNumerals.read(5),  "๕")
+        XCTAssertEqual(thaiNumerals.read(6),  "๖")
+        XCTAssertEqual(thaiNumerals.read(7),  "๗")
+        XCTAssertEqual(thaiNumerals.read(8),  "๘")
+        XCTAssertEqual(thaiNumerals.read(9),  "๙")
+        XCTAssertEqual(thaiNumerals.read(10), "๑๐")
+        XCTAssertEqual(thaiNumerals.read(11), "๑๑")
+        XCTAssertEqual(thaiNumerals.read(12), "๑๒")
+        XCTAssertEqual(thaiNumerals.read(13), "๑๓")
+        XCTAssertEqual(thaiNumerals.read(14), "๑๔")
+        XCTAssertEqual(thaiNumerals.read(114), "๑๑๔")
+        XCTAssertEqual(thaiNumerals.read("114.7"), "๑๑๔.๗")
+        XCTAssertEqual(thaiNumerals.read(1147), "๑๑๔๗")
+        XCTAssertEqual(thaiNumerals.read(1000), "๑๐๐๐")
 
     }
     
     func test_lanta() {
-        thai.groupSeparator = ""
-        thai.decimalSeparator = "."
         XCTAssertEqual(thai.read(100), "หนึ่งร้อย")
         XCTAssertEqual(thai.read(101), "หนึ่งร้อยหนึ่ง")
         XCTAssertEqual(thai.read(102), "หนึ่งร้อยสอง")

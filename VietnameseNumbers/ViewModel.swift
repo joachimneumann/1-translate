@@ -70,26 +70,26 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @Published var firstTranslatedNumberTopBorder: String? = nil
     @Published var secondTranslatedNumberTopBorder: String? = nil
 
-    let arabNumerals       = ArabicNumerals()
+    let arabNumerals       = ArabicNumeralsImpl()
     let armenianNumerals   = ArmenianNumerals()
-    let armenian           = Armenian()
-    let catalan            = Catalan()
-    let chineseFinancial   = Chinese(variant: .financial)
-    let chineseSimplified  = Chinese(variant: .simplified)
-    let chineseTraditional = Chinese(variant: .traditional)
-    let danish             = Danish()
-    let digits             = Digits()
+    let armenian           = ArmenianImpl()
+    let catalan            = CatalanImpl()
+    let chineseFinancial   = ChineseImpl(variant: .financial)
+    let chineseSimplified  = ChineseImpl(variant: .simplified)
+    let chineseTraditional = ChineseImpl(variant: .traditional)
+    let danish             = DanishImpl()
+    let digits             = DigitsImpl()
     let english            = EnglishImpl()
-    let french             = French()
-    let german             = German()
-    let polish             = Polish()
-    let roman              = Roman()
-    let spanish            = Spanish()
-    let thai               = Thai()
-    let thaiNumerals       = ThaiNumerals()
-    let vietnamese         = Vietnamese()
+    let french             = FrenchImpl()
+    let german             = GermanImpl()
+    let polish             = PolishImpl()
+    let roman              = RomanImpl()
+    let spanish            = SpanishImpl()
+    let thai               = ThaiImpl()
+    let thaiNumerals       = ThaiNumeralsImpl()
+    let vietnamese         = VietnameseImpl()
 
-    var languages: [Language] // set in init()
+    var languages: [LanguageBaseClass] // set in init()
 
     var previouslySelectedLanguages = StringPreference()
     var firstFont: Font {
@@ -172,11 +172,11 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     }
 
     @AppStorage(AppStorageKeys.settingsSpanishUsePunto, store: .standard)
-    var settingsSpanishUsePunto: Spanish.PuntoComma = .coma {
+    var settingsSpanishUsePunto: SpanishImpl.PuntoComma = .coma {
         didSet {
             spanish.dotString = settingsSpanishUsePunto.rawValue
             // make sure that the selected decimal and group seperator do not mess up the example
-            let tempSpanish = Spanish()
+            let tempSpanish = SpanishImpl()
             settingsSpanishExample = tempSpanish.read("1.5")
         }
     }
@@ -200,7 +200,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
 
     
     @AppStorage(AppStorageKeys.settingsVietnameseThousand)
-    var settingsVietnameseThousand: Vietnamese.Thousand = .nghìn {
+    var settingsVietnameseThousand: VietnameseImpl.Thousand = .nghìn {
         didSet {
             vietnamese.e3 = settingsVietnameseThousand.rawValue
             settingsVietnameseExample = vietnamese.read(303333)
@@ -208,7 +208,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     }
     
     @AppStorage(AppStorageKeys.settingsVietnameseSecondLast)
-    var settingsVietnameseSecondLast: Vietnamese.SecondLast = .lẻ {
+    var settingsVietnameseSecondLast: VietnameseImpl.SecondLast = .lẻ {
         didSet {
             vietnamese.secondLast = settingsVietnameseSecondLast
             settingsVietnameseExample = vietnamese.read(303333)
@@ -223,7 +223,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         }
     }
         
-    @Published var firstLanguage: Language = EnglishImpl() {
+    @Published var firstLanguage: LanguageBaseClass = EnglishImpl() {
         didSet {
             previouslySelectedLanguages.add(new: firstLanguage.name)
             if firstLanguage.name == secondLanguage.name {
@@ -242,7 +242,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             secondLanguageName = secondLanguage.name
         }
     }
-    @Published var secondLanguage: Language = German() {
+    @Published var secondLanguage: LanguageBaseClass = GermanImpl() {
         didSet {
             previouslySelectedLanguages.add(new: secondLanguage.name)
             if firstLanguage.name == secondLanguage.name {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ThaiNumerals: Language {
+class ThaiNumeralsImpl: LanguageBaseClass {
     init() {
         super.init(
             name: "แบบดั้งเดิม",

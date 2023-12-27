@@ -8,7 +8,7 @@
 import XCTest
 
 final class TestDigits: XCTestCase {
-    let digits = Digits()
+    let digits = DigitsImpl()
     
     func test_digits() {
         XCTAssertEqual(digits.read(0), "0")

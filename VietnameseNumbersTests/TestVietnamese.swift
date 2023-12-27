@@ -10,7 +10,7 @@ import XCTest
 final class TestVietnames: XCTestCase {
     
     func test_Vietnamese() {
-        let vietnamese = Vietnamese()
+        var vietnamese = TranslateNumber().vietnamese
          vietnamese.compact = false
         
         XCTAssertEqual(vietnamese.read(1001), "một nghìn không trăm lẻ một")
@@ -344,10 +344,10 @@ final class TestVietnames: XCTestCase {
         XCTAssertEqual(vietnamese.read(99_000_000_909), "chín chín tỷ chín trăm lẻ chín")
         XCTAssertEqual(vietnamese.read(99_999_999_999), "chín chín tỷ chín trăm chín chín triệu chín trăm chín chín nghìn chín trăm chín chín")
         
-        vietnamese.e3 = Vietnamese.Thousand.nghìn.rawValue
+        vietnamese.thousand = .nghìn
         XCTAssertEqual(vietnamese.read(1_000_000_000_000), "một nghìn tỷ")
         XCTAssertEqual(vietnamese.read(999_000_000_000_000), "chín trăm chín chín nghìn tỷ")
-        vietnamese.e3 = Vietnamese.Thousand.ngàn.rawValue
+        vietnamese.thousand = .ngàn
         XCTAssertEqual(vietnamese.read(1_000_000_000_000), "một ngàn tỷ")
         XCTAssertEqual(vietnamese.read(999_000_000_000_000), "chín trăm chín chín ngàn tỷ")
     }

@@ -7,26 +7,46 @@
 
 import Foundation
 
+protocol Language {
+    func read(_ numberString: String) -> String
+    func read(_ i: Int) -> String
+    var name: String { get }
+    var englishName: String? { get }
+    var rightToLeft: Bool { get }
+}
+protocol English: Language {
+    var afterHundred: String { get set }
+}
+protocol German: Language {
+    var capitalisation: Bool { get set }
+}
+protocol Vietnamese: Language {
+    var thousand: VietnameseImpl.Thousand { get set }
+    var secondLast: VietnameseImpl.SecondLast { get set }
+    var compact: Bool { get set }
+}
+
 class TranslateNumber {
-    var languages: [Language2P] = []
-    let arabicNumerals      = ArabicNumerals()
-    let armenianNumerals    = ArmenianNumerals()
-    let armenian            = Armenian()
-    let catalan             = Catalan()
-    let chineseFinancial    = Chinese(variant: .financial)
-    let chineseSimplified   = Chinese(variant: .simplified)
-    let chineseTraditional  = Chinese(variant: .traditional)
-    let danish              = Danish()
-    let digits              = Digits()
-    let english: English   = EnglishImpl()
-    let french              = French()
-    let german              = German()
-    let polish              = Polish()
-    let roman               = Roman()
-    let spanish             = Spanish()
-    let thai                = Thai()
-    let thaiNumerals        = ThaiNumerals()
-    let vietnamese          = Vietnamese()
+    var languages: [Language] = []
+    let arabic: Language              = ArabicImpl()
+    let arabicNumerals: Language      = ArabicNumeralsImpl()
+    let armenianNumerals: Language    = ArmenianNumerals()
+    let armenian: Language            = ArmenianImpl()
+    let catalan: Language             = CatalanImpl()
+    let chineseFinancial: Language    = ChineseImpl(variant: .financial)
+    let chineseSimplified: Language   = ChineseImpl(variant: .simplified)
+    let chineseTraditional: Language  = ChineseImpl(variant: .traditional)
+    let danish: Language              = DanishImpl()
+    let digits: Language              = DigitsImpl()
+    let english: English              = EnglishImpl()
+    let french: Language              = FrenchImpl()
+    let german: German                = GermanImpl()
+    let polish: Language              = PolishImpl()
+    let roman: Language               = RomanImpl()
+    let spanish: Language             = SpanishImpl()
+    let thai: Language                = ThaiImpl()
+    let thaiNumerals: Language        = ThaiNumeralsImpl()
+    let vietnamese: Vietnamese        = VietnameseImpl()
 
     init() {
         languages.append(arabicNumerals)

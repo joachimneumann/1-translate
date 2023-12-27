@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Spanish: Language {
+class SpanishImpl: LanguageBaseClass {
     
     enum PuntoComma: String, Codable, CaseIterable {
         case coma

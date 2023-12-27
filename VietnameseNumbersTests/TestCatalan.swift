@@ -10,9 +10,7 @@ import XCTest
 final class TestCatalan: XCTestCase {
     
     func test_catalan() {
-        let catalan = Catalan()
-        catalan.decimalSeparator = "."
-        catalan.groupSeparator = ""
+        let catalan = TranslateNumber().catalan
         
         XCTAssertEqual(catalan.read(-1), "menys u")
         XCTAssertEqual(catalan.read("-1"), "menys u")

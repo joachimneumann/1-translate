@@ -84,10 +84,10 @@ struct TranslateNumbers: View {
     
     struct LanguageButton: View {
         @State var showSheet = false
-        private let language: Language
+        private let language: LanguageBaseClass
         private let viewModel: ViewModel
 
-        init(language: Language, viewModel: ViewModel) {
+        init(language: LanguageBaseClass, viewModel: ViewModel) {
             self.language = language
             self.viewModel = viewModel
         }

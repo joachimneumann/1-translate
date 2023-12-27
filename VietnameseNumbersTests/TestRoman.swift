@@ -9,12 +9,7 @@ import XCTest
 
 final class TestRoman: XCTestCase {
     
-    let roman = Roman()
-
-    override func setUpWithError() throws {
-        roman.groupSeparator = ""
-        roman.decimalSeparator = "."
-    }
+    let roman = TranslateNumber().roman
 
     
     func test_Wikipedia() {
