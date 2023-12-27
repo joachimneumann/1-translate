@@ -92,7 +92,6 @@ struct TranslateNumbers: View {
             }
             .buttonStyle(TransparentButtonStyle())
             .opacity(0.9)
-
         }
     }
         

@@ -17,12 +17,12 @@ struct SelectLanguage: View {
         var body: some View {
             HStack(spacing: 0.0) {
                 Text(language.name)
-                    .foregroundColor(selected ? .white : Color(.lightGray))
+                    .foregroundColor(.white)
                 Spacer(minLength: 0)
                 if language.englishName != nil {
                     Text(" "+language.englishName!)
                         .italic()
-                        .foregroundColor(selected ? .white : Color(.lightGray))
+                        .foregroundColor(.white)
                         .minimumScaleFactor(0.01)
                 }
             }
@@ -32,8 +32,9 @@ struct SelectLanguage: View {
     }
     
     var body: some View {
+        let imageBorderWidth: CGFloat = 3
         let _1_selected = (language.name == viewModel.firstLanguage.name)
-        let _2_selected = (language.name == viewModel.secondLanguage.name)
+        let _2_selected = viewModel.secondLanguageAllowed && (language.name == viewModel.secondLanguage.name)
         HStack {
             Button(action: {
                 viewModel.newFirstLanguage(language)
@@ -42,15 +43,14 @@ struct SelectLanguage: View {
                     Image(language.flagName)
                         .resizable()
                         .scaledToFit()
-                        .padding(2)
-                        .border(.white, width: viewModel.firstLanguage.name == language.name ? 2 : 0)
+                        .padding(imageBorderWidth)
+                        .border(.white, width: viewModel.firstLanguage.name == language.name ? imageBorderWidth : 0)
                         .frame(height: 30)
                         .padding(.trailing, 10)
-                        .opacity(_1_selected ? 1.0 : 0.5)
                 }
             }
             if !viewModel.secondLanguageAllowed {
-                LanguageText(language: language, selected: _1_selected || (viewModel.secondLanguageAllowed && _2_selected))
+                LanguageText(language: language, selected: _1_selected || _2_selected)
                 Spacer()
             }
             if viewModel.secondLanguageAllowed {
@@ -61,14 +61,13 @@ struct SelectLanguage: View {
                         Image(language.flagName)
                             .resizable()
                             .scaledToFit()
-                            .padding(2)
-                            .border(.white, width: viewModel.secondLanguage.name == language.name ? 2 : 0)
+                            .padding(imageBorderWidth)
+                            .border(.white, width: viewModel.secondLanguage.name == language.name ? imageBorderWidth : 0)
                             .frame(height: 30)
-                            .opacity(_2_selected ? 1.0 : 0.5)
                             .padding(.trailing, 10)
                     }
                 }
-                LanguageText(language: language, selected: _1_selected || (viewModel.secondLanguageAllowed && _2_selected))
+                LanguageText(language: language, selected: _1_selected || _2_selected)
                 Spacer()
             }
         }
@@ -116,12 +115,20 @@ struct LanguageSelector: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 0.0) {
                     ForEach(0 ..< viewModel.languages.list.count, id: \.self) { index in
-                        SelectLanguage(viewModel: viewModel, language: viewModel.languages.list[index])
+                        let language = viewModel.languages.list[index]
+                        let _1_selected = (language.name == viewModel.firstLanguage.name)
+                        let _2_selected = viewModel.secondLanguageAllowed && (language.name == viewModel.secondLanguage.name)
+                        SelectLanguage(viewModel: viewModel, language: language)
+                        Rectangle()
+                            .frame(height: 2.0, alignment: .bottom)
+                            .padding(.top, -2)
+                            .foregroundColor((_1_selected || _2_selected) ? Color(.darkGray) : .black)
+                            .padding(.leading, 120)
                     }
                 }
+                .padding(.trailing, 5)
             }
             .padding(.leading, 10)
-            .padding(.trailing, 5)
         }
     }
 }
