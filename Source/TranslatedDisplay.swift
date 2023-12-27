@@ -26,13 +26,11 @@ struct TranslatedDisplay: View {
     let translatedString: String
     let translatedStringTopBorder: String?
     let screen: Screen
-    let rightToLeft: Bool
 
-    init(translatedString: String, translatedStringTopBorder: String?, screen: Screen, rightToLeft: Bool) {
+    init(translatedString: String, translatedStringTopBorder: String?, screen: Screen) {
         self.translatedString = translatedString
         self.translatedStringTopBorder = translatedStringTopBorder
         self.screen = screen
-        self.rightToLeft = rightToLeft
     }
     
     var body: some View {
@@ -40,21 +38,18 @@ struct TranslatedDisplay: View {
             ScrollView(.vertical) {
                 VStack {
                     HStack(alignment: .bottom, spacing: 0.0) {
-                        if rightToLeft {
-                            Spacer(minLength: 0.0)
-                        }
+                        Spacer(minLength: 0.0)
                         if translatedStringTopBorder != nil {
                             Text(translatedStringTopBorder!)
                                 .topBorder()
+                                .multilineTextAlignment(.trailing)
                         }
                         Text(translatedString)
                             .textSelection(.enabled)
-                        if !rightToLeft {
-                            Spacer(minLength: 0.0)
-                        }
+                            .multilineTextAlignment(.trailing)
                     }
                 }
-                .frame(width: geometry.size.width)      // Make the scroll view full-width
+                .frame(width: geometry.size.width) // Make the scroll view full-width
             }
             .scrollBounceBehavior(.basedOnSize)
         }

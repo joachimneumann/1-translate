@@ -23,20 +23,8 @@ struct TranslateNumbers: View {
             VStack(spacing: 0.0) {
                 VStack(spacing: 0.0) {
                     HStack(spacing: 30.0) {
-                        LanguageButton(language: viewModel.firstLanguage, viewModel: viewModel)
                         Spacer()
-                        NavigationLink {
-                            Settings(viewModel: viewModel, screen: screen, font: Font(screen.infoUiFont))
-                        } label: {
-                            Image(systemName: "switch.2")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .font(Font.title.weight(.thin))
-                                .frame(height: screen.plusIconSize * 0.8)
-                                .foregroundColor(Color.white)
-                        }
-                        .buttonStyle(TransparentButtonStyle())
-                        .opacity(0.9)
+                        LanguageButton(language: viewModel.firstLanguage, viewModel: viewModel, screen: screen)
                     }
                     .frame(height: 34.0)
                     .padding(.bottom, 10)
@@ -44,8 +32,7 @@ struct TranslateNumbers: View {
                         TranslatedDisplay(
                             translatedString: viewModel.firstTranslatedNumber,
                             translatedStringTopBorder: viewModel.firstTranslatedNumberTopBorder,
-                            screen: screen,
-                            rightToLeft: viewModel.firstLanguage.rightToLeft)
+                            screen: screen)
                         .font(viewModel.firstFont)
                         .padding(.horizontal, 0)
                     Spacer(minLength: 0.0)
@@ -53,8 +40,8 @@ struct TranslateNumbers: View {
                 if viewModel.secondLanguageAllowed {
                     VStack(spacing: 0.0) {
                         HStack(spacing: 30.0) {
-                            LanguageButton(language: viewModel.secondLanguage, viewModel: viewModel)
                             Spacer()
+                            LanguageButton(language: viewModel.secondLanguage, viewModel: viewModel, screen: screen)
                         }
                         .frame(height: 34.0)
                         .padding(.bottom, 10)
@@ -62,8 +49,7 @@ struct TranslateNumbers: View {
                         Spacer(minLength: 0.0)
                         TranslatedDisplay(
                             translatedString: viewModel.secondTranslatedNumber,
-                            translatedStringTopBorder: viewModel.secondTranslatedNumberTopBorder,                            screen: screen,
-                            rightToLeft: viewModel.secondLanguage.rightToLeft)
+                            translatedStringTopBorder: viewModel.secondTranslatedNumberTopBorder,                            screen: screen)
                         .font(viewModel.secondFont)
                         .padding(.horizontal, 0)
                     }
@@ -86,15 +72,17 @@ struct TranslateNumbers: View {
         @State var showSheet = false
         private let language: Language
         private let viewModel: ViewModel
+        private let screen: Screen
 
-        init(language: Language, viewModel: ViewModel) {
+        init(language: Language, viewModel: ViewModel, screen: Screen) {
             self.language = language
             self.viewModel = viewModel
+            self.screen = screen
         }
         
         var body: some View {
             NavigationLink {
-                LanguageSelector(viewModel: viewModel)
+                LanguageSelector(viewModel: viewModel, screen: screen)
             } label: {
                 Image(language.flagName)
                     .resizable()

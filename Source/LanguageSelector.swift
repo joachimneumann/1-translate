@@ -81,6 +81,7 @@ struct LanguageSelector: View {
     
     @Environment(\.presentationMode) var presentation /// for dismissing the Settings View
     @ObservedObject var viewModel: ViewModel
+    let screen : Screen
     
     var body: some View {
         VStack {
@@ -95,6 +96,19 @@ struct LanguageSelector: View {
                 Text("Show 2 languages")
                     .foregroundColor(Color.white)
                 Spacer()
+                NavigationLink {
+                    Settings(viewModel: viewModel, font: Font(screen.infoUiFont))
+                } label: {
+                    Image(systemName: "switch.2")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .font(Font.title.weight(.thin))
+                        .frame(height: screen.plusIconSize * 0.8)
+                        .foregroundColor(Color.white)
+                }
+                .buttonStyle(TransparentButtonStyle())
+                .opacity(0.9)
+                .padding(.trailing, 15)
             }
             .padding(.top, 20)
             .padding(.bottom, 10)

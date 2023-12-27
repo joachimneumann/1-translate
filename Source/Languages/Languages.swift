@@ -13,7 +13,6 @@ protocol Language {
     var name: String { get }
     var flagName: String { get }
     var englishName: String? { get }
-    var rightToLeft: Bool { get }
 }
 
 // Languages with parameters

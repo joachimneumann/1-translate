@@ -57,7 +57,6 @@
 		AA831B9D2B3462D9003307A2 /* FrenchImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA831B9B2B3462D9003307A2 /* FrenchImpl.swift */; };
 		AA831BA02B35238C003307A2 /* VietnameseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA831B9F2B35238C003307A2 /* VietnameseImpl.swift */; };
 		AA831BA12B35238C003307A2 /* VietnameseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA831B9F2B35238C003307A2 /* VietnameseImpl.swift */; };
-		AA8453E8294D872300A50B74 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8453E7294D872300A50B74 /* Icons.swift */; };
 		AA893A042B395B2100BE2772 /* TestArmenian.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA893A032B395B2100BE2772 /* TestArmenian.swift */; };
 		AA893A062B395C2700BE2772 /* ArmenianImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA893A052B395C2700BE2772 /* ArmenianImpl.swift */; };
 		AA893A072B395C2D00BE2772 /* ArmenianImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA893A052B395C2700BE2772 /* ArmenianImpl.swift */; };
@@ -166,7 +165,6 @@
 		AA7988B32B32B07700608906 /* ThaiImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThaiImpl.swift; sourceTree = "<group>"; };
 		AA831B9B2B3462D9003307A2 /* FrenchImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrenchImpl.swift; sourceTree = "<group>"; };
 		AA831B9F2B35238C003307A2 /* VietnameseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VietnameseImpl.swift; sourceTree = "<group>"; };
-		AA8453E7294D872300A50B74 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		AA893A032B395B2100BE2772 /* TestArmenian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestArmenian.swift; sourceTree = "<group>"; };
 		AA893A052B395C2700BE2772 /* ArmenianImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmenianImpl.swift; sourceTree = "<group>"; };
 		AA8A91132B1D7FD000CE7185 /* TranslatedDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatedDisplay.swift; sourceTree = "<group>"; };
@@ -256,7 +254,6 @@
 				AA29F589293CD608001ADF5A /* PortraitDisplay.swift */,
 				AAB10B96292A2222004707E9 /* NonScientificKeyboard.swift */,
 				AA370C30293352D60041AE4E /* Key.swift */,
-				AA8453E7294D872300A50B74 /* Icons.swift */,
 				AA672B09295189950044DC08 /* ScrollViewConditionalAnimation.swift */,
 				AABEFC122972A8780023A3C9 /* KeyColor.swift */,
 				AA370C2C293352960041AE4E /* Extensions.swift */,
@@ -472,7 +469,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA8453E8294D872300A50B74 /* Icons.swift in Sources */,
 				AA5CF91A2B3944AD004BB6BB /* ArmenianNumeralsImpl.swift in Sources */,
 				AA01B9D42957E44300617AFB /* Display.swift in Sources */,
 				AAB990512B35703500BD5A24 /* RomanImpl.swift in Sources */,

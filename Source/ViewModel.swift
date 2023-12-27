@@ -170,7 +170,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     }
     
     @AppStorage(AppStorageKeys.settingsGermanSoftHyphenKey)
-    var settingsGermanSoftHyphen: Bool = false {
+    var settingsGermanSoftHyphen: Bool = true {
         didSet {
             languages.german.useSoftHyphen = settingsGermanSoftHyphen
         }

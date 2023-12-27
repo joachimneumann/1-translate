@@ -24,7 +24,6 @@ class LanguageImpl: Language {
     var allowFraction = true
     let error = "ERROR"
     
-    var rightToLeft: Bool = false
     var e2: String? = nil
     var e3: String? = nil
     var e4: String? = nil

@@ -12,7 +12,6 @@ struct Settings: View {
     @Environment(\.presentationMode) var presentation /// for dismissing the Settings View
     
     @ObservedObject var viewModel: ViewModel
-    let screen: Screen
     let font: Font
     
     var body: some View {
@@ -371,7 +370,6 @@ struct ControlCenter_Previews: PreviewProvider {
     static var previews: some View {
         Settings(
             viewModel: ViewModel(),
-            screen: Screen(CGSize()),
             font: Font(Screen.appleFont(ofSize: 20)))
         .background(.black)
     }
