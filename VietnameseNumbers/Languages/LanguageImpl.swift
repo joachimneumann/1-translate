@@ -8,7 +8,7 @@
 import Foundation
 
 
-class LanguageBaseClass: Language {
+class LanguageImpl: Language {
     
     var name: String
     var englishName: String? = nil

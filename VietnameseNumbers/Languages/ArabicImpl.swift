@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ArabicImpl: LanguageBaseClass {
+class ArabicImpl: LanguageImpl {
     enum Variant {
         case web
         case chatGTP

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class VietnameseImpl: LanguageBaseClass, Vietnamese {
+class VietnameseImpl: LanguageImpl, Vietnamese {
     
     enum Thousand: String, Codable, CaseIterable {
         case ngàn

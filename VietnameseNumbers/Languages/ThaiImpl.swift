@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ThaiImpl: LanguageBaseClass {
+class ThaiImpl: LanguageImpl {
     init() {
         super.init(
             name: "ภาษาไทย",

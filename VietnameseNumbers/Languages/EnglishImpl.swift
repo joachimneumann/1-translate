@@ -7,7 +7,7 @@
 
 import Foundation
 
-class EnglishImpl: LanguageBaseClass, English {
+class EnglishImpl: LanguageImpl, English {
     var useAndAfterHundred: Bool = false {
         didSet {
             afterHundred = useAndAfterHundred ? " and" : ""

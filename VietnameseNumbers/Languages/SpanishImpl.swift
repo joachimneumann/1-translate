@@ -7,7 +7,7 @@
 
 import Foundation
 
-class SpanishImpl: LanguageBaseClass, Spanish {
+class SpanishImpl: LanguageImpl, Spanish {
     var puntoComma: PuntoComma {
         didSet {
             dotString = puntoComma.rawValue

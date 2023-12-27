@@ -7,7 +7,7 @@
 
 import Foundation
 
-class PolishImpl: LanguageBaseClass {
+class PolishImpl: LanguageImpl {
     init() {
         super.init(
             name: "Polski",

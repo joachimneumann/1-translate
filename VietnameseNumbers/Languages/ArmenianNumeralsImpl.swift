@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ArmenianNumeralsImpl: LanguageBaseClass {
+class ArmenianNumeralsImpl: LanguageImpl {
     init() {
         super.init(
             name: "թիվ", 

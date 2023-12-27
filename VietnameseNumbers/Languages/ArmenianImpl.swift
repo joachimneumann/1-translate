@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ArmenianImpl: LanguageBaseClass {
+class ArmenianImpl: LanguageImpl {
     init() {
         super.init(
             name: "հայերեն",

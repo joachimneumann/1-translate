@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ChineseImpl: LanguageBaseClass {
+class ChineseImpl: LanguageImpl {
     
     enum Variant {
         case traditional
