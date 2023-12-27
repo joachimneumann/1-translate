@@ -1,5 +1,5 @@
 //
-//  TranslateNumber.swift
+//  Languages.swift
 //  TranslateNumbers
 //
 //  Created by Joachim Neumann on 12/26/23.
@@ -32,8 +32,8 @@ protocol Spanish: Language {
     var puntoComma: SpanishImpl.PuntoComma { get set }
 }
 
-class TranslateNumber {
-    var languages: [Language] = []
+class Languages {
+    var list: [Language] = []
     let arabic: Language              = ArabicImpl()
     let arabicNumerals: Language      = ArabicNumeralsImpl()
     let armenianNumerals: Language    = ArmenianNumeralsImpl()
@@ -55,7 +55,7 @@ class TranslateNumber {
     var vietnamese: Vietnamese        = VietnameseImpl()
 
     init() {
-        languages = [arabicNumerals,
+        list = [arabicNumerals,
         armenianNumerals,
         armenian,
         catalan,

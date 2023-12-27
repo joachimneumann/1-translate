@@ -9,7 +9,7 @@ import XCTest
 
 class TestFrench: XCTestCase {
     
-    let french = TranslateNumber().french
+    let french = Languages().french
     
     func test_chatGTP() {
         XCTAssertEqual(french.read(0), "zéro")

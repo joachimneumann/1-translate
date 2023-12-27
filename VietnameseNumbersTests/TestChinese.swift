@@ -7,10 +7,10 @@
 
 import XCTest
 
-final class TestChinese: XCTestCase{
-    let simplified  = TranslateNumber().chineseSimplified
-    let traditional = TranslateNumber().chineseTraditional
-    let financial   = TranslateNumber().chineseFinancial
+final class TestChinese: XCTestCase {
+    let simplified  = Languages().chineseSimplified
+    let traditional = Languages().chineseTraditional
+    let financial   = Languages().chineseFinancial
     
     func test_traditional() {
         XCTAssertEqual(traditional.read(0), "零")

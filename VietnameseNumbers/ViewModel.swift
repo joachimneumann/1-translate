@@ -69,18 +69,18 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @Published var firstTranslatedNumberTopBorder: String? = nil
     @Published var secondTranslatedNumberTopBorder: String? = nil
     
-    let tn = TranslateNumber()
+    let languages = Languages()
     
     var previouslySelectedLanguages = StringPreference()
     var firstFont: Font {
-        if firstLanguage.englishName == tn.arabicNumerals.englishName {
+        if firstLanguage.englishName == languages.arabicNumerals.englishName {
             Font(UIFont(name: "Avenir", size: secondLanguageAllowed ? 40 : 60)!)
         } else {
             secondLanguageAllowed ? Font.title : Font.largeTitle
         }
     }
     var secondFont: Font {
-        if firstLanguage.englishName == tn.arabicNumerals.englishName {
+        if firstLanguage.englishName == languages.arabicNumerals.englishName {
             Font(UIFont(name: "Avenir", size: 40)!)
         } else {
             Font.title
@@ -138,16 +138,16 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @AppStorage(AppStorageKeys.settingsEnglishUseAndAfterHundredKey, store: .standard)
     var settingsEnglishUseAndAfterHundred: Bool = false {
         didSet {
-            tn.english.useAndAfterHundred = settingsEnglishUseAndAfterHundred
-            settingsEnglishExample = tn.english.read(105)
+            languages.english.useAndAfterHundred = settingsEnglishUseAndAfterHundred
+            settingsEnglishExample = languages.english.read(105)
         }
     }
     
     @AppStorage(AppStorageKeys.settingsSpanishUsePuntoKey, store: .standard)
     var settingsSpanishUsePunto: SpanishImpl.PuntoComma = .coma {
         didSet {
-            tn.spanish.puntoComma = settingsSpanishUsePunto
-            settingsSpanishExample = tn.spanish.read("1.5")
+            languages.spanish.puntoComma = settingsSpanishUsePunto
+            settingsSpanishExample = languages.spanish.read("1.5")
         }
     }
     
@@ -155,16 +155,16 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @AppStorage(AppStorageKeys.settingsGermanCaptalisationKey)
     var settingsGermanCaptalisation: Bool = true {
         didSet {
-            tn.german.capitalisation = settingsGermanCaptalisation
-            settingsGermanExample = tn.german.read(88)
+            languages.german.capitalisation = settingsGermanCaptalisation
+            settingsGermanExample = languages.german.read(88)
         }
     }
     
     @AppStorage(AppStorageKeys.settingsGermanSoftHyphenKey)
     var settingsGermanSoftHyphen: Bool = false {
         didSet {
-            tn.german.useSoftHyphen = settingsGermanSoftHyphen
-            settingsGermanExample = tn.german.read(88)
+            languages.german.useSoftHyphen = settingsGermanSoftHyphen
+            settingsGermanExample = languages.german.read(88)
         }
     }
     
@@ -172,24 +172,24 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @AppStorage(AppStorageKeys.settingsVietnameseThousandKey)
     var settingsVietnameseThousand: VietnameseImpl.Thousand = .nghìn {
         didSet {
-            tn.vietnamese.thousand = settingsVietnameseThousand
-            settingsVietnameseExample = tn.vietnamese.read(303333)
+            languages.vietnamese.thousand = settingsVietnameseThousand
+            settingsVietnameseExample = languages.vietnamese.read(303333)
         }
     }
     
     @AppStorage(AppStorageKeys.settingsVietnameseSecondLastKey)
     var settingsVietnameseSecondLast: VietnameseImpl.SecondLast = .lẻ {
         didSet {
-            tn.vietnamese.secondLast = settingsVietnameseSecondLast
-            settingsVietnameseExample = tn.vietnamese.read(303333)
+            languages.vietnamese.secondLast = settingsVietnameseSecondLast
+            settingsVietnameseExample = languages.vietnamese.read(303333)
         }
     }
     
     @AppStorage(AppStorageKeys.settingsVietnameseCompactKey)
     var settingsVietnameseCompact: Bool = false {
         didSet {
-            tn.vietnamese.compact = settingsVietnameseCompact
-            settingsVietnameseExample = tn.vietnamese.read(303333)
+            languages.vietnamese.compact = settingsVietnameseCompact
+            settingsVietnameseExample = languages.vietnamese.read(303333)
         }
     }
     
@@ -200,7 +200,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
                 /// make sure the languages are not the same
                 let newLanguageName = previouslySelectedLanguages.get(except: firstLanguage.name)
                 if newLanguageName != "" {
-                    for newLanguage in tn.languages {
+                    for newLanguage in languages.list {
                         if newLanguage.name == newLanguageName {
                             secondLanguage = newLanguage
                         }
@@ -219,7 +219,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
                 /// make sure the languages are not the same
                 let newLanguageName = previouslySelectedLanguages.get(except: secondLanguage.name)
                 if newLanguageName != "" {
-                    for newLanguage in tn.languages {
+                    for newLanguage in languages.list {
                         if newLanguage.name == newLanguageName {
                             firstLanguage = newLanguage
                         }
@@ -272,7 +272,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         precisionDescription = _precision.wrappedValue.useWords
         
         
-        for language in tn.languages {
+        for language in languages.list {
             previouslySelectedLanguages.add(new: language.name)
         }
         
@@ -290,12 +290,12 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         backgroundColor["plus"] = keyColor.upColor(for: "+", isPending: false)
         
         /// trigger the didSet action of the persistently stored variables
-        for l in tn.languages {
+        for l in languages.list {
             if secondLanguageName == l.name {
                 secondLanguage = l
             }
         }
-        for l in tn.languages {
+        for l in languages.list {
             if firstLanguageName == l.name {
                 firstLanguage = l
             }

@@ -8,7 +8,7 @@
 import XCTest
 
 final class TestArabic: XCTestCase {
-    let arabic = TranslateNumber().arabic
+    let arabic = Languages().arabic
     
     func XXtest() {
         /// https://lexisrex.com/Arabic-Numbers/1-1000

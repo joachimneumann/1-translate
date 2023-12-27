@@ -116,7 +116,7 @@ struct TranslateNumbers: View {
                         }
                     }
                     .padding(20)
-                    .presentationDetents([.height(150.0 + CGFloat(viewModel.tn.languages.count) * 44.0)])
+                    .presentationDetents([.height(150.0 + CGFloat(viewModel.languages.list.count) * 44.0)])
                 }
                 .background(Color(red: 0.15, green: 0.15, blue: 0.15))
             }

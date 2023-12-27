@@ -7,8 +7,8 @@
 import XCTest
 
 final class TestThai: XCTestCase {
-    let thai = TranslateNumber().thai
-    let thaiNumerals = TranslateNumber().thaiNumerals
+    let thai = Languages().thai
+    let thaiNumerals = Languages().thaiNumerals
 
     func test_traditionalThai() {
         XCTAssertEqual(thaiNumerals.read(0),  "๐")

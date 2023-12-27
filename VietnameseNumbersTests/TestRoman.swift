@@ -9,7 +9,7 @@ import XCTest
 
 final class TestRoman: XCTestCase {
     
-    let roman = TranslateNumber().roman
+    let roman = Languages().roman
 
     
     func test_Wikipedia() {

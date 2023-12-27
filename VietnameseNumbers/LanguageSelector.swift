@@ -95,8 +95,8 @@ struct LanguageSelector: View {
                 }
                 .padding(.top, 0)
                 .padding(.bottom, 10)
-                ForEach(0 ..< viewModel.tn.languages.count, id: \.self) { index in
-                    SelectLanguage(viewModel: viewModel, language: viewModel.tn.languages[index])
+                ForEach(0 ..< viewModel.languages.list.count, id: \.self) { index in
+                    SelectLanguage(viewModel: viewModel, language: viewModel.languages.list[index])
                 }
             }
         }

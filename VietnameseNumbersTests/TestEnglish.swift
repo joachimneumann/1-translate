@@ -8,7 +8,7 @@
 import XCTest
 
 final class TestEnglish: XCTestCase {
-    var english = TranslateNumber().english
+    var english = Languages().english
 
     func test_english() {
         XCTAssertEqual(english.read(0), "zero")

@@ -8,7 +8,7 @@
 import XCTest
 
 final class TestArabic2: XCTestCase {
-    let arabic = TranslateNumber().arabic
+    let arabic = Languages().arabic
     
 func test_generated() {
     XCTAssertEqual(arabic.read(0), "صفر")

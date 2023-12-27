@@ -143,14 +143,14 @@ struct Settings: View {
         return Group {
             GridRow {
                 HStack {
-                    Image(viewModel.tn.english.flagName)
+                    Image(viewModel.languages.english.flagName)
                         .resizable()
                         .scaledToFit()
                         .padding(1)
                         .border(.white)
                         .frame(height: 25)
                         .padding(.trailing, 10)
-                    Text(viewModel.tn.english.name)
+                    Text(viewModel.languages.english.name)
                         .bold()
                         .frame(height: 25)
                     Spacer()
@@ -180,14 +180,14 @@ struct Settings: View {
         return Group {
             GridRow {
                 HStack {
-                    Image(viewModel.tn.german.flagName)
+                    Image(viewModel.languages.german.flagName)
                         .resizable()
                         .scaledToFit()
                         .padding(1)
                         .border(.white)
                         .frame(height: 25)
                         .padding(.trailing, 10)
-                    Text(viewModel.tn.german.name)
+                    Text(viewModel.languages.german.name)
                         .bold()
                         .frame(height: 25)
                     Spacer()
@@ -227,14 +227,14 @@ struct Settings: View {
         return Group {
             GridRow {
                 HStack {
-                    Image(viewModel.tn.spanish.flagName)
+                    Image(viewModel.languages.spanish.flagName)
                         .resizable()
                         .scaledToFit()
                         .padding(1)
                         .border(.white)
                         .frame(height: 25)
                         .padding(.trailing, 10)
-                    Text(viewModel.tn.spanish.name)
+                    Text(viewModel.languages.spanish.name)
                         .bold()
                         .frame(height: 25)
                     Spacer()
@@ -268,14 +268,14 @@ struct Settings: View {
         return Group {
             GridRow {
                 HStack {
-                    Image(viewModel.tn.vietnamese.flagName)
+                    Image(viewModel.languages.vietnamese.flagName)
                         .resizable()
                         .scaledToFit()
                         .padding(1)
                         .border(.white)
                         .frame(height: 25)
                         .padding(.trailing, 10)
-                    Text(viewModel.tn.vietnamese.name)
+                    Text(viewModel.languages.vietnamese.name)
                         .bold()
                         .frame(height: 25)
                     Spacer()
