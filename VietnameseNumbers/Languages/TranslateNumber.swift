@@ -36,7 +36,7 @@ class TranslateNumber {
     var languages: [Language] = []
     let arabic: Language              = ArabicImpl()
     let arabicNumerals: Language      = ArabicNumeralsImpl()
-    let armenianNumerals: Language    = ArmenianNumerals()
+    let armenianNumerals: Language    = ArmenianNumeralsImpl()
     let armenian: Language            = ArmenianImpl()
     let catalan: Language             = CatalanImpl()
     let chineseFinancial: Language    = ChineseImpl(variant: .financial)
