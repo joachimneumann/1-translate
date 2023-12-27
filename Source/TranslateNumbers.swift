@@ -93,38 +93,23 @@ struct TranslateNumbers: View {
         }
         
         var body: some View {
-            let borderWidth = 2.0
-            Button {
-                showSheet.toggle()
+            NavigationLink {
+                LanguageSelector(viewModel: viewModel)
             } label: {
                 Image(language.flagName)
                     .resizable()
                     .scaledToFit()
+                    .padding(2)
+                    .border(.white, width: 2)
             }
-            .padding(borderWidth)
-            .border(.white, width: borderWidth)
-            .sheet(isPresented: $showSheet) {
-                ScrollView {
-                    VStack{
-                        LanguageSelector(viewModel: viewModel)
-                        Button(action: {
-                            showSheet = false
-                        }) {
-                            Text("Close")
-                                .foregroundColor(.white)
-                                .padding(.top, 10)
-                        }
-                    }
-                    .padding(20)
-                    .presentationDetents([.height(150.0 + CGFloat(viewModel.languages.list.count) * 44.0)])
-                }
-                .background(Color(red: 0.15, green: 0.15, blue: 0.15))
-            }
+            .buttonStyle(TransparentButtonStyle())
+            .opacity(0.9)
+
         }
     }
         
     var body: some View {
-        NavigationView {
+        NavigationStack {
             portraitView
                 .padding(.bottom, screen.bottomPadding)
                 .padding(.horizontal, screen.horizontalPadding)
@@ -136,6 +121,7 @@ struct TranslateNumbers: View {
                 }
                 .background(screen.backgroundColor)
         }
+        .accentColor(.white)
     }
 }
 

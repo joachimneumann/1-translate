@@ -23,7 +23,7 @@ struct Display {
     var canBeFloat: Bool
 
 #if os(macOS)
-    var color: Color = Color(white: 230.0/255.0)
+    var color: Color = Color(selected: 230.0/255.0)
 #else
     var color: Color = .white
 #endif

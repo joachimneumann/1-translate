@@ -212,7 +212,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     }
 
     func newFirstLanguage(_ newLanguage: Language) {
-        print("newFirstLanguage: " + newLanguage.name)
+        // print("newFirstLanguage: " + newLanguage.name)
         firstLanguage = newLanguage
         previouslySelectedLanguages.add(new: newLanguage.name)
         if secondLanguage.name == newLanguage.name {
@@ -231,7 +231,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     }
 
     func newSecondLanguage(_ newLanguage: Language) {
-        print("newSecondLanguage: " + newLanguage.name)
+        // print("newSecondLanguage: " + newLanguage.name)
         secondLanguage = newLanguage
         previouslySelectedLanguages.add(new: secondLanguage.name)
         if firstLanguage.name == secondLanguage.name {
@@ -277,10 +277,14 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         /// currentDisplay will be updated shortly by refreshDisplay in onAppear() of Calculator
         /// I set some values here
         currentDisplay = Display(left: "0", right: nil, canBeInteger: false, canBeFloat: false)
-        
-        for language in languages.list {
-            previouslySelectedLanguages.add(new: language.name)
-        }
+
+        // random preferences
+        previouslySelectedLanguages.add(new: languages.english.name)
+        previouslySelectedLanguages.add(new: languages.german.name)
+        previouslySelectedLanguages.add(new: languages.spanish.name)
+        previouslySelectedLanguages.add(new: secondLanguageName)
+        previouslySelectedLanguages.add(new: firstLanguageName)
+
         
         for symbol in [
             "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", ",",
@@ -294,7 +298,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             textColor[symbol] = keyColor.textColor(for: symbol, isPending: false)
         }
         backgroundColor["plus"] = keyColor.upColor(for: "+", isPending: false)
-        print("viewModel init")
+        // print("viewModel init")
         for l in languages.list {
             if secondLanguageName == l.name {
                 secondLanguage = l

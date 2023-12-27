@@ -17,10 +17,6 @@ struct Settings: View {
     
     var body: some View {
         VStack {
-            BackButton(
-                screen: screen,
-                font: font,
-                presentationMode: presentation)
             ScrollView {
                 VStack(alignment: .leading, spacing: 0.0) {
                     Grid(alignment: .leading, horizontalSpacing: 10.0, verticalSpacing: 10.0) {
@@ -33,35 +29,11 @@ struct Settings: View {
                     }
                     Spacer()
                 }
+                .padding(.top, 10)
                 .foregroundColor(Color.white)
                 .padding(.horizontal, 15)
             }
-        }
-        .navigationBarBackButtonHidden(true)
-    }
-    
-    struct BackButton: View {
-        let screen: Screen
-        let font: Font
-        let presentationMode: Binding<PresentationMode>
-        var body: some View {
-            HStack {
-                Button {
-                    presentationMode.wrappedValue.dismiss()
-                } label: {
-                    HStack {
-                        Image(systemName: "chevron.left")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 15.0)
-                        Text("Back")
-                    }
-                }
-                .buttonStyle(TransparentButtonStyle())
-                Spacer()
-            }
-            .foregroundColor(.white)
-            .padding()
+            .padding(.top, 10)
         }
     }
     
