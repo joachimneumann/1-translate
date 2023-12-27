@@ -59,6 +59,7 @@ class Languages {
 
     init() {
         list = [
+            arabic,
         arabicNumerals,
         armenianNumerals,
         armenian,

@@ -18,6 +18,7 @@ class ArmenianNumeralsImpl: LanguageImpl {
         allowNegativeNumbers = false
         allowExponent = false
         allowFraction = false
+        rightToLeft = true
     }
     
     private func read_armenian_1_9(_ i: Int) -> String {

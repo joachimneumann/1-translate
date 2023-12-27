@@ -15,6 +15,7 @@ class ArabicNumeralsImpl: LanguageImpl {
             dotString: ".",
             exponentString: "e")
         englishName = "Arabic Numerals"
+        rightToLeft = true
     }
     
     override func readInteger(_ i: Int) -> String {

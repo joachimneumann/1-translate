@@ -18,11 +18,12 @@ class ArabicImpl: LanguageImpl {
     init() {
         self.variant = .chatGTP
         super.init(
-            name: "Català",
-            negativeString: "menys",
-            dotString: "coma",
-            exponentString: " por diez elevat a ")
+            name: "عربي",
+            negativeString: "ناقص",
+            dotString: "واحدة",
+            exponentString: " مرات عشرة للقوة ")
         englishName = "Arabic"
+        rightToLeft = true
     }
     
     override func read_0_9(_ i: Int) -> String {
