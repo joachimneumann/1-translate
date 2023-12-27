@@ -80,6 +80,9 @@
 		AAB253BD2B3BDB6500860F93 /* TestHieroglyphs.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB253BC2B3BDB6500860F93 /* TestHieroglyphs.swift */; };
 		AAB253BF2B3BDC7600860F93 /* HieroglyphsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB253BE2B3BDC7600860F93 /* HieroglyphsImpl.swift */; };
 		AAB253C02B3BDCEF00860F93 /* HieroglyphsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB253BE2B3BDC7600860F93 /* HieroglyphsImpl.swift */; };
+		AAB253C22B3BF3A900860F93 /* TestBabylonian.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB253C12B3BF3A900860F93 /* TestBabylonian.swift */; };
+		AAB253C42B3BF42100860F93 /* BabylonianImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB253C32B3BF42100860F93 /* BabylonianImpl.swift */; };
+		AAB253C52B3BF55E00860F93 /* BabylonianImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB253C32B3BF42100860F93 /* BabylonianImpl.swift */; };
 		AAB9904E2B356B5C00BD5A24 /* CatalanImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB9904D2B356B5C00BD5A24 /* CatalanImpl.swift */; };
 		AAB9904F2B356B5C00BD5A24 /* CatalanImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB9904D2B356B5C00BD5A24 /* CatalanImpl.swift */; };
 		AAB990512B35703500BD5A24 /* RomanImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB990502B35703500BD5A24 /* RomanImpl.swift */; };
@@ -180,6 +183,8 @@
 		AAB253B42B3AE79400860F93 /* Languages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Languages.swift; sourceTree = "<group>"; };
 		AAB253BC2B3BDB6500860F93 /* TestHieroglyphs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHieroglyphs.swift; sourceTree = "<group>"; };
 		AAB253BE2B3BDC7600860F93 /* HieroglyphsImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HieroglyphsImpl.swift; sourceTree = "<group>"; };
+		AAB253C12B3BF3A900860F93 /* TestBabylonian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestBabylonian.swift; sourceTree = "<group>"; };
+		AAB253C32B3BF42100860F93 /* BabylonianImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabylonianImpl.swift; sourceTree = "<group>"; };
 		AAB9904D2B356B5C00BD5A24 /* CatalanImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalanImpl.swift; sourceTree = "<group>"; };
 		AAB990502B35703500BD5A24 /* RomanImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomanImpl.swift; sourceTree = "<group>"; };
 		AAB990532B35749700BD5A24 /* DanishImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanishImpl.swift; sourceTree = "<group>"; };
@@ -318,6 +323,7 @@
 				AAD343BB2B3AD7DB00EFFABF /* TestArabic2.swift */,
 				AA893A032B395B2100BE2772 /* TestArmenian.swift */,
 				AA5CF91C2B394959004BB6BB /* TestArmenianNumerals.swift */,
+				AAB253C12B3BF3A900860F93 /* TestBabylonian.swift */,
 				AA715CB62B2C3ABE009335B7 /* TestEnglish.swift */,
 				AA9561352B2AAFEB00648915 /* TestGerman.swift */,
 				AAB253BC2B3BDB6500860F93 /* TestHieroglyphs.swift */,
@@ -345,6 +351,7 @@
 				AAE3DA3E2B3988DA005F8414 /* ArabicImpl.swift */,
 				AA893A052B395C2700BE2772 /* ArmenianImpl.swift */,
 				AA5CF9192B3944AD004BB6BB /* ArmenianNumeralsImpl.swift */,
+				AAB253C32B3BF42100860F93 /* BabylonianImpl.swift */,
 				AAB9904D2B356B5C00BD5A24 /* CatalanImpl.swift */,
 				AAA180A92B365A9300B149E5 /* ChineseImpl.swift */,
 				AAB990532B35749700BD5A24 /* DanishImpl.swift */,
@@ -484,6 +491,7 @@
 				AA2FAC0F272F2349006DE4C8 /* Number.swift in Sources */,
 				AA370C2D293352960041AE4E /* Extensions.swift in Sources */,
 				AAB253BA2B3BA13600860F93 /* ArabicImpl.swift in Sources */,
+				AAB253C52B3BF55E00860F93 /* BabylonianImpl.swift in Sources */,
 				AA29F58A293CD608001ADF5A /* PortraitDisplay.swift in Sources */,
 				AA3565B02B32588B009B58D2 /* LanguageImpl.swift in Sources */,
 				AA8A91142B1D7FD000CE7185 /* TranslatedDisplay.swift in Sources */,
@@ -524,6 +532,7 @@
 				AAD343BD2B3AD82600EFFABF /* TestArabic2.swift in Sources */,
 				AAFBD8A82B32A36D00175197 /* ThaiNumeralsImpl.swift in Sources */,
 				AA7988B52B32B07700608906 /* ThaiImpl.swift in Sources */,
+				AAB253C42B3BF42100860F93 /* BabylonianImpl.swift in Sources */,
 				AAB990552B35749700BD5A24 /* DanishImpl.swift in Sources */,
 				AA3565B12B32588B009B58D2 /* LanguageImpl.swift in Sources */,
 				AA8B614E2B2AFC9A00D2152A /* TestSpanish.swift in Sources */,
@@ -545,6 +554,7 @@
 				AA5CF91E2B394959004BB6BB /* TestArmenianNumerals.swift in Sources */,
 				AA3565BA2B326B01009B58D2 /* TestDigits.swift in Sources */,
 				AA5CF9182B39318D004BB6BB /* ArabicNumeralsImpl.swift in Sources */,
+				AAB253C22B3BF3A900860F93 /* TestBabylonian.swift in Sources */,
 				AA715CAE2B2C22DB009335B7 /* TestDanish.swift in Sources */,
 				AA739C9E2B30014800A32478 /* TestFrensh.swift in Sources */,
 				AAE3DA3F2B3988DA005F8414 /* ArabicImpl.swift in Sources */,
