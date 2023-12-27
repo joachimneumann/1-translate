@@ -10,8 +10,8 @@ import XCTest
 final class TestVietnames: XCTestCase {
     
     func test_Vietnamese() {
-        var vietnamese = TranslateNumber().vietnamese
-         vietnamese.compact = false
+        var vietnamese = Languages().vietnamese
+        vietnamese.compact = false
         
         XCTAssertEqual(vietnamese.read(1001), "một nghìn không trăm lẻ một")
         
