@@ -215,8 +215,8 @@
 				AA6352B02B296C3B00CABC0C /* TODO.md */,
 				AAAE6D6C2B22C97900079392 /* README.md */,
 				AA08C7EB272F1241001B8575 /* TranslateNumbers.entitlements */,
-				AA08C7C0272EDA48001B8575 /* VietnameseNumbers */,
-				AA8A911C2B1D815C00CE7185 /* VietnameseNumbersTests */,
+				AA08C7C0272EDA48001B8575 /* Source */,
+				AA8A911C2B1D815C00CE7185 /* Tests */,
 				AA08C7BF272EDA48001B8575 /* Products */,
 				AA2FABE9272F2135006DE4C8 /* Frameworks */,
 			);
@@ -231,7 +231,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		AA08C7C0272EDA48001B8575 /* VietnameseNumbers */ = {
+		AA08C7C0272EDA48001B8575 /* Source */ = {
 			isa = PBXGroup;
 			children = (
 				AA3565BB2B326DE9009B58D2 /* Languages */,
@@ -259,7 +259,7 @@
 				AA08C7C7272EDA4A001B8575 /* Preview Content */,
 				AAEF2FB82B20D54B0012DDDD /* Separators.swift */,
 			);
-			path = VietnameseNumbers;
+			path = Source;
 			sourceTree = SOURCE_ROOT;
 		};
 		AA08C7C7272EDA4A001B8575 /* Preview Content */ = {
@@ -305,7 +305,7 @@
 			path = Languages;
 			sourceTree = "<group>";
 		};
-		AA8A911C2B1D815C00CE7185 /* VietnameseNumbersTests */ = {
+		AA8A911C2B1D815C00CE7185 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				AA3565B82B326B01009B58D2 /* TestDigits.swift */,
@@ -328,7 +328,7 @@
 				AAE128822B39C5C20010C848 /* x.txt */,
 				AAD343BB2B3AD7DB00EFFABF /* TestArabic2.swift */,
 			);
-			path = VietnameseNumbersTests;
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		AAB253BB2B3BBAD400860F93 /* Implementation */ = {
