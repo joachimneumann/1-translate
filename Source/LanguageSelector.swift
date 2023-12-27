@@ -36,8 +36,7 @@ struct SelectLanguage: View {
         let _2_selected = (language.name == viewModel.secondLanguage.name)
         HStack {
             Button(action: {
-                viewModel.firstLanguage = language
-                viewModel.firstLanguageName = language.name
+                viewModel.newFirstLanguage(language)
             }) {
                 HStack {
                     Image(language.flagName)
@@ -56,8 +55,7 @@ struct SelectLanguage: View {
             }
             if viewModel.secondLanguageAllowed {
                 Button(action: {
-                    viewModel.secondLanguage = language
-                    viewModel.secondLanguageName = language.name
+                    viewModel.newSecondLanguage(language)
                 }) {
                     HStack {
                         Image(language.flagName)

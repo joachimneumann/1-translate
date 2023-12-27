@@ -200,38 +200,50 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     
     @Published var firstLanguage: Language = EnglishImpl() {
         didSet {
-            previouslySelectedLanguages.add(new: firstLanguage.name)
-            if firstLanguage.name == secondLanguage.name {
-                /// make sure the languages are not the same
-                let newLanguageName = previouslySelectedLanguages.get(except: firstLanguage.name)
-                if newLanguageName != "" {
-                    for newLanguage in languages.list {
-                        if newLanguage.name == newLanguageName {
-                            secondLanguage = newLanguage
-                        }
-                    }
-                }
-            }
             updateTranslation()
             firstLanguageName  = firstLanguage.name
-            secondLanguageName = secondLanguage.name
         }
     }
     @Published var secondLanguage: Language = GermanImpl() {
         didSet {
-            previouslySelectedLanguages.add(new: secondLanguage.name)
-            if firstLanguage.name == secondLanguage.name {
-                /// make sure the languages are not the same
-                let newLanguageName = previouslySelectedLanguages.get(except: secondLanguage.name)
-                if newLanguageName != "" {
-                    for newLanguage in languages.list {
-                        if newLanguage.name == newLanguageName {
-                            firstLanguage = newLanguage
-                        }
+            updateTranslation()
+            secondLanguageName = secondLanguage.name
+        }
+    }
+
+    func newFirstLanguage(_ newLanguage: Language) {
+        print("newFirstLanguage: " + newLanguage.name)
+        firstLanguage = newLanguage
+        previouslySelectedLanguages.add(new: newLanguage.name)
+        if secondLanguage.name == newLanguage.name {
+            /// find a different second language
+            let newLanguageName = previouslySelectedLanguages.get(except: newLanguage.name)
+            if newLanguageName != "" {
+                for newLanguage in languages.list {
+                    if newLanguage.name == newLanguageName {
+                        secondLanguage = newLanguage
                     }
                 }
             }
-            updateTranslation()
+            firstLanguageName  = firstLanguage.name
+            secondLanguageName = secondLanguage.name
+        }
+    }
+
+    func newSecondLanguage(_ newLanguage: Language) {
+        print("newSecondLanguage: " + newLanguage.name)
+        secondLanguage = newLanguage
+        previouslySelectedLanguages.add(new: secondLanguage.name)
+        if firstLanguage.name == secondLanguage.name {
+        /// find a different first language
+            let newLanguageName = previouslySelectedLanguages.get(except: secondLanguage.name)
+            if newLanguageName != "" {
+                for newLanguage in languages.list {
+                    if newLanguage.name == newLanguageName {
+                        firstLanguage = newLanguage
+                    }
+                }
+            }
             firstLanguageName  = firstLanguage.name
             secondLanguageName = secondLanguage.name
         }
@@ -282,8 +294,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             textColor[symbol] = keyColor.textColor(for: symbol, isPending: false)
         }
         backgroundColor["plus"] = keyColor.upColor(for: "+", isPending: false)
-        
-        /// trigger the didSet action of the persistently stored variables
+        print("viewModel init")
         for l in languages.list {
             if secondLanguageName == l.name {
                 secondLanguage = l
