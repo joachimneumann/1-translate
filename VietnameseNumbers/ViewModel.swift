@@ -125,8 +125,8 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @AppStorage(AppStorageKeys.groupSeparatorKey, store: .standard)
     var groupSeparator: GroupSeparator = .none
     
-    @AppStorage(AppStorageKeys.groupSizeKey, store: .standard)
-    var groupSize: Int = 3
+    @AppStorage(AppStorageKeys.groupSeparatorKey, store: .standard)
+    var groupSize: GroupSize = ._3
     
     @AppStorage(AppStorageKeys.secondLanguageAllowedKey, store: .standard)
     var secondLanguageAllowed: Bool = false
@@ -432,7 +432,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     }
     
     func refreshDisplay(screen: Screen) async {
-        let tempDisplay = Display(displayNumber, screen: screen, separators: self, showAs: self, forceScientific: forceScientific, groupSize: groupSize)
+        let tempDisplay = Display(displayNumber, screen: screen, separators: self, showAs: self, forceScientific: forceScientific)
         await MainActor.run() {
             currentDisplay = tempDisplay
             self.showAC = currentDisplay.isZero

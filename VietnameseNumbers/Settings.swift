@@ -66,7 +66,7 @@ struct Settings: View {
     }
     
     var DigitsSettings: some View {
-        let example =  "1\(viewModel.groupSeparator.string)000\(viewModel.decimalSeparator.string)05"
+        let example =  Display(left: "").withSeparators(numberString: "10000.05", isNegative: false, separators: viewModel)
         return Group {
             GridRow {
                 Text("\(example)")
@@ -127,8 +127,10 @@ struct Settings: View {
             GridRow {
                 Text("GroupSize")
                 Picker("", selection: $viewModel.groupSize) {
-                    Text("3").tag(3)
-                    Text("4").tag(4)
+                    ForEach(GroupSize.allCases, id: \.self) { value in
+                        Text("\(value.string)")
+                            .tag(value)
+                    }
                 }
                 .padding(2)
                 .background(Color(UIColor.darkGray))

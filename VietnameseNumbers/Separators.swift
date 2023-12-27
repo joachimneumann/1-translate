@@ -44,8 +44,29 @@ enum GroupSeparator: String, Codable, CaseIterable {
         }
     }
 }
+enum GroupSize: Int, Codable, CaseIterable {
+    case _3
+    case _4
+    var int: Int {
+        get {
+            switch self {
+            case ._4: return 4
+            default: return 3
+            }
+        }
+    }
+    var string: String {
+        get {
+            switch self {
+            case ._4: return "4"
+            default: return "3"
+            }
+        }
+    }
+}
 
 protocol Separators {
     var decimalSeparator: DecimalSeparator   { get }
     var groupSeparator: GroupSeparator { get }
+    var groupSize: GroupSize { get }
 }
