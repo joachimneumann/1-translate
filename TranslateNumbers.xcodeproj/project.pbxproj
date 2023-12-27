@@ -25,7 +25,6 @@
 		AA326E4C2B332DCC0092E8E6 /* GermanImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA326E4B2B332DCC0092E8E6 /* GermanImpl.swift */; };
 		AA326E4D2B332DCC0092E8E6 /* GermanImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA326E4B2B332DCC0092E8E6 /* GermanImpl.swift */; };
 		AA32853B297248B800D86CB4 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA32853A297248B800D86CB4 /* ViewModel.swift */; };
-		AA32853D29724D5700D86CB4 /* FlexibleNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA32853C29724D5700D86CB4 /* FlexibleNavigation.swift */; };
 		AA3565AE2B3247C4009B58D2 /* Test_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3565AC2B3247C4009B58D2 /* Test_Extensions.swift */; };
 		AA3565B02B32588B009B58D2 /* LanguageImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3565AF2B32588B009B58D2 /* LanguageImpl.swift */; };
 		AA3565B12B32588B009B58D2 /* LanguageImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3565AF2B32588B009B58D2 /* LanguageImpl.swift */; };
@@ -118,9 +117,6 @@
 		AA08C7C8272EDA4A001B8575 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AA08C7EB272F1241001B8575 /* TranslateNumbers.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TranslateNumbers.entitlements; sourceTree = "<group>"; };
 		AA08C7EC272F1572001B8575 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		AA0CE3CE298CBFB00057D0D8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		AA0CE3D1298CBFB00057D0D8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		AA0CE3D3298CBFB00057D0D8 /* VietnameseNumbersMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VietnameseNumbersMac.entitlements; sourceTree = "<group>"; };
 		AA1B007C294777180054C851 /* gmp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gmp.h; path = dist/include/gmp.h; sourceTree = SOURCE_ROOT; };
 		AA1B007D294777180054C851 /* bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bridge.h; path = dist/include/bridge.h; sourceTree = SOURCE_ROOT; };
 		AA1B007E294777190054C851 /* mpfr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mpfr.h; path = dist/include/mpfr.h; sourceTree = SOURCE_ROOT; };
@@ -139,7 +135,6 @@
 		AA326E482B32F0430092E8E6 /* EnglishImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnglishImpl.swift; sourceTree = "<group>"; };
 		AA326E4B2B332DCC0092E8E6 /* GermanImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GermanImpl.swift; sourceTree = "<group>"; };
 		AA32853A297248B800D86CB4 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
-		AA32853C29724D5700D86CB4 /* FlexibleNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlexibleNavigation.swift; sourceTree = "<group>"; };
 		AA3565AC2B3247C4009B58D2 /* Test_Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_Extensions.swift; sourceTree = "<group>"; };
 		AA3565AF2B32588B009B58D2 /* LanguageImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageImpl.swift; sourceTree = "<group>"; };
 		AA3565B22B325D4B009B58D2 /* DigitsImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitsImpl.swift; sourceTree = "<group>"; };
@@ -221,7 +216,6 @@
 				AAAE6D6C2B22C97900079392 /* README.md */,
 				AA08C7EB272F1241001B8575 /* TranslateNumbers.entitlements */,
 				AA08C7C0272EDA48001B8575 /* VietnameseNumbers */,
-				AA0CE3C9298CBFAF0057D0D8 /* VietnameseNumbersMac */,
 				AA8A911C2B1D815C00CE7185 /* VietnameseNumbersTests */,
 				AA08C7BF272EDA48001B8575 /* Products */,
 				AA2FABE9272F2135006DE4C8 /* Frameworks */,
@@ -240,8 +234,8 @@
 		AA08C7C0272EDA48001B8575 /* VietnameseNumbers */ = {
 			isa = PBXGroup;
 			children = (
-				AA1B007B294772980054C851 /* Brain */,
 				AA3565BB2B326DE9009B58D2 /* Languages */,
+				AA1B007B294772980054C851 /* Brain */,
 				AA2FABFF272F2348006DE4C8 /* TranslateNumbersApp.swift */,
 				AA32853A297248B800D86CB4 /* ViewModel.swift */,
 				AA92B4C829273A58005E43F0 /* TranslateNumbers.swift */,
@@ -254,7 +248,6 @@
 				AA370C30293352D60041AE4E /* Key.swift */,
 				AA8453E7294D872300A50B74 /* Icons.swift */,
 				AA672B09295189950044DC08 /* ScrollViewConditionalAnimation.swift */,
-				AA32853C29724D5700D86CB4 /* FlexibleNavigation.swift */,
 				AABEFC122972A8780023A3C9 /* KeyColor.swift */,
 				AA370C2C293352960041AE4E /* Extensions.swift */,
 				AA3FB8262920E0E5002ECCEB /* Settings.swift */,
@@ -273,24 +266,6 @@
 			isa = PBXGroup;
 			children = (
 				AA08C7C8272EDA4A001B8575 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		AA0CE3C9298CBFAF0057D0D8 /* VietnameseNumbersMac */ = {
-			isa = PBXGroup;
-			children = (
-				AA0CE3CE298CBFB00057D0D8 /* Assets.xcassets */,
-				AA0CE3D3298CBFB00057D0D8 /* VietnameseNumbersMac.entitlements */,
-				AA0CE3D0298CBFB00057D0D8 /* Preview Content */,
-			);
-			path = VietnameseNumbersMac;
-			sourceTree = "<group>";
-		};
-		AA0CE3D0298CBFB00057D0D8 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				AA0CE3D1298CBFB00057D0D8 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -525,7 +500,6 @@
 				AA3FB8272920E0E5002ECCEB /* Settings.swift in Sources */,
 				AA689125295E681400129593 /* Brain.swift in Sources */,
 				AA326E4C2B332DCC0092E8E6 /* GermanImpl.swift in Sources */,
-				AA32853D29724D5700D86CB4 /* FlexibleNavigation.swift in Sources */,
 				AAFBD8A72B32A36D00175197 /* ThaiNumeralsImpl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -59,11 +59,6 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             updateTranslation()
         }
     }
-    @Published var settingsEnglishExample: String = ""
-    @Published var settingsGermanExample: String = ""
-    @Published var settingsVietnameseExample: String = ""
-    @Published var settingsChineseExample: String = ""
-    @Published var settingsSpanishExample: String = ""
     @Published var firstTranslatedNumber: String = ""
     @Published var secondTranslatedNumber: String = ""
     @Published var firstTranslatedNumberTopBorder: String? = nil
@@ -146,7 +141,6 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     var settingsEnglishUseAndAfterHundred: Bool = false {
         didSet {
             languages.english.useAndAfterHundred = settingsEnglishUseAndAfterHundred
-            settingsEnglishExample = languages.english.read(105)
         }
     }
     
@@ -154,7 +148,6 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     var settingsSpanishUsePunto: SpanishImpl.PuntoComma = .coma {
         didSet {
             languages.spanish.puntoComma = settingsSpanishUsePunto
-            settingsSpanishExample = languages.spanish.read("1.5")
         }
     }
     
@@ -163,7 +156,6 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     var settingsGermanCaptalisation: Bool = true {
         didSet {
             languages.german.capitalisation = settingsGermanCaptalisation
-            settingsGermanExample = languages.german.read(88)
         }
     }
     
@@ -171,7 +163,6 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     var settingsGermanSoftHyphen: Bool = false {
         didSet {
             languages.german.useSoftHyphen = settingsGermanSoftHyphen
-            settingsGermanExample = languages.german.read(88)
         }
     }
     
@@ -180,7 +171,6 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     var settingsVietnameseThousand: VietnameseImpl.Thousand = .nghìn {
         didSet {
             languages.vietnamese.thousand = settingsVietnameseThousand
-            settingsVietnameseExample = languages.vietnamese.read(303333)
         }
     }
     
@@ -188,7 +178,6 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     var settingsVietnameseSecondLast: VietnameseImpl.SecondLast = .lẻ {
         didSet {
             languages.vietnamese.secondLast = settingsVietnameseSecondLast
-            settingsVietnameseExample = languages.vietnamese.read(303333)
         }
     }
     
@@ -196,7 +185,6 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     var settingsVietnameseCompact: Bool = false {
         didSet {
             languages.vietnamese.compact = settingsVietnameseCompact
-            settingsVietnameseExample = languages.vietnamese.read(303333)
         }
     }
     

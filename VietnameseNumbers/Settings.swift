@@ -66,7 +66,7 @@ struct Settings: View {
     }
     
     var DigitsSettings: some View {
-        let example =  "1\(viewModel.groupSeparator.string)000\(viewModel.groupSeparator.string)000\(viewModel.decimalSeparator.string)05"
+        let example =  "1\(viewModel.groupSeparator.string)000\(viewModel.decimalSeparator.string)05"
         return Group {
             GridRow {
                 Text("\(example)")
@@ -140,6 +140,7 @@ struct Settings: View {
     }
     
     var EnglishSettings: some View {
+        let example =  viewModel.languages.english.read(150)
         return Group {
             GridRow {
                 HStack {
@@ -159,7 +160,7 @@ struct Settings: View {
                 .padding(.top, 40)
             }
             GridRow {
-                Text(viewModel.settingsEnglishExample)
+                Text(example)
                     .padding(.leading, 0)
                     .gridCellColumns(2)
             }
@@ -177,6 +178,7 @@ struct Settings: View {
     }
     
     var GermanSettings: some View {
+        let example =  viewModel.languages.german.read(88)
         return Group {
             GridRow {
                 HStack {
@@ -196,7 +198,7 @@ struct Settings: View {
                 .padding(.top, 40)
             }
             GridRow {
-                Text(viewModel.settingsGermanExample)
+                Text(example)
                     .padding(.leading, 0)
                     .gridCellColumns(2)
             }
@@ -224,6 +226,8 @@ struct Settings: View {
     }
     
     var SpanishSettings: some View {
+        let example = viewModel.languages.spanish.read("1.5")
+        
         return Group {
             GridRow {
                 HStack {
@@ -243,7 +247,7 @@ struct Settings: View {
                 .padding(.top, 40)
             }
             GridRow {
-                Text(viewModel.settingsSpanishExample)
+                Text(example)
                     .padding(.leading, 0)
                     .gridCellColumns(2)
             }
@@ -265,6 +269,7 @@ struct Settings: View {
     }
     
     var VietnameseSettings: some View {
+        let example = viewModel.languages.vietnamese.read(303333)
         return Group {
             GridRow {
                 HStack {
@@ -284,7 +289,7 @@ struct Settings: View {
                 .gridCellColumns(2)
             }
             GridRow {
-                Text(viewModel.settingsVietnameseExample)
+                Text(example)
                     .padding(.leading, 0)
                     .gridCellColumns(2)
                     .gridCellUnsizedAxes(.horizontal)
