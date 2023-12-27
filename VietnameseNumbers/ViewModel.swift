@@ -126,7 +126,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     var groupSeparator: GroupSeparator = .none
     
     @AppStorage(AppStorageKeys.groupSeparatorKey, store: .standard)
-    var groupSize: GroupSize = ._3
+    var groupSize: GroupSize = .three
     
     @AppStorage(AppStorageKeys.secondLanguageAllowedKey, store: .standard)
     var secondLanguageAllowed: Bool = false

@@ -44,22 +44,23 @@ enum GroupSeparator: String, Codable, CaseIterable {
         }
     }
 }
+
 enum GroupSize: Int, Codable, CaseIterable {
-    case _3
-    case _4
+    case three
+    case four
     var int: Int {
         get {
             switch self {
-            case ._4: return 4
-            default: return 3
+            case .three: return 3
+            case .four: return 4
             }
         }
     }
     var string: String {
         get {
             switch self {
-            case ._4: return "4"
-            default: return "3"
+            case .three: return "3"
+            case .four: return "4"
             }
         }
     }
