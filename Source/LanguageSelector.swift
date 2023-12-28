@@ -7,39 +7,8 @@
 
 import SwiftUI
 
-struct OneLanguage: View {
-    @ObservedObject var viewModel: ViewModel
-    let isFirstLanguage: Bool
-    let language: Language
-    
-    var body: some View {
-        let imageBorderWidth: CGFloat = 3
-        let isSelected = isFirstLanguage ? (language.name == viewModel.firstLanguage.name) : (language.name == viewModel.secondLanguage.name)
-        Button(action: {
-            isFirstLanguage ? viewModel.newFirstLanguage(language) : viewModel.newSecondLanguage(language)
-        }) {
-            HStack {
-                Image(language.flagName)
-                    .resizable()
-                    .scaledToFit()
-                    .padding(imageBorderWidth)
-                    .border(.white, width: isSelected ? imageBorderWidth : 0)
-                    .frame(height: 30)
-                    .padding(.trailing, 10)
-                Text(language.name)
-                    .bold(isSelected)
-                    .foregroundColor(.white)
-                Spacer(minLength: 0)
-                if let e = language.englishName {
-                    Text(" "+e)
-                        .italic()
-                        .foregroundColor(isSelected ? .white : Color(.lightGray))
-                }
-            }
-        }
-        .padding(.bottom, 28)
-    }
-}
+//let darkColor = Color(red: 65.0/255.0, green: 67.0/255.0, blue: 48.0/255.0)
+let darkColor = Color(red: 59.0/255.0, green: 36.0/255.0, blue: 28.0/255.0)
 
 
 struct MyDisclosureStyle: DisclosureGroupStyle {
@@ -47,15 +16,10 @@ struct MyDisclosureStyle: DisclosureGroupStyle {
         VStack(alignment: .leading) {
             HStack {
                 configuration.label
-                Spacer()
-                Image(systemName: "chevron.right")
-                    .rotationEffect(.degrees(configuration.isExpanded ? 90 : 0))
             }
-            .padding(.vertical)
-            .padding(.trailing)
+            .padding(.vertical, 10)
             .contentShape(Rectangle())
         }
-        .background(.yellow)
     }
 }
 
@@ -64,9 +28,7 @@ struct LanguageSelector: View {
     @Environment(\.presentationMode) var presentation /// for dismissing the Settings View
     @ObservedObject var viewModel: ViewModel
     let screen : Screen
-    @State var scrollPosition: Int?
     @State private var isExpanded = false
-    @State private var languageSelection: Int?
     
     let contacts = [
         "John",
@@ -74,31 +36,15 @@ struct LanguageSelector: View {
         "Bob"
     ]
     
-    var body: some View {
-        VStack {
-            HStack {
-                Spacer()
-                NavigationLink {
-                    Settings(viewModel: viewModel, font: Font(screen.infoUiFont))
-                } label: {
-                    Image(systemName: "switch.2")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .font(Font.title.weight(.thin))
-                        .frame(height: screen.plusIconSize * 0.8)
-                        .foregroundColor(Color.white)
-                }
-                .buttonStyle(TransparentButtonStyle())
-                .opacity(0.9)
-            }
-            .padding(.bottom, 15)
-            .padding(.trailing, 15)
-            .listStyle(.sidebar)
-            let _ = languageSelection = viewModel.firstLanguageIndex
-            ScrollViewReader { proxy in
-                
-                List(0..<viewModel.languages.list.count, id: \.self, selection: $languageSelection) { index in
-                    let language = viewModel.languages.list[index]
+    public struct LanguageList : View {
+        var selectedIndex: Binding<Int?>
+        let list: [Language]
+        let color: Color
+        
+        public var body: some View {
+            ScrollViewReader { scrollViewReaderProxy in
+                List(0..<list.count, id: \.self, selection: selectedIndex) { languageIndex in
+                    let language = list[languageIndex]
                     HStack {
                         Image(language.flagName)
                             .resizable()
@@ -114,71 +60,82 @@ struct LanguageSelector: View {
                                 .italic()
                         }
                     }
-                    .id(language.flagName)
-                    .listRowBackground(index == languageSelection ? Color(.darkGray) : nil)
-                }
-                .onAppear() {
-                    proxy.scrollTo(viewModel.languageindex, anchor: .top)
-                }
-            }
-            ScrollViewReader { scrollViewProxy in
-                List {
-                    ForEach(0 ..< viewModel.languages.list.count, id: \.self) { index in
-                        OneLanguage(viewModel: viewModel, isFirstLanguage: true, language: viewModel.languages.list[index])
-                            .id(index)
-                            .padding(.trailing, 15)
-                    }
-                    .listRowInsets(EdgeInsets())
+                    .id(languageIndex)
+                    //                    .padding(.horizontal, 10)
+                    //                    .padding(.vertical, 5)
+                    .listRowBackground(languageIndex == selectedIndex.wrappedValue ? Color(.darkGray) : color)
                 }
                 .listStyle(.plain)
-                .onAppear {
-                    scrollViewProxy.scrollTo(viewModel.firstLanguageIndex, anchor: .top)
-                }
-            }
-            .background(Color(red: 0.1, green: 0.1, blue: 0.1))
-            
-            DisclosureGroup(isExpanded: $viewModel.secondLanguageAllowed) {
-            } label: {
-                Text("Second Language")
-            }
-            .onTapGesture {
-                withAnimation {
-                    viewModel.secondLanguageAllowed.toggle()
-                }
-            }
-            .disclosureGroupStyle(MyDisclosureStyle())
-            
-            if viewModel.secondLanguageAllowed {
-                ScrollViewReader { scrollViewProxy in
-                    List {
-                        ForEach(0 ..< viewModel.languages.list.count, id: \.self) { index in
-                            OneLanguage(viewModel: viewModel, isFirstLanguage: false, language: viewModel.languages.list[index])
-                                .id(index)
-                                .padding(.trailing, 15)
-                        }
-                        .listRowInsets(EdgeInsets())
-                    }
-                    .listStyle(.plain)
-                    .onAppear {
-                        scrollViewProxy.scrollTo(viewModel.secondLanguageIndex, anchor: .top)
+                .background(color)
+                .onAppear() {
+                    if let position = selectedIndex.wrappedValue {
+                        scrollViewReaderProxy.scrollTo(position, anchor: .top)
                     }
                 }
-                .background(Color(red: 0.1, green: 0.1, blue: 0.1))
-                //
-                //
-                //                ScrollView {
-                //                    VStack(alignment: .leading, spacing: 0.0) {
-                //                        ForEach(0 ..< viewModel.languages.list.count, id: \.self) { index in
-                //                            OneLanguage(viewModel: viewModel, isFirstLanguage: false, language: viewModel.languages.list[index])
-                //                        }
-                //                    }
-                //                    .padding(.trailing, 15)
-                //                }
-                //                .background(Color(red: 0.1, green: 0.1, blue: 0.1))
             }
         }
-        .padding(.leading, 15)
-        .padding(.bottom, 15)
+        
+    }
+    
+    var body: some View {
+        ZStack(alignment: .top) {
+            darkColor
+                .edgesIgnoringSafeArea(.bottom)
+            //                .ignoresSafeArea(SafeAreaRegions.)
+            VStack {
+                VStack {
+                    HStack {
+                        Spacer()
+                        NavigationLink {
+                            Settings(viewModel: viewModel, font: Font(screen.infoUiFont))
+                        } label: {
+                            Image(systemName: "switch.2")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .font(Font.title.weight(.thin))
+                                .frame(height: screen.plusIconSize * 0.8)
+                                .foregroundColor(Color.white)
+                        }
+                        .buttonStyle(TransparentButtonStyle())
+                        .opacity(0.9)
+                    }
+                    .padding(.bottom, 15)
+                    .padding(.trailing, 15)
+                    .listStyle(.sidebar)
+                    .background(.black)
+                    
+                    LanguageList(
+                        selectedIndex: $viewModel.indexOfFirstLanguage,
+                        list: viewModel.languages.list,
+                        color: .black)
+                }
+                .background(.black)
+                VStack {
+                    DisclosureGroup(isExpanded: $viewModel.secondLanguageAllowed) {
+                    } label: {
+                        Text("Second Language")
+                            .bold()
+                        .padding(.bottom, viewModel.secondLanguageAllowed ? 0 : 20)
+                    }
+                    .onTapGesture {
+                        withAnimation {
+                            viewModel.secondLanguageAllowed.toggle()
+                        }
+                    }
+                    .disclosureGroupStyle(MyDisclosureStyle())
+                    
+                    if viewModel.secondLanguageAllowed {
+                        LanguageList(
+                            selectedIndex: $viewModel.indexOfSecondLanguage,
+                            list: viewModel.languages.list,
+                            color: darkColor)
+                        .transition(.move(edge: .bottom))
+                    }
+                }
+                .background(darkColor)
+            }
+            .edgesIgnoringSafeArea(.bottom)
+        }
     }
 }
 

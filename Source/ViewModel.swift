@@ -75,33 +75,41 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         return ret
     }
     
-    var indexOfFirstLanguage: Int = 0
-    var languageindex: Int {
-        for index in 0..<languages.list.count {
-            if languages.list[index].name == firstLanguageName { return index }
+    var indexOfFirstLanguage: Int? = 0 {
+        didSet {
+            if let index = indexOfFirstLanguage {
+                firstLanguage = languages.list[index]
+            }
         }
-        return 0
     }
-    
+    var indexOfSecondLanguage: Int? = 0 {
+        didSet {
+            if let index = indexOfSecondLanguage {
+                secondLanguage = languages.list[index]
+            }
+        }
+    }
+
     let languages = Languages()
-    var firstLanguageIndex: Int {
-        var ret = 0
-        for index in 0..<languages.list.count {
-            if firstLanguage.flagName == languages.list[index].flagName {
-                ret = index
-            }
-        }
-        return ret
-    }
-    var secondLanguageIndex: Int {
-        var ret = 0
-        for index in 0..<languages.list.count {
-            if secondLanguage.flagName == languages.list[index].flagName {
-                ret = index
-            }
-        }
-        return ret
-    }
+    
+//    var firstLanguageIndex: Int {
+//        var ret = 0
+//        for index in 0..<languages.list.count {
+//            if firstLanguage.flagName == languages.list[index].flagName {
+//                ret = index
+//            }
+//        }
+//        return ret
+//    }
+//    var secondLanguageIndex: Int {
+//        var ret = 0
+//        for index in 0..<languages.list.count {
+//            if secondLanguage.flagName == languages.list[index].flagName {
+//                ret = index
+//            }
+//        }
+//        return ret
+//    }
 
     var previouslySelectedLanguages = StringPreference()
     var firstFont: Font {
@@ -342,14 +350,12 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         }
         keyStatusColor["plus"] = keyColor.upColor(for: "+", isPending: false)
         // print("viewModel init")
-        for l in languages.list {
-            if secondLanguageName == l.name {
-                secondLanguage = l
+        for index in 0..<languages.list.count {
+            if secondLanguageName == languages.list[index].name {
+                indexOfSecondLanguage = index
             }
-        }
-        for l in languages.list {
-            if firstLanguageName == l.name {
-                firstLanguage = l
+            if firstLanguageName == languages.list[index].name {
+                indexOfFirstLanguage = index
             }
         }
         groupSeparator = groupSeparator
