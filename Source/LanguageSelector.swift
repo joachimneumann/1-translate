@@ -10,14 +10,18 @@ import SwiftUI
 //let darkColor = Color(red: 65.0/255.0, green: 67.0/255.0, blue: 48.0/255.0)
 let darkColor = Color(red: 59.0/255.0, green: 36.0/255.0, blue: 28.0/255.0)
 
-
 struct MyDisclosureStyle: DisclosureGroupStyle {
     func makeBody(configuration: Configuration) -> some View {
         VStack(alignment: .leading) {
             HStack {
                 configuration.label
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .rotationEffect(.degrees(configuration.isExpanded ? 90 : 0))
+                    .bold()
             }
-            .padding(.vertical, 10)
+            .padding()
+            .padding(.trailing, 5)
             .contentShape(Rectangle())
         }
     }
@@ -61,8 +65,6 @@ struct LanguageSelector: View {
                         }
                     }
                     .id(languageIndex)
-                    //                    .padding(.horizontal, 10)
-                    //                    .padding(.vertical, 5)
                     .listRowBackground(languageIndex == selectedIndex.wrappedValue ? Color(.darkGray) : color)
                 }
                 .listStyle(.plain)
@@ -77,11 +79,13 @@ struct LanguageSelector: View {
         
     }
     
+    let disclosureText = "Second Language"
+    @State var additionalDisclosureText = ""
+
     var body: some View {
         ZStack(alignment: .top) {
             darkColor
                 .edgesIgnoringSafeArea(.bottom)
-            //                .ignoresSafeArea(SafeAreaRegions.)
             VStack {
                 VStack {
                     HStack {
@@ -111,27 +115,49 @@ struct LanguageSelector: View {
                 }
                 .background(.black)
                 VStack {
-                    Text("Second Language")
-                        .bold()
-                        .padding(.top, 5)
-                        .padding(.bottom, viewModel.secondLanguageAllowed ? 10 : 30)
-                        .onTapGesture {
+                    DisclosureGroup(isExpanded: $viewModel.secondLanguageAllowed) {
+                    } label: {
+                        HStack {
+                            Text(disclosureText)
+                                .bold()
+                            Text(additionalDisclosureText)
+                                .italic()
+                                .padding(.leading, 5)
+                        }
+                    }
+                    .onTapGesture {
+                        withAnimation {
+                            viewModel.secondLanguageAllowed.toggle()
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
                             withAnimation {
-                                viewModel.secondLanguageAllowed.toggle()
+                                if viewModel.secondLanguageAllowed {
+                                    additionalDisclosureText = ""
+                                } else {
+                                    additionalDisclosureText = "(hidden)"
+                                }
                             }
                         }
-                        .disclosureGroupStyle(MyDisclosureStyle())
+                    }
+                    .disclosureGroupStyle(MyDisclosureStyle())
                     if viewModel.secondLanguageAllowed {
                         LanguageList(
                             selectedIndex: $viewModel.indexOfSecondLanguage,
                             list: viewModel.languages.list,
                             color: darkColor)
                         .transition(.move(edge: .bottom))
+                    } else {
+                        Rectangle()
+                            .frame(height: 0)
+                            .padding(.bottom, 30)
                     }
                 }
                 .background(darkColor)
             }
             .edgesIgnoringSafeArea(.bottom)
+        }
+        .onAppear() {
+            additionalDisclosureText = viewModel.secondLanguageAllowed ? " " : "(hidden)"
         }
     }
 }

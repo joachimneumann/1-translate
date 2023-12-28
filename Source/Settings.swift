@@ -112,26 +112,34 @@ struct Settings: View {
         }
     }
     
+    struct SettingsHeader: View {
+        let flagName: String
+        let name: String
+        var body: some View {
+            GridRow {
+                    HStack {
+                        Image(flagName)
+                            .resizable()
+                            .scaledToFit()
+                            .padding(1)
+                            .border(.white)
+                            .frame(height: 25)
+                            .padding(.trailing, 5)
+                        Text(name)
+                            .bold()
+                            .frame(height: 25)
+                        Spacer()
+                    }
+                    .gridCellColumns(2)
+                    .padding(.top, 40)
+                }
+        }
+    }
+    
     var EnglishSettings: some View {
         let example =  viewModel.languages.english.read(150)
         return Group {
-            GridRow {
-                HStack {
-                    Image(viewModel.languages.english.flagName)
-                        .resizable()
-                        .scaledToFit()
-                        .padding(1)
-                        .border(.white)
-                        .frame(height: 25)
-                        .padding(.trailing, 10)
-                    Text(viewModel.languages.english.name)
-                        .bold()
-                        .frame(height: 25)
-                    Spacer()
-                }
-                .gridCellColumns(2)
-                .padding(.top, 40)
-            }
+            SettingsHeader(flagName: viewModel.languages.english.flagName, name: viewModel.languages.english.name)
             GridRow {
                 Text(example)
                     .padding(.leading, 0)
@@ -153,23 +161,7 @@ struct Settings: View {
     var GermanSettings: some View {
         let example =  viewModel.languages.german.read(88) + (viewModel.languages.german.useWordSplitter ? " (with word splitter)" : "")
         return Group {
-            GridRow {
-                HStack {
-                    Image(viewModel.languages.german.flagName)
-                        .resizable()
-                        .scaledToFit()
-                        .padding(1)
-                        .border(.white)
-                        .frame(height: 25)
-                        .padding(.trailing, 10)
-                    Text(viewModel.languages.german.name)
-                        .bold()
-                        .frame(height: 25)
-                    Spacer()
-                }
-                .gridCellColumns(2)
-                .padding(.top, 40)
-            }
+            SettingsHeader(flagName: viewModel.languages.german.flagName, name: viewModel.languages.german.name)
             GridRow {
                 Text(example)
                     .padding(.leading, 0)
@@ -202,23 +194,7 @@ struct Settings: View {
         let example = viewModel.languages.spanish.read("1.5")
         
         return Group {
-            GridRow {
-                HStack {
-                    Image(viewModel.languages.spanish.flagName)
-                        .resizable()
-                        .scaledToFit()
-                        .padding(1)
-                        .border(.white)
-                        .frame(height: 25)
-                        .padding(.trailing, 10)
-                    Text(viewModel.languages.spanish.name)
-                        .bold()
-                        .frame(height: 25)
-                    Spacer()
-                }
-                .gridCellColumns(2)
-                .padding(.top, 40)
-            }
+            SettingsHeader(flagName: viewModel.languages.spanish.flagName, name: viewModel.languages.spanish.name)
             GridRow {
                 Text(example)
                     .padding(.leading, 0)
@@ -244,23 +220,7 @@ struct Settings: View {
     var VietnameseSettings: some View {
         let example = viewModel.languages.vietnamese.read(303333)
         return Group {
-            GridRow {
-                HStack {
-                    Image(viewModel.languages.vietnamese.flagName)
-                        .resizable()
-                        .scaledToFit()
-                        .padding(1)
-                        .border(.white)
-                        .frame(height: 25)
-                        .padding(.trailing, 10)
-                    Text(viewModel.languages.vietnamese.name)
-                        .bold()
-                        .frame(height: 25)
-                    Spacer()
-                }
-                .padding(.top, 40)
-                .gridCellColumns(2)
-            }
+            SettingsHeader(flagName: viewModel.languages.vietnamese.flagName, name: viewModel.languages.vietnamese.name)
             GridRow {
                 Text(example)
                     .padding(.leading, 0)
