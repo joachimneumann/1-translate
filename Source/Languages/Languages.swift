@@ -21,7 +21,7 @@ protocol English: Language {
 }
 protocol German: Language {
     var capitalisation: Bool { get set }
-    var useSoftHyphen: Bool { get set }
+    var useWordSplitter: Bool { get set }
 }
 protocol Vietnamese: Language {
     var thousand: VietnameseImpl.Thousand { get set }
@@ -44,21 +44,21 @@ class Languages {
     let chineseSimplified: Language   = ChineseImpl(variant: .simplified)
     let chineseTraditional: Language  = ChineseImpl(variant: .traditional)
     let danish: Language              = DanishImpl()
-    let digits: Language              = DigitsImpl()
+//    let digits: Language              = DigitsImpl()
     var english: English              = EnglishImpl()
+    var spanish: Spanish              = SpanishImpl()
     let french: Language              = FrenchImpl()
     var german: German                = GermanImpl()
     var hieroglyphs: Language         = HieroglyphsImpl()
     let polish: Language              = PolishImpl()
     let roman: Language               = RomanImpl()
-    var spanish: Spanish              = SpanishImpl()
     let thai: Language                = ThaiImpl()
     let thaiNumerals: Language        = ThaiNumeralsImpl()
     var vietnamese: Vietnamese        = VietnameseImpl()
 
     init() {
         list = [
-            arabic,
+        //arabic,
         arabicNumerals,
         armenianNumerals,
         armenian,
@@ -69,16 +69,16 @@ class Languages {
         chineseTraditional,
         danish,
         english,
+        spanish,
         french,
         german,
         hieroglyphs,
         polish,
         roman,
-        spanish,
         thai,
         thaiNumerals,
         vietnamese]
     }
     
-    static let soft_hyphen = "\u{200A}"
+    static let WordSplitter = "\u{200A}" // the SoftHyphen "@\u{00AD}" did not seperate words well
 }

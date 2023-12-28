@@ -119,11 +119,6 @@ struct LanguageSelector: View {
                         let _1_selected = (language.name == viewModel.firstLanguage.name)
                         let _2_selected = viewModel.secondLanguageAllowed && (language.name == viewModel.secondLanguage.name)
                         SelectLanguage(viewModel: viewModel, language: language)
-                        Rectangle()
-                            .frame(height: 2.0, alignment: .bottom)
-                            .padding(.top, -2)
-                            .foregroundColor((_1_selected || _2_selected) ? Color(.darkGray) : .black)
-                            .padding(.leading, 120)
                     }
                 }
                 .padding(.trailing, 5)

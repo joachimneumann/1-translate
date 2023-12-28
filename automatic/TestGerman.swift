@@ -10,7 +10,7 @@ final class TestGerman: XCTestCase {
 
     func test_german() {
         var german = Languages().german
-        german.useSoftHyphen = false
+        german.useWordSplitter = false
         german.capitalisation = false
         XCTAssertEqual(german.read(0), "null")
         XCTAssertEqual(german.read(1), "eins")

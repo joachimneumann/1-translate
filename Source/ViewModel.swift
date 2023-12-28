@@ -23,7 +23,7 @@ struct AppStorageKeys {
     static let settingsEnglishUseAndAfterHundredKey = "settingsEnglishUseAndAfterHundredKey"
     static let settingsSpanishUsePuntoKey           = "settingsSpanishUsePuntoKey"
     static let settingsGermanCaptalisationKey       = "settingsGermanCaptalisationKey"
-    static let settingsGermanSoftHyphenKey          = "settingsGermanSoftHyphenKey"
+    static let settingsGermanWordSplitterKey        = "settingsGermanWordSplitterKey"
     static let settingsVietnameseThousandKey        = "settingsVietnameseThousandKey"
     static let settingsVietnameseSecondLastKey      = "settingsVietnameseSecondLastKey"
     static let settingsVietnameseCompactKey         = "settingsVietnameseCompactKey"
@@ -114,7 +114,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             }
         }
         forCopyFirstTranslatedNumber = (firstTranslatedNumberTopBorder != nil ? "<overline>" + firstTranslatedNumberTopBorder! + "</overline>" : "") + firstTranslatedNumber
-        forCopyFirstTranslatedNumber = forCopyFirstTranslatedNumber.replacingOccurrences(of: Languages.soft_hyphen, with: "")
+        forCopyFirstTranslatedNumber = forCopyFirstTranslatedNumber.replacingOccurrences(of: Languages.WordSplitter, with: "")
 
         if secondLanguageAllowed {
             secondTranslatedNumber = secondLanguage.read(allInOneLine)
@@ -129,7 +129,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
                 }
             }
             forCopySecondTranslatedNumber = (secondTranslatedNumberTopBorder != nil ? "<overline>" + secondTranslatedNumberTopBorder! + "</overline>" : "") + secondTranslatedNumber
-            forCopySecondTranslatedNumber = forCopySecondTranslatedNumber.replacingOccurrences(of: Languages.soft_hyphen, with: "")
+            forCopySecondTranslatedNumber = forCopySecondTranslatedNumber.replacingOccurrences(of: Languages.WordSplitter, with: "")
         }
     }
     /// I initialize the decimalSeparator with the locale preference, but
@@ -177,10 +177,10 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         }
     }
     
-    @AppStorage(AppStorageKeys.settingsGermanSoftHyphenKey)
-    var settingsGermanSoftHyphen: Bool = true {
+    @AppStorage(AppStorageKeys.settingsGermanWordSplitterKey)
+    var settingsGermanWordSplitter: Bool = true {
         didSet {
-            languages.german.useSoftHyphen = settingsGermanSoftHyphen
+            languages.german.useWordSplitter = settingsGermanWordSplitter
         }
     }
     
@@ -326,7 +326,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         settingsVietnameseThousand = settingsVietnameseThousand
         settingsVietnameseSecondLast = settingsVietnameseSecondLast
         settingsGermanCaptalisation = settingsGermanCaptalisation
-        settingsGermanSoftHyphen = settingsGermanSoftHyphen
+        settingsGermanWordSplitter = settingsGermanWordSplitter
         settingsSpanishUsePunto = settingsSpanishUsePunto
 
     }

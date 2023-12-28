@@ -151,7 +151,7 @@ struct Settings: View {
     }
     
     var GermanSettings: some View {
-        let example =  viewModel.languages.german.read(88)
+        let example =  viewModel.languages.german.read(88) + (viewModel.languages.german.useWordSplitter ? " (with word splitter)" : "")
         return Group {
             GridRow {
                 HStack {
@@ -177,7 +177,7 @@ struct Settings: View {
             }
             GridRow {
                 Text("Trennung")
-                Toggle("", isOn: $viewModel.settingsGermanSoftHyphen)
+                Toggle("", isOn: $viewModel.settingsGermanWordSplitter)
                     .frame(width: 40)
                     .toggleStyle(
                         ColoredToggleStyle(onColor: Color(white: 0.6),

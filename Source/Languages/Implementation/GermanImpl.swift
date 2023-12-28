@@ -14,11 +14,11 @@ extension StringProtocol {
 
 
 class GermanImpl: LanguageImpl, German {
-    var useSoftHyphen: Bool = true {
+    var useWordSplitter: Bool = true {
         didSet {
-            if useSoftHyphen {
-                e2 = "hundert" + Languages.soft_hyphen
-                e3 = "tausend" + Languages.soft_hyphen
+            if useWordSplitter {
+                e2 = "hundert" + Languages.WordSplitter
+                e3 = "tausend" + Languages.WordSplitter
             } else {
                 e2 = "hundert"
                 e3 = "tausend"
@@ -111,7 +111,7 @@ class GermanImpl: LanguageImpl, German {
         if i == 18 { return "achtzehn" }
         if i == 19 { return "neunzehn" }
         // reversed order
-        return (i.E1x > 0 ? read_0_9(i.E1x) + Languages.soft_hyphen + "und" + Languages.soft_hyphen : "") + read_10s(i.E1)
+        return (i.E1x > 0 ? read_0_9(i.E1x) + Languages.WordSplitter + "und" + Languages.WordSplitter : "") + read_10s(i.E1)
     }
             
 }
