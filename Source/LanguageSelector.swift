@@ -111,19 +111,16 @@ struct LanguageSelector: View {
                 }
                 .background(.black)
                 VStack {
-                    DisclosureGroup(isExpanded: $viewModel.secondLanguageAllowed) {
-                    } label: {
-                        Text("Second Language")
-                            .bold()
-                        .padding(.bottom, viewModel.secondLanguageAllowed ? 0 : 20)
-                    }
-                    .onTapGesture {
-                        withAnimation {
-                            viewModel.secondLanguageAllowed.toggle()
+                    Text("Second Language")
+                        .bold()
+                        .padding(.top, 5)
+                        .padding(.bottom, viewModel.secondLanguageAllowed ? 10 : 30)
+                        .onTapGesture {
+                            withAnimation {
+                                viewModel.secondLanguageAllowed.toggle()
+                            }
                         }
-                    }
-                    .disclosureGroupStyle(MyDisclosureStyle())
-                    
+                        .disclosureGroupStyle(MyDisclosureStyle())
                     if viewModel.secondLanguageAllowed {
                         LanguageList(
                             selectedIndex: $viewModel.indexOfSecondLanguage,

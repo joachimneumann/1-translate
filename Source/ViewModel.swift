@@ -78,48 +78,25 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     var indexOfFirstLanguage: Int? = 0 {
         didSet {
             if let index = indexOfFirstLanguage {
-                firstLanguage = languages.list[index]
+                newFirstLanguage(languages.list[index])
             }
         }
     }
     var indexOfSecondLanguage: Int? = 0 {
         didSet {
             if let index = indexOfSecondLanguage {
-                secondLanguage = languages.list[index]
+                newSecondLanguage(languages.list[index])
             }
         }
     }
 
     let languages = Languages()
     
-//    var firstLanguageIndex: Int {
-//        var ret = 0
-//        for index in 0..<languages.list.count {
-//            if firstLanguage.flagName == languages.list[index].flagName {
-//                ret = index
-//            }
-//        }
-//        return ret
-//    }
-//    var secondLanguageIndex: Int {
-//        var ret = 0
-//        for index in 0..<languages.list.count {
-//            if secondLanguage.flagName == languages.list[index].flagName {
-//                ret = index
-//            }
-//        }
-//        return ret
-//    }
-
     var previouslySelectedLanguages = StringPreference()
     var firstFont: Font {
         switch firstLanguage.flagName {
         case languages.arabicNumerals.flagName:
             Font(UIFont(name: "Avenir", size: secondLanguageAllowed ? 40 : 50)!)
-//        case languages.hieroglyphs.flagName:
-//            Font(UIFont(name: "Avenir", size: secondLanguageAllowed ? 40 : 50)!)
-//        case languages.babylonian.flagName:
-//            Font(UIFont(name: "Avenir", size: secondLanguageAllowed ? 40 : 50)!)
         default:
             secondLanguageAllowed ? Font.title : Font.largeTitle
         }
@@ -128,10 +105,6 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         switch firstLanguage.flagName {
         case languages.arabicNumerals.flagName:
             Font(UIFont(name: "Avenir", size: 40)!)
-//        case languages.hieroglyphs.flagName:
-//            Font(UIFont(name: "Avenir", size: 40)!)
-//        case languages.babylonian.flagName:
-//            Font(UIFont(name: "Avenir", size: 40)!)
         default:
             Font.title
         }
@@ -278,6 +251,14 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             }
             firstLanguageName  = firstLanguage.name
             secondLanguageName = secondLanguage.name
+            for index in 0..<languages.list.count {
+                if firstLanguageName == languages.list[index].name {
+                    indexOfFirstLanguage = index
+                }
+                if secondLanguageName == languages.list[index].name {
+                    indexOfSecondLanguage = index
+                }
+            }
         }
     }
 
@@ -297,6 +278,14 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             }
             firstLanguageName  = firstLanguage.name
             secondLanguageName = secondLanguage.name
+            for index in 0..<languages.list.count {
+                if firstLanguageName == languages.list[index].name {
+                    indexOfFirstLanguage = index
+                }
+                if secondLanguageName == languages.list[index].name {
+                    indexOfSecondLanguage = index
+                }
+            }
         }
     }
         
