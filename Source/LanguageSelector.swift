@@ -94,9 +94,24 @@ struct LanguageSelector: View {
             .padding(.bottom, 15)
             .padding(.trailing, 15)
             .listStyle(.sidebar)
-            List(viewModel.languageNameList, id: \.self, selection: $languageSelection) { l in
-                Text(l)
-                    .listRowBackground(l == languageSelection ? Color(.darkGray) : nil)
+            List(viewModel.languageNameList, id: \.self, selection: $languageSelection) { languageName in
+                let language = viewModel.languageFromName(languageName)
+                HStack {
+                    Image(language.flagName)
+                        .resizable()
+                        .scaledToFit()
+                        .padding(2)
+                        .border(.white, width: 2)
+                        .frame(height: 30)
+                        .padding(.trailing, 10)
+                    Text(language.name)
+                    Spacer()
+                    if language.englishName != nil {
+                        Text(language.englishName!)
+                            .italic()
+                    }
+                }
+                    .listRowBackground(languageName == languageSelection ? Color(.darkGray) : nil)
             }
             ScrollViewReader { scrollViewProxy in
                 List {
