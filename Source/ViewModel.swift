@@ -67,7 +67,25 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @Published var forCopySecondTranslatedNumber: String = ""
 
     let languages = Languages()
-    
+    var firstLanguageIndex: Int {
+        var ret = 0
+        for index in 0..<languages.list.count {
+            if firstLanguage.flagName == languages.list[index].flagName {
+                ret = index
+            }
+        }
+        return ret
+    }
+    var secondLanguageIndex: Int {
+        var ret = 0
+        for index in 0..<languages.list.count {
+            if secondLanguage.flagName == languages.list[index].flagName {
+                ret = index
+            }
+        }
+        return ret
+    }
+
     var previouslySelectedLanguages = StringPreference()
     var firstFont: Font {
         switch firstLanguage.flagName {
