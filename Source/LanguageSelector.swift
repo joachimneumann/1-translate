@@ -37,7 +37,7 @@ struct OneLanguage: View {
                 }
             }
         }
-        .padding(.bottom, 8)
+        .padding(.bottom, 28)
     }
 }
 
@@ -66,6 +66,13 @@ struct LanguageSelector: View {
     let screen : Screen
     @State var scrollPosition: Int?
     @State private var isExpanded = false
+    @State private var languageSelection: String?
+    
+    let contacts = [
+        "John",
+        "Alice",
+        "Bob"
+    ]
     
     var body: some View {
         VStack {
@@ -86,6 +93,11 @@ struct LanguageSelector: View {
             }
             .padding(.bottom, 15)
             .padding(.trailing, 15)
+            .listStyle(.sidebar)
+            List(viewModel.languageNameList, id: \.self, selection: $languageSelection) { l in
+                Text(l)
+                    .listRowBackground(l == languageSelection ? Color(.darkGray) : nil)
+            }
             ScrollViewReader { scrollViewProxy in
                 List {
                     ForEach(0 ..< viewModel.languages.list.count, id: \.self) { index in

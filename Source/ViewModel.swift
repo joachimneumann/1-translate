@@ -46,6 +46,7 @@ struct StringPreference {
     }
     
 }
+
 class ViewModel: ObservableObject, ShowAs, Separators {
     @Published var showAsInt = false /// This will update the "-> Int or -> sci button texts
     @Published var showAsFloat = false
@@ -66,6 +67,14 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @Published var secondTranslatedNumberTopBorder: String? = nil
     @Published var forCopySecondTranslatedNumber: String = ""
 
+    var languageNameList: [String] {
+        var ret: [String] = []
+        for l in languages.list {
+            ret.append(l.name)
+        }
+        return ret
+    }
+    
     let languages = Languages()
     var firstLanguageIndex: Int {
         var ret = 0
