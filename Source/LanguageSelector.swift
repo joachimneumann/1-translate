@@ -42,12 +42,30 @@ struct OneLanguage: View {
 }
 
 
+struct MyDisclosureStyle: DisclosureGroupStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        VStack(alignment: .leading) {
+            HStack {
+                configuration.label
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .rotationEffect(.degrees(configuration.isExpanded ? 90 : 0))
+            }
+            .padding(.vertical)
+            .padding(.trailing)
+            .contentShape(Rectangle())
+        }
+        .background(.yellow)
+    }
+}
+
 struct LanguageSelector: View {
     
     @Environment(\.presentationMode) var presentation /// for dismissing the Settings View
     @ObservedObject var viewModel: ViewModel
     let screen : Screen
     @State var scrollPosition: Int?
+    @State private var isExpanded = false
     
     var body: some View {
         VStack {
@@ -84,15 +102,17 @@ struct LanguageSelector: View {
             }
             .background(Color(red: 0.1, green: 0.1, blue: 0.1))
             
-            HStack {
+            DisclosureGroup(isExpanded: $viewModel.secondLanguageAllowed) {
+            } label: {
                 Text("Second Language")
-                    .bold()
-                    .onTapGesture {
-                        viewModel.secondLanguageAllowed = !viewModel.secondLanguageAllowed
-                    }
-                Spacer()
             }
-            .padding(.top, 15)
+            .onTapGesture {
+                withAnimation {
+                    viewModel.secondLanguageAllowed.toggle()
+                }
+            }
+            .disclosureGroupStyle(MyDisclosureStyle())
+            
             if viewModel.secondLanguageAllowed {
                 ScrollViewReader { scrollViewProxy in
                     List {
@@ -109,17 +129,17 @@ struct LanguageSelector: View {
                     }
                 }
                 .background(Color(red: 0.1, green: 0.1, blue: 0.1))
-//
-//
-//                ScrollView {
-//                    VStack(alignment: .leading, spacing: 0.0) {
-//                        ForEach(0 ..< viewModel.languages.list.count, id: \.self) { index in
-//                            OneLanguage(viewModel: viewModel, isFirstLanguage: false, language: viewModel.languages.list[index])
-//                        }
-//                    }
-//                    .padding(.trailing, 15)
-//                }
-//                .background(Color(red: 0.1, green: 0.1, blue: 0.1))
+                //
+                //
+                //                ScrollView {
+                //                    VStack(alignment: .leading, spacing: 0.0) {
+                //                        ForEach(0 ..< viewModel.languages.list.count, id: \.self) { index in
+                //                            OneLanguage(viewModel: viewModel, isFirstLanguage: false, language: viewModel.languages.list[index])
+                //                        }
+                //                    }
+                //                    .padding(.trailing, 15)
+                //                }
+                //                .background(Color(red: 0.1, green: 0.1, blue: 0.1))
             }
         }
         .padding(.leading, 15)
@@ -127,3 +147,10 @@ struct LanguageSelector: View {
     }
 }
 
+
+
+#Preview {
+    GeometryReader { geo in
+        LanguageSelector(viewModel: ViewModel(), screen: Screen(geo.size))
+    }
+}
