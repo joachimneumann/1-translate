@@ -66,7 +66,7 @@ struct LanguageSelector: View {
     let screen : Screen
     @State var scrollPosition: Int?
     @State private var isExpanded = false
-    @State private var languageSelection: String?
+    @State private var languageSelection: Int?
     
     let contacts = [
         "John",
@@ -94,24 +94,32 @@ struct LanguageSelector: View {
             .padding(.bottom, 15)
             .padding(.trailing, 15)
             .listStyle(.sidebar)
-            List(viewModel.languageNameList, id: \.self, selection: $languageSelection) { languageName in
-                let language = viewModel.languageFromName(languageName)
-                HStack {
-                    Image(language.flagName)
-                        .resizable()
-                        .scaledToFit()
-                        .padding(2)
-                        .border(.white, width: 2)
-                        .frame(height: 30)
-                        .padding(.trailing, 10)
-                    Text(language.name)
-                    Spacer()
-                    if language.englishName != nil {
-                        Text(language.englishName!)
-                            .italic()
+            let _ = languageSelection = viewModel.firstLanguageIndex
+            ScrollViewReader { proxy in
+                
+                List(0..<viewModel.languages.list.count, id: \.self, selection: $languageSelection) { index in
+                    let language = viewModel.languages.list[index]
+                    HStack {
+                        Image(language.flagName)
+                            .resizable()
+                            .scaledToFit()
+                            .padding(2)
+                            .border(.white, width: 2)
+                            .frame(height: 30)
+                            .padding(.trailing, 10)
+                        Text(language.name)
+                        Spacer()
+                        if language.englishName != nil {
+                            Text(language.englishName!)
+                                .italic()
+                        }
                     }
+                    .id(language.flagName)
+                    .listRowBackground(index == languageSelection ? Color(.darkGray) : nil)
                 }
-                    .listRowBackground(languageName == languageSelection ? Color(.darkGray) : nil)
+                .onAppear() {
+                    proxy.scrollTo(viewModel.languageindex, anchor: .top)
+                }
             }
             ScrollViewReader { scrollViewProxy in
                 List {

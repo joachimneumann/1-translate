@@ -74,11 +74,13 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         }
         return ret
     }
-    func languageFromName(_ name: String) -> Language {
-        for l in languages.list {
-            if name == l.name { return l }
+    
+    var indexOfFirstLanguage: Int = 0
+    var languageindex: Int {
+        for index in 0..<languages.list.count {
+            if languages.list[index].name == firstLanguageName { return index }
         }
-        return EnglishImpl()
+        return 0
     }
     
     let languages = Languages()
