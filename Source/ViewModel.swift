@@ -34,6 +34,7 @@ struct StringPreference {
     mutating func add(new: String) {
         previously = previously.filter { $0 != new }
         previously.insert(new, at: 0)
+//        print("add: ") for p in previously { print(" "+p) }
     }
     
     func get(except notThis: String) -> String {
@@ -42,6 +43,7 @@ struct StringPreference {
                 return previously[i]
             }
         }
+//        print("get: ") for p in previously { print(" "+p) }
         return ""
     }
     
@@ -328,12 +330,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         
         for symbol in [
             "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", ",",
-            "C", "AC", "±", "%", "/", "x", "-", "+", "=",
-            "( ", " )", "mc", "m+", "m-", "mr",
-            "2nd", "x^2", "x^3", "x^y", "e^x", "y^x", "2^x", "10^x",
-            "One_x", "√", "3√", "y√", "logy", "ln", "log2", "log10",
-            "x!", "sin", "cos", "tan", "asin", "acos", "atan", "e", "EE",
-            "Deg", "Rad", "sinh", "cosh", "tanh", "asinh", "acosh", "atanh", "π", "Rand"] {
+            "C", "AC", "±", "%", "/", "x", "-", "+", "="] {
             keyStatusColor[symbol] = keyColor.upColor(for: symbol, isPending: false)
             textColor[symbol] = keyColor.textColor(for: symbol, isPending: false)
         }
@@ -342,9 +339,11 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         for index in 0..<languages.list.count {
             if secondLanguageName == languages.list[index].name {
                 indexOfSecondLanguage = index
+                newSecondLanguage(languages.list[index])
             }
             if firstLanguageName == languages.list[index].name {
                 indexOfFirstLanguage = index
+                newFirstLanguage(languages.list[index])
             }
         }
         groupSeparator = groupSeparator
@@ -358,7 +357,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         settingsGermanCaptalisation = settingsGermanCaptalisation
         settingsGermanWordSplitter = settingsGermanWordSplitter
         settingsSpanishUsePunto = settingsSpanishUsePunto
-
+        
     }
         
     ///  To give a clear visual feedback to the user that the button has been pressed,

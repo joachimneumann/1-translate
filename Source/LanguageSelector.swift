@@ -28,18 +28,10 @@ struct MyDisclosureStyle: DisclosureGroupStyle {
 }
 
 struct LanguageSelector: View {
-    
-    @Environment(\.presentationMode) var presentation /// for dismissing the Settings View
     @ObservedObject var viewModel: ViewModel
     let screen : Screen
-    @State private var isExpanded = false
-    
-    let contacts = [
-        "John",
-        "Alice",
-        "Bob"
-    ]
-    
+    @State var additionalDisclosureText = ""
+
     public struct LanguageList : View {
         var selectedIndex: Binding<Int?>
         let list: [Language]
@@ -79,8 +71,6 @@ struct LanguageSelector: View {
         
     }
     
-    let disclosureText = "Second Language"
-    @State var additionalDisclosureText = ""
 
     var body: some View {
         ZStack(alignment: .top) {
@@ -118,7 +108,7 @@ struct LanguageSelector: View {
                     DisclosureGroup(isExpanded: $viewModel.secondLanguageAllowed) {
                     } label: {
                         HStack {
-                            Text(disclosureText)
+                            Text("Second Language")
                                 .bold()
                             Text(additionalDisclosureText)
                                 .italic()
@@ -157,7 +147,7 @@ struct LanguageSelector: View {
             .edgesIgnoringSafeArea(.bottom)
         }
         .onAppear() {
-            additionalDisclosureText = viewModel.secondLanguageAllowed ? " " : "(hidden)"
+            additionalDisclosureText = viewModel.secondLanguageAllowed ? "" : "(hidden)"
         }
     }
 }
