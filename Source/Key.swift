@@ -12,7 +12,7 @@ struct Key: View {
     let symbol: String
     let keySize: CGSize
     let xOffset: CGFloat
-    let backgroundColor: Color
+    let keyStatusColor: Color
     let textColor: Color
     let touchDown: (String) -> ()
     let touchUp: (String, Screen) -> ()
@@ -37,7 +37,7 @@ struct Key: View {
                 height: keyHeight)
             xOffset = 0.0
         }
-        self.backgroundColor = viewModel.backgroundColor[symbol] ?? .green
+        self.keyStatusColor = viewModel.keyStatusColor[symbol] ?? .green
         self.textColor = viewModel.textColor[symbol]             ?? .green
         self.touchDown = viewModel.touchDown
         self.touchUp   = viewModel.touchUp
@@ -49,7 +49,7 @@ struct Key: View {
             .offset(x: xOffset)
             .foregroundColor(textColor)
             .frame(width: keySize.width, height: keySize.height)
-            .background(backgroundColor)
+            .background(keyStatusColor)
 #if os(macOS)
             .clipShape(Rectangle())
 #else

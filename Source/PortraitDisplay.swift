@@ -10,13 +10,11 @@ import SwiftUI
 struct PortraitDisplay: View {
     let display: Display
     let screen: Screen
-    let backgroundColor: Color
     private let font: Font
     
-    init(display: Display, screen: Screen, backgroundColor: Color) {
+    init(display: Display, screen: Screen) {
         self.display = display
         self.screen = screen
-        self.backgroundColor = backgroundColor
         
         /// calculate possibly expanded font
         var availableDisplayWidth = screen.displayWidth
@@ -47,7 +45,6 @@ struct PortraitDisplay: View {
             .lineLimit(0)
             .foregroundColor(display.color)
             .multilineTextAlignment(.trailing)
-            .background(testColors ? .yellow : backgroundColor).opacity(testColors ? 0.9 : 1.0)
     }
 
     @ViewBuilder
@@ -58,7 +55,6 @@ struct PortraitDisplay: View {
                 .font(font)
                 .foregroundColor(display.color)
                 .multilineTextAlignment(.trailing)
-                .background(testColors ? .yellow : backgroundColor).opacity(testColors ? 0.9 : 1.0)
                 .lineLimit(1)
                 .padding(.leading, screen.ePadding)
         }

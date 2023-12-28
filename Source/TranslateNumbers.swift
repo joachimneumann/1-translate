@@ -60,8 +60,7 @@ struct TranslateNumbers: View {
             
             PortraitDisplay(
                 display: viewModel.currentDisplay,
-                screen: screen,
-                backgroundColor: screen.backgroundColor)
+                screen: screen)
             .padding(.bottom, screen.portraitIPhoneDisplayBottomPadding)
             .padding(.horizontal, 0)
             NonScientificKeyboard(
@@ -108,7 +107,6 @@ struct TranslateNumbers: View {
                         await viewModel.refreshDisplay(screen: screen)
                     }
                 }
-                .background(screen.backgroundColor)
         }
         .accentColor(.white)
     }

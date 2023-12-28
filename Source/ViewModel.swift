@@ -52,7 +52,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @Published var isCopying: Bool = false
     @Published var isPasting: Bool = false
     @Published var showAC = true
-    @Published var backgroundColor: [String: Color] = [:]
+    @Published var keyStatusColor: [String: Color] = [:]
     @Published var textColor: [String: Color] = [:]
     @Published var currentDisplay: Display {
         didSet {
@@ -320,10 +320,10 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             "One_x", "√", "3√", "y√", "logy", "ln", "log2", "log10",
             "x!", "sin", "cos", "tan", "asin", "acos", "atan", "e", "EE",
             "Deg", "Rad", "sinh", "cosh", "tanh", "asinh", "acosh", "atanh", "π", "Rand"] {
-            backgroundColor[symbol] = keyColor.upColor(for: symbol, isPending: false)
+            keyStatusColor[symbol] = keyColor.upColor(for: symbol, isPending: false)
             textColor[symbol] = keyColor.textColor(for: symbol, isPending: false)
         }
-        backgroundColor["plus"] = keyColor.upColor(for: "+", isPending: false)
+        keyStatusColor["plus"] = keyColor.upColor(for: "+", isPending: false)
         // print("viewModel init")
         for l in languages.list {
             if secondLanguageName == l.name {
@@ -354,13 +354,13 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     func showDisabledColors(for symbol: String) async {
         await MainActor.run {
             withAnimation(.easeIn(duration: downTime)) {
-                backgroundColor[symbol] = keyColor.disabledColor
+                keyStatusColor[symbol] = keyColor.disabledColor
             }
         }
         try? await Task.sleep(nanoseconds: UInt64(downTime * 1_000_000_000))
         await MainActor.run {
             withAnimation(.easeIn(duration: upTime)) {
-                backgroundColor[symbol] = keyColor.upColor(for: symbol, isPending: symbol == previouslyPendingOperator)
+                keyStatusColor[symbol] = keyColor.upColor(for: symbol, isPending: symbol == previouslyPendingOperator)
             }
         }
     }
@@ -370,7 +370,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         downAnimationFinished = false
         await MainActor.run {
             withAnimation(.easeIn(duration: downTime)) {
-                backgroundColor[symbol] = keyColor.downColor(for: symbol, isPending: symbol == previouslyPendingOperator)
+                keyStatusColor[symbol] = keyColor.downColor(for: symbol, isPending: symbol == previouslyPendingOperator)
             }
         }
         //print("down: downColor sleep START", downTime)
@@ -387,7 +387,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         /// Set the background color back to normal
         await MainActor.run {
             withAnimation(.easeIn(duration: upTime)) {
-                backgroundColor[symbol] = keyColor.upColor(for: symbol, isPending: symbol == previouslyPendingOperator)
+                keyStatusColor[symbol] = keyColor.upColor(for: symbol, isPending: symbol == previouslyPendingOperator)
             }
         }
     }
@@ -447,7 +447,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         if let previous = previouslyPendingOperator {
             await MainActor.run() {
                 withAnimation(.easeIn(duration: downTime)) {
-                    backgroundColor[previous] = keyColor.upColor(for: previous, isPending: false)
+                    keyStatusColor[previous] = keyColor.upColor(for: previous, isPending: false)
                     textColor[previous] = keyColor.textColor(for: previous, isPending: false)
                 }
             }
@@ -455,7 +455,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         if ["/", "x", "-", "+", "x^y", "y^x", "y√"].contains(symbol) {
             await MainActor.run() {
                 withAnimation(.easeIn(duration: downTime)) {
-                    backgroundColor[symbol] = keyColor.upColor(for: symbol, isPending: true)
+                    keyStatusColor[symbol] = keyColor.upColor(for: symbol, isPending: true)
                     textColor[symbol] = keyColor.textColor(for: symbol, isPending: true)
                     previouslyPendingOperator = symbol
                 }

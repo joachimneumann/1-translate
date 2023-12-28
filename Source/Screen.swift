@@ -41,7 +41,6 @@ struct Screen: Equatable, DisplayLengthLimiter {
     var digitWidth: CGFloat = 0.0
     var radWidth: CGFloat = 0.0
     var eWidth: CGFloat = 0.0
-    let backgroundColor: Color
     let defaultTextColor: Color
     private let keyWidth: CGFloat
     private var keyHeight: CGFloat
@@ -57,7 +56,6 @@ struct Screen: Equatable, DisplayLengthLimiter {
     init(_ screenSize: CGSize) {
         //print("Screen INIT", screenSize)
         
-        backgroundColor = .black // Color(red: 0.2, green: 0.2, blue: 0.2)
         defaultTextColor = .white
         isPad = UIDevice.current.userInterfaceIdiom == .pad
         keySpacing = 0.034 * screenSize.width
