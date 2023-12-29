@@ -50,24 +50,19 @@ struct StringPreference {
 }
 
 class ViewModel: ObservableObject, ShowAs, Separators {
-    @Published var showAsInt = false /// This will update the "-> Int or -> sci button texts
-    @Published var showAsFloat = false
-    @Published var isCopying: Bool = false
-    @Published var isPasting: Bool = false
     @Published var showAC = true
     @Published var keyStatusColor: [String: Color] = [:]
     @Published var textColor: [String: Color] = [:]
-    @Published var currentDisplay: Display {
-        didSet {
-            updateTranslation()
-        }
-    }
+    @Published var currentDisplay: Display 
     @Published var firstTranslatedNumber: String = ""
     @Published var secondTranslatedNumber: String = ""
     @Published var forCopyFirstTranslatedNumber: String = ""
     @Published var firstTranslatedNumberTopBorder: String? = nil
     @Published var secondTranslatedNumberTopBorder: String? = nil
     @Published var forCopySecondTranslatedNumber: String = ""
+
+    var showAsInt = false /// This will update the "-> Int or -> sci button texts
+    var showAsFloat = false
 
     var languageNameList: [String] {
         var ret: [String] = []
@@ -114,6 +109,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     }
     
     func updateTranslation() {
+        // print("update translations")
         var allInOneLine = currentDisplay.allInOneLine
         if groupSeparator != .none {
             allInOneLine = allInOneLine.replacingOccurrences(of: groupSeparator.string, with: "")
@@ -508,8 +504,8 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         let tempDisplay = Display(displayNumber, screen: screen, separators: self, showAs: self, forceScientific: forceScientific)
         await MainActor.run() {
             currentDisplay = tempDisplay
-            self.showAC = currentDisplay.isZero
             updateTranslation()
+            self.showAC = currentDisplay.isZero
         }
     }
     
