@@ -317,17 +317,21 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     
     private var previouslyPendingOperator: String? = nil
 
+    var initVoiceDone = false
     func initVoice() {
-        var languageCodes: [String] = []
-        for l in languages.list {
-            if let code = l.code {
-                if (!languageCodes.contains(code)) {
-                    languageCodes.append(code)
+        if !initVoiceDone {
+            var languageCodes: [String] = []
+            for l in languages.list {
+                if let code = l.code {
+                    if (!languageCodes.contains(code)) {
+                        languageCodes.append(code)
+                    }
                 }
             }
+            voice.getVoicesFor(languages: languageCodes)
+            voice.initDoneCallback = updateTranslation
+            initVoiceDone = true
         }
-        voice.getVoicesFor(languages: languageCodes)
-        voice.initDoneCallback = updateTranslation
     }
     init() {
         /// currentDisplay will be updated shortly by refreshDisplay in onAppear() of Calculator
