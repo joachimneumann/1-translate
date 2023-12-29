@@ -20,12 +20,13 @@ struct Settings: View {
                 VStack(alignment: .leading, spacing: 0.0) {
                     Grid(alignment: .leading, horizontalSpacing: 10.0, verticalSpacing: 10.0) {
                         DigitsSettings
+                        VoiceSettings
                         EnglishSettings
                         GermanSettings
                         SpanishSettings
                         VietnameseSettings
-                        HobbyProject
                     }
+                    HobbyProject
                     Spacer()
                 }
                 .padding(.top, 10)
@@ -117,25 +118,25 @@ struct Settings: View {
         let name: String
         var body: some View {
             GridRow {
-                    HStack {
-                        Image(flagName)
-                            .resizable()
-                            .scaledToFit()
-                            .padding(1)
-                            .border(.white)
-                            .frame(height: 25)
-                            .padding(.trailing, 5)
-                        Text(name)
-                            .bold()
-                            .frame(height: 25)
-                        Spacer()
-                    }
-                    .gridCellColumns(2)
-                    .padding(.top, 40)
+                HStack {
+                    Image(flagName)
+                        .resizable()
+                        .scaledToFit()
+                        .padding(1)
+                        .border(.white)
+                        .frame(height: 25)
+                        .padding(.trailing, 5)
+                    Text(name)
+                        .bold()
+                        .frame(height: 25)
+                    Spacer()
                 }
+                .gridCellColumns(2)
+                .padding(.top, 40)
+            }
         }
     }
-    
+
     var EnglishSettings: some View {
         let example =  viewModel.languages.english.read(150)
         return Group {
@@ -268,6 +269,22 @@ struct Settings: View {
         }
     }
     
+    
+    var VoiceSettings: some View {
+        return NavigationLink {
+            Text("Voice")
+        } label: {
+            HStack {
+                Text("Configure Voices")
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .padding(.trailing, 15)
+            }
+            .bold()
+        }
+        .padding(.top, 30)
+    }
+
     var HobbyProject: some View {
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
