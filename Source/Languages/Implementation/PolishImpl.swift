@@ -13,7 +13,8 @@ class PolishImpl: LanguageImpl {
             name: "Polski",
             negativeString: "minus",
             dotString: "przecinek",
-            exponentString: " razy dziesięć do potęgi ")
+            exponentString: " razy dziesięć do potęgi ",
+            code: "pl")
         
         e2 = "sto"
         e2_one = "sto"

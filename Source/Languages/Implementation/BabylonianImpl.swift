@@ -28,7 +28,8 @@ class BabylonianImpl: LanguageImpl {
             name: "Babylonian",
             negativeString: "",
             dotString: "",
-            exponentString: "")
+            exponentString: "",
+            code: nil)
         allowNegativeNumbers = false
         allowExponent = false
         allowFraction = false

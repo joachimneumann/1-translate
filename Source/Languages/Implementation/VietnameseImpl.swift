@@ -32,7 +32,8 @@ class VietnameseImpl: LanguageImpl, Vietnamese {
             name: "Tiếng Việt",
             negativeString: "âm",
             dotString: "phẩy",
-            exponentString: " nhân mười mũ ")
+            exponentString: " nhân mười mũ ",
+        code: "vi")
         e2 = "trăm"
         e3 = "nghìn"
         e6 = "triệu"

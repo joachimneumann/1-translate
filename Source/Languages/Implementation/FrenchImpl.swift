@@ -13,7 +13,8 @@ class FrenchImpl: LanguageImpl {
             name: "Française",
             negativeString: "moins",
             dotString: "virgule",
-            exponentString: " fois dix à la puissance ")
+            exponentString: " fois dix à la puissance ",
+            code: "fr")
 
         e2 = "cent"
         e2_one = "cent"

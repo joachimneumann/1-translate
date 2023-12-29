@@ -13,7 +13,8 @@ class CatalanImpl: LanguageImpl {
             name: "Català",
             negativeString: "menys",
             dotString: "coma",
-            exponentString: " por diez elevat a ")
+            exponentString: " por diez elevat a ",
+            code: "ca")
 
         e2 = "cent"
         e2_one = "cent"

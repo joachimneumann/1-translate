@@ -22,7 +22,8 @@ class HieroglyphsImpl: LanguageImpl {
             name: "Hieroglyphs",
             negativeString: "",
             dotString: "",
-            exponentString: "")
+            exponentString: "",
+            code: nil)
         allowNegativeNumbers = false
         allowExponent = false
         allowFraction = false

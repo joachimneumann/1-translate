@@ -93,7 +93,8 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     }
 
     let languages = Languages()
-    
+    var voice: Voice
+
     var previouslySelectedLanguages = StringPreference()
     var firstFont: Font {
         switch firstLanguage.flagName {
@@ -320,6 +321,16 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         /// I set some values here
         currentDisplay = Display(left: "0", right: nil, canBeInteger: false, canBeFloat: false)
 
+        var languageCodes: [String] = []
+        for l in languages.list {
+            if let code = l.code {
+                if (!languageCodes.contains(code)) {
+                    languageCodes.append(code)
+                }
+            }
+        }
+        voice = Voice(languagesCodes: languageCodes)
+
         // random preferences
         previouslySelectedLanguages.add(new: languages.english.name)
         previouslySelectedLanguages.add(new: languages.german.name)
@@ -327,7 +338,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         previouslySelectedLanguages.add(new: secondLanguageName)
         previouslySelectedLanguages.add(new: firstLanguageName)
 
-        
+
         for symbol in [
             "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", ",",
             "C", "AC", "±", "%", "/", "x", "-", "+", "="] {

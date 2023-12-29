@@ -13,7 +13,8 @@ class ArabicNumeralsImpl: LanguageImpl {
             name: "الترقيم العربي",
             negativeString: "-",
             dotString: ".",
-            exponentString: "e")
+            exponentString: "e",
+            code: "ar")
         englishName = "Arabic Numerals"
     }
     

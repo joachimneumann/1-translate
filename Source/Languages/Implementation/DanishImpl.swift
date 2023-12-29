@@ -14,7 +14,8 @@ class DanishImpl: LanguageImpl {
             name: "Dansk",
             negativeString: "minus",
             dotString: "komma",
-            exponentString: " gange ti i ")
+            exponentString: " gange ti i ",
+            code: "da")
         
         e2 = "hundrede"
         e2_one = "hundred"

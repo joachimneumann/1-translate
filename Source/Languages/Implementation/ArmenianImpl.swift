@@ -13,7 +13,8 @@ class ArmenianImpl: LanguageImpl {
             name: "հայերեն",
             negativeString: "մինուս",
             dotString: "կետ",
-            exponentString: "e")
+            exponentString: "e",
+            code: "hy")
         englishName = "Armenian"
         e2 = "հարյուր"
         e2_one = e2

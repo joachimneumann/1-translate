@@ -32,7 +32,8 @@ class GermanImpl: LanguageImpl, German {
             name: "Deutsch",
             negativeString: "minus",
             dotString: "Komma",
-            exponentString: " mal zehn hoch ")
+            exponentString: " mal zehn hoch ",
+            code: "de")
 
         e2 = "hundert"
         e3 = "tausend"

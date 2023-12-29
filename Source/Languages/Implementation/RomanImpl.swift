@@ -16,7 +16,8 @@ class RomanImpl: LanguageImpl {
             name: "Roman",
             negativeString: "",
             dotString: "",
-            exponentString: "")
+            exponentString: "",
+            code: "la")
         allowNegativeNumbers = false
         allowExponent = false
         allowFraction = false

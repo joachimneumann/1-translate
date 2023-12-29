@@ -13,6 +13,7 @@ protocol Language {
     var name: String { get }
     var flagName: String { get }
     var englishName: String? { get }
+    var code: String? { get }
 }
 
 // Languages with parameters
