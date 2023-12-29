@@ -16,6 +16,7 @@ struct AppStorageKeys {
     static let forceScientificKey                   = "forceScientificKey"
     static let decimalSeparatorKey                  = "decimalSeparatorKey"
     static let groupSeparatorKey                    = "groupSeparatorKey"
+    static let offerReadingAloudKey                 = "offerReadingAloudKey"
     static let groupSizeKey                         = "groupSizeKey"
     static let secondLanguageAllowedKey             = "secondLanguageAllowedKey"
     static let firstLanguageKey                     = "firstLanguageKey"
@@ -163,6 +164,9 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @AppStorage(AppStorageKeys.groupSeparatorKey, store: .standard)
     var groupSeparator: GroupSeparator = .none
     
+    @AppStorage(AppStorageKeys.offerReadingAloudKey, store: .standard)
+    var offerReadingAloud: Bool = false
+
     @AppStorage(AppStorageKeys.groupSeparatorKey, store: .standard)
     var groupSize: GroupSize = .three
     

@@ -147,7 +147,7 @@ struct Settings: View {
                     .gridCellColumns(2)
             }
             GridRow {
-                Text("use 'and'")
+                Text("use \"and\"")
                 Toggle("", isOn: $viewModel.settingsEnglishUseAndAfterHundred)
                     .frame(width: 40)
                     .toggleStyle(
@@ -223,7 +223,7 @@ struct Settings: View {
         return Group {
             SettingsHeader(flagName: viewModel.languages.vietnamese.flagName, name: viewModel.languages.vietnamese.name)
             GridRow {
-                Text(example)
+                Text("Digits: "+example)
                     .padding(.leading, 0)
                     .gridCellColumns(2)
                     .gridCellUnsizedAxes(.horizontal)
@@ -269,8 +269,37 @@ struct Settings: View {
         }
     }
     
-    
     var VoiceSettings: some View {
+        return Group {
+            Text("Voices")
+                .bold()
+                .padding(.top, 30)
+            GridRow {
+                Text("Read Aloud")
+                Toggle("", isOn: $viewModel.offerReadingAloud)
+                    .frame(width: 40)
+                    .toggleStyle(
+                        ColoredToggleStyle(onColor: Color(white: 0.6),
+                                           offColor: Color(white: 0.25),
+                                           thumbColor: .white))
+                    .padding(.leading, 3)
+            }
+            NavigationLink {
+                VoiceSelection(voice: viewModel.voice)
+            } label: {
+                HStack {
+                    Text("Configure Voices")
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .padding(.trailing, 15)
+                }
+            }
+            .padding(.top, 5)
+        }
+    }
+
+    
+    var VoiceSettingsOld: some View {
         return NavigationLink {
             VoiceSelection(voice: viewModel.voice)
         } label: {
