@@ -136,6 +136,9 @@ struct LanguageSelector: View {
                             list: viewModel.languages.list,
                             color: darkColor)
                         .transition(.move(edge: .bottom))
+                        Rectangle()
+                            .frame(height: 0)
+                            .padding(.bottom, 30)
                     } else {
                         Rectangle()
                             .frame(height: 0)

@@ -90,7 +90,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     }
 
     let languages = Languages()
-    var voice = Voice()
+    var voice = Voices()
 
     var previouslySelectedLanguages = StringPreference()
     var firstFont: Font {
@@ -149,8 +149,8 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             forCopySecondTranslatedNumber = forCopySecondTranslatedNumber.replacingOccurrences(of: Languages.WordSplitter, with: "")
         }
         
-        firstHasVoice = voice.has(firstLanguage.code)
-        secondHasVoice = voice.has(secondLanguage.code)
+        firstHasVoice = voice.supportedLanguages.has(firstLanguage.code)
+        secondHasVoice = voice.supportedLanguages.has(secondLanguage.code)
     }
     /// I initialize the decimalSeparator with the locale preference, but
     /// I ignore the value of Locale.current.groupSeparator
@@ -320,15 +320,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     var initVoiceDone = false
     func initVoice() {
         if !initVoiceDone {
-            var languageCodes: [String] = []
-            for l in languages.list {
-                if let code = l.code {
-                    if (!languageCodes.contains(code)) {
-                        languageCodes.append(code)
-                    }
-                }
-            }
-            voice.getVoicesFor(languages: languageCodes)
+            voice.getVoicesFor(translatorLanguages: languages.list)
             voice.initDoneCallback = updateTranslation
             initVoiceDone = true
         }

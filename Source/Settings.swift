@@ -272,7 +272,7 @@ struct Settings: View {
     
     var VoiceSettings: some View {
         return NavigationLink {
-            Text("Voice")
+            VoiceSelection(voice: viewModel.voice)
         } label: {
             HStack {
                 Text("Configure Voices")
