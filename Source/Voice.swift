@@ -62,6 +62,13 @@ class Voice {
             languages = []
         }
         
+        func has(_ languageCode: String) -> Bool {
+            for language in languages {
+                if language.code == languageCode { return true}
+            }
+            return false
+        }
+        
         func findOrCreate(_ code: String) -> Language {
             for language in languages {
                 if language.code == code { return language }
@@ -89,12 +96,24 @@ class Voice {
     
     let synthesizer = AVSpeechSynthesizer()
     var languages = AllLanguages()
+    var supportedLanguages: [String] = []
     
-    init(languagesCodes: [String]) {
+    func getVoices() async {
         let voices = AVSpeechSynthesisVoice.speechVoices()
         for voice in voices {
             languages.add(combinedCode: voice.language, name: voice.name, quality: voice.quality)
         }
         print(languages)
+    }
+    
+    init(languagesCodes: [String]) {
+        Task {
+            await getVoices()
+            for languagesCode in languagesCodes {
+                if languages.has(languagesCode) {
+                    supportedLanguages.append(languagesCode)
+                }
+            }
+        }
     }
 }
