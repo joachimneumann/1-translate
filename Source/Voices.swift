@@ -118,12 +118,12 @@ class Voices {
         func guessBestVoice() -> AVSpeechSynthesisVoice? {
             guard list.count > 0 else { return nil }
             for voice in list {
-                if voice.quality == .premium {
+                if voice.quality == .enhanced {
                     return voice
                 }
             }
             for voice in list {
-                if voice.quality == .enhanced {
+                if voice.quality == .premium {
                     return voice
                 }
             }
@@ -154,7 +154,6 @@ class Voices {
                             utterance.voice = supportedLanguage.guessBestVoice()
                             DispatchQueue.main.async {
                                 self.synthesizer.speak(utterance)
-                                self.synthesizer.
                             }
                         }
                     }

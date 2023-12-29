@@ -24,6 +24,7 @@ struct TranslateNumbers: View {
             VStack(spacing: 0.0) {
                 VStack(spacing: 0.0) {
                     HStack(spacing: 30.0) {
+                        Spacer()
                         Button {
                             viewModel.voice.readAloud(viewModel.firstTranslatedNumber, in: viewModel.firstLanguage.code)
                             print("read \(viewModel.firstTranslatedNumber)")
@@ -31,11 +32,11 @@ struct TranslateNumbers: View {
                             Image(systemName: "speaker.wave.3.fill")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(height: 25)
+                                .frame(height: 20)
+                                .padding(10)
                         }
                         .disabled(!viewModel.firstHasVoice)
-                        .padding(.leading, 0)
-                        Spacer()
+                        .padding(.trailing, 10)
                         LanguageButton(language: viewModel.firstLanguage, viewModel: viewModel, screen: screen)                    }
                     .frame(height: 34.0)
                     .padding(.bottom, 10)
@@ -52,6 +53,7 @@ struct TranslateNumbers: View {
                 if viewModel.secondLanguageAllowed {
                     VStack(spacing: 0.0) {
                         HStack(spacing: 30.0) {
+                            Spacer()
                             Button {
                                 viewModel.voice.readAloud(viewModel.secondTranslatedNumber, in: viewModel.secondLanguage.code)
                                 print("read \(viewModel.secondTranslatedNumber)")
@@ -59,10 +61,11 @@ struct TranslateNumbers: View {
                                 Image(systemName: "speaker.wave.3.fill")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .frame(height: 25)
+                                    .frame(height: 20)
+                                    .padding(10)
                             }
                             .disabled(!viewModel.secondHasVoice)
-                            Spacer()
+                            .padding(.trailing, 10)
                             LanguageButton(language: viewModel.secondLanguage, viewModel: viewModel, screen: screen)
                         }
                         .frame(height: 34.0)
