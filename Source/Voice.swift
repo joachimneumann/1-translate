@@ -9,6 +9,7 @@ import Foundation
 import AVFoundation
 
 class Voice {
+    var initDoneCallback: () -> () = {}
     class Speaker: Equatable {
         let name: String
         let quality: AVSpeechSynthesisVoiceQuality
@@ -100,15 +101,14 @@ class Voice {
     }
     
     let synthesizer = AVSpeechSynthesizer()
-    var languages = AllLanguages()
+    var allLanguages = AllLanguages()
     var supportedVoices: [String : AVSpeechSynthesisVoice] = [:]
     
-    func getVoices() async {
-        let voices = AVSpeechSynthesisVoice.speechVoices()
-        for voice in voices {
-            languages.add(combinedCode: voice.language, name: voice.name, quality: voice.quality, gender: voice.gender)
+    func getAllVoices() async {
+        let allVoices = AVSpeechSynthesisVoice.speechVoices()
+        for voice in allVoices {
+            allLanguages.add(combinedCode: voice.language, name: voice.name, quality: voice.quality, gender: voice.gender)
         }
-        print(languages)
     }
     
     func has(_ code: String?) -> Bool {
@@ -128,13 +128,19 @@ class Voice {
         }
     }
 
-    init(languagesCodes: [String]) {
+    init() {
+    }
+    
+    func getVoicesFor(languages languagesCodes: [String]) {
         Task {
-            await getVoices()
+            await getAllVoices()
             for languagesCode in languagesCodes {
-                if languages.has(languagesCode) {
+                if allLanguages.has(languagesCode) {
                     supportedVoices[languagesCode] = AVSpeechSynthesisVoice(language: languagesCode)
                 }
+            }
+            DispatchQueue.main.async {
+                self.initDoneCallback()
             }
         }
     }

@@ -56,6 +56,8 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @Published var currentDisplay: Display 
     @Published var firstTranslatedNumber: String = ""
     @Published var secondTranslatedNumber: String = ""
+    @Published var firstHasVoice: Bool = false
+    @Published var secondHasVoice: Bool = false
     @Published var forCopyFirstTranslatedNumber: String = ""
     @Published var firstTranslatedNumberTopBorder: String? = nil
     @Published var secondTranslatedNumberTopBorder: String? = nil
@@ -88,7 +90,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     }
 
     let languages = Languages()
-    var voice: Voice
+    var voice = Voice()
 
     var previouslySelectedLanguages = StringPreference()
     var firstFont: Font {
@@ -146,6 +148,9 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             forCopySecondTranslatedNumber = (secondTranslatedNumberTopBorder != nil ? "<overline>" + secondTranslatedNumberTopBorder! + "</overline>" : "") + secondTranslatedNumber
             forCopySecondTranslatedNumber = forCopySecondTranslatedNumber.replacingOccurrences(of: Languages.WordSplitter, with: "")
         }
+        
+        firstHasVoice = voice.has(firstLanguage.code)
+        secondHasVoice = voice.has(secondLanguage.code)
     }
     /// I initialize the decimalSeparator with the locale preference, but
     /// I ignore the value of Locale.current.groupSeparator
@@ -311,12 +316,8 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     private var displayNumber = Number("0", precision: 10)
     
     private var previouslyPendingOperator: String? = nil
-    
-    init() {
-        /// currentDisplay will be updated shortly by refreshDisplay in onAppear() of Calculator
-        /// I set some values here
-        currentDisplay = Display(left: "0", right: nil, canBeInteger: false, canBeFloat: false)
 
+    func initVoice() {
         var languageCodes: [String] = []
         for l in languages.list {
             if let code = l.code {
@@ -325,7 +326,13 @@ class ViewModel: ObservableObject, ShowAs, Separators {
                 }
             }
         }
-        voice = Voice(languagesCodes: languageCodes)
+        voice.getVoicesFor(languages: languageCodes)
+        voice.initDoneCallback = updateTranslation
+    }
+    init() {
+        /// currentDisplay will be updated shortly by refreshDisplay in onAppear() of Calculator
+        /// I set some values here
+        currentDisplay = Display(left: "0", right: nil, canBeInteger: false, canBeFloat: false)
 
         // random preferences
         previouslySelectedLanguages.add(new: languages.english.name)

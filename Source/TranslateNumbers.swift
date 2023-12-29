@@ -24,13 +24,19 @@ struct TranslateNumbers: View {
             VStack(spacing: 0.0) {
                 VStack(spacing: 0.0) {
                     HStack(spacing: 30.0) {
-                        Spacer()
-                        Button("read") {
+                        Button {
                             viewModel.voice.read(viewModel.firstTranslatedNumber, in: viewModel.firstLanguage.code)
                             print("read \(viewModel.firstTranslatedNumber)")
+                        } label: {
+                            Image(systemName: "speaker.wave.3.fill")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(height: 25)
                         }
-                        LanguageButton(language: viewModel.firstLanguage, viewModel: viewModel, screen: screen)
-                    }
+                        .disabled(!viewModel.firstHasVoice)
+                        .padding(.leading, 0)
+                        Spacer()
+                        LanguageButton(language: viewModel.firstLanguage, viewModel: viewModel, screen: screen)                    }
                     .frame(height: 34.0)
                     .padding(.bottom, 10)
                     .padding(.top, 20)
@@ -109,7 +115,9 @@ struct TranslateNumbers: View {
                 .preferredColorScheme(.dark)
                 .onAppear() {
                     Task {
+                        viewModel.initVoice()
                         await viewModel.refreshDisplay(screen: screen)
+                        
                     }
                 }
         }
