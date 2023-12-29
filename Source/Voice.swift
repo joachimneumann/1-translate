@@ -12,9 +12,11 @@ class Voice {
     class Speaker: Equatable {
         let name: String
         let quality: AVSpeechSynthesisVoiceQuality
-        init(_ name: String, _ quality: AVSpeechSynthesisVoiceQuality) {
+        let gender: AVSpeechSynthesisVoiceGender
+        init(_ name: String, _ quality: AVSpeechSynthesisVoiceQuality, _ gender: AVSpeechSynthesisVoiceGender) {
             self.name = name
             self.quality = quality
+            self.gender = gender
         }
         static func == (lhs: Voice.Speaker, rhs: Voice.Speaker) -> Bool {
             return (lhs.name == rhs.name) && (lhs.quality == rhs.quality)
@@ -61,14 +63,7 @@ class Voice {
         init() {
             languages = []
         }
-        
-        func has(_ languageCode: String) -> Bool {
-            for language in languages {
-                if language.code == languageCode { return true}
-            }
-            return false
-        }
-        
+                
         func findOrCreate(_ code: String) -> Language {
             for language in languages {
                 if language.code == code { return language }
@@ -78,7 +73,17 @@ class Voice {
             return newLanguage
         }
         
-        func add(combinedCode: String, name: String, quality: AVSpeechSynthesisVoiceQuality) {
+        func has(_ languageCode: String) -> Bool {
+            for language in languages {
+                if language.code == languageCode { return true}
+            }
+            return false
+        }
+
+        func add(combinedCode: String,
+                 name: String,
+                 quality: AVSpeechSynthesisVoiceQuality,
+                 gender: AVSpeechSynthesisVoiceGender) {
             let splitString = combinedCode.split(separator: "-")
             if splitString.count != 2 {
                 fatalError("splitString.count = \(splitString.count)")
@@ -89,29 +94,46 @@ class Voice {
             
             let language = findOrCreate(newLanguageCode)
             let variant = language.findOrCreate(newVariantCode)
-            let speaker = Speaker(name, quality)
+            let speaker = Speaker(name, quality, gender)
             variant.add(speaker)
         }
     }
     
     let synthesizer = AVSpeechSynthesizer()
     var languages = AllLanguages()
-    var supportedLanguages: [String] = []
+    var supportedVoices: [String : AVSpeechSynthesisVoice] = [:]
     
     func getVoices() async {
         let voices = AVSpeechSynthesisVoice.speechVoices()
         for voice in voices {
-            languages.add(combinedCode: voice.language, name: voice.name, quality: voice.quality)
+            languages.add(combinedCode: voice.language, name: voice.name, quality: voice.quality, gender: voice.gender)
         }
         print(languages)
     }
     
+    func has(_ code: String?) -> Bool {
+        guard let code = code else { return false }
+        return supportedVoices.keys.contains(code)
+    }
+    
+    func read(_ text: String, in languageCode: String?) {
+        if text.count > 0 {
+            if let languageCode = languageCode {
+                if let voice = supportedVoices[languageCode] {
+                    let utterance = AVSpeechUtterance(string: text)
+                    utterance.voice = voice
+                    synthesizer.speak(utterance)
+                }
+            }
+        }
+    }
+
     init(languagesCodes: [String]) {
         Task {
             await getVoices()
             for languagesCode in languagesCodes {
                 if languages.has(languagesCode) {
-                    supportedLanguages.append(languagesCode)
+                    supportedVoices[languagesCode] = AVSpeechSynthesisVoice(language: languagesCode)
                 }
             }
         }

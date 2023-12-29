@@ -18,12 +18,17 @@ struct TranslateNumbers: View {
     @State private var showLanguageSelection = false
     @State private var settingsDetent = PresentationDetent.medium
 
+    @State var voiceAvailable = false
     var portraitView: some View {
         VStack(spacing: 0.0) {
             VStack(spacing: 0.0) {
                 VStack(spacing: 0.0) {
                     HStack(spacing: 30.0) {
                         Spacer()
+                        Button("read") {
+                            viewModel.voice.read(viewModel.firstTranslatedNumber, in: viewModel.firstLanguage.code)
+                            print("read \(viewModel.firstTranslatedNumber)")
+                        }
                         LanguageButton(language: viewModel.firstLanguage, viewModel: viewModel, screen: screen)
                     }
                     .frame(height: 34.0)
