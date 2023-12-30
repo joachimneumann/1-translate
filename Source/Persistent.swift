@@ -8,19 +8,19 @@
 import SwiftUI
 
 struct Persistent {
-    @AppStorage(AppStorageKeys.forceScientificKey, store: .standard)
+    @AppStorage("forceScientificKey", store: .standard)
     var forceScientific: Bool = false
     
-    @AppStorage(AppStorageKeys.offerReadingAloudKey, store: .standard)
+    @AppStorage("offerReadingAloudKey", store: .standard)
     var offerReadingAloud: Bool = false
     
-    @AppStorage(AppStorageKeys.secondLanguageAllowedKey, store: .standard)
+    @AppStorage("secondLanguageAllowedKey", store: .standard)
     var secondLanguageAllowed: Bool = false
     
-    @AppStorage(AppStorageKeys.firstLanguageKey, store: .standard)
+    @AppStorage("firstLanguageKey", store: .standard)
     var firstLanguageName: String = "English"
     
-    @AppStorage(AppStorageKeys.secondLanguageKey, store: .standard)
+    @AppStorage("secondLanguageKey", store: .standard)
     var secondLanguageName: String = "German"
     
 

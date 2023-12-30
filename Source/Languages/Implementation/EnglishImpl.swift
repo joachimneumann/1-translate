@@ -5,15 +5,16 @@
 //  Created by Joachim Neumann on 12/20/23.
 //
 
-import Foundation
+import SwiftUI
 
 class EnglishImpl: LanguageImpl, English {
+    @AppStorage("EnglishUseAndAfterHundredKey", store: .standard)
     var useAndAfterHundred: Bool = false {
         didSet {
             afterHundred = useAndAfterHundred ? " and" : ""
         }
     }
-    
+
     init() {
         super.init(
             name: "English",

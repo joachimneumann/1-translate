@@ -13,15 +13,9 @@ protocol ShowAs {
 }
 
 struct AppStorageKeys {
-    static let forceScientificKey                   = "forceScientificKey"
     static let decimalSeparatorKey                  = "decimalSeparatorKey"
     static let groupSeparatorKey                    = "groupSeparatorKey"
     static let groupSizeKey                         = "groupSizeKey"
-    static let offerReadingAloudKey                 = "offerReadingAloudKey"
-    static let secondLanguageAllowedKey             = "secondLanguageAllowedKey"
-    static let firstLanguageKey                     = "firstLanguageKey"
-    static let secondLanguageKey                    = "secondLanguageKey"
-    static let settingsEnglishUseAndAfterHundredKey = "settingsEnglishUseAndAfterHundredKey"
     static let settingsSpanishUsePuntoKey           = "settingsSpanishUsePuntoKey"
     static let settingsGermanCaptalisationKey       = "settingsGermanCaptalisationKey"
     static let settingsGermanWordSplitterKey        = "settingsGermanWordSplitterKey"
@@ -61,8 +55,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @Published var firstTranslatedNumberTopBorder: String? = nil
     @Published var secondTranslatedNumberTopBorder: String? = nil
     @Published var forCopySecondTranslatedNumber: String = ""
-
-    var persistent: Persistent
+    @Published var persistent: Persistent
     
     var showAsInt = false /// This will update the "-> Int or -> sci button texts
     var showAsFloat = false
@@ -90,7 +83,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         }
     }
 
-    let languages = Languages()
+    @Published var languages = Languages()
     var voice = Voices()
 
     var previouslySelectedLanguages = StringPreference()
@@ -161,13 +154,6 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     
     @AppStorage(AppStorageKeys.groupSizeKey, store: .standard)
     var groupSize: GroupSize = .three
-    
-    @AppStorage(AppStorageKeys.settingsEnglishUseAndAfterHundredKey, store: .standard)
-    var settingsEnglishUseAndAfterHundred: Bool = false {
-        didSet {
-            languages.english.useAndAfterHundred = settingsEnglishUseAndAfterHundred
-        }
-    }
     
     @AppStorage(AppStorageKeys.settingsSpanishUsePuntoKey, store: .standard)
     var settingsSpanishUsePunto: SpanishImpl.PuntoComma = .coma {
@@ -348,7 +334,6 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         decimalSeparator = decimalSeparator
 
         // get the AppStorage values into the languages
-        settingsEnglishUseAndAfterHundred = settingsEnglishUseAndAfterHundred
         settingsVietnameseCompact = settingsVietnameseCompact
         settingsVietnameseThousand = settingsVietnameseThousand
         settingsVietnameseSecondLast = settingsVietnameseSecondLast

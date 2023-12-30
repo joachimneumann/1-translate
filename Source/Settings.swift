@@ -150,7 +150,7 @@ struct Settings: View {
             }
             GridRow {
                 Text("use \"and\"")
-                Toggle("", isOn: $viewModel.settingsEnglishUseAndAfterHundred)
+                Toggle("", isOn: $viewModel.languages.english.useAndAfterHundred)
                     .frame(width: 40)
                     .toggleStyle(
                         ColoredToggleStyle(onColor: Color(white: 0.6),
@@ -303,21 +303,6 @@ struct Settings: View {
         }
     }
     
-    
-    var VoiceSettingsOld: some View {
-        return NavigationLink {
-            VoiceSelection(viewModel: viewModel)
-        } label: {
-            HStack {
-                Text("Configure Voices")
-                Spacer()
-                Image(systemName: "chevron.right")
-                    .padding(.trailing, 15)
-            }
-            .bold()
-        }
-        .padding(.top, 30)
-    }
     
     var HobbyProject: some View {
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
