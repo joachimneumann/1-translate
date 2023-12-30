@@ -43,6 +43,12 @@ struct Display {
     }
 }
 
+protocol ShowAs {
+    var showAsInt: Bool   { get }
+    var showAsFloat: Bool { get }
+}
+
+
 extension Display {
     init(
     left: String,

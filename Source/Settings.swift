@@ -99,7 +99,7 @@ struct Settings: View {
             }
             GridRow {
                 Text("GroupSize")
-                Picker("", selection: $viewModel.persistegroupSize) {
+                Picker("", selection: $viewModel.persistent.groupSize) {
                     ForEach(GroupSize.allCases, id: \.self) { value in
                         Text("\(value.string)")
                             .tag(value)

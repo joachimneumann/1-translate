@@ -7,31 +7,6 @@
 
 import SwiftUI
 
-protocol ShowAs {
-    var showAsInt: Bool   { get }
-    var showAsFloat: Bool { get }
-}
-
-struct StringPreference {
-    var previously: [String] = []
-    mutating func add(new: String) {
-        previously = previously.filter { $0 != new }
-        previously.insert(new, at: 0)
-//        print("add: ") for p in previously { print(" "+p) }
-    }
-    
-    func get(except notThis: String) -> String {
-        for i in 0..<previously.count {
-            if previously[i] != notThis {
-                return previously[i]
-            }
-        }
-//        print("get: ") for p in previously { print(" "+p) }
-        return ""
-    }
-    
-}
-
 class ViewModel: ObservableObject, ShowAs {
     @Published var showAC = true
     @Published var keyStatusColor: [String: Color] = [:]
@@ -44,9 +19,46 @@ class ViewModel: ObservableObject, ShowAs {
     @Published var secondTranslatedNumberTopBorder: String? = nil
     @Published var forCopySecondTranslatedNumber: String = ""
     @Published var persistent: Persistent
-    
+    @Published var languages = Languages()
+
+    private var initVoiceDone = false
     var showAsInt = false /// This will update the "-> Int or -> sci button texts
     var showAsFloat = false
+    var voice = Voices()
+    var previouslySelectedLanguages = Priority()
+    private var stupidBrain = BrainEngine(precision: 1_000) /// I want to call fast sync functions
+    private let keysThatRequireValidNumber = ["±", "%", "/", "x", "-", "+", "="]
+    private static let MAX_DISPLAY_LEN = 10_000 /// too long strings in Text() crash the app
+    private let keyColor = KeyColor()
+    
+    private var upHasHappended = false
+    private var downAnimationFinished = false
+    
+    private enum KeyState {
+        case notPressed
+        case pressed
+        case highPrecisionProcessing
+        case highPrecisionProcessingDisabled
+    }
+    
+    private var keyState: KeyState = .notPressed //{ didSet { print("keyState ->", keyState) } }
+    private let downTime = 0.1
+    private let upTime = 0.4
+    private var displayNumber = Number("0", precision: 10)
+    private var previouslyPendingOperator: String? = nil
+
+    @Published var firstLanguage: Language = EnglishImpl() {
+        didSet {
+            updateTranslation()
+            persistent.firstLanguageName  = firstLanguage.name
+        }
+    }
+    @Published var secondLanguage: Language = GermanImpl() {
+        didSet {
+            updateTranslation()
+            persistent.secondLanguageName = secondLanguage.name
+        }
+    }
 
     var languageNameList: [String] {
         var ret: [String] = []
@@ -71,10 +83,6 @@ class ViewModel: ObservableObject, ShowAs {
         }
     }
 
-    @Published var languages = Languages()
-    var voice = Voices()
-
-    var previouslySelectedLanguages = StringPreference()
     var firstFont: Font {
         switch firstLanguage.name {
         case languages.arabicNumerals.name:
@@ -92,6 +100,48 @@ class ViewModel: ObservableObject, ShowAs {
         }
     }
     
+    func initVoice() {
+        if !initVoiceDone {
+            voice.getVoicesFor(translatorLanguages: languages.list)
+            voice.initDoneCallback = updateTranslation
+            initVoiceDone = true
+        }
+    }
+    
+    init() {
+        persistent = Persistent()
+        /// currentDisplay will be updated shortly by refreshDisplay in onAppear() of Calculator
+        /// I set some values here
+        currentDisplay = Display(left: "0", right: nil, canBeInteger: false, canBeFloat: false)
+
+        // random preferences
+        previouslySelectedLanguages.add(new: languages.english.name)
+        previouslySelectedLanguages.add(new: languages.german.name)
+        previouslySelectedLanguages.add(new: languages.spanish.name)
+        previouslySelectedLanguages.add(new: persistent.secondLanguageName)
+        previouslySelectedLanguages.add(new: persistent.firstLanguageName)
+
+
+        for symbol in [
+            "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", ",",
+            "C", "AC", "±", "%", "/", "x", "-", "+", "="] {
+            keyStatusColor[symbol] = keyColor.upColor(for: symbol, isPending: false)
+            textColor[symbol] = keyColor.textColor(for: symbol, isPending: false)
+        }
+        keyStatusColor["plus"] = keyColor.upColor(for: "+", isPending: false)
+        // print("viewModel init")
+        for index in 0..<languages.list.count {
+            if persistent.secondLanguageName == languages.list[index].name {
+                indexOfSecondLanguage = index
+                newSecondLanguage(languages.list[index])
+            }
+            if persistent.firstLanguageName == languages.list[index].name {
+                indexOfFirstLanguage = index
+                newFirstLanguage(languages.list[index])
+            }
+        }
+    }
+        
     func updateTranslation() {
         // print("update translations")
         var allInOneLine = currentDisplay.allInOneLine
@@ -131,20 +181,8 @@ class ViewModel: ObservableObject, ShowAs {
             forCopySecondTranslatedNumber = forCopySecondTranslatedNumber.replacingOccurrences(of: Languages.WordSplitter, with: "")
         }
     }
-        
-    @Published var firstLanguage: Language = EnglishImpl() {
-        didSet {
-            updateTranslation()
-            persistent.firstLanguageName  = firstLanguage.name
-        }
-    }
-    @Published var secondLanguage: Language = GermanImpl() {
-        didSet {
-            updateTranslation()
-            persistent.secondLanguageName = secondLanguage.name
-        }
-    }
 
+    
     func newFirstLanguage(_ newLanguage: Language) {
         // print("newFirstLanguage: " + newLanguage.name)
         firstLanguage = newLanguage
@@ -198,73 +236,7 @@ class ViewModel: ObservableObject, ShowAs {
             }
         }
     }
-        
-    private var stupidBrain = BrainEngine(precision: 1_000) /// I want to call fast sync functions
     
-    private let keysThatRequireValidNumber = ["±", "%", "/", "x", "-", "+", "=", "( ", " )", "m+", "m-", "x^2", "x^3", "x^y", "e^x", "y^x", "2^x", "10^x", "One_x", "√", "3√", "y√", "logy", "ln", "log2", "log10", "x!", "sin", "cos", "tan", "asin", "acos", "atan", "EE", "sinh", "cosh", "tanh", "asinh", "acosh", "atanh"]
-    private static let MAX_DISPLAY_LEN = 10_000 /// too long strings in Text() crash the app
-    private let keyColor = KeyColor()
-    
-    private var upHasHappended = false
-    private var downAnimationFinished = false
-    
-    private enum KeyState {
-        case notPressed
-        case pressed
-        case highPrecisionProcessing
-        case highPrecisionProcessingDisabled
-    }
-    
-    private var keyState: KeyState = .notPressed //{ didSet { print("keyState ->", keyState) } }
-    private let downTime = 0.1
-    private let upTime = 0.4
-    
-    private var displayNumber = Number("0", precision: 10)
-    
-    private var previouslyPendingOperator: String? = nil
-
-    var initVoiceDone = false
-    func initVoice() {
-        if !initVoiceDone {
-            voice.getVoicesFor(translatorLanguages: languages.list)
-            voice.initDoneCallback = updateTranslation
-            initVoiceDone = true
-        }
-    }
-    init() {
-        persistent = Persistent()
-        /// currentDisplay will be updated shortly by refreshDisplay in onAppear() of Calculator
-        /// I set some values here
-        currentDisplay = Display(left: "0", right: nil, canBeInteger: false, canBeFloat: false)
-
-        // random preferences
-        previouslySelectedLanguages.add(new: languages.english.name)
-        previouslySelectedLanguages.add(new: languages.german.name)
-        previouslySelectedLanguages.add(new: languages.spanish.name)
-        previouslySelectedLanguages.add(new: persistent.secondLanguageName)
-        previouslySelectedLanguages.add(new: persistent.firstLanguageName)
-
-
-        for symbol in [
-            "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", ",",
-            "C", "AC", "±", "%", "/", "x", "-", "+", "="] {
-            keyStatusColor[symbol] = keyColor.upColor(for: symbol, isPending: false)
-            textColor[symbol] = keyColor.textColor(for: symbol, isPending: false)
-        }
-        keyStatusColor["plus"] = keyColor.upColor(for: "+", isPending: false)
-        // print("viewModel init")
-        for index in 0..<languages.list.count {
-            if persistent.secondLanguageName == languages.list[index].name {
-                indexOfSecondLanguage = index
-                newSecondLanguage(languages.list[index])
-            }
-            if persistent.firstLanguageName == languages.list[index].name {
-                indexOfFirstLanguage = index
-                newFirstLanguage(languages.list[index])
-            }
-        }
-    }
-        
     ///  To give a clear visual feedback to the user that the button has been pressed,
     ///  the animation will always wait for the downAnimation to finish
     func showDisabledColors(for symbol: String) async {

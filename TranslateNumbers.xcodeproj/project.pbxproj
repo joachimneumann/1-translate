@@ -12,6 +12,8 @@
 		AA0523472B27024800DDAAD4 /* LanguageSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0523462B27024800DDAAD4 /* LanguageSelector.swift */; };
 		AA08C7C6272EDA4A001B8575 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA08C7C5272EDA4A001B8575 /* Assets.xcassets */; };
 		AA08C7C9272EDA4A001B8575 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA08C7C8272EDA4A001B8575 /* Preview Assets.xcassets */; };
+		AA12A3362B3FF2AE00422866 /* Priority.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA12A3352B3FF2AE00422866 /* Priority.swift */; };
+		AA12A3372B3FF2AE00422866 /* Priority.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA12A3352B3FF2AE00422866 /* Priority.swift */; };
 		AA2567A62B3DD98A006DCC72 /* Voices.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2567A52B3DD98A006DCC72 /* Voices.swift */; };
 		AA2567A72B3DD98A006DCC72 /* Voices.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2567A52B3DD98A006DCC72 /* Voices.swift */; };
 		AA29F58A293CD608001ADF5A /* PortraitDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29F589293CD608001ADF5A /* PortraitDisplay.swift */; };
@@ -127,6 +129,7 @@
 		AA08C7C8272EDA4A001B8575 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AA08C7EB272F1241001B8575 /* TranslateNumbers.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TranslateNumbers.entitlements; sourceTree = "<group>"; };
 		AA08C7EC272F1572001B8575 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		AA12A3352B3FF2AE00422866 /* Priority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Priority.swift; sourceTree = "<group>"; };
 		AA1B007C294777180054C851 /* gmp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gmp.h; path = dist/include/gmp.h; sourceTree = SOURCE_ROOT; };
 		AA1B007D294777180054C851 /* bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bridge.h; path = dist/include/bridge.h; sourceTree = SOURCE_ROOT; };
 		AA1B007E294777190054C851 /* mpfr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mpfr.h; path = dist/include/mpfr.h; sourceTree = SOURCE_ROOT; };
@@ -273,6 +276,7 @@
 				AA2567A52B3DD98A006DCC72 /* Voices.swift */,
 				AA899D412B3E914700ADDC16 /* VoiceSelection.swift */,
 				AA659AB72B3FDE73004CF20A /* Persistent.swift */,
+				AA12A3352B3FF2AE00422866 /* Priority.swift */,
 			);
 			path = Source;
 			sourceTree = SOURCE_ROOT;
@@ -523,6 +527,7 @@
 				AA3FB8272920E0E5002ECCEB /* Settings.swift in Sources */,
 				AA689125295E681400129593 /* Brain.swift in Sources */,
 				AA326E4C2B332DCC0092E8E6 /* GermanImpl.swift in Sources */,
+				AA12A3362B3FF2AE00422866 /* Priority.swift in Sources */,
 				AAFBD8A72B32A36D00175197 /* ThaiNumeralsImpl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -552,6 +557,7 @@
 				AA30E9E02B2DAD4C00F7FDEA /* TestThai.swift in Sources */,
 				AAB253BD2B3BDB6500860F93 /* TestHieroglyphs.swift in Sources */,
 				AA715CB72B2C3ABE009335B7 /* TestEnglish.swift in Sources */,
+				AA12A3372B3FF2AE00422866 /* Priority.swift in Sources */,
 				AA659AB62B3FC170004CF20A /* Language.swift in Sources */,
 				AAB990522B35703500BD5A24 /* RomanImpl.swift in Sources */,
 				AA5CF91B2B3944AD004BB6BB /* ArmenianNumeralsImpl.swift in Sources */,
