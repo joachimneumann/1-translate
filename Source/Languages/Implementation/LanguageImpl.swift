@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import AVFoundation
 
 
 class LanguageImpl: Language {
@@ -15,6 +16,7 @@ class LanguageImpl: Language {
     var flagName: String { englishName != nil ? englishName! : name }
     var voiceLanguageCode: String?
     var voiceLanguageName: String?
+    var voice: AVSpeechSynthesisVoice? = nil
     var negativeString: String
     var dotString: String
     var exponentString: String

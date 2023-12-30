@@ -57,8 +57,6 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @Published var currentDisplay: Display 
     @Published var firstTranslatedNumber: String = ""
     @Published var secondTranslatedNumber: String = ""
-    @Published var firstHasVoice: Bool = false
-    @Published var secondHasVoice: Bool = false
     @Published var forCopyFirstTranslatedNumber: String = ""
     @Published var firstTranslatedNumberTopBorder: String? = nil
     @Published var secondTranslatedNumberTopBorder: String? = nil
@@ -78,14 +76,14 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     var indexOfFirstLanguage: Int? = 0 {
         didSet {
             if let index = indexOfFirstLanguage {
-                newFirstLanguage(languages.list[index])
+                newFirstLanguage(languages.list[index] as! LanguageImpl)
             }
         }
     }
     var indexOfSecondLanguage: Int? = 0 {
         didSet {
             if let index = indexOfSecondLanguage {
-                newSecondLanguage(languages.list[index])
+                newSecondLanguage(languages.list[index] as! LanguageImpl)
             }
         }
     }
@@ -149,10 +147,8 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             forCopySecondTranslatedNumber = (secondTranslatedNumberTopBorder != nil ? "<overline>" + secondTranslatedNumberTopBorder! + "</overline>" : "") + secondTranslatedNumber
             forCopySecondTranslatedNumber = forCopySecondTranslatedNumber.replacingOccurrences(of: Languages.WordSplitter, with: "")
         }
-        
-        firstHasVoice = voice.supportedLanguages.has(firstLanguage.voiceLanguageCode)
-        secondHasVoice = voice.supportedLanguages.has(secondLanguage.voiceLanguageCode)
     }
+    
     /// I initialize the decimalSeparator with the locale preference, but
     /// I ignore the value of Locale.current.groupSeparator
     @AppStorage(AppStorageKeys.forceScientificKey, store: .standard)
@@ -230,20 +226,20 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         }
     }
     
-    @Published var firstLanguage: Language = EnglishImpl() {
+    @Published var firstLanguage: LanguageImpl = EnglishImpl() {
         didSet {
             updateTranslation()
             firstLanguageName  = firstLanguage.name
         }
     }
-    @Published var secondLanguage: Language = GermanImpl() {
+    @Published var secondLanguage: LanguageImpl = GermanImpl() {
         didSet {
             updateTranslation()
             secondLanguageName = secondLanguage.name
         }
     }
 
-    func newFirstLanguage(_ newLanguage: Language) {
+    func newFirstLanguage(_ newLanguage: LanguageImpl) {
         // print("newFirstLanguage: " + newLanguage.name)
         firstLanguage = newLanguage
         previouslySelectedLanguages.add(new: newLanguage.name)
@@ -252,8 +248,10 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             let newLanguageName = previouslySelectedLanguages.get(except: newLanguage.name)
             if newLanguageName != "" {
                 for newLanguage in languages.list {
-                    if newLanguage.name == newLanguageName {
-                        secondLanguage = newLanguage
+                    if let newLanguageImpl = newLanguage as? LanguageImpl {
+                        if newLanguageImpl.name == newLanguageName {
+                            secondLanguage = newLanguageImpl
+                        }
                     }
                 }
             }
@@ -270,7 +268,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         }
     }
 
-    func newSecondLanguage(_ newLanguage: Language) {
+    func newSecondLanguage(_ newLanguage: LanguageImpl) {
         // print("newSecondLanguage: " + newLanguage.name)
         secondLanguage = newLanguage
         previouslySelectedLanguages.add(new: secondLanguage.name)
@@ -279,8 +277,10 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             let newLanguageName = previouslySelectedLanguages.get(except: secondLanguage.name)
             if newLanguageName != "" {
                 for newLanguage in languages.list {
-                    if newLanguage.name == newLanguageName {
-                        firstLanguage = newLanguage
+                    if let newLanguageImpl = newLanguage as? LanguageImpl {
+                        if newLanguageImpl.name == newLanguageName {
+                            firstLanguage = newLanguageImpl
+                        }
                     }
                 }
             }
@@ -353,11 +353,11 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         for index in 0..<languages.list.count {
             if secondLanguageName == languages.list[index].name {
                 indexOfSecondLanguage = index
-                newSecondLanguage(languages.list[index])
+                newSecondLanguage(languages.list[index] as! LanguageImpl)
             }
             if firstLanguageName == languages.list[index].name {
                 indexOfFirstLanguage = index
-                newFirstLanguage(languages.list[index])
+                newFirstLanguage(languages.list[index] as! LanguageImpl)
             }
         }
         groupSeparator = groupSeparator

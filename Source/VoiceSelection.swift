@@ -22,7 +22,11 @@ struct VoiceSelection: View {
                     let speakerQuality = voice.quality.rawValue == 1 ? "" : (voice.quality.rawValue == 2 ? "Enhanced" : "Premium")
                     let variant = !showVariant || (voice.variantCode == "001") ? "" : ", "+voice.variantCode
                     HStack {
-                        Text(voice.name + " (\(speakerGender)\(variant)) \(speakerQuality)")
+                        Text(voice.name + " (\(speakerGender)\(variant))")
+                        Spacer()
+                        Text("Q:"+speakerQuality)
+                            .foregroundColor(.yellow)
+                            .bold()
                     }
                 }
             }
@@ -35,19 +39,8 @@ struct VoiceSelection: View {
             ForEach(Array(dict.keys), id: \.self) { key in
                 LanguageSection(voiceLanguage: dict[key]!, languageCode: key)
             }
-//
-//
-//
-//            ForEach(structAData.objectsB, id: \.name) { objectB in
-//                Section(header: Text(objectB.name)) {
-//                    ForEach(objectB.stringList, id: \.self) { item in
-//                        Text(item)
-//                    }
-//                }
-//            }
         }
         .navigationTitle("Select Voice")
-        Text("X")
     }
 }
 

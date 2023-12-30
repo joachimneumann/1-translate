@@ -27,7 +27,7 @@ struct TranslateNumbers: View {
                         Spacer()
                         if viewModel.offerReadingAloud {
                             Button {
-                                viewModel.voice.readAloud(viewModel.firstTranslatedNumber, in: viewModel.firstLanguage.voiceLanguageCode)
+                                viewModel.voice.readAloud(viewModel.firstTranslatedNumber, in: viewModel.firstLanguage.voice!)
                             } label: {
                                 Image(systemName: "speaker.wave.3.fill")
                                     .resizable()
@@ -35,7 +35,7 @@ struct TranslateNumbers: View {
                                     .frame(height: 20)
                                     .padding(10)
                             }
-                            .disabled(!viewModel.firstHasVoice)
+                            .disabled(viewModel.firstLanguage.voice == nil)
                             .padding(.trailing, 10)
                         }
                         LanguageButton(language: viewModel.firstLanguage, viewModel: viewModel, screen: screen)                    }
@@ -57,8 +57,7 @@ struct TranslateNumbers: View {
                             Spacer()
                             if viewModel.offerReadingAloud {
                                 Button {
-                                    viewModel.voice.readAloud(viewModel.secondTranslatedNumber, in: viewModel.secondLanguage.voiceLanguageCode)
-                                    print("read \(viewModel.secondTranslatedNumber)")
+                                    viewModel.voice.readAloud(viewModel.secondTranslatedNumber, in: viewModel.secondLanguage.voice!)
                                 } label: {
                                     Image(systemName: "speaker.wave.3.fill")
                                         .resizable()
@@ -66,7 +65,7 @@ struct TranslateNumbers: View {
                                         .frame(height: 20)
                                         .padding(10)
                                 }
-                                .disabled(!viewModel.secondHasVoice)
+                                .disabled(viewModel.secondLanguage.voice == nil)
                                 .padding(.trailing, 10)
                             }
                             LanguageButton(language: viewModel.secondLanguage, viewModel: viewModel, screen: screen)

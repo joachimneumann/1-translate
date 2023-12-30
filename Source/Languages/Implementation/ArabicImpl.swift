@@ -23,7 +23,6 @@ class ArabicImpl: LanguageImpl {
             dotString: "واحدة",
             exponentString: " مرات عشرة للقوة ")
         voiceLanguageCode = "ar"
-        voiceLanguageName = "Arabic"
         englishName = "Arabic"
     }
     
