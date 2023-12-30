@@ -42,7 +42,7 @@ struct LanguageSelector: View {
                 List(0..<list.count, id: \.self, selection: selectedIndex) { languageIndex in
                     let language = list[languageIndex]
                     HStack {
-                        Image((language as! LanguageImpl).flagName)
+                        Image(language.flagName)
                             .resizable()
                             .scaledToFit()
                             .padding(2)

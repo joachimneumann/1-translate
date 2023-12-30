@@ -139,10 +139,10 @@ struct Settings: View {
     }
     
     var EnglishSettings: some View {
-        let impl = viewModel.languages.english as! LanguageImpl
-        let example =  impl.read(150)
+        let english = viewModel.languages.english
+        let example =  english.read(150)
         return Group {
-            SettingsHeader(flagName: impl.flagName, name: impl.name)
+            SettingsHeader(flagName: english.flagName, name: english.name)
             GridRow {
                 Text(example)
                     .padding(.leading, 0)
@@ -162,10 +162,10 @@ struct Settings: View {
     }
     
     var GermanSettings: some View {
-        let impl = viewModel.languages.german as! LanguageImpl
-        let example =  impl.read(88) + (viewModel.languages.german.useWordSplitter ? " (with word splitter)" : "")
+        let german = viewModel.languages.german
+        let example =  german.read(88) + (german.useWordSplitter ? " (with word splitter)" : "")
         return Group {
-            SettingsHeader(flagName: impl.flagName, name: impl.name)
+            SettingsHeader(flagName: german.flagName, name: german.name)
             GridRow {
                 Text(example)
                     .padding(.leading, 0)
@@ -195,11 +195,11 @@ struct Settings: View {
     }
     
     var SpanishSettings: some View {
-        let impl = viewModel.languages.spanish as! LanguageImpl
-        let example = impl.read("1.5")
+        let spanish = viewModel.languages.spanish
+        let example = spanish.read("1.5")
         
         return Group {
-            SettingsHeader(flagName: impl.flagName, name: impl.name)
+            SettingsHeader(flagName: spanish.flagName, name: spanish.name)
             GridRow {
                 Text(example)
                     .padding(.leading, 0)
@@ -223,10 +223,10 @@ struct Settings: View {
     }
     
     var VietnameseSettings: some View {
-        let impl = viewModel.languages.vietnamese as! LanguageImpl
-        let example = impl.read(303333)
+        let vietnamese = viewModel.languages.vietnamese
+        let example = vietnamese.read(303333)
         return Group {
-            SettingsHeader(flagName: impl.flagName, name: impl.name)
+            SettingsHeader(flagName: vietnamese.flagName, name: vietnamese.name)
             GridRow {
                 Text("Digits: "+example)
                     .padding(.leading, 0)

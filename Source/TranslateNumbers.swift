@@ -27,7 +27,7 @@ struct TranslateNumbers: View {
                         Spacer()
                         if viewModel.offerReadingAloud {
                             Button {
-                                viewModel.voice.readAloud(viewModel.firstTranslatedNumber, in: viewModel.firstLanguage.voice!)
+                                viewModel.firstLanguage.readAloud(viewModel.firstTranslatedNumber)
                             } label: {
                                 Image(systemName: "speaker.wave.3.fill")
                                     .resizable()
@@ -35,7 +35,7 @@ struct TranslateNumbers: View {
                                     .frame(height: 20)
                                     .padding(10)
                             }
-                            .disabled(viewModel.firstLanguage.voice == nil)
+                            .disabled(!viewModel.firstLanguage.canReadAloud)
                             .padding(.trailing, 10)
                         }
                         LanguageButton(language: viewModel.firstLanguage, viewModel: viewModel, screen: screen)                    }
@@ -57,7 +57,7 @@ struct TranslateNumbers: View {
                             Spacer()
                             if viewModel.offerReadingAloud {
                                 Button {
-                                    viewModel.voice.readAloud(viewModel.secondTranslatedNumber, in: viewModel.secondLanguage.voice!)
+                                    viewModel.secondLanguage.readAloud(viewModel.secondTranslatedNumber)
                                 } label: {
                                     Image(systemName: "speaker.wave.3.fill")
                                         .resizable()
@@ -65,7 +65,7 @@ struct TranslateNumbers: View {
                                         .frame(height: 20)
                                         .padding(10)
                                 }
-                                .disabled(viewModel.secondLanguage.voice == nil)
+                                .disabled(!viewModel.secondLanguage.canReadAloud)
                                 .padding(.trailing, 10)
                             }
                             LanguageButton(language: viewModel.secondLanguage, viewModel: viewModel, screen: screen)
@@ -111,7 +111,7 @@ struct TranslateNumbers: View {
             NavigationLink {
                 LanguageSelector(viewModel: viewModel, screen: screen)
             } label: {
-                Image((language as! LanguageImpl).flagName)
+                Image(language.flagName)
                     .resizable()
                     .scaledToFit()
                     .padding(2)

@@ -10,8 +10,11 @@ import Foundation
 protocol Language {
     func read(_ numberString: String) -> String
     func read(_ i: Int) -> String
+    func readAloud(_ text: String)
     var name: String { get }
     var nameDescription: String? { get }
+    var flagName: String { get }
+    var canReadAloud: Bool { get set }
 }
 
 // Languages with parameters
