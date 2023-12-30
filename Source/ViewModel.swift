@@ -12,12 +12,6 @@ protocol ShowAs {
     var showAsFloat: Bool { get }
 }
 
-struct AppStorageKeys {
-    static let decimalSeparatorKey                  = "decimalSeparatorKey"
-    static let groupSeparatorKey                    = "groupSeparatorKey"
-    static let groupSizeKey                         = "groupSizeKey"
-}
-
 struct StringPreference {
     var previously: [String] = []
     mutating func add(new: String) {
@@ -38,7 +32,7 @@ struct StringPreference {
     
 }
 
-class ViewModel: ObservableObject, ShowAs, Separators {
+class ViewModel: ObservableObject, ShowAs {
     @Published var showAC = true
     @Published var keyStatusColor: [String: Color] = [:]
     @Published var textColor: [String: Color] = [:]
@@ -101,11 +95,11 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     func updateTranslation() {
         // print("update translations")
         var allInOneLine = currentDisplay.allInOneLine
-        if groupSeparator != .none {
-            allInOneLine = allInOneLine.replacingOccurrences(of: groupSeparator.string, with: "")
+        if persistent.groupSeparator != .none {
+            allInOneLine = allInOneLine.replacingOccurrences(of: persistent.groupSeparator.string, with: "")
         }
-        if decimalSeparator != .dot {
-            allInOneLine = allInOneLine.replacingOccurrences(of: decimalSeparator.string, with: ".")
+        if persistent.decimalSeparator != .dot {
+            allInOneLine = allInOneLine.replacingOccurrences(of: persistent.decimalSeparator.string, with: ".")
         }
         firstTranslatedNumber = firstLanguage.read(allInOneLine)
         firstTranslatedNumberTopBorder = nil
@@ -137,18 +131,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             forCopySecondTranslatedNumber = forCopySecondTranslatedNumber.replacingOccurrences(of: Languages.WordSplitter, with: "")
         }
     }
-    
-    /// I initialize the decimalSeparator with the locale preference, but
-    /// I ignore the value of Locale.current.groupSeparator
-    @AppStorage(AppStorageKeys.decimalSeparatorKey, store: .standard)
-    var decimalSeparator: DecimalSeparator = Locale.current.decimalSeparator == "," ? .comma : .dot
-    
-    @AppStorage(AppStorageKeys.groupSeparatorKey, store: .standard)
-    var groupSeparator: GroupSeparator = .none
-    
-    @AppStorage(AppStorageKeys.groupSizeKey, store: .standard)
-    var groupSize: GroupSize = .three
-    
+        
     @Published var firstLanguage: Language = EnglishImpl() {
         didSet {
             updateTranslation()
@@ -416,7 +399,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     }
     
     func refreshDisplay(screen: Screen) async {
-        let tempDisplay = Display(displayNumber, screen: screen, separators: self, showAs: self, forceScientific: persistent.forceScientific)
+        let tempDisplay = Display(displayNumber, screen: screen, separators: self.persistent, showAs: self, forceScientific: persistent.forceScientific)
         await MainActor.run() {
             currentDisplay = tempDisplay
             updateTranslation()

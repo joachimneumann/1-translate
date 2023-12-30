@@ -39,7 +39,7 @@ struct Settings: View {
     }
     
     var DigitsSettings: some View {
-        let example =  Display(left: "").withSeparators(numberString: "10000.05", isNegative: false, separators: viewModel)
+        let example =  Display(left: "").withSeparators(numberString: "10000.05", isNegative: false, separators: viewModel.persistent)
         return Group {
             GridRow {
                 Text("\(example)")
@@ -49,7 +49,7 @@ struct Settings: View {
             }
             GridRow {
                 Text("Decimal")
-                Picker("", selection: $viewModel.decimalSeparator) {
+                Picker("", selection: $viewModel.persistent.decimalSeparator) {
                     ForEach(DecimalSeparator.allCases, id: \.self) { value in
                         Text("\(value.rawValue)")
                             .tag(value)
@@ -59,14 +59,14 @@ struct Settings: View {
                 .frame(width: 220)
                 .background(Color(UIColor.darkGray))
                 .borderRadius(Color.black, width: 5, cornerRadius: 10, corners: [.topLeft, .bottomLeft, .topRight, .bottomRight])
-                .onChange(of: viewModel.decimalSeparator) { _ in
-                    if viewModel.decimalSeparator == .comma {
-                        if viewModel.groupSeparator == .comma {
-                            viewModel.groupSeparator = .dot
+                .onChange(of: viewModel.persistent.decimalSeparator) { _ in
+                    if viewModel.persistent.decimalSeparator == .comma {
+                        if viewModel.persistent.groupSeparator == .comma {
+                            viewModel.persistent.groupSeparator = .dot
                         }
-                    } else if viewModel.decimalSeparator == .dot {
-                        if viewModel.groupSeparator == .dot {
-                            viewModel.groupSeparator = .comma
+                    } else if viewModel.persistent.decimalSeparator == .dot {
+                        if viewModel.persistent.groupSeparator == .dot {
+                            viewModel.persistent.groupSeparator = .comma
                         }
                     }
                 }
@@ -74,7 +74,7 @@ struct Settings: View {
             }
             GridRow {
                 Text("Grouping")
-                Picker("", selection: $viewModel.groupSeparator) {
+                Picker("", selection: $viewModel.persistent.groupSeparator) {
                     ForEach(GroupSeparator.allCases, id: \.self) { value in
                         Text("\(value.rawValue)")
                             .tag(value)
@@ -83,14 +83,14 @@ struct Settings: View {
                 .padding(2)
                 .background(Color(UIColor.darkGray))
                 .borderRadius(Color.black, width: 5, cornerRadius: 10, corners: [.topLeft, .bottomLeft, .topRight, .bottomRight])
-                .onChange(of: viewModel.groupSeparator) { _ in
-                    if viewModel.groupSeparator == .comma {
-                        if viewModel.decimalSeparator == .comma {
-                            viewModel.decimalSeparator = .dot
+                .onChange(of: viewModel.persistent.groupSeparator) { _ in
+                    if viewModel.persistent.groupSeparator == .comma {
+                        if viewModel.persistent.decimalSeparator == .comma {
+                            viewModel.persistent.decimalSeparator = .dot
                         }
-                    } else if viewModel.groupSeparator == .dot { /// dot
-                        if viewModel.decimalSeparator == .dot { /// also dot
-                            viewModel.decimalSeparator = .comma
+                    } else if viewModel.persistent.groupSeparator == .dot { /// dot
+                        if viewModel.persistent.decimalSeparator == .dot { /// also dot
+                            viewModel.persistent.decimalSeparator = .comma
                         }
                     }
                 }
@@ -99,7 +99,7 @@ struct Settings: View {
             }
             GridRow {
                 Text("GroupSize")
-                Picker("", selection: $viewModel.groupSize) {
+                Picker("", selection: $viewModel.persistegroupSize) {
                     ForEach(GroupSize.allCases, id: \.self) { value in
                         Text("\(value.string)")
                             .tag(value)

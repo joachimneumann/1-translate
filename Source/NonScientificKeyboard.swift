@@ -40,7 +40,7 @@ struct NonScientificKeyboard: View {
             }
             HStack(spacing: spacing) {
                 Key("0", screen, viewModel)
-                Key(viewModel.decimalSeparator.string, screen, viewModel)
+                Key(viewModel.persistent.decimalSeparator.string, screen, viewModel)
                 Key("=", screen, viewModel)
             }
         }
