@@ -105,7 +105,7 @@ struct LanguageSelector: View {
                 }
                 .background(.black)
                 VStack {
-                    DisclosureGroup(isExpanded: $viewModel.secondLanguageAllowed) {
+                    DisclosureGroup(isExpanded: $viewModel.persistent.secondLanguageAllowed) {
                     } label: {
                         HStack {
                             Text("Second Language")
@@ -117,11 +117,11 @@ struct LanguageSelector: View {
                     }
                     .onTapGesture {
                         withAnimation {
-                            viewModel.secondLanguageAllowed.toggle()
+                            viewModel.persistent.secondLanguageAllowed.toggle()
                         }
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
                             withAnimation {
-                                if viewModel.secondLanguageAllowed {
+                                if viewModel.persistent.secondLanguageAllowed {
                                     additionalDisclosureText = ""
                                 } else {
                                     additionalDisclosureText = "(hidden)"
@@ -130,7 +130,7 @@ struct LanguageSelector: View {
                         }
                     }
                     .disclosureGroupStyle(MyDisclosureStyle())
-                    if viewModel.secondLanguageAllowed {
+                    if viewModel.persistent.secondLanguageAllowed {
                         LanguageList(
                             selectedIndex: $viewModel.indexOfSecondLanguage,
                             list: viewModel.languages.list,
@@ -150,7 +150,7 @@ struct LanguageSelector: View {
             .edgesIgnoringSafeArea(.bottom)
         }
         .onAppear() {
-            additionalDisclosureText = viewModel.secondLanguageAllowed ? "" : "(hidden)"
+            additionalDisclosureText = viewModel.persistent.secondLanguageAllowed ? "" : "(hidden)"
         }
     }
 }

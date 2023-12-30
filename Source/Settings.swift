@@ -281,7 +281,7 @@ struct Settings: View {
                 .padding(.top, 30)
             GridRow {
                 Text("Read Aloud")
-                Toggle("", isOn: $viewModel.offerReadingAloud)
+                Toggle("", isOn: $viewModel.persistent.offerReadingAloud)
                     .frame(width: 40)
                     .toggleStyle(
                         ColoredToggleStyle(onColor: Color(white: 0.6),

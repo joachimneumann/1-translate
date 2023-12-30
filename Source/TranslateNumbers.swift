@@ -25,7 +25,7 @@ struct TranslateNumbers: View {
                 VStack(spacing: 0.0) {
                     HStack(spacing: 30.0) {
                         Spacer()
-                        if viewModel.offerReadingAloud {
+                        if viewModel.persistent.offerReadingAloud {
                             Button {
                                 viewModel.firstLanguage.readAloud(viewModel.firstTranslatedNumber)
                             } label: {
@@ -51,11 +51,11 @@ struct TranslateNumbers: View {
                         .padding(.horizontal, 0)
                     Spacer(minLength: 0.0)
                 }
-                if viewModel.secondLanguageAllowed {
+                if viewModel.persistent.secondLanguageAllowed {
                     VStack(spacing: 0.0) {
                         HStack(spacing: 30.0) {
                             Spacer()
-                            if viewModel.offerReadingAloud {
+                            if viewModel.persistent.offerReadingAloud {
                                 Button {
                                     viewModel.secondLanguage.readAloud(viewModel.secondTranslatedNumber)
                                 } label: {

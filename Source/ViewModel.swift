@@ -62,6 +62,8 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @Published var secondTranslatedNumberTopBorder: String? = nil
     @Published var forCopySecondTranslatedNumber: String = ""
 
+    var persistent: Persistent
+    
     var showAsInt = false /// This will update the "-> Int or -> sci button texts
     var showAsFloat = false
 
@@ -95,9 +97,9 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     var firstFont: Font {
         switch firstLanguage.name {
         case languages.arabicNumerals.name:
-            Font(UIFont(name: "Avenir", size: secondLanguageAllowed ? 40 : 50)!)
+            Font(UIFont(name: "Avenir", size: persistent.secondLanguageAllowed ? 40 : 50)!)
         default:
-            secondLanguageAllowed ? Font.title : Font.largeTitle
+            persistent.secondLanguageAllowed ? Font.title : Font.largeTitle
         }
     }
     var secondFont: Font {
@@ -132,7 +134,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         forCopyFirstTranslatedNumber = (firstTranslatedNumberTopBorder != nil ? "<overline>" + firstTranslatedNumberTopBorder! + "</overline>" : "") + firstTranslatedNumber
         forCopyFirstTranslatedNumber = forCopyFirstTranslatedNumber.replacingOccurrences(of: Languages.WordSplitter, with: "")
 
-        if secondLanguageAllowed {
+        if persistent.secondLanguageAllowed {
             secondTranslatedNumber = secondLanguage.read(allInOneLine)
             secondTranslatedNumberTopBorder = nil
             if secondTranslatedNumber.contains(OVERLINE) {
@@ -151,23 +153,14 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     
     /// I initialize the decimalSeparator with the locale preference, but
     /// I ignore the value of Locale.current.groupSeparator
-    @AppStorage(AppStorageKeys.forceScientificKey, store: .standard)
-    var forceScientific: Bool = false
-    
     @AppStorage(AppStorageKeys.decimalSeparatorKey, store: .standard)
     var decimalSeparator: DecimalSeparator = Locale.current.decimalSeparator == "," ? .comma : .dot
     
     @AppStorage(AppStorageKeys.groupSeparatorKey, store: .standard)
     var groupSeparator: GroupSeparator = .none
     
-    @AppStorage(AppStorageKeys.offerReadingAloudKey, store: .standard)
-    var offerReadingAloud: Bool = false
-
     @AppStorage(AppStorageKeys.groupSeparatorKey, store: .standard)
     var groupSize: GroupSize = .three
-    
-    @AppStorage(AppStorageKeys.secondLanguageAllowedKey, store: .standard)
-    var secondLanguageAllowed: Bool = false
     
     @AppStorage(AppStorageKeys.firstLanguageKey, store: .standard)
     var firstLanguageName: String = "English"
@@ -326,6 +319,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         }
     }
     init() {
+        persistent = Persistent()
         /// currentDisplay will be updated shortly by refreshDisplay in onAppear() of Calculator
         /// I set some values here
         currentDisplay = Display(left: "0", right: nil, canBeInteger: false, canBeFloat: false)
@@ -504,7 +498,7 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     }
     
     func refreshDisplay(screen: Screen) async {
-        let tempDisplay = Display(displayNumber, screen: screen, separators: self, showAs: self, forceScientific: forceScientific)
+        let tempDisplay = Display(displayNumber, screen: screen, separators: self, showAs: self, forceScientific: persistent.forceScientific)
         await MainActor.run() {
             currentDisplay = tempDisplay
             updateTranslation()
