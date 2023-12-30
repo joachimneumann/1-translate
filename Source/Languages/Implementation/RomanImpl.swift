@@ -16,8 +16,9 @@ class RomanImpl: LanguageImpl {
             name: "Roman",
             negativeString: "",
             dotString: "",
-            exponentString: "",
-            code: "la")
+            exponentString: "")
+        voiceLanguageCode = "la"
+        voiceLanguageName = "Latin"
         allowNegativeNumbers = false
         allowExponent = false
         allowFraction = false

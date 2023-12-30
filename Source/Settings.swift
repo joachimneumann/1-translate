@@ -35,6 +35,7 @@ struct Settings: View {
             }
             .padding(.top, 10)
         }
+        .navigationTitle("Settings")
     }
     
     var DigitsSettings: some View {
@@ -136,7 +137,7 @@ struct Settings: View {
             }
         }
     }
-
+    
     var EnglishSettings: some View {
         let example =  viewModel.languages.english.read(150)
         return Group {
@@ -285,7 +286,7 @@ struct Settings: View {
                     .padding(.leading, 3)
             }
             NavigationLink {
-                VoiceSelection(voice: viewModel.voice)
+                VoiceSelection(viewModel: viewModel)
             } label: {
                 HStack {
                     Text("Configure Voices")
@@ -297,11 +298,11 @@ struct Settings: View {
             .padding(.top, 5)
         }
     }
-
+    
     
     var VoiceSettingsOld: some View {
         return NavigationLink {
-            VoiceSelection(voice: viewModel.voice)
+            VoiceSelection(viewModel: viewModel)
         } label: {
             HStack {
                 Text("Configure Voices")
@@ -313,7 +314,7 @@ struct Settings: View {
         }
         .padding(.top, 30)
     }
-
+    
     var HobbyProject: some View {
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String

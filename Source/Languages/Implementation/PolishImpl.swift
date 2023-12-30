@@ -13,9 +13,10 @@ class PolishImpl: LanguageImpl {
             name: "Polski",
             negativeString: "minus",
             dotString: "przecinek",
-            exponentString: " razy dziesięć do potęgi ",
-            code: "pl")
+            exponentString: " razy dziesięć do potęgi ")
         
+        voiceLanguageCode = "pl"
+        voiceLanguageName = "Polish"
         e2 = "sto"
         e2_one = "sto"
         afterGroup = " "

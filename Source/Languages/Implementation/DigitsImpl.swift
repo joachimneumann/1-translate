@@ -13,8 +13,7 @@ class DigitsImpl: LanguageImpl {
             name: "Digits",
             negativeString: "-",
             dotString: ".",
-            exponentString: "e",
-            code: nil)
+            exponentString: "e")
         afterNegative = ""
     }
     

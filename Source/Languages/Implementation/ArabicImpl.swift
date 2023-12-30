@@ -21,8 +21,9 @@ class ArabicImpl: LanguageImpl {
             name: "عربي",
             negativeString: "ناقص",
             dotString: "واحدة",
-            exponentString: " مرات عشرة للقوة ",
-            code: "ar")
+            exponentString: " مرات عشرة للقوة ")
+        voiceLanguageCode = "ar"
+        voiceLanguageName = "Arabic"
         englishName = "Arabic"
     }
     

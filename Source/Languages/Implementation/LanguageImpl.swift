@@ -13,7 +13,8 @@ class LanguageImpl: Language {
     var name: String
     var englishName: String? = nil
     var flagName: String { englishName != nil ? englishName! : name }
-    var code: String?
+    var voiceLanguageCode: String?
+    var voiceLanguageName: String?
     var negativeString: String
     var dotString: String
     var exponentString: String
@@ -64,10 +65,10 @@ class LanguageImpl: Language {
     init(name: String,
          negativeString: String,
          dotString: String,
-         exponentString: String,
-         code: String?) {
+         exponentString: String) {
         self.name = name
-        self.code = code
+        self.voiceLanguageCode = nil
+        self.voiceLanguageName = nil
         self.negativeString = negativeString
         self.dotString = dotString
         self.exponentString = exponentString

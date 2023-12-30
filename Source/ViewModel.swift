@@ -150,8 +150,8 @@ class ViewModel: ObservableObject, ShowAs, Separators {
             forCopySecondTranslatedNumber = forCopySecondTranslatedNumber.replacingOccurrences(of: Languages.WordSplitter, with: "")
         }
         
-        firstHasVoice = voice.supportedLanguages.has(firstLanguage.code)
-        secondHasVoice = voice.supportedLanguages.has(secondLanguage.code)
+        firstHasVoice = voice.supportedLanguages.has(firstLanguage.voiceLanguageCode)
+        secondHasVoice = voice.supportedLanguages.has(secondLanguage.voiceLanguageCode)
     }
     /// I initialize the decimalSeparator with the locale preference, but
     /// I ignore the value of Locale.current.groupSeparator
@@ -517,3 +517,4 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     }
     
 }
+

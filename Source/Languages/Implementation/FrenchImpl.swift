@@ -13,9 +13,10 @@ class FrenchImpl: LanguageImpl {
             name: "Française",
             negativeString: "moins",
             dotString: "virgule",
-            exponentString: " fois dix à la puissance ",
-            code: "fr")
+            exponentString: " fois dix à la puissance ")
 
+        voiceLanguageCode = "fr"
+        voiceLanguageName = "French"
         e2 = "cent"
         e2_one = "cent"
         e2_cleanPlural = "cents"

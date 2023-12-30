@@ -25,9 +25,10 @@ class SpanishImpl: LanguageImpl, Spanish {
             name: "Español",
             negativeString: "menos",
             dotString: "coma",
-            exponentString: " por diez elevado a ",
-            code: "es")
+            exponentString: " por diez elevado a ")
 
+        voiceLanguageCode = "es"
+        voiceLanguageName = "Spanish"
         e3 = "mil"
         e3_one = "mil"
         e6_one = "un millón"

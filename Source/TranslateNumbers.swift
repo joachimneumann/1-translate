@@ -27,8 +27,7 @@ struct TranslateNumbers: View {
                         Spacer()
                         if viewModel.offerReadingAloud {
                             Button {
-                                viewModel.voice.readAloud(viewModel.firstTranslatedNumber, in: viewModel.firstLanguage.code)
-                                print("read \(viewModel.firstTranslatedNumber)")
+                                viewModel.voice.readAloud(viewModel.firstTranslatedNumber, in: viewModel.firstLanguage.voiceLanguageCode)
                             } label: {
                                 Image(systemName: "speaker.wave.3.fill")
                                     .resizable()
@@ -58,7 +57,7 @@ struct TranslateNumbers: View {
                             Spacer()
                             if viewModel.offerReadingAloud {
                                 Button {
-                                    viewModel.voice.readAloud(viewModel.secondTranslatedNumber, in: viewModel.secondLanguage.code)
+                                    viewModel.voice.readAloud(viewModel.secondTranslatedNumber, in: viewModel.secondLanguage.voiceLanguageCode)
                                     print("read \(viewModel.secondTranslatedNumber)")
                                 } label: {
                                     Image(systemName: "speaker.wave.3.fill")

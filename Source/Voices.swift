@@ -166,21 +166,42 @@ class Voices {
         Task {
             let allSystemVoices = AVSpeechSynthesisVoice.speechVoices()
             
+            // remove dupliates
+            var tempUniqueCodes: [String] = []
+            var cleanLanguagesList: [Language] = []
             for translatorLanguage in translatorLanguages {
-                if let translatorCode = translatorLanguage.code {
-                    for systemVoice in allSystemVoices {
-                        if systemVoice.language.prefix(2) == translatorCode {
-                            if !supportedLanguages.has(translatorCode) {
-                                supportedLanguages.dict[translatorCode] = VoiceLanguage(languageName: translatorLanguage.flagName)
-                            }
-                            supportedLanguages.dict[translatorCode]!.list.append(systemVoice)
-                        }
+                if let code = translatorLanguage.voiceLanguageCode {
+                    if !tempUniqueCodes.contains(code) {
+                        tempUniqueCodes.append(code)
+                        cleanLanguagesList.append(translatorLanguage)
                     }
                 }
             }
+            
+            for translatorLanguage in cleanLanguagesList {
+                for systemVoice in allSystemVoices {
+                    if systemVoice.languageCode == translatorLanguage.voiceLanguageCode {
+                        if !supportedLanguages.has(systemVoice.languageCode) {
+                            supportedLanguages.dict[systemVoice.languageCode] = VoiceLanguage(languageName: translatorLanguage.voiceLanguageName ?? "")
+                        }
+                        supportedLanguages.dict[systemVoice.languageCode]!.list.append(systemVoice)
+                    }
+                }
+            }
+            
             DispatchQueue.main.async {
                 self.initDoneCallback()
             }
         }
     }
 }
+
+extension AVSpeechSynthesisVoice {
+    var languageCode: String {
+        String(self.language.split(separator: "-")[0])
+    }
+    var variantCode: String {
+        String(self.language.split(separator: "-")[1])
+    }
+}
+

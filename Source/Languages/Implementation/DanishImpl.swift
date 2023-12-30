@@ -14,9 +14,10 @@ class DanishImpl: LanguageImpl {
             name: "Dansk",
             negativeString: "minus",
             dotString: "komma",
-            exponentString: " gange ti i ",
-            code: "da")
+            exponentString: " gange ti i ")
         
+        voiceLanguageCode = "da"
+        voiceLanguageName = "Danish"
         e2 = "hundrede"
         e2_one = "hundred"
         afterGroup = " og"

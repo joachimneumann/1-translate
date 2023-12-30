@@ -19,8 +19,9 @@ class EnglishImpl: LanguageImpl, English {
             name: "English",
             negativeString: "minus",
             dotString: "point",
-            exponentString: " times ten to the power of ",
-            code: "en")
+            exponentString: " times ten to the power of ")
+        voiceLanguageCode = "en"
+        voiceLanguageName = "English"
         e2 = "hundred"
         e3 = "thousand"
         e6 = "million"

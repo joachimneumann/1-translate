@@ -128,9 +128,9 @@ class ChineseImpl: LanguageImpl {
             name: variant.name,
             negativeString: "负",
             dotString: "点",
-            exponentString: " 乘以 十的 ",
-            code: "zh")
-        
+            exponentString: " 乘以 十的 ")
+        voiceLanguageCode = "zh"
+        voiceLanguageName = "Chinese"
         englishName = variant.englishName
         e2 = variant.e2
         e3 = variant.e3

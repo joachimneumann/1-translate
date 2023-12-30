@@ -13,8 +13,9 @@ class ArmenianNumeralsImpl: LanguageImpl {
             name: "թիվ", 
             negativeString: "",
             dotString: "",
-            exponentString: "",
-            code: "hy")
+            exponentString: "")
+        voiceLanguageCode = "hy"
+        voiceLanguageName = "Armenian"
         englishName = "Armenian Numerals"
         allowNegativeNumbers = false
         allowExponent = false

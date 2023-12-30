@@ -32,9 +32,10 @@ class GermanImpl: LanguageImpl, German {
             name: "Deutsch",
             negativeString: "minus",
             dotString: "Komma",
-            exponentString: " mal zehn hoch ",
-            code: "de")
+            exponentString: " mal zehn hoch ")
 
+        voiceLanguageCode = "de"
+        voiceLanguageName = "German"
         e2 = "hundert"
         e3 = "tausend"
         e6 = "Millionen"
