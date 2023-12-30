@@ -16,8 +16,8 @@ struct AppStorageKeys {
     static let forceScientificKey                   = "forceScientificKey"
     static let decimalSeparatorKey                  = "decimalSeparatorKey"
     static let groupSeparatorKey                    = "groupSeparatorKey"
-    static let offerReadingAloudKey                 = "offerReadingAloudKey"
     static let groupSizeKey                         = "groupSizeKey"
+    static let offerReadingAloudKey                 = "offerReadingAloudKey"
     static let secondLanguageAllowedKey             = "secondLanguageAllowedKey"
     static let firstLanguageKey                     = "firstLanguageKey"
     static let secondLanguageKey                    = "secondLanguageKey"
@@ -159,14 +159,8 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @AppStorage(AppStorageKeys.groupSeparatorKey, store: .standard)
     var groupSeparator: GroupSeparator = .none
     
-    @AppStorage(AppStorageKeys.groupSeparatorKey, store: .standard)
+    @AppStorage(AppStorageKeys.groupSizeKey, store: .standard)
     var groupSize: GroupSize = .three
-    
-    @AppStorage(AppStorageKeys.firstLanguageKey, store: .standard)
-    var firstLanguageName: String = "English"
-    
-    @AppStorage(AppStorageKeys.secondLanguageKey, store: .standard)
-    var secondLanguageName: String = "German"
     
     @AppStorage(AppStorageKeys.settingsEnglishUseAndAfterHundredKey, store: .standard)
     var settingsEnglishUseAndAfterHundred: Bool = false {
@@ -222,13 +216,13 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @Published var firstLanguage: Language = EnglishImpl() {
         didSet {
             updateTranslation()
-            firstLanguageName  = firstLanguage.name
+            persistent.firstLanguageName  = firstLanguage.name
         }
     }
     @Published var secondLanguage: Language = GermanImpl() {
         didSet {
             updateTranslation()
-            secondLanguageName = secondLanguage.name
+            persistent.secondLanguageName = secondLanguage.name
         }
     }
 
@@ -246,13 +240,13 @@ class ViewModel: ObservableObject, ShowAs, Separators {
                     }
                 }
             }
-            firstLanguageName  = firstLanguage.name
-            secondLanguageName = secondLanguage.name
+            persistent.firstLanguageName  = firstLanguage.name
+            persistent.secondLanguageName = secondLanguage.name
             for index in 0..<languages.list.count {
-                if firstLanguageName == languages.list[index].name {
+                if persistent.firstLanguageName == languages.list[index].name {
                     indexOfFirstLanguage = index
                 }
-                if secondLanguageName == languages.list[index].name {
+                if persistent.secondLanguageName == languages.list[index].name {
                     indexOfSecondLanguage = index
                 }
             }
@@ -273,13 +267,13 @@ class ViewModel: ObservableObject, ShowAs, Separators {
                     }
                 }
             }
-            firstLanguageName  = firstLanguage.name
-            secondLanguageName = secondLanguage.name
+            persistent.firstLanguageName  = firstLanguage.name
+            persistent.secondLanguageName = secondLanguage.name
             for index in 0..<languages.list.count {
-                if firstLanguageName == languages.list[index].name {
+                if persistent.firstLanguageName == languages.list[index].name {
                     indexOfFirstLanguage = index
                 }
-                if secondLanguageName == languages.list[index].name {
+                if persistent.secondLanguageName == languages.list[index].name {
                     indexOfSecondLanguage = index
                 }
             }
@@ -328,8 +322,8 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         previouslySelectedLanguages.add(new: languages.english.name)
         previouslySelectedLanguages.add(new: languages.german.name)
         previouslySelectedLanguages.add(new: languages.spanish.name)
-        previouslySelectedLanguages.add(new: secondLanguageName)
-        previouslySelectedLanguages.add(new: firstLanguageName)
+        previouslySelectedLanguages.add(new: persistent.secondLanguageName)
+        previouslySelectedLanguages.add(new: persistent.firstLanguageName)
 
 
         for symbol in [
@@ -341,11 +335,11 @@ class ViewModel: ObservableObject, ShowAs, Separators {
         keyStatusColor["plus"] = keyColor.upColor(for: "+", isPending: false)
         // print("viewModel init")
         for index in 0..<languages.list.count {
-            if secondLanguageName == languages.list[index].name {
+            if persistent.secondLanguageName == languages.list[index].name {
                 indexOfSecondLanguage = index
                 newSecondLanguage(languages.list[index])
             }
-            if firstLanguageName == languages.list[index].name {
+            if persistent.firstLanguageName == languages.list[index].name {
                 indexOfFirstLanguage = index
                 newFirstLanguage(languages.list[index])
             }

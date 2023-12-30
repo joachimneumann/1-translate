@@ -17,4 +17,11 @@ struct Persistent {
     @AppStorage(AppStorageKeys.secondLanguageAllowedKey, store: .standard)
     var secondLanguageAllowed: Bool = false
     
+    @AppStorage(AppStorageKeys.firstLanguageKey, store: .standard)
+    var firstLanguageName: String = "English"
+    
+    @AppStorage(AppStorageKeys.secondLanguageKey, store: .standard)
+    var secondLanguageName: String = "German"
+    
+
 }
