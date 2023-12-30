@@ -35,7 +35,7 @@ struct TranslateNumbers: View {
                                     .frame(height: 20)
                                     .padding(10)
                             }
-                            .disabled(!viewModel.firstLanguage.canReadAloud)
+                            .disabled(viewModel.firstLanguage.voice == nil)
                             .padding(.trailing, 10)
                         }
                         LanguageButton(language: viewModel.firstLanguage, viewModel: viewModel, screen: screen)                    }
@@ -65,7 +65,7 @@ struct TranslateNumbers: View {
                                         .frame(height: 20)
                                         .padding(10)
                                 }
-                                .disabled(!viewModel.secondLanguage.canReadAloud)
+                                .disabled(viewModel.secondLanguage.voice == nil)
                                 .padding(.trailing, 10)
                             }
                             LanguageButton(language: viewModel.secondLanguage, viewModel: viewModel, screen: screen)

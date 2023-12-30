@@ -14,7 +14,6 @@ extension StringProtocol {
 
 
 class GermanImpl: LanguageImpl, German {
-    
     @AppStorage("germanCaptalisationKey")
     var capitalisation: Bool = true
     
@@ -30,7 +29,7 @@ class GermanImpl: LanguageImpl, German {
             }
         }
     }
-
+    
     init() {
         super.init(
             name: "Deutsch",

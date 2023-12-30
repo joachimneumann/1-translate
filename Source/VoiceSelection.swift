@@ -34,13 +34,14 @@ struct VoiceSelection: View {
     }
     
     var body: some View {
-        let dict = viewModel.voice.supportedLanguages.dict
-        List {
-            ForEach(Array(dict.keys), id: \.self) { key in
-                LanguageSection(voiceLanguage: dict[key]!, languageCode: key)
-            }
-        }
-        .navigationTitle("Select Voice")
+        Text("todo")
+//        let dict = viewModel.voices.voicesForLanguage
+//        List {
+//            ForEach(Array(dict.keys), id: \.self) { key in
+//                LanguageSection(voiceLanguage: dict[key]!.first.identifier, languageCode: key)
+//            }
+//        }
+//        .navigationTitle("Select Voice")
     }
 }
 

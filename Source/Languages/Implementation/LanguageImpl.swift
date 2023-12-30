@@ -8,15 +8,12 @@
 import Foundation
 import AVFoundation
 
-
 class LanguageImpl: Language {
-    
     var name: String
     var nameDescription: String? = nil
     var flagName: String { nameDescription != nil ? nameDescription! : name }
     var voiceLanguageCode: String?
     var voiceLanguageName: String?
-    var canReadAloud: Bool
     var voice: AVSpeechSynthesisVoice? = nil
     var negativeString: String
     var dotString: String
@@ -65,6 +62,8 @@ class LanguageImpl: Language {
         }
     }
     
+    let synthesizer: AVSpeechSynthesizer? = nil
+    
     init(name: String,
          negativeString: String,
          dotString: String,
@@ -75,11 +74,20 @@ class LanguageImpl: Language {
         self.negativeString = negativeString
         self.dotString = dotString
         self.exponentString = exponentString
-        canReadAloud = false
     }
     
     func readAloud(_ text: String) {
-        
+        if let voice = voice {
+            if let synthesizer = synthesizer {
+                Task {
+                    let utterance = AVSpeechUtterance(string: text)
+                    utterance.voice = voice
+                    DispatchQueue.main.async {
+                        synthesizer.speak(utterance)
+                    }
+                }
+            }
+        }
     }
     
     func read_0_9(_ i: Int) -> String {

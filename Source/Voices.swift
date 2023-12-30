@@ -11,6 +11,8 @@ import AVFoundation
 class Voices {
     var initDoneCallback: () -> () = {}
     
+    var allSystemVoices: [AVSpeechSynthesisVoice] = []
+    
     struct Voice {
         let variant: String
         let name: String
@@ -40,37 +42,17 @@ class Voices {
 //            return list.first
 //        }
     }
-    
-    class SupportedLanguages {
-        var dict: [String : VoiceLanguage] = [:]
-
-        func has(_ code: String?) -> Bool {
-            guard let code = code else { return false }
-            return dict.keys.contains(code)
-        }
-    }
-    
+        
     let synthesizer = AVSpeechSynthesizer()
-    var supportedLanguages = SupportedLanguages()
-    
-    
-    func readAloud(_ text: String, in voice: AVSpeechSynthesisVoice) {
-        if text.count > 0 {
-            Task {
-                let utterance = AVSpeechUtterance(string: text)
-                utterance.voice = voice
-                DispatchQueue.main.async {
-                    self.synthesizer.speak(utterance)
-                }
-            }
-        }
-    }
-    
+    var voicesForLanguage: [String : [AVSpeechSynthesisVoice]] = [:]
+
+        
     func getVoicesFor(translatorLanguages: [Language]) {
         Task {
-            let allSystemVoices = AVSpeechSynthesisVoice.speechVoices()
+            allSystemVoices = AVSpeechSynthesisVoice.speechVoices()
             
-            // remove dupliates
+            ///Preparation
+            /// remove dupliate voice codes in the translation languages
             var tempUniqueCodes: [String] = []
             var cleanLanguagesList: [LanguageImpl] = []
             for translatorLanguage in translatorLanguages {
@@ -84,21 +66,54 @@ class Voices {
                 }
             }
             
+            /// create voicesForLanguage dictionary
             for translatorLanguage in cleanLanguagesList {
                 for systemVoice in allSystemVoices {
                     if systemVoice.languageCode == translatorLanguage.voiceLanguageCode {
-                        if !supportedLanguages.has(systemVoice.languageCode) {
-                            supportedLanguages.dict[systemVoice.languageCode] = VoiceLanguage(languageName: translatorLanguage.voiceLanguageName ?? "")
+                        if !voicesForLanguage.keys.contains(systemVoice.languageCode) {
+                            voicesForLanguage[systemVoice.languageCode] = []
                         }
-                        supportedLanguages.dict[systemVoice.languageCode]!.list.append(systemVoice)
+                        voicesForLanguage[systemVoice.languageCode]!.append(systemVoice)
                     }
                 }
+            }
+            
+            /// For all languages:
+            ///      voice stored in userdefaults?
+            ///      if not: guess best voice
+            let defaults = UserDefaults.standard
+            for var language in translatorLanguages {
+                language.voice = nil
+                let userdefaultKey = language.name + "_voiceIdentifier"
+                let voiceIdentifier = defaults.string(forKey: userdefaultKey)
+                if let voiceIdentifier = voiceIdentifier {
+                    for systemVoice in allSystemVoices {
+                        if systemVoice.identifier == voiceIdentifier {
+                            language.voice = systemVoice
+                        }
+                    }
+                }
+            }
+            for language in translatorLanguages {
+                guard let language = language as? LanguageImpl else { continue }
+                guard language.voice == nil else { continue }
+                guard language.voiceLanguageCode != nil else { continue }
+                guard voicesForLanguage.keys.contains(language.voiceLanguageCode!) else { continue }
+                let voiceList = voicesForLanguage[language.voiceLanguageCode!]
+                language.voice = getBestVoice(in: voiceList!)
             }
             
             DispatchQueue.main.async {
                 self.initDoneCallback()
             }
         }
+    }
+    
+    func getBestVoice(in voiceList: [AVSpeechSynthesisVoice]) -> AVSpeechSynthesisVoice? {
+        for voice in voiceList { if voice.quality == .premium { return voice } }
+        for voice in voiceList { if voice.quality == .enhanced { return voice } }
+        if voiceList.count >= 1 { return voiceList.first }
+        return nil
     }
 }
 
