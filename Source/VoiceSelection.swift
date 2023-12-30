@@ -12,39 +12,57 @@ struct VoiceSelection: View {
     let viewModel: ViewModel
 
     struct LanguageSection : View {
-        let voiceLanguage: Voices.VoiceLanguage
-        let languageCode: String
+        let viewModel: ViewModel
+        let list: [AVSpeechSynthesisVoice]
+        let voiceCode: String
         var body: some View {
-            Section(header: Text(voiceLanguage.languageName + " (" + languageCode + ")")) {
-                let showVariant = voiceLanguage.list.count > 2
-                ForEach(voiceLanguage.list, id: \.self) { voice in
-                    let speakerGender = voice.gender.rawValue == 1 ? "male" : "female"
-                    let speakerQuality = voice.quality.rawValue == 1 ? "" : (voice.quality.rawValue == 2 ? "Enhanced" : "Premium")
-                    let variant = !showVariant || (voice.variantCode == "001") ? "" : ", "+voice.variantCode
+            Section(header: Text(voiceCode)) {
+                ForEach(list, id: \.self) { voice in
                     HStack {
-                        Text(voice.name + " (\(speakerGender)\(variant))")
-                        Spacer()
-                        Text("Q:"+speakerQuality)
-                            .foregroundColor(.yellow)
+                        Text(voice.variantCode)
                             .bold()
+                            .frame(width: 40)
+                        Text(voice.name + " \(voice.genderSting) \(voice.qualityString)")
+                        Spacer()
+                    }
+                    .onTapGesture {
+                        viewModel.voices.setVoices(voice, for: voiceCode)
                     }
                 }
             }
         }
     }
     
+    
     var body: some View {
-        Text("todo")
-//        let dict = viewModel.voices.voicesForLanguage
-//        List {
-//            ForEach(Array(dict.keys), id: \.self) { key in
-//                LanguageSection(voiceLanguage: dict[key]!.first.identifier, languageCode: key)
-//            }
-//        }
-//        .navigationTitle("Select Voice")
+        let dict = viewModel.voices.voicesForLanguage
+//        let languages = Array(arrayLiteral: dict.keys)
+        let languages = ["es", "de", "vi"]
+        List {
+            ForEach(languages, id: \.self) { language in
+                LanguageSection(viewModel: viewModel, list: dict[language]!, voiceCode: language)
+            }
+        }
+        .navigationTitle("Select Voice")
     }
 }
+
 
 #Preview {
     VoiceSelection(viewModel: ViewModel())
 }
+
+//struct LanguageSection : View {
+//    let voicesList: [AVSpeechSynthesisVoice]
+//    let languageCode: String
+//    var body: some View {
+//        Section(header: Text("languageCode") {
+//            ForEach(voicesList, id: \.self) { voice in
+//                HStack {
+//                    Text(voice.name + " (\(voice.genderString) \(voice.qualityString))")
+//                    Spacer()
+//                }
+//            }
+//        }
+//    }
+//}

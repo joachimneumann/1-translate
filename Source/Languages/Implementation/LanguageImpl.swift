@@ -15,6 +15,7 @@ class LanguageImpl: Language {
     var voiceLanguageCode: String?
     var voiceLanguageName: String?
     var voice: AVSpeechSynthesisVoice? = nil
+    let synthesizer: AVSpeechSynthesizer? = nil
     var negativeString: String
     var dotString: String
     var exponentString: String
@@ -62,7 +63,6 @@ class LanguageImpl: Language {
         }
     }
     
-    let synthesizer: AVSpeechSynthesizer? = nil
     
     init(name: String,
          negativeString: String,

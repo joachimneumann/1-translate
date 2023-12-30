@@ -102,7 +102,7 @@ class ViewModel: ObservableObject, ShowAs {
     
     func initVoice() {
         if !initVoiceDone {
-            voices.getVoicesFor(translatorLanguages: languages.list)
+            voices.getVoices(for: languages.list)
             voices.initDoneCallback = updateTranslation
             initVoiceDone = true
         }
