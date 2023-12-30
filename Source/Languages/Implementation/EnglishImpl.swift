@@ -32,6 +32,7 @@ class EnglishImpl: LanguageImpl, English {
         beforeAndAfterDotString = " "
         tensConnector = "-"
         eSpace = " "
+        useAndAfterHundred = useAndAfterHundred
     }
     
     override func read_0_9(_ i: Int) -> String {

@@ -5,10 +5,24 @@
 //  Created by Joachim Neumann on 12/22/23.
 //
 
-import Foundation
+import SwiftUI
 
 class VietnameseImpl: LanguageImpl, Vietnamese {
     
+    @AppStorage("VietnameseThousandKey")
+    var thousand: VietnameseImpl.Thousand = .nghìn {
+        didSet {
+            e3 = thousand.rawValue
+        }
+    }
+    
+    @AppStorage("VietnameseSecondLastKey")
+    var secondLast: VietnameseImpl.SecondLast = .lẻ
+    
+    @AppStorage("VietnameseCompactKey")
+    var compact: Bool = false
+    
+
     enum Thousand: String, Codable, CaseIterable {
         case ngàn
         case nghìn
@@ -19,14 +33,6 @@ class VietnameseImpl: LanguageImpl, Vietnamese {
         case lẻ
     }
     
-    var thousand: Thousand = .nghìn {
-        didSet {
-            e3 = thousand.rawValue
-        }
-    }
-    var secondLast: SecondLast = .lẻ
-    var compact: Bool = false
-
     init() {
         super.init(
             name: "Tiếng Việt",

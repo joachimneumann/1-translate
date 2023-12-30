@@ -173,7 +173,7 @@ struct Settings: View {
             }
             GridRow {
                 Text("Trennung")
-                Toggle("", isOn: $viewModel.settingsGermanWordSplitter)
+                Toggle("", isOn: $viewModel.languages.german.useWordSplitter)
                     .frame(width: 40)
                     .toggleStyle(
                         ColoredToggleStyle(onColor: Color(white: 0.6),
@@ -183,7 +183,7 @@ struct Settings: View {
             }
             GridRow {
                 Text("Großschreibung")
-                Toggle("", isOn: $viewModel.settingsGermanCaptalisation)
+                Toggle("", isOn: $viewModel.languages.german.capitalisation)
                     .frame(width: 40)
                     .toggleStyle(
                         ColoredToggleStyle(onColor: Color(white: 0.6),
@@ -207,7 +207,7 @@ struct Settings: View {
             }
             GridRow {
                 Text("Coma o punto")
-                Picker("", selection: $viewModel.settingsSpanishUsePunto) {
+                Picker("", selection: $viewModel.languages.spanish.puntoComma) {
                     ForEach(SpanishImpl.PuntoComma.allCases, id: \.self) { value in
                         Text("\(value.rawValue)")
                             .tag(value)
@@ -235,7 +235,7 @@ struct Settings: View {
             }
             GridRow {
                 Text("1000")
-                Picker("", selection: $viewModel.settingsVietnameseThousand) {
+                Picker("", selection: $viewModel.languages.vietnamese.thousand) {
                     ForEach(VietnameseImpl.Thousand.allCases, id: \.self) { value in
                         Text("\(value.rawValue)")
                             .tag(value)
@@ -249,7 +249,7 @@ struct Settings: View {
             }
             GridRow {
                 Text("linh hoặc lẻ")
-                Picker("", selection: $viewModel.settingsVietnameseSecondLast) {
+                Picker("", selection: $viewModel.languages.vietnamese.secondLast) {
                     ForEach(VietnameseImpl.SecondLast.allCases, id: \.self) { value in
                         Text("\(value.rawValue)")
                             .tag(value)
@@ -263,7 +263,7 @@ struct Settings: View {
             }
             GridRow {
                 Text("gọn")
-                Toggle("", isOn: $viewModel.settingsVietnameseCompact)
+                Toggle("", isOn: $viewModel.languages.vietnamese.compact)
                     .frame(width: 40)
                     .toggleStyle(
                         ColoredToggleStyle(onColor: Color(white: 0.6),
@@ -302,7 +302,6 @@ struct Settings: View {
             .padding(.top, 5)
         }
     }
-    
     
     var HobbyProject: some View {
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String

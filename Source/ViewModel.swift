@@ -16,12 +16,6 @@ struct AppStorageKeys {
     static let decimalSeparatorKey                  = "decimalSeparatorKey"
     static let groupSeparatorKey                    = "groupSeparatorKey"
     static let groupSizeKey                         = "groupSizeKey"
-    static let settingsSpanishUsePuntoKey           = "settingsSpanishUsePuntoKey"
-    static let settingsGermanCaptalisationKey       = "settingsGermanCaptalisationKey"
-    static let settingsGermanWordSplitterKey        = "settingsGermanWordSplitterKey"
-    static let settingsVietnameseThousandKey        = "settingsVietnameseThousandKey"
-    static let settingsVietnameseSecondLastKey      = "settingsVietnameseSecondLastKey"
-    static let settingsVietnameseCompactKey         = "settingsVietnameseCompactKey"
 }
 
 struct StringPreference {
@@ -155,50 +149,6 @@ class ViewModel: ObservableObject, ShowAs, Separators {
     @AppStorage(AppStorageKeys.groupSizeKey, store: .standard)
     var groupSize: GroupSize = .three
     
-    @AppStorage(AppStorageKeys.settingsSpanishUsePuntoKey, store: .standard)
-    var settingsSpanishUsePunto: SpanishImpl.PuntoComma = .coma {
-        didSet {
-            languages.spanish.puntoComma = settingsSpanishUsePunto
-        }
-    }
-    
-    
-    @AppStorage(AppStorageKeys.settingsGermanCaptalisationKey)
-    var settingsGermanCaptalisation: Bool = true {
-        didSet {
-            languages.german.capitalisation = settingsGermanCaptalisation
-        }
-    }
-    
-    @AppStorage(AppStorageKeys.settingsGermanWordSplitterKey)
-    var settingsGermanWordSplitter: Bool = true {
-        didSet {
-            languages.german.useWordSplitter = settingsGermanWordSplitter
-        }
-    }
-    
-    
-    @AppStorage(AppStorageKeys.settingsVietnameseThousandKey)
-    var settingsVietnameseThousand: VietnameseImpl.Thousand = .nghìn {
-        didSet {
-            languages.vietnamese.thousand = settingsVietnameseThousand
-        }
-    }
-    
-    @AppStorage(AppStorageKeys.settingsVietnameseSecondLastKey)
-    var settingsVietnameseSecondLast: VietnameseImpl.SecondLast = .lẻ {
-        didSet {
-            languages.vietnamese.secondLast = settingsVietnameseSecondLast
-        }
-    }
-    
-    @AppStorage(AppStorageKeys.settingsVietnameseCompactKey)
-    var settingsVietnameseCompact: Bool = false {
-        didSet {
-            languages.vietnamese.compact = settingsVietnameseCompact
-        }
-    }
-    
     @Published var firstLanguage: Language = EnglishImpl() {
         didSet {
             updateTranslation()
@@ -330,17 +280,6 @@ class ViewModel: ObservableObject, ShowAs, Separators {
                 newFirstLanguage(languages.list[index])
             }
         }
-        groupSeparator = groupSeparator
-        decimalSeparator = decimalSeparator
-
-        // get the AppStorage values into the languages
-        settingsVietnameseCompact = settingsVietnameseCompact
-        settingsVietnameseThousand = settingsVietnameseThousand
-        settingsVietnameseSecondLast = settingsVietnameseSecondLast
-        settingsGermanCaptalisation = settingsGermanCaptalisation
-        settingsGermanWordSplitter = settingsGermanWordSplitter
-        settingsSpanishUsePunto = settingsSpanishUsePunto
-        
     }
         
     ///  To give a clear visual feedback to the user that the button has been pressed,

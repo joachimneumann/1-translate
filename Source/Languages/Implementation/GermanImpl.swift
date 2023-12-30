@@ -5,7 +5,7 @@
 //  Created by Joachim Neumann on 12/20/23.
 //
 
-import Foundation
+import SwiftUI
 
 extension StringProtocol {
     var firstUppercased: String { prefix(1).uppercased() + dropFirst() }
@@ -14,6 +14,11 @@ extension StringProtocol {
 
 
 class GermanImpl: LanguageImpl, German {
+    
+    @AppStorage("germanCaptalisationKey")
+    var capitalisation: Bool = true
+    
+    @AppStorage("germanWordSplitterKey")
     var useWordSplitter: Bool = true {
         didSet {
             if useWordSplitter {
@@ -25,7 +30,6 @@ class GermanImpl: LanguageImpl, German {
             }
         }
     }
-    var capitalisation: Bool = true
 
     init() {
         super.init(
@@ -49,6 +53,7 @@ class GermanImpl: LanguageImpl, German {
         eSpace = ""
         e69Space = " "
         postProcessing = germanPostProcessing
+        useWordSplitter = useWordSplitter
     }
     
     func germanPostProcessing(_ unprocessed: String) -> String {

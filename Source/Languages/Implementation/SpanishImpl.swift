@@ -5,22 +5,23 @@
 //  Created by Joachim Neumann on 12/20/23.
 //
 
-import Foundation
+import SwiftUI
 
 class SpanishImpl: LanguageImpl, Spanish {
-    var puntoComma: PuntoComma {
-        didSet {
-            dotString = puntoComma.rawValue
-        }
-    }
-    
     enum PuntoComma: String, Codable, CaseIterable {
         case coma
         case punto
     }
 
+    @AppStorage("SpanishUsePuntoKey", store: .standard)
+    var puntoComma: PuntoComma = .coma {
+        didSet {
+            dotString = puntoComma.rawValue
+        }
+    }
+    
     init() {
-        puntoComma = .coma
+
         super.init(
             name: "Español",
             negativeString: "menos",
@@ -41,6 +42,7 @@ class SpanishImpl: LanguageImpl, Spanish {
         beforeAndAfterDotString = " "
         tensConnector = " y "
         eSpace = " "
+        puntoComma = puntoComma
     }
 
     override func read_0_9(_ i: Int) -> String {
