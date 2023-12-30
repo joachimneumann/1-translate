@@ -86,11 +86,11 @@ class Voices {
                 print("looping, " + language.name)
 
                 guard let language = language as? LanguageImpl else { continue }
-                guard language.voice != nil else { fatalError("voices should be nil at the beginning") }
+                guard language.voice == nil else { fatalError("voices should be nil at the beginning") }
                 guard language.voiceLanguageCode != nil else { continue } // no code -> no voice
 
                 language.voice = nil
-                let voiceKey = language.name + "_voiceIdentifier"
+                let voiceKey = language.flagName + "_voiceIdentifier"
                 let storedVoiceIdentifier = defaults.string(forKey: voiceKey)
 
                 if let storedVoiceIdentifier = storedVoiceIdentifier {
@@ -103,6 +103,7 @@ class Voices {
                     }
                 }
 
+                guard language.voice == nil else { continue }
                 if let voiceList = voicesForLanguage[language.voiceLanguageCode!] {
                     language.voice = getBestVoice(in: voiceList)
                     defaults.set(language.voice!.identifier, forKey: voiceKey)
