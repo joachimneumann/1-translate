@@ -17,7 +17,7 @@ class ThaiNumeralsImpl: LanguageImpl {
         
         voiceLanguageCode = "th"
         voiceLanguageName = "Thai"
-        englishName = "Thai Numerals"
+        nameDescription = "Thai Numerals"
     }
         
     override func readInteger(_ i: Int) -> String {

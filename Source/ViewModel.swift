@@ -93,16 +93,16 @@ class ViewModel: ObservableObject, ShowAs, Separators {
 
     var previouslySelectedLanguages = StringPreference()
     var firstFont: Font {
-        switch firstLanguage.flagName {
-        case languages.arabicNumerals.flagName:
+        switch firstLanguage.name {
+        case languages.arabicNumerals.name:
             Font(UIFont(name: "Avenir", size: secondLanguageAllowed ? 40 : 50)!)
         default:
             secondLanguageAllowed ? Font.title : Font.largeTitle
         }
     }
     var secondFont: Font {
-        switch firstLanguage.flagName {
-        case languages.arabicNumerals.flagName:
+        switch firstLanguage.name {
+        case languages.arabicNumerals.name:
             Font(UIFont(name: "Avenir", size: 40)!)
         default:
             Font.title

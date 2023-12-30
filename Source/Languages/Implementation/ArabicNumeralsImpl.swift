@@ -16,7 +16,7 @@ class ArabicNumeralsImpl: LanguageImpl {
             exponentString: "e")
         voiceLanguageCode = "ar"
         voiceLanguageName = "Arabic"
-        englishName = "Arabic Numerals"
+        nameDescription = "Arabic Numerals"
     }
     
     override func readInteger(_ i: Int) -> String {

@@ -23,7 +23,7 @@ class ArabicImpl: LanguageImpl {
             dotString: "واحدة",
             exponentString: " مرات عشرة للقوة ")
         voiceLanguageCode = "ar"
-        englishName = "Arabic"
+        nameDescription = "Arabic"
     }
     
     override func read_0_9(_ i: Int) -> String {

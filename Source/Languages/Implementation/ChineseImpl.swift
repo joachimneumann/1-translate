@@ -131,7 +131,7 @@ class ChineseImpl: LanguageImpl {
             exponentString: " 乘以 十的 ")
         voiceLanguageCode = "zh"
         voiceLanguageName = "Chinese"
-        englishName = variant.englishName
+        nameDescription = variant.englishName
         e2 = variant.e2
         e3 = variant.e3
         e4 = variant.e4

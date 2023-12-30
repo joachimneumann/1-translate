@@ -11,8 +11,7 @@ protocol Language {
     func read(_ numberString: String) -> String
     func read(_ i: Int) -> String
     var name: String { get }
-    var flagName: String { get }
-    var englishName: String? { get }
+    var nameDescription: String? { get }
 }
 
 // Languages with parameters

@@ -17,7 +17,7 @@ class ThaiImpl: LanguageImpl {
         
         voiceLanguageCode = "th"
         voiceLanguageName = "Thai"
-        englishName = "Thai"
+        nameDescription = "Thai"
         e2 = "ร้อย"
         e3 = "พัน"
         e4 = "หมื่น"

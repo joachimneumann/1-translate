@@ -12,8 +12,8 @@ import AVFoundation
 class LanguageImpl: Language {
     
     var name: String
-    var englishName: String? = nil
-    var flagName: String { englishName != nil ? englishName! : name }
+    var nameDescription: String? = nil
+    var flagName: String { nameDescription != nil ? nameDescription! : name }
     var voiceLanguageCode: String?
     var voiceLanguageName: String?
     var voice: AVSpeechSynthesisVoice? = nil

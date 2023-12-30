@@ -111,7 +111,7 @@ struct TranslateNumbers: View {
             NavigationLink {
                 LanguageSelector(viewModel: viewModel, screen: screen)
             } label: {
-                Image(language.flagName)
+                Image((language as! LanguageImpl).flagName)
                     .resizable()
                     .scaledToFit()
                     .padding(2)

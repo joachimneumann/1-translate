@@ -43,7 +43,7 @@ class VietnameseImpl: LanguageImpl, Vietnamese {
         afterNegative = " "
         beforeAndAfterDotString = " "
         eSpace = " "
-        englishName = "Vietnamese"
+        nameDescription = "Vietnamese"
     }
     
     override func read_0_9(_ i: Int) -> String {

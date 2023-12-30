@@ -42,7 +42,7 @@ struct LanguageSelector: View {
                 List(0..<list.count, id: \.self, selection: selectedIndex) { languageIndex in
                     let language = list[languageIndex]
                     HStack {
-                        Image(language.flagName)
+                        Image((language as! LanguageImpl).flagName)
                             .resizable()
                             .scaledToFit()
                             .padding(2)
@@ -51,8 +51,8 @@ struct LanguageSelector: View {
                             .padding(.trailing, 10)
                         Text(language.name)
                         Spacer()
-                        if language.englishName != nil {
-                            Text(language.englishName!)
+                        if language.nameDescription != nil {
+                            Text(language.nameDescription!)
                                 .italic()
                         }
                     }
