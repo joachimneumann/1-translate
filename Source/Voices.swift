@@ -82,25 +82,32 @@ class Voices {
             ///      voice stored in userdefaults?
             ///      if not: guess best voice
             let defaults = UserDefaults.standard
-            for var language in translatorLanguages {
+            for language in translatorLanguages {
+                print("looping, " + language.name)
+
+                guard let language = language as? LanguageImpl else { continue }
+                guard language.voice != nil else { fatalError("voices should be nil at the beginning") }
+                guard language.voiceLanguageCode != nil else { continue } // no code -> no voice
+
                 language.voice = nil
-                let userdefaultKey = language.name + "_voiceIdentifier"
-                let voiceIdentifier = defaults.string(forKey: userdefaultKey)
-                if let voiceIdentifier = voiceIdentifier {
+                let voiceKey = language.name + "_voiceIdentifier"
+                let storedVoiceIdentifier = defaults.string(forKey: voiceKey)
+
+                if let storedVoiceIdentifier = storedVoiceIdentifier {
+                    print("found " + voiceKey + ": " + storedVoiceIdentifier)
                     for systemVoice in allSystemVoices {
-                        if systemVoice.identifier == voiceIdentifier {
+                        if systemVoice.identifier == storedVoiceIdentifier {
                             language.voice = systemVoice
+                            continue
                         }
                     }
                 }
-            }
-            for language in translatorLanguages {
-                guard let language = language as? LanguageImpl else { continue }
-                guard language.voice == nil else { continue }
-                guard language.voiceLanguageCode != nil else { continue }
-                guard voicesForLanguage.keys.contains(language.voiceLanguageCode!) else { continue }
-                let voiceList = voicesForLanguage[language.voiceLanguageCode!]
-                language.voice = getBestVoice(in: voiceList!)
+
+                if let voiceList = voicesForLanguage[language.voiceLanguageCode!] {
+                    language.voice = getBestVoice(in: voiceList)
+                    defaults.set(language.voice!.identifier, forKey: voiceKey)
+                    print("set " + voiceKey)
+                }
             }
             
             DispatchQueue.main.async {
