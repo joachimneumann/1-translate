@@ -9,6 +9,11 @@ import SwiftUI
 import AVFoundation
 
 class ViewModel: ObservableObject, ShowAs {
+    
+    class VoicesForCode {
+        var list: [AVSpeechSynthesisVoice] = []
+        let displayName: String = ""
+    }
     @Published var showAC = true
     @Published var keyStatusColor: [String: Color] = [:]
     @Published var textColor: [String: Color] = [:]
@@ -51,7 +56,7 @@ class ViewModel: ObservableObject, ShowAs {
     var initDoneCallback: () -> () = {}
     var allSystemVoices: [AVSpeechSynthesisVoice] = []
     let synthesizer = AVSpeechSynthesizer()
-    var voicesForCode: [String : [AVSpeechSynthesisVoice]] = [:]
+    var voicesForCode: [String : VoicesForCode] = [:]
 
     @Published var firstLanguage: Language = EnglishImpl() {
         didSet {
@@ -456,7 +461,8 @@ class ViewModel: ObservableObject, ShowAs {
                     }
                 }
                 if list.count > 0 {
-                    voicesForCode[code] = list
+                    voicesForCode[code] = VoicesForCode()
+                    voicesForCode[code]?.list = list
                 }
             }
             
@@ -469,6 +475,7 @@ class ViewModel: ObservableObject, ShowAs {
             for code in uniqueCodes {
                 if let storedVoiceIdentifier = UserDefaults.standard.string(forKey: voiceKey(code)) {
                     for systemVoice in allSystemVoices {
+                        print(systemVoice.description)
                         if systemVoice.identifier == storedVoiceIdentifier {
                             setVoiceIfCodeMatches(allLanguages: translatorLanguages, code: code, voice: systemVoice)
                             DispatchQueue.main.async {
@@ -479,7 +486,7 @@ class ViewModel: ObservableObject, ShowAs {
                 } else {
                     /// guess the voice
                     var guessedVoice: AVSpeechSynthesisVoice? = nil
-                    if let list = voicesForCode[code] {
+                    if let list = voicesForCode[code]?.list {
                         if list.count >= 1 { guessedVoice = list.first }
                         for voice in list { if voice.quality == .enhanced { guessedVoice = voice } }
                         for voice in list { if voice.quality == .premium { guessedVoice = voice } }
