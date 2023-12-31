@@ -35,11 +35,19 @@ struct VoiceSelection: View {
     
     
     var body: some View {
+//        let dict = viewModel.voices.voicesForLanguage
+//        let languages = ["es", "de", "vi"]
+//        List {
+//            ForEach(Array(dict.keys), id: \.self) { language in
+//                LanguageSection(viewModel: viewModel, list: dict[language]!, voiceCode: language)
+//            }
+//        }
+//        .navigationTitle("Select Voice")
+
+
         let dict = viewModel.voices.voicesForLanguage
-//        let languages = Array(arrayLiteral: dict.keys)
-        let languages = ["es", "de", "vi"]
         List {
-            ForEach(languages, id: \.self) { language in
+            ForEach(dict.keys.sorted(), id: \.self) { language in
                 LanguageSection(viewModel: viewModel, list: dict[language]!, voiceCode: language)
             }
         }
