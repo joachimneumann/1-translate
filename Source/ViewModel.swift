@@ -24,7 +24,7 @@ class ViewModel: ObservableObject, ShowAs {
     private var initVoiceDone = false
     var showAsInt = false /// This will update the "-> Int or -> sci button texts
     var showAsFloat = false
-    var voices = Voices()
+    @Published var voices = Voices()
     var previouslySelectedLanguages = Priority()
     private var stupidBrain = BrainEngine(precision: 1_000) /// I want to call fast sync functions
     private let keysThatRequireValidNumber = ["±", "%", "/", "x", "-", "+", "="]

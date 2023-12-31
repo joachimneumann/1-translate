@@ -12,11 +12,8 @@ import AVFoundation
 struct VoiceSelection: View {
     @ObservedObject var viewModel: ViewModel
     
-    @State private var selectedVoices: [String: AVSpeechSynthesisVoice] = [:]
-    
     struct OneVoiceView: View {
         let voice: AVSpeechSynthesisVoice
-        let code: String
         let selected: Bool
 
         var body: some View {
@@ -32,16 +29,19 @@ struct VoiceSelection: View {
             }
         }
     }
-    
+    @State var status = "xx"
     var body: some View {
-        let dict = viewModel.voices.voicesForLanguage
+        let dict = viewModel.voices.voicesForCode
         List {
-            ForEach(dict.keys.sorted(), id: \.self) { language in
-                Section(header: Text(language)) {
-                    ForEach(dict[language]!, id: \.self) { voice in
-                        OneVoiceView(voice: voice, code: language, selected: selectedVoices[language]?.identifier == voice.identifier)
+            Text(status)
+            ForEach(dict.keys.sorted(), id: \.self) { code in
+                Section(header: Text(code)) {
+                    ForEach(dict[code]!, id: \.self) { voice in
+                        OneVoiceView(voice: voice, selected: viewModel.voices.selectedVoiceDict[code] == voice)
                             .onTapGesture {
-                                selectedVoices[language] = voice
+                                status = code + " " + voice.identifier
+                                viewModel.voices.selectedVoiceDict[code] = voice
+                                viewModel.voices.setVoiceIfCodeMatches(allLanguages: viewModel.languages.list, code: code, voice: voice)
                             }
                     }
                 }
@@ -50,10 +50,6 @@ struct VoiceSelection: View {
         .onAppear() {
             Task {
                 viewModel.initVoice()
-                for (language, list) in viewModel.voices.voicesForLanguage {
-                    selectedVoices[language] = list.first
-                    //print(language)
-                }
             }
         }
     }
