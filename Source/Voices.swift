@@ -59,6 +59,7 @@ class Voices {
                         if !voicesForLanguage.keys.contains(systemVoice.languageCode) {
                             voicesForLanguage[systemVoice.languageCode] = []
                         }
+                        //print("append, " + systemVoice.identifier)
                         voicesForLanguage[systemVoice.languageCode]!.append(systemVoice)
                     }
                 }
@@ -68,7 +69,7 @@ class Voices {
             ///      voice stored in userdefaults?
             ///      if not: guess best voice
             for language in translatorLanguages {
-                print("looping, " + language.name)
+//                print("looping, " + language.name)
 
                 guard let language = language as? LanguageImpl else { continue }
                 guard language.voice == nil else { continue } //fatalError("voices should be nil at the beginning") }
@@ -78,7 +79,7 @@ class Voices {
                 let storedVoiceIdentifier = UserDefaults.standard.string(forKey: voiceKey(language))
 
                 if let storedVoiceIdentifier = storedVoiceIdentifier {
-                    print("found " + voiceKey(language) + ": " + storedVoiceIdentifier)
+//                    print("found " + voiceKey(language) + ": " + storedVoiceIdentifier)
                     for systemVoice in allSystemVoices {
                         if systemVoice.identifier == storedVoiceIdentifier {
                             language.voice = systemVoice
