@@ -14,8 +14,6 @@
 		AA08C7C9272EDA4A001B8575 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA08C7C8272EDA4A001B8575 /* Preview Assets.xcassets */; };
 		AA12A3362B3FF2AE00422866 /* Priority.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA12A3352B3FF2AE00422866 /* Priority.swift */; };
 		AA12A3372B3FF2AE00422866 /* Priority.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA12A3352B3FF2AE00422866 /* Priority.swift */; };
-		AA2567A62B3DD98A006DCC72 /* Voices.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2567A52B3DD98A006DCC72 /* Voices.swift */; };
-		AA2567A72B3DD98A006DCC72 /* Voices.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2567A52B3DD98A006DCC72 /* Voices.swift */; };
 		AA29F58A293CD608001ADF5A /* PortraitDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29F589293CD608001ADF5A /* PortraitDisplay.swift */; };
 		AA2FABEB272F2135006DE4C8 /* mpfr.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA2FABEA272F2135006DE4C8 /* mpfr.xcframework */; };
 		AA2FABF2272F217F006DE4C8 /* Gmp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FABF1272F217F006DE4C8 /* Gmp.swift */; };
@@ -134,7 +132,6 @@
 		AA1B007D294777180054C851 /* bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bridge.h; path = dist/include/bridge.h; sourceTree = SOURCE_ROOT; };
 		AA1B007E294777190054C851 /* mpfr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mpfr.h; path = dist/include/mpfr.h; sourceTree = SOURCE_ROOT; };
 		AA1B007F294777190054C851 /* mpf2mpfr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mpf2mpfr.h; path = dist/include/mpf2mpfr.h; sourceTree = SOURCE_ROOT; };
-		AA2567A52B3DD98A006DCC72 /* Voices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voices.swift; sourceTree = "<group>"; };
 		AA29F589293CD608001ADF5A /* PortraitDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortraitDisplay.swift; sourceTree = "<group>"; };
 		AA2FABEA272F2135006DE4C8 /* mpfr.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = mpfr.xcframework; path = dist/mpfr.xcframework; sourceTree = "<group>"; };
 		AA2FABEE272F2141006DE4C8 /* gmp.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = gmp.xcframework; path = dist/gmp.xcframework; sourceTree = "<group>"; };
@@ -273,7 +270,6 @@
 				AA08C7C5272EDA4A001B8575 /* Assets.xcassets */,
 				AA08C7C7272EDA4A001B8575 /* Preview Content */,
 				AAEF2FB82B20D54B0012DDDD /* Separators.swift */,
-				AA2567A52B3DD98A006DCC72 /* Voices.swift */,
 				AA899D412B3E914700ADDC16 /* VoiceSelection.swift */,
 				AA659AB72B3FDE73004CF20A /* Persistent.swift */,
 				AA12A3352B3FF2AE00422866 /* Priority.swift */,
@@ -486,7 +482,6 @@
 				AA01B9D42957E44300617AFB /* Display.swift in Sources */,
 				AAB990512B35703500BD5A24 /* RomanImpl.swift in Sources */,
 				AAB10B9C292A2222004707E9 /* NonScientificKeyboard.swift in Sources */,
-				AA2567A62B3DD98A006DCC72 /* Voices.swift in Sources */,
 				AA0523472B27024800DDAAD4 /* LanguageSelector.swift in Sources */,
 				AA831B9C2B3462D9003307A2 /* FrenchImpl.swift in Sources */,
 				AA893A072B395C2D00BE2772 /* ArmenianImpl.swift in Sources */,
@@ -540,7 +535,6 @@
 				AAE3DA3D2B39865F005F8414 /* TestArabic.swift in Sources */,
 				AAB253BF2B3BDC7600860F93 /* HieroglyphsImpl.swift in Sources */,
 				AA5020272B333C280080E00C /* SpanishImpl.swift in Sources */,
-				AA2567A72B3DD98A006DCC72 /* Voices.swift in Sources */,
 				AA326E4A2B32F0430092E8E6 /* EnglishImpl.swift in Sources */,
 				AAD343BD2B3AD82600EFFABF /* TestArabic2.swift in Sources */,
 				AAFBD8A82B32A36D00175197 /* ThaiNumeralsImpl.swift in Sources */,

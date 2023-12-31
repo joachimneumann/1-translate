@@ -29,19 +29,19 @@ struct VoiceSelection: View {
             }
         }
     }
-    @State var status = "xx"
+
     var body: some View {
-        let dict = viewModel.voices.voicesForCode
+        let dict = viewModel.voicesForCode
         List {
-            Text(status)
             ForEach(dict.keys.sorted(), id: \.self) { code in
                 Section(header: Text(code)) {
                     ForEach(dict[code]!, id: \.self) { voice in
-                        OneVoiceView(voice: voice, selected: viewModel.voices.selectedVoiceDict[code] == voice)
+                        OneVoiceView(voice: voice, selected: viewModel.selectedVoiceDict[code] == voice)
                             .onTapGesture {
-                                status = code + " " + voice.identifier
-                                viewModel.voices.selectedVoiceDict[code] = voice
-                                viewModel.voices.setVoiceIfCodeMatches(allLanguages: viewModel.languages.list, code: code, voice: voice)
+                                DispatchQueue.main.async {
+                                    viewModel.selectedVoiceDict[code] = voice
+                                    viewModel.setVoiceIfCodeMatches(allLanguages: viewModel.languages.list, code: code, voice: voice)
+                                }
                             }
                     }
                 }
