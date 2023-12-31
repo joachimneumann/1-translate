@@ -471,7 +471,9 @@ class ViewModel: ObservableObject, ShowAs {
                     for systemVoice in allSystemVoices {
                         if systemVoice.identifier == storedVoiceIdentifier {
                             setVoiceIfCodeMatches(allLanguages: translatorLanguages, code: code, voice: systemVoice)
-                            selectedVoiceDict[code] = systemVoice
+                            DispatchQueue.main.async {
+                                self.selectedVoiceDict[code] = systemVoice
+                            }
                         }
                     }
                 } else {
@@ -484,7 +486,9 @@ class ViewModel: ObservableObject, ShowAs {
                         guard let guessedVoice = guessedVoice else { fatalError("failed guessing the initial voice for "+code) }
                         UserDefaults.standard.set(guessedVoice.identifier, forKey: voiceKey(code))
                         setVoiceIfCodeMatches(allLanguages: translatorLanguages, code: code, voice: guessedVoice)
-                        selectedVoiceDict[code] = guessedVoice
+                        DispatchQueue.main.async {
+                            self.selectedVoiceDict[code] = guessedVoice
+                        }
                     } else {
                         /// code not supported
                     }
