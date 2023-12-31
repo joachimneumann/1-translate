@@ -17,7 +17,7 @@ protocol Language {
     var voiceLanguageCode: String? { get }
     var flagName: String { get }
     var voice: AVSpeechSynthesisVoice? { get set }
-    var synthesizer: AVSpeechSynthesizer? { get }
+    var synthesizer: AVSpeechSynthesizer? { get set }
 }
 
 // Languages with parameters

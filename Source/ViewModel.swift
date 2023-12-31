@@ -151,6 +151,9 @@ class ViewModel: ObservableObject, ShowAs {
                 newFirstLanguage(languages.list[index])
             }
         }
+        for var language in languages.list {
+            language.synthesizer = synthesizer
+        }
     }
         
     func updateTranslation() {
@@ -475,7 +478,7 @@ class ViewModel: ObservableObject, ShowAs {
             for code in uniqueCodes {
                 if let storedVoiceIdentifier = UserDefaults.standard.string(forKey: voiceKey(code)) {
                     for systemVoice in allSystemVoices {
-                        print(systemVoice.description)
+//                        print(systemVoice.description)
                         if systemVoice.identifier == storedVoiceIdentifier {
                             setVoiceIfCodeMatches(allLanguages: translatorLanguages, code: code, voice: systemVoice)
                             DispatchQueue.main.async {
