@@ -71,7 +71,7 @@ class Voices {
                 print("looping, " + language.name)
 
                 guard let language = language as? LanguageImpl else { continue }
-                guard language.voice == nil else { fatalError("voices should be nil at the beginning") }
+                guard language.voice == nil else { continue } //fatalError("voices should be nil at the beginning") }
                 guard language.voiceLanguageCode != nil else { continue } // no code -> no voice
 
                 language.voice = nil
