@@ -39,6 +39,12 @@ struct VoiceSelection: View {
     var body: some View {
         let dict = viewModel.voicesForCode
         List {
+            Text("Note: to add Premium or Enhanced voices, search for \"Spoken Content\" in the iOS settings app.")
+                .onTapGesture {
+                    if let url = URL(string: UIApplication.openSettingsURLString) {
+                        UIApplication.shared.open(url)
+                    }
+                }
             ForEach(dict.keys.sorted(), id: \.self) { code in
                 Section(header: Text(languageName(code))) {
                     ForEach(dict[code]!.list, id: \.self) { voice in
@@ -58,6 +64,7 @@ struct VoiceSelection: View {
                 viewModel.initVoice()
             }
         }
+        .navigationTitle("Select Voices")
     }
     func languageName(_ code: String) -> String {
         let XX: Locale = .current
