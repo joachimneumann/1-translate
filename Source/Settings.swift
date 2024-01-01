@@ -59,17 +59,6 @@ struct Settings: View {
                 .frame(width: 220)
                 .background(Color(UIColor.darkGray))
                 .borderRadius(Color.black, width: 5, cornerRadius: 10, corners: [.topLeft, .bottomLeft, .topRight, .bottomRight])
-                .onChange(of: viewModel.persistent.decimalSeparator) { _ in
-                    if viewModel.persistent.decimalSeparator == .comma {
-                        if viewModel.persistent.groupSeparator == .comma {
-                            viewModel.persistent.groupSeparator = .dot
-                        }
-                    } else if viewModel.persistent.decimalSeparator == .dot {
-                        if viewModel.persistent.groupSeparator == .dot {
-                            viewModel.persistent.groupSeparator = .comma
-                        }
-                    }
-                }
                 .pickerStyle(.segmented)
             }
             GridRow {
@@ -82,18 +71,7 @@ struct Settings: View {
                 }
                 .padding(2)
                 .background(Color(UIColor.darkGray))
-                .borderRadius(Color.black, width: 5, cornerRadius: 10, corners: [.topLeft, .bottomLeft, .topRight, .bottomRight])
-                .onChange(of: viewModel.persistent.groupSeparator) { _ in
-                    if viewModel.persistent.groupSeparator == .comma {
-                        if viewModel.persistent.decimalSeparator == .comma {
-                            viewModel.persistent.decimalSeparator = .dot
-                        }
-                    } else if viewModel.persistent.groupSeparator == .dot { /// dot
-                        if viewModel.persistent.decimalSeparator == .dot { /// also dot
-                            viewModel.persistent.decimalSeparator = .comma
-                        }
-                    }
-                }
+                .borderRadius(Color.black, width: 5, cornerRadius: 10, corners: .allCorners)
                 .frame(width: 220)
                 .pickerStyle(.segmented)
             }
@@ -107,7 +85,7 @@ struct Settings: View {
                 }
                 .padding(2)
                 .background(Color(UIColor.darkGray))
-                .borderRadius(Color.black, width: 5, cornerRadius: 10, corners: [.topLeft, .bottomLeft, .topRight, .bottomRight])
+                .borderRadius(Color.black, width: 5, cornerRadius: 10, corners: .allCorners)
                 .frame(width: 150)
                 .pickerStyle(.segmented)
             }

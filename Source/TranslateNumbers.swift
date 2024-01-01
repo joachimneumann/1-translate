@@ -23,9 +23,6 @@ struct TranslateNumbers: View {
         VStack(spacing: 0.0) {
             VStack(spacing: 0.0) {
                 VStack(spacing: 0.0) {
-                    let _ = print("1:")
-                    let _ = print(viewModel.firstLanguage.flagName)
-                    let _ = print(viewModel.firstLanguage.voice == nil)
                     HStack(spacing: 30.0) {
                         Spacer()
                         if viewModel.persistent.offerReadingAloud {
@@ -61,9 +58,6 @@ struct TranslateNumbers: View {
                 }
                 if viewModel.persistent.secondLanguageAllowed {
                     VStack(spacing: 0.0) {
-                        let _ = print("2:")
-                        let _ = print(viewModel.secondLanguage.flagName)
-                        let _ = print(viewModel.secondLanguage.voice == nil)
                         HStack(spacing: 30.0) {
                             let noVoice = viewModel.secondLanguage.voice == nil
                             let color =  noVoice ? Color(red: 0.5, green: 0.5, blue: 0.5) : Color(red: 0.95, green:0.95, blue: 0.95)
