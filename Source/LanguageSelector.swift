@@ -21,25 +21,37 @@ struct LanguageSelector: View {
             ScrollViewReader { scrollViewReaderProxy in
                 List(0..<list.count, id: \.self, selection: selectedIndex) { languageIndex in
                     let language = list[languageIndex]
-                    HStack {
+                    let selected = languageIndex == selectedIndex.wrappedValue
+                    HStack(spacing: 0) {
                         Image(language.flagName)
                             .resizable()
                             .scaledToFit()
-                            .padding(2)
-                            .border(.white, width: 2)
-                            .frame(height: 30)
-                            .padding(.trailing, 10)
-                        Text(language.name)
-                        Spacer()
+                            .padding(.vertical, 1)
+                            .border(.white, width: 1)
+                            .frame(height: 20)
+//                            .padding(.trailing, 10)
+                        Text("  "+language.name)
                         if language.nameDescription != nil {
-                            Text(language.nameDescription!)
+                            Text("/"+language.nameDescription!)
                                 .italic()
+                        }
+                        Spacer()
+                        if selected {
+                            Image(systemName: "checkmark")
+                                .foregroundColor(.yellow)
+                                .bold()
+                                .frame(width: 20)
+                        } else {
+                            Rectangle()
+                                .background()
+                                .frame(width: 20, height: 0)
                         }
                     }
                     .id(languageIndex)
-                    .listRowBackground(languageIndex == selectedIndex.wrappedValue ? Color(.darkGray) : color)
+                    .listRowBackground(selected ? Color(white: 0.18) : Color(white: 0.1))
+//                    .listRowBackground(languageIndex == selectedIndex.wrappedValue ? Color(.darkGray) : color)
                 }
-                .listStyle(.plain)
+                .listStyle(.sidebar)
                 .background(color)
                 .onAppear() {
                     if let position = selectedIndex.wrappedValue {
@@ -50,7 +62,6 @@ struct LanguageSelector: View {
         }
         
     }
-    
     
     var body: some View {
         VStack {
@@ -70,8 +81,7 @@ struct LanguageSelector: View {
                     .buttonStyle(DefaultButtonStyle())
                 }
                 .padding(.bottom, 15)
-                .padding(.trailing, 15)
-                .listStyle(.sidebar)
+                .padding(.trailing, 20)
                 .background(.black)
                 
                 LanguageList(
@@ -81,7 +91,7 @@ struct LanguageSelector: View {
             }
         }
         .navigationTitle(isFirstLanguage ? "First Language" : "Second Language")
-        .edgesIgnoringSafeArea(.bottom)
+//        .edgesIgnoringSafeArea(.bottom)
     }
 }
 

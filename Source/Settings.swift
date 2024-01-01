@@ -20,28 +20,12 @@ struct Settings: View {
                 Appearance(temp: $viewModel.persistent.secondLanguageAllowed)
                 DigitsSettings
                 VoiceSettings
-                LanguageSettings
+                English
+                German
+                Spanish
+                Vietnamese
                 HobbyProject
             }
-            
-//            ScrollView {
-//                VStack(alignment: .leading, spacing: 0.0) {
-                    //                    Grid(alignment: .leading, horizontalSpacing: 10.0, verticalSpacing: 10.0) {
-                    //                        DigitsSettings
-                    //                        VoiceSettings
-                    //                        EnglishSettings
-                    //                        GermanSettings
-                    //                        SpanishSettings
-                    //                        VietnameseSettings
-                    //                    }
-                    //                    HobbyProject
-//                    Spacer()
-//                }
-//                .padding(.top, 10)
-//                .foregroundColor(Color.white)
-//                .padding(.horizontal, 15)
-//            }
-//            .padding(.top, 10)
         }
         .navigationTitle("Settings")
     }
@@ -126,10 +110,11 @@ struct Settings: View {
                     }
                     .pickerStyle(.segmented)
                 }
+                .padding(.bottom, 5)
                 GridRow {
                     Text("Grouping")
                         .padding(.trailing, 5)
-                   Picker("", selection: $viewModel.persistent.groupSeparator) {
+                    Picker("", selection: $viewModel.persistent.groupSeparator) {
                         ForEach(GroupSeparator.allCases, id: \.self) { value in
                             Text("\(value.rawValue)")
                                 .tag(value)
@@ -137,6 +122,7 @@ struct Settings: View {
                     }
                     .pickerStyle(.segmented)
                 }
+                .padding(.bottom, 5)
                 GridRow {
                     Text("GroupSize")
                         .padding(.trailing, 5)
@@ -158,37 +144,45 @@ struct Settings: View {
         let color =  noVoice ? yellow.opacity(0.7) : yellow
         let symbolName = noVoice ? "speaker.slash.fill" : "speaker.wave.3.fill"
         return Section(header: Text("Read Aloud")) {
-            Button {
-                viewModel.firstLanguage.readAloud(viewModel.firstLanguage.read("100"))
-            } label: {
-                Image(systemName: symbolName)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .foregroundColor(color)
-                    .frame(height: 23)
-                    .padding(.bottom, 5)
-                    .padding(.leading, noVoice ? 0 : 5)
-                    .frame(height: 23)
-                    .padding(.top, 10)
+            VStack(alignment: .leading) {
+                Button {
+                    viewModel.firstLanguage.readAloud(viewModel.firstLanguage.read("100"))
+                } label: {
+                    Image(systemName: symbolName)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .foregroundColor(color)
+                        .frame(height: 23)
+                        .padding(.bottom, 5)
+                        .padding(.leading, noVoice ? 0 : 5)
+                        .frame(height: 23)
+                        .padding(.top, 10)
+                }
+                .buttonStyle(.plain)
+                .disabled(noVoice)
+                HStack {
+                    Text("Read Aloud")
+                    Spacer()
+                    Toggle("", isOn: $viewModel.persistent.offerReadingAloud)
+                        .frame(width: 40)
+                        .toggleStyle(
+                            ColoredToggleStyle(onColor: Color(white: 0.6),
+                                               offColor: Color(white: 0.25),
+                                               thumbColor: .white))
+                        .buttonStyle(.plain)
+                        .padding(.trailing, 10)
+                }
+                .buttonStyle(BorderlessButtonStyle())
             }
-            .disabled(noVoice)
-            HStack {
-                Text("Read Aloud")
-                Spacer()
-                Toggle("", isOn: $viewModel.persistent.offerReadingAloud)
-                    .frame(width: 40)
-                    .toggleStyle(
-                        ColoredToggleStyle(onColor: Color(white: 0.6),
-                                           offColor: Color(white: 0.25),
-                                           thumbColor: .white))
-                    .padding(.trailing, 10)
+            VStack(alignment: .leading) {
+                NavigationLink {
+                    VoiceSelection(viewModel: viewModel)
+                } label: {
+                    Text("Select Voices")
+//                        .buttonStyle(.plain)
+                }
+//                .disabled(!viewModel.persistent.offerReadingAloud)
             }
-            NavigationLink {
-                VoiceSelection(viewModel: viewModel)
-            } label: {
-                Text("Select Voices")
-            }
-            .disabled(!viewModel.persistent.offerReadingAloud)
         }
     }
     
@@ -196,116 +190,145 @@ struct Settings: View {
         let flagName: String
         let text: String
         var body: some View {
-                HStack {
-                    Image(flagName)
-                        .resizable()
-                        .scaledToFit()
-                        .padding(1)
-                        .border(.white)
-                        .frame(height: 25)
-                        .padding(.trailing, 5)
-                    Text(text)
-                        .bold()
-                        .frame(height: 25)
-                        .foregroundColor(.yellow)
-                    Spacer()
-                }
-                .padding(.top, 15)
+            HStack {
+                Image(flagName)
+                    .resizable()
+                    .scaledToFit()
+                    .padding(1)
+                    .border(.white)
+                    .frame(height: 18)
+                    .padding(.trailing, 3)
+                Text(text)
+                    .fontWeight(.semibold)
+                    .frame(height: 25)
+                    .foregroundColor(.yellow)
+            }
         }
     }
     
-    var LanguageSettings: some View {
+    var English: some View {
         let english = viewModel.languages.english
-        let german = viewModel.languages.german
-        let spanish = viewModel.languages.spanish
-        let vietnamese = viewModel.languages.vietnamese
-
-        return Section(header: Text("Language Settings")) {
-            SettingsHeader(flagName: english.flagName, text: english.read(150))
-            HStack {
-                Text("use \"and\"")
-                Spacer()
-                Toggle("", isOn: $viewModel.languages.english.useAndAfterHundred)
-                    .frame(width: 40)
-                    .toggleStyle(
-                        ColoredToggleStyle(onColor: Color(white: 0.6),
-                                           offColor: Color(white: 0.25),
-                                           thumbColor: .white))
-                    .padding(.trailing, 10)
-            }
-            SettingsHeader(
-                flagName: german.flagName,
-                text: german.read(88) + (german.useWordSplitter ? " +splitter" : ""))
-            HStack {
-                Text("Trennung")
-                Spacer()
-                Toggle("", isOn: $viewModel.languages.german.useWordSplitter)
-                    .frame(width: 40)
-                    .toggleStyle(
-                        ColoredToggleStyle(onColor: Color(white: 0.6),
-                                           offColor: Color(white: 0.25),
-                                           thumbColor: .white))
-                    .padding(.trailing, 10)
-            }
-            HStack {
-                Text("Großschreibung")
-                Spacer()
-                Toggle("", isOn: $viewModel.languages.german.capitalisation)
-                    .frame(width: 40)
-                    .toggleStyle(
-                        ColoredToggleStyle(onColor: Color(white: 0.6),
-                                           offColor: Color(white: 0.25),
-                                           thumbColor: .white))
-                    .padding(.trailing, 10)
-            }
-            SettingsHeader(flagName: spanish.flagName, text: spanish.read("1.5"))
-            HStack {
-                Text("Coma o punto:")
-                Spacer()
-                Picker("", selection: $viewModel.languages.spanish.puntoComma) {
-                    ForEach(SpanishImpl.PuntoComma.allCases, id: \.self) { value in
-                        Text("\(value.rawValue)")
-                            .tag(value)
-                    }
+        
+        return Section(header: Text("English")) {
+            VStack(alignment: .leading) {
+                SettingsHeader(flagName: english.flagName, text: english.read(150))
+                HStack {
+                    Text("use \"and\"")
+                    Spacer()
+                    Toggle("", isOn: $viewModel.languages.english.useAndAfterHundred)
+                        .frame(width: 40)
+                        .toggleStyle(
+                            ColoredToggleStyle(onColor: Color(white: 0.6),
+                                               offColor: Color(white: 0.25),
+                                               thumbColor: .white))
+                        .buttonStyle(.plain)
+                        .padding(.trailing, 10)
                 }
-                .pickerStyle(.segmented)
-            }
-            SettingsHeader(flagName: vietnamese.flagName, text: vietnamese.read(33303))
-            HStack {
-                Text("1000")
-                Spacer()
-                Picker("", selection: $viewModel.languages.vietnamese.thousand) {
-                    ForEach(VietnameseImpl.Thousand.allCases, id: \.self) { value in
-                        Text("\(value.rawValue)")
-                            .tag(value)
-                    }
-                }
-                .pickerStyle(.segmented)
-            }
-            HStack {
-                Text("linh hoặc lẻ")
-                Spacer()
-                Picker("", selection: $viewModel.languages.vietnamese.secondLast) {
-                    ForEach(VietnameseImpl.SecondLast.allCases, id: \.self) { value in
-                        Text("\(value.rawValue)")
-                            .tag(value)
-                    }
-                }
-                .pickerStyle(.segmented)
-            }
-            HStack {
-                Text("gọn")
-                Spacer()
-                Toggle("", isOn: $viewModel.languages.vietnamese.compact)
-                    .frame(width: 40)
-                    .toggleStyle(
-                        ColoredToggleStyle(onColor: Color(white: 0.6),
-                                           offColor: Color(white: 0.25),
-                                           thumbColor: .white))
-                    .padding(.trailing, 10)
             }
         }
     }
+    var German: some View {
+        let german = viewModel.languages.german
+        
+        return Section(header: Text("German")) {
+            VStack(alignment: .leading) {
+                SettingsHeader(
+                    flagName: german.flagName,
+                    text: german.read(88) + (german.useWordSplitter ? " +splitter" : ""))
+                HStack {
+                    Text("Trennung")
+                    Spacer()
+                    Toggle("", isOn: $viewModel.languages.german.useWordSplitter)
+                        .frame(width: 40)
+                        .toggleStyle(
+                            ColoredToggleStyle(onColor: Color(white: 0.6),
+                                               offColor: Color(white: 0.25),
+                                               thumbColor: .white))
+                        .buttonStyle(.plain)
+                        .padding(.trailing, 10)
+                }
+                HStack {
+                    Text("Großschreibung")
+                    Spacer()
+                    Toggle("", isOn: $viewModel.languages.german.capitalisation)
+                        .frame(width: 40)
+                        .toggleStyle(
+                            ColoredToggleStyle(onColor: Color(white: 0.6),
+                                               offColor: Color(white: 0.25),
+                                               thumbColor: .white))
+                        .buttonStyle(.plain)
+                        .padding(.trailing, 10)
+                }
+            }
+        }
+    }
+    
+    var Spanish: some View {
+        let spanish = viewModel.languages.spanish
+        
+        return Section(header: Text("Spanish")) {
+            VStack(alignment: .leading) {
+                SettingsHeader(flagName: spanish.flagName, text: spanish.read("1.5"))
+                HStack {
+                    Text("Coma o punto:")
+                    Spacer()
+                    Picker("", selection: $viewModel.languages.spanish.puntoComma) {
+                        ForEach(SpanishImpl.PuntoComma.allCases, id: \.self) { value in
+                            Text("\(value.rawValue)")
+                                .tag(value)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                }
+            }
+        }
+    }
+    
+    var Vietnamese: some View {
+        let vietnamese = viewModel.languages.vietnamese
+        
+        return Section(header: Text("Vietnamese")) {
+            VStack(alignment: .leading) {
+                SettingsHeader(flagName: vietnamese.flagName, text: vietnamese.read(33303))
+                Grid(alignment: .leading) {
+                    GridRow {
+                        Text("1000")
+                        Picker("", selection: $viewModel.languages.vietnamese.thousand) {
+                            ForEach(VietnameseImpl.Thousand.allCases, id: \.self) { value in
+                                Text("\(value.rawValue)")
+                                    .tag(value)
+                            }
+                        }
+                        .pickerStyle(.segmented)
+                        .padding(.bottom, 5)
+                    }
+                    GridRow {
+                        Text("linh hoặc lẻ")
+                        Picker("", selection: $viewModel.languages.vietnamese.secondLast) {
+                            ForEach(VietnameseImpl.SecondLast.allCases, id: \.self) { value in
+                                Text("\(value.rawValue)")
+                                    .tag(value)
+                            }
+                        }
+                        .pickerStyle(.segmented)
+                    }
+                }
+                HStack {
+                    Text("gọn")
+                    Spacer()
+                    Toggle("", isOn: $viewModel.languages.vietnamese.compact)
+                        .frame(width: 40)
+                        .toggleStyle(
+                            ColoredToggleStyle(onColor: Color(white: 0.6),
+                                               offColor: Color(white: 0.25),
+                                               thumbColor: .white))
+                        .buttonStyle(.plain)
+                        .padding(.trailing, 10)
+                }
+            }
+        }
+    }
+    
     
     
     var HobbyProject: some View {
@@ -313,12 +336,12 @@ struct Settings: View {
         let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
         
         return Section(header: Text("About")) {
-//            VStack(alignment: .leading) {
-                Text("Version: \(appVersion ?? "unknown") (build \(buildNumber ?? "unknown"))")
-                    .italic()
-                    .padding(.bottom, 3)
-                Text("This is a hobby project by Joachim Neumann. Although I have done some testing, errors may occur. If you have feedback, for example a wrong translations or ideas for improvement, drop me an email at joachim@joachimneumann.com").tint(.white)
-//            }
+            //            VStack(alignment: .leading) {
+            Text("Version: \(appVersion ?? "unknown") (build \(buildNumber ?? "unknown"))")
+                .italic()
+                .padding(.bottom, 3)
+            Text("This is a hobby project by Joachim Neumann. Although I have done some testing, errors may occur. If you have feedback, for example a wrong translations or ideas for improvement, drop me an email at joachim@joachimneumann.com").tint(.white)
+            //            }
         }
     }
     

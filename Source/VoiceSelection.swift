@@ -16,7 +16,7 @@ struct VoiceSelection: View {
         let voice: AVSpeechSynthesisVoice
         let selected: Bool
         let showVariant: Bool
-
+        
         var body: some View {
             let name = voice.name.replacingOccurrences(of: " (Premium)", with: "").replacingOccurrences(of: " (Enhanced)", with: "")
             HStack(spacing: 0) {
@@ -32,6 +32,7 @@ struct VoiceSelection: View {
                 }
             }
             .contentShape(Rectangle())
+            .listRowBackground(selected ? Color(white: 0.18) : Color(white: 0.1))
         }
     }
     func hasMultipleVariants(_ list: [AVSpeechSynthesisVoice]) -> Bool {
@@ -54,19 +55,21 @@ struct VoiceSelection: View {
                 let hasMultipleVariants = hasMultipleVariants(dict[code]!.list)
                 Section(header: Text(languageName(code))) {
                     ForEach(dict[code]!.list, id: \.self) { voice in
-                        OneVoiceView(voice: voice, 
+                        OneVoiceView(voice: voice,
                                      selected: viewModel.selectedVoiceDict[code] == voice,
                                      showVariant: hasMultipleVariants)
-                            .onTapGesture {
-                                DispatchQueue.main.async {
-                                    viewModel.selectedVoiceDict[code] = voice
-                                    viewModel.setVoiceIfCodeMatches(allLanguages: viewModel.languages.list, code: code, voice: voice)
-                                }
+                        .onTapGesture {
+                            DispatchQueue.main.async {
+                                viewModel.selectedVoiceDict[code] = voice
+                                viewModel.setVoiceIfCodeMatches(allLanguages: viewModel.languages.list, code: code, voice: voice)
                             }
+                        }
+
                     }
                 }
             }
         }
+        .padding(.top, 10)
         .onAppear() {
             Task {
                 viewModel.initVoice()
@@ -82,7 +85,7 @@ struct VoiceSelection: View {
         }
         return code
     }
-
+    
 }
 
 
