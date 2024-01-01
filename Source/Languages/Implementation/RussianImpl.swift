@@ -20,16 +20,16 @@ class RussianImpl: LanguageImpl {
         e2 = "стo"
         e2_one = e2
         e3 = "тысяча"
-        //        e3_one = e3
+        e3_one = e3
         e6 = "миллион"
-        //        e6_one = e6
+        e6_one = e6
         e9 = "миллиард"
-        //        e9_one = e9
+        e9_one = e9
         e12 = "триллион"
-        //        e12_one = e12
+        e12_one = e12
         tensConnector = " "
         eSpace = " "
-        afterHundred = " "
+//        afterHundred = " "
 //        beforeHundred = " "
         beforeAndAfterDotString = " "
     }
