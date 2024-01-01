@@ -85,7 +85,7 @@ class DanishImpl: LanguageImpl {
         } else {
             ret = readInteger(i.E3)
             if i.E3 >= 100 && i.E3 < 200 {
-                ret += "e"
+                ret = ret.replacingOccurrences(of: "hundred", with: "hundrede")
             }
             ret += " " + e3!
         }
@@ -102,7 +102,7 @@ class DanishImpl: LanguageImpl {
         } else {
             ret = readInteger(i.E6)
             if i.E6 >= 100 && i.E6 < 200 {
-                ret += "e"
+                ret = ret.replacingOccurrences(of: "hundred", with: "hundrede")
             }
             ret += " " + e6!
         }
@@ -119,7 +119,7 @@ class DanishImpl: LanguageImpl {
         } else {
             ret = readInteger(i.E9)
             if i.E9 >= 100 && i.E9 < 200 {
-                ret += "e"
+                ret = ret.replacingOccurrences(of: "hundred", with: "hundrede")
             }
             ret += " " + e9!
         }

@@ -117,7 +117,16 @@ class GermanImpl: LanguageImpl, German {
         if i == 18 { return "achtzehn" }
         if i == 19 { return "neunzehn" }
         // reversed order
-        return (i.E1x > 0 ? read_0_9(i.E1x) + Languages.WordSplitter + "und" + Languages.WordSplitter : "") + read_10s(i.E1)
+        var ret = ""
+        if i.E1x > 0 {
+            ret = read_0_9(i.E1x)
+            if useWordSplitter { ret += Languages.WordSplitter }
+            ret += "und"
+            if useWordSplitter { ret += Languages.WordSplitter }
+        }
+        ret += read_10s(i.E1)
+        return ret
+        
     }
             
 }

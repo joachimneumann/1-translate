@@ -11,6 +11,7 @@ final class TestEnglish: XCTestCase {
     var english = Languages().english
 
     func test_english() {
+        english.useAndAfterHundred = false
         XCTAssertEqual(english.read(0), "zero")
         XCTAssertEqual(english.read(1), "one")
         XCTAssertEqual(english.read(2), "two")
