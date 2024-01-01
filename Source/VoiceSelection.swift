@@ -64,18 +64,10 @@ struct VoiceSelection: View {
                                     viewModel.setVoiceIfCodeMatches(allLanguages: viewModel.languages.list, code: code, voice: voice)
                                 }
                             }
-                            .simultaneousGesture(DragGesture(minimumDistance: 0)
-                                .onChanged { _ in
-//                                    touchDown(symbol)
-                                }
-                                .onEnded { _ in
-//                                    touchUp(symbol, screen)
-                                })
                     }
                 }
             }
         }
-        .listStyle(.sidebar)
         .onAppear() {
             Task {
                 viewModel.initVoice()
