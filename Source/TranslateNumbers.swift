@@ -23,12 +23,16 @@ struct TranslateNumbers: View {
         VStack(spacing: 0.0) {
             VStack(spacing: 0.0) {
                 VStack(spacing: 0.0) {
+                    let _ = print("1:")
+                    let _ = print(viewModel.firstLanguage.flagName)
+                    let _ = print(viewModel.firstLanguage.voice == nil)
                     HStack(spacing: 30.0) {
                         Spacer()
                         if viewModel.persistent.offerReadingAloud {
-                            let color =  viewModel.firstLanguage.voice == nil ? Color(red: 0.5, green: 0.5, blue: 0.5) : Color(red: 0.95, green:0.95, blue: 0.95)
-//                            let color =  Color(red: 0.95, green:0.95, blue: 0.95)
-                            let symbolName = viewModel.firstLanguage.voice == nil ? "speaker.slash.fill" : "speaker.wave.3.fill"
+                            let noVoice = viewModel.firstLanguage.voice == nil
+                            let color =  noVoice ? Color(red: 0.5, green: 0.5, blue: 0.5) : Color(red: 0.95, green:0.95, blue: 0.95)
+                            let symbolName = noVoice ? "speaker.slash.fill" : "speaker.wave.3.fill"
+                            let symbolSize: CGFloat = noVoice ? 23.0 : 18.0
                             Button {
                                 viewModel.firstLanguage.readAloud(viewModel.firstTranslatedNumber)
                             } label: {
@@ -36,7 +40,7 @@ struct TranslateNumbers: View {
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .foregroundColor(color)
-                                    .frame(height: 18)
+                                    .frame(height: symbolSize)
                                     .padding(10)
                             }
                             .disabled(viewModel.firstLanguage.voice == nil)
@@ -57,17 +61,24 @@ struct TranslateNumbers: View {
                 }
                 if viewModel.persistent.secondLanguageAllowed {
                     VStack(spacing: 0.0) {
+                        let _ = print("2:")
+                        let _ = print(viewModel.secondLanguage.flagName)
+                        let _ = print(viewModel.secondLanguage.voice == nil)
                         HStack(spacing: 30.0) {
+                            let noVoice = viewModel.secondLanguage.voice == nil
+                            let color =  noVoice ? Color(red: 0.5, green: 0.5, blue: 0.5) : Color(red: 0.95, green:0.95, blue: 0.95)
+                            let symbolName = noVoice ? "speaker.slash.fill" : "speaker.wave.3.fill"
+                            let symbolSize: CGFloat = noVoice ? 23.0 : 18.0
                             Spacer()
                             if viewModel.persistent.offerReadingAloud {
                                 Button {
                                     viewModel.secondLanguage.readAloud(viewModel.secondTranslatedNumber)
                                 } label: {
-                                    Image(systemName: "speaker.wave.3.fill")
+                                    Image(systemName: symbolName)
                                         .resizable()
-                                        .foregroundColor(Color(red: 0.95, green:0.95, blue: 0.95))
+                                        .foregroundColor(color)
                                         .aspectRatio(contentMode: .fit)
-                                        .frame(height: 18)
+                                        .frame(height: symbolSize)
                                         .padding(10)
                                 }
                                 .disabled(viewModel.secondLanguage.voice == nil)
