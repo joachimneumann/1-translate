@@ -136,7 +136,7 @@ class DanishImpl: LanguageImpl {
         } else {
             ret = readInteger(i.E12)
             if i.E12 >= 100 && i.E12 < 200 {
-                ret += "e"
+                ret = ret.replacingOccurrences(of: "hundred", with: "hundrede")
             }
             ret += " " + e12!
         }
