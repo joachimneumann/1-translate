@@ -26,13 +26,16 @@ struct TranslateNumbers: View {
                     HStack(spacing: 30.0) {
                         Spacer()
                         if viewModel.persistent.offerReadingAloud {
+                            let color =  viewModel.firstLanguage.voice == nil ? Color(red: 0.5, green: 0.5, blue: 0.5) : Color(red: 0.95, green:0.95, blue: 0.95)
+//                            let color =  Color(red: 0.95, green:0.95, blue: 0.95)
+                            let symbolName = viewModel.firstLanguage.voice == nil ? "speaker.slash.fill" : "speaker.wave.3.fill"
                             Button {
                                 viewModel.firstLanguage.readAloud(viewModel.firstTranslatedNumber)
                             } label: {
-                                Image(systemName: "speaker.wave.3.fill")
+                                Image(systemName: symbolName)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .foregroundColor(Color(red: 0.95, green:0.95, blue: 0.95))
+                                    .foregroundColor(color)
                                     .frame(height: 18)
                                     .padding(10)
                             }

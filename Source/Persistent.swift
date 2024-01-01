@@ -23,7 +23,7 @@ struct Persistent: Separators {
     var forceScientific: Bool = false
     
     @AppStorage("offerReadingAloudKey", store: .standard)
-    var offerReadingAloud: Bool = false
+    var offerReadingAloud: Bool = true
     
     @AppStorage("secondLanguageAllowedKey", store: .standard)
     var secondLanguageAllowed: Bool = false

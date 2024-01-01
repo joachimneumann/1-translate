@@ -22,8 +22,7 @@ struct VoiceSelection: View {
             HStack(spacing: 0) {
                 Text(name)
                     .bold()
-                if showVariant { Text(" \(voice.variantCode),") }
-                Text(" \(voice.genderSting)")
+                if showVariant { Text(" (\(voice.variantCode))") }
                 Text("  \(voice.qualityString)")
                     .bold()
                     .foregroundColor(.yellow)

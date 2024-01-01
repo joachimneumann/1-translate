@@ -502,7 +502,7 @@ class ViewModel: ObservableObject, ShowAs {
                 var found = false
                 if let storedVoiceIdentifier = UserDefaults.standard.string(forKey: voiceKey(code)) {
                     for systemVoice in systemVoices {
-                        print(systemVoice.description)
+                        // print(systemVoice.description)
                         if systemVoice.identifier == storedVoiceIdentifier {
                             setVoiceIfCodeMatches(allLanguages: translatorLanguages, code: code, voice: systemVoice)
                             found = true
