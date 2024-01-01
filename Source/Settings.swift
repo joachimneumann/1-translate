@@ -16,78 +16,139 @@ struct Settings: View {
     
     var body: some View {
         VStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 0.0) {
-                    Grid(alignment: .leading, horizontalSpacing: 10.0, verticalSpacing: 10.0) {
-                        DigitsSettings
-                        VoiceSettings
-                        EnglishSettings
-                        GermanSettings
-                        SpanishSettings
-                        VietnameseSettings
-                    }
-                    HobbyProject
-                    Spacer()
-                }
-                .padding(.top, 10)
-                .foregroundColor(Color.white)
-                .padding(.horizontal, 15)
+            List {
+                Appearance(temp: $viewModel.persistent.secondLanguageAllowed)
+                DigitsSettings
+                VoiceSettings
+                LanguageSettings
+                HobbyProject
             }
-            .padding(.top, 10)
+            
+//            ScrollView {
+//                VStack(alignment: .leading, spacing: 0.0) {
+                    //                    Grid(alignment: .leading, horizontalSpacing: 10.0, verticalSpacing: 10.0) {
+                    //                        DigitsSettings
+                    //                        VoiceSettings
+                    //                        EnglishSettings
+                    //                        GermanSettings
+                    //                        SpanishSettings
+                    //                        VietnameseSettings
+                    //                    }
+                    //                    HobbyProject
+//                    Spacer()
+//                }
+//                .padding(.top, 10)
+//                .foregroundColor(Color.white)
+//                .padding(.horizontal, 15)
+//            }
+//            .padding(.top, 10)
         }
         .navigationTitle("Settings")
     }
     
+    struct Appearance: View {
+        @Binding var temp: Bool
+        var body: some View {
+            Section(header: Text("Appearance")) {
+                Grid(alignment: .center, horizontalSpacing: 0.0, verticalSpacing: 10.0) {
+                    GridRow {
+                        let size: CGFloat = 20.0
+                        VStack {
+                            Image("oneLanguage")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .padding(.horizontal, 20)
+                            Text("One")
+                            if !temp {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .foregroundColor(.yellow)
+                                    .frame(width: size, height: size)
+                            } else {
+                                Circle()
+                                    .stroke(lineWidth: 2)
+                                    .foregroundColor(Color(UIColor.tertiaryLabel))
+                                    .frame(width: size, height: size)
+                            }
+                        }
+                        .onTapGesture {
+                            temp = false
+                        }
+                        VStack {
+                            Image("twoLanguages")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .padding(.horizontal, 20)
+                            Text("Two")
+                            if temp {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .foregroundColor(.yellow)
+                                    .frame(width: size, height: size)
+                            } else {
+                                Circle()
+                                    .stroke(lineWidth: 2)
+                                    .foregroundColor(Color(UIColor.tertiaryLabel))
+                                    .frame(width: size, height: size)
+                            }
+                        }
+                        .onTapGesture {
+                            temp = true
+                        }
+                    }
+                }
+                .padding(.top, 20)
+            }
+        }
+    }
+    
     var DigitsSettings: some View {
         let example =  Display(left: "").withSeparators(numberString: "10000.05", isNegative: false, separators: viewModel.persistent)
-        return Group {
-            GridRow {
-                Text("\(example)")
-                    .foregroundColor(.yellow)
-                    .font(.largeTitle)
-                    .gridCellColumns(2)
-            }
-            GridRow {
-                Text("Decimal")
-                Picker("", selection: $viewModel.persistent.decimalSeparator) {
-                    ForEach(DecimalSeparator.allCases, id: \.self) { value in
-                        Text("\(value.rawValue)")
-                            .tag(value)
-                    }
+        return Section(header: Text("Display and Seperators")) {
+            Grid(alignment: .leading, verticalSpacing: 10) {
+                GridRow {
+                    Text("\(example)")
+                        .foregroundColor(.yellow)
+                        .font(.largeTitle)
+                        .gridCellColumns(2)
+                        .padding(.bottom, 5)
                 }
-                .padding(2)
-                .frame(width: 220)
-                .background(Color(UIColor.darkGray))
-                .borderRadius(Color.black, width: 5, cornerRadius: 10, corners: [.topLeft, .bottomLeft, .topRight, .bottomRight])
-                .pickerStyle(.segmented)
-            }
-            GridRow {
-                Text("Grouping")
-                Picker("", selection: $viewModel.persistent.groupSeparator) {
-                    ForEach(GroupSeparator.allCases, id: \.self) { value in
-                        Text("\(value.rawValue)")
-                            .tag(value)
+                GridRow {
+                    Text("Decimal")
+                        .padding(.trailing, 5)
+                    Picker("", selection: $viewModel.persistent.decimalSeparator) {
+                        ForEach(DecimalSeparator.allCases, id: \.self) { value in
+                            Text("\(value.rawValue)")
+                                .tag(value)
+                        }
                     }
+                    .pickerStyle(.segmented)
                 }
-                .padding(2)
-                .background(Color(UIColor.darkGray))
-                .borderRadius(Color.black, width: 5, cornerRadius: 10, corners: .allCorners)
-                .frame(width: 220)
-                .pickerStyle(.segmented)
-            }
-            GridRow {
-                Text("GroupSize")
-                Picker("", selection: $viewModel.persistent.groupSize) {
-                    ForEach(GroupSize.allCases, id: \.self) { value in
-                        Text("\(value.string)")
-                            .tag(value)
+                GridRow {
+                    Text("Grouping")
+                        .padding(.trailing, 5)
+                   Picker("", selection: $viewModel.persistent.groupSeparator) {
+                        ForEach(GroupSeparator.allCases, id: \.self) { value in
+                            Text("\(value.rawValue)")
+                                .tag(value)
+                        }
                     }
+                    .pickerStyle(.segmented)
                 }
-                .padding(2)
-                .background(Color(UIColor.darkGray))
-                .borderRadius(Color.black, width: 5, cornerRadius: 10, corners: .allCorners)
-                .frame(width: 150)
-                .pickerStyle(.segmented)
+                GridRow {
+                    Text("GroupSize")
+                        .padding(.trailing, 5)
+                    Picker("", selection: $viewModel.persistent.groupSize) {
+                        ForEach(GroupSize.allCases, id: \.self) { value in
+                            Text("\(value.string)")
+                                .tag(value)
+                        }
+                    }
+                    .frame(width: 150)
+                    .pickerStyle(.segmented)
+                }
             }
         }
     }
@@ -96,8 +157,7 @@ struct Settings: View {
         let noVoice = !viewModel.persistent.offerReadingAloud
         let color =  noVoice ? yellow.opacity(0.7) : yellow
         let symbolName = noVoice ? "speaker.slash.fill" : "speaker.wave.3.fill"
-        let symbolSize: CGFloat = noVoice ? 23.0 : 18.0
-        return Group {
+        return Section(header: Text("Read Aloud")) {
             Button {
                 viewModel.firstLanguage.readAloud(viewModel.firstLanguage.read("100"))
             } label: {
@@ -105,33 +165,30 @@ struct Settings: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .foregroundColor(color)
-                    .frame(height: symbolSize)
-                    .padding(.bottom, 5)
                     .frame(height: 23)
-                    .padding(.top, 40)
+                    .padding(.bottom, 5)
+                    .padding(.leading, noVoice ? 0 : 5)
+                    .frame(height: 23)
+                    .padding(.top, 10)
             }
             .disabled(noVoice)
-            GridRow {
+            HStack {
                 Text("Read Aloud")
+                Spacer()
                 Toggle("", isOn: $viewModel.persistent.offerReadingAloud)
                     .frame(width: 40)
                     .toggleStyle(
                         ColoredToggleStyle(onColor: Color(white: 0.6),
                                            offColor: Color(white: 0.25),
                                            thumbColor: .white))
-                    .padding(.leading, 3)
+                    .padding(.trailing, 10)
             }
             NavigationLink {
                 VoiceSelection(viewModel: viewModel)
             } label: {
                 Text("Select Voices")
-                Image(systemName: "chevron.right")
-                    .padding(.leading, 15)
             }
-            .foregroundColor(viewModel.persistent.offerReadingAloud ? .white : .gray)
-            
             .disabled(!viewModel.persistent.offerReadingAloud)
-            .padding(.top, 5)
         }
     }
     
@@ -139,7 +196,6 @@ struct Settings: View {
         let flagName: String
         let text: String
         var body: some View {
-            GridRow {
                 HStack {
                     Image(flagName)
                         .resizable()
@@ -154,123 +210,99 @@ struct Settings: View {
                         .foregroundColor(.yellow)
                     Spacer()
                 }
-                .gridCellColumns(2)
-                .padding(.top, 40)
-            }
+                .padding(.top, 15)
         }
     }
     
-    var EnglishSettings: some View {
+    var LanguageSettings: some View {
         let english = viewModel.languages.english
-        let example =  english.read(150)
-        return Group {
-            SettingsHeader(flagName: english.flagName, text: example)
-            GridRow {
+        let german = viewModel.languages.german
+        let spanish = viewModel.languages.spanish
+        let vietnamese = viewModel.languages.vietnamese
+
+        return Section(header: Text("Language Settings")) {
+            SettingsHeader(flagName: english.flagName, text: english.read(150))
+            HStack {
                 Text("use \"and\"")
+                Spacer()
                 Toggle("", isOn: $viewModel.languages.english.useAndAfterHundred)
                     .frame(width: 40)
                     .toggleStyle(
                         ColoredToggleStyle(onColor: Color(white: 0.6),
                                            offColor: Color(white: 0.25),
                                            thumbColor: .white))
-                    .padding(.leading, 3)
+                    .padding(.trailing, 10)
             }
-        }
-    }
-    
-    var GermanSettings: some View {
-        let german = viewModel.languages.german
-        let example =  german.read(88) + (german.useWordSplitter ? " (with word splitter)" : "")
-        return Group {
-            SettingsHeader(flagName: german.flagName, text: example)
-            GridRow {
+            SettingsHeader(
+                flagName: german.flagName,
+                text: german.read(88) + (german.useWordSplitter ? " +splitter" : ""))
+            HStack {
                 Text("Trennung")
+                Spacer()
                 Toggle("", isOn: $viewModel.languages.german.useWordSplitter)
                     .frame(width: 40)
                     .toggleStyle(
                         ColoredToggleStyle(onColor: Color(white: 0.6),
                                            offColor: Color(white: 0.25),
                                            thumbColor: .white))
-                    .padding(.leading, 3)
+                    .padding(.trailing, 10)
             }
-            GridRow {
+            HStack {
                 Text("Großschreibung")
+                Spacer()
                 Toggle("", isOn: $viewModel.languages.german.capitalisation)
                     .frame(width: 40)
                     .toggleStyle(
                         ColoredToggleStyle(onColor: Color(white: 0.6),
                                            offColor: Color(white: 0.25),
                                            thumbColor: .white))
-                    .padding(.leading, 3)
+                    .padding(.trailing, 10)
             }
-        }
-    }
-    
-    var SpanishSettings: some View {
-        let spanish = viewModel.languages.spanish
-        let example = spanish.read("1.5")
-        
-        return Group {
-            SettingsHeader(flagName: spanish.flagName, text: example)
-            GridRow {
-                Text("Coma o punto")
+            SettingsHeader(flagName: spanish.flagName, text: spanish.read("1.5"))
+            HStack {
+                Text("Coma o punto:")
+                Spacer()
                 Picker("", selection: $viewModel.languages.spanish.puntoComma) {
                     ForEach(SpanishImpl.PuntoComma.allCases, id: \.self) { value in
                         Text("\(value.rawValue)")
                             .tag(value)
                     }
                 }
-                .frame(width: 220)
-                .padding(2)
-                .background(Color(UIColor.darkGray))
-                .borderRadius(Color.black, width: 5, cornerRadius: 10, corners: [.topLeft, .bottomLeft, .topRight, .bottomRight])
                 .pickerStyle(.segmented)
             }
-        }
-    }
-    
-    var VietnameseSettings: some View {
-        let vietnamese = viewModel.languages.vietnamese
-        let example = vietnamese.read(33303)
-        return Group {
-            SettingsHeader(flagName: vietnamese.flagName, text: example)
-            GridRow {
+            SettingsHeader(flagName: vietnamese.flagName, text: vietnamese.read(33303))
+            HStack {
                 Text("1000")
+                Spacer()
                 Picker("", selection: $viewModel.languages.vietnamese.thousand) {
                     ForEach(VietnameseImpl.Thousand.allCases, id: \.self) { value in
                         Text("\(value.rawValue)")
                             .tag(value)
                     }
                 }
-                .frame(width: 220)
-                .padding(2)
-                .background(Color(UIColor.darkGray))
-                .borderRadius(Color.black, width: 5, cornerRadius: 10, corners: [.topLeft, .bottomLeft, .topRight, .bottomRight])
                 .pickerStyle(.segmented)
             }
-            GridRow {
+            HStack {
                 Text("linh hoặc lẻ")
+                Spacer()
                 Picker("", selection: $viewModel.languages.vietnamese.secondLast) {
                     ForEach(VietnameseImpl.SecondLast.allCases, id: \.self) { value in
                         Text("\(value.rawValue)")
                             .tag(value)
                     }
                 }
-                .frame(width: 220)
-                .padding(2)
-                .background(Color(UIColor.darkGray))
-                .borderRadius(Color.black, width: 5, cornerRadius: 10, corners: [.topLeft, .bottomLeft, .topRight, .bottomRight])
                 .pickerStyle(.segmented)
             }
-            GridRow {
+            HStack {
                 Text("gọn")
+                Spacer()
                 Toggle("", isOn: $viewModel.languages.vietnamese.compact)
                     .frame(width: 40)
                     .toggleStyle(
                         ColoredToggleStyle(onColor: Color(white: 0.6),
                                            offColor: Color(white: 0.25),
                                            thumbColor: .white))
-                    .padding(.leading, 3)
+                    .padding(.trailing, 10)
             }
         }
     }
@@ -280,11 +312,13 @@ struct Settings: View {
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
         
-        return VStack(alignment: .leading) {
-            Text("\nVersion: \(appVersion ?? "unknown") (build \(buildNumber ?? "unknown"))")
-                .italic()
-                .padding(.bottom, 3)
-            Text("This is a hobby project by Joachim Neumann. Although I have done some testing, errors may occur. If you have feedback, for example a wrong translations or ideas for improvement, drop me an email at joachim@joachimneumann.com").tint(.white)
+        return Section(header: Text("About")) {
+//            VStack(alignment: .leading) {
+                Text("Version: \(appVersion ?? "unknown") (build \(buildNumber ?? "unknown"))")
+                    .italic()
+                    .padding(.bottom, 3)
+                Text("This is a hobby project by Joachim Neumann. Although I have done some testing, errors may occur. If you have feedback, for example a wrong translations or ideas for improvement, drop me an email at joachim@joachimneumann.com").tint(.white)
+//            }
         }
     }
     

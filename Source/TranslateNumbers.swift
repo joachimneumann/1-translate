@@ -21,6 +21,7 @@ struct TranslateNumbers: View {
     @State var voiceAvailable = false
     
     struct OneLanguage: View {
+        let isFirstLanguage: Bool
         @ObservedObject var viewModel: ViewModel
         let screen: Screen
         let language: Language
@@ -47,7 +48,7 @@ struct TranslateNumbers: View {
                     .disabled(language.voice == nil)
                     .padding(.trailing, 10)
                 }
-                LanguageButton(language: language, viewModel: viewModel, screen: screen)
+                LanguageButton(language: language, isFirstLanguage: isFirstLanguage, viewModel: viewModel, screen: screen)
             }
             .frame(height: 34.0)
             .padding(.bottom, 10)
@@ -58,7 +59,8 @@ struct TranslateNumbers: View {
     var portraitView: some View {
         VStack(spacing: 0.0) {
             VStack(spacing: 0.0) {
-                OneLanguage(viewModel: viewModel,
+                OneLanguage(isFirstLanguage: true,
+                            viewModel: viewModel,
                             screen: screen,
                             language: viewModel.firstLanguage,
                             translated: viewModel.firstTranslatedNumber)
@@ -71,7 +73,8 @@ struct TranslateNumbers: View {
                 .padding(.horizontal, 0)
                 Spacer(minLength: 0.0)
                 if viewModel.persistent.secondLanguageAllowed {
-                    OneLanguage(viewModel: viewModel,
+                    OneLanguage(isFirstLanguage: false,
+                                viewModel: viewModel,
                                 screen: screen,
                                 language: viewModel.secondLanguage,
                                 translated: viewModel.secondTranslatedNumber)
@@ -97,12 +100,13 @@ struct TranslateNumbers: View {
     }
     
     struct LanguageButton: View {
-        @State var showSheet = false
+        let isFirstLanguage: Bool
         private let language: Language
         private let viewModel: ViewModel
         private let screen: Screen
 
-        init(language: Language, viewModel: ViewModel, screen: Screen) {
+        init(language: Language, isFirstLanguage: Bool, viewModel: ViewModel, screen: Screen) {
+            self.isFirstLanguage = isFirstLanguage
             self.language = language
             self.viewModel = viewModel
             self.screen = screen
@@ -110,7 +114,7 @@ struct TranslateNumbers: View {
         
         var body: some View {
             NavigationLink {
-                LanguageSelector(viewModel: viewModel, screen: screen)
+                LanguageSelector(viewModel: viewModel, screen: screen, isFirstLanguage: isFirstLanguage)
             } label: {
                 Image(language.flagName)
                     .resizable()

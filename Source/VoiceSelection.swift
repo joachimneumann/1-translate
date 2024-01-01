@@ -44,7 +44,7 @@ struct VoiceSelection: View {
     var body: some View {
         let dict = viewModel.voicesForCode
         List {
-            Text("Note: to add Premium or Enhanced voices, search for \"Spoken Content\" in the iOS settings app.")
+            Text("You can add Premium or Enhanced voices in \"Spoken Content\" in the iOS settings app.")
                 .onTapGesture {
                     if let url = URL(string: UIApplication.openSettingsURLString) {
                         UIApplication.shared.open(url)
