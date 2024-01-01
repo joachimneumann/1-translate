@@ -71,8 +71,6 @@ class PolishImpl: LanguageImpl {
     override func read_e2_e3(_ i: Int) -> String {
         var ret = ""
         switch i.E2 {
-        case 0:
-            ret = ""
         case 1:
             ret = "sto"
         case 2:

@@ -58,6 +58,7 @@ final class TestRussian: XCTestCase {
         XCTAssertEqual(russian.read(900), "девятьсот")
         XCTAssertEqual(russian.read(999), "девятьсот девяносто девять")
         XCTAssertEqual(russian.read(1_000), "тысяча")
+        XCTAssertEqual(russian.read(1_348), "тысяча триста сорок восемь")
         XCTAssertEqual(russian.read(1_534), "тысячу пятьсот тридцать четыре")
         XCTAssertEqual(russian.read(2_000), "две тысячи")
         XCTAssertEqual(russian.read(2_345), "две тысячи триста сорок пять")

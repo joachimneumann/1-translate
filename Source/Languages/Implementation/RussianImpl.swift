@@ -29,8 +29,6 @@ class RussianImpl: LanguageImpl {
         e12_one = e12
         tensConnector = " "
         eSpace = " "
-//        afterHundred = " "
-//        beforeHundred = " "
         beforeAndAfterDotString = " "
     }
     
@@ -77,5 +75,67 @@ class RussianImpl: LanguageImpl {
         if i == 18 { return "восемнадцать" }
         if i == 19 { return "девятнадцать" }
         return super.read_10_99(i)
+    }
+    
+    override func read_e2_e3(_ i: Int) -> String {
+        var ret = ""
+        switch i.E2 {
+        case 1:
+            ret = "стo"
+        case 2:
+            ret = "двести"
+        case 3:
+            ret = "триста"
+        case 4:
+            ret = "четыреста"
+        case 5:
+            ret = "пятьсот"
+        case 6:
+            ret = "шестьсот"
+        case 7:
+            ret = "семьсот"
+        case 8:
+            ret = "восемьсот"
+        case 9:
+            ret = "девятьсот"
+        default:
+            fatalError("read_e2_e3 out of range")
+        }
+        if i.E2x > 0 {
+            if ret.count > 0 { ret += " " }
+            ret += readInteger(i.E2x)
+        }
+        return ret
+    }
+
+    override func read_e3_e6(_ i: Int) -> String {
+        var ret = ""
+        switch i.E3 {
+        case 1:
+            ret = "тысяча"
+        case 2:
+            ret = "две тысячи"
+        case 3:
+            ret = "три тысячи"
+        case 4:
+            ret = "четыре тысячи"
+        case 5:
+            ret = "пять тысяч"
+        case 6:
+            ret = "шесть тысяч"
+        case 7:
+            ret = "семь тысяч"
+        case 8:
+            ret = "восемь тысяч"
+        case 9:
+            ret = "девять тысяч"
+        default:
+            ret = readInteger(i.E3) + " " + "тысяч"
+        }
+        if i.E3x > 0 {
+            ret += " "
+            ret += readInteger(i.E3x)
+        }
+        return ret
     }
 }
