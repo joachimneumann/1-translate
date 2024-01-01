@@ -293,7 +293,7 @@ struct Settings: View {
                 VoiceSelection(viewModel: viewModel)
             } label: {
                 HStack {
-                    Text("Configure Voices")
+                    Text("Select Voices")
                     Spacer()
                     Image(systemName: "chevron.right")
                         .padding(.trailing, 15)

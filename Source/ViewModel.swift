@@ -54,7 +54,7 @@ class ViewModel: ObservableObject, ShowAs {
 
     var translatorLanguages: [Language] = []
     var initDoneCallback: () -> () = {}
-    var allSystemVoices: [AVSpeechSynthesisVoice] = []
+    var systemVoices: [AVSpeechSynthesisVoice] = []
     let synthesizer = AVSpeechSynthesizer()
     var voicesForCode: [String : VoicesForCode] = [:]
 
@@ -450,15 +450,38 @@ class ViewModel: ObservableObject, ShowAs {
 
     func getVoices(for translatorLanguages: [Language]) {
         Task {
-            allSystemVoices = AVSpeechSynthesisVoice.speechVoices()
-            
+            let allSystemVoices = AVSpeechSynthesisVoice.speechVoices()
+            systemVoices = []
+            for systemVoice in allSystemVoices {
+                if systemVoice.identifier.contains("premium") {
+                    systemVoices.append(systemVoice)
+                }
+            }
+            for systemVoice in allSystemVoices {
+                if systemVoice.identifier.contains("enhanced") {
+                    let check = systemVoice.identifier.replacingOccurrences(of: "enhanced", with: "premium")
+                    var exists = false
+                    for s in systemVoices { if s.identifier == check { exists = true } }
+                    if !exists { systemVoices.append(systemVoice) }
+                }
+            }
+            for systemVoice in allSystemVoices {
+                if systemVoice.identifier.contains("compact") {
+                    let check1 = systemVoice.identifier.replacingOccurrences(of: "compact", with: "enhanced")
+                    let check2 = systemVoice.identifier.replacingOccurrences(of: "compact", with: "premium")
+                    var exists = false
+                    for s in systemVoices { if s.identifier == check1 || s.identifier == check2 { exists = true } }
+                    if !exists { systemVoices.append(systemVoice) }
+                }
+            }
+
             let uniqueCodes = uniqueLanguageCodes(allLanguages: translatorLanguages)
             
             /// create voicesForCode dictionary
             assert(voicesForCode.keys.count == 0)
             for code in uniqueCodes {
                 var list: [AVSpeechSynthesisVoice] = []
-                for systemVoice in allSystemVoices {
+                for systemVoice in systemVoices {
                     if systemVoice.languageCode == code {
                         list.append(systemVoice)
                     }
@@ -476,17 +499,20 @@ class ViewModel: ObservableObject, ShowAs {
             
             /// any voice identifiers stored in userdefaults?
             for code in uniqueCodes {
+                var found = false
                 if let storedVoiceIdentifier = UserDefaults.standard.string(forKey: voiceKey(code)) {
-                    for systemVoice in allSystemVoices {
-//                        print(systemVoice.description)
+                    for systemVoice in systemVoices {
+                        print(systemVoice.description)
                         if systemVoice.identifier == storedVoiceIdentifier {
                             setVoiceIfCodeMatches(allLanguages: translatorLanguages, code: code, voice: systemVoice)
+                            found = true
                             DispatchQueue.main.async {
                                 self.selectedVoiceDict[code] = systemVoice
                             }
                         }
                     }
-                } else {
+                }
+                if !found {
                     /// guess the voice
                     var guessedVoice: AVSpeechSynthesisVoice? = nil
                     if let list = voicesForCode[code]?.list {

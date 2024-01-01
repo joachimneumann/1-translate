@@ -15,16 +15,16 @@ struct VoiceSelection: View {
     struct OneVoiceView: View {
         let voice: AVSpeechSynthesisVoice
         let selected: Bool
+        let showVariant: Bool
 
         var body: some View {
             let name = voice.name.replacingOccurrences(of: " (Premium)", with: "").replacingOccurrences(of: " (Enhanced)", with: "")
-            HStack {
-                Text(voice.variantCode)
-                    .bold()
-                    .frame(width: 40)
+            HStack(spacing: 0) {
                 Text(name)
+                    .bold()
+                if showVariant { Text(" \(voice.variantCode),") }
                 Text(" \(voice.genderSting)")
-                Text(" \(voice.qualityString)")
+                Text("  \(voice.qualityString)")
                     .bold()
                     .foregroundColor(.yellow)
                 Spacer()
@@ -35,7 +35,13 @@ struct VoiceSelection: View {
             .contentShape(Rectangle())
         }
     }
-
+    func hasMultipleVariants(_ list: [AVSpeechSynthesisVoice]) -> Bool {
+        let variant = list.first?.variantCode ?? ""
+        for voice in list {
+            if voice.variantCode != variant { return true }
+        }
+        return false
+    }
     var body: some View {
         let dict = viewModel.voicesForCode
         List {
@@ -46,19 +52,30 @@ struct VoiceSelection: View {
                     }
                 }
             ForEach(dict.keys.sorted(), id: \.self) { code in
+                let hasMultipleVariants = hasMultipleVariants(dict[code]!.list)
                 Section(header: Text(languageName(code))) {
                     ForEach(dict[code]!.list, id: \.self) { voice in
-                        OneVoiceView(voice: voice, selected: viewModel.selectedVoiceDict[code] == voice)
+                        OneVoiceView(voice: voice, 
+                                     selected: viewModel.selectedVoiceDict[code] == voice,
+                                     showVariant: hasMultipleVariants)
                             .onTapGesture {
                                 DispatchQueue.main.async {
                                     viewModel.selectedVoiceDict[code] = voice
                                     viewModel.setVoiceIfCodeMatches(allLanguages: viewModel.languages.list, code: code, voice: voice)
                                 }
                             }
+                            .simultaneousGesture(DragGesture(minimumDistance: 0)
+                                .onChanged { _ in
+//                                    touchDown(symbol)
+                                }
+                                .onEnded { _ in
+//                                    touchUp(symbol, screen)
+                                })
                     }
                 }
             }
         }
+        .listStyle(.sidebar)
         .onAppear() {
             Task {
                 viewModel.initVoice()
