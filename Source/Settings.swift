@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct Settings: View {
-    
     @Environment(\.presentationMode) var presentation /// for dismissing the Settings View
     
     @ObservedObject var viewModel: ViewModel
     let font: Font
+    let yellow = Color(red: 242.0/255.0, green: 203.0/255.0, blue: 48.0/255.0)
     
     var body: some View {
         VStack {
@@ -43,6 +43,7 @@ struct Settings: View {
         return Group {
             GridRow {
                 Text("\(example)")
+                    .foregroundColor(.yellow)
                     .font(.largeTitle)
                     .gridCellColumns(2)
             }
@@ -91,9 +92,52 @@ struct Settings: View {
         }
     }
     
+    var VoiceSettings: some View {
+        let noVoice = !viewModel.persistent.offerReadingAloud
+        let color =  noVoice ? yellow.opacity(0.7) : yellow
+        let symbolName = noVoice ? "speaker.slash.fill" : "speaker.wave.3.fill"
+        let symbolSize: CGFloat = noVoice ? 23.0 : 18.0
+        return Group {
+            Button {
+                viewModel.firstLanguage.readAloud(viewModel.firstLanguage.read("100"))
+            } label: {
+                Image(systemName: symbolName)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .foregroundColor(color)
+                    .frame(height: symbolSize)
+                    .padding(.bottom, 5)
+                    .frame(height: 23)
+                    .padding(.top, 40)
+            }
+            .disabled(noVoice)
+            GridRow {
+                Text("Read Aloud")
+                Toggle("", isOn: $viewModel.persistent.offerReadingAloud)
+                    .frame(width: 40)
+                    .toggleStyle(
+                        ColoredToggleStyle(onColor: Color(white: 0.6),
+                                           offColor: Color(white: 0.25),
+                                           thumbColor: .white))
+                    .padding(.leading, 3)
+            }
+            NavigationLink {
+                VoiceSelection(viewModel: viewModel)
+            } label: {
+                Text("Select Voices")
+                Image(systemName: "chevron.right")
+                    .padding(.leading, 15)
+            }
+            .foregroundColor(viewModel.persistent.offerReadingAloud ? .white : .gray)
+            
+            .disabled(!viewModel.persistent.offerReadingAloud)
+            .padding(.top, 5)
+        }
+    }
+    
     struct SettingsHeader: View {
         let flagName: String
-        let name: String
+        let text: String
         var body: some View {
             GridRow {
                 HStack {
@@ -104,9 +148,10 @@ struct Settings: View {
                         .border(.white)
                         .frame(height: 25)
                         .padding(.trailing, 5)
-                    Text(name)
+                    Text(text)
                         .bold()
                         .frame(height: 25)
+                        .foregroundColor(.yellow)
                     Spacer()
                 }
                 .gridCellColumns(2)
@@ -119,12 +164,7 @@ struct Settings: View {
         let english = viewModel.languages.english
         let example =  english.read(150)
         return Group {
-            SettingsHeader(flagName: english.flagName, name: english.name)
-            GridRow {
-                Text(example)
-                    .padding(.leading, 0)
-                    .gridCellColumns(2)
-            }
+            SettingsHeader(flagName: english.flagName, text: example)
             GridRow {
                 Text("use \"and\"")
                 Toggle("", isOn: $viewModel.languages.english.useAndAfterHundred)
@@ -142,12 +182,7 @@ struct Settings: View {
         let german = viewModel.languages.german
         let example =  german.read(88) + (german.useWordSplitter ? " (with word splitter)" : "")
         return Group {
-            SettingsHeader(flagName: german.flagName, name: german.name)
-            GridRow {
-                Text(example)
-                    .padding(.leading, 0)
-                    .gridCellColumns(2)
-            }
+            SettingsHeader(flagName: german.flagName, text: example)
             GridRow {
                 Text("Trennung")
                 Toggle("", isOn: $viewModel.languages.german.useWordSplitter)
@@ -176,12 +211,7 @@ struct Settings: View {
         let example = spanish.read("1.5")
         
         return Group {
-            SettingsHeader(flagName: spanish.flagName, name: spanish.name)
-            GridRow {
-                Text(example)
-                    .padding(.leading, 0)
-                    .gridCellColumns(2)
-            }
+            SettingsHeader(flagName: spanish.flagName, text: example)
             GridRow {
                 Text("Coma o punto")
                 Picker("", selection: $viewModel.languages.spanish.puntoComma) {
@@ -201,15 +231,9 @@ struct Settings: View {
     
     var VietnameseSettings: some View {
         let vietnamese = viewModel.languages.vietnamese
-        let example = vietnamese.read(303333)
+        let example = vietnamese.read(33303)
         return Group {
-            SettingsHeader(flagName: vietnamese.flagName, name: vietnamese.name)
-            GridRow {
-                Text("Digits: "+example)
-                    .padding(.leading, 0)
-                    .gridCellColumns(2)
-                    .gridCellUnsizedAxes(.horizontal)
-            }
+            SettingsHeader(flagName: vietnamese.flagName, text: example)
             GridRow {
                 Text("1000")
                 Picker("", selection: $viewModel.languages.vietnamese.thousand) {
@@ -251,48 +275,6 @@ struct Settings: View {
         }
     }
     
-    var VoiceSettings: some View {
-        let noVoice = !viewModel.persistent.offerReadingAloud
-        let color =  noVoice ? Color(white: 0.7) : Color(white: 0.95)
-        let symbolName = noVoice ? "speaker.slash.fill" : "speaker.wave.3.fill"
-        let symbolSize: CGFloat = noVoice ? 23.0 : 18.0
-        return Group {
-            Button {
-                viewModel.firstLanguage.readAloud(viewModel.firstLanguage.read("100"))
-            } label: {
-                Image(systemName: symbolName)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .foregroundColor(color)
-                    .frame(height: symbolSize)
-                    .padding(.bottom, 5)
-                    .frame(height: 23)
-                    .padding(.top, 40)
-            }
-            .disabled(noVoice)
-            GridRow {
-                Text("Read Aloud")
-                Toggle("", isOn: $viewModel.persistent.offerReadingAloud)
-                    .frame(width: 40)
-                    .toggleStyle(
-                        ColoredToggleStyle(onColor: Color(white: 0.6),
-                                           offColor: Color(white: 0.25),
-                                           thumbColor: .white))
-                    .padding(.leading, 3)
-            }
-            NavigationLink {
-                VoiceSelection(viewModel: viewModel)
-            } label: {
-                Text("Select Voices")
-                Image(systemName: "chevron.right")
-                    .padding(.leading, 15)
-            }
-            .foregroundColor(viewModel.persistent.offerReadingAloud ? .white : .gray)
-            
-            .disabled(!viewModel.persistent.offerReadingAloud)
-            .padding(.top, 5)
-        }
-    }
     
     var HobbyProject: some View {
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
