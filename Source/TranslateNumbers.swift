@@ -32,7 +32,8 @@ struct TranslateNumbers: View {
                                 Image(systemName: "speaker.wave.3.fill")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .frame(height: 20)
+                                    .foregroundColor(Color(red: 0.95, green:0.95, blue: 0.95))
+                                    .frame(height: 18)
                                     .padding(10)
                             }
                             .disabled(viewModel.firstLanguage.voice == nil)
@@ -61,8 +62,9 @@ struct TranslateNumbers: View {
                                 } label: {
                                     Image(systemName: "speaker.wave.3.fill")
                                         .resizable()
+                                        .foregroundColor(Color(red: 0.95, green:0.95, blue: 0.95))
                                         .aspectRatio(contentMode: .fit)
-                                        .frame(height: 20)
+                                        .frame(height: 18)
                                         .padding(10)
                                 }
                                 .disabled(viewModel.secondLanguage.voice == nil)
