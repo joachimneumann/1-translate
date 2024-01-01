@@ -72,7 +72,7 @@ struct VoiceSelection: View {
                 viewModel.initVoice()
             }
         }
-        .navigationTitle("Select Voices")
+        .navigationTitle("Voice Selector")
     }
     func languageName(_ code: String) -> String {
         let XX: Locale = .current

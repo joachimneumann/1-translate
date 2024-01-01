@@ -90,7 +90,7 @@ struct LanguageSelector: View {
                                 .frame(height: screen.plusIconSize * 0.8)
                                 .foregroundColor(Color.white)
                         }
-                        .buttonStyle(TransparentButtonStyle())
+                        .buttonStyle(DefaultButtonStyle())
                         .opacity(0.9)
                     }
                     .padding(.bottom, 15)
@@ -147,6 +147,7 @@ struct LanguageSelector: View {
                 }
                 .background(darkColor)
             }
+            .navigationTitle("Language Selector")
             .edgesIgnoringSafeArea(.bottom)
         }
         .onAppear() {

@@ -26,6 +26,7 @@ class Languages {
     var german: German                = GermanImpl()
     var hieroglyphs: Language         = HieroglyphsImpl()
     let polish: Language              = PolishImpl()
+    let russian: Language             = RussianImpl()
     let roman: Language               = RomanImpl()
     let thai: Language                = ThaiImpl()
     let thaiNumerals: Language        = ThaiNumeralsImpl()

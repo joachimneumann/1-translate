@@ -19,78 +19,69 @@ struct TranslateNumbers: View {
     @State private var settingsDetent = PresentationDetent.medium
 
     @State var voiceAvailable = false
+    
+    struct OneLanguage: View {
+        @ObservedObject var viewModel: ViewModel
+        let screen: Screen
+        let language: Language
+        let translated: String
+
+        var body: some View {
+            HStack(spacing: 30.0) {
+                Spacer()
+                if viewModel.persistent.offerReadingAloud {
+                    let noVoice = language.voice == nil
+                    let color =  noVoice ? Color(white: 0.7) : Color(white: 0.95)
+                    let symbolName = noVoice ? "speaker.slash.fill" : "speaker.wave.3.fill"
+                    let symbolSize: CGFloat = noVoice ? 23.0 : 18.0
+                    Button {
+                        language.readAloud(translated)
+                    } label: {
+                        Image(systemName: symbolName)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .foregroundColor(color)
+                            .frame(height: symbolSize)
+                            .padding(10)
+                    }
+                    .disabled(language.voice == nil)
+                    .padding(.trailing, 10)
+                }
+                LanguageButton(language: language, viewModel: viewModel, screen: screen)
+            }
+            .frame(height: 34.0)
+            .padding(.bottom, 10)
+            .padding(.top, 20)
+        }
+    }
+    
     var portraitView: some View {
         VStack(spacing: 0.0) {
             VStack(spacing: 0.0) {
-                VStack(spacing: 0.0) {
-                    HStack(spacing: 30.0) {
-                        Spacer()
-                        if viewModel.persistent.offerReadingAloud {
-                            let noVoice = viewModel.firstLanguage.voice == nil
-                            let color =  noVoice ? Color(red: 0.5, green: 0.5, blue: 0.5) : Color(red: 0.95, green:0.95, blue: 0.95)
-                            let symbolName = noVoice ? "speaker.slash.fill" : "speaker.wave.3.fill"
-                            let symbolSize: CGFloat = noVoice ? 23.0 : 18.0
-                            Button {
-                                viewModel.firstLanguage.readAloud(viewModel.firstTranslatedNumber)
-                            } label: {
-                                Image(systemName: symbolName)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .foregroundColor(color)
-                                    .frame(height: symbolSize)
-                                    .padding(10)
-                            }
-                            .disabled(viewModel.firstLanguage.voice == nil)
-                            .padding(.trailing, 10)
-                        }
-                        LanguageButton(language: viewModel.firstLanguage, viewModel: viewModel, screen: screen)                    }
-                    .frame(height: 34.0)
-                    .padding(.bottom, 10)
-                    .padding(.top, 20)
-                        TranslatedDisplay(
-                            translatedString: viewModel.firstTranslatedNumber,
-                            forCopyTranslatedNumber: viewModel.forCopyFirstTranslatedNumber,
-                            translatedStringTopBorder: viewModel.firstTranslatedNumberTopBorder,
-                            screen: screen)
-                        .font(viewModel.firstFont)
-                        .padding(.horizontal, 0)
-                    Spacer(minLength: 0.0)
-                }
+                OneLanguage(viewModel: viewModel,
+                            screen: screen,
+                            language: viewModel.firstLanguage,
+                            translated: viewModel.firstTranslatedNumber)
+                TranslatedDisplay(
+                    translatedString: viewModel.firstTranslatedNumber,
+                    forCopyTranslatedNumber: viewModel.forCopyFirstTranslatedNumber,
+                    translatedStringTopBorder: viewModel.firstTranslatedNumberTopBorder,
+                    screen: screen)
+                .font(viewModel.firstFont)
+                .padding(.horizontal, 0)
+                Spacer(minLength: 0.0)
                 if viewModel.persistent.secondLanguageAllowed {
-                    VStack(spacing: 0.0) {
-                        HStack(spacing: 30.0) {
-                            let noVoice = viewModel.secondLanguage.voice == nil
-                            let color =  noVoice ? Color(red: 0.5, green: 0.5, blue: 0.5) : Color(red: 0.95, green:0.95, blue: 0.95)
-                            let symbolName = noVoice ? "speaker.slash.fill" : "speaker.wave.3.fill"
-                            let symbolSize: CGFloat = noVoice ? 23.0 : 18.0
-                            Spacer()
-                            if viewModel.persistent.offerReadingAloud {
-                                Button {
-                                    viewModel.secondLanguage.readAloud(viewModel.secondTranslatedNumber)
-                                } label: {
-                                    Image(systemName: symbolName)
-                                        .resizable()
-                                        .foregroundColor(color)
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(height: symbolSize)
-                                        .padding(10)
-                                }
-                                .disabled(viewModel.secondLanguage.voice == nil)
-                                .padding(.trailing, 10)
-                            }
-                            LanguageButton(language: viewModel.secondLanguage, viewModel: viewModel, screen: screen)
-                        }
-                        .frame(height: 34.0)
-                        .padding(.bottom, 10)
-                        .padding(.top, 20)
-                        Spacer(minLength: 0.0)
-                        TranslatedDisplay(
-                            translatedString: viewModel.secondTranslatedNumber,
-                            forCopyTranslatedNumber: viewModel.forCopySecondTranslatedNumber,
-                            translatedStringTopBorder: viewModel.secondTranslatedNumberTopBorder,                            screen: screen)
-                        .font(viewModel.secondFont)
-                        .padding(.horizontal, 0)
-                    }
+                    OneLanguage(viewModel: viewModel,
+                                screen: screen,
+                                language: viewModel.secondLanguage,
+                                translated: viewModel.secondTranslatedNumber)
+                    Spacer(minLength: 0.0)
+                    TranslatedDisplay(
+                        translatedString: viewModel.secondTranslatedNumber,
+                        forCopyTranslatedNumber: viewModel.forCopySecondTranslatedNumber,
+                        translatedStringTopBorder: viewModel.secondTranslatedNumberTopBorder,                            screen: screen)
+                    .font(viewModel.secondFont)
+                    .padding(.horizontal, 0)
                 }
             }
             
@@ -127,7 +118,7 @@ struct TranslateNumbers: View {
                     .padding(2)
                     .border(.white, width: 2)
             }
-            .buttonStyle(TransparentButtonStyle())
+            .buttonStyle(DefaultButtonStyle())
             .opacity(0.9)
         }
     }

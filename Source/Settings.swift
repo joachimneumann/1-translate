@@ -43,8 +43,7 @@ struct Settings: View {
         return Group {
             GridRow {
                 Text("\(example)")
-                    .bold()
-                    .padding(.leading, 0)
+                    .font(.largeTitle)
                     .gridCellColumns(2)
             }
             GridRow {
@@ -253,10 +252,24 @@ struct Settings: View {
     }
     
     var VoiceSettings: some View {
+        let noVoice = !viewModel.persistent.offerReadingAloud
+        let color =  noVoice ? Color(white: 0.7) : Color(white: 0.95)
+        let symbolName = noVoice ? "speaker.slash.fill" : "speaker.wave.3.fill"
+        let symbolSize: CGFloat = noVoice ? 23.0 : 18.0
         return Group {
-            Text("Voices")
-                .bold()
-                .padding(.top, 30)
+            Button {
+                viewModel.firstLanguage.readAloud(viewModel.firstLanguage.read("100"))
+            } label: {
+                Image(systemName: symbolName)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .foregroundColor(color)
+                    .frame(height: symbolSize)
+                    .padding(.bottom, 5)
+                    .frame(height: 23)
+                    .padding(.top, 40)
+            }
+            .disabled(noVoice)
             GridRow {
                 Text("Read Aloud")
                 Toggle("", isOn: $viewModel.persistent.offerReadingAloud)
@@ -270,13 +283,13 @@ struct Settings: View {
             NavigationLink {
                 VoiceSelection(viewModel: viewModel)
             } label: {
-                HStack {
-                    Text("Select Voices")
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                        .padding(.trailing, 15)
-                }
+                Text("Select Voices")
+                Image(systemName: "chevron.right")
+                    .padding(.leading, 15)
             }
+            .foregroundColor(viewModel.persistent.offerReadingAloud ? .white : .gray)
+            
+            .disabled(!viewModel.persistent.offerReadingAloud)
             .padding(.top, 5)
         }
     }
