@@ -47,19 +47,19 @@ struct VoiceSelection: View {
     var body: some View {
         let dict = viewModel.voicesForCode
         VStack {
-            Text("Add Premium or Enhanced voices in \"Spoken Content\" (iOS settings)")
+            Text("Add Premium or Enhanced voices in \"Spoken Content\"")
                 .italic()
+                .padding(10)
+                .multilineTextAlignment(.center)
+                .frame(maxWidth: .infinity)
+                .background(Color(white: 0.18))
+                .cornerRadius(10.0)
+                .padding(.horizontal, 20)
                 .onTapGesture {
                     if let url = URL(string: UIApplication.openSettingsURLString) {
                         UIApplication.shared.open(url)
                     }
                 }
-                .padding()
-                .background(Color(white: 0.18))
-                .cornerRadius(10.0)
-            
-            
-                .padding(.horizontal, 1)
             List {
                 ForEach(dict.keys.sorted(), id: \.self) { code in
                     let hasMultipleVariants = hasMultipleVariants(dict[code]!.list)
