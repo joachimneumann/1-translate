@@ -13,7 +13,7 @@ class RussianImpl: LanguageImpl {
             name: "русский",
             negativeString: "минус",
             dotString: "целых",
-            exponentString: "e")
+            exponentString: " EE ")
         voiceLanguageCode = "ru"
         voiceLanguageName = "Russian"
         nameDescription = "Russian"

@@ -13,7 +13,7 @@ class ArmenianImpl: LanguageImpl {
             name: "հայերեն",
             negativeString: "մինուս",
             dotString: "կետ",
-            exponentString: "e")
+            exponentString: " EE ")
         voiceLanguageCode = "hy"
         voiceLanguageName = "Armenian"
         nameDescription = "Armenian"

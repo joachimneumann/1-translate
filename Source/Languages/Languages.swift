@@ -21,6 +21,7 @@ class Languages {
     let danish: Language              = DanishImpl()
 //    let digits: Language              = DigitsImpl()
     var english: English              = EnglishImpl()
+    var esperanto: Language           = EsperantoImpl()
     var spanish: Spanish              = SpanishImpl()
     let french: Language              = FrenchImpl()
     var german: German                = GermanImpl()

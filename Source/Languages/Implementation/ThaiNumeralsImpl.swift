@@ -13,8 +13,8 @@ class ThaiNumeralsImpl: LanguageImpl {
             name: "แบบดั้งเดิม",
             negativeString: "-",
             dotString: ".",
-            exponentString: "e")
-        
+            exponentString: " EE ")
+
         voiceLanguageCode = "th"
         voiceLanguageName = "Thai"
         nameDescription = "Thai Numerals"

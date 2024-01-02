@@ -13,7 +13,7 @@ class ArabicNumeralsImpl: LanguageImpl {
             name: "الترقيم العربي",
             negativeString: "-",
             dotString: ".",
-            exponentString: "e")
+            exponentString: " EE ")
         voiceLanguageCode = "ar"
         voiceLanguageName = "Arabic"
         nameDescription = "Arabic Numerals"
