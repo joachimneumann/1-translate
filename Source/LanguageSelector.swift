@@ -64,33 +64,24 @@ struct LanguageSelector: View {
     }
     
     var body: some View {
-        VStack {
-            VStack {
-                HStack {
-                    Spacer()
-                    NavigationLink {
-                        Settings(viewModel: viewModel, font: Font(screen.infoUiFont))
-                    } label: {
-                        Image(systemName: "switch.2")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .font(Font.title.weight(.thin))
-                            .frame(height: screen.plusIconSize)
-                            .foregroundColor(Color.white)
-                    }
-                    .buttonStyle(DefaultButtonStyle())
-                }
-                .padding(.bottom, 15)
-                .padding(.trailing, 20)
-                .background(.black)
-                
-                LanguageList(
-                    selectedIndex: isFirstLanguage ? $viewModel.indexOfFirstLanguage : $viewModel.indexOfSecondLanguage,
-                    list: viewModel.languages.list,
-                    color: .black)
+        LanguageList(
+            selectedIndex: isFirstLanguage ? $viewModel.indexOfFirstLanguage : $viewModel.indexOfSecondLanguage,
+            list: viewModel.languages.list,
+            color: .black)
+        .padding(.top, 20)
+        .navigationTitle(isFirstLanguage ? "First Language" : "Second Language")
+        .toolbar {
+            NavigationLink {
+                Settings(viewModel: viewModel, font: Font(screen.infoUiFont))
+            } label: {
+                Image(systemName: "gearshape")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .bold()
+                    .frame(height: 25)
+                    .foregroundColor(Color.white)
             }
         }
-        .navigationTitle(isFirstLanguage ? "First Language" : "Second Language")
 //        .edgesIgnoringSafeArea(.bottom)
     }
 }

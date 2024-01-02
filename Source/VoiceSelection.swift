@@ -29,6 +29,8 @@ struct VoiceSelection: View {
                 Spacer()
                 if selected {
                     Image(systemName: "checkmark")
+                        .bold()
+                        .foregroundColor(.yellow)
                 }
             }
             .contentShape(Rectangle())
@@ -44,48 +46,57 @@ struct VoiceSelection: View {
     }
     var body: some View {
         let dict = viewModel.voicesForCode
-        List {
-            Text("You can add Premium or Enhanced voices in \"Spoken Content\" in the iOS settings app.")
+        VStack {
+            Text("Add Premium or Enhanced voices in \"Spoken Content\" (iOS settings)")
+                .italic()
                 .onTapGesture {
                     if let url = URL(string: UIApplication.openSettingsURLString) {
                         UIApplication.shared.open(url)
                     }
                 }
-            ForEach(dict.keys.sorted(), id: \.self) { code in
-                let hasMultipleVariants = hasMultipleVariants(dict[code]!.list)
-                Section(header: Text(languageName(code))) {
-                    ForEach(dict[code]!.list, id: \.self) { voice in
-                        OneVoiceView(voice: voice,
-                                     selected: viewModel.selectedVoiceDict[code] == voice,
-                                     showVariant: hasMultipleVariants)
-                        .onTapGesture {
-                            DispatchQueue.main.async {
-                                viewModel.selectedVoiceDict[code] = voice
-                                viewModel.setVoiceIfCodeMatches(allLanguages: viewModel.languages.list, code: code, voice: voice)
+                .padding()
+                .background(Color(white: 0.18))
+                .cornerRadius(10.0)
+            
+            
+                .padding(.horizontal, 1)
+            List {
+                ForEach(dict.keys.sorted(), id: \.self) { code in
+                    let hasMultipleVariants = hasMultipleVariants(dict[code]!.list)
+                    Section(header: Text(languageName(code))) {
+                        ForEach(dict[code]!.list, id: \.self) { voice in
+                            OneVoiceView(voice: voice,
+                                         selected: viewModel.selectedVoiceDict[code] == voice,
+                                         showVariant: hasMultipleVariants)
+                            .onTapGesture {
+                                DispatchQueue.main.async {
+                                    viewModel.selectedVoiceDict[code] = voice
+                                    viewModel.setVoiceIfCodeMatches(allLanguages: viewModel.languages.list, code: code, voice: voice)
+                                }
                             }
+                            
                         }
-
                     }
                 }
             }
+            .padding(.top, 10)
         }
-        .padding(.top, 10)
         .onAppear() {
             Task {
                 viewModel.initVoice()
             }
         }
         .navigationTitle("Voice Selector")
+}
+func languageName(_ code: String) -> String {
+    let locale: Locale = .current
+    let variant = locale.localizedString(forIdentifier: code)
+    if let variant = variant {
+        return variant + " (" + code + ")"
     }
-    func languageName(_ code: String) -> String {
-        let XX: Locale = .current
-        let XXX = XX.localizedString(forIdentifier: code)
-        if let XXX = XXX {
-            return XXX + " (" + code + ")"
-        }
-        return code
-    }
-    
+    return code
+}
+
 }
 
 

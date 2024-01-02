@@ -27,7 +27,6 @@ struct Settings: View {
                 HobbyProject
             }
         }
-        .navigationTitle("Settings")
     }
     
     struct Appearance: View {
