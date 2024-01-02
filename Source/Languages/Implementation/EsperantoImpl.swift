@@ -18,6 +18,16 @@ class EsperantoImpl: LanguageImpl {
         e2 = "cent"
         e2_one = e2
         eSpace = " "
+        e3 = "mil"
+        e3_one = e3
+        e6 = "milionoj"
+        e6_one = "miliono"
+        e9 = "miliardoj"
+        e9_one = "miliardo"
+        e12 = "bilionoj"
+        e12_one = "biliono"
+        afterNegative = " "
+        beforeAndAfterDotString = " "
     }
 
     
@@ -40,6 +50,12 @@ class EsperantoImpl: LanguageImpl {
     override func read_10s(_ i: Int) -> String {
         if i == 1 { return "dek"}
         return read_0_9(i) + "dek"
+    }
+    
+    override func read_e2_e3(_ i: Int) -> String {
+        var ret = super.read_e2_e3(i)
+        ret = ret.replacingOccurrences(of: " cent", with: "cent")
+        return ret
     }
     
 }
