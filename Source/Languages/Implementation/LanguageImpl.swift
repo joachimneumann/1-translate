@@ -19,7 +19,7 @@ class LanguageImpl: Language {
     var negativeString: String
     var dotString: String
     var exponentString: String
-
+    
     var afterNegative = " "
     var beforeAndAfterDotString = ""
     var exponentString2: String? = nil
@@ -46,14 +46,14 @@ class LanguageImpl: Language {
     var afterGroup = ""
     var allowNegativeNumbers = true
     var postProcessing: ((String) -> String)? = nil
-
+    
     var eSpace: String? = nil
     var e3Space: String? = nil
     var e69Space: String? = nil
     private var eSpace_: String { eSpace == nil ? "" : eSpace! }
     private var e3Space_: String { e3Space == nil ? "" : e3Space! }
     private var e69Space_: String { e69Space == nil ? "" : e69Space! }
-
+    
     var tensConnector: String? = nil
     var tensConnector_: String {
         if tensConnector != nil {
@@ -63,6 +63,9 @@ class LanguageImpl: Language {
         }
     }
     
+    var nameWithDescription: String {
+        name + (nameDescription != nil ? "/"+nameDescription! : "")
+    }
     
     init(name: String,
          negativeString: String,

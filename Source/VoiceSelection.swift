@@ -47,8 +47,11 @@ struct VoiceSelection: View {
     var body: some View {
         let dict = viewModel.voicesForCode
         VStack {
-            Text("Add Premium or Enhanced voices in \"Spoken Content\"")
-                .italic()
+            HStack(spacing: 0) {
+                Text("Add Premium or Enhanced voices in ") +
+                Text("Accessibility → Spoken Content → Voices")
+                    .italic()
+            }
                 .padding(10)
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity)
@@ -69,10 +72,7 @@ struct VoiceSelection: View {
                                          selected: viewModel.selectedVoiceDict[code] == voice,
                                          showVariant: hasMultipleVariants)
                             .onTapGesture {
-                                DispatchQueue.main.async {
-                                    viewModel.selectedVoiceDict[code] = voice
-                                    viewModel.setVoiceIfCodeMatches(allLanguages: viewModel.languages.list, code: code, voice: voice)
-                                }
+                                viewModel.setAndRemember(code, voice)
                             }
                             
                         }

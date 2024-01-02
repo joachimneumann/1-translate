@@ -439,13 +439,12 @@ class ViewModel: ObservableObject, ShowAs {
     
     @Published var selectedVoiceDict: [String: AVSpeechSynthesisVoice] = [:]
 
-    func selectedVoiceFor(allLanguages: [Language], code: String) -> AVSpeechSynthesisVoice! {
-        for language in allLanguages {
-            if language.voiceLanguageCode == code {
-                return language.voice
-            }
+    func setAndRemember(_ code: String, _ voice: AVSpeechSynthesisVoice) {
+        DispatchQueue.main.async {
+            self.selectedVoiceDict[code] = voice
         }
-        return nil
+        UserDefaults.standard.set(voice.identifier, forKey: voiceKey(code))
+        setVoiceIfCodeMatches(allLanguages: languages.list, code: code, voice: voice)
     }
 
     func getVoices(for translatorLanguages: [Language]) {
@@ -520,11 +519,7 @@ class ViewModel: ObservableObject, ShowAs {
                         for voice in list { if voice.quality == .enhanced { guessedVoice = voice } }
                         for voice in list { if voice.quality == .premium { guessedVoice = voice } }
                         guard let guessedVoice = guessedVoice else { fatalError("failed guessing the initial voice for "+code) }
-                        UserDefaults.standard.set(guessedVoice.identifier, forKey: voiceKey(code))
-                        setVoiceIfCodeMatches(allLanguages: translatorLanguages, code: code, voice: guessedVoice)
-                        DispatchQueue.main.async {
-                            self.selectedVoiceDict[code] = guessedVoice
-                        }
+                        setAndRemember(code, guessedVoice)
                     } else {
                         /// code not supported
                     }

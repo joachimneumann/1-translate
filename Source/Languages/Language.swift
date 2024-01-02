@@ -14,6 +14,7 @@ protocol Language {
     func readAloud(_ text: String)
     var name: String { get }
     var nameDescription: String? { get }
+    var nameWithDescription: String { get }
     var voiceLanguageCode: String? { get }
     var flagName: String { get }
     var voice: AVSpeechSynthesisVoice? { get set }

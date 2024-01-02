@@ -88,7 +88,7 @@ struct Settings: View {
     }
     
     var DigitsSettings: some View {
-        let example =  Display(left: "").withSeparators(numberString: "10000.05", isNegative: false, separators: viewModel.persistent)
+        let example =  Display(left: "").withSeparators(numberString: "12000.5", isNegative: false, separators: viewModel.persistent)
         return Section(header: Text("Display and Seperators")) {
             Grid(alignment: .leading, verticalSpacing: 10) {
                 GridRow {
@@ -178,39 +178,48 @@ struct Settings: View {
                     VoiceSelection(viewModel: viewModel)
                 } label: {
                     Text("Select Voices")
-//                        .buttonStyle(.plain)
+                    //                        .buttonStyle(.plain)
                 }
-//                .disabled(!viewModel.persistent.offerReadingAloud)
+                //                .disabled(!viewModel.persistent.offerReadingAloud)
             }
         }
     }
     
-    struct SettingsHeader: View {
-        let flagName: String
-        let text: String
+    struct LanguageSection <Content: View>: View {
+        let language: Language
+        let example: String
+        var content: () -> Content
+        init(language: Language,
+             example: String,
+             @ViewBuilder content: @escaping () -> Content) {
+            self.language = language
+            self.example = example
+            self.content = content
+        }
+        
         var body: some View {
-            HStack {
-                Image(flagName)
+            Section(header: HStack {
+                Image(language.flagName)
                     .resizable()
                     .scaledToFit()
                     .padding(1)
                     .border(.white)
-                    .frame(height: 18)
+                    .frame(height: 13)
                     .padding(.trailing, 3)
-                Text(text)
-                    .fontWeight(.semibold)
-                    .frame(height: 25)
-                    .foregroundColor(.yellow)
-            }
+                Text(language.nameWithDescription) }) {
+                    Text(example + ": " + language.read(example))
+                        .fontWeight(.semibold)
+                        .frame(height: 25)
+                        .foregroundColor(.yellow)
+                    content()
+                }
         }
     }
     
     var English: some View {
-        let english = viewModel.languages.english
-        
-        return Section(header: Text("English")) {
-            VStack(alignment: .leading) {
-                SettingsHeader(flagName: english.flagName, text: english.read(150))
+        return LanguageSection(
+            language: viewModel.languages.english,
+            example: "150") {
                 HStack {
                     Text("use \"and\"")
                     Spacer()
@@ -224,16 +233,13 @@ struct Settings: View {
                         .padding(.trailing, 10)
                 }
             }
-        }
     }
+    
+    
     var German: some View {
-        let german = viewModel.languages.german
-        
-        return Section(header: Text("German")) {
-            VStack(alignment: .leading) {
-                SettingsHeader(
-                    flagName: german.flagName,
-                    text: german.read(88) + (german.useWordSplitter ? " +splitter" : ""))
+        return LanguageSection(
+            language: viewModel.languages.german,
+            example: "88") {
                 HStack {
                     Text("Trennung")
                     Spacer()
@@ -259,15 +265,13 @@ struct Settings: View {
                         .padding(.trailing, 10)
                 }
             }
-        }
     }
     
+    
     var Spanish: some View {
-        let spanish = viewModel.languages.spanish
-        
-        return Section(header: Text("Spanish")) {
-            VStack(alignment: .leading) {
-                SettingsHeader(flagName: spanish.flagName, text: spanish.read("1.5"))
+        return LanguageSection(
+            language: viewModel.languages.spanish,
+            example: "1.5") {
                 HStack {
                     Text("Coma o punto:")
                     Spacer()
@@ -280,15 +284,12 @@ struct Settings: View {
                     .pickerStyle(.segmented)
                 }
             }
-        }
     }
     
     var Vietnamese: some View {
-        let vietnamese = viewModel.languages.vietnamese
-        
-        return Section(header: Text("Vietnamese")) {
-            VStack(alignment: .leading) {
-                SettingsHeader(flagName: vietnamese.flagName, text: vietnamese.read(33303))
+        return LanguageSection(
+            language: viewModel.languages.vietnamese,
+            example: "33303") {
                 Grid(alignment: .leading) {
                     GridRow {
                         Text("1000")
@@ -325,9 +326,7 @@ struct Settings: View {
                         .padding(.trailing, 10)
                 }
             }
-        }
     }
-    
     
     
     var HobbyProject: some View {
@@ -339,7 +338,9 @@ struct Settings: View {
             Text("Version: \(appVersion ?? "unknown") (build \(buildNumber ?? "unknown"))")
                 .italic()
                 .padding(.bottom, 3)
-            Text("This is a hobby project by Joachim Neumann. Although I have done some testing, errors may occur. If you have feedback, for example a wrong translations or ideas for improvement, drop me an email at joachim@joachimneumann.com").tint(.white)
+            Text("This is a hobby project by Joachim Neumann. Although I have done some testing, errors may occur. If you have feedback, for example a wrong translations or ideas for improvement, drop me an email or, even better, look at existing tests and file a bug in the Testing Repository:").tint(.white)
+            Link("Write email", destination: URL(string: "mailto:joachim@joachimneumann.com")!).tint(.yellow)
+            Text("[Open Testing Repository](https://github.com/joachimneumann/1-translate-tests)").tint(.yellow)
             //            }
         }
     }

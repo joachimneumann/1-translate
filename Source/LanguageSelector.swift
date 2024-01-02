@@ -19,7 +19,8 @@ struct LanguageSelector: View {
         
         public var body: some View {
             ScrollViewReader { scrollViewReaderProxy in
-                List(0..<list.count, id: \.self, selection: selectedIndex) { languageIndex in
+                List(0..<list.count, id: \.self, selection: selectedIndex) {
+                    languageIndex in
                     let language = list[languageIndex]
                     let selected = languageIndex == selectedIndex.wrappedValue
                     HStack(spacing: 0) {
@@ -30,7 +31,8 @@ struct LanguageSelector: View {
                             .border(.white, width: 1)
                             .frame(height: 20)
 //                            .padding(.trailing, 10)
-                        Text("  "+language.name)
+                        Text(language.name)
+                            .padding(.leading, 10)
                         if language.nameDescription != nil {
                             Text("/"+language.nameDescription!)
                                 .italic()
