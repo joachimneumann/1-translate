@@ -21,12 +21,12 @@ class RussianImpl: LanguageImpl {
         e2_one = e2
         e3 = "тысяча"
         e3_one = e3
-        e6 = "миллион"
-        e6_one = e6
-        e9 = "миллиард"
-        e9_one = e9
-        e12 = "триллион"
-        e12_one = e12
+        e6 = "миллиона"
+        e6_one = "один миллион"
+        e9 = "миллиарда"
+        e9_one = "один миллиард"
+        e12 = "триллиона"
+        e12_one = "один триллион"
         tensConnector = " "
         eSpace = " "
         beforeAndAfterDotString = " "
@@ -35,7 +35,7 @@ class RussianImpl: LanguageImpl {
     
     override func read_0_9(_ i: Int) -> String {
         switch i {
-        case 0:     return "нуль"
+        case 0:     return "ноль"
         case 1:     return "один"
         case 2:     return "два"
         case 3:     return "три"
@@ -130,11 +130,49 @@ class RussianImpl: LanguageImpl {
         case 9:
             ret = "девять тысяч"
         default:
-            ret = readInteger(i.E3) + " " + "тысяч"
+            ret = readInteger(i.E3)
+            if i.E3 <= 20 {
+                ret += " " + "тысяч"
+            } else {
+                if i.E3 % 10 == 0 {
+                    ret += " " + "тысяч"
+                } else if i.E3 % 10 == 1 {
+                        ret += " " + "тысяча"
+                } else if i.E3 % 10 <= 4 {
+                    ret += " " + "тысячи"
+                } else {
+                    ret += " " + "тысяч"
+                }
+            }
         }
         if i.E3x > 0 {
             ret += " "
             ret += readInteger(i.E3x)
+        }
+        ret = ret.replacingOccurrences(of: "один ", with: "одна ")
+        return ret
+    }
+    
+    override func read_e6_e9(_ i: Int) -> String {
+        var ret = super.read_e6_e9(i)
+        if i.E6 > 4 { ret = ret.replacingOccurrences(of: "миллиона", with: "миллионов")}
+        return ret
+    }
+    
+    override func read_e9_e12(_ i: Int) -> String {
+        var ret = super.read_e9_e12(i)
+        if i.E9 > 4 { ret = ret.replacingOccurrences(of: "миллиарда", with: "миллиардов")}
+        if i.E9 > 1 {
+            ret = ret.replacingOccurrences(of: "один ", with: "одна ")
+        }
+        return ret
+    }
+    
+    override func read_e12_e15(_ i: Int) -> String {
+        var ret = super.read_e12_e15(i)
+        if i.E12 > 4 { ret = ret.replacingOccurrences(of: "триллиона", with: "триллионов")}
+        if i.E12 > 1 {
+            ret = ret.replacingOccurrences(of: "один ", with: "одна ")
         }
         return ret
     }
