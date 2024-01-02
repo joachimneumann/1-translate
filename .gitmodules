@@ -1,0 +1,3 @@
+[submodule "public"]
+	path = public
+	url = git@github.com:joachimneumann/1-translate-tests.git
