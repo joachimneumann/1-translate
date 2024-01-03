@@ -67,7 +67,7 @@ struct LanguageSelector: View {
     
     var body: some View {
         LanguageList(
-            selectedIndex: isFirstLanguage ? $viewModel.indexOfFirstLanguage : $viewModel.indexOfSecondLanguage,
+            selectedIndex: isFirstLanguage ? $viewModel.languages.indexOfFirstLanguage : $viewModel.languages.indexOfSecondLanguage,
             list: viewModel.languages.list,
             color: .black)
         .padding(.top, 20)

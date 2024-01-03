@@ -60,28 +60,28 @@ struct TranslateNumbers: View {
                 OneLanguage(isFirstLanguage: true,
                             viewModel: viewModel,
                             screen: screen,
-                            language: viewModel.firstLanguage!,
+                            language: viewModel.languages.first,
                             translated: viewModel.firstTranslatedNumber)
                 TranslatedDisplay(
                     translatedString: viewModel.firstTranslatedNumber,
                     forCopyTranslatedNumber: viewModel.forCopyFirstTranslatedNumber,
                     translatedStringTopBorder: viewModel.firstTranslatedNumberTopBorder,
                     screen: screen)
-                .font(viewModel.firstFont)
+                .font(viewModel.languages.firstFont)
                 .padding(.horizontal, 0)
                 Spacer(minLength: 0.0)
-                if viewModel.persistent.secondLanguageAllowed {
+                if viewModel.languages.persistent.secondLanguageAllowed {
                     OneLanguage(isFirstLanguage: false,
                                 viewModel: viewModel,
                                 screen: screen,
-                                language: viewModel.secondLanguage!,
+                                language: viewModel.languages.second,
                                 translated: viewModel.secondTranslatedNumber)
                     Spacer(minLength: 0.0)
                     TranslatedDisplay(
                         translatedString: viewModel.secondTranslatedNumber,
                         forCopyTranslatedNumber: viewModel.forCopySecondTranslatedNumber,
                         translatedStringTopBorder: viewModel.secondTranslatedNumberTopBorder,                            screen: screen)
-                    .font(viewModel.secondFont)
+                    .font(viewModel.languages.secondFont)
                     .padding(.horizontal, 0)
                 }
             }

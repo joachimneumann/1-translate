@@ -14,11 +14,12 @@ import AVFoundation
         let displayName: String = ""
     }
 
+    var voicesForCode: [String : VoicesForCode] = [:]
+    var selectedVoiceDict: [String: AVSpeechSynthesisVoice] = [:]
+
     private let synthesizer = AVSpeechSynthesizer()
     private var translatorLanguages: [Language] = []
     private var systemVoices: [AVSpeechSynthesisVoice] = []
-    var voicesForCode: [String : VoicesForCode] = [:]
-    private var selectedVoiceDict: [String: AVSpeechSynthesisVoice] = [:]
 
     private func voiceKey(_ language: Language) -> String {
         language.flagName + "_voiceIdentifier"
@@ -52,7 +53,7 @@ import AVFoundation
         return ret
     }
     
-    private func setAndRemember(_ code: String, _ voice: AVSpeechSynthesisVoice) {
+    func setAndRemember(_ code: String, _ voice: AVSpeechSynthesisVoice) {
         DispatchQueue.main.async {
             self.selectedVoiceDict[code] = voice
         }

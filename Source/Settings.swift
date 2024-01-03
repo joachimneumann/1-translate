@@ -17,7 +17,7 @@ struct Settings: View {
     var body: some View {
         VStack {
             List {
-                Appearance(temp: $viewModel.persistent.secondLanguageAllowed)
+                Appearance(temp: $viewModel.languages.persistent.secondLanguageAllowed)
                 DigitsSettings
                 VoiceSettings
                 English
@@ -145,7 +145,7 @@ struct Settings: View {
         return Section(header: Text("Read Aloud")) {
             VStack(alignment: .leading) {
                 Button {
-                    viewModel.firstLanguage!.readAloud(viewModel.firstLanguage!.read("100"))
+                    viewModel.languages.first!.readAloud(viewModel.languages.first.read("100"))
                 } label: {
                     Image(systemName: symbolName)
                         .resizable()
