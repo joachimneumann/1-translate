@@ -10,10 +10,6 @@ import AVFoundation
 
 @Observable class ViewModel: ShowAs {
     
-    class VoicesForCode {
-        var list: [AVSpeechSynthesisVoice] = []
-        let displayName: String = ""
-    }
     var showAC = true
     var keyStatusColor: [String: Color] = [:]
     var textColor: [String: Color] = [:]
@@ -27,7 +23,6 @@ import AVFoundation
     var persistent: Persistent
     var languages = Languages()
     
-    private var initVoiceDone = false
     var showAsInt = false /// This will update the "-> Int or -> sci button texts
     var showAsFloat = false
     var previouslySelectedLanguages = Priority()
@@ -51,23 +46,20 @@ import AVFoundation
     private let upTime = 0.4
     private var displayNumber = Number("0", precision: 10)
     private var previouslyPendingOperator: String? = nil
-
+    var voices = Voices()
+    
     var translatorLanguages: [Language] = []
-    var initDoneCallback: () -> () = {}
-    var systemVoices: [AVSpeechSynthesisVoice] = []
-    let synthesizer = AVSpeechSynthesizer()
-    var voicesForCode: [String : VoicesForCode] = [:]
 
-    var firstLanguage: Language = EnglishImpl() {
+    var firstLanguage: Language? {
         didSet {
             updateTranslation()
-            persistent.firstLanguageName  = firstLanguage.name
+            persistent.firstLanguageName  = firstLanguage!.name
         }
     }
-    var secondLanguage: Language = GermanImpl() {
+    var secondLanguage: Language? {
         didSet {
             updateTranslation()
-            persistent.secondLanguageName = secondLanguage.name
+            persistent.secondLanguageName = secondLanguage!.name
         }
     }
 
@@ -95,7 +87,7 @@ import AVFoundation
     }
 
     var firstFont: Font {
-        switch firstLanguage.name {
+        switch firstLanguage!.name {
         case languages.arabicNumerals.name:
             Font(UIFont(name: "Avenir", size: persistent.secondLanguageAllowed ? 40 : 50)!)
         default:
@@ -103,24 +95,17 @@ import AVFoundation
         }
     }
     var secondFont: Font {
-        switch firstLanguage.name {
+        switch firstLanguage!.name {
         case languages.arabicNumerals.name:
             Font(UIFont(name: "Avenir", size: 40)!)
         default:
             Font.title
         }
     }
-    
-    func initVoice() {
-        if !initVoiceDone {
-            getVoices(for: languages.list)
-            initDoneCallback = updateTranslation
-            initVoiceDone = true
-        }
-    }
-    
+        
     init() {
         persistent = Persistent()
+
         /// currentDisplay will be updated shortly by refreshDisplay in onAppear() of Calculator
         /// I set some values here
         currentDisplay = Display(left: "0", right: nil, canBeInteger: false, canBeFloat: false)
@@ -151,13 +136,10 @@ import AVFoundation
                 newFirstLanguage(languages.list[index])
             }
         }
-        for var language in languages.list {
-            language.synthesizer = synthesizer
-        }
+        voices.populate(with: languages.list)
     }
         
     func updateTranslation() {
-        // print("update translations")
         var allInOneLine = currentDisplay.allInOneLine
         if persistent.groupSeparator != .none {
             allInOneLine = allInOneLine.replacingOccurrences(of: persistent.groupSeparator.string, with: "")
@@ -165,7 +147,7 @@ import AVFoundation
         if persistent.decimalSeparator != .dot {
             allInOneLine = allInOneLine.replacingOccurrences(of: persistent.decimalSeparator.string, with: ".")
         }
-        firstTranslatedNumber = firstLanguage.read(allInOneLine)
+        firstTranslatedNumber = firstLanguage!.read(allInOneLine)
         firstTranslatedNumberTopBorder = nil
         if firstTranslatedNumber.contains(OVERLINE) {
             let split = firstTranslatedNumber.split(separator: OVERLINE)
@@ -179,8 +161,8 @@ import AVFoundation
         forCopyFirstTranslatedNumber = (firstTranslatedNumberTopBorder != nil ? "<overline>" + firstTranslatedNumberTopBorder! + "</overline>" : "") + firstTranslatedNumber
         forCopyFirstTranslatedNumber = forCopyFirstTranslatedNumber.replacingOccurrences(of: Languages.WordSplitter, with: "")
 
-        if persistent.secondLanguageAllowed {
-            secondTranslatedNumber = secondLanguage.read(allInOneLine)
+        if persistent.secondLanguageAllowed && secondLanguage != nil {
+            secondTranslatedNumber = secondLanguage!.read(allInOneLine)
             secondTranslatedNumberTopBorder = nil
             if secondTranslatedNumber.contains(OVERLINE) {
                 let split = secondTranslatedNumber.split(separator: OVERLINE)
@@ -201,7 +183,7 @@ import AVFoundation
         // print("newFirstLanguage: " + newLanguage.name)
         firstLanguage = newLanguage
         previouslySelectedLanguages.add(new: newLanguage.name)
-        if secondLanguage.name == newLanguage.name {
+        if secondLanguage != nil && secondLanguage!.name == newLanguage.name {
             /// find a different second language
             let newLanguageName = previouslySelectedLanguages.get(except: newLanguage.name)
             if newLanguageName != "" {
@@ -211,8 +193,8 @@ import AVFoundation
                     }
                 }
             }
-            persistent.firstLanguageName  = firstLanguage.name
-            persistent.secondLanguageName = secondLanguage.name
+            persistent.firstLanguageName  = firstLanguage!.name
+            persistent.secondLanguageName = secondLanguage!.name
             for index in 0..<languages.list.count {
                 if persistent.firstLanguageName == languages.list[index].name {
                     indexOfFirstLanguage = index
@@ -227,10 +209,10 @@ import AVFoundation
     func newSecondLanguage(_ newLanguage: Language) {
         // print("newSecondLanguage: " + newLanguage.name)
         secondLanguage = newLanguage
-        previouslySelectedLanguages.add(new: secondLanguage.name)
-        if firstLanguage.name == secondLanguage.name {
+        previouslySelectedLanguages.add(new: secondLanguage!.name)
+        if firstLanguage!.name == secondLanguage!.name {
         /// find a different first language
-            let newLanguageName = previouslySelectedLanguages.get(except: secondLanguage.name)
+            let newLanguageName = previouslySelectedLanguages.get(except: secondLanguage!.name)
             if newLanguageName != "" {
                 for newLanguage in languages.list {
                     if newLanguage.name == newLanguageName {
@@ -238,8 +220,8 @@ import AVFoundation
                     }
                 }
             }
-            persistent.firstLanguageName  = firstLanguage.name
-            persistent.secondLanguageName = secondLanguage.name
+            persistent.firstLanguageName  = firstLanguage!.name
+            persistent.secondLanguageName = secondLanguage!.name
             for index in 0..<languages.list.count {
                 if persistent.firstLanguageName == languages.list[index].name {
                     indexOfFirstLanguage = index
@@ -391,168 +373,6 @@ import AVFoundation
             updateTranslation()
             self.showAC = currentDisplay.isZero
         }
-    }
-    
-    private func voiceKey(_ language: Language) -> String {
-        language.flagName + "_voiceIdentifier"
-    }
-    private func voiceKey(_ code: String) -> String {
-        code + "_voiceIdentifier"
-    }
-
-    private func setVoice(_ voice: AVSpeechSynthesisVoice, for language: LanguageImpl) {
-        language.voice = voice
-        UserDefaults.standard.set(language.voice!.identifier, forKey: voiceKey(language))
-    }
-    
-    func setVoices(_ voice: AVSpeechSynthesisVoice, for code: String) {
-        for language in translatorLanguages {
-            if let language = language as? LanguageImpl {
-                if language.voiceLanguageCode == code {
-                    setVoice(voice, for: language)
-                }
-            }
-        }
-    }
-    
-    func uniqueLanguageCodes(allLanguages: [Language]) -> [String] {
-        var ret: [String] = []
-        for language in allLanguages {
-            if let language = language as? LanguageImpl {
-                if let code = language.voiceLanguageCode {
-                    if !ret.contains(code) {
-                        ret.append(code)
-                    }
-                }
-            }
-        }
-        return ret
-    }
-    
-    func setVoiceIfCodeMatches(allLanguages: [Language], code: String, voice: AVSpeechSynthesisVoice) {
-        for var language in allLanguages {
-            if language.voiceLanguageCode == code {
-                language.voice = voice
-            }
-        }
-    }
-    
-    var selectedVoiceDict: [String: AVSpeechSynthesisVoice] = [:]
-
-    func setAndRemember(_ code: String, _ voice: AVSpeechSynthesisVoice) {
-        DispatchQueue.main.async {
-            self.selectedVoiceDict[code] = voice
-        }
-        UserDefaults.standard.set(voice.identifier, forKey: voiceKey(code))
-        setVoiceIfCodeMatches(allLanguages: languages.list, code: code, voice: voice)
-    }
-
-    func getVoices(for translatorLanguages: [Language]) {
-        Task {
-            let allSystemVoices = AVSpeechSynthesisVoice.speechVoices()
-            systemVoices = []
-            for systemVoice in allSystemVoices {
-                if systemVoice.identifier.contains("premium") {
-                    systemVoices.append(systemVoice)
-                }
-            }
-            for systemVoice in allSystemVoices {
-                if systemVoice.identifier.contains("enhanced") {
-                    let check = systemVoice.identifier.replacingOccurrences(of: "enhanced", with: "premium")
-                    var exists = false
-                    for s in systemVoices { if s.identifier == check { exists = true } }
-                    if !exists { systemVoices.append(systemVoice) }
-                }
-            }
-            for systemVoice in allSystemVoices {
-                if systemVoice.identifier.contains("compact") {
-                    let check1 = systemVoice.identifier.replacingOccurrences(of: "compact", with: "enhanced")
-                    let check2 = systemVoice.identifier.replacingOccurrences(of: "compact", with: "premium")
-                    var exists = false
-                    for s in systemVoices { if s.identifier == check1 || s.identifier == check2 { exists = true } }
-                    if !exists { systemVoices.append(systemVoice) }
-                }
-            }
-
-            let uniqueCodes = uniqueLanguageCodes(allLanguages: translatorLanguages)
-            
-            /// create voicesForCode dictionary
-            assert(voicesForCode.keys.count == 0)
-            for code in uniqueCodes {
-                var list: [AVSpeechSynthesisVoice] = []
-                for systemVoice in systemVoices {
-                    if systemVoice.languageCode == code {
-                        list.append(systemVoice)
-                    }
-                }
-                if list.count > 0 {
-                    voicesForCode[code] = VoicesForCode()
-                    voicesForCode[code]?.list = list
-                }
-            }
-            
-            /// Are all voices nil?
-            for language in translatorLanguages {
-                assert(language.voice == nil)
-            }
-            
-            /// any voice identifiers stored in userdefaults?
-            for code in uniqueCodes {
-                var found = false
-                if let storedVoiceIdentifier = UserDefaults.standard.string(forKey: voiceKey(code)) {
-                    for systemVoice in systemVoices {
-                        // print(systemVoice.description)
-                        if systemVoice.identifier == storedVoiceIdentifier {
-                            setVoiceIfCodeMatches(allLanguages: translatorLanguages, code: code, voice: systemVoice)
-                            found = true
-                            DispatchQueue.main.async {
-                                self.selectedVoiceDict[code] = systemVoice
-                            }
-                        }
-                    }
-                }
-                if !found {
-                    /// guess the voice
-                    var guessedVoice: AVSpeechSynthesisVoice? = nil
-                    if let list = voicesForCode[code]?.list {
-                        if list.count >= 1 { guessedVoice = list.first }
-                        for voice in list { if voice.quality == .enhanced { guessedVoice = voice } }
-                        for voice in list { if voice.quality == .premium { guessedVoice = voice } }
-                        guard let guessedVoice = guessedVoice else { fatalError("failed guessing the initial voice for "+code) }
-                        setAndRemember(code, guessedVoice)
-                    } else {
-                        /// code not supported
-                    }
-                }
-            }
-             
-            DispatchQueue.main.async {
-                self.initDoneCallback()
-            }
-        }
-    }
-    
-    func getBestVoice(in voiceList: [AVSpeechSynthesisVoice]) -> AVSpeechSynthesisVoice? {
-        for voice in voiceList { if voice.quality == .premium { return voice } }
-        for voice in voiceList { if voice.quality == .enhanced { return voice } }
-        if voiceList.count >= 1 { return voiceList.first }
-        return nil
-    }
-}
-
-
-extension AVSpeechSynthesisVoice {
-    var languageCode: String {
-        String(self.language.split(separator: "-")[0])
-    }
-    var variantCode: String {
-        String(self.language.split(separator: "-")[1])
-    }
-    var genderSting: String {
-        self.gender.rawValue == 1 ? "male" : "female"
-    }
-    var qualityString: String {
-        self.quality.rawValue == 3 ? "Premium" : (self.quality.rawValue == 2 ? "Enhanced" : "")
     }
 
 }

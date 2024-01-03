@@ -8,7 +8,7 @@
 import Foundation
 import AVFoundation
 
-class LanguageImpl: Language {
+@Observable class LanguageImpl: Language {
     var name: String
     var nameDescription: String? = nil
     var flagName: String { nameDescription != nil ? nameDescription! : name }

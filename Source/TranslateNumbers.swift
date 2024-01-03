@@ -17,8 +17,6 @@ struct TranslateNumbers: View {
     @State var isZoomed: Bool = false
     @State private var showLanguageSelection = false
     @State private var settingsDetent = PresentationDetent.medium
-
-    @State var voiceAvailable = false
     
     struct OneLanguage: View {
         let isFirstLanguage: Bool
@@ -62,7 +60,7 @@ struct TranslateNumbers: View {
                 OneLanguage(isFirstLanguage: true,
                             viewModel: viewModel,
                             screen: screen,
-                            language: viewModel.firstLanguage,
+                            language: viewModel.firstLanguage!,
                             translated: viewModel.firstTranslatedNumber)
                 TranslatedDisplay(
                     translatedString: viewModel.firstTranslatedNumber,
@@ -76,7 +74,7 @@ struct TranslateNumbers: View {
                     OneLanguage(isFirstLanguage: false,
                                 viewModel: viewModel,
                                 screen: screen,
-                                language: viewModel.secondLanguage,
+                                language: viewModel.secondLanguage!,
                                 translated: viewModel.secondTranslatedNumber)
                     Spacer(minLength: 0.0)
                     TranslatedDisplay(
@@ -133,13 +131,6 @@ struct TranslateNumbers: View {
                 .padding(.bottom, screen.bottomPadding)
                 .padding(.horizontal, screen.horizontalPadding)
                 .preferredColorScheme(.dark)
-                .onAppear() {
-                    Task {
-                        viewModel.initVoice()
-                        await viewModel.refreshDisplay(screen: screen)
-                        
-                    }
-                }
         }
         .accentColor(.white)
     }

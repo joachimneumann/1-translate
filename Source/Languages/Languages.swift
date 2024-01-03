@@ -19,7 +19,7 @@ class Languages {
     let chineseSimplified: Language   = ChineseImpl(variant: .simplified)
     let chineseTraditional: Language  = ChineseImpl(variant: .traditional)
     let danish: Language              = DanishImpl()
-//    let digits: Language              = DigitsImpl()
+    let digits: Language              = DigitsImpl()
     var english: English              = EnglishImpl()
     var esperanto: Language           = EsperantoImpl()
     var spanish: Spanish              = SpanishImpl()
@@ -46,6 +46,7 @@ class Languages {
         chineseSimplified,
         chineseTraditional,
         danish,
+        // digits,
         english,
         esperanto,
         spanish,

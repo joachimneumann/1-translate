@@ -105,6 +105,8 @@
 		AAF472622B4469F400E7B986 /* SwahiliImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF472612B4469F400E7B986 /* SwahiliImpl.swift */; };
 		AAF472632B446BBD00E7B986 /* SwahiliImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF472612B4469F400E7B986 /* SwahiliImpl.swift */; };
 		AAF472652B446DA200E7B986 /* TestSwahili.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF472642B446DA200E7B986 /* TestSwahili.swift */; };
+		AAF472672B452BD000E7B986 /* Voices.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF472662B452BD000E7B986 /* Voices.swift */; };
+		AAF472682B452BD000E7B986 /* Voices.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF472662B452BD000E7B986 /* Voices.swift */; };
 		AAFBD8A72B32A36D00175197 /* ThaiNumeralsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFBD8A62B32A36D00175197 /* ThaiNumeralsImpl.swift */; };
 		AAFBD8A82B32A36D00175197 /* ThaiNumeralsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFBD8A62B32A36D00175197 /* ThaiNumeralsImpl.swift */; };
 /* End PBXBuildFile section */
@@ -205,6 +207,7 @@
 		AAF4725E2B442FE300E7B986 /* EsperantoImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EsperantoImpl.swift; sourceTree = "<group>"; };
 		AAF472612B4469F400E7B986 /* SwahiliImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwahiliImpl.swift; sourceTree = "<group>"; };
 		AAF472642B446DA200E7B986 /* TestSwahili.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestSwahili.swift; path = "../../1-translate-tests/Tests/TestSwahili.swift"; sourceTree = "<group>"; };
+		AAF472662B452BD000E7B986 /* Voices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voices.swift; sourceTree = "<group>"; };
 		AAFBD8A62B32A36D00175197 /* ThaiNumeralsImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThaiNumeralsImpl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -257,6 +260,7 @@
 				AA1B007B294772980054C851 /* Brain */,
 				AA2FABFF272F2348006DE4C8 /* TranslateNumbersApp.swift */,
 				AA32853A297248B800D86CB4 /* ViewModel.swift */,
+				AAF472662B452BD000E7B986 /* Voices.swift */,
 				AA92B4C829273A58005E43F0 /* TranslateNumbers.swift */,
 				AA0523462B27024800DDAAD4 /* LanguageSelector.swift */,
 				AAE426F629597AE3005FE365 /* Screen.swift */,
@@ -506,6 +510,7 @@
 				AA659AB52B3FC170004CF20A /* Language.swift in Sources */,
 				AAB990542B35749700BD5A24 /* DanishImpl.swift in Sources */,
 				AA5020262B333C280080E00C /* SpanishImpl.swift in Sources */,
+				AAF472672B452BD000E7B986 /* Voices.swift in Sources */,
 				AA2FAC17272F2349006DE4C8 /* BrainEngine.swift in Sources */,
 				AAB253B52B3AE79500860F93 /* Languages.swift in Sources */,
 				AA2FAC12272F2349006DE4C8 /* NumberStack.swift in Sources */,
@@ -574,6 +579,7 @@
 				AACCD0B42B43AC0600D545C5 /* TestVietnamese.swift in Sources */,
 				AA659AB92B3FDE73004CF20A /* Persistent.swift in Sources */,
 				AACCD0B32B43AC0600D545C5 /* TestFrensh.swift in Sources */,
+				AAF472682B452BD000E7B986 /* Voices.swift in Sources */,
 				AACCD0A82B43AC0600D545C5 /* TestHieroglyphs.swift in Sources */,
 				AA326E4D2B332DCC0092E8E6 /* GermanImpl.swift in Sources */,
 				AA893A062B395C2700BE2772 /* ArmenianImpl.swift in Sources */,

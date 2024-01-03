@@ -145,7 +145,7 @@ struct Settings: View {
         return Section(header: Text("Read Aloud")) {
             VStack(alignment: .leading) {
                 Button {
-                    viewModel.firstLanguage.readAloud(viewModel.firstLanguage.read("100"))
+                    viewModel.firstLanguage!.readAloud(viewModel.firstLanguage!.read("100"))
                 } label: {
                     Image(systemName: symbolName)
                         .resizable()
