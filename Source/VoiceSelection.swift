@@ -10,7 +10,7 @@ import SwiftUI
 import AVFoundation
 
 struct VoiceSelection: View {
-    @ObservedObject var viewModel: ViewModel
+    var viewModel: ViewModel
     
     struct OneVoiceView: View {
         let voice: AVSpeechSynthesisVoice

@@ -10,7 +10,7 @@ import SwiftUI
 struct Settings: View {
     @Environment(\.presentationMode) var presentation /// for dismissing the Settings View
     
-    @ObservedObject var viewModel: ViewModel
+    @Bindable var viewModel: ViewModel
     let font: Font
     let yellow = Color(red: 242.0/255.0, green: 203.0/255.0, blue: 48.0/255.0)
     

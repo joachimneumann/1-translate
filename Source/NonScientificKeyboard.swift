@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NonScientificKeyboard: View {
     let screen: Screen
-    @ObservedObject var viewModel: ViewModel
+    var viewModel: ViewModel
     
     var body: some View {
         let spacing = screen.keySpacing

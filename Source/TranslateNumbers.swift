@@ -9,7 +9,7 @@ import SwiftUI
 let testColors = false
 
 struct TranslateNumbers: View {
-    @StateObject private var viewModel: ViewModel = ViewModel()
+    @State var viewModel: ViewModel = ViewModel()
     var screen: Screen
     
     @State var scrollViewHasScrolled = false
@@ -22,7 +22,7 @@ struct TranslateNumbers: View {
     
     struct OneLanguage: View {
         let isFirstLanguage: Bool
-        @ObservedObject var viewModel: ViewModel
+        var viewModel: ViewModel
         let screen: Screen
         let language: Language
         let translated: String

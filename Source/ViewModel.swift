@@ -8,24 +8,24 @@
 import SwiftUI
 import AVFoundation
 
-class ViewModel: ObservableObject, ShowAs {
+@Observable class ViewModel: ShowAs {
     
     class VoicesForCode {
         var list: [AVSpeechSynthesisVoice] = []
         let displayName: String = ""
     }
-    @Published var showAC = true
-    @Published var keyStatusColor: [String: Color] = [:]
-    @Published var textColor: [String: Color] = [:]
-    @Published var currentDisplay: Display 
-    @Published var firstTranslatedNumber: String = ""
-    @Published var secondTranslatedNumber: String = ""
-    @Published var forCopyFirstTranslatedNumber: String = ""
-    @Published var firstTranslatedNumberTopBorder: String? = nil
-    @Published var secondTranslatedNumberTopBorder: String? = nil
-    @Published var forCopySecondTranslatedNumber: String = ""
-    @Published var persistent: Persistent
-    @Published var languages = Languages()
+    var showAC = true
+    var keyStatusColor: [String: Color] = [:]
+    var textColor: [String: Color] = [:]
+    var currentDisplay: Display
+    var firstTranslatedNumber: String = ""
+    var secondTranslatedNumber: String = ""
+    var forCopyFirstTranslatedNumber: String = ""
+    var firstTranslatedNumberTopBorder: String? = nil
+    var secondTranslatedNumberTopBorder: String? = nil
+    var forCopySecondTranslatedNumber: String = ""
+    var persistent: Persistent
+    var languages = Languages()
     
     private var initVoiceDone = false
     var showAsInt = false /// This will update the "-> Int or -> sci button texts
@@ -58,13 +58,13 @@ class ViewModel: ObservableObject, ShowAs {
     let synthesizer = AVSpeechSynthesizer()
     var voicesForCode: [String : VoicesForCode] = [:]
 
-    @Published var firstLanguage: Language = EnglishImpl() {
+    var firstLanguage: Language = EnglishImpl() {
         didSet {
             updateTranslation()
             persistent.firstLanguageName  = firstLanguage.name
         }
     }
-    @Published var secondLanguage: Language = GermanImpl() {
+    var secondLanguage: Language = GermanImpl() {
         didSet {
             updateTranslation()
             persistent.secondLanguageName = secondLanguage.name
@@ -437,7 +437,7 @@ class ViewModel: ObservableObject, ShowAs {
         }
     }
     
-    @Published var selectedVoiceDict: [String: AVSpeechSynthesisVoice] = [:]
+    var selectedVoiceDict: [String: AVSpeechSynthesisVoice] = [:]
 
     func setAndRemember(_ code: String, _ voice: AVSpeechSynthesisVoice) {
         DispatchQueue.main.async {

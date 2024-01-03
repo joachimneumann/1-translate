@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LanguageSelector: View {
-    @ObservedObject var viewModel: ViewModel
+    @Bindable var viewModel: ViewModel
     let screen : Screen
     let isFirstLanguage: Bool
     
