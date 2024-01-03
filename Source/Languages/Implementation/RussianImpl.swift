@@ -10,7 +10,7 @@ import Foundation
 class RussianImpl: LanguageImpl {
     init() {
         super.init(
-            name: "русский",
+            name: "Русский",
             negativeString: "минус",
             dotString: "целых",
             exponentString: " EE ")
