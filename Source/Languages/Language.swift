@@ -15,7 +15,6 @@ protocol Language {
     var nameWithDescription: String { get }
     var voiceLanguageCode: String? { get }
     var flagName: String { get }
-    var voiceIdentifier: String? { get set }
 }
 
 // Languages with parameters

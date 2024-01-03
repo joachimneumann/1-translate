@@ -30,12 +30,13 @@ struct TranslateNumbers: View {
             HStack(spacing: 30.0) {
                 Spacer()
                 if viewModel.persistent.offerReadingAloud {
-                    let noVoice = language.voiceIdentifier == nil
+                    let noVoice = language.voiceLanguageCode == nil
                     let color =  noVoice ? Color(white: 0.7) : Color(white: 0.95)
                     let symbolName = noVoice ? "speaker.slash.fill" : "speaker.wave.3.fill"
                     let symbolSize: CGFloat = noVoice ? 23.0 : 18.0
                     Button {
-                        viewModel.languages.voices.readAloud(translated, with: language.voiceIdentifier)
+                        let id = viewModel.languages.voices.voiceIDFor(code: language.voiceLanguageCode)
+                        viewModel.languages.voices.readAloud(translated, withId: id)
                     } label: {
                         Image(systemName: symbolName)
                             .resizable()

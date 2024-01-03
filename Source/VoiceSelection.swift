@@ -10,7 +10,13 @@ import SwiftUI
 import AVFoundation
 
 struct VoiceSelection: View {
-    var viewModel: ViewModel
+    var voices: Voices
+    let uniqueVoiceLanguageCodes: [String]
+    
+    init(voices: Voices) {
+        self.voices = voices
+        self.uniqueVoiceLanguageCodes = voices.uniqueVoiceLanguageCodes
+    }
     
     struct OneVoiceView: View {
         let voice: AVSpeechSynthesisVoice
@@ -37,6 +43,7 @@ struct VoiceSelection: View {
             .listRowBackground(selected ? Color(white: 0.18) : Color(white: 0.1))
         }
     }
+    
     func hasMultipleVariants(_ list: [AVSpeechSynthesisVoice]) -> Bool {
         let variant = list.first?.variantCode ?? ""
         for voice in list {
@@ -44,35 +51,53 @@ struct VoiceSelection: View {
         }
         return false
     }
+    
     var body: some View {
-//        let dict = viewModel.voices.voicesForCode
         VStack {
             HStack(spacing: 0) {
                 Text("Add Premium or Enhanced voices in ") +
                 Text("Accessibility → Spoken Content → Voices")
                     .italic()
             }
-                .padding(10)
-                .multilineTextAlignment(.center)
-                .frame(maxWidth: .infinity)
-                .background(Color(white: 0.18))
-                .cornerRadius(10.0)
-                .padding(.horizontal, 20)
-                .onTapGesture {
-                    if let url = URL(string: UIApplication.openSettingsURLString) {
-                        UIApplication.shared.open(url)
+            .padding(10)
+            .multilineTextAlignment(.center)
+            .frame(maxWidth: .infinity)
+            .background(Color(white: 0.18))
+            .cornerRadius(10.0)
+            .padding(.horizontal, 20)
+            .onTapGesture {
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(url)
+                }
+            }
+            List {
+                ForEach(uniqueVoiceLanguageCodes, id: \.self) { voiceLanguageCode in
+                    let name = languageName(voiceLanguageCode)
+                    Section(header: Text(name)) {
+                        let voicesList = voices.voicesForCode(code: voiceLanguageCode)
+                        let hasMultipleVariants = hasMultipleVariants(voicesList)
+                        ForEach(voicesList, id: \.self) { voice in
+                            let selectedID = voices.voiceIDFor(code: voiceLanguageCode)
+                            let selected = (selectedID == voice.identifier)
+                            OneVoiceView(voice: voice, selected: selected, showVariant: hasMultipleVariants)
+                                .onTapGesture {
+                                    voices.selectVoiceID(voice.identifier, for: voiceLanguageCode)
+                                }
+                        }
                     }
                 }
-            List {
-//                ForEach(dict.keys.sorted(), id: \.self) { code in
-//                    let hasMultipleVariants = hasMultipleVariants(dict[code]!.list)
+//
+//                ForEach(uniqueVoiceLanguageCodes) { code in
+//                    let voicesList = voices.voicesForCode(code: code)
+//                    let hasMultipleVariants = hasMultipleVariants(voicesList)
 //                    Section(header: Text(languageName(code))) {
-//                        ForEach(dict[code]!.list, id: \.self) { voice in
-//                            OneVoiceView(voice: voice,
-//                                         selected: viewModel.voices.selectedVoiceDict[code] == voice,
-//                                         showVariant: hasMultipleVariants)
+//                        ForEach(voicesList, id: \.self) { voice in
+//                            let selectedID = voices.voiceIDFor(code: code)
+////                            OneVoiceView(voice: voice,
+////                                         selected: voice.identifier == selectedID,
+////                                         showVariant: hasMultipleVariants)
 //                            .onTapGesture {
-//                                viewModel.voices.setAndRemember(code, voice)
+//                                voices.setAndRemember(code, voice)
 //                            }
 //                        }
 //                    }
@@ -81,19 +106,19 @@ struct VoiceSelection: View {
             .padding(.top, 10)
         }
         .navigationTitle("Voice Selector")
-}
-func languageName(_ code: String) -> String {
-    let locale: Locale = .current
-    let variant = locale.localizedString(forIdentifier: code)
-    if let variant = variant {
-        return variant + " (" + code + ")"
     }
-    return code
+    func languageName(_ code: String) -> String {
+        let locale: Locale = .current
+        let variant = locale.localizedString(forIdentifier: code)
+        if let variant = variant {
+            return variant + " (" + code + ")"
+        }
+        return code
+    }
+    
 }
 
-}
 
-
-#Preview {
-    VoiceSelection(viewModel: ViewModel())
-}
+//#Preview {
+//    return VoiceSelection(viewModel: ViewModel())
+//}

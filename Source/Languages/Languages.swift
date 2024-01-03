@@ -93,15 +93,11 @@ import SwiftUI
             }
         }
         
-        for var language in list {
-            language.voiceIdentifier = voices.voiceFor(code: language.voiceLanguageCode)
-        }
-    }
-    
-    func setVoiceIfCodeMatches(code: String, voiceIdentifier: String) {
-        for var language in list {
-            if language.voiceLanguageCode == code {
-                language.voiceIdentifier = voiceIdentifier
+        for language in list {
+            if let code = language.voiceLanguageCode {
+                if !voices.uniqueVoiceLanguageCodes.contains(code) {
+                    voices.uniqueVoiceLanguageCodes.append(code)
+                }
             }
         }
     }

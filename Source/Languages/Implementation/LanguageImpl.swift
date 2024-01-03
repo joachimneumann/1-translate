@@ -13,7 +13,6 @@ import Foundation
     var flagName: String { nameDescription != nil ? nameDescription! : name }
     var voiceLanguageCode: String?
     var voiceLanguageName: String?
-    var voiceIdentifier : String? = nil
     var negativeString: String
     var dotString: String
     var exponentString: String

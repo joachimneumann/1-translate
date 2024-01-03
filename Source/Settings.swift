@@ -145,8 +145,9 @@ struct Settings: View {
         return Section(header: Text("Read Aloud")) {
             VStack(alignment: .leading) {
                 Button {
-                    viewModel.languages.voices.readAloud(
-                        viewModel.languages.english.read("100"), with: viewModel.languages.english.voiceIdentifier)
+                    let text = viewModel.languages.english.read("100")
+                    let id = viewModel.languages.voices.voiceIDFor(code: "en")
+                    viewModel.languages.voices.readAloud(text, withId: id)
                 } label: {
                     Image(systemName: symbolName)
                         .resizable()
@@ -176,12 +177,12 @@ struct Settings: View {
             }
             VStack(alignment: .leading) {
                 NavigationLink {
-                    VoiceSelection(viewModel: viewModel)
+                    VoiceSelection(voices: viewModel.languages.voices)
                 } label: {
                     Text("Select Voices")
-                    //                        .buttonStyle(.plain)
+//                                            .buttonStyle(.plain)
                 }
-                //                .disabled(!viewModel.persistent.offerReadingAloud)
+                .disabled(!viewModel.persistent.offerReadingAloud)
             }
         }
     }
@@ -409,7 +410,6 @@ struct TransparentButtonStyle: ButtonStyle {
 }
 
 struct RoundedCorner: Shape {
-    
     var radius: CGFloat = .infinity
     var corners: UIRectCorner = .allCorners
     
