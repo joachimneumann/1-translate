@@ -5,7 +5,6 @@
 //
 
 import SwiftUI
-import AVFoundation
 
 let testColors = false
 
