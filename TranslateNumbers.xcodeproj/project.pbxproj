@@ -102,6 +102,9 @@
 		AAF4725D2B442AF300E7B986 /* TestEsperanto.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF4725C2B442AF300E7B986 /* TestEsperanto.swift */; };
 		AAF4725F2B442FE300E7B986 /* EsperantoImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF4725E2B442FE300E7B986 /* EsperantoImpl.swift */; };
 		AAF472602B44328100E7B986 /* EsperantoImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF4725E2B442FE300E7B986 /* EsperantoImpl.swift */; };
+		AAF472622B4469F400E7B986 /* SwahiliImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF472612B4469F400E7B986 /* SwahiliImpl.swift */; };
+		AAF472632B446BBD00E7B986 /* SwahiliImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF472612B4469F400E7B986 /* SwahiliImpl.swift */; };
+		AAF472652B446DA200E7B986 /* TestSwahili.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF472642B446DA200E7B986 /* TestSwahili.swift */; };
 		AAFBD8A72B32A36D00175197 /* ThaiNumeralsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFBD8A62B32A36D00175197 /* ThaiNumeralsImpl.swift */; };
 		AAFBD8A82B32A36D00175197 /* ThaiNumeralsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFBD8A62B32A36D00175197 /* ThaiNumeralsImpl.swift */; };
 /* End PBXBuildFile section */
@@ -200,6 +203,8 @@
 		AAEF2FB82B20D54B0012DDDD /* Separators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Separators.swift; sourceTree = "<group>"; };
 		AAF4725C2B442AF300E7B986 /* TestEsperanto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestEsperanto.swift; path = "../../1-translate-tests/Tests/TestEsperanto.swift"; sourceTree = "<group>"; };
 		AAF4725E2B442FE300E7B986 /* EsperantoImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EsperantoImpl.swift; sourceTree = "<group>"; };
+		AAF472612B4469F400E7B986 /* SwahiliImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwahiliImpl.swift; sourceTree = "<group>"; };
+		AAF472642B446DA200E7B986 /* TestSwahili.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestSwahili.swift; path = "../../1-translate-tests/Tests/TestSwahili.swift"; sourceTree = "<group>"; };
 		AAFBD8A62B32A36D00175197 /* ThaiNumeralsImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThaiNumeralsImpl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -342,6 +347,7 @@
 				AAB990562B35793100BD5A24 /* PolishImpl.swift */,
 				AAB990502B35703500BD5A24 /* RomanImpl.swift */,
 				AA5020252B333C280080E00C /* SpanishImpl.swift */,
+				AAF472612B4469F400E7B986 /* SwahiliImpl.swift */,
 				AA7988B32B32B07700608906 /* ThaiImpl.swift */,
 				AAFBD8A62B32A36D00175197 /* ThaiNumeralsImpl.swift */,
 				AA831B9F2B35238C003307A2 /* VietnameseImpl.swift */,
@@ -369,6 +375,7 @@
 				AACCD0892B43ABB600D545C5 /* TestRoman.swift */,
 				AACCD08A2B43ABB600D545C5 /* TestRussian.swift */,
 				AACCD08F2B43ABB700D545C5 /* TestSpanish.swift */,
+				AAF472642B446DA200E7B986 /* TestSwahili.swift */,
 				AACCD08B2B43ABB700D545C5 /* TestVietnamese.swift */,
 			);
 			path = Tests;
@@ -474,6 +481,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAF472632B446BBD00E7B986 /* SwahiliImpl.swift in Sources */,
 				AA5CF91A2B3944AD004BB6BB /* ArmenianNumeralsImpl.swift in Sources */,
 				AA01B9D42957E44300617AFB /* Display.swift in Sources */,
 				AAB990512B35703500BD5A24 /* RomanImpl.swift in Sources */,
@@ -550,6 +558,7 @@
 				AA831BA12B35238C003307A2 /* VietnameseImpl.swift in Sources */,
 				AACCD0B12B43AC0600D545C5 /* TestBabylonian.swift in Sources */,
 				AAEF2FBA2B20D5500012DDDD /* Separators.swift in Sources */,
+				AAF472622B4469F400E7B986 /* SwahiliImpl.swift in Sources */,
 				AAF4725F2B442FE300E7B986 /* EsperantoImpl.swift in Sources */,
 				AA831B9D2B3462D9003307A2 /* FrenchImpl.swift in Sources */,
 				AACCD0AE2B43AC0600D545C5 /* TestRussian.swift in Sources */,
@@ -569,6 +578,7 @@
 				AA326E4D2B332DCC0092E8E6 /* GermanImpl.swift in Sources */,
 				AA893A062B395C2700BE2772 /* ArmenianImpl.swift in Sources */,
 				AA5CF9182B39318D004BB6BB /* ArabicNumeralsImpl.swift in Sources */,
+				AAF472652B446DA200E7B986 /* TestSwahili.swift in Sources */,
 				AAE3DA3F2B3988DA005F8414 /* ArabicImpl.swift in Sources */,
 				AAB253B62B3AE79500860F93 /* Languages.swift in Sources */,
 				AAB990582B35793100BD5A24 /* PolishImpl.swift in Sources */,

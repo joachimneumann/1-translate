@@ -28,6 +28,7 @@ class Languages {
     var hieroglyphs: Language         = HieroglyphsImpl()
     let polish: Language              = PolishImpl()
     let russian: Language             = RussianImpl()
+    let swahili: Language             = SwahiliImpl()
     let roman: Language               = RomanImpl()
     let thai: Language                = ThaiImpl()
     let thaiNumerals: Language        = ThaiNumeralsImpl()
@@ -48,6 +49,7 @@ class Languages {
         english,
         esperanto,
         spanish,
+        swahili,
         french,
         german,
         hieroglyphs,
