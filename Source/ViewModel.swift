@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import AVFoundation
 
 @Observable class ViewModel: ShowAs {
     var showAC = true
@@ -21,7 +20,7 @@ import AVFoundation
     var forCopySecondTranslatedNumber: String = ""
     var persistent: Persistent
     var languages = Languages()
-    
+
     var showAsInt = false /// This will update the "-> Int or -> sci button texts
     var showAsFloat = false
     private var stupidBrain = BrainEngine(precision: 1_000) /// I want to call fast sync functions
@@ -44,10 +43,7 @@ import AVFoundation
     private let upTime = 0.4
     private var displayNumber = Number("0", precision: 10)
     private var previouslyPendingOperator: String? = nil
-    var voices = Voices()
-    
-    var translatorLanguages: [Language] = []
-        
+            
     init() {
         persistent = Persistent()
 
@@ -63,7 +59,6 @@ import AVFoundation
         }
         keyStatusColor["plus"] = keyColor.upColor(for: "+", isPending: false)
         // print("viewModel init")
-        voices.populate(with: languages.list)
     }
         
     func updateTranslation() {
@@ -232,14 +227,8 @@ import AVFoundation
         await refreshDisplay(screen: screen)
     }
     
-    func refreshDisplaySync(screen: Screen) {
-        Task {
-            await refreshDisplay(screen: screen)
-        }
-    }
-    
     func refreshDisplay(screen: Screen) async {
-        let tempDisplay = Display(displayNumber, screen: screen, separators: self.persistent, showAs: self, forceScientific: persistent.forceScientific)
+        let tempDisplay = Display(displayNumber, screen: screen, separators: self.persistent, showAs: self, forceScientific: false )
         await MainActor.run() {
             currentDisplay = tempDisplay
             updateTranslation()

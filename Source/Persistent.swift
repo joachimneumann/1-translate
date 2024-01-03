@@ -36,9 +36,6 @@ struct Persistent: Separators {
     
     @AppStorage("groupSizeKey", store: .standard)
     var groupSize: GroupSize = .three
-
-    @AppStorage("forceScientificKey", store: .standard)
-    var forceScientific: Bool = false
     
     @AppStorage("offerReadingAloudKey", store: .standard)
     var offerReadingAloud: Bool = true

@@ -6,19 +6,16 @@
 //
 
 import Foundation
-import AVFoundation
 
 protocol Language {
     func read(_ numberString: String) -> String
     func read(_ i: Int) -> String
-    func readAloud(_ text: String)
     var name: String { get }
     var nameDescription: String? { get }
     var nameWithDescription: String { get }
     var voiceLanguageCode: String? { get }
     var flagName: String { get }
-    var voice: AVSpeechSynthesisVoice? { get set }
-    var synthesizer: AVSpeechSynthesizer? { get set }
+    var voiceIdentifier: String? { get set }
 }
 
 // Languages with parameters

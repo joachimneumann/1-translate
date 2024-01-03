@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 @Observable class Languages {
     
     struct LanguagePersistent {
@@ -21,6 +20,7 @@ import SwiftUI
     var first: Language!
     var second: Language!
     var list: [Language] = []
+    var voices = Voices()
     let arabic: Language              = ArabicImpl() // not working
     let arabicNumerals: Language      = ArabicNumeralsImpl()
     let armenianNumerals: Language    = ArmenianNumeralsImpl()
@@ -82,7 +82,6 @@ import SwiftUI
         previouslySelectedLanguages.add(new: spanish.name)
         previouslySelectedLanguages.add(new: english.name)
         
-        
         for index in 0..<list.count {
             if persistent.secondName == list[index].name {
                 indexOfSecondLanguage = index
@@ -93,9 +92,19 @@ import SwiftUI
                 newFirstLanguage(list[index])
             }
         }
-
+        
+        for var language in list {
+            language.voiceIdentifier = voices.voiceFor(code: language.voiceLanguageCode)
+        }
     }
     
+    func setVoiceIfCodeMatches(code: String, voiceIdentifier: String) {
+        for var language in list {
+            if language.voiceLanguageCode == code {
+                language.voiceIdentifier = voiceIdentifier
+            }
+        }
+    }
     
     var firstFont: Font {
         switch first.name {

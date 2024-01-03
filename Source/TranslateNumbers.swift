@@ -5,6 +5,7 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 let testColors = false
 
@@ -29,12 +30,12 @@ struct TranslateNumbers: View {
             HStack(spacing: 30.0) {
                 Spacer()
                 if viewModel.persistent.offerReadingAloud {
-                    let noVoice = language.voice == nil
+                    let noVoice = language.voiceIdentifier == nil
                     let color =  noVoice ? Color(white: 0.7) : Color(white: 0.95)
                     let symbolName = noVoice ? "speaker.slash.fill" : "speaker.wave.3.fill"
                     let symbolSize: CGFloat = noVoice ? 23.0 : 18.0
                     Button {
-                        language.readAloud(translated)
+                        viewModel.languages.voices.readAloud(translated, with: language.voiceIdentifier)
                     } label: {
                         Image(systemName: symbolName)
                             .resizable()
@@ -43,7 +44,7 @@ struct TranslateNumbers: View {
                             .frame(height: symbolSize)
                             .padding(10)
                     }
-                    .disabled(language.voice == nil)
+                    .disabled(noVoice)
                     .padding(.trailing, 10)
                 }
                 LanguageButton(language: language, isFirstLanguage: isFirstLanguage, viewModel: viewModel, screen: screen)
@@ -133,6 +134,11 @@ struct TranslateNumbers: View {
                 .preferredColorScheme(.dark)
         }
         .accentColor(.white)
+        .onAppear() {
+            Task {
+                await viewModel.refreshDisplay(screen: screen)
+            }
+        }
     }
 }
 

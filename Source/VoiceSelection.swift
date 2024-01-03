@@ -45,7 +45,7 @@ struct VoiceSelection: View {
         return false
     }
     var body: some View {
-        let dict = viewModel.voices.voicesForCode
+//        let dict = viewModel.voices.voicesForCode
         VStack {
             HStack(spacing: 0) {
                 Text("Add Premium or Enhanced voices in ") +
@@ -64,19 +64,19 @@ struct VoiceSelection: View {
                     }
                 }
             List {
-                ForEach(dict.keys.sorted(), id: \.self) { code in
-                    let hasMultipleVariants = hasMultipleVariants(dict[code]!.list)
-                    Section(header: Text(languageName(code))) {
-                        ForEach(dict[code]!.list, id: \.self) { voice in
-                            OneVoiceView(voice: voice,
-                                         selected: viewModel.voices.selectedVoiceDict[code] == voice,
-                                         showVariant: hasMultipleVariants)
-                            .onTapGesture {
-                                viewModel.voices.setAndRemember(code, voice)
-                            }
-                        }
-                    }
-                }
+//                ForEach(dict.keys.sorted(), id: \.self) { code in
+//                    let hasMultipleVariants = hasMultipleVariants(dict[code]!.list)
+//                    Section(header: Text(languageName(code))) {
+//                        ForEach(dict[code]!.list, id: \.self) { voice in
+//                            OneVoiceView(voice: voice,
+//                                         selected: viewModel.voices.selectedVoiceDict[code] == voice,
+//                                         showVariant: hasMultipleVariants)
+//                            .onTapGesture {
+//                                viewModel.voices.setAndRemember(code, voice)
+//                            }
+//                        }
+//                    }
+//                }
             }
             .padding(.top, 10)
         }

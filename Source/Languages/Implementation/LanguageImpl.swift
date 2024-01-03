@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import AVFoundation
 
 @Observable class LanguageImpl: Language {
     var name: String
@@ -14,8 +13,7 @@ import AVFoundation
     var flagName: String { nameDescription != nil ? nameDescription! : name }
     var voiceLanguageCode: String?
     var voiceLanguageName: String?
-    var voice: AVSpeechSynthesisVoice? = nil
-    var synthesizer: AVSpeechSynthesizer? = nil
+    var voiceIdentifier : String? = nil
     var negativeString: String
     var dotString: String
     var exponentString: String
@@ -77,20 +75,6 @@ import AVFoundation
         self.negativeString = negativeString
         self.dotString = dotString
         self.exponentString = exponentString
-    }
-    
-    func readAloud(_ text: String) {
-        if let voice = voice {
-            if let synthesizer = synthesizer {
-                Task {
-                    let utterance = AVSpeechUtterance(string: text)
-                    utterance.voice = voice
-                    DispatchQueue.main.async {
-                        synthesizer.speak(utterance)
-                    }
-                }
-            }
-        }
     }
     
     func read_0_9(_ i: Int) -> String {
