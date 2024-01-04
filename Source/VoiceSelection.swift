@@ -55,6 +55,27 @@ struct VoiceSelection: View {
         }
     }
     
+    struct OneVoiceListView: View {
+        let quality: AVSpeechSynthesisVoiceQuality
+        let code: String
+        let voiceDict: Voices.VoiceDict
+        let callback: ((String, String) -> ())?
+        
+        var body: some View {
+            ForEach(Array(voiceDict[code]!.dict.keys).sorted(), id: \.self) { reducedIdentifier in
+                let (displayData, voice) = voiceDict[code]!.dict[reducedIdentifier]!
+                if voice.quality == quality {
+                    OneVoiceView(displayData: displayData)
+                        .onTapGesture {
+                            if let callback = callback {
+                                callback(reducedIdentifier, code)
+                            }
+                        }
+                }
+            }
+        }
+    }
+    
 
     var body: some View {
         VStack {
@@ -75,18 +96,13 @@ struct VoiceSelection: View {
                 }
             }
             List {
-                ForEach(Array(voiceDict.keys), id: \.self) { code in
+                ForEach(Array(voiceDict.keys.sorted()), id: \.self) { code in
                     let name = languageName(code)
                     Section(header: Text(name)) {
-                        ForEach(Array(voiceDict[code]!.dict.keys), id: \.self) { reducedIdentifier in
-                            let (displayData, _) = voiceDict[code]!.dict[reducedIdentifier]!
-                            OneVoiceView(displayData: displayData)
-                                .onTapGesture {
-                                    if let callback = callback {
-                                        callback(reducedIdentifier, code)
-                                    }
-                                }
-                        }
+                        let _ = print(code)
+                        OneVoiceListView(quality: .premium, code: code, voiceDict: voiceDict, callback: callback)
+                        OneVoiceListView(quality: .enhanced, code: code, voiceDict: voiceDict, callback: callback)
+                        OneVoiceListView(quality: .default, code: code, voiceDict: voiceDict, callback: callback)
                     }
                 }
             }

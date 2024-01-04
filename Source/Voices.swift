@@ -73,7 +73,7 @@ import AVFoundation
                             }
                             let displayData = VoiceDisplayData(
                                 variant: voice.variantCode,
-                                name: voice.name,
+                                name: voice.name.replacingOccurrences(of: " (Premium)", with: ""),
                                 quality: voice.quality.string,
                                 selected: voiceDict[code]!.selectedId != nil && voiceDict[code]!.selectedId == voice.reducedIdentifier)
                             voiceDict[code]!.dict[voice.reducedIdentifier] = (displayData, voice)
@@ -92,7 +92,7 @@ import AVFoundation
                             }
                             let displayData = VoiceDisplayData(
                                 variant: voice.variantCode,
-                                name: voice.name,
+                                name: voice.name.replacingOccurrences(of: " (Enhanced)", with: ""),
                                 quality: voice.quality.string,
                                 selected: voiceDict[code]!.selectedId != nil && voiceDict[code]!.selectedId == voice.reducedIdentifier)
                             voiceDict[code]!.dict[voice.reducedIdentifier] = (displayData, voice)
@@ -101,23 +101,25 @@ import AVFoundation
                 }
             }
             
-            /// compact?
+            /// enhanced?
             for voice in allSystemVoices {
                 if voice.languageCode == code {
                     if !voiceDict[code]!.dict.keys.contains(voice.reducedIdentifier) {
-                        if voiceDict[code]!.selectedId == nil {
-                            voiceDict[code]!.selectedId = voice.reducedIdentifier
+                        if voice.identifier.contains("compact") {
+                            if voiceDict[code]!.selectedId == nil {
+                                voiceDict[code]!.selectedId = voice.reducedIdentifier
+                            }
+                            let displayData = VoiceDisplayData(
+                                variant: voice.variantCode,
+                                name: voice.name,
+                                quality: voice.quality.string,
+                                selected: voiceDict[code]!.selectedId != nil && voiceDict[code]!.selectedId == voice.reducedIdentifier)
+                            voiceDict[code]!.dict[voice.reducedIdentifier] = (displayData, voice)
                         }
-                        let displayData = VoiceDisplayData(
-                            variant: voice.variantCode,
-                            name: voice.name,
-                            quality: voice.quality.string,
-                            selected: voiceDict[code]!.selectedId != nil && voiceDict[code]!.selectedId == voice.reducedIdentifier)
-                        voiceDict[code]!.dict[voice.reducedIdentifier] = (displayData, voice)
                     }
                 }
             }
-            
+
             /// no voice found?
             if voiceDict[code]!.selectedId == nil {
                 voiceDict[code] = nil
@@ -155,8 +157,9 @@ extension AVSpeechSynthesisVoice {
     }
     var reducedIdentifier: String {
         self.identifier
-            .replacingOccurrences(of: "premium", with: "")
-            .replacingOccurrences(of: "enhanced", with: "")
-            .replacingOccurrences(of: "compact", with: "")
+            .replacingOccurrences(of: ".premium", with: "")
+            .replacingOccurrences(of: ".enhanced", with: "")
+            .replacingOccurrences(of: ".compact", with: "")
+            .replacingOccurrences(of: ".eloquence", with: "")
     }
 }
