@@ -226,7 +226,7 @@ struct Settings: View {
             language: viewModel.languages.english,
             example: "150") {
                 HStack {
-                    Text("use \"and\"")
+                    Text("Use \"and\"")
                     Spacer()
                     Toggle("", isOn: $viewModel.languages.english.useAndAfterHundred)
                         .frame(width: 40)
@@ -308,7 +308,7 @@ struct Settings: View {
                         .padding(.bottom, 5)
                     }
                     GridRow {
-                        Text("linh hoặc lẻ")
+                        Text("Linh hoặc lẻ")
                         Picker("", selection: $viewModel.languages.vietnamese.secondLast) {
                             ForEach(VietnameseImpl.SecondLast.allCases, id: \.self) { value in
                                 Text("\(value.rawValue)")
@@ -319,7 +319,7 @@ struct Settings: View {
                     }
                 }
                 HStack {
-                    Text("gọn")
+                    Text("Ngắn gọn")
                     Spacer()
                     Toggle("", isOn: $viewModel.languages.vietnamese.compact)
                         .frame(width: 40)
