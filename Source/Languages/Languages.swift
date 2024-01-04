@@ -20,7 +20,7 @@ import SwiftUI
     var first: Language!
     var second: Language!
     var list: [Language] = []
-    var voices = Voices()
+    var voices: Voices = Voices()
     let arabic: Language              = ArabicImpl() // not working
     let arabicNumerals: Language      = ArabicNumeralsImpl()
     let armenianNumerals: Language    = ArmenianNumeralsImpl()
@@ -74,6 +74,8 @@ import SwiftUI
         thaiNumerals,
         vietnamese]
         
+        voices.refreshVoiceDict(list: list)
+
         first = english
         second = german
 
@@ -92,16 +94,8 @@ import SwiftUI
                 newFirstLanguage(list[index])
             }
         }
-        
-        for language in list {
-            if let code = language.voiceLanguageCode {
-                if !voices.uniqueVoiceLanguageCodes.contains(code) {
-                    voices.uniqueVoiceLanguageCodes.append(code)
-                }
-            }
-        }
     }
-    
+        
     var firstFont: Font {
         switch first.name {
         case arabicNumerals.name:

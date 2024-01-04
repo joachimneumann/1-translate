@@ -9,49 +9,53 @@
 import SwiftUI
 import AVFoundation
 
+func hasMultipleVariants(_ list: [AVSpeechSynthesisVoice]) -> Bool {
+    let variant = list.first?.variantCode ?? ""
+    for voice in list {
+        if voice.variantCode != variant { return true }
+    }
+    return false
+}
+
 struct VoiceSelection: View {
-    var voices: Voices
-    let uniqueVoiceLanguageCodes: [String]
     
-    init(voices: Voices) {
-        self.voices = voices
-        self.uniqueVoiceLanguageCodes = voices.uniqueVoiceLanguageCodes
+    var voiceDict: Voices.VoiceDict
+
+    var callback: ((String, String) -> ())?
+    
+    init(voiceDict: Voices.VoiceDict, callback: ((String, String) -> ())?) {
+        self.callback = callback
+        self.voiceDict = voiceDict
     }
     
     struct OneVoiceView: View {
-        let voice: AVSpeechSynthesisVoice
-        let selected: Bool
-        let showVariant: Bool
+        let displayData: Voices.VoiceDisplayData
         
         var body: some View {
-            let name = voice.name.replacingOccurrences(of: " (Premium)", with: "").replacingOccurrences(of: " (Enhanced)", with: "")
             HStack(spacing: 0) {
-                Text(name)
+                Text(displayData.name)
                     .bold()
-                if showVariant { Text(" (\(voice.variantCode))") }
-                Text("  \(voice.qualityString)")
-                    .bold()
-                    .foregroundColor(.yellow)
+                if displayData.variant != nil {
+                    Text(" " + displayData.variant!)
+                }
+                if displayData.quality != nil {
+                    Text(" " + displayData.quality!)
+                        .bold()
+                        .foregroundColor(.yellow)
+                }
                 Spacer()
-                if selected {
+                if displayData.selected {
                     Image(systemName: "checkmark")
                         .bold()
                         .foregroundColor(.yellow)
                 }
             }
             .contentShape(Rectangle())
-            .listRowBackground(selected ? Color(white: 0.18) : Color(white: 0.1))
+            .listRowBackground(displayData.selected ? Color(white: 0.18) : Color(white: 0.1))
         }
     }
     
-    func hasMultipleVariants(_ list: [AVSpeechSynthesisVoice]) -> Bool {
-        let variant = list.first?.variantCode ?? ""
-        for voice in list {
-            if voice.variantCode != variant { return true }
-        }
-        return false
-    }
-    
+
     var body: some View {
         VStack {
             HStack(spacing: 0) {
@@ -71,37 +75,20 @@ struct VoiceSelection: View {
                 }
             }
             List {
-                ForEach(uniqueVoiceLanguageCodes, id: \.self) { voiceLanguageCode in
-                    let name = languageName(voiceLanguageCode)
+                ForEach(Array(voiceDict.keys), id: \.self) { code in
+                    let name = languageName(code)
                     Section(header: Text(name)) {
-                        let voicesList = voices.voicesForCode(code: voiceLanguageCode)
-                        let hasMultipleVariants = hasMultipleVariants(voicesList)
-                        ForEach(voicesList, id: \.self) { voice in
-                            let selectedID = voices.voiceIDFor(code: voiceLanguageCode)
-                            let selected = (selectedID == voice.identifier)
-                            OneVoiceView(voice: voice, selected: selected, showVariant: hasMultipleVariants)
+                        ForEach(Array(voiceDict[code]!.dict.keys), id: \.self) { reducedIdentifier in
+                            let (displayData, _) = voiceDict[code]!.dict[reducedIdentifier]!
+                            OneVoiceView(displayData: displayData)
                                 .onTapGesture {
-                                    voices.selectVoiceID(voice.identifier, for: voiceLanguageCode)
+                                    if let callback = callback {
+                                        callback(reducedIdentifier, code)
+                                    }
                                 }
                         }
                     }
                 }
-//
-//                ForEach(uniqueVoiceLanguageCodes) { code in
-//                    let voicesList = voices.voicesForCode(code: code)
-//                    let hasMultipleVariants = hasMultipleVariants(voicesList)
-//                    Section(header: Text(languageName(code))) {
-//                        ForEach(voicesList, id: \.self) { voice in
-//                            let selectedID = voices.voiceIDFor(code: code)
-////                            OneVoiceView(voice: voice,
-////                                         selected: voice.identifier == selectedID,
-////                                         showVariant: hasMultipleVariants)
-//                            .onTapGesture {
-//                                voices.setAndRemember(code, voice)
-//                            }
-//                        }
-//                    }
-//                }
             }
             .padding(.top, 10)
         }
@@ -118,7 +105,17 @@ struct VoiceSelection: View {
     
 }
 
+extension AVSpeechSynthesisVoiceQuality {
+    var string: String? {
+        switch self {
+        case .premium: "Premium"
+        case .enhanced: "Enhanced"
+        default: nil
+            
+        }
+    }
+}
 
-//#Preview {
-//    return VoiceSelection(viewModel: ViewModel())
-//}
+#Preview {
+    return VoiceSelection(voiceDict: ViewModel().languages.voices.voiceDict, callback: nil)
+}

@@ -63,7 +63,7 @@ import Foundation
     var nameWithDescription: String {
         name + (nameDescription != nil ? "/"+nameDescription! : "")
     }
-    
+
     init(name: String,
          negativeString: String,
          dotString: String,

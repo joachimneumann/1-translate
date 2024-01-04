@@ -138,6 +138,10 @@ struct Settings: View {
         }
     }
     
+    func updateSelectedVoice(reducedIdentifier: String, for code: String) {
+        viewModel.languages.voices.updateSelectedVoice(reducedIdentifier: reducedIdentifier, for: code, languageList: viewModel.languages.list)
+    }
+    
     var VoiceSettings: some View {
         let noVoice = !viewModel.persistent.offerReadingAloud
         let color =  noVoice ? yellow.opacity(0.7) : yellow
@@ -146,8 +150,7 @@ struct Settings: View {
             VStack(alignment: .leading) {
                 Button {
                     let text = viewModel.languages.english.read("100")
-                    let id = viewModel.languages.voices.voiceIDFor(code: "en")
-                    viewModel.languages.voices.readAloud(text, withId: id)
+                    viewModel.languages.voices.readAloud(text, in: viewModel.languages.english)
                 } label: {
                     Image(systemName: symbolName)
                         .resizable()
@@ -177,7 +180,7 @@ struct Settings: View {
             }
             VStack(alignment: .leading) {
                 NavigationLink {
-                    VoiceSelection(voices: viewModel.languages.voices)
+                    VoiceSelection(voiceDict: viewModel.languages.voices.voiceDict, callback: updateSelectedVoice)
                 } label: {
                     Text("Select Voices")
 //                                            .buttonStyle(.plain)
