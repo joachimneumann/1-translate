@@ -106,7 +106,6 @@
 		AAF472632B446BBD00E7B986 /* SwahiliImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF472612B4469F400E7B986 /* SwahiliImpl.swift */; };
 		AAF472652B446DA200E7B986 /* TestSwahili.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF472642B446DA200E7B986 /* TestSwahili.swift */; };
 		AAF472672B452BD000E7B986 /* Voices.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF472662B452BD000E7B986 /* Voices.swift */; };
-		AAF472682B452BD000E7B986 /* Voices.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF472662B452BD000E7B986 /* Voices.swift */; };
 		AAFBD8A72B32A36D00175197 /* ThaiNumeralsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFBD8A62B32A36D00175197 /* ThaiNumeralsImpl.swift */; };
 		AAFBD8A82B32A36D00175197 /* ThaiNumeralsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFBD8A62B32A36D00175197 /* ThaiNumeralsImpl.swift */; };
 /* End PBXBuildFile section */
@@ -579,7 +578,6 @@
 				AACCD0B42B43AC0600D545C5 /* TestVietnamese.swift in Sources */,
 				AA659AB92B3FDE73004CF20A /* Persistent.swift in Sources */,
 				AACCD0B32B43AC0600D545C5 /* TestFrensh.swift in Sources */,
-				AAF472682B452BD000E7B986 /* Voices.swift in Sources */,
 				AACCD0A82B43AC0600D545C5 /* TestHieroglyphs.swift in Sources */,
 				AA326E4D2B332DCC0092E8E6 /* GermanImpl.swift in Sources */,
 				AA893A062B395C2700BE2772 /* ArmenianImpl.swift in Sources */,

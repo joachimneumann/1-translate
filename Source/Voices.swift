@@ -140,8 +140,8 @@ import AVFoundation
     }
 }
 
-private extension String {
-    var voiceIdentifierKey: String {
+extension String {
+    fileprivate var voiceIdentifierKey: String {
         self + "_voiceIdentifier"
     }
 }
@@ -149,13 +149,13 @@ private extension String {
 
 
 extension AVSpeechSynthesisVoice {
-    var languageCode: String {
+    fileprivate var languageCode: String {
         String(self.language.split(separator: "-")[0])
     }
     var variantCode: String {
         String(self.language.split(separator: "-")[1])
     }
-    var reducedIdentifier: String {
+    fileprivate var reducedIdentifier: String {
         self.identifier
             .replacingOccurrences(of: ".premium", with: "")
             .replacingOccurrences(of: ".enhanced", with: "")

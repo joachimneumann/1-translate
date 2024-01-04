@@ -30,7 +30,8 @@ import SwiftUI
     
     private var upHasHappended = false
     private var downAnimationFinished = false
-    
+    var voices: Voices = Voices()
+
     private enum KeyState {
         case notPressed
         case pressed
@@ -59,6 +60,7 @@ import SwiftUI
         }
         keyStatusColor["plus"] = keyColor.upColor(for: "+", isPending: false)
         // print("viewModel init")
+        voices.refreshVoiceDict(list: languages.list)
     }
         
     func updateTranslation() {

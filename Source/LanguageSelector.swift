@@ -80,8 +80,10 @@ struct LanguageSelector: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .bold()
-                    .frame(height: 25)
+                    .frame(height: 30)
                     .foregroundColor(Color.white)
+                    .padding(.top, 14)
+                    .padding(.trailing, 5)
             }
         }
 //        .edgesIgnoringSafeArea(.bottom)

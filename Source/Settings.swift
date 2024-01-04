@@ -139,7 +139,7 @@ struct Settings: View {
     }
     
     func updateSelectedVoice(reducedIdentifier: String, for code: String) {
-        viewModel.languages.voices.updateSelectedVoice(reducedIdentifier: reducedIdentifier, for: code, languageList: viewModel.languages.list)
+        viewModel.voices.updateSelectedVoice(reducedIdentifier: reducedIdentifier, for: code, languageList: viewModel.languages.list)
     }
     
     var VoiceSettings: some View {
@@ -150,7 +150,7 @@ struct Settings: View {
             VStack(alignment: .leading) {
                 Button {
                     let text = viewModel.languages.english.read("100")
-                    viewModel.languages.voices.readAloud(text, in: viewModel.languages.english)
+                    viewModel.voices.readAloud(text, in: viewModel.languages.english)
                 } label: {
                     Image(systemName: symbolName)
                         .resizable()
@@ -180,7 +180,7 @@ struct Settings: View {
             }
             VStack(alignment: .leading) {
                 NavigationLink {
-                    VoiceSelection(voiceDict: viewModel.languages.voices.voiceDict, callback: updateSelectedVoice)
+                    VoiceSelection(voiceDict: viewModel.voices.voiceDict, callback: updateSelectedVoice)
                 } label: {
                     Text("Select Voices")
 //                                            .buttonStyle(.plain)

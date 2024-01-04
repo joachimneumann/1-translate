@@ -9,7 +9,7 @@
 import SwiftUI
 import AVFoundation
 
-func hasMultipleVariants(_ list: [AVSpeechSynthesisVoice]) -> Bool {
+private func hasMultipleVariants(_ list: [AVSpeechSynthesisVoice]) -> Bool {
     let variant = list.first?.variantCode ?? ""
     for voice in list {
         if voice.variantCode != variant { return true }
@@ -18,17 +18,24 @@ func hasMultipleVariants(_ list: [AVSpeechSynthesisVoice]) -> Bool {
 }
 
 struct VoiceSelection: View {
-    
-    var voiceDict: Voices.VoiceDict
-
-    var callback: ((String, String) -> ())?
+    private var voiceDict: Voices.VoiceDict
+    private var callback: ((String, String) -> ())?
     
     init(voiceDict: Voices.VoiceDict, callback: ((String, String) -> ())?) {
         self.callback = callback
         self.voiceDict = voiceDict
     }
     
-    struct OneVoiceView: View {
+    private func languageName(_ code: String) -> String {
+        let locale: Locale = .current
+        let variant = locale.localizedString(forIdentifier: code)
+        if let variant = variant {
+            return variant + " (" + code + ")"
+        }
+        return code
+    }
+    
+    private struct VoiceView: View {
         let displayData: Voices.VoiceDisplayData
         
         var body: some View {
@@ -55,7 +62,7 @@ struct VoiceSelection: View {
         }
     }
     
-    struct OneVoiceListView: View {
+    private struct VoiceListView: View {
         let quality: AVSpeechSynthesisVoiceQuality
         let code: String
         let voiceDict: Voices.VoiceDict
@@ -65,7 +72,7 @@ struct VoiceSelection: View {
             ForEach(Array(voiceDict[code]!.dict.keys).sorted(), id: \.self) { reducedIdentifier in
                 let (displayData, voice) = voiceDict[code]!.dict[reducedIdentifier]!
                 if voice.quality == quality {
-                    OneVoiceView(displayData: displayData)
+                    VoiceView(displayData: displayData)
                         .onTapGesture {
                             if let callback = callback {
                                 callback(reducedIdentifier, code)
@@ -75,7 +82,6 @@ struct VoiceSelection: View {
             }
         }
     }
-    
 
     var body: some View {
         VStack {
@@ -100,9 +106,9 @@ struct VoiceSelection: View {
                     let name = languageName(code)
                     Section(header: Text(name)) {
                         let _ = print(code)
-                        OneVoiceListView(quality: .premium, code: code, voiceDict: voiceDict, callback: callback)
-                        OneVoiceListView(quality: .enhanced, code: code, voiceDict: voiceDict, callback: callback)
-                        OneVoiceListView(quality: .default, code: code, voiceDict: voiceDict, callback: callback)
+                        VoiceListView(quality: .premium, code: code, voiceDict: voiceDict, callback: callback)
+                        VoiceListView(quality: .enhanced, code: code, voiceDict: voiceDict, callback: callback)
+                        VoiceListView(quality: .default, code: code, voiceDict: voiceDict, callback: callback)
                     }
                 }
             }
@@ -110,15 +116,6 @@ struct VoiceSelection: View {
         }
         .navigationTitle("Voice Selector")
     }
-    func languageName(_ code: String) -> String {
-        let locale: Locale = .current
-        let variant = locale.localizedString(forIdentifier: code)
-        if let variant = variant {
-            return variant + " (" + code + ")"
-        }
-        return code
-    }
-    
 }
 
 extension AVSpeechSynthesisVoiceQuality {
@@ -133,5 +130,5 @@ extension AVSpeechSynthesisVoiceQuality {
 }
 
 #Preview {
-    return VoiceSelection(voiceDict: ViewModel().languages.voices.voiceDict, callback: nil)
+    return VoiceSelection(voiceDict: ViewModel().voices.voiceDict, callback: nil)
 }

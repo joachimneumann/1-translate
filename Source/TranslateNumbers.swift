@@ -34,7 +34,7 @@ struct TranslateNumbers: View {
                     let symbolName = noVoice ? "speaker.slash.fill" : "speaker.wave.3.fill"
                     let symbolSize: CGFloat = noVoice ? 23.0 : 18.0
                     Button {
-                        viewModel.languages.voices.readAloud(translated, in: language)
+                        viewModel.voices.readAloud(translated, in: language)
                     } label: {
                         Image(systemName: symbolName)
                             .resizable()

@@ -20,7 +20,6 @@ import SwiftUI
     var first: Language!
     var second: Language!
     var list: [Language] = []
-    var voices: Voices = Voices()
     let arabic: Language              = ArabicImpl() // not working
     let arabicNumerals: Language      = ArabicNumeralsImpl()
     let armenianNumerals: Language    = ArmenianNumeralsImpl()
@@ -74,8 +73,6 @@ import SwiftUI
         thaiNumerals,
         vietnamese]
         
-        voices.refreshVoiceDict(list: list)
-
         first = english
         second = german
 
