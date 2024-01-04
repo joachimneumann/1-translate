@@ -51,7 +51,6 @@ struct LanguageSelector: View {
                     }
                     .id(languageIndex)
                     .listRowBackground(selected ? Color(white: 0.18) : Color(white: 0.1))
-//                    .listRowBackground(languageIndex == selectedIndex.wrappedValue ? Color(.darkGray) : color)
                 }
                 .listStyle(.sidebar)
                 .background(color)
@@ -70,6 +69,12 @@ struct LanguageSelector: View {
             selectedIndex: isFirstLanguage ? $viewModel.languages.indexOfFirstLanguage : $viewModel.languages.indexOfSecondLanguage,
             list: viewModel.languages.list,
             color: .black)
+        .onChange(of: viewModel.languages.indexOfFirstLanguage, { oldValue, newValue in
+            viewModel.updateTranslation()
+        })
+        .onChange(of: viewModel.languages.indexOfSecondLanguage, { oldValue, newValue in
+            viewModel.updateTranslation()
+        })
         .padding(.top, 20)
         .navigationTitle(isFirstLanguage ? "First Language" : "Second Language")
         .toolbar {

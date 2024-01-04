@@ -189,10 +189,8 @@ import SwiftUI
                 }
                 await setPendingColors(for: symbol)
             }
-            Task.detached(priority: .low) {
-                await self.defaultTask(for: symbol, screen: screen)
-                self.keyState = .notPressed
-            }
+            self.defaultTask(for: symbol, screen: screen)
+            self.keyState = .notPressed
         }
     }
     
@@ -218,24 +216,20 @@ import SwiftUI
         }
     }
     
-    func defaultTask(for symbol: String, screen: Screen) async {
-        await MainActor.run() {
-            showAsInt = false
-            showAsFloat = false
-        }
+    func defaultTask(for symbol: String, screen: Screen) {
+        showAsInt = false
+        showAsFloat = false
         
         keyState = .highPrecisionProcessing
         displayNumber = stupidBrain.operation(symbol)
-        await refreshDisplay(screen: screen)
+        refreshDisplay(screen: screen)
     }
     
-    func refreshDisplay(screen: Screen) async {
+    func refreshDisplay(screen: Screen) {
         let tempDisplay = Display(displayNumber, screen: screen, separators: self.persistent, showAs: self, forceScientific: false )
-        await MainActor.run() {
-            currentDisplay = tempDisplay
-            updateTranslation()
-            self.showAC = currentDisplay.isZero
-        }
+        currentDisplay = tempDisplay
+        updateTranslation()
+        self.showAC = currentDisplay.isZero
     }
 
 }
