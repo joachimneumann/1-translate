@@ -67,7 +67,7 @@ struct Screen: Equatable, DisplayLengthLimiter {
         calculatorWidth = screenSize.width - 2 * horizontalPadding
         
         keyWidth = isPad ? (calculatorWidth - 9.0 * keySpacing) * 0.1 : (calculatorWidth - 3.0 * keySpacing) * 0.25
-        keyHeight = keyWidth * 0.5
+        keyHeight = keyWidth * 0.4
         keyboardHeight = 5 * keyHeight + 4 * keySpacing
         bottomPadding = isPad ? 0.0 : keyboardHeight * 0.09
 
