@@ -34,6 +34,7 @@ import SwiftUI
     var english: English              = EnglishImpl()
     var esperanto: Language           = EsperantoImpl()
     var spanish: Spanish              = SpanishImpl()
+    let finnish: Language             = FinnishImpl()
     let french: Language              = FrenchImpl()
     var german: German                = GermanImpl()
     var hieroglyphs: Language         = HieroglyphsImpl()
