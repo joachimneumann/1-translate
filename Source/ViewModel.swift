@@ -12,12 +12,12 @@ import SwiftUI
     var keyStatusColor: [String: Color] = [:]
     var textColor: [String: Color] = [:]
     var currentDisplay: Display
-    var firstTranslatedNumber: String = ""
-    var secondTranslatedNumber: String = ""
-    var forCopyFirstTranslatedNumber: String = ""
-    var firstTranslatedNumberTopBorder: String? = nil
-    var secondTranslatedNumberTopBorder: String? = nil
-    var forCopySecondTranslatedNumber: String = ""
+    var _1ForDisplay: String = ""
+    var _1ForDisplayOverline: String? = nil
+    var _1ForCopy: String = ""
+    var _2ForDisplay: String = ""
+    var _2ForDisplayOverline: String? = nil
+    var _2ForCopy: String = ""
     var persistent: Persistent
     var languages = Languages()
 
@@ -63,42 +63,42 @@ import SwiftUI
         voices.refreshVoiceDict(list: languages.list)
     }
         
-    func updateTranslation() {
-        var allInOneLine = currentDisplay.allInOneLine
+    func forCopy(_ text: String, _ overline: String?) -> String {
+        let text = text.replacingOccurrences(of: Languages.WordSplitter, with: "")
+        guard var overline = overline else { return text }
+        overline = overline.replacingOccurrences(of: Languages.WordSplitter, with: "")
+        return "<overline>" + overline + "</overline>" + text
+    }
+    
+    func splitForDisplay(_ text: String) -> (String, String?) {
+        guard text.contains(OVERLINE) else { return (text, nil) }
+        let split = text.split(separator: OVERLINE)
+        guard split.count == 2 else { return (text, nil) }
+        return (String(split[0]), String(split[1]))
+    }
+ 
+    func cleanSeperators(_ text: String) -> String {
+        var ret = text
         if persistent.groupSeparator != .none {
-            allInOneLine = allInOneLine.replacingOccurrences(of: persistent.groupSeparator.string, with: "")
+            ret = ret.replacingOccurrences(of: persistent.groupSeparator.string, with: "")
         }
         if persistent.decimalSeparator != .dot {
-            allInOneLine = allInOneLine.replacingOccurrences(of: persistent.decimalSeparator.string, with: ".")
+            ret = ret.replacingOccurrences(of: persistent.decimalSeparator.string, with: ".")
         }
-        firstTranslatedNumber = languages.first.read(allInOneLine)
-        firstTranslatedNumberTopBorder = nil
-        if firstTranslatedNumber.contains(OVERLINE) {
-            let split = firstTranslatedNumber.split(separator: OVERLINE)
-            firstTranslatedNumberTopBorder = String(split[0])
-            if split.count == 2 {
-                firstTranslatedNumber = String(split[1])
-            } else {
-                firstTranslatedNumber = ""
-            }
-        }
-        forCopyFirstTranslatedNumber = (firstTranslatedNumberTopBorder != nil ? "<overline>" + firstTranslatedNumberTopBorder! + "</overline>" : "") + firstTranslatedNumber
-        forCopyFirstTranslatedNumber = forCopyFirstTranslatedNumber.replacingOccurrences(of: Languages.WordSplitter, with: "")
+        return ret
+    }
+    
+
+    func updateTranslation() {
+        let allInOneLine = cleanSeperators(currentDisplay.allInOneLine)
+        let translated = languages.first.read(allInOneLine)
+        (_1ForDisplay, _1ForDisplayOverline) = splitForDisplay(translated)
+        _1ForCopy = forCopy(_1ForDisplay, _1ForDisplayOverline)
 
         if languages.persistent.secondLanguageAllowed {
-            secondTranslatedNumber = languages.second.read(allInOneLine)
-            secondTranslatedNumberTopBorder = nil
-            if secondTranslatedNumber.contains(OVERLINE) {
-                let split = secondTranslatedNumber.split(separator: OVERLINE)
-                secondTranslatedNumberTopBorder = String(split[0])
-                if split.count == 2 {
-                    secondTranslatedNumber = String(split[1])
-                } else {
-                    secondTranslatedNumber = ""
-                }
-            }
-            forCopySecondTranslatedNumber = (secondTranslatedNumberTopBorder != nil ? "<overline>" + secondTranslatedNumberTopBorder! + "</overline>" : "") + secondTranslatedNumber
-            forCopySecondTranslatedNumber = forCopySecondTranslatedNumber.replacingOccurrences(of: Languages.WordSplitter, with: "")
+            let translated = languages.second.read(allInOneLine)
+            (_2ForDisplay, _2ForDisplayOverline) = splitForDisplay(translated)
+            _2ForCopy = forCopy(_2ForDisplay, _2ForDisplayOverline)
         }
     }
     

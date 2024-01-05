@@ -183,14 +183,6 @@ import Foundation
         return ret
     }
 
-    func read(_ i: Int) -> String {
-        var ret = readInteger(i)
-        if let postProcessing = postProcessing {
-            ret = postProcessing(ret)
-        }
-        return ret
-    }
-
     func readInteger(_ i: Int) -> String {
         if i < 0 {
             guard allowNegativeNumbers else { return "negative: unknown" }
@@ -235,6 +227,15 @@ import Foundation
             return read_e9_e12(i)
         }
         return read_e12_e15(i)
+    }
+    
+    
+    func read(_ i: Int) -> String {
+        var ret = readInteger(i)
+        if let postProcessing = postProcessing {
+            ret = postProcessing(ret)
+        }
+        return ret
     }
     
     func read(_ s: String) -> String {

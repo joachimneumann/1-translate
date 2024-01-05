@@ -61,11 +61,11 @@ struct TranslateNumbers: View {
                             viewModel: viewModel,
                             screen: screen,
                             language: viewModel.languages.first,
-                            translated: viewModel.firstTranslatedNumber)
+                            translated: viewModel._1ForDisplay)
                 TranslatedDisplay(
-                    translatedString: viewModel.firstTranslatedNumber,
-                    forCopyTranslatedNumber: viewModel.forCopyFirstTranslatedNumber,
-                    translatedStringTopBorder: viewModel.firstTranslatedNumberTopBorder,
+                    translatedString: viewModel._1ForDisplay,
+                    forCopyTranslatedNumber: viewModel._1ForCopy,
+                    overline: viewModel._1ForDisplayOverline,
                     screen: screen)
                 .font(viewModel.languages.firstFont)
                 .padding(.horizontal, 0)
@@ -75,12 +75,12 @@ struct TranslateNumbers: View {
                                 viewModel: viewModel,
                                 screen: screen,
                                 language: viewModel.languages.second,
-                                translated: viewModel.secondTranslatedNumber)
+                                translated: viewModel._2ForDisplay)
                     Spacer(minLength: 0.0)
                     TranslatedDisplay(
-                        translatedString: viewModel.secondTranslatedNumber,
-                        forCopyTranslatedNumber: viewModel.forCopySecondTranslatedNumber,
-                        translatedStringTopBorder: viewModel.secondTranslatedNumberTopBorder,                            screen: screen)
+                        translatedString: viewModel._2ForDisplay,
+                        forCopyTranslatedNumber: viewModel._2ForCopy,
+                        overline: viewModel._2ForDisplayOverline,                            screen: screen)
                     .font(viewModel.languages.secondFont)
                     .padding(.horizontal, 0)
                 }
@@ -134,9 +134,7 @@ struct TranslateNumbers: View {
         }
         .accentColor(.white)
         .onAppear() {
-            Task {
-                await viewModel.refreshDisplay(screen: screen)
-            }
+            viewModel.refreshDisplay(screen: screen)
         }
     }
 }
