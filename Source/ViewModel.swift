@@ -15,11 +15,11 @@ import SwiftUI
     var _1ForDisplay: String = ""
     var _1ForDisplayOverline: String? = nil
     var _1ForCopy: String = ""
-    var _1ForSpeaking: String = ""
+    var _1ForSpeaking: String? = ""
     var _2ForDisplay: String = ""
     var _2ForDisplayOverline: String? = nil
     var _2ForCopy: String = ""
-    var _2ForSpeaking: String = ""
+    var _2ForSpeaking: String? = ""
     var persistent: Persistent
     var languages = Languages()
 
@@ -101,14 +101,26 @@ import SwiftUI
         let translated = languages.first.read(allInOneLine)
         (_1ForDisplay, _1ForDisplayOverline) = splitForDisplay(translated)
         _1ForCopy = forCopy(_1ForDisplay, _1ForDisplayOverline)
-        _1ForSpeaking = forSpeaking(_1ForDisplay)
-        _1ForSpeaking = languages.first.speakingPostProcessing(_1ForSpeaking)
+        _1ForSpeaking = nil
+        if  let code = languages.first.voiceLanguageCode {
+            if voices.voiceDict[code] != nil {
+                _1ForSpeaking = forSpeaking(_1ForDisplay)
+                _1ForSpeaking = languages.first.speakingPostProcessing(_1ForSpeaking!)
+            }
+        }
 
         if languages.persistent.secondLanguageAllowed {
             let translated = languages.second.read(allInOneLine)
             (_2ForDisplay, _2ForDisplayOverline) = splitForDisplay(translated)
             _2ForCopy = forCopy(_2ForDisplay, _2ForDisplayOverline)
             _2ForSpeaking = forSpeaking(_2ForDisplay)
+            _2ForSpeaking = nil
+            if  let code = languages.second.voiceLanguageCode {
+                if voices.voiceDict[code] != nil {
+                    _2ForSpeaking = forSpeaking(_2ForDisplay)
+                    _2ForSpeaking = languages.first.speakingPostProcessing(_2ForSpeaking!)
+                }
+            }
         }
     }
     

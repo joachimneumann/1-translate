@@ -24,18 +24,18 @@ struct TranslateNumbers: View {
         let screen: Screen
         let language: Language
         let translated: String
-        let forSpeaking: String
+        let forSpeaking: String?
 
         var body: some View {
             HStack(spacing: 30.0) {
                 Spacer()
                 if viewModel.persistent.offerReadingAloud {
-                    let noVoice = language.voiceLanguageCode == nil
+                    let noVoice = (forSpeaking == nil)
                     let color =  noVoice ? Color(white: 0.7) : Color(white: 0.95)
                     let symbolName = noVoice ? "speaker.slash.fill" : "speaker.wave.3.fill"
                     let symbolSize: CGFloat = noVoice ? 23.0 : 18.0
                     Button {
-                        viewModel.voices.readAloud(forSpeaking, in: language)
+                        viewModel.voices.readAloud(forSpeaking!, in: language)
                     } label: {
                         Image(systemName: symbolName)
                             .resizable()
