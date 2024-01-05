@@ -91,8 +91,9 @@ import SwiftUI
     func splitForDisplay(_ text: String) -> (String, String?) {
         guard text.contains(OVERLINE) else { return (text, nil) }
         let split = text.split(separator: OVERLINE)
-        guard split.count == 2 else { return (text, nil) }
-        return (String(split[0]), String(split[1]))
+        if split.count == 1 { return ("", String(split[0])) }
+        if split.count == 2 { return (String(split[1]), String(split[0])) }
+        return (text, nil)
     }
     
 

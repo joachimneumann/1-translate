@@ -134,11 +134,13 @@ import AVFoundation
         if AVAudioSession.sharedInstance().category != .playback {
             do {
                 try AVAudioSession.sharedInstance().setCategory(.playback,mode: .default)
-            } catch let error {
+            } catch _ {
                 return
-                // fatalError("AVAudioSession: could not set category: \(error.localizedDescription)")
+                /// } catch let error {
+                /// fatalError("AVAudioSession: could not set category: \(error.localizedDescription)")
             }
         }
+
 
         guard let voiceLanguageCode = language.voiceLanguageCode else { return }
         guard let (selectedID, dict) = voiceDict[voiceLanguageCode] else { return }

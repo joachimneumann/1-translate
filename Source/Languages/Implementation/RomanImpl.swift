@@ -24,7 +24,7 @@ class RomanImpl: LanguageImpl {
         allowFraction = false
     }
     
-    private func read_1_999(_ i: Int) -> String {
+    private func read_3_999(_ i: Int) -> String {
         if i == 0 {
             return "zero: unknown"
         }
@@ -48,15 +48,18 @@ class RomanImpl: LanguageImpl {
     }
     
     override func readInteger(_ num: Int) -> String {
+        if num < 0 {
+            return "negative: unknown"
+        }
         if num <= 3_999 {
-            return read_1_999(num)
+            return read_3_999(num)
         } else {
             if num < 3_999_999 {
                 let XXX = num % 1000
                 let XXX_000 = num / 1000
-                var ret = read_1_999(XXX_000) + OVERLINE
+                var ret = read_3_999(XXX_000) + OVERLINE
                 if XXX > 0 {
-                    ret += read_1_999(XXX)
+                    ret += read_3_999(XXX)
                 }
                 return ret
             }
