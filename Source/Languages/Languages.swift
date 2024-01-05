@@ -61,14 +61,14 @@ import SwiftUI
         // digits,
         english,
         esperanto,
-        spanish,
-        swahili,
         french,
+        spanish,
         german,
         hieroglyphs,
         polish,
         roman,
         russian,
+        swahili,
         thai,
         thaiNumerals,
         vietnamese]
@@ -92,7 +92,7 @@ import SwiftUI
             }
         }
     }
-        
+    
     var firstFont: Font {
         switch first.name {
         case arabicNumerals.name:

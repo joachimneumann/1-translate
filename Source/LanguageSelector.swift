@@ -69,12 +69,6 @@ struct LanguageSelector: View {
             selectedIndex: isFirstLanguage ? $viewModel.languages.indexOfFirstLanguage : $viewModel.languages.indexOfSecondLanguage,
             list: viewModel.languages.list,
             color: .black)
-        .onChange(of: viewModel.languages.indexOfFirstLanguage, { oldValue, newValue in
-            viewModel.updateTranslation()
-        })
-        .onChange(of: viewModel.languages.indexOfSecondLanguage, { oldValue, newValue in
-            viewModel.updateTranslation()
-        })
         .padding(.top, 20)
         .navigationTitle(isFirstLanguage ? "First Language" : "Second Language")
         .toolbar {
@@ -91,8 +85,11 @@ struct LanguageSelector: View {
                     .padding(.trailing, 5)
             }
         }
-//        .edgesIgnoringSafeArea(.bottom)
+        .onDisappear {
+            viewModel.refreshDisplay(screen: screen)
+        }
     }
+    
 }
 
 

@@ -105,7 +105,6 @@ struct VoiceSelection: View {
                 ForEach(Array(voiceDict.keys.sorted()), id: \.self) { code in
                     let name = languageName(code)
                     Section(header: Text(name)) {
-                        let _ = print(code)
                         VoiceListView(quality: .premium, code: code, voiceDict: voiceDict, callback: callback)
                         VoiceListView(quality: .enhanced, code: code, voiceDict: voiceDict, callback: callback)
                         VoiceListView(quality: .default, code: code, voiceDict: voiceDict, callback: callback)
