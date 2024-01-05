@@ -129,6 +129,17 @@ import AVFoundation
     
     
     func readAloud(_ text: String, in language: Language) {
+        
+        /// also speak when the phone is in silent mode
+        if AVAudioSession.sharedInstance().category != .playback {
+            do {
+                try AVAudioSession.sharedInstance().setCategory(.playback,mode: .default)
+            } catch let error {
+                return
+                // fatalError("AVAudioSession: could not set category: \(error.localizedDescription)")
+            }
+        }
+
         guard let voiceLanguageCode = language.voiceLanguageCode else { return }
         guard let (selectedID, dict) = voiceDict[voiceLanguageCode] else { return }
         guard let selectedID = selectedID else { return }
