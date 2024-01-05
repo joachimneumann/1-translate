@@ -93,6 +93,7 @@ struct TranslateNumbers: View {
                 screen: screen)
             .padding(.bottom, screen.portraitIPhoneDisplayBottomPadding)
             .padding(.horizontal, 0)
+            .frame(height: 65)
             NonScientificKeyboard(
                 screen: screen,
                 viewModel: viewModel)
