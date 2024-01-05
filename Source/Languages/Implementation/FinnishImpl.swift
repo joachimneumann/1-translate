@@ -26,7 +26,8 @@ class FinnishImpl: LanguageImpl {
         e9_one = "miljardi"
         e12 = "biljoonaa"
         e12_one = "biljoona"
-        eSpace = Languages.WordSplitter
+        e3Space = Languages.WordSplitter
+        e69Space = " "
     }
 
 
