@@ -34,8 +34,7 @@ struct LanguageSelector: View {
                         Text(language.name)
                             .padding(.leading, 10)
                         if language.nameDescription != nil {
-                            Text("/"+language.nameDescription!)
-                                .italic()
+                            Text(" ("+language.nameDescription!+")")
                         }
                         Spacer()
                         if selected {
