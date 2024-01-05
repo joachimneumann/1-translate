@@ -15,21 +15,18 @@ class FinnishImpl: LanguageImpl {
             dotString: "pilkku",
             exponentString: " EE ")
         nameDescription = "Finnish"
-
-//        tensConnector = " "
-//        e2 = "cent"
-//        e2_one = e2
-//        eSpace = " "
-//        e3 = "mil"
-//        e3_one = e3
-//        e6 = "milionoj"
-//        e6_one = "miliono"
-//        e9 = "miliardoj"
-//        e9_one = "miliardo"
-//        e12 = "bilionoj"
-//        e12_one = "biliono"
-//        afterNegative = " "
-//        beforeAndAfterDotString = " "
+        voiceLanguageCode = "fi"
+        e2 = "sataa"
+        e2_one = "sata"
+        e3 = "tuhatta"
+        e3_one = "tuhat"
+        e6 = "miljoonaa"
+        e6_one = "miljoona"
+        e9 = "miljardia"
+        e9_one = "miljardi"
+        e12 = "biljoonaa"
+        e12_one = "biljoona"
+        eSpace = Languages.WordSplitter
     }
 
 
@@ -50,10 +47,24 @@ class FinnishImpl: LanguageImpl {
     }
     
     override func read_10s(_ i: Int) -> String {
-        if i == 1 { return "dek"}
-        return read_0_9(i) + "dek"
+        if i == 1 { return "toista" } //kymmenen"}
+        return read_0_9(i) + Languages.WordSplitter + "kymmentä"
     }
     
+    override func read_10_99(_ i: Int) -> String {
+        if i == 10 { return "kymmenen" }
+        var ret = read_10s(i.E1)
+        if i < 20 {
+            if i.E1x > 0 {
+                ret = read_0_9(i.E1x) + Languages.WordSplitter + ret
+            }
+        } else {
+            if i.E1x > 0 {
+                ret += Languages.WordSplitter + read_0_9(i.E1x)
+            }
+        }
+        return ret
+    }
     override func read_e2_e3(_ i: Int) -> String {
         var ret = super.read_e2_e3(i)
         ret = ret.replacingOccurrences(of: " cent", with: "cent")

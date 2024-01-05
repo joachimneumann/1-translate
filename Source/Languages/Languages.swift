@@ -62,6 +62,7 @@ import SwiftUI
         // digits,
         english,
         esperanto,
+        finnish,
         french,
         spanish,
         german,
