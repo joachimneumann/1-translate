@@ -15,9 +15,11 @@ import SwiftUI
     var _1ForDisplay: String = ""
     var _1ForDisplayOverline: String? = nil
     var _1ForCopy: String = ""
+    var _1ForSpeaking: String = ""
     var _2ForDisplay: String = ""
     var _2ForDisplayOverline: String? = nil
     var _2ForCopy: String = ""
+    var _2ForSpeaking: String = ""
     var persistent: Persistent
     var languages = Languages()
 
@@ -63,20 +65,6 @@ import SwiftUI
         voices.refreshVoiceDict(list: languages.list)
     }
         
-    func forCopy(_ text: String, _ overline: String?) -> String {
-        let text = text.replacingOccurrences(of: Languages.WordSplitter, with: "")
-        guard var overline = overline else { return text }
-        overline = overline.replacingOccurrences(of: Languages.WordSplitter, with: "")
-        return "<overline>" + overline + "</overline>" + text
-    }
-    
-    func splitForDisplay(_ text: String) -> (String, String?) {
-        guard text.contains(OVERLINE) else { return (text, nil) }
-        let split = text.split(separator: OVERLINE)
-        guard split.count == 2 else { return (text, nil) }
-        return (String(split[0]), String(split[1]))
-    }
- 
     func cleanSeperators(_ text: String) -> String {
         var ret = text
         if persistent.groupSeparator != .none {
@@ -87,6 +75,25 @@ import SwiftUI
         }
         return ret
     }
+
+    func forCopy(_ text: String, _ overline: String?) -> String {
+        let text = text.replacingOccurrences(of: Languages.WordSplitter, with: "")
+        guard var overline = overline else { return text }
+        overline = overline.replacingOccurrences(of: Languages.WordSplitter, with: "")
+        return "<overline>" + overline + "</overline>" + text
+    }
+    
+    func forSpeaking(_ text: String) -> String {
+        let text = text.replacingOccurrences(of: Languages.WordSplitter, with: " ")
+        return text
+    }
+    
+    func splitForDisplay(_ text: String) -> (String, String?) {
+        guard text.contains(OVERLINE) else { return (text, nil) }
+        let split = text.split(separator: OVERLINE)
+        guard split.count == 2 else { return (text, nil) }
+        return (String(split[0]), String(split[1]))
+    }
     
 
     func updateTranslation() {
@@ -94,11 +101,13 @@ import SwiftUI
         let translated = languages.first.read(allInOneLine)
         (_1ForDisplay, _1ForDisplayOverline) = splitForDisplay(translated)
         _1ForCopy = forCopy(_1ForDisplay, _1ForDisplayOverline)
+        _1ForSpeaking = forSpeaking(_1ForDisplay)
 
         if languages.persistent.secondLanguageAllowed {
             let translated = languages.second.read(allInOneLine)
             (_2ForDisplay, _2ForDisplayOverline) = splitForDisplay(translated)
             _2ForCopy = forCopy(_2ForDisplay, _2ForDisplayOverline)
+            _2ForSpeaking = forSpeaking(_2ForDisplay)
         }
     }
     

@@ -24,6 +24,7 @@ struct TranslateNumbers: View {
         let screen: Screen
         let language: Language
         let translated: String
+        let forSpeaking: String
 
         var body: some View {
             HStack(spacing: 30.0) {
@@ -34,7 +35,7 @@ struct TranslateNumbers: View {
                     let symbolName = noVoice ? "speaker.slash.fill" : "speaker.wave.3.fill"
                     let symbolSize: CGFloat = noVoice ? 23.0 : 18.0
                     Button {
-                        viewModel.voices.readAloud(translated, in: language)
+                        viewModel.voices.readAloud(forSpeaking, in: language)
                     } label: {
                         Image(systemName: symbolName)
                             .resizable()
@@ -61,12 +62,12 @@ struct TranslateNumbers: View {
                             viewModel: viewModel,
                             screen: screen,
                             language: viewModel.languages.first,
-                            translated: viewModel._1ForDisplay)
-                TranslatedDisplay(
-                    translatedString: viewModel._1ForDisplay,
-                    forCopyTranslatedNumber: viewModel._1ForCopy,
-                    overline: viewModel._1ForDisplayOverline,
-                    screen: screen)
+                            translated: viewModel._1ForDisplay,
+                            forSpeaking: viewModel._1ForSpeaking)
+                TranslatedDisplay(text: viewModel._1ForDisplay,
+                                  overline: viewModel._1ForDisplayOverline,
+                                  forCopy: viewModel._1ForCopy,
+                                  screen: screen)
                 .font(viewModel.languages.firstFont)
                 .padding(.horizontal, 0)
                 Spacer(minLength: 0.0)
@@ -75,12 +76,13 @@ struct TranslateNumbers: View {
                                 viewModel: viewModel,
                                 screen: screen,
                                 language: viewModel.languages.second,
-                                translated: viewModel._2ForDisplay)
+                                translated: viewModel._2ForDisplay,
+                                forSpeaking: viewModel._2ForSpeaking)
                     Spacer(minLength: 0.0)
-                    TranslatedDisplay(
-                        translatedString: viewModel._2ForDisplay,
-                        forCopyTranslatedNumber: viewModel._2ForCopy,
-                        overline: viewModel._2ForDisplayOverline,                            screen: screen)
+                    TranslatedDisplay(text: viewModel._2ForDisplay,
+                                      overline: viewModel._2ForDisplayOverline,
+                                      forCopy: viewModel._2ForCopy,
+                                      screen: screen)
                     .font(viewModel.languages.secondFont)
                     .padding(.horizontal, 0)
                 }
