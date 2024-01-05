@@ -289,6 +289,10 @@ import Foundation
         }
         return ret;
     }
+    
+    func speakingPostProcessing(_ text: String) -> String {
+        text // can be overriden by the language
+    }
 }
 
 extension Int {

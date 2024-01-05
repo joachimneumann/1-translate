@@ -102,6 +102,7 @@ import SwiftUI
         (_1ForDisplay, _1ForDisplayOverline) = splitForDisplay(translated)
         _1ForCopy = forCopy(_1ForDisplay, _1ForDisplayOverline)
         _1ForSpeaking = forSpeaking(_1ForDisplay)
+        _1ForSpeaking = languages.first.speakingPostProcessing(_1ForSpeaking)
 
         if languages.persistent.secondLanguageAllowed {
             let translated = languages.second.read(allInOneLine)

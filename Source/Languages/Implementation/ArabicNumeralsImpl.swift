@@ -34,4 +34,28 @@ class ArabicNumeralsImpl: LanguageImpl {
         return ret
     }
     
+    override func speakingPostProcessing(_ text: String) -> String {
+        var ret = ""
+        for letter in text {
+            switch letter {
+            case ".": ret += "واحدة"
+            case "٠": ret += "صفر"
+            case "١": ret += "وَاحِد"
+            case "٢": ret += "اِثْنَان"
+            case "٣": ret += "ثَلَاثَة"
+            case "٤": ret += "أَرْبَعَة"
+            case "٥": ret += "خَمْسَة"
+            case "٦": ret += "سِتَّة"
+            case "٧": ret += "سَبْعَة"
+            case "٨": ret += "ثَمَانِيَة"
+            case "٩": ret += "تِسْعَة"
+            default: fatalError("speakingPostProcessing: outside range")
+            }
+            ret += " "
+        }
+        if ret.count > 0 {
+            ret = String(ret.dropLast())
+        }
+        return ret
+    }
 }

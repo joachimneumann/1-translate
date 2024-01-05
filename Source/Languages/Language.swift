@@ -10,6 +10,7 @@ import Foundation
 protocol Language {
     func read(_ numberString: String) -> String
     func read(_ i: Int) -> String
+    func speakingPostProcessing(_ text: String) -> String
     var name: String { get }
     var nameDescription: String? { get }
     var nameWithDescription: String { get }
