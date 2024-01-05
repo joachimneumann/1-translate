@@ -17,19 +17,6 @@ class GermanImpl: LanguageImpl, German {
     @AppStorage("germanCaptalisationKey")
     var capitalisation: Bool = true
     
-    @AppStorage("germanWordSplitterKey")
-    var useWordSplitter: Bool = true {
-        didSet {
-            if useWordSplitter {
-                e2 = "hundert" + Languages.WordSplitter
-                e3 = "tausend" + Languages.WordSplitter
-            } else {
-                e2 = "hundert"
-                e3 = "tausend"
-            }
-        }
-    }
-    
     init() {
         super.init(
             name: "Deutsch",
@@ -52,12 +39,11 @@ class GermanImpl: LanguageImpl, German {
         eSpace = ""
         e69Space = " "
         postProcessing = germanPostProcessing
-        useWordSplitter = useWordSplitter
     }
     
     func germanPostProcessing(_ unprocessed: String) -> String {
         var ret = unprocessed
-        ret = ret.replacingOccurrences(of: "einsund", with: "einund")
+        ret = ret.replacingOccurrences(of: "eins"+Languages.WordSplitter+"und", with: "ein"+Languages.WordSplitter+"und")
         ret = ret.replacingOccurrences(of: "einshundert", with: "einhundert")
         ret = ret.replacingOccurrences(of: "einstausend", with: "eintausend")
 
@@ -120,9 +106,9 @@ class GermanImpl: LanguageImpl, German {
         var ret = ""
         if i.E1x > 0 {
             ret = read_0_9(i.E1x)
-            if useWordSplitter { ret += Languages.WordSplitter }
+            ret += Languages.WordSplitter
             ret += "und"
-            if useWordSplitter { ret += Languages.WordSplitter }
+            ret += Languages.WordSplitter
         }
         ret += read_10s(i.E1)
         return ret

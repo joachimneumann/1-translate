@@ -24,7 +24,6 @@ protocol English: Language {
 }
 protocol German: Language {
     var capitalisation: Bool { get set }
-    var useWordSplitter: Bool { get set }
 }
 protocol Vietnamese: Language {
     var thousand: VietnameseImpl.Thousand { get set }

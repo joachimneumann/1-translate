@@ -246,18 +246,6 @@ struct Settings: View {
             language: viewModel.languages.german,
             example: "88") {
                 HStack {
-                    Text("Trennung")
-                    Spacer()
-                    Toggle("", isOn: $viewModel.languages.german.useWordSplitter)
-                        .frame(width: 40)
-                        .toggleStyle(
-                            ColoredToggleStyle(onColor: Color(white: 0.6),
-                                               offColor: Color(white: 0.25),
-                                               thumbColor: .white))
-                        .buttonStyle(.plain)
-                        .padding(.trailing, 10)
-                }
-                HStack {
                     Text("Großschreibung")
                     Spacer()
                     Toggle("", isOn: $viewModel.languages.german.capitalisation)
