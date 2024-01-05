@@ -25,13 +25,13 @@ class ArabicNumeralsImpl: LanguageImpl {
         ret = ret.replacingOccurrences(of: "1", with: "١")
         ret = ret.replacingOccurrences(of: "2", with: "٢")
         ret = ret.replacingOccurrences(of: "3", with: "٣")
-        ret = ret.replacingOccurrences(of: "4", with: "٤‎")
-        ret = ret.replacingOccurrences(of: "5", with: "٥‎")
-        ret = ret.replacingOccurrences(of: "6", with: "٦‎")
-        ret = ret.replacingOccurrences(of: "7", with: "٧‎")
-        ret = ret.replacingOccurrences(of: "8", with: "٨‎")
+        ret = ret.replacingOccurrences(of: "4", with: "٤")
+        ret = ret.replacingOccurrences(of: "5", with: "٥")
+        ret = ret.replacingOccurrences(of: "6", with: "٦")
+        ret = ret.replacingOccurrences(of: "7", with: "٧")
+        ret = ret.replacingOccurrences(of: "8", with: "٨")
         ret = ret.replacingOccurrences(of: "9", with: "٩")
         return ret
     }
-
+    
 }
