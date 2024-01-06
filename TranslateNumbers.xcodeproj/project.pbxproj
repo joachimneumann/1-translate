@@ -45,8 +45,6 @@
 		AA5CF9182B39318D004BB6BB /* ArabicNumeralsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5CF9162B39318D004BB6BB /* ArabicNumeralsImpl.swift */; };
 		AA5CF91A2B3944AD004BB6BB /* ArmenianNumeralsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5CF9192B3944AD004BB6BB /* ArmenianNumeralsImpl.swift */; };
 		AA5CF91B2B3944AD004BB6BB /* ArmenianNumeralsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5CF9192B3944AD004BB6BB /* ArmenianNumeralsImpl.swift */; };
-		AA659AB52B3FC170004CF20A /* LanguageOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA659AB42B3FC170004CF20A /* LanguageOld.swift */; };
-		AA659AB62B3FC170004CF20A /* LanguageOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA659AB42B3FC170004CF20A /* LanguageOld.swift */; };
 		AA659AB82B3FDE73004CF20A /* Persistent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA659AB72B3FDE73004CF20A /* Persistent.swift */; };
 		AA659AB92B3FDE73004CF20A /* Persistent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA659AB72B3FDE73004CF20A /* Persistent.swift */; };
 		AA689125295E681400129593 /* Brain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA689124295E681400129593 /* Brain.swift */; };
@@ -168,7 +166,6 @@
 		AA5CF9162B39318D004BB6BB /* ArabicNumeralsImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArabicNumeralsImpl.swift; sourceTree = "<group>"; };
 		AA5CF9192B3944AD004BB6BB /* ArmenianNumeralsImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmenianNumeralsImpl.swift; sourceTree = "<group>"; };
 		AA6352B02B296C3B00CABC0C /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
-		AA659AB42B3FC170004CF20A /* LanguageOld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageOld.swift; sourceTree = "<group>"; };
 		AA659AB72B3FDE73004CF20A /* Persistent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistent.swift; sourceTree = "<group>"; };
 		AA689124295E681400129593 /* Brain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brain.swift; sourceTree = "<group>"; };
 		AA7988B32B32B07700608906 /* ThaiImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThaiImpl.swift; sourceTree = "<group>"; };
@@ -331,7 +328,6 @@
 		AA3565BB2B326DE9009B58D2 /* Languages */ = {
 			isa = PBXGroup;
 			children = (
-				AA659AB42B3FC170004CF20A /* LanguageOld.swift */,
 				AA3565AF2B32588B009B58D2 /* Language.swift */,
 				AAB253B42B3AE79400860F93 /* Languages.swift */,
 				AAB253BB2B3BBAD400860F93 /* Implementation */,
@@ -521,7 +517,6 @@
 				AA29F58A293CD608001ADF5A /* PortraitDisplay.swift in Sources */,
 				AA3565B02B32588B009B58D2 /* Language.swift in Sources */,
 				AA8A91142B1D7FD000CE7185 /* TranslatedDisplay.swift in Sources */,
-				AA659AB52B3FC170004CF20A /* LanguageOld.swift in Sources */,
 				AAB990542B35749700BD5A24 /* DanishImpl.swift in Sources */,
 				AA5020262B333C280080E00C /* SpanishImpl.swift in Sources */,
 				AAF472672B452BD000E7B986 /* Voices.swift in Sources */,
@@ -591,7 +586,6 @@
 				AACCD0AB2B43AC0600D545C5 /* TestCatalan.swift in Sources */,
 				AA12A3372B3FF2AE00422866 /* Priority.swift in Sources */,
 				AACCD0AF2B43AC0600D545C5 /* TestArmenian.swift in Sources */,
-				AA659AB62B3FC170004CF20A /* LanguageOld.swift in Sources */,
 				AACCD0A52B43ABFA00D545C5 /* TestArabic.swift in Sources */,
 				AAB990522B35703500BD5A24 /* RomanImpl.swift in Sources */,
 				AA5CF91B2B3944AD004BB6BB /* ArmenianNumeralsImpl.swift in Sources */,
