@@ -38,6 +38,7 @@ import SwiftUI
     let french: Language              = FrenchImpl()
     var german: German                = GermanImpl()
     var hieroglyphs: Language         = HieroglyphsImpl()
+    var hindi: Language               = HindiImpl()
     let polish: Language              = PolishImpl()
     let russian: Language             = RussianImpl()
     let swahili: Language             = SwahiliImpl()
@@ -67,6 +68,7 @@ import SwiftUI
         spanish,
         german,
         hieroglyphs,
+        hindi,
         polish,
         roman,
         russian,

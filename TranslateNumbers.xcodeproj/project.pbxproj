@@ -38,6 +38,9 @@
 		AA5456512B47F58400078196 /* TestFinnish.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5456502B47F58400078196 /* TestFinnish.swift */; };
 		AA5456532B47F63600078196 /* FinnishImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5456522B47F63600078196 /* FinnishImpl.swift */; };
 		AA5456542B47FAC400078196 /* FinnishImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5456522B47F63600078196 /* FinnishImpl.swift */; };
+		AA5456562B48533400078196 /* TestHindi.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5456552B48533400078196 /* TestHindi.swift */; };
+		AA5456582B48572500078196 /* HindiImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5456572B48572500078196 /* HindiImpl.swift */; };
+		AA5456592B4858BF00078196 /* HindiImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5456572B48572500078196 /* HindiImpl.swift */; };
 		AA5CF9172B39318D004BB6BB /* ArabicNumeralsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5CF9162B39318D004BB6BB /* ArabicNumeralsImpl.swift */; };
 		AA5CF9182B39318D004BB6BB /* ArabicNumeralsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5CF9162B39318D004BB6BB /* ArabicNumeralsImpl.swift */; };
 		AA5CF91A2B3944AD004BB6BB /* ArmenianNumeralsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5CF9192B3944AD004BB6BB /* ArmenianNumeralsImpl.swift */; };
@@ -160,6 +163,8 @@
 		AA5020252B333C280080E00C /* SpanishImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpanishImpl.swift; sourceTree = "<group>"; };
 		AA5456502B47F58400078196 /* TestFinnish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestFinnish.swift; path = "../../1-translate-tests/Tests/TestFinnish.swift"; sourceTree = "<group>"; };
 		AA5456522B47F63600078196 /* FinnishImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinnishImpl.swift; sourceTree = "<group>"; };
+		AA5456552B48533400078196 /* TestHindi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestHindi.swift; path = "../../1-translate-tests/Tests/TestHindi.swift"; sourceTree = "<group>"; };
+		AA5456572B48572500078196 /* HindiImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HindiImpl.swift; sourceTree = "<group>"; };
 		AA5CF9162B39318D004BB6BB /* ArabicNumeralsImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArabicNumeralsImpl.swift; sourceTree = "<group>"; };
 		AA5CF9192B3944AD004BB6BB /* ArmenianNumeralsImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmenianNumeralsImpl.swift; sourceTree = "<group>"; };
 		AA6352B02B296C3B00CABC0C /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
@@ -360,6 +365,7 @@
 				AA7988B32B32B07700608906 /* ThaiImpl.swift */,
 				AAFBD8A62B32A36D00175197 /* ThaiNumeralsImpl.swift */,
 				AA831B9F2B35238C003307A2 /* VietnameseImpl.swift */,
+				AA5456572B48572500078196 /* HindiImpl.swift */,
 			);
 			path = Implementation;
 			sourceTree = "<group>";
@@ -367,6 +373,7 @@
 		AACCD0812B43AB6C00D545C5 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				AA5456552B48533400078196 /* TestHindi.swift */,
 				AACCD08C2B43ABB700D545C5 /* TestArabic.swift */,
 				AACCD08E2B43ABB700D545C5 /* TestArabic2.swift */,
 				AACCD0942B43ABB700D545C5 /* TestArmenian.swift */,
@@ -495,6 +502,7 @@
 				AA5CF91A2B3944AD004BB6BB /* ArmenianNumeralsImpl.swift in Sources */,
 				AA01B9D42957E44300617AFB /* Display.swift in Sources */,
 				AAB990512B35703500BD5A24 /* RomanImpl.swift in Sources */,
+				AA5456592B4858BF00078196 /* HindiImpl.swift in Sources */,
 				AAC64EB32B42C89F00ABCAAF /* RussianImpl.swift in Sources */,
 				AAB10B9C292A2222004707E9 /* NonScientificKeyboard.swift in Sources */,
 				AA0523472B27024800DDAAD4 /* LanguageSelector.swift in Sources */,
@@ -555,9 +563,11 @@
 				AAF4725D2B442AF300E7B986 /* TestEsperanto.swift in Sources */,
 				AACCD0B22B43AC0600D545C5 /* TestChinese.swift in Sources */,
 				AACCD0A72B43AC0600D545C5 /* TestDigits.swift in Sources */,
+				AA5456562B48533400078196 /* TestHindi.swift in Sources */,
 				AA5020272B333C280080E00C /* SpanishImpl.swift in Sources */,
 				AA326E4A2B32F0430092E8E6 /* EnglishImpl.swift in Sources */,
 				AACCD0B52B43AC0600D545C5 /* TestRoman.swift in Sources */,
+				AA5456582B48572500078196 /* HindiImpl.swift in Sources */,
 				AAFBD8A82B32A36D00175197 /* ThaiNumeralsImpl.swift in Sources */,
 				AACCD0B02B43AC0600D545C5 /* TestArmenianNumerals.swift in Sources */,
 				AA5456512B47F58400078196 /* TestFinnish.swift in Sources */,

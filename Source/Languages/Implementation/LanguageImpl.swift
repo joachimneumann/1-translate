@@ -46,9 +46,13 @@ import Foundation
     
     var eSpace: String? = nil
     var e3Space: String? = nil
+    var e4Space: String? = nil
+    var e5Space: String? = nil
     var e69Space: String? = nil
     private var eSpace_: String { eSpace == nil ? "" : eSpace! }
     private var e3Space_: String { e3Space == nil ? "" : e3Space! }
+    private var e4Space_: String { e4Space == nil ? "" : e4Space! }
+    private var e5Space_: String { e5Space == nil ? "" : e5Space! }
     private var e69Space_: String { e69Space == nil ? "" : e69Space! }
     
     var tensConnector: String? = nil
@@ -199,7 +203,7 @@ import Foundation
             if e5 != nil {
                 if i >= 100_000 {
                     ret += read_0_9(i.E5)
-                    ret += e5!
+                    ret += eSpace_ + e5Space_ + e5!
                     if i.E5x > 0 {
                         ret += readInteger(i.E5x)
                     }
@@ -209,7 +213,7 @@ import Foundation
             if e4 != nil {
                 if i >= 10_000 {
                     ret += readInteger(i.E4)
-                    ret += e4!
+                    ret += eSpace_ + e4Space_ + e4!
                     if i.E4x > 0 {
                         ret += readInteger(i.E4x)
                     }
@@ -308,6 +312,8 @@ extension Int {
     var E5x: Int { self - self / 100_000 * 100_000 }
     var E6: Int { self / 1_000_000 }
     var E6x: Int { self - self / 1_000_000 * 1_000_000 }
+    var E7: Int { self / 10_000_000 }
+    var E7x: Int { self - self / 10_000_000 * 10_000_000 }
     var E8: Int { self / 100_000_000 }
     var E8x: Int { self - self / 100_000_000 * 100_000_000 }
     var E9: Int { self / 1_000_000_000 }
