@@ -30,7 +30,7 @@ struct LanguageSelector: View {
     var body: some View {
         ScrollViewReader { scrollViewReaderProxy in
             List(viewModel.languages.list)  { language in
-                let selected: Bool = currentLanguage != nil && language.name == currentLanguage!.name
+                let selected: Bool = language.name == currentLanguage?.name
                 Button {
                     currentLanguage = language
                 } label: {
@@ -59,11 +59,12 @@ struct LanguageSelector: View {
                         }
                     }
                 }
+                .id(language.name)
                 .listRowBackground(selected ? Color(white: 0.18) : Color(white: 0.1))
             }
-//            .onAppear() {
-//                scrollViewReaderProxy.scrollTo(3, anchor: .top)
-//            }
+            .onAppear() {
+                scrollViewReaderProxy.scrollTo(isFirstLanguage ? viewModel.languages.first.name : viewModel.languages.second.name, anchor: .top)
+            }
             .listStyle(.sidebar)
         }
         .onAppear() {
