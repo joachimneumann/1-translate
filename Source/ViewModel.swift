@@ -111,7 +111,7 @@ import SwiftUI
             }
         }
 
-        if languages.persistent.secondLanguageAllowed {
+        if languages.secondLanguageAllowed {
             let translated = languages.second.read(allInOneLine)
             (_2ForDisplay, _2ForDisplayOverline) = splitForDisplay(translated)
             _2ForCopy = forCopy(_2ForDisplay, _2ForDisplayOverline)

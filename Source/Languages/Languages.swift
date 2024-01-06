@@ -7,16 +7,10 @@
 
 import SwiftUI
 
-@Observable class Languages {
-    
-    struct LanguagePersistent {
-        @AppStorage("firstNameKey") var firstName: String = "English"
-        @AppStorage("secondNameKey") var secondName: String = "German"
-        @AppStorage("secondLanguageAllowedKey") var secondLanguageAllowed: Bool = false
-
-    }
-
-    var persistent = LanguagePersistent()
+class Languages {
+    @AppStorage("firstNameKey") var firstName: String = "English"
+    @AppStorage("secondNameKey") var secondName: String = "German"
+    @AppStorage("secondLanguageAllowedKey") var secondLanguageAllowed: Bool = false
     var first: Language!
     var second: Language!
     var list: [Language] = []
@@ -79,10 +73,10 @@ import SwiftUI
         first = english
         second = german
         for language in list {
-            if language.name == persistent.firstName {
+            if language.name == firstName {
                 first = language
             }
-            if language.name == persistent.secondName {
+            if language.name == secondName {
                 second = language
             }
         }
@@ -91,9 +85,9 @@ import SwiftUI
     var firstFont: Font {
         switch first.name {
         case arabicNumerals.name:
-            Font(UIFont(name: "Avenir", size: persistent.secondLanguageAllowed ? 40 : 50)!)
+            Font(UIFont(name: "Avenir", size: secondLanguageAllowed ? 40 : 50)!)
         default:
-            persistent.secondLanguageAllowed ? Font.title : Font.largeTitle
+            secondLanguageAllowed ? Font.title : Font.largeTitle
         }
     }
     var secondFont: Font {

@@ -71,7 +71,7 @@ struct TranslateNumbers: View {
                 .font(viewModel.languages.firstFont)
                 .padding(.horizontal, 0)
                 Spacer(minLength: 0.0)
-                if viewModel.languages.persistent.secondLanguageAllowed {
+                if viewModel.languages.secondLanguageAllowed {
                     OneLanguage(isFirstLanguage: false,
                                 viewModel: viewModel,
                                 screen: screen,

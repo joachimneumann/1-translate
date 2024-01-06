@@ -23,7 +23,7 @@ struct Key: View {
         self.screen = screen
         self.symbol = symbol
         var keyHeight = screen.keySize.height
-        if !viewModel.languages.persistent.secondLanguageAllowed {
+        if !viewModel.languages.secondLanguageAllowed {
             keyHeight *= 1.5
         }
         if symbol == "0" {

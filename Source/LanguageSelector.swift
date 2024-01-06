@@ -17,10 +17,10 @@ struct LanguageSelector: View {
             if let currentLanguage = currentLanguage {
                 if isFirstLanguage {
                     viewModel.languages.first = currentLanguage
-                    viewModel.languages.persistent.firstName = currentLanguage.name
+                    viewModel.languages.firstName = currentLanguage.name
                 } else {
                     viewModel.languages.second = currentLanguage
-                    viewModel.languages.persistent.secondName = currentLanguage.name
+                    viewModel.languages.secondName = currentLanguage.name
                 }
             }
             viewModel.updateTranslation()

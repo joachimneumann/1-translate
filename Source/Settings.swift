@@ -17,7 +17,7 @@ struct Settings: View {
     var body: some View {
         VStack {
             List {
-                Appearance(temp: $viewModel.languages.persistent.secondLanguageAllowed)
+                Appearance(temp: $viewModel.languages.secondLanguageAllowed)
                 DigitsSettings
                 VoiceSettings
                 English
