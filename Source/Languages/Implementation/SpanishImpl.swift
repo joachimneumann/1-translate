@@ -39,7 +39,6 @@ class SpanishImpl: LanguageImpl, Spanish {
         e12_one = "un billón"
         e12 = "billiones"
         afterNegative = " "
-        beforeAndAfterDotString = " "
         tensConnector = " y "
         eSpace = " "
         puntoComma = puntoComma

@@ -21,7 +21,6 @@ class PolishImpl: LanguageImpl {
         e2_one = "sto"
         afterGroup = " "
         tensConnector = " "
-        beforeAndAfterDotString = " "
     }
     
     override func read_0_9(_ i: Int) -> String {

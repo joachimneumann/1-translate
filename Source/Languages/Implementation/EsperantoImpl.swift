@@ -27,7 +27,6 @@ class EsperantoImpl: LanguageImpl {
         e12 = "bilionoj"
         e12_one = "biliono"
         afterNegative = " "
-        beforeAndAfterDotString = " "
     }
 
     

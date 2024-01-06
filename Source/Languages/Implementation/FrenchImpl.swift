@@ -30,7 +30,6 @@ class FrenchImpl: LanguageImpl {
         e12_one = "un billion"
 
         afterNegative = " "
-        beforeAndAfterDotString = " "
         tensConnector = "-"
         eSpace = " "
     }

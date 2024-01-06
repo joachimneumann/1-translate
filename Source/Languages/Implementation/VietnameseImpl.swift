@@ -47,7 +47,6 @@ class VietnameseImpl: LanguageImpl, Vietnamese {
         e6 = "triệu"
         e9 = "tỷ"
         afterNegative = " "
-        beforeAndAfterDotString = " "
         eSpace = " "
         nameDescription = "Vietnamese"
     }

@@ -28,7 +28,6 @@ class ArmenianImpl: LanguageImpl {
         e12 = "տրիլիոն"
         e12_one = e12
         eSpace = " "
-        beforeAndAfterDotString = " "
     }
 
     

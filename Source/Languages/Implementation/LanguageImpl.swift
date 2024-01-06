@@ -18,7 +18,6 @@ import Foundation
     var exponentString: String
     
     var afterNegative = " "
-    var beforeAndAfterDotString = ""
     var exponentString2: String? = nil
     var allowExponent = true
     var allowFraction = true
@@ -268,11 +267,11 @@ import Foundation
         }
         if let fractionalPart = fractionalPart {
             var count = 0
-            ret += beforeAndAfterDotString + dotString
+            ret += " " + dotString
             for char in fractionalPart {
                 if count < 10 {
                     guard let digit = Int(String(char)) else { return error }
-                    ret += beforeAndAfterDotString + readInteger(digit)
+                    ret += " " + readInteger(digit)
                 }
                 count += 1
             }

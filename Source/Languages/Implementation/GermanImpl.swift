@@ -35,7 +35,6 @@ class GermanImpl: LanguageImpl, German {
         e12 = "Billionen"
         e12_one = "eine Billion"
         afterNegative = " "
-        beforeAndAfterDotString = " "
         eSpace = ""
         e69Space = " "
         postProcessing = germanPostProcessing

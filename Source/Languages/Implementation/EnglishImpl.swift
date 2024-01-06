@@ -29,7 +29,6 @@ class EnglishImpl: LanguageImpl, English {
         e9 = "billion"
         e12 = "trillion"
         afterNegative = " "
-        beforeAndAfterDotString = " "
         tensConnector = "-"
         eSpace = " "
         useAndAfterHundred = useAndAfterHundred

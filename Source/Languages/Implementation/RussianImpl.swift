@@ -29,7 +29,6 @@ class RussianImpl: LanguageImpl {
         e12_one = "один триллион"
         tensConnector = " "
         eSpace = " "
-        beforeAndAfterDotString = " "
     }
     
     

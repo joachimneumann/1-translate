@@ -27,7 +27,6 @@ class CatalanImpl: LanguageImpl {
         e12_one = "un bilió"
         e12 = "bilions"
         afterNegative = " "
-        beforeAndAfterDotString = " "
         tensConnector = "-"
         beforeHundred = "-"
         e3Space = " "

@@ -30,7 +30,6 @@ class DanishImpl: LanguageImpl {
         e12 = "billioner"
         e12_one = "en billion"
         eSpace = " "
-        beforeAndAfterDotString = " "
     }
 
     override func read_0_9(_ i: Int) -> String {

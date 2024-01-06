@@ -14,7 +14,6 @@ class SwahiliImpl: LanguageImpl {
             negativeString: "menos",
             dotString: "kaj",
             exponentString: " EE ")
-        beforeAndAfterDotString = " "
         tensConnector = " na "
         eSpace = " "
         e6 = "milioni"
