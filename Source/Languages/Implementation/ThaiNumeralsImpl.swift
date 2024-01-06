@@ -22,16 +22,16 @@ class ThaiNumeralsImpl: Language {
         
     override func readInteger(_ i: Int) -> String {
         var ret = i.string
-        ret = ret.replacingOccurrences(of: "0", with: "๐")
-        ret = ret.replacingOccurrences(of: "1", with: "๑")
-        ret = ret.replacingOccurrences(of: "2", with: "๒")
-        ret = ret.replacingOccurrences(of: "3", with: "๓")
-        ret = ret.replacingOccurrences(of: "4", with: "๔")
-        ret = ret.replacingOccurrences(of: "5", with: "๕")
-        ret = ret.replacingOccurrences(of: "6", with: "๖")
-        ret = ret.replacingOccurrences(of: "7", with: "๗")
-        ret = ret.replacingOccurrences(of: "8", with: "๘")
-        ret = ret.replacingOccurrences(of: "9", with: "๙")
+        ret = ret.replacingOccurrences(of: "0", with: "๐"+Languages.WordSplitter)
+        ret = ret.replacingOccurrences(of: "1", with: "๑"+Languages.WordSplitter)
+        ret = ret.replacingOccurrences(of: "2", with: "๒"+Languages.WordSplitter)
+        ret = ret.replacingOccurrences(of: "3", with: "๓"+Languages.WordSplitter)
+        ret = ret.replacingOccurrences(of: "4", with: "๔"+Languages.WordSplitter)
+        ret = ret.replacingOccurrences(of: "5", with: "๕"+Languages.WordSplitter)
+        ret = ret.replacingOccurrences(of: "6", with: "๖"+Languages.WordSplitter)
+        ret = ret.replacingOccurrences(of: "7", with: "๗"+Languages.WordSplitter)
+        ret = ret.replacingOccurrences(of: "8", with: "๘"+Languages.WordSplitter)
+        ret = ret.replacingOccurrences(of: "9", with: "๙"+Languages.WordSplitter)
         return ret
     }
 

@@ -25,7 +25,8 @@ class ThaiImpl: Language {
         e6 = "ล้าน"
         e9 = "พันล้าน"
         e12 = "ล้านล้าน"
-        afterNegative = ""
+        afterNegative = Languages.WordSplitter
+        eSpace = Languages.WordSplitter
     }
     
     override func read_0_9(_ i: Int) -> String {

@@ -49,6 +49,7 @@ class ArabicNumeralsImpl: Language {
             case "٧": ret += "سَبْعَة"
             case "٨": ret += "ثَمَانِيَة"
             case "٩": ret += "تِسْعَة"
+            case " ": ret += " "
             default: fatalError("speakingPostProcessing: outside range")
             }
             ret += " "

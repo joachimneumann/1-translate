@@ -106,4 +106,5 @@ import SwiftUI
     }
     
     static let WordSplitter = "\u{200A}" // the SoftHyphen "@\u{00AD}" did not seperate words well
+//    static let WordSplitter = "@" 
 }
