@@ -63,6 +63,7 @@ import SwiftUI
         keyStatusColor["plus"] = keyColor.upColor(for: "+", isPending: false)
         // print("viewModel init")
         voices.refreshVoiceDict(list: languages.list)
+        updateTranslation()
     }
         
     func cleanSeperators(_ text: String) -> String {

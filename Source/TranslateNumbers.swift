@@ -136,9 +136,9 @@ struct TranslateNumbers: View {
                 .preferredColorScheme(.dark)
         }
         .accentColor(.white)
-        .onAppear() {
-            viewModel.refreshDisplay(screen: screen)
-        }
+//        .onAppear() {
+//            viewModel.refreshDisplay(screen: screen)
+//        }
     }
 }
 

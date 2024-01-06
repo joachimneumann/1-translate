@@ -7,7 +7,7 @@
 
 import Foundation
 
-@Observable class Language {
+@Observable class Language: Identifiable {
     var name: String
     var nameDescription: String? = nil
     var flagName: String { nameDescription != nil ? nameDescription! : name }

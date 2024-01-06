@@ -11,18 +11,29 @@ struct LanguageSelector: View {
     @Bindable var viewModel: ViewModel
     let screen : Screen
     let isFirstLanguage: Bool
-    
-    public struct LanguageList : View {
-        var selectedIndex: Binding<Int?>
-        let list: [Language]
-        let color: Color
         
-        public var body: some View {
-            ScrollViewReader { scrollViewReaderProxy in
-                List(0..<list.count, id: \.self, selection: selectedIndex) {
-                    languageIndex in
-                    let language = list[languageIndex]
-                    let selected = languageIndex == selectedIndex.wrappedValue
+    @State var currentLanguage: Language? {
+        didSet {
+            if let currentLanguage = currentLanguage {
+                if isFirstLanguage {
+                    viewModel.languages.first = currentLanguage
+                    viewModel.languages.persistent.firstName = currentLanguage.name
+                } else {
+                    viewModel.languages.second = currentLanguage
+                    viewModel.languages.persistent.secondName = currentLanguage.name
+                }
+            }
+            viewModel.updateTranslation()
+        }
+    }
+    
+    var body: some View {
+        ScrollViewReader { scrollViewReaderProxy in
+            List(viewModel.languages.list)  { language in
+                let selected: Bool = currentLanguage != nil && language.name == currentLanguage!.name
+                Button {
+                    currentLanguage = language
+                } label: {
                     HStack(spacing: 0) {
                         Image(language.flagName)
                             .resizable()
@@ -30,7 +41,6 @@ struct LanguageSelector: View {
                             .padding(.vertical, 1)
                             .border(.white, width: 1)
                             .frame(height: 20)
-//                            .padding(.trailing, 10)
                         Text(language.name)
                             .padding(.leading, 10)
                         if language.nameDescription != nil {
@@ -48,26 +58,21 @@ struct LanguageSelector: View {
                                 .frame(width: 20, height: 0)
                         }
                     }
-                    .id(languageIndex)
-                    .listRowBackground(selected ? Color(white: 0.18) : Color(white: 0.1))
                 }
-                .listStyle(.sidebar)
-                .background(color)
-                .onAppear() {
-                    if let position = selectedIndex.wrappedValue {
-                        scrollViewReaderProxy.scrollTo(position, anchor: .top)
-                    }
-                }
+                .listRowBackground(selected ? Color(white: 0.18) : Color(white: 0.1))
+            }
+//            .onAppear() {
+//                scrollViewReaderProxy.scrollTo(3, anchor: .top)
+//            }
+            .listStyle(.sidebar)
+        }
+        .onAppear() {
+            if isFirstLanguage {
+                currentLanguage = viewModel.languages.first
+            } else {
+                currentLanguage = viewModel.languages.second
             }
         }
-        
-    }
-    
-    var body: some View {
-        LanguageList(
-            selectedIndex: isFirstLanguage ? $viewModel.languages.indexOfFirstLanguage : $viewModel.languages.indexOfSecondLanguage,
-            list: viewModel.languages.list,
-            color: .black)
         .padding(.top, 20)
         .navigationTitle(isFirstLanguage ? "First Language" : "Second Language")
         .toolbar {
@@ -84,9 +89,9 @@ struct LanguageSelector: View {
                     .padding(.trailing, 5)
             }
         }
-        .onDisappear {
-            viewModel.refreshDisplay(screen: screen)
-        }
+//        .onDisappear {
+//            viewModel.refreshDisplay(screen: screen)
+//        }
     }
     
 }
