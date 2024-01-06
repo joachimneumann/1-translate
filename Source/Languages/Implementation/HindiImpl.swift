@@ -132,7 +132,7 @@ class HindiImpl: LanguageImpl {
         }
     }
     
-    override func read(_ i: Int) -> String {
+    override func readInteger(_ i: Int) -> String {
         if i < 10 { return read_0_9(i) }
         if i < 100 { return read_10_99(i) }
         if i < 1000 {
@@ -183,6 +183,14 @@ class HindiImpl: LanguageImpl {
             }
             return ret
         }
-        return "X"
+        if i < 100*100*100*100*100*100_000 {
+            var ret = ""
+            ret = read(i.E13) + " " + "नील" // nil
+            if i.E13x > 0 {
+                ret += " " + read(i.E13x)
+            }
+            return ret
+        }
+        return "?"
     }
 }
