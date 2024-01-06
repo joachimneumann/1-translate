@@ -120,7 +120,7 @@ import SwiftUI
             if  let code = languages.second.voiceLanguageCode {
                 if voices.voiceDict[code] != nil {
                     _2ForSpeaking = forSpeaking(_2ForDisplay)
-                    _2ForSpeaking = languages.first.speakingPostProcessing(_2ForSpeaking!)
+                    _2ForSpeaking = languages.second.speakingPostProcessing(_2ForSpeaking!)
                 }
             }
         }
