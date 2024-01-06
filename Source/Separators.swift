@@ -48,11 +48,13 @@ enum GroupSeparator: String, Codable, CaseIterable {
 enum GroupSize: Int, Codable, CaseIterable {
     case three
     case four
+    case five
     var int: Int {
         get {
             switch self {
             case .three: return 3
             case .four: return 4
+            case .five: return 5
             }
         }
     }
@@ -61,6 +63,7 @@ enum GroupSize: Int, Codable, CaseIterable {
             switch self {
             case .three: return "3"
             case .four: return "4"
+            case .five: return "5"
             }
         }
     }

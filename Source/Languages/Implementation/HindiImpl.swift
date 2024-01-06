@@ -17,10 +17,6 @@ class HindiImpl: LanguageImpl {
             exponentString: " EE ")
         nameDescription = "Hindi"
         voiceLanguageCode = "hi"
-        e2 = "सौ"
-        e3 = "हज़ार"
-        afterHundred = " "
-        beforeHundred = " "
     }
     
     
@@ -136,45 +132,57 @@ class HindiImpl: LanguageImpl {
         }
     }
     
-    override func read_e3_e6(_ i: Int) -> String {
-        var ret = ""
+    override func read(_ i: Int) -> String {
+        if i < 10 { return read_0_9(i) }
+        if i < 100 { return read_10_99(i) }
+        if i < 1000 {
+            var ret = ""
+            ret = read_0_9(i.E2) + " " + "सौ"
+            if i.E2x > 0 {
+                ret += " " + read(i.E2x)
+            }
+            return ret
+        }
         if i < 100_000 {
-            ret = read(i.E3) + " " + e3!
+            var ret = ""
+            ret = read(i.E3) + " " + "हज़ार"
             if i.E3x > 0 {
                 ret += " " + read(i.E3x)
             }
             return ret
         }
-        ret = read(i.E5) + " " + "लाख"
-        if i.E5x > 0 {
-            ret += read(i.E5x)
-        }
-        return ret
-    }
-    
-    override func read_e6_e9(_ i: Int) -> String {
-        var ret = ""
-        if i < 10_000_000 {
-            ret = read(i.E5) + " " + "लाख"
+        if i < 100*100_000 {
+            var ret = ""
+            ret = read(i.E5) + " " + "लाख" // lakh
             if i.E5x > 0 {
                 ret += " " + read(i.E5x)
             }
             return ret
         }
-        ret = read(i.E7) + " " + "करोड़"
-        if i.E7x > 0 {
-            ret += " " + read(i.E7x)
+        if i < 100*100*100_000 {
+            var ret = ""
+            ret = read(i.E7) + " " + "करोड़" // crore
+            if i.E7x > 0 {
+                ret += " " + read(i.E7x)
+            }
+            return ret
         }
-        return ret
-    }
-
-    override func read_e9_e12(_ i: Int) -> String {
-        var ret = ""
-        ret = read(i.E9) + " " + "अरब"
-        if i.E9x > 0 {
-            ret += " " + read(i.E9x)
+        if i < 100*100*100*100_000 {
+            var ret = ""
+            ret = read(i.E9) + " " + "अरब" // arab
+            if i.E9x > 0 {
+                ret += " " + read(i.E9x)
+            }
+            return ret
         }
-        return ret
+        if i < 100*100*100*100*100_000 {
+            var ret = ""
+            ret = read(i.E11) + " " + "खरब" // kharab
+            if i.E11x > 0 {
+                ret += " " + read(i.E11x)
+            }
+            return ret
+        }
+        return "X"
     }
-
 }

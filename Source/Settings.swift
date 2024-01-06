@@ -88,7 +88,7 @@ struct Settings: View {
     }
     
     var DigitsSettings: some View {
-        let example =  Display(left: "").withSeparators(numberString: "12000.5", isNegative: false, separators: viewModel.persistent)
+        let example =  Display(left: "").withSeparators(numberString: "120000.5", isNegative: false, separators: viewModel.persistent)
         return Section(header: Text("Display and Seperators")) {
             Grid(alignment: .leading, verticalSpacing: 10) {
                 GridRow {
@@ -131,7 +131,7 @@ struct Settings: View {
                                 .tag(value)
                         }
                     }
-                    .frame(width: 150)
+//                    .frame(width: 200)
                     .pickerStyle(.segmented)
                 }
             }
