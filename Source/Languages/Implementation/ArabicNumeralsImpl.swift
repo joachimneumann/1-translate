@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ArabicNumeralsImpl: LanguageImpl {
+class ArabicNumeralsImpl: Language {
     init() {
         super.init(
             name: "الترقيم العربي",

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class VietnameseImpl: LanguageImpl, Vietnamese {
+class VietnameseImpl: Language {
     
     @AppStorage("VietnameseThousandKey")
     var thousand: VietnameseImpl.Thousand = .nghìn {

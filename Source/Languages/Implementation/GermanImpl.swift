@@ -13,7 +13,7 @@ extension StringProtocol {
 }
 
 
-class GermanImpl: LanguageImpl, German {
+class GermanImpl: Language {
     @AppStorage("germanCaptalisationKey")
     var capitalisation: Bool = true
     

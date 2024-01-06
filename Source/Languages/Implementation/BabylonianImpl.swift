@@ -5,7 +5,7 @@
 //  Created by Joachim Neumann on 12/27/23.
 //
 
-class BabylonianImpl: LanguageImpl {
+class BabylonianImpl: Language {
     static let symbolSpace = " "
     static let symbolNone = "   "
     static let symbolOne = "𒐕"
