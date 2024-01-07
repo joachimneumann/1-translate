@@ -20,96 +20,77 @@
 		AA2FAC17272F2349006DE4C8 /* BrainEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FAC01272F2348006DE4C8 /* BrainEngine.swift */; };
 		AA2FAC23272F2349006DE4C8 /* OperatorStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FAC0D272F2349006DE4C8 /* OperatorStack.swift */; };
 		AA326E492B32F0430092E8E6 /* EnglishImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA326E482B32F0430092E8E6 /* EnglishImpl.swift */; };
-		AA326E4A2B32F0430092E8E6 /* EnglishImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA326E482B32F0430092E8E6 /* EnglishImpl.swift */; };
 		AA326E4C2B332DCC0092E8E6 /* GermanImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA326E4B2B332DCC0092E8E6 /* GermanImpl.swift */; };
-		AA326E4D2B332DCC0092E8E6 /* GermanImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA326E4B2B332DCC0092E8E6 /* GermanImpl.swift */; };
 		AA32853B297248B800D86CB4 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA32853A297248B800D86CB4 /* ViewModel.swift */; };
 		AA3565B02B32588B009B58D2 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3565AF2B32588B009B58D2 /* Language.swift */; };
-		AA3565B12B32588B009B58D2 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3565AF2B32588B009B58D2 /* Language.swift */; };
 		AA3565B32B325D4B009B58D2 /* DigitsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3565B22B325D4B009B58D2 /* DigitsImpl.swift */; };
-		AA3565B42B325D4B009B58D2 /* DigitsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3565B22B325D4B009B58D2 /* DigitsImpl.swift */; };
 		AA370C2D293352960041AE4E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA370C2C293352960041AE4E /* Extensions.swift */; };
 		AA370C31293352D60041AE4E /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA370C30293352D60041AE4E /* Key.swift */; };
 		AA3FB8272920E0E5002ECCEB /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3FB8262920E0E5002ECCEB /* Settings.swift */; };
 		AA5020262B333C280080E00C /* SpanishImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5020252B333C280080E00C /* SpanishImpl.swift */; };
-		AA5020272B333C280080E00C /* SpanishImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5020252B333C280080E00C /* SpanishImpl.swift */; };
-		AA5456512B47F58400078196 /* TestFinnish.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5456502B47F58400078196 /* TestFinnish.swift */; };
-		AA5456532B47F63600078196 /* FinnishImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5456522B47F63600078196 /* FinnishImpl.swift */; };
 		AA5456542B47FAC400078196 /* FinnishImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5456522B47F63600078196 /* FinnishImpl.swift */; };
-		AA5456562B48533400078196 /* TestHindi.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5456552B48533400078196 /* TestHindi.swift */; };
-		AA5456582B48572500078196 /* HindiImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5456572B48572500078196 /* HindiImpl.swift */; };
 		AA5456592B4858BF00078196 /* HindiImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5456572B48572500078196 /* HindiImpl.swift */; };
 		AA5CF9172B39318D004BB6BB /* ArabicNumeralsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5CF9162B39318D004BB6BB /* ArabicNumeralsImpl.swift */; };
-		AA5CF9182B39318D004BB6BB /* ArabicNumeralsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5CF9162B39318D004BB6BB /* ArabicNumeralsImpl.swift */; };
 		AA5CF91A2B3944AD004BB6BB /* ArmenianNumeralsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5CF9192B3944AD004BB6BB /* ArmenianNumeralsImpl.swift */; };
-		AA5CF91B2B3944AD004BB6BB /* ArmenianNumeralsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5CF9192B3944AD004BB6BB /* ArmenianNumeralsImpl.swift */; };
 		AA659AB82B3FDE73004CF20A /* Persistent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA659AB72B3FDE73004CF20A /* Persistent.swift */; };
 		AA659AB92B3FDE73004CF20A /* Persistent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA659AB72B3FDE73004CF20A /* Persistent.swift */; };
 		AA689125295E681400129593 /* Brain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA689124295E681400129593 /* Brain.swift */; };
 		AA7988B42B32B07700608906 /* ThaiImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7988B32B32B07700608906 /* ThaiImpl.swift */; };
-		AA7988B52B32B07700608906 /* ThaiImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7988B32B32B07700608906 /* ThaiImpl.swift */; };
 		AA831B9C2B3462D9003307A2 /* FrenchImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA831B9B2B3462D9003307A2 /* FrenchImpl.swift */; };
-		AA831B9D2B3462D9003307A2 /* FrenchImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA831B9B2B3462D9003307A2 /* FrenchImpl.swift */; };
 		AA831BA02B35238C003307A2 /* VietnameseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA831B9F2B35238C003307A2 /* VietnameseImpl.swift */; };
-		AA831BA12B35238C003307A2 /* VietnameseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA831B9F2B35238C003307A2 /* VietnameseImpl.swift */; };
-		AA893A062B395C2700BE2772 /* ArmenianImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA893A052B395C2700BE2772 /* ArmenianImpl.swift */; };
 		AA893A072B395C2D00BE2772 /* ArmenianImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA893A052B395C2700BE2772 /* ArmenianImpl.swift */; };
 		AA899D422B3E914700ADDC16 /* VoiceSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA899D412B3E914700ADDC16 /* VoiceSelection.swift */; };
 		AA8A91112B1D7B5F00CE7185 /* TranslateNumbersApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FABFF272F2348006DE4C8 /* TranslateNumbersApp.swift */; };
 		AA8A91122B1D7B7100CE7185 /* TranslateNumbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA92B4C829273A58005E43F0 /* TranslateNumbers.swift */; };
 		AA8A91142B1D7FD000CE7185 /* TranslatedDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8A91132B1D7FD000CE7185 /* TranslatedDisplay.swift */; };
 		AAA180AA2B365A9300B149E5 /* ChineseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA180A92B365A9300B149E5 /* ChineseImpl.swift */; };
-		AAA180AB2B365A9300B149E5 /* ChineseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA180A92B365A9300B149E5 /* ChineseImpl.swift */; };
 		AAB10B9A292A2222004707E9 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB10B94292A2222004707E9 /* Label.swift */; };
 		AAB10B9C292A2222004707E9 /* NonScientificKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB10B96292A2222004707E9 /* NonScientificKeyboard.swift */; };
 		AAB253B52B3AE79500860F93 /* Languages.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB253B42B3AE79400860F93 /* Languages.swift */; };
 		AAB253B62B3AE79500860F93 /* Languages.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB253B42B3AE79400860F93 /* Languages.swift */; };
 		AAB253BA2B3BA13600860F93 /* ArabicImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3DA3E2B3988DA005F8414 /* ArabicImpl.swift */; };
-		AAB253BF2B3BDC7600860F93 /* HieroglyphsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB253BE2B3BDC7600860F93 /* HieroglyphsImpl.swift */; };
 		AAB253C02B3BDCEF00860F93 /* HieroglyphsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB253BE2B3BDC7600860F93 /* HieroglyphsImpl.swift */; };
-		AAB253C42B3BF42100860F93 /* BabylonianImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB253C32B3BF42100860F93 /* BabylonianImpl.swift */; };
 		AAB253C52B3BF55E00860F93 /* BabylonianImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB253C32B3BF42100860F93 /* BabylonianImpl.swift */; };
 		AAB9904E2B356B5C00BD5A24 /* CatalanImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB9904D2B356B5C00BD5A24 /* CatalanImpl.swift */; };
-		AAB9904F2B356B5C00BD5A24 /* CatalanImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB9904D2B356B5C00BD5A24 /* CatalanImpl.swift */; };
 		AAB990512B35703500BD5A24 /* RomanImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB990502B35703500BD5A24 /* RomanImpl.swift */; };
-		AAB990522B35703500BD5A24 /* RomanImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB990502B35703500BD5A24 /* RomanImpl.swift */; };
 		AAB990542B35749700BD5A24 /* DanishImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB990532B35749700BD5A24 /* DanishImpl.swift */; };
-		AAB990552B35749700BD5A24 /* DanishImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB990532B35749700BD5A24 /* DanishImpl.swift */; };
 		AAB990572B35793100BD5A24 /* PolishImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB990562B35793100BD5A24 /* PolishImpl.swift */; };
-		AAB990582B35793100BD5A24 /* PolishImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB990562B35793100BD5A24 /* PolishImpl.swift */; };
 		AABEFC132972A8780023A3C9 /* KeyColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABEFC122972A8780023A3C9 /* KeyColor.swift */; };
 		AAC64EB32B42C89F00ABCAAF /* RussianImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC64EB22B42C89F00ABCAAF /* RussianImpl.swift */; };
-		AAC64EB52B42C8B800ABCAAF /* RussianImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC64EB22B42C89F00ABCAAF /* RussianImpl.swift */; };
-		AACCD0842B43AB8900D545C5 /* TestGerman.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACCD0822B43AB8500D545C5 /* TestGerman.swift */; };
-		AACCD0A52B43ABFA00D545C5 /* TestArabic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACCD08C2B43ABB700D545C5 /* TestArabic.swift */; };
-		AACCD0A72B43AC0600D545C5 /* TestDigits.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACCD0872B43ABB600D545C5 /* TestDigits.swift */; };
-		AACCD0A82B43AC0600D545C5 /* TestHieroglyphs.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACCD08D2B43ABB700D545C5 /* TestHieroglyphs.swift */; };
-		AACCD0A92B43AC0600D545C5 /* TestSpanish.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACCD08F2B43ABB700D545C5 /* TestSpanish.swift */; };
-		AACCD0AA2B43AC0600D545C5 /* TestChinese2.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACCD0852B43ABB600D545C5 /* TestChinese2.swift */; };
-		AACCD0AB2B43AC0600D545C5 /* TestCatalan.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACCD0902B43ABB700D545C5 /* TestCatalan.swift */; };
-		AACCD0AC2B43AC0600D545C5 /* TestEnglish.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACCD0862B43ABB600D545C5 /* TestEnglish.swift */; };
-		AACCD0AD2B43AC0600D545C5 /* TestArabic2.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACCD08E2B43ABB700D545C5 /* TestArabic2.swift */; };
-		AACCD0AE2B43AC0600D545C5 /* TestRussian.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACCD08A2B43ABB600D545C5 /* TestRussian.swift */; };
-		AACCD0AF2B43AC0600D545C5 /* TestArmenian.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACCD0942B43ABB700D545C5 /* TestArmenian.swift */; };
-		AACCD0B02B43AC0600D545C5 /* TestArmenianNumerals.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACCD0912B43ABB700D545C5 /* TestArmenianNumerals.swift */; };
-		AACCD0B12B43AC0600D545C5 /* TestBabylonian.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACCD0922B43ABB700D545C5 /* TestBabylonian.swift */; };
-		AACCD0B22B43AC0600D545C5 /* TestChinese.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACCD0882B43ABB600D545C5 /* TestChinese.swift */; };
-		AACCD0B32B43AC0600D545C5 /* TestFrensh.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACCD0932B43ABB700D545C5 /* TestFrensh.swift */; };
-		AACCD0B42B43AC0600D545C5 /* TestVietnamese.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACCD08B2B43ABB700D545C5 /* TestVietnamese.swift */; };
-		AACCD0B52B43AC0600D545C5 /* TestRoman.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACCD0892B43ABB600D545C5 /* TestRoman.swift */; };
-		AAE3DA3F2B3988DA005F8414 /* ArabicImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3DA3E2B3988DA005F8414 /* ArabicImpl.swift */; };
 		AAE426F729597AE3005FE365 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE426F629597AE3005FE365 /* Screen.swift */; };
 		AAEF2FB92B20D54B0012DDDD /* Separators.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEF2FB82B20D54B0012DDDD /* Separators.swift */; };
 		AAEF2FBA2B20D5500012DDDD /* Separators.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEF2FB82B20D54B0012DDDD /* Separators.swift */; };
-		AAF4725D2B442AF300E7B986 /* TestEsperanto.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF4725C2B442AF300E7B986 /* TestEsperanto.swift */; };
-		AAF4725F2B442FE300E7B986 /* EsperantoImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF4725E2B442FE300E7B986 /* EsperantoImpl.swift */; };
 		AAF472602B44328100E7B986 /* EsperantoImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF4725E2B442FE300E7B986 /* EsperantoImpl.swift */; };
-		AAF472622B4469F400E7B986 /* SwahiliImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF472612B4469F400E7B986 /* SwahiliImpl.swift */; };
 		AAF472632B446BBD00E7B986 /* SwahiliImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF472612B4469F400E7B986 /* SwahiliImpl.swift */; };
-		AAF472652B446DA200E7B986 /* TestSwahili.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF472642B446DA200E7B986 /* TestSwahili.swift */; };
 		AAF472672B452BD000E7B986 /* Voices.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF472662B452BD000E7B986 /* Voices.swift */; };
+		AAF9EC142B4A5051007D0B1D /* LanguageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF9EC132B4A5051007D0B1D /* LanguageTest.swift */; };
+		AAF9EC182B4A5094007D0B1D /* Languages.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB253B42B3AE79400860F93 /* Languages.swift */; };
+		AAF9EC1B2B4A51B2007D0B1D /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3565AF2B32588B009B58D2 /* Language.swift */; };
+		AAF9EC1C2B4A51C4007D0B1D /* ThaiImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7988B32B32B07700608906 /* ThaiImpl.swift */; };
+		AAF9EC1D2B4A51C4007D0B1D /* RussianImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC64EB22B42C89F00ABCAAF /* RussianImpl.swift */; };
+		AAF9EC1E2B4A51C4007D0B1D /* ArabicNumeralsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5CF9162B39318D004BB6BB /* ArabicNumeralsImpl.swift */; };
+		AAF9EC1F2B4A51C4007D0B1D /* RomanImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB990502B35703500BD5A24 /* RomanImpl.swift */; };
+		AAF9EC202B4A51C4007D0B1D /* ChineseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA180A92B365A9300B149E5 /* ChineseImpl.swift */; };
+		AAF9EC212B4A51C4007D0B1D /* FrenchImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA831B9B2B3462D9003307A2 /* FrenchImpl.swift */; };
+		AAF9EC222B4A51C4007D0B1D /* CatalanImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB9904D2B356B5C00BD5A24 /* CatalanImpl.swift */; };
+		AAF9EC232B4A51C4007D0B1D /* GermanImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA326E4B2B332DCC0092E8E6 /* GermanImpl.swift */; };
+		AAF9EC242B4A51C4007D0B1D /* HieroglyphsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB253BE2B3BDC7600860F93 /* HieroglyphsImpl.swift */; };
+		AAF9EC252B4A51C4007D0B1D /* PolishImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB990562B35793100BD5A24 /* PolishImpl.swift */; };
+		AAF9EC262B4A51C4007D0B1D /* ArabicImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3DA3E2B3988DA005F8414 /* ArabicImpl.swift */; };
+		AAF9EC272B4A51C4007D0B1D /* DanishImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB990532B35749700BD5A24 /* DanishImpl.swift */; };
+		AAF9EC282B4A51C4007D0B1D /* ArmenianImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA893A052B395C2700BE2772 /* ArmenianImpl.swift */; };
+		AAF9EC292B4A51C4007D0B1D /* VietnameseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA831B9F2B35238C003307A2 /* VietnameseImpl.swift */; };
+		AAF9EC2A2B4A51C4007D0B1D /* EnglishImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA326E482B32F0430092E8E6 /* EnglishImpl.swift */; };
+		AAF9EC2B2B4A51C4007D0B1D /* FinnishImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5456522B47F63600078196 /* FinnishImpl.swift */; };
+		AAF9EC2C2B4A51C4007D0B1D /* SpanishImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5020252B333C280080E00C /* SpanishImpl.swift */; };
+		AAF9EC2D2B4A51C4007D0B1D /* BabylonianImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB253C32B3BF42100860F93 /* BabylonianImpl.swift */; };
+		AAF9EC2E2B4A51C4007D0B1D /* EsperantoImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF4725E2B442FE300E7B986 /* EsperantoImpl.swift */; };
+		AAF9EC2F2B4A51C4007D0B1D /* SwahiliImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF472612B4469F400E7B986 /* SwahiliImpl.swift */; };
+		AAF9EC302B4A51C4007D0B1D /* ThaiNumeralsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFBD8A62B32A36D00175197 /* ThaiNumeralsImpl.swift */; };
+		AAF9EC312B4A51C4007D0B1D /* DigitsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3565B22B325D4B009B58D2 /* DigitsImpl.swift */; };
+		AAF9EC322B4A51C4007D0B1D /* ArmenianNumeralsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5CF9192B3944AD004BB6BB /* ArmenianNumeralsImpl.swift */; };
+		AAF9EC332B4A51C4007D0B1D /* HindiImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5456572B48572500078196 /* HindiImpl.swift */; };
 		AAFBD8A72B32A36D00175197 /* ThaiNumeralsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFBD8A62B32A36D00175197 /* ThaiNumeralsImpl.swift */; };
-		AAFBD8A82B32A36D00175197 /* ThaiNumeralsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFBD8A62B32A36D00175197 /* ThaiNumeralsImpl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -211,6 +192,8 @@
 		AAF472612B4469F400E7B986 /* SwahiliImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwahiliImpl.swift; sourceTree = "<group>"; };
 		AAF472642B446DA200E7B986 /* TestSwahili.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestSwahili.swift; path = "../../1-translate-tests/Tests/TestSwahili.swift"; sourceTree = "<group>"; };
 		AAF472662B452BD000E7B986 /* Voices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voices.swift; sourceTree = "<group>"; };
+		AAF9EC112B4A5051007D0B1D /* LanguageTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LanguageTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAF9EC132B4A5051007D0B1D /* LanguageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageTest.swift; sourceTree = "<group>"; };
 		AAFBD8A62B32A36D00175197 /* ThaiNumeralsImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThaiNumeralsImpl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -231,6 +214,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AAF9EC0E2B4A5051007D0B1D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -242,6 +232,7 @@
 				AA08C7EB272F1241001B8575 /* TranslateNumbers.entitlements */,
 				AA08C7C0272EDA48001B8575 /* Source */,
 				AACCD0812B43AB6C00D545C5 /* Tests */,
+				AAF9EC122B4A5051007D0B1D /* LanguageTest */,
 				AA08C7BF272EDA48001B8575 /* Products */,
 				AA2FABE9272F2135006DE4C8 /* Frameworks */,
 			);
@@ -252,6 +243,7 @@
 			children = (
 				AA08C7BE272EDA48001B8575 /* TranslateNumbers.app */,
 				AA8A911B2B1D815C00CE7185 /* TranslateNumbersTests.xctest */,
+				AAF9EC112B4A5051007D0B1D /* LanguageTest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -390,6 +382,14 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
+		AAF9EC122B4A5051007D0B1D /* LanguageTest */ = {
+			isa = PBXGroup;
+			children = (
+				AAF9EC132B4A5051007D0B1D /* LanguageTest.swift */,
+			);
+			path = LanguageTest;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -428,6 +428,23 @@
 			productReference = AA8A911B2B1D815C00CE7185 /* TranslateNumbersTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		AAF9EC102B4A5051007D0B1D /* LanguageTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AAF9EC172B4A5051007D0B1D /* Build configuration list for PBXNativeTarget "LanguageTest" */;
+			buildPhases = (
+				AAF9EC0D2B4A5051007D0B1D /* Sources */,
+				AAF9EC0E2B4A5051007D0B1D /* Frameworks */,
+				AAF9EC0F2B4A5051007D0B1D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LanguageTest;
+			productName = LanguageTest;
+			productReference = AAF9EC112B4A5051007D0B1D /* LanguageTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -435,7 +452,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1500;
+				LastSwiftUpdateCheck = 1510;
 				LastUpgradeCheck = 1510;
 				TargetAttributes = {
 					AA08C7BD272EDA48001B8575 = {
@@ -444,6 +461,9 @@
 					AA8A911A2B1D815C00CE7185 = {
 						CreatedOnToolsVersion = 15.0.1;
 						TestTargetID = AA0CE3C7298CBFAF0057D0D8;
+					};
+					AAF9EC102B4A5051007D0B1D = {
+						CreatedOnToolsVersion = 15.1;
 					};
 				};
 			};
@@ -462,6 +482,7 @@
 			targets = (
 				AA08C7BD272EDA48001B8575 /* TranslateNumbers */,
 				AA8A911A2B1D815C00CE7185 /* TranslateNumbersTests */,
+				AAF9EC102B4A5051007D0B1D /* LanguageTest */,
 			);
 		};
 /* End PBXProject section */
@@ -477,6 +498,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		AA8A91192B1D815C00CE7185 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AAF9EC0F2B4A5051007D0B1D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -547,55 +575,43 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AAB9904F2B356B5C00BD5A24 /* CatalanImpl.swift in Sources */,
-				AAB253BF2B3BDC7600860F93 /* HieroglyphsImpl.swift in Sources */,
-				AACCD0A92B43AC0600D545C5 /* TestSpanish.swift in Sources */,
-				AAF4725D2B442AF300E7B986 /* TestEsperanto.swift in Sources */,
-				AACCD0B22B43AC0600D545C5 /* TestChinese.swift in Sources */,
-				AACCD0A72B43AC0600D545C5 /* TestDigits.swift in Sources */,
-				AA5456562B48533400078196 /* TestHindi.swift in Sources */,
-				AA5020272B333C280080E00C /* SpanishImpl.swift in Sources */,
-				AA326E4A2B32F0430092E8E6 /* EnglishImpl.swift in Sources */,
-				AACCD0B52B43AC0600D545C5 /* TestRoman.swift in Sources */,
-				AA5456582B48572500078196 /* HindiImpl.swift in Sources */,
-				AAFBD8A82B32A36D00175197 /* ThaiNumeralsImpl.swift in Sources */,
-				AACCD0B02B43AC0600D545C5 /* TestArmenianNumerals.swift in Sources */,
-				AA5456512B47F58400078196 /* TestFinnish.swift in Sources */,
-				AAC64EB52B42C8B800ABCAAF /* RussianImpl.swift in Sources */,
-				AA7988B52B32B07700608906 /* ThaiImpl.swift in Sources */,
-				AAB253C42B3BF42100860F93 /* BabylonianImpl.swift in Sources */,
-				AACCD0AC2B43AC0600D545C5 /* TestEnglish.swift in Sources */,
-				AACCD0AD2B43AC0600D545C5 /* TestArabic2.swift in Sources */,
-				AAB990552B35749700BD5A24 /* DanishImpl.swift in Sources */,
-				AA3565B12B32588B009B58D2 /* Language.swift in Sources */,
-				AA831BA12B35238C003307A2 /* VietnameseImpl.swift in Sources */,
-				AACCD0B12B43AC0600D545C5 /* TestBabylonian.swift in Sources */,
 				AAEF2FBA2B20D5500012DDDD /* Separators.swift in Sources */,
-				AAF472622B4469F400E7B986 /* SwahiliImpl.swift in Sources */,
-				AAF4725F2B442FE300E7B986 /* EsperantoImpl.swift in Sources */,
-				AA831B9D2B3462D9003307A2 /* FrenchImpl.swift in Sources */,
-				AA5456532B47F63600078196 /* FinnishImpl.swift in Sources */,
-				AACCD0AE2B43AC0600D545C5 /* TestRussian.swift in Sources */,
-				AA3565B42B325D4B009B58D2 /* DigitsImpl.swift in Sources */,
-				AACCD0842B43AB8900D545C5 /* TestGerman.swift in Sources */,
-				AACCD0AB2B43AC0600D545C5 /* TestCatalan.swift in Sources */,
-				AACCD0AF2B43AC0600D545C5 /* TestArmenian.swift in Sources */,
-				AACCD0A52B43ABFA00D545C5 /* TestArabic.swift in Sources */,
-				AAB990522B35703500BD5A24 /* RomanImpl.swift in Sources */,
-				AA5CF91B2B3944AD004BB6BB /* ArmenianNumeralsImpl.swift in Sources */,
-				AACCD0B42B43AC0600D545C5 /* TestVietnamese.swift in Sources */,
 				AA659AB92B3FDE73004CF20A /* Persistent.swift in Sources */,
-				AACCD0B32B43AC0600D545C5 /* TestFrensh.swift in Sources */,
-				AACCD0A82B43AC0600D545C5 /* TestHieroglyphs.swift in Sources */,
-				AA326E4D2B332DCC0092E8E6 /* GermanImpl.swift in Sources */,
-				AA893A062B395C2700BE2772 /* ArmenianImpl.swift in Sources */,
-				AA5CF9182B39318D004BB6BB /* ArabicNumeralsImpl.swift in Sources */,
-				AAF472652B446DA200E7B986 /* TestSwahili.swift in Sources */,
-				AAE3DA3F2B3988DA005F8414 /* ArabicImpl.swift in Sources */,
 				AAB253B62B3AE79500860F93 /* Languages.swift in Sources */,
-				AAB990582B35793100BD5A24 /* PolishImpl.swift in Sources */,
-				AACCD0AA2B43AC0600D545C5 /* TestChinese2.swift in Sources */,
-				AAA180AB2B365A9300B149E5 /* ChineseImpl.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AAF9EC0D2B4A5051007D0B1D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AAF9EC272B4A51C4007D0B1D /* DanishImpl.swift in Sources */,
+				AAF9EC1D2B4A51C4007D0B1D /* RussianImpl.swift in Sources */,
+				AAF9EC2A2B4A51C4007D0B1D /* EnglishImpl.swift in Sources */,
+				AAF9EC232B4A51C4007D0B1D /* GermanImpl.swift in Sources */,
+				AAF9EC2D2B4A51C4007D0B1D /* BabylonianImpl.swift in Sources */,
+				AAF9EC1B2B4A51B2007D0B1D /* Language.swift in Sources */,
+				AAF9EC212B4A51C4007D0B1D /* FrenchImpl.swift in Sources */,
+				AAF9EC1E2B4A51C4007D0B1D /* ArabicNumeralsImpl.swift in Sources */,
+				AAF9EC302B4A51C4007D0B1D /* ThaiNumeralsImpl.swift in Sources */,
+				AAF9EC2F2B4A51C4007D0B1D /* SwahiliImpl.swift in Sources */,
+				AAF9EC332B4A51C4007D0B1D /* HindiImpl.swift in Sources */,
+				AAF9EC222B4A51C4007D0B1D /* CatalanImpl.swift in Sources */,
+				AAF9EC2C2B4A51C4007D0B1D /* SpanishImpl.swift in Sources */,
+				AAF9EC2B2B4A51C4007D0B1D /* FinnishImpl.swift in Sources */,
+				AAF9EC2E2B4A51C4007D0B1D /* EsperantoImpl.swift in Sources */,
+				AAF9EC1F2B4A51C4007D0B1D /* RomanImpl.swift in Sources */,
+				AAF9EC322B4A51C4007D0B1D /* ArmenianNumeralsImpl.swift in Sources */,
+				AAF9EC1C2B4A51C4007D0B1D /* ThaiImpl.swift in Sources */,
+				AAF9EC242B4A51C4007D0B1D /* HieroglyphsImpl.swift in Sources */,
+				AAF9EC282B4A51C4007D0B1D /* ArmenianImpl.swift in Sources */,
+				AAF9EC202B4A51C4007D0B1D /* ChineseImpl.swift in Sources */,
+				AAF9EC142B4A5051007D0B1D /* LanguageTest.swift in Sources */,
+				AAF9EC312B4A51C4007D0B1D /* DigitsImpl.swift in Sources */,
+				AAF9EC292B4A51C4007D0B1D /* VietnameseImpl.swift in Sources */,
+				AAF9EC252B4A51C4007D0B1D /* PolishImpl.swift in Sources */,
+				AAF9EC182B4A5094007D0B1D /* Languages.swift in Sources */,
+				AAF9EC262B4A51C4007D0B1D /* ArabicImpl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -868,6 +884,49 @@
 			};
 			name = Release;
 		};
+		AAF9EC152B4A5051007D0B1D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8A4DL788W9;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.joachimneumann.LanguageTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		AAF9EC162B4A5051007D0B1D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8A4DL788W9;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.joachimneumann.LanguageTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -894,6 +953,15 @@
 			buildConfigurations = (
 				AA8A91222B1D815C00CE7185 /* Debug */,
 				AA8A91232B1D815C00CE7185 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AAF9EC172B4A5051007D0B1D /* Build configuration list for PBXNativeTarget "LanguageTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AAF9EC152B4A5051007D0B1D /* Debug */,
+				AAF9EC162B4A5051007D0B1D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

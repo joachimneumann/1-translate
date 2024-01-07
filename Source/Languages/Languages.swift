@@ -81,24 +81,7 @@ class Languages {
             }
         }
     }
-    
-    var firstFont: Font {
-        switch first.name {
-        case arabicNumerals.name:
-            Font(UIFont(name: "Avenir", size: secondLanguageAllowed ? 40 : 50)!)
-        default:
-            secondLanguageAllowed ? Font.title : Font.largeTitle
-        }
-    }
-    var secondFont: Font {
-        switch second.name {
-        case arabicNumerals.name:
-            Font(UIFont(name: "Avenir", size: 40)!)
-        default:
-            Font.title
-        }
-    }
-    
+        
     static let WordSplitter = "\u{200A}" // the SoftHyphen "@\u{00AD}" did not seperate words well
 //    static let WordSplitter = "@" 
 }

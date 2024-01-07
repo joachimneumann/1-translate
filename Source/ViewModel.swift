@@ -68,6 +68,24 @@ import SwiftUI
         updateTranslation()
     }
         
+    var firstFont: Font {
+        switch languages.first.name {
+        case languages.arabicNumerals.name:
+            Font(UIFont(name: "Avenir", size: languages.secondLanguageAllowed ? 40 : 50)!)
+        default:
+            languages.secondLanguageAllowed ? Font.title : Font.largeTitle
+        }
+    }
+    var secondFont: Font {
+        switch languages.second.name {
+        case languages.arabicNumerals.name:
+            Font(UIFont(name: "Avenir", size: 40)!)
+        default:
+            Font.title
+        }
+    }
+
+    
     func cleanSeperators(_ text: String) -> String {
         var ret = text
         if persistent.groupSeparator != .none {

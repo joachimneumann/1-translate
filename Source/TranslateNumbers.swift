@@ -64,7 +64,7 @@ struct TranslateNumbers: View {
                             translation: viewModel._1Translation)
                 TranslatedDisplay(translation: viewModel._1Translation,
                                   screen: screen)
-                .font(viewModel.languages.firstFont)
+                .font(viewModel.firstFont)
                 .padding(.horizontal, 0)
                 Spacer(minLength: 0.0)
                 if viewModel.languages.secondLanguageAllowed {
@@ -76,7 +76,7 @@ struct TranslateNumbers: View {
                     Spacer(minLength: 0.0)
                     TranslatedDisplay(translation: viewModel._2Translation,
                                       screen: screen)
-                    .font(viewModel.languages.secondFont)
+                    .font(viewModel.secondFont)
                     .padding(.horizontal, 0)
                 }
             }
