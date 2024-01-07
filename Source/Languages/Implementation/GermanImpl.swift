@@ -26,7 +26,6 @@ class GermanImpl: Language {
             exponentString: " mal zehn hoch ")
 
         voiceLanguageCode = "de"
-        voiceLanguageName = "German"
         e2 = "hundert"
         e3 = "tausend"
         e6 = "Millionen"

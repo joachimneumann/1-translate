@@ -25,8 +25,7 @@ struct Translation {
     
     var nameDescription: String? = nil
     var flagName: String { nameDescription != nil ? nameDescription! : name }
-    var voiceLanguageCode: String?
-    var voiceLanguageName: String?
+    var voiceLanguageCode: String? = nil
     var negativeString: String
     var dotString: String
     var exponentString: String
@@ -89,8 +88,6 @@ struct Translation {
          exponentString: String) {
         self.name = name
         self.zero = zero
-        self.voiceLanguageCode = nil
-        self.voiceLanguageName = nil
         self.negativeString = negativeString
         self.dotString = dotString
         self.exponentString = exponentString

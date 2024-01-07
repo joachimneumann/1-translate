@@ -16,7 +16,6 @@ class ArabicNumeralsImpl: Language {
             dotString: ".",
             exponentString: " EE ")
         voiceLanguageCode = "ar"
-        voiceLanguageName = "Arabic"
         nameDescription = "Arabic Numerals"
         speakingPostProcessing = speakingPostProcessing
     }

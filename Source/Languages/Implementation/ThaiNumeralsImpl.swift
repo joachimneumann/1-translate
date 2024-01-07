@@ -17,7 +17,6 @@ class ThaiNumeralsImpl: Language {
             exponentString: " EE ")
 
         voiceLanguageCode = "th"
-        voiceLanguageName = "Thai"
         nameDescription = "Thai Numerals"
     }
         

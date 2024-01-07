@@ -16,7 +16,6 @@ class CatalanImpl: Language {
             dotString: "coma",
             exponentString: " por diez elevat a ")        
         voiceLanguageCode = "ca"
-        voiceLanguageName = "Català"
         e2 = "cent"
         e2_one = "cent"
         e3 = "mil"

@@ -17,7 +17,6 @@ class FrenchImpl: Language {
             exponentString: " fois dix à la puissance ")
 
         voiceLanguageCode = "fr"
-        voiceLanguageName = "French"
         e2 = "cent"
         e2_one = "cent"
         e2_cleanPlural = "cents"

@@ -16,7 +16,6 @@ class ArmenianImpl: Language {
             dotString: "կետ",
             exponentString: " EE ")
         voiceLanguageCode = "hy"
-        voiceLanguageName = "Armenian"
         nameDescription = "Armenian"
         e2 = "հարյուր"
         e2_one = e2

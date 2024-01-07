@@ -42,7 +42,6 @@ class VietnameseImpl: Language {
             exponentString: " nhân mười mũ ")
         
         voiceLanguageCode = "vi"
-        voiceLanguageName = "Vietnamese"
         e2 = "trăm"
         e3 = "nghìn"
         e6 = "triệu"

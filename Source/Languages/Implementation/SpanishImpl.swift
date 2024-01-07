@@ -30,7 +30,6 @@ class SpanishImpl: Language {
             exponentString: " por diez elevado a ")
 
         voiceLanguageCode = "es"
-        voiceLanguageName = "Spanish"
         e3 = "mil"
         e3_one = "mil"
         e6_one = "un millón"
