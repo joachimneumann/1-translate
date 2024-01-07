@@ -90,7 +90,7 @@ class ArmenianNumeralsImpl: Language {
         }
     }
     
-    private func read_9_999(_ i: Int) -> String {
+    private func armenianUpTo9999(_ i: Int) -> String {
         if i <= 9 {
             return read_armenian_1_9(i)
         }
@@ -123,23 +123,27 @@ class ArmenianNumeralsImpl: Language {
     
     
     override func read_1_(_ i: Int) -> String {
-        if i < 0 {
-            return "negative: unknown"
-        }
         if i <= 9_999 {
-            return read_9_999(i)
+            return armenianUpTo9999(i)
         } else {
             if i <= 99_999_999 {
-                let XXX = i % 10_000
-                let XXX_000 = i / 10_000
-                var ret = read_9_999(XXX_000) + OVERLINE
-                if XXX > 0 {
-                    ret += read_9_999(XXX)
-                }
-                return ret
+                let leftover = i % 10_000
+                if leftover == 0 { return "" }
+                return armenianUpTo9999(leftover)
+            }
+            return "too large"
+        }
+    }
+
+    override func read_OVERLINE(_ i: Int) -> String? {
+        if i <= 9_999 {
+            return nil
+        } else {
+            if i <= 99_999_999 {
+                return armenianUpTo9999(i / 10_000)
             }
         }
-        return "too large"
+        return nil
     }
 
 }

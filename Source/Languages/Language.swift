@@ -199,7 +199,7 @@ struct Translation {
         }
         return ret
     }
-
+    
     func read_1_(_ i: Int) -> String {
         if i <= 0 {
             fatalError("read_1_() called with \(i)")
@@ -246,13 +246,15 @@ struct Translation {
     }
     
     
+    func read_OVERLINE(_ i: Int) -> String? { nil }
+
     func read(_ i: Int) -> String {
         var ret: String
         if i == 0 {
             ret = zero ?? "zero unknown"
         } else if i < 0 {
             if !allowNegativeNumbers {
-                ret = "negative: unknown"
+                ret = "negative unknown"
             } else {
                 ret = negativeString + afterNegative + read(-i)
             }
@@ -267,6 +269,10 @@ struct Translation {
     
     func translate(_ s: String) -> Translation {
         let displayText = read(s)
+        var overline: String? = nil
+        if let i = Int(s) {
+            overline = read_OVERLINE(i)
+        }
         var spokenText: String? = nil
         if voiceLanguageCode != nil {
             spokenText = displayText.replacingOccurrences(of: Languages.WordSplitter, with: " ")
@@ -276,7 +282,7 @@ struct Translation {
         }
         return Translation(
             displayText: displayText,
-            overline: nil,
+            overline: overline,
             spokenText: spokenText)
     }
     
