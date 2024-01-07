@@ -8,7 +8,8 @@
 import Foundation
 
 class HieroglyphsImpl: Language {
-    let symbolZero = "\u{13124}"
+    // static, because I will use it in the tests
+    static let symbolZero = "\u{13124}"
     static let symbolOne = "\u{133E4}"
     static let symbolTen = "\u{13386}"
     static let symbolHundred = "\u{13362}"
@@ -20,7 +21,7 @@ class HieroglyphsImpl: Language {
     init() {
         super.init(
             name: "Hieroglyphs",
-            zero: symbolZero,
+            zero: HieroglyphsImpl.symbolZero,
             negativeString: "",
             dotString: "",
             exponentString: "")

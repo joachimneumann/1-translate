@@ -92,9 +92,6 @@ class ArmenianNumeralsImpl: Language {
     }
     
     private func read_9_999(_ i: Int) -> String {
-        if i == 0 {
-            return "zero: unknown"
-        }
         if i <= 9 {
             return read_armenian_1_9(i)
         }

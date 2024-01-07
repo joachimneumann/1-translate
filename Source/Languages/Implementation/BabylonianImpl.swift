@@ -65,11 +65,7 @@ class BabylonianImpl: Language {
     override func read_1_(_ i: Int) -> String {
         if i > 60*60*60*60 {
             return "too big"
-        }
-        if i == 0 {
-            return "Zero unknown"
-        }
-        
+        }        
         var value = i
         var ret = ""
         if value >= 60*60*60 {

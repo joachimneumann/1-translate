@@ -204,11 +204,10 @@ struct Translation {
     }
 
     func read_1_(_ i: Int) -> String {
-        if i < 0 {
-            guard allowNegativeNumbers else { return "negative: unknown" }
-            return negativeString + afterNegative + read_1_(-i)
+        if i <= 0 {
+            fatalError("read_1_() called with \(i)")
         }
-        guard i >= 0 && i < 999_999_999_999_999 else { fatalError("too large") }
+        if i > 999_999_999_999_999 { fatalError("too large") }
         
         if i < 10    { return read_1_9(i) }
         if i <= 99   { return read_10_99(i)   }
@@ -251,6 +250,12 @@ struct Translation {
     
     
     func read(_ i: Int) -> String {
+        if i == 0 { return zero ?? "zero unknown" }
+        if i < 0 {
+            guard allowNegativeNumbers else { return "negative: unknown" }
+            return negativeString + afterNegative + read(-i)
+        }
+        
         var ret = read_1_(i)
         if let postProcessing = postProcessing {
             ret = postProcessing(ret)
@@ -288,15 +293,9 @@ struct Translation {
         let fractionalPart: String? = (parts.count == 2) ? parts[1] : nil
         guard allowFraction || fractionalPart == nil else { return "fractions not known" }
 
+        guard let integerPartInt = Int(integerPart) else { return error }
+        var ret: String = read(integerPartInt)
 
-        var ret: String = ""
-
-        if integerPart == "-0" {
-            ret = negativeString + afterNegative + read_1_(0)
-        } else {
-            guard let integerPartValue = Int(integerPart) else { return error }
-            ret = read_1_(integerPartValue)
-        }
         if let fractionalPart = fractionalPart {
             var count = 0
             ret += " " + dotString
