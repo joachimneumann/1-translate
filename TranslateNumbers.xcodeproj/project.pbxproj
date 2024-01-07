@@ -63,7 +63,6 @@
 		AAF472602B44328100E7B986 /* EsperantoImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF4725E2B442FE300E7B986 /* EsperantoImpl.swift */; };
 		AAF472632B446BBD00E7B986 /* SwahiliImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF472612B4469F400E7B986 /* SwahiliImpl.swift */; };
 		AAF472672B452BD000E7B986 /* Voices.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF472662B452BD000E7B986 /* Voices.swift */; };
-		AAF9EC142B4A5051007D0B1D /* LanguageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF9EC132B4A5051007D0B1D /* LanguageTest.swift */; };
 		AAF9EC182B4A5094007D0B1D /* Languages.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB253B42B3AE79400860F93 /* Languages.swift */; };
 		AAF9EC1B2B4A51B2007D0B1D /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3565AF2B32588B009B58D2 /* Language.swift */; };
 		AAF9EC1C2B4A51C4007D0B1D /* ThaiImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7988B32B32B07700608906 /* ThaiImpl.swift */; };
@@ -90,6 +89,7 @@
 		AAF9EC312B4A51C4007D0B1D /* DigitsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3565B22B325D4B009B58D2 /* DigitsImpl.swift */; };
 		AAF9EC322B4A51C4007D0B1D /* ArmenianNumeralsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5CF9192B3944AD004BB6BB /* ArmenianNumeralsImpl.swift */; };
 		AAF9EC332B4A51C4007D0B1D /* HindiImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5456572B48572500078196 /* HindiImpl.swift */; };
+		AAF9EC4D2B4A9341007D0B1D /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF9EC4C2B4A9341007D0B1D /* test.swift */; };
 		AAFBD8A72B32A36D00175197 /* ThaiNumeralsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFBD8A62B32A36D00175197 /* ThaiNumeralsImpl.swift */; };
 /* End PBXBuildFile section */
 
@@ -193,7 +193,7 @@
 		AAF472642B446DA200E7B986 /* TestSwahili.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestSwahili.swift; path = "../../1-translate-tests/Tests/TestSwahili.swift"; sourceTree = "<group>"; };
 		AAF472662B452BD000E7B986 /* Voices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voices.swift; sourceTree = "<group>"; };
 		AAF9EC112B4A5051007D0B1D /* LanguageTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LanguageTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AAF9EC132B4A5051007D0B1D /* LanguageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageTest.swift; sourceTree = "<group>"; };
+		AAF9EC4C2B4A9341007D0B1D /* test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 		AAFBD8A62B32A36D00175197 /* ThaiNumeralsImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThaiNumeralsImpl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -385,7 +385,7 @@
 		AAF9EC122B4A5051007D0B1D /* LanguageTest */ = {
 			isa = PBXGroup;
 			children = (
-				AAF9EC132B4A5051007D0B1D /* LanguageTest.swift */,
+				AAF9EC4C2B4A9341007D0B1D /* test.swift */,
 			);
 			path = LanguageTest;
 			sourceTree = "<group>";
@@ -401,6 +401,7 @@
 				AA08C7BB272EDA48001B8575 /* Frameworks */,
 				AA08C7BC272EDA48001B8575 /* Resources */,
 				AA2FABED272F2136006DE4C8 /* Embed Frameworks */,
+				AAF9EC412B4A8A8A007D0B1D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -435,6 +436,7 @@
 				AAF9EC0D2B4A5051007D0B1D /* Sources */,
 				AAF9EC0E2B4A5051007D0B1D /* Frameworks */,
 				AAF9EC0F2B4A5051007D0B1D /* Resources */,
+				AAF9EC402B4A8A1A007D0B1D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -512,6 +514,43 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		AAF9EC402B4A8A1A007D0B1D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n";
+		};
+		AAF9EC412B4A8A8A007D0B1D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AA08C7BA272EDA48001B8575 /* Sources */ = {
@@ -606,8 +645,8 @@
 				AAF9EC242B4A51C4007D0B1D /* HieroglyphsImpl.swift in Sources */,
 				AAF9EC282B4A51C4007D0B1D /* ArmenianImpl.swift in Sources */,
 				AAF9EC202B4A51C4007D0B1D /* ChineseImpl.swift in Sources */,
-				AAF9EC142B4A5051007D0B1D /* LanguageTest.swift in Sources */,
 				AAF9EC312B4A51C4007D0B1D /* DigitsImpl.swift in Sources */,
+				AAF9EC4D2B4A9341007D0B1D /* test.swift in Sources */,
 				AAF9EC292B4A51C4007D0B1D /* VietnameseImpl.swift in Sources */,
 				AAF9EC252B4A51C4007D0B1D /* PolishImpl.swift in Sources */,
 				AAF9EC182B4A5094007D0B1D /* Languages.swift in Sources */,
@@ -891,7 +930,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8A4DL788W9;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				ENABLE_USER_SELECTED_FILES = "";
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
@@ -913,7 +953,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8A4DL788W9;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				ENABLE_USER_SELECTED_FILES = "";
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
