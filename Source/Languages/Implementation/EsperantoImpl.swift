@@ -11,6 +11,7 @@ class EsperantoImpl: Language {
     init() {
         super.init(
             name: "Esperanto",
+            zero: "nul",
             negativeString: "minus",
             dotString: "kaj",
             exponentString: " EE ")
@@ -30,9 +31,8 @@ class EsperantoImpl: Language {
     }
 
     
-    override func read_0_9(_ i: Int) -> String {
+    override func read_1_9(_ i: Int) -> String {
         switch i {
-        case 0: return "nul"
         case 1: return "unu"
         case 2: return "du"
         case 3: return "tri"
@@ -48,7 +48,7 @@ class EsperantoImpl: Language {
     
     override func read_10s(_ i: Int) -> String {
         if i == 1 { return "dek"}
-        return read_0_9(i) + "dek"
+        return read_1_9(i) + "dek"
     }
     
     override func read_e2_e3(_ i: Int) -> String {

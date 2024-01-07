@@ -20,6 +20,7 @@ class GermanImpl: Language {
     init() {
         super.init(
             name: "Deutsch",
+            zero: "null",
             negativeString: "minus",
             dotString: "Komma",
             exponentString: " mal zehn hoch ")
@@ -60,9 +61,8 @@ class GermanImpl: Language {
         return ret
     }
     
-    override func read_0_9(_ i: Int) -> String {
+    override func read_1_9(_ i: Int) -> String {
         switch i {
-        case 0:     return "null"
         case 1:     return "eins"
         case 2:     return "zwei"
         case 3:     return "drei"
@@ -104,7 +104,7 @@ class GermanImpl: Language {
         // reversed order
         var ret = ""
         if i.E1x > 0 {
-            ret = read_0_9(i.E1x)
+            ret = read_1_9(i.E1x)
             ret += Languages.WordSplitter
             ret += "und"
             ret += Languages.WordSplitter

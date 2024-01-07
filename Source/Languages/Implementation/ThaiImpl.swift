@@ -11,6 +11,7 @@ class ThaiImpl: Language {
     init() {
         super.init(
             name: "ภาษาไทย",
+            zero: "ศูนย์",
             negativeString: "ลบ",
             dotString: "จุด",
             exponentString: " EE ")
@@ -29,9 +30,8 @@ class ThaiImpl: Language {
         eSpace = Languages.WordSplitter
     }
     
-    override func read_0_9(_ i: Int) -> String {
+    override func read_1_9(_ i: Int) -> String {
         switch i {
-        case 0: return "ศูนย์"
         case 1: return "หนึ่ง" // "เอ็ด"
         case 2: return "สอง"
         case 3: return "สาม"
@@ -57,7 +57,7 @@ class ThaiImpl: Language {
         switch i {
         case 1:     return "สิบ"
         case 2:     return "ยี่สิบ"
-        default: return read_0_9(i) + "สิบ"
+        default: return read_1_9(i) + "สิบ"
         }
     }
 }

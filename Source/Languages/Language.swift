@@ -7,8 +7,22 @@
 
 import Foundation
 
+struct Translation {
+    let displayText: String
+    let overline: String?
+    var spokenText: String?
+    var copyText: String {
+        let text = displayText.replacingOccurrences(of: Languages.WordSplitter, with: "")
+        guard var overline = overline else { return text }
+        overline = overline.replacingOccurrences(of: Languages.WordSplitter, with: "")
+        return "<overline>" + overline + "</overline>" + text
+    }
+}
+
 @Observable class Language: Identifiable {
     var name: String
+    let zero: String?
+    
     var nameDescription: String? = nil
     var flagName: String { nameDescription != nil ? nameDescription! : name }
     var voiceLanguageCode: String?
@@ -42,7 +56,8 @@ import Foundation
     var afterGroup = ""
     var allowNegativeNumbers = true
     var postProcessing: ((String) -> String)? = nil
-    
+    var speakingPostProcessing: ((String) -> String)?
+
     var eSpace: String? = nil
     var e3Space: String? = nil
     var e4Space: String? = nil
@@ -68,10 +83,12 @@ import Foundation
     }
 
     init(name: String,
+         zero: String?,
          negativeString: String,
          dotString: String,
          exponentString: String) {
         self.name = name
+        self.zero = zero
         self.voiceLanguageCode = nil
         self.voiceLanguageName = nil
         self.negativeString = negativeString
@@ -79,7 +96,7 @@ import Foundation
         self.exponentString = exponentString
     }
     
-    func read_0_9(_ i: Int) -> String {
+    func read_1_9(_ i: Int) -> String {
         fatalError("not implmented")
     }
     
@@ -93,19 +110,19 @@ import Foundation
             ret = e1_one!
         } else {
             if i.E1x > 0 {
-                ret += tensConnector_ + read_0_9(i.E1x)
+                ret += tensConnector_ + read_1_9(i.E1x)
             }
         }
         return ret
     }
     
     func read_e2_e3(_ i: Int) -> String {
-        var ret = readInteger(i.E2)
+        var ret = read_1_(i.E2)
         if i.E2 == 1 && e2_one != nil {
             ret = e2_one!
         } else {
             if let e2 = e2 {
-                ret = readInteger(i.E2)
+                ret = read_1_(i.E2)
                 ret += eSpace_
                 if i.E2 > 1 && i.E2x == 0 && e2_cleanPlural != nil {
                     ret += e2_cleanPlural!
@@ -117,83 +134,83 @@ import Foundation
         }
         if i.E2x > 0 {
             ret += afterHundred + afterGroup
-            ret += eSpace_ + readInteger(i.E2x)
+            ret += eSpace_ + read_1_(i.E2x)
         }
         return ret
     }
     
     func read_e3_e6(_ i: Int) -> String {
-        var ret = readInteger(i.E3)
+        var ret = read_1_(i.E3)
         if i.E3 == 1 && e3_one != nil {
             ret = e3_one!
         } else {
             if let e3 = e3 {
-                ret = readInteger(i.E3)
+                ret = read_1_(i.E3)
                 ret += eSpace_ + e3Space_ + e3
             }
         }
         if i.E3x > 0 {
-            ret += afterGroup + eSpace_ + e3Space_ + readInteger(i.E3x)
+            ret += afterGroup + eSpace_ + e3Space_ + read_1_(i.E3x)
         }
         return ret
     }
 
     func read_e6_e9(_ i: Int) -> String {
-        var ret = readInteger(i.E6)
+        var ret = read_1_(i.E6)
         if i.E6 == 1 && e6_one != nil {
             ret = e6_one!
         } else {
             if let e6 = e6 {
-                ret = readInteger(i.E6)
+                ret = read_1_(i.E6)
                 ret += eSpace_ + e69Space_ + e6
             }
         }
         if i.E6x > 0 {
-            ret += afterGroup + eSpace_ + e69Space_ + readInteger(i.E6x)
+            ret += afterGroup + eSpace_ + e69Space_ + read_1_(i.E6x)
         }
         return ret
     }
 
     func read_e9_e12(_ i: Int) -> String {
-        var ret = readInteger(i.E9)
+        var ret = read_1_(i.E9)
         if i.E9 == 1 && e9_one != nil {
             ret = e9_one!
         } else {
             if let e9 = e9 {
-                ret = readInteger(i.E9)
+                ret = read_1_(i.E9)
                 ret += eSpace_ + e69Space_ + e9
             }
         }
         if i.E9x > 0 {
-            ret += afterGroup + eSpace_ + e69Space_ + readInteger(i.E9x)
+            ret += afterGroup + eSpace_ + e69Space_ + read_1_(i.E9x)
         }
         return ret
     }
     
     func read_e12_e15(_ i: Int) -> String {
-        var ret = readInteger(i.E12)
+        var ret = read_1_(i.E12)
         if i.E12 == 1 && e12_one != nil {
             ret = e12_one!
         } else {
             if let e12 = e12 {
-                ret = readInteger(i.E12)
+                ret = read_1_(i.E12)
                 ret += eSpace_ + e69Space_ + e12
             }
         }
         if i.E12x > 0 {
-            ret += afterGroup + eSpace_ + e69Space_ + readInteger(i.E12x)
+            ret += afterGroup + eSpace_ + e69Space_ + read_1_(i.E12x)
         }
         return ret
     }
 
-    func readInteger(_ i: Int) -> String {
+    func read_1_(_ i: Int) -> String {
         if i < 0 {
             guard allowNegativeNumbers else { return "negative: unknown" }
-            return negativeString + afterNegative + readInteger(-i)
+            return negativeString + afterNegative + read_1_(-i)
         }
         guard i >= 0 && i < 999_999_999_999_999 else { fatalError("too large") }
         
-        if i < 10    { return read_0_9(i) }
+        if i < 10    { return read_1_9(i) }
         if i <= 99   { return read_10_99(i)   }
         if i < 1_000 { return read_e2_e3(i) }
         
@@ -201,20 +218,20 @@ import Foundation
         if i < 1_000_000 {
             if e5 != nil {
                 if i >= 100_000 {
-                    ret += read_0_9(i.E5)
+                    ret += read_1_9(i.E5)
                     ret += eSpace_ + e5Space_ + e5!
                     if i.E5x > 0 {
-                        ret += readInteger(i.E5x)
+                        ret += read_1_(i.E5x)
                     }
                     return ret
                 }
             }
             if e4 != nil {
                 if i >= 10_000 {
-                    ret += readInteger(i.E4)
+                    ret += read_1_(i.E4)
                     ret += eSpace_ + e4Space_ + e4!
                     if i.E4x > 0 {
-                        ret += readInteger(i.E4x)
+                        ret += read_1_(i.E4x)
                     }
                     return ret
                 }
@@ -234,11 +251,26 @@ import Foundation
     
     
     func read(_ i: Int) -> String {
-        var ret = readInteger(i)
+        var ret = read_1_(i)
         if let postProcessing = postProcessing {
             ret = postProcessing(ret)
         }
         return ret
+    }
+    
+    func translate(_ s: String) -> Translation {
+        let displayText = read(s)
+        var spokenText: String? = nil
+        if voiceLanguageCode != nil {
+            spokenText = displayText.replacingOccurrences(of: Languages.WordSplitter, with: " ")
+            if let speakingPostProcessing = speakingPostProcessing {
+                spokenText = speakingPostProcessing(spokenText!)
+            }
+        }
+        return Translation(
+            displayText: displayText,
+            overline: nil,
+            spokenText: spokenText)
     }
     
     func read(_ s: String) -> String {
@@ -260,10 +292,10 @@ import Foundation
         var ret: String = ""
 
         if integerPart == "-0" {
-            ret = negativeString + afterNegative + readInteger(0)
+            ret = negativeString + afterNegative + read_1_(0)
         } else {
             guard let integerPartValue = Int(integerPart) else { return error }
-            ret = readInteger(integerPartValue)
+            ret = read_1_(integerPartValue)
         }
         if let fractionalPart = fractionalPart {
             var count = 0
@@ -271,7 +303,7 @@ import Foundation
             for char in fractionalPart {
                 if count < 10 {
                     guard let digit = Int(String(char)) else { return error }
-                    ret += " " + readInteger(digit)
+                    ret += " " + read_1_(digit)
                 }
                 count += 1
             }
@@ -293,9 +325,6 @@ import Foundation
         return ret;
     }
     
-    func speakingPostProcessing(_ text: String) -> String {
-        text // can be overriden by the language
-    }
 }
 
 extension Int {

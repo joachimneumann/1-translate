@@ -12,14 +12,8 @@ import SwiftUI
     var keyStatusColor: [String: Color] = [:]
     var textColor: [String: Color] = [:]
     var currentDisplay: Display
-    var _1ForDisplay: String = ""
-    var _1ForDisplayOverline: String? = nil
-    var _1ForCopy: String = ""
-    var _1ForSpeaking: String? = ""
-    var _2ForDisplay: String = ""
-    var _2ForDisplayOverline: String? = nil
-    var _2ForCopy: String = ""
-    var _2ForSpeaking: String? = ""
+    var _1Translation: Translation = Translation(displayText: "", overline: nil, spokenText: nil)
+    var _2Translation: Translation = Translation(displayText: "", overline: nil, spokenText: nil)
     var persistent: Persistent
     var languages = Languages()
 
@@ -63,6 +57,14 @@ import SwiftUI
         keyStatusColor["plus"] = keyColor.upColor(for: "+", isPending: false)
         // print("viewModel init")
         voices.refreshVoiceDict(list: languages.list)
+        
+        for language in languages.list {
+            if language.voiceLanguageCode != nil {
+                if voices.voiceDict[language.voiceLanguageCode!] == nil {
+                    language.voiceLanguageCode = nil
+                }
+            }
+        }
         updateTranslation()
     }
         
@@ -77,52 +79,11 @@ import SwiftUI
         return ret
     }
 
-    func forCopy(_ text: String, _ overline: String?) -> String {
-        let text = text.replacingOccurrences(of: Languages.WordSplitter, with: "")
-        guard var overline = overline else { return text }
-        overline = overline.replacingOccurrences(of: Languages.WordSplitter, with: "")
-        return "<overline>" + overline + "</overline>" + text
-    }
-    
-    func forSpeaking(_ text: String) -> String {
-        let text = text.replacingOccurrences(of: Languages.WordSplitter, with: " ")
-        return text
-    }
-    
-    func splitForDisplay(_ text: String) -> (String, String?) {
-        guard text.contains(OVERLINE) else { return (text, nil) }
-        let split = text.split(separator: OVERLINE)
-        if split.count == 1 { return ("", String(split[0])) }
-        if split.count == 2 { return (String(split[1]), String(split[0])) }
-        return (text, nil)
-    }
-    
-
     func updateTranslation() {
         let allInOneLine = cleanSeperators(currentDisplay.allInOneLine)
-        let translated = languages.first.read(allInOneLine)
-        (_1ForDisplay, _1ForDisplayOverline) = splitForDisplay(translated)
-        _1ForCopy = forCopy(_1ForDisplay, _1ForDisplayOverline)
-        _1ForSpeaking = nil
-        if  let code = languages.first.voiceLanguageCode {
-            if voices.voiceDict[code] != nil {
-                _1ForSpeaking = forSpeaking(_1ForDisplay)
-                _1ForSpeaking = languages.first.speakingPostProcessing(_1ForSpeaking!)
-            }
-        }
-
+        _1Translation = languages.first.translate(allInOneLine)
         if languages.secondLanguageAllowed {
-            let translated = languages.second.read(allInOneLine)
-            (_2ForDisplay, _2ForDisplayOverline) = splitForDisplay(translated)
-            _2ForCopy = forCopy(_2ForDisplay, _2ForDisplayOverline)
-            _2ForSpeaking = forSpeaking(_2ForDisplay)
-            _2ForSpeaking = nil
-            if  let code = languages.second.voiceLanguageCode {
-                if voices.voiceDict[code] != nil {
-                    _2ForSpeaking = forSpeaking(_2ForDisplay)
-                    _2ForSpeaking = languages.second.speakingPostProcessing(_2ForSpeaking!)
-                }
-            }
+            _2Translation = languages.second.translate(allInOneLine)
         }
     }
     

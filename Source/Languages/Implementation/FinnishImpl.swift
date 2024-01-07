@@ -11,6 +11,7 @@ class FinnishImpl: Language {
     init() {
         super.init(
             name: "Suomalainen",
+            zero: "nolla",
             negativeString: "miinus",
             dotString: "pilkku",
             exponentString: " EE ")
@@ -31,9 +32,8 @@ class FinnishImpl: Language {
     }
 
 
-    override func read_0_9(_ i: Int) -> String {
+    override func read_1_9(_ i: Int) -> String {
         switch i {
-        case 0: return "nolla"
         case 1: return "yksi"
         case 2: return "kaksi"
         case 3: return "kolme"
@@ -49,7 +49,7 @@ class FinnishImpl: Language {
     
     override func read_10s(_ i: Int) -> String {
         if i == 1 { return "toista" } //kymmenen"}
-        return read_0_9(i) + Languages.WordSplitter + "kymmentä"
+        return read_1_9(i) + Languages.WordSplitter + "kymmentä"
     }
     
     override func read_10_99(_ i: Int) -> String {
@@ -57,11 +57,11 @@ class FinnishImpl: Language {
         var ret = read_10s(i.E1)
         if i < 20 {
             if i.E1x > 0 {
-                ret = read_0_9(i.E1x) + Languages.WordSplitter + ret
+                ret = read_1_9(i.E1x) + Languages.WordSplitter + ret
             }
         } else {
             if i.E1x > 0 {
-                ret += Languages.WordSplitter + read_0_9(i.E1x)
+                ret += Languages.WordSplitter + read_1_9(i.E1x)
             }
         }
         return ret

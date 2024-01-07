@@ -11,13 +11,14 @@ class DigitsImpl: Language {
     init() {
         super.init(
             name: "Digits",
+            zero: "0",
             negativeString: "-",
             dotString: ".",
             exponentString: " EE ")
         afterNegative = ""
     }
     
-    override func readInteger(_ i: Int) -> String {
+    override func read_1_(_ i: Int) -> String {
         i.string
     }
 }

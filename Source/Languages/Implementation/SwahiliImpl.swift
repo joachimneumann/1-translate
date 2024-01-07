@@ -11,6 +11,7 @@ class SwahiliImpl: Language {
     init() {
         super.init(
             name: "Swahili",
+            zero: "sifuri",
             negativeString: "menos",
             dotString: "kaj",
             exponentString: " EE ")
@@ -19,9 +20,8 @@ class SwahiliImpl: Language {
         e6 = "milioni"
     }
     
-    override func read_0_9(_ i: Int) -> String {
+    override func read_1_9(_ i: Int) -> String {
         switch i {
-        case 0:     return "sifuri"
         case 1:     return "moja"
         case 2:     return "mbili"
         case 3:     return "tatu"
@@ -51,7 +51,7 @@ class SwahiliImpl: Language {
     }
     
     override func read_e2_e3(_ i: Int) -> String {
-        var ret = "mia " + read_0_9(i.E2)
+        var ret = "mia " + read_1_9(i.E2)
         if i.E2x > 0 {
             var leftover = read(i.E2x)
             if leftover.split(separator: " ").count == 1 { leftover = "na " + leftover }

@@ -11,6 +11,7 @@ class ArmenianNumeralsImpl: Language {
     init() {
         super.init(
             name: "թիվ", 
+            zero: nil,
             negativeString: "",
             dotString: "",
             exponentString: "")
@@ -108,14 +109,14 @@ class ArmenianNumeralsImpl: Language {
         if i <= 999 {
             ret = read_armenianHundreds(i.E2)
             if i.E2x > 0 {
-                ret += readInteger(i.E2x)
+                ret += read_1_(i.E2x)
             }
             return ret
         }
         if i <= 9_999 {
             ret = read_armenianThousands(i.E3)
             if i.E3x > 0 {
-                ret += readInteger(i.E3x)
+                ret += read_1_(i.E3x)
             }
             return ret
         }
@@ -125,7 +126,7 @@ class ArmenianNumeralsImpl: Language {
     
     
     
-    override func readInteger(_ i: Int) -> String {
+    override func read_1_(_ i: Int) -> String {
         if i < 0 {
             return "negative: unknown"
         }

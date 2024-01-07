@@ -12,6 +12,7 @@ class HindiImpl: Language {
     init() {
         super.init(
             name: "हिंदी",
+            zero: "शून्य",
             negativeString: "शून्य से",
             dotString: "बिंदु",
             exponentString: " EE ")
@@ -20,9 +21,8 @@ class HindiImpl: Language {
     }
     
     
-    override func read_0_9(_ i: Int) -> String {
+    override func read_1_9(_ i: Int) -> String {
         switch i {
-        case 0:     return "शून्य"
         case 1:     return "एक"
         case 2:     return "दो"
         case 3:     return "तीन"
@@ -132,12 +132,12 @@ class HindiImpl: Language {
         }
     }
     
-    override func readInteger(_ i: Int) -> String {
-        if i < 10 { return read_0_9(i) }
+    override func read_1_(_ i: Int) -> String {
+        if i < 10 { return read_1_9(i) }
         if i < 100 { return read_10_99(i) }
         if i < 1000 {
             var ret = ""
-            ret = read_0_9(i.E2) + " " + "सौ"
+            ret = read_1_9(i.E2) + " " + "सौ"
             if i.E2x > 0 {
                 ret += " " + read(i.E2x)
             }

@@ -11,6 +11,7 @@ class FrenchImpl: Language {
     init() {
         super.init(
             name: "Française",
+            zero: "zéro",
             negativeString: "moins",
             dotString: "virgule",
             exponentString: " fois dix à la puissance ")
@@ -34,9 +35,8 @@ class FrenchImpl: Language {
         eSpace = " "
     }
 
-    override func read_0_9(_ i: Int) -> String {
+    override func read_1_9(_ i: Int) -> String {
         switch i {
-        case 0:     return "zéro"
         case 1:     return "un"
         case 2:     return "deux"
         case 3:     return "trois"
@@ -86,7 +86,7 @@ class FrenchImpl: Language {
         }
         if X > 0 {
             let connector = X0 < 8 && (X == 1 || X == 11) ? " et " : "-"
-            ret += connector + (X < 10 ? read_0_9(X) : read_10_99(X))
+            ret += connector + (X < 10 ? read_1_9(X) : read_10_99(X))
 
         }
         return ret

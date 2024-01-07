@@ -18,6 +18,7 @@ class EnglishImpl: Language {
     init() {
         super.init(
             name: "English",
+            zero: "zero",
             negativeString: "minus",
             dotString: "point",
             exponentString: " times ten to the power of ")
@@ -34,9 +35,8 @@ class EnglishImpl: Language {
         useAndAfterHundred = useAndAfterHundred
     }
     
-    override func read_0_9(_ i: Int) -> String {
+    override func read_1_9(_ i: Int) -> String {
         switch i {
-        case 0:     return "zero"
         case 1:     return "one"
         case 2:     return "two"
         case 3:     return "three"

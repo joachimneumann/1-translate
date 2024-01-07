@@ -14,6 +14,7 @@ class RomanImpl: Language {
     init() {
         super.init(
             name: "Roman",
+            zero: nil,
             negativeString: "",
             dotString: "",
             exponentString: "")
@@ -25,9 +26,6 @@ class RomanImpl: Language {
     }
     
     private func read_3_999(_ i: Int) -> String {
-        if i == 0 {
-            return "zero: unknown"
-        }
         if i > 3_999 {
             return "too large"
         }
@@ -47,7 +45,7 @@ class RomanImpl: Language {
         return result
     }
     
-    override func readInteger(_ num: Int) -> String {
+    override func read_1_(_ num: Int) -> String {
         if num < 0 {
             return "negative: unknown"
         }

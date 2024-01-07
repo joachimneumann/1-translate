@@ -11,6 +11,7 @@ class ArmenianImpl: Language {
     init() {
         super.init(
             name: "հայերեն",
+            zero: "զրո",
             negativeString: "մինուս",
             dotString: "կետ",
             exponentString: " EE ")
@@ -31,9 +32,8 @@ class ArmenianImpl: Language {
     }
 
     
-    override func read_0_9(_ i: Int) -> String {
+    override func read_1_9(_ i: Int) -> String {
         switch i {
-        case 0:     return "զրո"
         case 1:     return "մեկ"
         case 2:     return "երկու"
         case 3:     return "երեք"

@@ -11,6 +11,7 @@ class RussianImpl: Language {
     init() {
         super.init(
             name: "Русский",
+            zero: "ноль",
             negativeString: "минус",
             dotString: "целых",
             exponentString: " EE ")
@@ -32,9 +33,8 @@ class RussianImpl: Language {
     }
     
     
-    override func read_0_9(_ i: Int) -> String {
+    override func read_1_9(_ i: Int) -> String {
         switch i {
-        case 0:     return "ноль"
         case 1:     return "один"
         case 2:     return "два"
         case 3:     return "три"
@@ -102,7 +102,7 @@ class RussianImpl: Language {
         }
         if i.E2x > 0 {
             if ret.count > 0 { ret += " " }
-            ret += readInteger(i.E2x)
+            ret += read_1_(i.E2x)
         }
         return ret
     }
@@ -129,7 +129,7 @@ class RussianImpl: Language {
         case 9:
             ret = "девять тысяч"
         default:
-            ret = readInteger(i.E3)
+            ret = read_1_(i.E3)
             if i.E3 == 22 { ret = "двадцать две"}
             if i.E3 <= 20 {
                 ret += " " + "тысяч"
@@ -147,14 +147,14 @@ class RussianImpl: Language {
         }
         if i.E3x > 0 {
             ret += " "
-            ret += readInteger(i.E3x)
+            ret += read_1_(i.E3x)
         }
         ret = ret.replacingOccurrences(of: "один ", with: "одна ")
         return ret
     }
     
     override func read_e6_e9(_ i: Int) -> String {
-        var ret = super.readInteger(i.E6)
+        var ret = super.read_1_(i.E6)
         if i.E6 == 1 {
             ret = "один миллион"
         } else if i.E6 % 10 == 0 {

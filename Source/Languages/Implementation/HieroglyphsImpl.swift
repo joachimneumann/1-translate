@@ -8,7 +8,7 @@
 import Foundation
 
 class HieroglyphsImpl: Language {
-    static let symbolZero = "\u{13124}"
+    let symbolZero = "\u{13124}"
     static let symbolOne = "\u{133E4}"
     static let symbolTen = "\u{13386}"
     static let symbolHundred = "\u{13362}"
@@ -20,6 +20,7 @@ class HieroglyphsImpl: Language {
     init() {
         super.init(
             name: "Hieroglyphs",
+            zero: symbolZero,
             negativeString: "",
             dotString: "",
             exponentString: "")
@@ -83,14 +84,10 @@ class HieroglyphsImpl: Language {
         return ret
     }
     
-    override func readInteger(_ i: Int) -> String {
+    override func read_1_(_ i: Int) -> String {
         if i > 10_000_000 {
             return "too big"
-        }
-        if i == 0 {
-            return HieroglyphsImpl.symbolZero
-        }
-        
+        }        
         let without = readHieroglyphs(i, newLine: "")
         if without.count < 17 {
             return without

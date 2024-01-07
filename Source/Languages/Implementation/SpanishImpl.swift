@@ -24,6 +24,7 @@ class SpanishImpl: Language {
 
         super.init(
             name: "Español",
+            zero: "cero",
             negativeString: "menos",
             dotString: "coma",
             exponentString: " por diez elevado a ")
@@ -44,9 +45,8 @@ class SpanishImpl: Language {
         puntoComma = puntoComma
     }
 
-    override func read_0_9(_ i: Int) -> String {
+    override func read_1_9(_ i: Int) -> String {
         switch i {
-        case 0:     return "cero"
         case 1:     return "uno"
         case 2:     return "dos"
         case 3:     return "tres"
@@ -110,10 +110,10 @@ class SpanishImpl: Language {
         case 9:
             ret = "novecientos"
         default:
-            ret = readInteger(i.E2) + "cientos"
+            ret = read_1_(i.E2) + "cientos"
         }
         if i.E2x > 0 {
-            ret += " " + readInteger(i.E2x)
+            ret += " " + read_1_(i.E2x)
         }
         return ret
     }

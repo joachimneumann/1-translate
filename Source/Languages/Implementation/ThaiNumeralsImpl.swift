@@ -11,6 +11,7 @@ class ThaiNumeralsImpl: Language {
     init() {
         super.init(
             name: "แบบดั้งเดิม",
+            zero: "๐"+Languages.WordSplitter,
             negativeString: "-",
             dotString: ".",
             exponentString: " EE ")
@@ -20,9 +21,8 @@ class ThaiNumeralsImpl: Language {
         nameDescription = "Thai Numerals"
     }
         
-    override func readInteger(_ i: Int) -> String {
+    override func read_1_(_ i: Int) -> String {
         var ret = i.string
-        ret = ret.replacingOccurrences(of: "0", with: "๐"+Languages.WordSplitter)
         ret = ret.replacingOccurrences(of: "1", with: "๑"+Languages.WordSplitter)
         ret = ret.replacingOccurrences(of: "2", with: "๒"+Languages.WordSplitter)
         ret = ret.replacingOccurrences(of: "3", with: "๓"+Languages.WordSplitter)

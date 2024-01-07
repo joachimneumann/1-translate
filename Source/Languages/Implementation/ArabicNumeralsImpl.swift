@@ -11,17 +11,18 @@ class ArabicNumeralsImpl: Language {
     init() {
         super.init(
             name: "الترقيم العربي",
+            zero: "٠",
             negativeString: "-",
             dotString: ".",
             exponentString: " EE ")
         voiceLanguageCode = "ar"
         voiceLanguageName = "Arabic"
         nameDescription = "Arabic Numerals"
+        speakingPostProcessing = speakingPostProcessing
     }
     
-    override func readInteger(_ i: Int) -> String {
+    override func read_1_(_ i: Int) -> String {
         var ret = i.string
-        ret = ret.replacingOccurrences(of: "0", with: "٠")
         ret = ret.replacingOccurrences(of: "1", with: "١")
         ret = ret.replacingOccurrences(of: "2", with: "٢")
         ret = ret.replacingOccurrences(of: "3", with: "٣")
@@ -34,7 +35,7 @@ class ArabicNumeralsImpl: Language {
         return ret
     }
     
-    override func speakingPostProcessing(_ text: String) -> String {
+    func speakingPostProcessing(_ text: String) -> String {
         var ret = ""
         for letter in text {
             switch letter {

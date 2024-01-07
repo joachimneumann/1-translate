@@ -26,6 +26,7 @@ class BabylonianImpl: Language {
     init() {
         super.init(
             name: "Babylonian",
+            zero: nil,
             negativeString: "",
             dotString: "",
             exponentString: "")
@@ -61,7 +62,7 @@ class BabylonianImpl: Language {
         return ret
     }
     
-    override func readInteger(_ i: Int) -> String {
+    override func read_1_(_ i: Int) -> String {
         if i > 60*60*60*60 {
             return "too big"
         }

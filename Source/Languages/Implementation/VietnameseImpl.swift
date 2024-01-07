@@ -36,6 +36,7 @@ class VietnameseImpl: Language {
     init() {
         super.init(
             name: "Tiếng Việt",
+            zero: "không",
             negativeString: "âm",
             dotString: "phẩy",
             exponentString: " nhân mười mũ ")
@@ -51,9 +52,8 @@ class VietnameseImpl: Language {
         nameDescription = "Vietnamese"
     }
     
-    override func read_0_9(_ i: Int) -> String {
+    override func read_1_9(_ i: Int) -> String {
         switch i {
-        case 0:     return "không"
         case 1:     return "một"
         case 2:     return "hai"
         case 3:     return "ba"
@@ -72,11 +72,11 @@ class VietnameseImpl: Language {
         if i.E1 == 1 {
             ret = "mười"
         } else {
-            ret = read_0_9(i.E1)
+            ret = read_1_9(i.E1)
             if !compact || i.E1x == 0 { ret += " mươi" }
         }
         if i.E1x > 0 {
-            ret += " " + read_0_9(i.E1x)
+            ret += " " + read_1_9(i.E1x)
         }
 
         if ret.hasSuffix("năm") {
@@ -94,7 +94,7 @@ class VietnameseImpl: Language {
     func read_trailing_tens(_ i: Int) -> String {
         var ret = ""
         if i > 0 {
-            ret = readInteger(i)
+            ret = read_1_(i)
             if i.lastDigit > 0 && i.secondLastDigit == 0 {
                 ret = secondLast.rawValue + " " + ret
             }
@@ -110,7 +110,7 @@ class VietnameseImpl: Language {
             if i.E2 == 0 {
                 ret += "không trăm"
             } else {
-                ret += read_0_9(i.E2) + " " + "trăm"
+                ret += read_1_9(i.E2) + " " + "trăm"
             }
             ret += read_trailing_tens(i.E2x)
             ret += name
@@ -119,22 +119,22 @@ class VietnameseImpl: Language {
     }
     
     override func read_e2_e3(_ i: Int) -> String {
-        return read_0_9(i.E2) + " trăm" + read_trailing_tens(i.E2x)
+        return read_1_9(i.E2) + " trăm" + read_trailing_tens(i.E2x)
     }
 
     override func read_e3_e6(_ i: Int) -> String {
-        return readInteger(i.E3) + " " + e3! + read_trailing_3digits(i.E3x)
+        return read_1_(i.E3) + " " + e3! + read_trailing_3digits(i.E3x)
     }
 
     override func read_e6_e9(_ i: Int) -> String {
-        var ret = readInteger(i.E6s) + " " + e6!
+        var ret = read_1_(i.E6s) + " " + e6!
         ret += read_trailing_3digits(i.E3s, " " + e3!)
         ret += read_trailing_3digits(i.E0s)
         return ret
     }
     
     override func read_e12_e15(_ i: Int) -> String {
-        return readInteger(i.E9) + " " + e9!
+        return read_1_(i.E9) + " " + e9!
     }
     
 

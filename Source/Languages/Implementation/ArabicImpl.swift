@@ -19,6 +19,7 @@ class ArabicImpl: Language {
         self.variant = .chatGTP
         super.init(
             name: "عربي",
+            zero: "صفر",
             negativeString: "ناقص",
             dotString: "واحدة",
             exponentString: " مرات عشرة للقوة ")
@@ -26,10 +27,9 @@ class ArabicImpl: Language {
         nameDescription = "Arabic"
     }
     
-    override func read_0_9(_ i: Int) -> String {
+    override func read_1_9(_ i: Int) -> String {
         if variant == .web {
             switch i {
-            case 0:     return "صفر"
             case 1:     return "وَاحِد"
             case 2:     return "اِثْنَان"
             case 3:     return "ثَلَاثَة"
@@ -43,7 +43,6 @@ class ArabicImpl: Language {
             }
         } else {
             switch i {
-            case 0:     return "صفر"
             case 1:     return "واحد"
             case 2:     return "اثنان"
             case 3:     return "ثلاثة"
@@ -154,7 +153,7 @@ class ArabicImpl: Language {
         switch i {
         case 1:     return "أَلف"
         case 2:     return "أَلفين"
-        default:    return readInteger(i) + " " + "أَلاف"
+        default:    return read_1_(i) + " " + "أَلاف"
         }
     }
     
@@ -162,7 +161,7 @@ class ArabicImpl: Language {
         switch i {
         case 1:     return "مليون"
         case 2:     return "مليونان"
-        default:    return readInteger(i) + " " + "ملايين"
+        default:    return read_1_(i) + " " + "ملايين"
         }
     }
 
@@ -170,7 +169,7 @@ class ArabicImpl: Language {
         switch i {
         case 1:     return "مِلْيار"
         case 2:     return "مليارين"
-        default:    return readInteger(i) + " " + "مِلْيار"
+        default:    return read_1_(i) + " " + "مِلْيار"
         }
     }
 
@@ -187,7 +186,7 @@ class ArabicImpl: Language {
             if i.E1 == 1 {
                 ret += read_arabic_0_9(i.E1x)
             } else {
-                ret += read_0_9(i.E1x)
+                ret += read_1_9(i.E1x)
             }
             ret += " "
             if i.E1 > 1 {
@@ -205,7 +204,7 @@ class ArabicImpl: Language {
         ret += read_arabic_100s(i.E2)
         if i.E2x > 0 {
             ret += " و"
-            ret += readInteger(i.E2x)
+            ret += read_1_(i.E2x)
         }
         return ret
     }
@@ -215,7 +214,7 @@ class ArabicImpl: Language {
         ret += read_arabic_1000s(i.E3)
         if i.E3x > 0 {
             ret += " و "
-            ret += readInteger(i.E3x)
+            ret += read_1_(i.E3x)
         }
         return ret
     }
@@ -225,7 +224,7 @@ class ArabicImpl: Language {
         ret += read_arabic_1000_000s(i.E6)
         if i.E6x > 0 {
             ret += " و "
-            ret += readInteger(i.E6x)
+            ret += read_1_(i.E6x)
         }
         return ret
     }
@@ -235,7 +234,7 @@ class ArabicImpl: Language {
         ret += read_arabic_1000_000_000s(i.E9)
         if i.E9x > 0 {
             ret += " و "
-            ret += readInteger(i.E9x)
+            ret += read_1_(i.E9x)
         }
         return ret
     }

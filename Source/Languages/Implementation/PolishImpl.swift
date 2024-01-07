@@ -11,6 +11,7 @@ class PolishImpl: Language {
     init() {
         super.init(
             name: "Polski",
+            zero: "zero",
             negativeString: "minus",
             dotString: "przecinek",
             exponentString: " razy dziesięć do potęgi ")
@@ -23,9 +24,8 @@ class PolishImpl: Language {
         tensConnector = " "
     }
     
-    override func read_0_9(_ i: Int) -> String {
+    override func read_1_9(_ i: Int) -> String {
         switch i {
-        case 0:         return "zero"
         case 1:         return "jeden"
         case 2:         return "dwa"
         case 3:         return "trzy"
@@ -75,13 +75,13 @@ class PolishImpl: Language {
         case 2:
             ret = "dwieście"
         case 3, 4:
-            ret = read_0_9(i.E2) + "sta"
+            ret = read_1_9(i.E2) + "sta"
         default:
-            ret = read_0_9(i.E2) + "set"
+            ret = read_1_9(i.E2) + "set"
         }
         if i.E2x > 0 {
             if ret.count > 0 { ret += " " }
-            ret += readInteger(i.E2x)
+            ret += read_1_(i.E2x)
         }
         return ret
     }
@@ -104,30 +104,30 @@ class PolishImpl: Language {
     }
     
     override func read_e3_e6(_ i: Int) -> String {
-        var ret = readInteger(i.E3) + " " + use(i.E3, "tysiące", "tysięcy")
+        var ret = read_1_(i.E3) + " " + use(i.E3, "tysiące", "tysięcy")
         if i.E3 == 1 { ret = "tysiąc" }
-        if i.E3x > 0 { ret += " " + readInteger(i.E3x) }
+        if i.E3x > 0 { ret += " " + read_1_(i.E3x) }
         return ret
     }
     
     override func read_e6_e9(_ i: Int) -> String {
-        var ret = readInteger(i.E6) + " " + use(i.E6, "miliony", "milionów")
+        var ret = read_1_(i.E6) + " " + use(i.E6, "miliony", "milionów")
         if i.E6 == 1 { ret = "jeden milion" }
-        if i.E6x > 0 { ret += " " + readInteger(i.E6x) }
+        if i.E6x > 0 { ret += " " + read_1_(i.E6x) }
         return ret
     }
     
     override func read_e9_e12(_ i: Int) -> String {
-        var ret = readInteger(i.E9) + " " + use(i.E9, "miliardy", "miliardów")
+        var ret = read_1_(i.E9) + " " + use(i.E9, "miliardy", "miliardów")
         if i.E9 == 1 { ret = "jeden miliard" }
-        if i.E9x > 0 { ret += " " + readInteger(i.E9x) }
+        if i.E9x > 0 { ret += " " + read_1_(i.E9x) }
         return ret
     }
     
     override func read_e12_e15(_ i: Int) -> String {
-        var ret = readInteger(i.E12) + " " + use(i.E12, "biliony", "bilionów")
+        var ret = read_1_(i.E12) + " " + use(i.E12, "biliony", "bilionów")
         if i.E12 == 1 { ret = "jeden bilion" }
-        if i.E12x > 0 { ret += " " + readInteger(i.E12x) }
+        if i.E12x > 0 { ret += " " + read_1_(i.E12x) }
         return ret
     }
 }

@@ -11,6 +11,7 @@ class CatalanImpl: Language {
     init() {
         super.init(
             name: "Català",
+            zero: "zero",
             negativeString: "menys",
             dotString: "coma",
             exponentString: " por diez elevat a ")        
@@ -33,9 +34,8 @@ class CatalanImpl: Language {
         e69Space = " "
     }
 
-    override func read_0_9(_ i: Int) -> String {
+    override func read_1_9(_ i: Int) -> String {
         switch i {
-        case 0:     return "zero"
         case 1:     return "u"
         case 2:     return "dos"
         case 3:     return "tres"
@@ -84,10 +84,10 @@ class CatalanImpl: Language {
         if i.E2 == 1 {
             ret = "cent"
         } else {
-            ret = read_0_9(i.E2) + "-cents"
+            ret = read_1_9(i.E2) + "-cents"
         }
         if i.E2x > 0 {
-            ret += " " + readInteger(i.E2x)
+            ret += " " + read_1_(i.E2x)
         }
         return ret
     }

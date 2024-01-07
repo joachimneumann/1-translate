@@ -23,18 +23,12 @@ struct Overline: Shape {
 }
 
 struct TranslatedDisplay: View {
-    let text: String
-    let overline: String?
-    let forCopy: String
+    let translation: Translation
     let screen: Screen
 
-    init(text: String,
-         overline: String?,
-         forCopy: String,
+    init(translation: Translation,
          screen: Screen) {
-        self.text = text
-        self.overline = overline
-        self.forCopy = forCopy
+        self.translation = translation
         self.screen = screen
     }
     
@@ -44,17 +38,17 @@ struct TranslatedDisplay: View {
                 VStack {
                     HStack(alignment: .bottom, spacing: 0.0) {
                         Spacer(minLength: 0.0)
-                        if overline != nil {
-                            Text(overline!)
+                        if translation.overline != nil {
+                            Text(translation.overline!)
                                 .overline()
                                 .multilineTextAlignment(.trailing)
                         }
-                        Text(text)
+                        Text(translation.displayText)
                             .multilineTextAlignment(.trailing)
                     }
                     .contextMenu {
                         Button("Copy to Clipboard") {
-                            UIPasteboard.general.string = forCopy
+                            UIPasteboard.general.string = translation.copyText
                         }
                     }
                 }
