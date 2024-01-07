@@ -24,6 +24,7 @@ struct Settings: View {
                 German
                 Spanish
                 Vietnamese
+                Babylonian
                 HobbyProject
             }
         }
@@ -321,6 +322,24 @@ struct Settings: View {
             }
     }
     
+    var Babylonian: some View {
+        return LanguageSection(
+            language: viewModel.languages.babylonian,
+            example: "3601") {
+                HStack {
+                    Text("Empty column")
+                    Spacer()
+                    Toggle("", isOn: $viewModel.languages.babylonian.babylonianEmptyColumn)
+                        .frame(width: 40)
+                        .toggleStyle(
+                            ColoredToggleStyle(onColor: Color(white: 0.6),
+                                               offColor: Color(white: 0.25),
+                                               thumbColor: .white))
+                        .buttonStyle(.plain)
+                        .padding(.trailing, 10)
+                }
+            }
+    }
     
     var HobbyProject: some View {
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String

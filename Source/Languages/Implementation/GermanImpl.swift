@@ -7,12 +7,6 @@
 
 import SwiftUI
 
-extension StringProtocol {
-    var firstUppercased: String { prefix(1).uppercased() + dropFirst() }
-    var firstCapitalized: String { prefix(1).capitalized + dropFirst() }
-}
-
-
 class GermanImpl: Language {
     @AppStorage("germanCaptalisationKey")
     var capitalisation: Bool = true

@@ -5,9 +5,12 @@
 //  Created by Joachim Neumann on 12/27/23.
 //
 
+import SwiftUI
+
 class BabylonianImpl: Language {
-    static let symbolSpace = " "
-    static let symbolNone = "   "
+    static let symbolSpace = ""
+    static let symbolNone = ""
+    static let symbolEmptyColumn = "𒑊"
     static let symbolOne = "𒐕"
     static let symbolTwo = "𒐖"
     static let symbolThree = "𒐗"
@@ -23,6 +26,12 @@ class BabylonianImpl: Language {
     static let symbolForty = "𒐏"
     static let symbolFifty = "𒐐"
     
+    @AppStorage("babylonianEmptyColumn")
+    var babylonianEmptyColumn: Bool = true
+
+    var none: String {
+        babylonianEmptyColumn ? BabylonianImpl.symbolEmptyColumn : BabylonianImpl.symbolNone
+    }
     init() {
         super.init(
             name: "Babylonian",
@@ -79,7 +88,7 @@ class BabylonianImpl: Language {
             ret += representation(group)
             value -= 60*60 * group
         } else {
-            if ret.count > 0 { ret += Self.symbolNone }
+            if ret.count > 0 { ret += none }
         }
         if value >= 60 {
             if ret.count > 0 {  ret += Self.symbolSpace }
@@ -87,22 +96,22 @@ class BabylonianImpl: Language {
             ret += representation(group)
             value -= 60 * group
         } else {
-            if ret.count > 0 { ret += Self.symbolNone }
+            if ret.count > 0 { ret += none }
         }
         if value > 0 {
             if ret.count > 0 {  ret += Self.symbolSpace }
             ret += representation(value)
         } else {
-            if ret.count > 0 { ret += Self.symbolNone }
+            if ret.count > 0 { ret += none }
         }
         
         
-        if ret.hasSuffix(Self.symbolNone) {
+        while ret.hasSuffix(" ") {
+            ret.removeLast()
+        }
+        while ret.hasSuffix(Self.symbolEmptyColumn) {
             /// sadly, 60 and 1 will have the same value :(
-            ret.removeLast(Self.symbolNone.count)
-        }
-        while ret.hasSuffix(Self.symbolSpace) {
-            ret.removeLast(Self.symbolSpace.count)
+            ret.removeLast(Self.symbolEmptyColumn.count)
         }
 
         return ret

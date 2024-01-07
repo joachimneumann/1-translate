@@ -11,8 +11,9 @@ https://medium.com/bleeding-edge/writing-better-unit-tests-in-swift-part-two-d19
 protocol LanguageProtocol {
     func read_1_9()
     var zero: String?
-}
+} 
 typealias Language = LanguageBaseClass & LanguageProtocol
+/// problem: some impl only override read_1_()
 
 babylonian add zero as option
 

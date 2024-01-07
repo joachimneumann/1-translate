@@ -18,7 +18,7 @@ class Languages {
     let arabicNumerals      = ArabicNumeralsImpl()
     let armenianNumerals    = ArmenianNumeralsImpl()
     let armenian            = ArmenianImpl()
-    let babylonian          = BabylonianImpl()
+    var babylonian          = BabylonianImpl()
     let catalan             = CatalanImpl()
     let chineseFinancial    = ChineseImpl(variant: .financial)
     let chineseSimplified   = ChineseImpl(variant: .simplified)
