@@ -6,17 +6,12 @@
 
 import XCTest
 
-extension String {
-    var x: String {
-        self.replacingOccurrences(of: Languages.WordSplitter, with: "")
-    }
-}
+final class Test_german: XCTestCase {
 
-final class LanguageTests: XCTestCase {
+    let languages = Languages()
+
     func test_german() {
-        let languages = Languages()
         let language = languages.german
-        language.capitalisation = false
         language.capitalisation = false
         XCTAssertEqual(language.read(0).x, "null")
         XCTAssertEqual(language.read(1).x, "eins")
