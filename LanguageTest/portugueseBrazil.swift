@@ -3,11 +3,11 @@
 
 import XCTest
 
-final class Test_portuguese: XCTestCase {
+final class Test_portugueseBrazil: XCTestCase {
 
-    let language = Languages().portuguese
+    let language = Languages().portugueseBrazil
 
-    func test_portuguese() {
+    func test_portugueseBrazil() {
         // https: www.fluentu.com/blog/portuguese/portuguese-numbers/
         XCTAssertEqual(language.read(0).x, "zero")
         XCTAssertEqual(language.read(1).x, "um")
@@ -184,8 +184,6 @@ final class Test_portuguese: XCTestCase {
         XCTAssertEqual(language.read(631_897).x, "seiscentos e trinta e um mil oitocentos e noventa e sete")
         XCTAssertEqual(language.read(7_543_100).x, "sete milhões quinhentos e quarenta e três mil e cem")
         XCTAssertEqual(language.read(16_550_024).x, "dezesseis milhões quinhentos e cinquenta mil e vinte e quatro")
-
-        language.variant = .Brazil
         XCTAssertEqual(language.read(1_000_000).x, "um milhão")
         XCTAssertEqual(language.read(2_000_000).x, "dois milhões")
         XCTAssertEqual(language.read(4_000_000).x, "quatro milhões")
@@ -195,13 +193,5 @@ final class Test_portuguese: XCTestCase {
         XCTAssertEqual(language.read(1_000_000_000_000).x, "um trilhão")
         XCTAssertEqual(language.read(2_000_000_000_000).x, "dois trilhões")
         XCTAssertEqual(language.read(3_000_000_000_000).x, "três trilhões")
-
-        language.variant = .Portugal
-        XCTAssertEqual(language.read(1_000_000).x, "um milhão")
-        XCTAssertEqual(language.read(2_000_000).x, "dois milhões")
-        XCTAssertEqual(language.read(1_000_000_000).x, "mil milhões")
-        XCTAssertEqual(language.read(2_000_000_000).x, "dois mil milhões")
-        XCTAssertEqual(language.read(1_000_000_000_000).x, "um bilião")
-        XCTAssertEqual(language.read(2_000_000_000_000).x, "dois biliões")
     }
 }
