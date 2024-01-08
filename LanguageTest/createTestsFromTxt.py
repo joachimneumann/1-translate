@@ -63,6 +63,7 @@ def assertEqual(components):
             overline = normalAndOverline[1].strip()
             if not "Impl." in overline:
                 overline = "\""+overline+"\""
+            writeln("")
             write_("XCTAssertEqual(language.read(")
             write(number)
             write(").x, ")
@@ -74,7 +75,7 @@ def assertEqual(components):
             write(normal)
             write(")")
     else:
-        write("// "+" ".join(components))
+        write_("// "+" ".join(components))
 
 for file in glob.glob("../../1-translate-tests/language/*.txt"):       ## first get full file name with directores using for loop
     tempIndex = 1
@@ -101,25 +102,26 @@ for file in glob.glob("../../1-translate-tests/language/*.txt"):       ## first 
 
                 if len(content) == 0:
                     if len(comment) > 0:
-                        write("// "+comment)
-                components = content.strip().split(" ")
-                if len(components) < 2:
-                    if len(components) < 2:
-                        write("// "+components[0]+"\n")
+                        writeln_("// "+comment)
                 else:
-                    if components[0] == "SETTINGS":
-                        writeln("")
-                        write_("language.")
-                        write(components[1])
-                        write(" = ")
-                        write(components[2])
-                        if len(comment) > 0:
-                            write("// "+comment)
+                    components = content.strip().split(" ")
+                    if len(components) < 2:
+                        if len(components) < 2:
+                            write_("// "+components[0]+"\n")
                     else:
-                        assertEqual(components)
-                        if len(comment) > 0:
-                            write("  // "+comment)
-                    writeln("")
+                        if components[0] == "SETTINGS":
+                            writeln("")
+                            write_("language.")
+                            write(components[1])
+                            write(" = ")
+                            write(components[2])
+                            if len(comment) > 0:
+                                write(" // "+comment)
+                        else:
+                            assertEqual(components)
+                            if len(comment) > 0:
+                                write(" // "+comment)
+                        writeln("")
     writeln("    }")
     writeln("}")
     f.close()

@@ -62,7 +62,7 @@ final class Test_french: XCTestCase {
         XCTAssertEqual(language.read(999_999_999_999).x, "neuf cent quatre-vingt-dix-neuf milliards neuf cent quatre-vingt-dix-neuf millions neuf cent quatre-vingt-dix-neuf mille neuf cent quatre-vingt-dix-neuf")
         XCTAssertEqual(language.read(1_000_000_000_000).x, "un billion")
         XCTAssertEqual(language.read(100_000_000_000_000).x, "cent billions")
-// / https: languageatlas.com/french-a1/numbers-in-french/// 
+        // / https: languageatlas.com/french-a1/numbers-in-french/
         XCTAssertEqual(language.read(0).x, "zéro")
         XCTAssertEqual(language.read(1).x, "un")
         XCTAssertEqual(language.read(2).x, "deux")
@@ -139,7 +139,7 @@ final class Test_french: XCTestCase {
         XCTAssertEqual(language.read(100_000).x, "cent mille")
         XCTAssertEqual(language.read(1_000_000).x, "un million")
         XCTAssertEqual(language.read(1_000_000_000).x, "un milliard")
-// / https: www.mezzoguild.com/learn/french/numbers/#hundredsto1000// 
+        // / https: www.mezzoguild.com/learn/french/numbers/#hundredsto1000
         XCTAssertEqual(language.read(100).x, "cent")
         XCTAssertEqual(language.read(101).x, "cent un")
         XCTAssertEqual(language.read(200).x, "deux cents")

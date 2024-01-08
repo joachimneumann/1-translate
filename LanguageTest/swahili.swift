@@ -112,7 +112,7 @@ final class Test_swahili: XCTestCase {
         XCTAssertEqual(language.read(8_000_000_000).x, "bilioni nane")
         XCTAssertEqual(language.read(100_000_000_000).x, "bilioni mia moja")
         XCTAssertEqual(language.read(1_000_000_000_000).x, "trilioni moja")
-// / https: hist.hse.ru/data/2019/06/14/1486229742/18.%20Numbers.pdf// 
+        // / https: hist.hse.ru/data/2019/06/14/1486229742/18.%20Numbers.pdf
         XCTAssertEqual(language.read(15).x, "kumi na tano")
         XCTAssertEqual(language.read(26).x, "ishirini na sita")
         XCTAssertEqual(language.read(29).x, "ishirini na tisa")

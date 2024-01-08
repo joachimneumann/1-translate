@@ -8,7 +8,7 @@ final class Test_chineseSimplified: XCTestCase {
     let language = Languages().chineseSimplified
 
     func test_chineseSimplified() {
-// /https: www.mezzoguild.com/learn/chinese/numbers/// 
+        // /https: www.mezzoguild.com/learn/chinese/numbers/
         XCTAssertEqual(language.read(0).x, "〇")
         XCTAssertEqual(language.read(1).x, "一")
         XCTAssertEqual(language.read(2).x, "二")

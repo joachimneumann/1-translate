@@ -108,26 +108,26 @@ final class Test_hindi: XCTestCase {
         XCTAssertEqual(language.read(97).x, "सत्तानवे")
         XCTAssertEqual(language.read(98).x, "अट्ठानवे")
         XCTAssertEqual(language.read(99).x, "निन्यानवे")
-        XCTAssertEqual(language.read(100).x, "एक सौ")  // "सौ
-        XCTAssertEqual(language.read(200).x, "दो सौ")  // "सौ
-        XCTAssertEqual(language.read(250).x, "दो सौ पचास")  // दो सौ पचास
-        XCTAssertEqual(language.read(300).x, "तीन सौ")  // "सौ
-        XCTAssertEqual(language.read(352).x, "तीन सौ बावन")  // "सौ
-        XCTAssertEqual(language.read(1000).x, "एक हज़ार")  // / एक सहस्र
+        XCTAssertEqual(language.read(100).x, "एक सौ") // "सौ
+        XCTAssertEqual(language.read(200).x, "दो सौ") // "सौ
+        XCTAssertEqual(language.read(250).x, "दो सौ पचास") // दो सौ पचास
+        XCTAssertEqual(language.read(300).x, "तीन सौ") // "सौ
+        XCTAssertEqual(language.read(352).x, "तीन सौ बावन") // "सौ
+        XCTAssertEqual(language.read(1000).x, "एक हज़ार") // / एक सहस्र
 
         let temp1 = 10*1000
         XCTAssertEqual(language.read(temp1).x, "दश हज़ार")
 
         let temp2 = 100*1000
-        XCTAssertEqual(language.read(temp2).x, "एक लाख")  // 1 Lakh
+        XCTAssertEqual(language.read(temp2).x, "एक लाख") // 1 Lakh
 
         let temp3 = 10*100*1000
         XCTAssertEqual(language.read(temp3).x, "दश लाख")
         XCTAssertEqual(language.read(1_000_000).x, "दश लाख")
-        XCTAssertEqual(language.read(1_000_500).x, "दश लाख पांच सौ")  // ? दश लाख पांच सौ
+        XCTAssertEqual(language.read(1_000_500).x, "दश लाख पांच सौ") // ? दश लाख पांच सौ
 
         let temp4 = 100*100*1000
-        XCTAssertEqual(language.read(temp4).x, "एक करोड़")  // 1 Crore
+        XCTAssertEqual(language.read(temp4).x, "एक करोड़") // 1 Crore
         XCTAssertEqual(language.read(10_000_000).x, "एक करोड़")
 
         let temp5 = 10*100*100_000
@@ -139,20 +139,20 @@ final class Test_hindi: XCTestCase {
         XCTAssertEqual(language.read(500_000_000).x, "पचास करोड़")
 
         let temp7 = 100*100*100*1000
-        XCTAssertEqual(language.read(temp7).x, "एक अरब")  // 1 Arab
+        XCTAssertEqual(language.read(temp7).x, "एक अरब") // 1 Arab
         XCTAssertEqual(language.read(1_000_000_000).x, "एक अरब")
 
         let temp8 = 2*100*100*100*1000
         XCTAssertEqual(language.read(temp8).x, "दो अरब")
 
         let temp9 = 2*100*100*100*1000+50*100*100_000
-        XCTAssertEqual(language.read(temp9).x, "दो अरब पचास करोड़")  // दो अरब पचास करोड़
-        XCTAssertEqual(language.read(2_500_000_000).x, "दो अरब पचास करोड़")  // दो अरब पांच सौ करोड़
+        XCTAssertEqual(language.read(temp9).x, "दो अरब पचास करोड़") // दो अरब पचास करोड़
+        XCTAssertEqual(language.read(2_500_000_000).x, "दो अरब पचास करोड़") // दो अरब पांच सौ करोड़
         XCTAssertEqual(language.read(10_000_000_000).x, "दश अरब")
-        XCTAssertEqual(language.read(100_000_000_000).x, "एक खरब")  // एक सौ अरब
-// xx
-// Is google translate wrong?// 
-// एक सौ अरब = 100_000_000_000// 
-// एक खरब = 1_000_000_000_000// 
+        XCTAssertEqual(language.read(100_000_000_000).x, "एक खरब") // एक सौ अरब
+        // xx
+        // Is google translate wrong?
+        // एक सौ अरब = 100_000_000_000
+        // एक खरब = 1_000_000_000_000
     }
 }
