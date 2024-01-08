@@ -132,7 +132,6 @@ struct Settings: View {
                                 .tag(value)
                         }
                     }
-//                    .frame(width: 200)
                     .pickerStyle(.segmented)
                 }
             }
