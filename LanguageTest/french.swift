@@ -6,12 +6,12 @@
 
 import XCTest
 
-final class Test_frensh: XCTestCase {
+final class Test_french: XCTestCase {
 
     let languages = Languages()
 
-    func test_frensh() {
-        let language = languages.frensh
+    func test_french() {
+        let language = languages.french
         XCTAssertEqual(language.read(0).x, "zéro")
         XCTAssertEqual(language.read(1).x, "un")
         XCTAssertEqual(language.read(5).x, "cinq")
