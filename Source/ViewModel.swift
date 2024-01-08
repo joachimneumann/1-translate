@@ -224,8 +224,15 @@ import SwiftUI
         keyState = .highPrecisionProcessing
         displayNumber = stupidBrain.operation(symbol)
         refreshDisplay(screen: screen)
+        lastScreen = screen
     }
-    
+    var lastScreen: Screen?
+    func refreshDisplay() {
+        if let lastScreen = lastScreen {
+            refreshDisplay(screen: lastScreen)
+        }
+    }
+
     func refreshDisplay(screen: Screen) {
         let tempDisplay = Display(displayNumber, screen: screen, separators: self.persistent, showAs: self, forceScientific: false )
         currentDisplay = tempDisplay

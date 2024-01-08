@@ -90,9 +90,6 @@ struct LanguageSelector: View {
                     .padding(.trailing, 5)
             }
         }
-//        .onDisappear {
-//            viewModel.refreshDisplay(screen: screen)
-//        }
     }
     
 }

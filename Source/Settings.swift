@@ -28,6 +28,9 @@ struct Settings: View {
                 HobbyProject
             }
         }
+        .onDisappear() {
+            viewModel.refreshDisplay()
+        }
     }
     
     struct Appearance: View {
