@@ -13,7 +13,7 @@ final class Test_babylonian: XCTestCase {
     func test_babylonian() {
         let language = languages.babylonian
 
-        language.babylonian.babylonianEmptyColumn = false
+        language.babylonianEmptyColumn = false
 // 1, BabylonianImpl.symbolOne
 // 60, BabylonianImpl.symbolOne  // 6,0
 // 61, BabylonianImpl.symbolOne+BabylonianImpl.symbolOne  // 6,1
@@ -22,7 +22,7 @@ final class Test_babylonian: XCTestCase {
 // 21609, BabylonianImpl.symbolSix+BabylonianImpl.symbolNone+BabylonianImpl.symbolNine  // 6,0 9.
 // 424000,  BabylonianImpl.symbolOne+BabylonianImpl.symbolFifty+BabylonianImpl.symbolSeven+BabylonianImpl.symbolForty+BabylonianImpl.symbolSix+BabylonianImpl.symbolForty  // 1,57,46,40
 
-        language.babylonian.babylonianEmptyColumn = true
+        language.babylonianEmptyColumn = true
 // 1, BabylonianImpl.symbolOne
 // 60, BabylonianImpl.symbolOne  // 6,0
 // 61, BabylonianImpl.symbolOne+BabylonianImpl.symbolOne  // 6,1

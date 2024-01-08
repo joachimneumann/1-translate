@@ -16,7 +16,7 @@ def is_calculation(number):
         testNumber = number[1:]
     else:
         testNumber = number
-    if any(ext in ["+", "-", "*", "/", ".", "e"] for ext in testNumber):
+    if any(ext in ["+", "-", "*", "/"] for ext in testNumber):
         return True
     return False
 
@@ -44,6 +44,8 @@ def assertEqual(components):
         number = temp
         tempIndex = tempIndex + 1
     if is_number(number) or number.startswith("temp"):
+        if "." in number or "e" in number:
+            number = "\""+number+"\""
         translated = " ".join(components[1:])
         normalAndOverline = translated.split("OVERLINE")
         if len(normalAndOverline) != 2:

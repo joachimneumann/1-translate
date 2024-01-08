@@ -146,17 +146,9 @@ final class Test_swahili: XCTestCase {
         XCTAssertEqual(language.read(-1).x, "menos moja")
         XCTAssertEqual(language.read(-75).x, "menos sabini na tano")
         XCTAssertEqual(language.read(-1_000_000).x, "menos milioni moja")
-
-        let temp1 = 3.1415926
-        XCTAssertEqual(language.read(temp1).x, "tatu kaj moja nne moja tano tisa mbili sita")
-
-        let temp2 = -3.1415926
-        XCTAssertEqual(language.read(temp2).x, "menos tatu kaj moja nne moja tano tisa mbili sita")
-
-        let temp3 = 3.4e16
-        XCTAssertEqual(language.read(temp3).x, "tatu kaj nne EE kumi na sita")
-
-        let temp4 = 3.5e26
-        XCTAssertEqual(language.read(temp4).x, "tatu kaj tano EE ishirini na sita")
+        XCTAssertEqual(language.read("3.1415926").x, "tatu kaj moja nne moja tano tisa mbili sita")
+        XCTAssertEqual(language.read("-3.1415926").x, "menos tatu kaj moja nne moja tano tisa mbili sita")
+        XCTAssertEqual(language.read("3.4e16").x, "tatu kaj nne EE kumi na sita")
+        XCTAssertEqual(language.read("3.5e26").x, "tatu kaj tano EE ishirini na sita")
     }
 }

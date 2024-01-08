@@ -37,12 +37,8 @@ final class Test_digits: XCTestCase {
         XCTAssertEqual(language.read(903_945_873_498).x, "903945873498")
         XCTAssertEqual(language.read(23_903_945_873_498).x, "23903945873498")
         XCTAssertEqual(language.read(123_903_945_873_498).x, "123903945873498")
-
-        let temp1 = 1.5
-        XCTAssertEqual(language.read(temp1).x, "1 . 5")
-
-        let temp2 = 12224.543
-        XCTAssertEqual(language.read(temp2).x, "12224 . 5 4 3")
+        XCTAssertEqual(language.read("1.5").x, "1 . 5")
+        XCTAssertEqual(language.read("12224.543").x, "12224 . 5 4 3")
         XCTAssertEqual(language.read(-1).x, "-1")
         XCTAssertEqual(language.read(-12).x, "-12")
         XCTAssertEqual(language.read(-1).x, "-1")

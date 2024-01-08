@@ -170,19 +170,13 @@ final class Test_english: XCTestCase {
         XCTAssertEqual(language.read(-1).x, "minus one")
 
         let temp1 = "-1.5"
-        XCTAssertEqual(language.read(temp1).x, "minus one point five")
+        XCTAssertEqual(language.read("temp1").x, "minus one point five")
+// "1.5" one point five
+// "3.1415926" three point one four one five nine two six
 
-        let temp2 = "1.5"
-        XCTAssertEqual(language.read(temp2).x, "one point five")
-
-        let temp3 = "3.1415926"
-        XCTAssertEqual(language.read(temp3).x, "three point one four one five nine two six")
-
-        let temp4 = "-3.1415926"
-        XCTAssertEqual(language.read(temp4).x, "minus three point one four one five nine two six")
-
-        let temp5 = "3.4e22"
-        XCTAssertEqual(language.read(temp5).x, "three point four times ten to the power of twenty-two")
+        let temp2 = "-3.1415926"
+        XCTAssertEqual(language.read("temp2").x, "minus three point one four one five nine two six")
+// "3.4e22" three point four times ten to the power of twenty-two
 
         language.useAndAfterHundred = true
         XCTAssertEqual(language.read(0).x, "zero")

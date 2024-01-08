@@ -106,21 +106,11 @@ final class Test_catalan: XCTestCase {
         XCTAssertEqual(language.read(999_000_000_000_000).x, "nou-cents noranta-nou bilions")
         XCTAssertEqual(language.read(-1).x, "menys u")
 // -1, menys u
-
-        let temp1 = 1.5
-        XCTAssertEqual(language.read(temp1).x, "u coma cinc")
-
-        let temp2 = -1.5
-        XCTAssertEqual(language.read(temp2).x, "menys u coma cinc")
-
-        let temp3 = -1.51
-        XCTAssertEqual(language.read(temp3).x, "menys u coma cinc u")
-
-        let temp4 = -0.7
-        XCTAssertEqual(language.read(temp4).x, "menys zero coma set")
-
-        let temp5 = -1.5
-        XCTAssertEqual(language.read(temp5).x, "menys u coma cinc")
+        XCTAssertEqual(language.read("1.5").x, "u coma cinc")
+        XCTAssertEqual(language.read("-1.5").x, "menys u coma cinc")
+        XCTAssertEqual(language.read("-1.51").x, "menys u coma cinc u")
+        XCTAssertEqual(language.read("-0.7").x, "menys zero coma set")
+        XCTAssertEqual(language.read("-1.5").x, "menys u coma cinc")
         XCTAssertEqual(language.read(-74).x, "menys setanta-quatre")
         XCTAssertEqual(language.read(-1_000_000).x, "menys un milió")
     }

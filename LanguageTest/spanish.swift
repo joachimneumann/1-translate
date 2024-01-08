@@ -180,34 +180,16 @@ final class Test_spanish: XCTestCase {
 
         language.puntoComma = .coma
         XCTAssertEqual(language.read(-1).x, "menos uno")
-
-        let temp1 = 1.5
-        XCTAssertEqual(language.read(temp1).x, "uno coma cinco")
-
-        let temp2 = -1.5
-        XCTAssertEqual(language.read(temp2).x, "menos uno coma cinco")
-
-        let temp3 = -1.51
-        XCTAssertEqual(language.read(temp3).x, "menos uno coma cinco uno")
-
-        let temp4 = -0.7
-        XCTAssertEqual(language.read(temp4).x, "menos cero coma siete")
-
-        let temp5 = -1.5
-        XCTAssertEqual(language.read(temp5).x, "menos uno coma cinco")
+        XCTAssertEqual(language.read("1.5").x, "uno coma cinco")
+        XCTAssertEqual(language.read("-1.5").x, "menos uno coma cinco")
+        XCTAssertEqual(language.read("-1.51").x, "menos uno coma cinco uno")
+        XCTAssertEqual(language.read("-0.7").x, "menos cero coma siete")
+        XCTAssertEqual(language.read("-1.5").x, "menos uno coma cinco")
         XCTAssertEqual(language.read(-74).x, "menos setenta y cuatro")
         XCTAssertEqual(language.read(-1_000_000).x, "menos un millón")
-
-        let temp6 = 3.1415926
-        XCTAssertEqual(language.read(temp6).x, "tres coma uno cuatro uno cinco nueve dos seis")
-
-        let temp7 = -3.1415926
-        XCTAssertEqual(language.read(temp7).x, "menos tres coma uno cuatro uno cinco nueve dos seis")
-
-        let temp8 = 3.4e16
-        XCTAssertEqual(language.read(temp8).x, "tres coma cuatro por diez elevado a dieciséis")
-
-        let temp9 = 3.5e26
-        XCTAssertEqual(language.read(temp9).x, "tres coma cinco por diez elevado a veintiséis")
+        XCTAssertEqual(language.read("3.1415926").x, "tres coma uno cuatro uno cinco nueve dos seis")
+        XCTAssertEqual(language.read("-3.1415926").x, "menos tres coma uno cuatro uno cinco nueve dos seis")
+        XCTAssertEqual(language.read("3.4e16").x, "tres coma cuatro por diez elevado a dieciséis")
+        XCTAssertEqual(language.read("3.5e26").x, "tres coma cinco por diez elevado a veintiséis")
     }
 }

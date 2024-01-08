@@ -55,8 +55,6 @@ final class Test_esperanto: XCTestCase {
         XCTAssertEqual(language.read(5_004_003_022_729).x, "kvin bilionoj kvar miliardoj tri milionoj dudek du mil sepcent dudek naŭ")
         XCTAssertEqual(language.read(-1).x, "minus unu")
         XCTAssertEqual(language.read(-1_000_000).x, "minus miliono")
-
-        let temp1 = 1.5
-        XCTAssertEqual(language.read(temp1).x, "unu kaj kvin")
+        XCTAssertEqual(language.read("1.5").x, "unu kaj kvin")
     }
 }
