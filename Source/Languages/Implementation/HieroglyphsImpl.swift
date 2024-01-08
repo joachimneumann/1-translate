@@ -1,6 +1,6 @@
 //
 //  HieroglyphsImpl.swift
-//  TranslateNumbersTests
+//  TranslateNumbers
 //
 //  Created by Joachim Neumann on 12/27/23.
 //

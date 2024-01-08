@@ -1,6 +1,6 @@
 //
 //  FinnishImpl.swift
-//  TranslateNumbersTests
+//  TranslateNumbers
 //
 //  Created by Joachim Neumann on 1/5/24.
 //

@@ -1,6 +1,6 @@
 //
 //  Armenian.swift
-//  TranslateNumbersTests
+//  TranslateNumbers
 //
 //  Created by Joachim Neumann on 12/25/23.
 //

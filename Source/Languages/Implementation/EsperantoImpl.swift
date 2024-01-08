@@ -1,6 +1,6 @@
 //
 //  EsperantoImpl.swift
-//  TranslateNumbersTests
+//  TranslateNumbers
 //
 //  Created by Joachim Neumann on 1/2/24.
 //
