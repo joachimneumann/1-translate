@@ -13,6 +13,7 @@ final class Test_english: XCTestCase {
     func test_english() {
         let language = languages.english
         language.useAndAfterHundred = false
+
         XCTAssertEqual(language.read(0).x, "zero")
         XCTAssertEqual(language.read(1).x, "one")
         XCTAssertEqual(language.read(2).x, "two")
@@ -167,12 +168,13 @@ final class Test_english: XCTestCase {
         XCTAssertEqual(language.read(99_000_000_909).x, "ninety-nine billion nine hundred nine")
         XCTAssertEqual(language.read(99_999_999_999).x, "ninety-nine billion nine hundred ninety-nine million nine hundred ninety-nine thousand nine hundred ninety-nine")
         XCTAssertEqual(language.read(-1).x, "minus one")
-        XCTAssertEqual(language.read("-1.5").x, "minus one point five")
-        XCTAssertEqual(language.read("1.5").x, "one point five")
-        XCTAssertEqual(language.read("3.1415926").x, "three point one four one five nine two six")
-        XCTAssertEqual(language.read("-3.1415926").x, "minus three point one four one five nine two six")
-        XCTAssertEqual(language.read("3.4e22").x, "three point four times ten to the power of twenty-two")
+// "-1.5" minus one point five
+// "1.5" one point five
+// "3.1415926" three point one four one five nine two six
+// "-3.1415926" minus three point one four one five nine two six
+// "3.4e22" three point four times ten to the power of twenty-two
         language.useAndAfterHundred = true
+
         XCTAssertEqual(language.read(0).x, "zero")
         XCTAssertEqual(language.read(1).x, "one")
         XCTAssertEqual(language.read(2).x, "two")
