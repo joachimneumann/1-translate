@@ -416,7 +416,6 @@
 				AA08C7BB272EDA48001B8575 /* Frameworks */,
 				AA08C7BC272EDA48001B8575 /* Resources */,
 				AA2FABED272F2136006DE4C8 /* Embed Frameworks */,
-				AAF9EC412B4A8A8A007D0B1D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -451,7 +450,6 @@
 				AAF9EC0D2B4A5051007D0B1D /* Sources */,
 				AAF9EC0E2B4A5051007D0B1D /* Frameworks */,
 				AAF9EC0F2B4A5051007D0B1D /* Resources */,
-				AAF9EC402B4A8A1A007D0B1D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -529,43 +527,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		AAF9EC402B4A8A1A007D0B1D /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n";
-		};
-		AAF9EC412B4A8A8A007D0B1D /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AA08C7BA272EDA48001B8575 /* Sources */ = {

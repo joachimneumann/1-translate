@@ -27,7 +27,7 @@ def assertEqual(components):
     number = components[0]
     if is_number(number):
         translated = " ".join(components[1:])
-        normalAndOverline = line.split("OVERLINE")
+        normalAndOverline = translated.split("OVERLINE")
         if len(normalAndOverline) != 2:
             write_("XCTAssertEqual(language.read(")
             write(number)
@@ -40,12 +40,12 @@ def assertEqual(components):
             write_("XCTAssertEqual(language.read(")
             write(number)
             write(").x, \"")
-            write(normal)
+            write(overline)
             write("\")\n")
             write_("XCTAssertEqual(language.read_OVERLINE(")
             write(number)
             write(")!.x, \"")
-            write(overline)
+            write(normal)
             write("\")")
     else:
         write("// "+" ".join(components))

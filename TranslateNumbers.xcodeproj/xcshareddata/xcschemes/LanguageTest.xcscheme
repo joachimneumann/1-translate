@@ -63,6 +63,15 @@
             </ActionContent>
          </ExecutionAction>
       </PreActions>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "AA08C7BD272EDA48001B8575"
+            BuildableName = "TranslateNumbers.app"
+            BlueprintName = "TranslateNumbers"
+            ReferencedContainer = "container:TranslateNumbers.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
