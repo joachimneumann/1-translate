@@ -23,7 +23,6 @@ struct Settings: View {
                 English
                 German
                 Spanish
-                Portuguese
                 Vietnamese
                 Babylonian
                 HobbyProject
@@ -283,23 +282,6 @@ struct Settings: View {
             }
     }
     
-    var Portuguese: some View {
-        return LanguageSection(
-            language: viewModel.languages.portuguese,
-            example: "1000000000") {
-                HStack {
-                    Text("variant:")
-                    Spacer()
-                    Picker("", selection: $viewModel.languages.portuguese.variant) {
-                        ForEach(PortugueseImpl.Variant.allCases, id: \.self) { value in
-                            Text("\(value.rawValue)")
-                                .tag(value)
-                        }
-                    }
-                    .pickerStyle(.segmented)
-                }
-            }
-    }
     var Vietnamese: some View {
         return LanguageSection(
             language: viewModel.languages.vietnamese,

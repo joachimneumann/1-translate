@@ -10,22 +10,26 @@ import SwiftUI
 class PortugueseImpl: Language {
     
     enum Variant: String, Codable, CaseIterable {
-        case Portugal
-        case Brazil
+        case European
+        case Brazilian
+        var name: String {
+            switch self {
+            case .European: "Português Europeu"
+            case .Brazilian:  "Português Brasileiro"
+            }
+        }
     }
     
-    @AppStorage("PortugueseVariant", store: .standard)
-    var variant: Variant = .Portugal
+    var variant: Variant
     
-    init() {
-        
+    init(variant: Variant) {
+        self.variant = variant
         super.init(
-            name: "Português",
+            name: variant.name,
             zero: "zero",
             negativeString: "menos",
             dotString: "vírgula",
             exponentString: " EE ")
-        nameDescription = "Portuguese"
         voiceLanguageCode = "pt"
         tensConnector = " e "
     }
@@ -132,16 +136,16 @@ class PortugueseImpl: Language {
         if i.E9 > 1 {
             ret = read(i.E9) + " "
             switch variant {
-            case .Brazil:
+            case .Brazilian:
                 ret += "bilhões"
-            case .Portugal:
+            case .European:
                 ret += "mil milhões"
             }
         } else {
             switch variant {
-            case .Brazil:
+            case .Brazilian:
                 ret = "um bilhão"
-            case .Portugal:
+            case .European:
                 ret = "mil milhões"
             }
         }
@@ -162,16 +166,16 @@ class PortugueseImpl: Language {
         if i.E12 > 1 {
             ret = read(i.E12) + " "
             switch variant {
-            case .Brazil:
+            case .Brazilian:
                 ret += "trilhões"
-            case .Portugal:
+            case .European:
                 ret += "biliões"
             }
         } else {
             switch variant {
-            case .Brazil:
+            case .Brazilian:
                 ret = "um trilhão"
-            case .Portugal:
+            case .European:
                 ret += "um bilião"
             }
         }
