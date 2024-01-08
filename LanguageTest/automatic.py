@@ -47,24 +47,30 @@ def assertEqual(components):
         translated = " ".join(components[1:])
         normalAndOverline = translated.split("OVERLINE")
         if len(normalAndOverline) != 2:
+            if not "Impl." in translated:
+                translated = "\""+translated+"\""
             write_("XCTAssertEqual(language.read(")
             write(number)
-            write(").x, \"")
+            write(").x, ")
             write(translated)
-            write("\")")
+            write(")")
         else:
             normal = normalAndOverline[0].strip()
+            if not "Impl." in normal:
+                normal = "\""+normal+"\""
             overline = normalAndOverline[1].strip()
+            if not "Impl." in overline:
+                overline = "\""+overline+"\""
             write_("XCTAssertEqual(language.read(")
             write(number)
-            write(").x, \"")
+            write(").x, ")
             write(overline)
-            write("\")\n")
+            write(")\n")
             write_("XCTAssertEqual(language.read_OVERLINE(")
             write(number)
-            write(")!.x, \"")
+            write(")!.x, ")
             write(normal)
-            write("\")")
+            write(")")
     else:
         write("// "+" ".join(components))
 

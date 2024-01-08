@@ -1,0 +1,83 @@
+// LanguageTests
+//
+// automatically generated)
+// do not edit
+
+
+import XCTest
+
+final class Test_finnish: XCTestCase {
+
+    let languages = Languages()
+
+    func test_finnish() {
+        let language = languages.finnish
+        XCTAssertEqual(language.read(0).x, "nolla")
+        XCTAssertEqual(language.read(1).x, "yksi")
+        XCTAssertEqual(language.read(2).x, "kaksi")
+        XCTAssertEqual(language.read(3).x, "kolme")
+        XCTAssertEqual(language.read(4).x, "neljä")
+        XCTAssertEqual(language.read(5).x, "viisi")
+        XCTAssertEqual(language.read(6).x, "kuusi")
+        XCTAssertEqual(language.read(7).x, "seitsemän")
+        XCTAssertEqual(language.read(8).x, "kahdeksan")
+        XCTAssertEqual(language.read(9).x, "yhdeksän")
+        XCTAssertEqual(language.read(10).x, "kymmenen")
+        XCTAssertEqual(language.read(11).x, "yksitoista")
+        XCTAssertEqual(language.read(12).x, "kaksitoista")
+        XCTAssertEqual(language.read(13).x, "kolmetoista")
+        XCTAssertEqual(language.read(14).x, "neljätoista")
+        XCTAssertEqual(language.read(15).x, "viisitoista")
+        XCTAssertEqual(language.read(16).x, "kuusitoista")
+        XCTAssertEqual(language.read(17).x, "seitsemäntoista")
+        XCTAssertEqual(language.read(18).x, "kahdeksantoista")
+        XCTAssertEqual(language.read(19).x, "yhdeksäntoista")
+        XCTAssertEqual(language.read(20).x, "kaksikymmentä")
+        XCTAssertEqual(language.read(21).x, "kaksikymmentäyksi")
+        XCTAssertEqual(language.read(22).x, "kaksikymmentäkaksi")
+        XCTAssertEqual(language.read(23).x, "kaksikymmentäkolme")
+        XCTAssertEqual(language.read(24).x, "kaksikymmentäneljä")
+        XCTAssertEqual(language.read(25).x, "kaksikymmentäviisi")
+        XCTAssertEqual(language.read(26).x, "kaksikymmentäkuusi")
+        XCTAssertEqual(language.read(27).x, "kaksikymmentäseitsemän")
+        XCTAssertEqual(language.read(28).x, "kaksikymmentäkahdeksan")
+        XCTAssertEqual(language.read(29).x, "kaksikymmentäyhdeksän")
+        XCTAssertEqual(language.read(30).x, "kolmekymmentä")
+        XCTAssertEqual(language.read(40).x, "neljäkymmentä")
+        XCTAssertEqual(language.read(45).x, "neljäkymmentäviisi")
+        XCTAssertEqual(language.read(50).x, "viisikymmentä")
+        XCTAssertEqual(language.read(60).x, "kuusikymmentä")
+        XCTAssertEqual(language.read(70).x, "seitsemänkymmentä")
+        XCTAssertEqual(language.read(80).x, "kahdeksankymmentä")
+        XCTAssertEqual(language.read(90).x, "yhdeksänkymmentä")
+        XCTAssertEqual(language.read(100).x, "sata")
+        XCTAssertEqual(language.read(101).x, "satayksi")
+        XCTAssertEqual(language.read(200).x, "kaksisataa")
+        XCTAssertEqual(language.read(300).x, "kolmesataa")
+        XCTAssertEqual(language.read(400).x, "neljäsataa")
+        XCTAssertEqual(language.read(500).x, "viisisataa")
+        XCTAssertEqual(language.read(600).x, "kuusisataa")
+        XCTAssertEqual(language.read(700).x, "seitsemänsataa")
+        XCTAssertEqual(language.read(800).x, "kahdeksansataa")
+        XCTAssertEqual(language.read(900).x, "yhdeksänsataa")
+        XCTAssertEqual(language.read(1_000).x, "tuhat")
+        XCTAssertEqual(language.read(1_999).x, "tuhatyhdeksänsataayhdeksänkymmentäyhdeksän")
+        XCTAssertEqual(language.read(2000).x, "kaksituhatta")
+        XCTAssertEqual(language.read(3000).x, "kolmetuhatta")
+        XCTAssertEqual(language.read(4000).x, "neljätuhatta")
+        XCTAssertEqual(language.read(5000).x, "viisituhatta")
+        XCTAssertEqual(language.read(6000).x, "kuusituhatta")
+        XCTAssertEqual(language.read(7000).x, "seitsemäntuhatta")
+        XCTAssertEqual(language.read(8000).x, "kahdeksantuhatta")
+        XCTAssertEqual(language.read(9000).x, "yhdeksäntuhatta")
+        XCTAssertEqual(language.read(10000).x, "kymmenentuhatta")
+        XCTAssertEqual(language.read(3721).x, "kolmetuhattaseitsemänsataakaksikymmentäyksi")
+        XCTAssertEqual(language.read(10_000).x, "kymmenentuhatta")
+        XCTAssertEqual(language.read(1_000_000).x, "miljoona")
+        XCTAssertEqual(language.read(1_001_000).x, "miljoona tuhat")  // ? yksi miljoona tuhat
+        XCTAssertEqual(language.read(2_000_000).x, "kaksi miljoonaa")
+        XCTAssertEqual(language.read(1_000_000_000).x, "miljardi")
+        XCTAssertEqual(language.read(300_700_400_283).x, "kolmesataa miljardia seitsemänsataa miljoonaa neljäsataatuhattakaksisataakahdeksankymmentäkolme")
+        XCTAssertEqual(language.read(1_000_000_000_000).x, "biljoona")
+    }
+}

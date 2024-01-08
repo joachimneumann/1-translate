@@ -58,6 +58,7 @@
 		AAB990542B35749700BD5A24 /* DanishImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB990532B35749700BD5A24 /* DanishImpl.swift */; };
 		AAB990572B35793100BD5A24 /* PolishImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB990562B35793100BD5A24 /* PolishImpl.swift */; };
 		AABEFC132972A8780023A3C9 /* KeyColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABEFC122972A8780023A3C9 /* KeyColor.swift */; };
+		AAC5A63B2B4B851D002173CD /* babylonian.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC5A63A2B4B851D002173CD /* babylonian.swift */; };
 		AAC64EB32B42C89F00ABCAAF /* RussianImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC64EB22B42C89F00ABCAAF /* RussianImpl.swift */; };
 		AAE426F729597AE3005FE365 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE426F629597AE3005FE365 /* Screen.swift */; };
 		AAEF2FB92B20D54B0012DDDD /* Separators.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEF2FB82B20D54B0012DDDD /* Separators.swift */; };
@@ -144,7 +145,7 @@
 		AA4A37AC2B4B6FE900684114 /* armenianNumerals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = armenianNumerals.swift; sourceTree = "<group>"; };
 		AA4A37AD2B4B6FE900684114 /* armenian.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = armenian.swift; sourceTree = "<group>"; };
 		AA5020252B333C280080E00C /* SpanishImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpanishImpl.swift; sourceTree = "<group>"; };
-		AA5456502B47F58400078196 /* TestFinnish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestFinnish.swift; path = "../../1-translate-tests/Tests/TestFinnish.swift"; sourceTree = "<group>"; };
+		AA5456502B47F58400078196 /* finnish.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = finnish.txt; path = "../../1-translate-tests/Tests/finnish.txt"; sourceTree = "<group>"; };
 		AA5456522B47F63600078196 /* FinnishImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinnishImpl.swift; sourceTree = "<group>"; };
 		AA5456552B48533400078196 /* TestHindi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestHindi.swift; path = "../../1-translate-tests/Tests/TestHindi.swift"; sourceTree = "<group>"; };
 		AA5456572B48572500078196 /* HindiImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HindiImpl.swift; sourceTree = "<group>"; };
@@ -172,32 +173,33 @@
 		AAB990532B35749700BD5A24 /* DanishImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanishImpl.swift; sourceTree = "<group>"; };
 		AAB990562B35793100BD5A24 /* PolishImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolishImpl.swift; sourceTree = "<group>"; };
 		AABEFC122972A8780023A3C9 /* KeyColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyColor.swift; sourceTree = "<group>"; };
+		AAC5A63A2B4B851D002173CD /* babylonian.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = babylonian.swift; sourceTree = "<group>"; };
 		AAC64EB22B42C89F00ABCAAF /* RussianImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RussianImpl.swift; sourceTree = "<group>"; };
 		AACCD0772B43A89A00D545C5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = "../1-translate-tests/README.md"; sourceTree = "<group>"; };
 		AACCD0822B43AB8500D545C5 /* TestGerman.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestGerman.swift; path = "../../1-translate-tests/Tests/TestGerman.swift"; sourceTree = "<group>"; };
 		AACCD0852B43ABB600D545C5 /* TestChinese2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestChinese2.swift; path = "../../1-translate-tests/Tests/TestChinese2.swift"; sourceTree = "<group>"; };
 		AACCD0862B43ABB600D545C5 /* TestEnglish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestEnglish.swift; path = "../../1-translate-tests/Tests/TestEnglish.swift"; sourceTree = "<group>"; };
-		AACCD0872B43ABB600D545C5 /* TestDigits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestDigits.swift; path = "../../1-translate-tests/Tests/TestDigits.swift"; sourceTree = "<group>"; };
+		AACCD0872B43ABB600D545C5 /* digits.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = digits.txt; path = "../../1-translate-tests/Tests/digits.txt"; sourceTree = "<group>"; };
 		AACCD0882B43ABB600D545C5 /* TestChinese.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestChinese.swift; path = "../../1-translate-tests/Tests/TestChinese.swift"; sourceTree = "<group>"; };
-		AACCD0892B43ABB600D545C5 /* TestRoman.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestRoman.swift; path = "../../1-translate-tests/Tests/TestRoman.swift"; sourceTree = "<group>"; };
-		AACCD08A2B43ABB600D545C5 /* TestRussian.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestRussian.swift; path = "../../1-translate-tests/Tests/TestRussian.swift"; sourceTree = "<group>"; };
-		AACCD08B2B43ABB700D545C5 /* TestVietnamese.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestVietnamese.swift; path = "../../1-translate-tests/Tests/TestVietnamese.swift"; sourceTree = "<group>"; };
+		AACCD0892B43ABB600D545C5 /* roman.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = roman.txt; path = "../../1-translate-tests/Tests/roman.txt"; sourceTree = "<group>"; };
+		AACCD08A2B43ABB600D545C5 /* russian.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = russian.txt; path = "../../1-translate-tests/Tests/russian.txt"; sourceTree = "<group>"; };
+		AACCD08B2B43ABB700D545C5 /* vietnamese.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = vietnamese.txt; path = "../../1-translate-tests/Tests/vietnamese.txt"; sourceTree = "<group>"; };
 		AACCD08C2B43ABB700D545C5 /* TestArabic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestArabic.swift; path = "../../1-translate-tests/Tests/TestArabic.swift"; sourceTree = "<group>"; };
-		AACCD08D2B43ABB700D545C5 /* TestHieroglyphs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestHieroglyphs.swift; path = "../../1-translate-tests/Tests/TestHieroglyphs.swift"; sourceTree = "<group>"; };
+		AACCD08D2B43ABB700D545C5 /* hieroglyphs.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = hieroglyphs.txt; path = "../../1-translate-tests/Tests/hieroglyphs.txt"; sourceTree = "<group>"; };
 		AACCD08E2B43ABB700D545C5 /* TestArabic2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestArabic2.swift; path = "../../1-translate-tests/Tests/TestArabic2.swift"; sourceTree = "<group>"; };
-		AACCD08F2B43ABB700D545C5 /* TestSpanish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestSpanish.swift; path = "../../1-translate-tests/Tests/TestSpanish.swift"; sourceTree = "<group>"; };
-		AACCD0902B43ABB700D545C5 /* TestCatalan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestCatalan.swift; path = "../../1-translate-tests/Tests/TestCatalan.swift"; sourceTree = "<group>"; };
+		AACCD08F2B43ABB700D545C5 /* spanish.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = spanish.txt; path = "../../1-translate-tests/Tests/spanish.txt"; sourceTree = "<group>"; };
+		AACCD0902B43ABB700D545C5 /* catalan.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = catalan.txt; path = "../../1-translate-tests/Tests/catalan.txt"; sourceTree = "<group>"; };
 		AACCD0912B43ABB700D545C5 /* TestArmenianNumerals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestArmenianNumerals.swift; path = "../../1-translate-tests/Tests/TestArmenianNumerals.swift"; sourceTree = "<group>"; };
-		AACCD0922B43ABB700D545C5 /* TestBabylonian.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestBabylonian.swift; path = "../../1-translate-tests/Tests/TestBabylonian.swift"; sourceTree = "<group>"; };
-		AACCD0932B43ABB700D545C5 /* TestFrensh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestFrensh.swift; path = "../../1-translate-tests/Tests/TestFrensh.swift"; sourceTree = "<group>"; };
+		AACCD0922B43ABB700D545C5 /* babylonian.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = babylonian.txt; path = "../../1-translate-tests/Tests/babylonian.txt"; sourceTree = "<group>"; };
+		AACCD0932B43ABB700D545C5 /* frensh.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = frensh.txt; path = "../../1-translate-tests/Tests/frensh.txt"; sourceTree = "<group>"; };
 		AACCD0942B43ABB700D545C5 /* TestArmenian.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestArmenian.swift; path = "../../1-translate-tests/Tests/TestArmenian.swift"; sourceTree = "<group>"; };
 		AAE3DA3E2B3988DA005F8414 /* ArabicImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArabicImpl.swift; sourceTree = "<group>"; };
 		AAE426F629597AE3005FE365 /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
 		AAEF2FB82B20D54B0012DDDD /* Separators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Separators.swift; sourceTree = "<group>"; };
-		AAF4725C2B442AF300E7B986 /* TestEsperanto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestEsperanto.swift; path = "../../1-translate-tests/Tests/TestEsperanto.swift"; sourceTree = "<group>"; };
+		AAF4725C2B442AF300E7B986 /* esperanto.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = esperanto.txt; path = "../../1-translate-tests/Tests/esperanto.txt"; sourceTree = "<group>"; };
 		AAF4725E2B442FE300E7B986 /* EsperantoImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EsperantoImpl.swift; sourceTree = "<group>"; };
 		AAF472612B4469F400E7B986 /* SwahiliImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwahiliImpl.swift; sourceTree = "<group>"; };
-		AAF472642B446DA200E7B986 /* TestSwahili.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestSwahili.swift; path = "../../1-translate-tests/Tests/TestSwahili.swift"; sourceTree = "<group>"; };
+		AAF472642B446DA200E7B986 /* swahili.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = swahili.txt; path = "../../1-translate-tests/Tests/swahili.txt"; sourceTree = "<group>"; };
 		AAF472662B452BD000E7B986 /* Voices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voices.swift; sourceTree = "<group>"; };
 		AAF9EC112B4A5051007D0B1D /* LanguageTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LanguageTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAF9EC502B4B0D8F007D0B1D /* german.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = german.swift; sourceTree = "<group>"; };
@@ -372,22 +374,22 @@
 				AACCD08E2B43ABB700D545C5 /* TestArabic2.swift */,
 				AACCD0942B43ABB700D545C5 /* TestArmenian.swift */,
 				AACCD0912B43ABB700D545C5 /* TestArmenianNumerals.swift */,
-				AACCD0922B43ABB700D545C5 /* TestBabylonian.swift */,
-				AACCD0902B43ABB700D545C5 /* TestCatalan.swift */,
-				AACCD0882B43ABB600D545C5 /* TestChinese.swift */,
-				AACCD0852B43ABB600D545C5 /* TestChinese2.swift */,
-				AACCD0872B43ABB600D545C5 /* TestDigits.swift */,
-				AAF4725C2B442AF300E7B986 /* TestEsperanto.swift */,
-				AA5456502B47F58400078196 /* TestFinnish.swift */,
 				AACCD0822B43AB8500D545C5 /* TestGerman.swift */,
 				AACCD0862B43ABB600D545C5 /* TestEnglish.swift */,
-				AACCD0932B43ABB700D545C5 /* TestFrensh.swift */,
-				AACCD08D2B43ABB700D545C5 /* TestHieroglyphs.swift */,
-				AACCD0892B43ABB600D545C5 /* TestRoman.swift */,
-				AACCD08A2B43ABB600D545C5 /* TestRussian.swift */,
-				AACCD08F2B43ABB700D545C5 /* TestSpanish.swift */,
-				AAF472642B446DA200E7B986 /* TestSwahili.swift */,
-				AACCD08B2B43ABB700D545C5 /* TestVietnamese.swift */,
+				AACCD0922B43ABB700D545C5 /* babylonian.txt */,
+				AACCD0902B43ABB700D545C5 /* catalan.txt */,
+				AACCD0882B43ABB600D545C5 /* TestChinese.swift */,
+				AACCD0852B43ABB600D545C5 /* TestChinese2.swift */,
+				AACCD0872B43ABB600D545C5 /* digits.txt */,
+				AAF4725C2B442AF300E7B986 /* esperanto.txt */,
+				AA5456502B47F58400078196 /* finnish.txt */,
+				AACCD0932B43ABB700D545C5 /* frensh.txt */,
+				AACCD08D2B43ABB700D545C5 /* hieroglyphs.txt */,
+				AACCD0892B43ABB600D545C5 /* roman.txt */,
+				AACCD08A2B43ABB600D545C5 /* russian.txt */,
+				AACCD08F2B43ABB700D545C5 /* spanish.txt */,
+				AAF472642B446DA200E7B986 /* swahili.txt */,
+				AACCD08B2B43ABB700D545C5 /* vietnamese.txt */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -395,6 +397,7 @@
 		AAF9EC122B4A5051007D0B1D /* LanguageTest */ = {
 			isa = PBXGroup;
 			children = (
+				AAC5A63A2B4B851D002173CD /* babylonian.swift */,
 				AA4A37AD2B4B6FE900684114 /* armenian.swift */,
 				AA4A37AC2B4B6FE900684114 /* armenianNumerals.swift */,
 				AAF9EC562B4B120F007D0B1D /* hindi.swift */,
@@ -625,6 +628,7 @@
 				AAF9EC1C2B4A51C4007D0B1D /* ThaiImpl.swift in Sources */,
 				AAF9EC242B4A51C4007D0B1D /* HieroglyphsImpl.swift in Sources */,
 				AAF9EC282B4A51C4007D0B1D /* ArmenianImpl.swift in Sources */,
+				AAC5A63B2B4B851D002173CD /* babylonian.swift in Sources */,
 				AAF9EC202B4A51C4007D0B1D /* ChineseImpl.swift in Sources */,
 				AAF9EC312B4A51C4007D0B1D /* DigitsImpl.swift in Sources */,
 				AAF9EC292B4A51C4007D0B1D /* VietnameseImpl.swift in Sources */,
