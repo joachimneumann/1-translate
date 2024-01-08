@@ -1,15 +1,24 @@
 #!/usr/bin/env python3
 import glob, os
 
-def is_number(n):
+def is_number(number):
     is_number = True
     try:
-        num = float(n)
+        num = float(number)
         # check for "nan" floats
         is_number = num == num   # or use `math.isnan(num)`
     except ValueError:
         is_number = False
     return is_number
+
+def is_calculation(number):
+    if number.startswith("-"):
+        testNumber = number[1:]
+    else:
+        testNumber = number
+    if any(ext in ["+", "-", "*", "/", ".", "e"] for ext in testNumber):
+        return True
+    return False
 
 def write(content):
     f.write(content)
@@ -23,9 +32,18 @@ def write_(content):
     write("        ")
     write(content)
 
+tempIndex = 1
+
 def assertEqual(components):
+    global tempIndex
     number = components[0]
-    if is_number(number):
+    if is_calculation(number):
+        temp = "temp"+str(tempIndex)
+        writeln("")
+        writeln_("let "+temp+" = "+number)
+        number = temp
+        tempIndex = tempIndex + 1
+    if is_number(number) or number.startswith("temp"):
         translated = " ".join(components[1:])
         normalAndOverline = translated.split("OVERLINE")
         if len(normalAndOverline) != 2:
@@ -51,6 +69,7 @@ def assertEqual(components):
         write("// "+" ".join(components))
 
 for file in glob.glob("../../1-translate-tests/language/*.txt"):       ## first get full file name with directores using for loop
+    tempIndex = 1
     filename = os.path.basename(file).replace(".txt", "")
     f = open(filename+".swift", 'w')
     writeln("// LanguageTests")
@@ -85,13 +104,13 @@ for file in glob.glob("../../1-translate-tests/language/*.txt"):       ## first 
                         write("// "+components[0]+"\n")
                 else:
                     if components[0] == "SETTINGS":
+                        writeln("")
                         write_("language.")
                         write(components[1])
                         write(" = ")
                         write(components[2])
                         if len(comment) > 0:
                             write("// "+comment)
-                        write("\n")
                     else:
                         assertEqual(components)
                         if len(comment) > 0:

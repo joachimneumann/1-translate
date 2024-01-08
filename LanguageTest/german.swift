@@ -12,8 +12,8 @@ final class Test_german: XCTestCase {
 
     func test_german() {
         let language = languages.german
-        language.capitalisation = false
 
+        language.capitalisation = false
         XCTAssertEqual(language.read(0).x, "null")
         XCTAssertEqual(language.read(1).x, "eins")
         XCTAssertEqual(language.read(2).x, "zwei")
@@ -164,8 +164,8 @@ final class Test_german: XCTestCase {
         XCTAssertEqual(language.read(99_000_000_909).x, "neunundneunzig Milliarden neunhundertneun")
         XCTAssertEqual(language.read(-1).x, "minus eins")
         XCTAssertEqual(language.read(-15).x, "minus fünfzehn")
-        language.capitalisation = true
 
+        language.capitalisation = true
         XCTAssertEqual(language.read(0).x, "Null")
         XCTAssertEqual(language.read(1).x, "Eins")
         XCTAssertEqual(language.read(2).x, "Zwei")

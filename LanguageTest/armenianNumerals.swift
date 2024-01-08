@@ -39,6 +39,13 @@ final class Test_armenianNumerals: XCTestCase {
         XCTAssertEqual(language.read_OVERLINE(9_000_000)!.x, "Ջ")
         XCTAssertEqual(language.read(11_431_255).x, "ՌՄԾԵ")
         XCTAssertEqual(language.read_OVERLINE(11_431_255)!.x, "ՌՃԽԳ")
-// 9_999*10_000+9_999 ՔՋՂԹ OVERLINE ՔՋՂԹ
+
+        let temp1 = 11_43*10_000+1_255
+        XCTAssertEqual(language.read(temp1).x, "ՌՄԾԵ")
+        XCTAssertEqual(language.read_OVERLINE(temp1)!.x, "ՌՃԽԳ")
+
+        let temp2 = 9_999*10_000+9_999
+        XCTAssertEqual(language.read(temp2).x, "ՔՋՂԹ")
+        XCTAssertEqual(language.read_OVERLINE(temp2)!.x, "ՔՋՂԹ")
     }
 }
