@@ -1,26 +1,27 @@
 //
-//  RussianImpl.swift
+//  UkrainianImpl.swift
 //  TranslateNumbers
 //
-//  Created by Joachim Neumann on 1/1/24.
+//  Created by Joachim Neumann on 1/8/24.
 //
 
 import Foundation
 
-class RussianImpl: Language {
+
+class UkrainianImpl: Language {
     init() {
         super.init(
-            name: "Русский",
-            zero: "ноль",
-            negativeString: "минус",
-            dotString: "целых",
+            name: "українська",
+            zero: "нуль",
+            negativeString: "мінус",
+            dotString: "кома",
             exponentString: " EE ")
         voiceLanguageCode = "ru"
-        nameDescription = "Russian"
-        e9 = "миллиарда"
-        e9_one = "один миллиард"
-        e12 = "триллиона"
-        e12_one = "один триллион"
+        nameDescription = "Ukrainian"
+        e9 = "мільярди"
+        e9_one = "один мільярд"
+        e12 = "трильйони"
+        e12_one = "один трильйон"
         tensConnector = " "
         eSpace = " "
     }
@@ -31,12 +32,12 @@ class RussianImpl: Language {
         case 1:     return "один"
         case 2:     return "два"
         case 3:     return "три"
-        case 4:     return "четыре"
-        case 5:     return "пять"
-        case 6:     return "шесть"
-        case 7:     return "семь"
-        case 8:     return "восемь"
-        case 9:     return "девять"
+        case 4:     return "чотири"
+        case 5:     return "п'ять"
+        case 6:     return "шість"
+        case 7:     return "сім"
+        case 8:     return "вісім"
+        case 9:     return "дев'ять"
         default: return "read_0_9: outside range"
         }
     }
@@ -44,28 +45,28 @@ class RussianImpl: Language {
     override func read_10s(_ i: Int) -> String {
         switch i {
         case 1:     return "десять"
-        case 2:     return "двадцать"
-        case 3:     return "тридцать"
+        case 2:     return "двадцять"
+        case 3:     return "тридцять"
         case 4:     return "сорок"
-        case 5:     return "пятьдесят"
-        case 6:     return "шестьдесят"
-        case 7:     return "семьдесят"
-        case 8:     return "восемьдесят"
-        case 9:     return "девяносто"
+        case 5:     return "п'ятдесят"
+        case 6:     return "шістдесят"
+        case 7:     return "сімдесят"
+        case 8:     return "вісімдесят"
+        case 9:     return "дев'яносто"
         default: return "read_10s: outside range"
         }
     }
     
     override func read_10_99(_ i: Int) -> String {
-        if i == 11 { return "одиннадцать" }
-        if i == 12 { return "двенадцать" }
-        if i == 13 { return "тринадцать" }
-        if i == 14 { return "четырнадцать" }
-        if i == 15 { return "пятнадцать" }
-        if i == 16 { return "шестнадцать" }
-        if i == 17 { return "семнадцать" }
-        if i == 18 { return "восемнадцать" }
-        if i == 19 { return "девятнадцать" }
+        if i == 11 { return "одинадцять" }
+        if i == 12 { return "дванадцять" }
+        if i == 13 { return "тринадцять" }
+        if i == 14 { return "чотирнадцять" }
+        if i == 15 { return "п'ятнадцять" }
+        if i == 16 { return "шістнадцять" }
+        if i == 17 { return "сімнадцять" }
+        if i == 18 { return "вісімнадцять" }
+        if i == 19 { return "дев'ятнадцять" }
         return super.read_10_99(i)
     }
     
@@ -73,23 +74,23 @@ class RussianImpl: Language {
         var ret = ""
         switch i.E2 {
         case 1:
-            ret = "стo"
+            ret = "сто"
         case 2:
-            ret = "двести"
+            ret = "двісті"
         case 3:
             ret = "триста"
         case 4:
-            ret = "четыреста"
+            ret = "чотириста"
         case 5:
-            ret = "пятьсот"
+            ret = "п'ятсот"
         case 6:
-            ret = "шестьсот"
+            ret = "шістсот"
         case 7:
-            ret = "семьсот"
+            ret = "сімсот"
         case 8:
-            ret = "восемьсот"
+            ret = "вісімсот"
         case 9:
-            ret = "девятьсот"
+            ret = "дев'ятсот"
         default:
             fatalError("read_e2_e3 out of range")
         }
@@ -104,37 +105,37 @@ class RussianImpl: Language {
         var ret = ""
         switch i.E3 {
         case 1:
-            ret = "тысяча"
+            ret = "тисяча"
         case 2:
-            ret = "две тысячи"
+            ret = "дві тисячі"
         case 3:
-            ret = "три тысячи"
+            ret = "три тисячі"
         case 4:
-            ret = "четыре тысячи"
+            ret = "чотири тисячі"
         case 5:
-            ret = "пять тысяч"
+            ret = "п'ять тисяч"
         case 6:
-            ret = "шесть тысяч"
+            ret = "шість тисяч"
         case 7:
-            ret = "семь тысяч"
+            ret = "сім тисяч"
         case 8:
-            ret = "восемь тысяч"
+            ret = "вісім тисяч"
         case 9:
-            ret = "девять тысяч"
+            ret = "дев'ять тисяч"
         default:
             ret = read_1_(i.E3)
-            if i.E3 == 22 { ret = "двадцать две"}
+            if i.E3 == 22 { ret = "двадцять дві"}
             if i.E3 <= 20 {
-                ret += " " + "тысяч"
+                ret += " " + "тисяч"
             } else {
                 if i.E3 % 10 == 0 {
-                    ret += " " + "тысяч"
+                    ret += " " + "тисяч"
                 } else if i.E3 % 10 == 1 {
-                    ret += " " + "тысяча"
+                    ret += " " + "тисяча"
                 } else if i.E3 % 10 <= 4 {
-                    ret += " " + "тысячи"
+                    ret += " " + "тисячі"
                 } else {
-                    ret += " " + "тысяч"
+                    ret += " " + "тисяч"
                 }
             }
         }
@@ -149,15 +150,15 @@ class RussianImpl: Language {
     override func read_e6_e9(_ i: Int) -> String {
         var ret = super.read_1_(i.E6)
         if i.E6 == 1 {
-            ret = "один миллион"
+            ret = "один мільйон"
         } else if i.E6 % 10 == 0 {
-            ret += " " + "миллионов"
+            ret += " " + "мільйонів"
         } else if i.E6 % 10 == 1 {
-            ret += " " + "миллион"
+            ret += " " + "мільйон"
         } else if i.E6 % 10 <= 4 {
-            ret += " " + "миллиона"
+            ret += " " + "мільйони"
         } else {
-            ret += " " + "миллионов"
+            ret += " " + "мільйонів"
         }
         if i.E6x > 0 {
             let leftover = read(i.E6x)
@@ -171,7 +172,7 @@ class RussianImpl: Language {
 
 override func read_e9_e12(_ i: Int) -> String {
     var ret = super.read_e9_e12(i)
-    if i.E9 > 4 { ret = ret.replacingOccurrences(of: "миллиарда", with: "миллиардов")}
+    if i.E9 > 4 { ret = ret.replacingOccurrences(of: "мільярди", with: "мільярдів")}
     if i.E9 > 1 {
         ret = ret.replacingOccurrences(of: "один ", with: "одна ")
     }
@@ -180,7 +181,7 @@ override func read_e9_e12(_ i: Int) -> String {
 
 override func read_e12_e15(_ i: Int) -> String {
     var ret = super.read_e12_e15(i)
-    if i.E12 > 4 { ret = ret.replacingOccurrences(of: "триллиона", with: "триллионов")}
+    if i.E12 > 4 { ret = ret.replacingOccurrences(of: "трильйони", with: "трильйонів")}
     if i.E12 > 1 {
         ret = ret.replacingOccurrences(of: "один ", with: "одна ")
     }

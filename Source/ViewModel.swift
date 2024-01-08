@@ -14,7 +14,7 @@ import SwiftUI
     var currentDisplay: Display
     var _1Translation: Translation = Translation(displayText: "", overline: nil, spokenText: nil)
     var _2Translation: Translation = Translation(displayText: "", overline: nil, spokenText: nil)
-    var persistent: Persistent
+    var persistent = Persistent()
     var languages = Languages()
 
     var showAsInt = false /// This will update the "-> Int or -> sci button texts
@@ -42,8 +42,6 @@ import SwiftUI
     private var previouslyPendingOperator: String? = nil
             
     init() {
-        persistent = Persistent()
-
         /// currentDisplay will be updated shortly by refreshDisplay in onAppear() of Calculator
         /// I set some values here
         currentDisplay = Display(left: "0", right: nil, canBeInteger: false, canBeFloat: false)

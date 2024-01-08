@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Persistent: Separators {
+class Persistent: Separators {
     /// I initialize the decimalSeparator with the locale preference, but
     /// I ignore the value of Locale.current.groupSeparator
     @AppStorage("decimalSeparatorKey", store: .standard)

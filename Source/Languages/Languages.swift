@@ -8,9 +8,15 @@
 import SwiftUI
 
 class Languages {
-    @AppStorage("firstNameKey") var firstName: String = "English"
-    @AppStorage("secondNameKey") var secondName: String = "German"
-    @AppStorage("secondLanguageAllowedKey") var secondLanguageAllowed: Bool = false
+    @AppStorage("firstNameKey") 
+    var firstName: String = "English"
+    
+    @AppStorage("secondNameKey")
+    var secondName: String = "German"
+    
+    @AppStorage("secondLanguageAllowedKey")
+    var secondLanguageAllowed: Bool = false
+    
     var first: Language!
     var second: Language!
     var list: [Language] = []
@@ -35,6 +41,7 @@ class Languages {
     var hindi               = HindiImpl()
     let polish              = PolishImpl()
     let russian             = RussianImpl()
+    let ukrainian           = UkrainianImpl()
     let swahili             = SwahiliImpl()
     let roman               = RomanImpl()
     let thai                = ThaiImpl()
@@ -65,6 +72,7 @@ class Languages {
         polish,
         roman,
         russian,
+        ukrainian,
         swahili,
         thai,
         thaiNumerals,
