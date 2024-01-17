@@ -9,3 +9,6 @@ https://medium.com/bleeding-edge/writing-better-unit-tests-in-swift-part-two-d19
 
 Delete old compiler warnings:
 rm -rf ~/Library/Developer/Xcode/DerivedData
+
+
+ Hiragana, Katakana, and Kanji

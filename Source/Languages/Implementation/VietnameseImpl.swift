@@ -94,7 +94,7 @@ class VietnameseImpl: Language {
         var ret = ""
         if i > 0 {
             ret = read_1_(i)
-            if i.lastDigit > 0 && i.secondLastDigit == 0 {
+            if i.E1x > 0 && i.secondLastDigit == 0 {
                 ret = secondLast.rawValue + " " + ret
             }
             ret = " " + ret
@@ -103,6 +103,9 @@ class VietnameseImpl: Language {
     }
     
     func read_trailing_3digits(_ i: Int, _ name: String = "") -> String {
+        if i < 1 || i > 999 {
+            return "read_trailing_3digits: outside range"
+        }
         var ret = ""
         if i > 0 {
             ret = " "
@@ -122,26 +125,62 @@ class VietnameseImpl: Language {
     }
 
     override func read_e3_e6(_ i: Int) -> String {
-        return read_1_(i.E3) + " " + e3! + read_trailing_3digits(i.E3x)
+        var ret = read_1_(i.E3) + " " + e3!
+        if i.E3x > 0 {
+            ret += read_trailing_3digits(i.E3x)
+        }
+        return ret
     }
 
     override func read_e6_e9(_ i: Int) -> String {
-        var ret = read_1_(i.E6s) + " " + e6!
-        ret += read_trailing_3digits(i.E3s, " " + e3!)
-        ret += read_trailing_3digits(i.E0s)
+        var ret = read_1_(i.E6) + " " + e6!
+        let thousands = i.E6x - i.E3x
+        if thousands > 0 {
+            ret += read_trailing_3digits(thousands.E3, " " + e3!)
+        }
+        let lastThree = i.E3x
+        if lastThree > 0 {
+            ret += read_trailing_3digits(lastThree)
+        }
         return ret
     }
     
-    override func read_e12_e15(_ i: Int) -> String {
-        return read_1_(i.E9) + " " + e9!
+    override func read_e9_e12(_ i: Int) -> String {
+        var ret = read_1_(i.E9) + " " + e9!
+        let millions = i.E9x - i.E6x
+        if millions > 0 {
+            ret += read_trailing_3digits(millions.E6, " " + e6!)
+        }
+        let thousands = i.E6x - i.E3x
+        if thousands > 0 {
+            ret += read_trailing_3digits(thousands.E3, " " + e3!)
+        }
+        let lastThree = i.E3x
+        if lastThree > 0 {
+            ret += read_trailing_3digits(lastThree)
+        }
+        return ret
     }
-    
 
-}
-
-fileprivate extension Int {
-    var E0s: Int { self % 1_000 }
-    var E3s: Int { (self / 1_000) % 1_000 }
-    var E6s: Int { (self / 1_000_000) % 1_000 }
-    var lastDigit: Int { self % 10 }
+    override func read_e12_e15(_ i: Int) -> String {
+        var ret = ""
+        ret = read_1_(i.E12) + " " + e3! + " " + e9!
+        let billions = i.E12x - i.E9x
+        if billions > 0 {
+            ret += read_trailing_3digits(billions.E9, " " + e9!)
+        }
+        let millions = i.E9x - i.E6x
+        if millions > 0 {
+            ret += read_trailing_3digits(millions.E6, " " + e6!)
+        }
+        let thousands = i.E6x - i.E3x
+        if thousands > 0 {
+            ret += read_trailing_3digits(thousands.E3, " " + e3!)
+        }
+        let lastThree = i.E3x
+        if lastThree > 0 {
+            ret += read_trailing_3digits(lastThree)
+        }
+        return ret
+    }
 }

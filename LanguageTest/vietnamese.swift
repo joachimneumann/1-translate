@@ -338,15 +338,20 @@ final class Test_vietnamese: XCTestCase {
         XCTAssertEqual(language.read(502_305).x, "năm trăm lẻ hai nghìn ba trăm lẻ năm")
         XCTAssertEqual(language.read(999_999).x, "chín trăm chín chín nghìn chín trăm chín chín")
         XCTAssertEqual(language.read(62_000_000).x, "sáu hai triệu")
+        XCTAssertEqual(language.read(62_000_005).x, "sáu hai triệu không trăm lẻ năm")
         XCTAssertEqual(language.read(62_003_005).x, "sáu hai triệu không trăm lẻ ba nghìn không trăm lẻ năm")
         XCTAssertEqual(language.read(62_003_105).x, "sáu hai triệu không trăm lẻ ba nghìn một trăm lẻ năm")
         XCTAssertEqual(language.read(62_003_155).x, "sáu hai triệu không trăm lẻ ba nghìn một trăm năm lăm")
         XCTAssertEqual(language.read(99_000_000_909).x, "chín chín tỷ chín trăm lẻ chín")
         XCTAssertEqual(language.read(99_999_999_999).x, "chín chín tỷ chín trăm chín chín triệu chín trăm chín chín nghìn chín trăm chín chín")
 
+
+        
         language.thousand = .nghìn
         XCTAssertEqual(language.read(1_000_000_000_000).x, "một nghìn tỷ")
+        XCTAssertEqual(language.read(103_000_000_000_000).x, "một trăm lẻ ba nghìn tỷ")
         XCTAssertEqual(language.read(999_000_000_000_000).x, "chín trăm chín chín nghìn tỷ")
+        XCTAssertEqual(language.read(1_000_000_000_003).x, "một nghìn tỷ không trăm lẻ ba")
 
         language.thousand = .ngàn
         XCTAssertEqual(language.read(1_000_000_000_000).x, "một ngàn tỷ")

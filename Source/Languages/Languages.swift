@@ -71,6 +71,7 @@ class Languages {
         german,
         hieroglyphs,
         hindi,
+        // japanese,
         polish,
         portugueseBrazil,
         portugueseEuropean,
