@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-class EnglishImpl: Language {
+class EnglishImpl: NewLanguageGroup3 {
     @AppStorage("EnglishUseAndAfterHundredKey", store: .standard)
     var useAndAfterHundred: Bool = false {
         didSet {
-            afterHundred = useAndAfterHundred ? " and" : ""
+            connector_3_2.after = useAndAfterHundred ? " and " : " "
         }
     }
-
+    
     init() {
         super.init(
             name: "English",
@@ -23,18 +23,34 @@ class EnglishImpl: Language {
             dotString: "point",
             exponentString: " times ten to the power of ")
         voiceLanguageCode = "en"
-        e2 = "hundred"
-        e3 = "thousand"
-        e6 = "million"
-        e9 = "billion"
-        e12 = "trillion"
-        afterNegative = " "
-        tensConnector = "-"
-        eSpace = " "
-        useAndAfterHundred = useAndAfterHundred
+        connector_2_1.after = "-"
+        connector_3_2.before = " "
+        connector_3_2.name = "hundred"
+        //connector_3_2.after set by AppStorage
+        connector_4_3.before = " "
+        connector_4_3.name = "thousand"
+        connector_4_3.after = " "
+        connector_7_6.before = " "
+        connector_7_6.name = "million"
+        connector_7_6.after = " "
+        connector_10_9.before = " "
+        connector_10_9.name = "billion"
+        connector_10_9.after = " "
+        connector_13_12.before = " "
+        connector_13_12.name = "trillion"
+        connector_13_12.after = " "
+//        E1.after = "-"
+//        E2.before = " "
+//        E2.name = "hundred"
+//        E2.after = " "
+//        E3.name = "thousand"
+//        E6.name = "million"
+//        E9.name = "billion"
+//        E12.name = "trillion"
+//        useAndAfterHundred = useAndAfterHundred
     }
     
-    override func read_1_9(_ i: Int) -> String {
+    override func override(_ i: Int) -> String? {
         switch i {
         case 1:     return "one"
         case 2:     return "two"
@@ -45,35 +61,26 @@ class EnglishImpl: Language {
         case 7:     return "seven"
         case 8:     return "eight"
         case 9:     return "nine"
-        default: return "read_0_9: outside range"
+        case 10:     return "ten"
+        case 20:     return "twenty"
+        case 30:     return "thirty"
+        case 40:     return "forty"
+        case 50:     return "fifty"
+        case 60:     return "sixty"
+        case 70:     return "seventy"
+        case 80:     return "eighty"
+        case 90:     return "ninety"
+        case 11:     return "eleven"
+        case 12:     return "twelve"
+        case 13:     return "thirteen"
+        case 14:     return "fourteen"
+        case 15:     return "fifteen"
+        case 16:     return "sixteen"
+        case 17:     return "seventeen"
+        case 18:     return "eighteen"
+        case 19:     return "nineteen"
+        default:
+            return nil
         }
-    }
-    
-    override func read_10s(_ i: Int) -> String {
-        switch i {
-        case 1:     return "ten"
-        case 2:     return "twenty"
-        case 3:     return "thirty"
-        case 4:     return "forty"
-        case 5:     return "fifty"
-        case 6:     return "sixty"
-        case 7:     return "seventy"
-        case 8:     return "eighty"
-        case 9:     return "ninety"
-        default: return "read_10s outside range"
-        }
-    }
-    
-    override func read_10_99(_ i: Int) -> String {
-        if i == 11 { return "eleven" }
-        if i == 12 { return "twelve" }
-        if i == 13 { return "thirteen" }
-        if i == 14 { return "fourteen" }
-        if i == 15 { return "fifteen" }
-        if i == 16 { return "sixteen" }
-        if i == 17 { return "seventeen" }
-        if i == 18 { return "eighteen" }
-        if i == 19 { return "nineteen" }
-        return super.read_10_99(i)
     }
 }

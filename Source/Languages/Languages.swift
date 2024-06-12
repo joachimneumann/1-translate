@@ -17,9 +17,9 @@ class Languages {
     @AppStorage("secondLanguageAllowedKey")
     var secondLanguageAllowed: Bool = false
     
-    var first: Language!
-    var second: Language!
-    var list: [Language] = []
+    var first: NewLanguage!
+    var second: NewLanguage!
+    var list: [NewLanguage] = []
     let arabic              = ArabicImpl() // not working
     let arabicNumerals      = ArabicNumeralsImpl()
     let armenianNumerals    = ArmenianNumeralsImpl()
@@ -52,39 +52,40 @@ class Languages {
 
     init() {
         list = [
-        //arabic,
-        arabicNumerals,
-        armenianNumerals,
-        armenian,
-        babylonian,
-        catalan,
-        chineseFinancial,
-        chineseSimplified,
-        chineseTraditional,
-        danish,
-        // digits,
+        // XXarabic,
+//        arabicNumerals,
+//        armenianNumerals,
+//        armenian,
+//        babylonian,
+//        catalan,
+//        chineseFinancial,
+//        chineseSimplified,
+//        chineseTraditional,
+//        danish,
+        // XXdigits,
         english,
-        esperanto,
-        finnish,
-        french,
-        spanish,
-        german,
-        hieroglyphs,
-        hindi,
-        // japanese,
-        polish,
-        portugueseBrazil,
-        portugueseEuropean,
-        roman,
-        russian,
-        ukrainian,
-        swahili,
-        thai,
-        thaiNumerals,
-        vietnamese]
+//        esperanto,
+//        finnish,
+//        french,
+//        spanish,
+//        german,
+//        hieroglyphs,
+//        hindi,
+//        // XXjapanese,
+//        polish,
+//        portugueseBrazil,
+//        portugueseEuropean,
+//        roman,
+//        russian,
+//        ukrainian,
+//        swahili,
+//        thai,
+//        thaiNumerals,
+//        vietnamese
+        ]
         
         first = english
-        second = german
+        second = english //german
         for language in list {
             if language.name == firstName {
                 first = language

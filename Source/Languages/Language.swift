@@ -19,6 +19,293 @@ struct Translation {
     }
 }
 
+enum Grouping: Int {
+    case one
+    case three
+    case four
+    var int: Int {
+        get {
+            switch self {
+            case .one: return 1
+            case .three: return 3
+            case .four: return 4
+            }
+        }
+    }
+    var string: String {
+        get {
+            switch self {
+            case .one: return "1"
+            case .three: return "3"
+            case .four: return "4"
+            }
+        }
+    }
+    var limits: [Int] {
+        get {
+            switch self {
+            case .one: return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+            case .three: return [3, 6, 9, 12]
+            case .four: return [4, 9, 12]
+            }
+        }
+    }
+}
+
+func aboveLimit(_ i: Int, _ limit: Int) -> Int {
+    return (i / Int(pow(10.0, Double(limit))))
+}
+func belowLimit(_ i: Int, _ limit: Int) -> Int {
+    return (i % Int(pow(10.0, Double(limit))))
+}
+
+struct Connector {
+    var before: String = ""
+    var name: String = ""
+    var after: String = ""
+    var one: String? = nil
+}
+
+@Observable class NewLanguageGroup3: NewLanguage {
+    override func read_group(_ i: Int) -> String {
+        if i <= 9 {
+            return read_group_1(i)
+        }
+        
+        if i <= 99 {
+            return read_group_2(i)
+        }
+        
+        if i <= 999 {
+            return read_group_3(i)
+        }
+        return "ERROR in NewLanguageGroup3.read_group()"
+    }
+    
+    override func read_positive(_ i: Int) -> String {
+        if i <= 0 {
+            fatalError("read_1_() called with \(i)")
+        }
+        if i > 999_999_999_999_999 { fatalError("too large") }
+        
+        if let ret = override(i) { return ret }
+        
+        if i <= 999 {
+            return read_group(i)
+        }
+
+        if i <= 999_999 {
+            var ret: String = read_group(i.E3)
+            ret += connector_4_3.before + connector_4_3.name
+            if i.E3x > 0 {
+                ret += connector_4_3.after
+                ret += read_group(i.E3x)
+            }
+            return ret
+        }
+
+        if i <= 999_999_999 {
+            var ret: String = read_group(i.E6)
+            ret += connector_7_6.before + connector_7_6.name
+            if i.E6x > 0 {
+                ret += connector_7_6.after
+                ret += read_positive(i.E6x)
+            }
+            return ret
+        }
+
+        if i <= 999_999_999_999 {
+            var ret: String = read_group(i.E9)
+            ret += connector_10_9.before + connector_10_9.name
+            if i.E9x > 0 {
+                ret += connector_10_9.after
+                ret += read_positive(i.E9x)
+            }
+            return ret
+        }
+
+        if i <= 999_999_999_999_999 {
+            var ret: String = read_group(i.E12)
+            ret += connector_13_12.before + connector_13_12.name
+            if i.E12x > 0 {
+                ret += connector_13_12.after
+                ret += read_positive(i.E12x)
+            }
+            return ret
+        }
+        return "ERROR in NewLanguageGroup3.read_positive()"
+    }
+}
+
+@Observable class NewLanguage {
+    var name: String
+    var grouping: Grouping
+    let zero: String?
+    var negativeString: String
+    var dotString: String
+    var exponentString: String
+    var voiceLanguageCode: String? = nil
+    var allowNegativeNumbers = true
+    var afterNegative = " "
+    var postProcessing: ((String) -> String)? = nil
+    let LanguageError = "ERROR"
+    var allowExponent = true
+    var allowFraction = true
+    var connector_2_1: Connector = Connector()
+    var connector_3_2: Connector = Connector()
+    var connector_4_3: Connector = Connector()
+    var connector_7_6: Connector = Connector()
+    var connector_10_9: Connector = Connector()
+    var connector_13_12: Connector = Connector()
+
+    init(name: String,
+         zero: String?,
+         negativeString: String,
+         dotString: String,
+         exponentString: String) {
+        self.name = name
+        self.zero = zero
+        self.negativeString = negativeString
+        self.dotString = dotString
+        self.exponentString = exponentString
+        self.grouping = Grouping.three
+    }
+    
+    func read_group(_ i: Int) -> String {
+        fatalError("read_group not implmented")
+    }
+
+    func read_group_1(_ i: Int) -> String {
+        if let overridden = override(i) {
+            return overridden
+        } else {
+            return String(i)
+        }
+    }
+
+    func read_group_2(_ i: Int) -> String {
+        if let overridden = override(i) {
+            return overridden
+        } else {
+            var ret: String
+            if let overridden = override(10 * i.E1) {
+                ret = overridden
+            } else {
+                ret = read_group_1(i.E1)
+            }
+            ret += connector_2_1.before + connector_2_1.name
+            if i.E1x > 0 {
+                ret += connector_2_1.after + read_group_1(i.E1x)
+            }
+            return ret
+        }
+    }
+
+    func read_group_3(_ i: Int) -> String {
+        if let overridden = override(i) {
+            return overridden
+        } else {
+            var ret = read_group_1(i.E2)
+            ret += connector_3_2.before + connector_3_2.name
+            if i.E2x > 0 {
+                ret += connector_3_2.after + read_group_2(i.E2x)
+            }
+            return ret
+        }
+    }
+
+    func read_positive(_ i: Int) -> String {
+        fatalError("read_positive not implmented")
+    }
+
+    func override(_ i: Int) -> String? { return nil }
+    
+    func read(_ i: Int) -> String {
+        var ret: String
+        if i == 0 {
+            ret = zero ?? "zero unknown"
+        } else if i < 0 {
+            if !allowNegativeNumbers {
+                ret = "negative unknown"
+            } else {
+                ret = negativeString + afterNegative + read(-i)
+            }
+        } else {
+            ret = read_positive(i)
+        }
+        if let postProcessing = postProcessing {
+            ret = postProcessing(ret)
+        }
+        return ret
+    }
+
+    func read(_ s: String) -> String {
+        // exponent and mantissa part
+        var parts = s.components(separatedBy: "e")
+        guard parts.count > 0 && parts.count <= 2 else { return LanguageError }
+        let mantissa = parts[0]
+        let exponentAsString: String? = (parts.count == 2) ? parts[1] : nil
+        guard allowExponent || parts.count == 1 else { return "scientific notation not known" }
+
+        // integer part and fractional part
+        parts = mantissa.components(separatedBy: ".")
+        guard parts.count > 0 && parts.count <= 2 else { return LanguageError }
+        let integerPart = parts[0]
+        let fractionalPart: String? = (parts.count == 2) ? parts[1] : nil
+        guard allowFraction || fractionalPart == nil else { return "fractions not known" }
+
+        var ret: String = ""
+        if integerPart == "-0" && fractionalPart != nil { // e.g. -0.7 !!!
+            if let zero = zero {
+                ret = negativeString + afterNegative + zero
+            } else {
+                return "zero unknown"
+            }
+        } else {
+            guard let integerPartInt = Int(integerPart) else { return LanguageError }
+            ret = read(integerPartInt)
+        }
+        
+        if let fractionalPart = fractionalPart {
+            var count = 0
+            ret += " " + dotString
+            for char in fractionalPart {
+                if count < 10 {
+                    guard let digit = Int(String(char)) else { return LanguageError }
+                    ret += " " + read_positive(digit)
+                }
+                count += 1
+            }
+            if count >= 10 {
+                ret += "..."
+            }
+        }
+
+        if let exponentAsString = exponentAsString {
+            ret += exponentString + read(exponentAsString)
+        }
+
+        if let postProcessing = postProcessing {
+            ret = postProcessing(ret)
+        }
+        return ret;
+    }
+}
+
+
+
+
+
+///////   XXXXXXXXXXXXXX
+///////   XXXXXXXXXXXXXX
+///////   XXXXXXXXXXXXXX
+///////   XXXXXXXXXXXXXX
+///////   XXXXXXXXXXXXXX
+///////   XXXXXXXXXXXXXX
+///////   XXXXXXXXXXXXXX
+///////   XXXXXXXXXXXXXX
+///////   XXXXXXXXXXXXXX
+///////   XXXXXXXXXXXXXX
 @Observable class Language: Identifiable {
     var name: String
     let zero: String?
@@ -36,6 +323,7 @@ struct Translation {
     var allowFraction = true
     let error = "ERROR"
     
+    var e1: String? = nil
     var e2: String? = nil
     var e3: String? = nil
     var e4: String? = nil
@@ -46,6 +334,8 @@ struct Translation {
     var e1_one: String? = nil
     var e2_one: String? = nil
     var e3_one: String? = nil
+    var e4_one: String? = nil
+    var e5_one: String? = nil
     var e6_one: String? = nil
     var e9_one: String? = nil
     var e12_one: String? = nil
