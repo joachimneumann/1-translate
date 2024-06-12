@@ -105,8 +105,13 @@ struct Connector {
         }
 
         if i <= 999_999_999 {
-            var ret: String = read_group(i.E6)
-            ret += connector_7_6.before + connector_7_6.name
+            var ret: String
+            if i.E6 == 1 && connector_7_6.one != nil {
+                ret = connector_7_6.one!
+            } else {
+                ret = read_group(i.E6)
+                ret += connector_7_6.before + connector_7_6.name
+            }
             if i.E6x > 0 {
                 ret += connector_7_6.after
                 ret += read_positive(i.E6x)
@@ -115,8 +120,13 @@ struct Connector {
         }
 
         if i <= 999_999_999_999 {
-            var ret: String = read_group(i.E9)
-            ret += connector_10_9.before + connector_10_9.name
+            var ret: String
+            if i.E9 == 1 && connector_10_9.one != nil {
+                ret = connector_10_9.one!
+            } else {
+                ret = read_group(i.E9)
+                ret += connector_10_9.before + connector_10_9.name
+            }
             if i.E9x > 0 {
                 ret += connector_10_9.after
                 ret += read_positive(i.E9x)
@@ -125,8 +135,13 @@ struct Connector {
         }
 
         if i <= 999_999_999_999_999 {
-            var ret: String = read_group(i.E12)
-            ret += connector_13_12.before + connector_13_12.name
+            var ret: String
+            if i.E12 == 1 && connector_13_12.one != nil {
+                ret = connector_13_12.one!
+            } else {
+                ret = read_group(i.E12)
+                ret += connector_13_12.before + connector_13_12.name
+            }
             if i.E12x > 0 {
                 ret += connector_13_12.after
                 ret += read_positive(i.E12x)

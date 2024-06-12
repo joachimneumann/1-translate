@@ -30,7 +30,7 @@ class GermanImpl: LanguageGroup3 {
         connector_7_6.before = " "
         connector_7_6.name = "Millionen"
         connector_7_6.one = "eine Million"
-        connector_7_6.after = " "
+        connector_7_6.after = " und "
         connector_10_9.before = " "
         connector_10_9.name = "Milliarden"
         connector_10_9.one = "eine Milliarde"
@@ -54,7 +54,11 @@ class GermanImpl: LanguageGroup3 {
             let words = ret.split(separator: " ")
             ret = ""
             for word in words {
-                ret += word.prefix(1).uppercased() + word.dropFirst() + " "
+                if word == "und" {
+                    ret += word + " "
+                } else {
+                    ret += word.prefix(1).uppercased() + word.dropFirst() + " "
+                }
             }
             if ret.hasSuffix(" ") {
                 ret = String(ret.dropLast())

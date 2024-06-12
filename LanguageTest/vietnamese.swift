@@ -173,10 +173,9 @@ final class Test_vietnamese: XCTestCase {
         XCTAssertEqual(language.read(34_200).x, "Ba vạn bốn nghìn hai trăm")
         // What is đơn vị???
         XCTAssertEqual(language.read(38_003).x, "ba mươi tám nghìn không trăm ba đơn vị")
-        // What is vạn???
-        XCTAssertEqual(language.read(34_000).x, "Ba bốn nghìn")
+        // vạn is 10000
+        // 34_000 Ba vạn bốn nghìn
         XCTAssertEqual(language.read(34_000).x, "Ba mươi bốn nghìn")
-        XCTAssertEqual(language.read(34_000).x, "Ba vạn bốn nghìn")
         XCTAssertEqual(language.read(52_425).x, "năm mươi hai nghìn bốn trăm hai mươi lăm")
         XCTAssertEqual(language.read(20_101).x, "hai mươi nghìn một trăm lẻ một")
         XCTAssertEqual(language.read(201_001).x, "hai trăm lẻ một nghìn không trăm lẻ một")
