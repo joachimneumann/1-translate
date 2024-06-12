@@ -77,7 +77,7 @@ def assertEqual(components):
     else:
         write_("// "+" ".join(components))
 
-for file in glob.glob("../../1-translate-tests/language/english.txt"):       ## first get full file name with directores using for loop
+for file in glob.glob("../../1-translate-tests/language/*.txt"):       ## first get full file name with directores using for loop
     tempIndex = 1
     filename = os.path.basename(file).replace(".txt", "")
     f = open(filename+".swift", 'w')

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class GermanImpl: Language {
+class GermanImpl: LanguageGroup3 {
     @AppStorage("germanCaptalisationKey")
     var capitalisation: Bool = true
     
@@ -20,17 +20,27 @@ class GermanImpl: Language {
             exponentString: " mal zehn hoch ")
 
         voiceLanguageCode = "de"
-        e2 = "hundert"
-        e3 = "tausend"
-        e6 = "Millionen"
-        e6_one = "eine Million"
-        e9 = "Milliarden"
-        e9_one = "eine Milliarde"
-        e12 = "Billionen"
-        e12_one = "eine Billion"
+        
+        connector_2_1.before = Languages.WordSplitter
+        connector_2_1.name = "und"
+        connector_2_1.before = Languages.WordSplitter
+        group_2_inverted = true
+        connector_3_2.name = "hundert"
+        connector_4_3.name = "tausend"
+        connector_7_6.before = " "
+        connector_7_6.name = "Millionen"
+        connector_7_6.one = "eine Million"
+        connector_7_6.after = " "
+        connector_10_9.before = " "
+        connector_10_9.name = "Milliarden"
+        connector_10_9.one = "eine Milliarde"
+        connector_10_9.after = " "
+        connector_13_12.before = " "
+        connector_13_12.name = "Billionen"
+        connector_13_12.one = "eine Billion"
+        connector_13_12.after = " "
+
         afterNegative = " "
-        eSpace = ""
-        e69Space = " "
         postProcessing = germanPostProcessing
     }
     
@@ -54,57 +64,37 @@ class GermanImpl: Language {
         return ret
     }
     
-    override func read_1_9(_ i: Int) -> String {
+    override func override(_ i: Int) -> String? {
         switch i {
-        case 1:     return "eins"
-        case 2:     return "zwei"
-        case 3:     return "drei"
-        case 4:     return "vier"
-        case 5:     return "fünf"
-        case 6:     return "sechs"
-        case 7:     return "sieben"
-        case 8:     return "acht"
-        case 9:     return "neun"
-        default: return "read_0_9: outside range"
+        case 1:  return "eins"
+        case 2:  return "zwei"
+        case 3:  return "drei"
+        case 4:  return "vier"
+        case 5:  return "fünf"
+        case 6:  return "sechs"
+        case 7:  return "sieben"
+        case 8:  return "acht"
+        case 9:  return "neun"
+        case 10: return "zehn"
+        case 11: return "elf"
+        case 12: return "zwölf"
+        case 13: return "dreizehn"
+        case 14: return "vierzehn"
+        case 15: return "fünfzehn"
+        case 16: return "sechzehn"
+        case 17: return "siebzehn"
+        case 18: return "achtzehn"
+        case 19: return "neunzehn"
+        case 20: return "zwanzig"
+        case 30: return "dreißig"
+        case 40: return "vierzig"
+        case 50: return "fünfzig"
+        case 60: return "sechzig"
+        case 70: return "siebzig"
+        case 80: return "achtzig"
+        case 90: return "neunzig"
+        default:
+            return nil
         }
     }
-    
-    override func read_10s(_ i: Int) -> String {
-        switch i {
-        case 1:     return "zehn"
-        case 2:     return "zwanzig"
-        case 3:     return "dreißig"
-        case 4:     return "vierzig"
-        case 5:     return "fünfzig"
-        case 6:     return "sechzig"
-        case 7:     return "siebzig"
-        case 8:     return "achtzig"
-        case 9:     return "neunzig"
-        default: return "read_10s: outside range"
-        }
-    }
-    
-    override func read_10_99(_ i: Int) -> String {
-        if i == 11 { return "elf" }
-        if i == 12 { return "zwölf" }
-        if i == 13 { return "dreizehn" }
-        if i == 14 { return "vierzehn" }
-        if i == 15 { return "fünfzehn" }
-        if i == 16 { return "sechzehn" }
-        if i == 17 { return "siebzehn" }
-        if i == 18 { return "achtzehn" }
-        if i == 19 { return "neunzehn" }
-        // reversed order
-        var ret = ""
-        if i.E1x > 0 {
-            ret = read_1_9(i.E1x)
-            ret += Languages.WordSplitter
-            ret += "und"
-            ret += Languages.WordSplitter
-        }
-        ret += read_10s(i.E1)
-        return ret
-        
-    }
-            
 }

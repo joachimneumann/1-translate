@@ -66,7 +66,7 @@ struct Connector {
     var one: String? = nil
 }
 
-@Observable class NewLanguageGroup3: NewLanguage {
+@Observable class LanguageGroup3: GroupedLanguage {
     override func read_group(_ i: Int) -> String {
         if i <= 9 {
             return read_group_1(i)
@@ -137,9 +137,10 @@ struct Connector {
     }
 }
 
-@Observable class NewLanguage {
+@Observable class GroupedLanguage {
     var name: String
     var grouping: Grouping
+    var group_2_inverted = false
     let zero: String?
     var negativeString: String
     var dotString: String
@@ -193,9 +194,12 @@ struct Connector {
             } else {
                 ret = read_group_1(i.E1)
             }
-            ret += connector_2_1.before + connector_2_1.name
             if i.E1x > 0 {
-                ret += connector_2_1.after + read_group_1(i.E1x)
+                if group_2_inverted {
+                    ret = read_group_1(i.E1x) + connector_2_1.before + connector_2_1.name + connector_2_1.after + ret
+                } else {
+                    ret += connector_2_1.before + connector_2_1.name + connector_2_1.after + read_group_1(i.E1x)
+                }
             }
             return ret
         }
