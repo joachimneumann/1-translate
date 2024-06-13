@@ -62,10 +62,22 @@ struct Connector {
     var connector_10_9: Connector = Connector()
     var connector_13_12: Connector = Connector()
     var _11_99_inverted = false
+    var filler_empty_2: String? = nil
 
     func _10s(_ i: Int) -> String? { return nil }
     func _10_19(_ i: Int) -> String? { return nil }
-
+    func _1_99(_ i: Int, isLargestGroup: Bool) -> String {
+        var ret = ""
+        if i <= 9 {
+            if !isLargestGroup {
+                if let filler_empty_2 = filler_empty_2 {
+                    ret += filler_empty_2
+                }
+            }
+            return ret + _0_9(i)
+        }
+        return _10_99(i)
+    }
     func _0_999(_ i: Int, isLargestGroup: Bool) -> String {
         if i <= 9 {
             return _0_9(i)
@@ -166,7 +178,7 @@ struct Connector {
         var ret = _0_9(i.E2)
         ret += _100_999_connector.before + _100_999_connector.name
         if i.E2x > 0 {
-            ret += _100_999_connector.after + _0_999(i.E2x, isLargestGroup: false)
+            ret += _100_999_connector.after + _1_99(i.E2x, isLargestGroup: false)
 //            if filler_empty_2 != nil && i.E2x / 10 == 0 {
 //                // filler for second last digit is defined and the second last digit is 0
 //                ret += connector_3_2.after + filler_empty_2! + _10_99(i.E2x)

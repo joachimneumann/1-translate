@@ -20,7 +20,7 @@ class VietnameseImpl: LanguageGroup3 {
     @AppStorage("VietnameseSecondLastKey")
     var secondLast: VietnameseImpl.SecondLast = .lẻ {
         didSet {
-//            filler_empty_2 = secondLast.rawValue + " "
+            filler_empty_2 = secondLast.rawValue + " "
         }
     }
     
