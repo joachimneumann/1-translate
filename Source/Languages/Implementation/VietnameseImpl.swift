@@ -48,15 +48,16 @@ class VietnameseImpl: LanguageGroup3 {
         afterNegative = " "
         nameDescription = "Vietnamese"
         _10_99_connector.before = " "
-        _100_999_connector.before = " "
-        _100_999_connector.name = "trăm"
-        _100_999_connector.after = " "
 
 //        e2 = "trăm"
 //        e3 = "nghìn"
 //        e6 = "triệu"
 //        e9 = "tỷ"
         postProcessing = vietnamesePostProcessing
+    }
+    
+    override func hundred(_ i: Int) -> Connector {
+        return Connector(before: " ", name: "trăm", after: " ")
     }
     
     func vietnamesePostProcessing(_ unprocessed: String) -> String {

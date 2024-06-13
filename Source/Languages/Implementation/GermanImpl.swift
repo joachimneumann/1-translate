@@ -25,23 +25,26 @@ class GermanImpl: LanguageGroup3 {
         _10_99_connector.name = "und"
         _10_99_connector.before = Languages.WordSplitter
         _11_99_inverted = true
-        _100_999_connector.name = "hundert"
         connector_4_3.name = "tausend"
         connector_7_6.before = " "
         connector_7_6.name = "Millionen"
-        connector_7_6.one = "eine Million"
+//        connector_7_6.one = "eine Million"
         connector_7_6.after = " und "
         connector_10_9.before = " "
         connector_10_9.name = "Milliarden"
-        connector_10_9.one = "eine Milliarde"
+//        connector_10_9.one = "eine Milliarde"
         connector_10_9.after = " "
         connector_13_12.before = " "
         connector_13_12.name = "Billionen"
-        connector_13_12.one = "eine Billion"
+//        connector_13_12.one = "eine Billion"
         connector_13_12.after = " "
 
         afterNegative = " "
         postProcessing = germanPostProcessing
+    }
+    
+    override func hundred(_ i: Int) -> Connector {
+        return Connector(before: "", name: "hundert", after: "")
     }
     
     func germanPostProcessing(_ unprocessed: String) -> String {

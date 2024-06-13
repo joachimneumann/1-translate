@@ -9,11 +9,7 @@ import SwiftUI
 
 class EnglishImpl: LanguageGroup3 {
     @AppStorage("EnglishUseAndAfterHundredKey", store: .standard)
-    var useAndAfterHundred: Bool = false {
-        didSet {
-            _100_999_connector.after = useAndAfterHundred ? " and " : " "
-        }
-    }
+    var useAndAfterHundred: Bool = false
     
     init() {
         super.init(
@@ -24,9 +20,6 @@ class EnglishImpl: LanguageGroup3 {
             exponentString: " times ten to the power of ")
         voiceLanguageCode = "en"
         _10_99_connector.name = "-"
-        _100_999_connector.before = " "
-        _100_999_connector.name = "hundred"
-        //connector_3_2.after set by AppStorage
         connector_4_3.before = " "
         connector_4_3.name = "thousand"
         connector_4_3.after = " "
@@ -41,6 +34,9 @@ class EnglishImpl: LanguageGroup3 {
         connector_13_12.after = " "
     }
     
+    override func hundred(_ i: Int) -> Connector {
+        return Connector(before: " ", name: "hundred", after: useAndAfterHundred ? " and " : " ")
+    }
     override func _0_9(_ i: Int) -> String {
         switch i {
         case 0:  return zero!
