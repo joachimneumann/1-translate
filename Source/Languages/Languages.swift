@@ -17,9 +17,9 @@ class Languages {
     @AppStorage("secondLanguageAllowedKey")
     var secondLanguageAllowed: Bool = false
     
-    var first: GroupedLanguage!
-    var second: GroupedLanguage!
-    var list: [GroupedLanguage] = []
+    var first: Language!
+    var second: Language!
+    var list: [Language] = []
 //    let arabic              = ArabicImpl() // not working
 //    let arabicNumerals      = ArabicNumeralsImpl()
 //    let armenianNumerals    = ArmenianNumeralsImpl()

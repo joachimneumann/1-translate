@@ -20,7 +20,7 @@ class VietnameseImpl: LanguageGroup3 {
     @AppStorage("VietnameseSecondLastKey")
     var secondLast: VietnameseImpl.SecondLast = .lẻ {
         didSet {
-            filler_empty_2 = secondLast.rawValue + " "
+//            filler_empty_2 = secondLast.rawValue + " "
         }
     }
     
@@ -47,12 +47,10 @@ class VietnameseImpl: LanguageGroup3 {
         voiceLanguageCode = "vi"
         afterNegative = " "
         nameDescription = "Vietnamese"
-        tenString = "mười"
-        teensString = "mươi"
-        connector_2_1.after = " "
-        connector_3_2.before = " "
-        connector_3_2.name = "trăm"
-        connector_3_2.after = " "
+        _10_99_connector.before = " "
+        _100_999_connector.before = " "
+        _100_999_connector.name = "trăm"
+        _100_999_connector.after = " "
 
 //        e2 = "trăm"
 //        e3 = "nghìn"
@@ -68,8 +66,10 @@ class VietnameseImpl: LanguageGroup3 {
         ret = ret.replacingOccurrences(of: "mươi một", with: "mươi mốt")
         return ret
     }
-    override func override(_ i: Int) -> String? {
+    
+    override func _0_9(_ i: Int) -> String {
         switch i {
+        case 0:  return zero!
         case 1:  return "một"
         case 2:  return "hai"
         case 3:  return "ba"
@@ -79,10 +79,22 @@ class VietnameseImpl: LanguageGroup3 {
         case 7:  return "bảy"
         case 8:  return "tám"
         case 9:  return "chín"
-        case 10: return "mười"
         default:
-            return nil
+            fatalError("_0_9() parameter \(i)")
         }
+    }
+    
+    override func _10_19(_ i: Int) -> String? {
+        var ret = "mười"
+        if i.E1x > 0 {
+            ret += " " + _0_9(i.E1x)
+        }
+        return ret
+    }
+    
+    override func _10s(_ i: Int) -> String? {
+        if i == 1 { return _10_19(10) }
+        return _0_9(i) + " mươi"
     }
     
 //    override func read_10_99(_ i: Int) -> String {

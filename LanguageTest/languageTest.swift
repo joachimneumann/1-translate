@@ -8,10 +8,8 @@
 import XCTest
 
 final class Test_language: XCTestCase {
-    
-    let language = Languages().english
-    
-    func test_english() {
+        
+    func test_aboveLimit() {
         XCTAssertEqual(aboveLimit(1234, 3), 1)
         XCTAssertEqual(aboveLimit(12345, 3), 12)
         XCTAssertEqual(aboveLimit(123456, 3), 123)

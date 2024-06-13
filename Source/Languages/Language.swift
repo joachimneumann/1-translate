@@ -19,146 +19,9 @@ struct Translation {
     }
 }
 
-enum Grouping: Int {
-    case one
-    case three
-    case four
-    var int: Int {
-        get {
-            switch self {
-            case .one: return 1
-            case .three: return 3
-            case .four: return 4
-            }
-        }
-    }
-    var string: String {
-        get {
-            switch self {
-            case .one: return "1"
-            case .three: return "3"
-            case .four: return "4"
-            }
-        }
-    }
-    var limits: [Int] {
-        get {
-            switch self {
-            case .one: return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-            case .three: return [3, 6, 9, 12]
-            case .four: return [4, 9, 12]
-            }
-        }
-    }
-}
-
-func aboveLimit(_ i: Int, _ limit: Int) -> Int {
-    return (i / Int(pow(10.0, Double(limit))))
-}
-func belowLimit(_ i: Int, _ limit: Int) -> Int {
-    return (i % Int(pow(10.0, Double(limit))))
-}
-
-struct Connector {
-    var before: String = ""
-    var name: String = ""
-    var after: String = ""
-    var one: String? = nil
-}
-
-@Observable class LanguageGroup3: GroupedLanguage {
-    override func read_group(_ i: Int) -> String {
-        if i <= 9 {
-            return read_group_1(i)
-        }
-        
-        if i <= 99 {
-            return read_group_2(i)
-        }
-        
-        if i <= 999 {
-            return read_group_3(i)
-        }
-        return "ERROR in NewLanguageGroup3.read_group()"
-    }
-    
-    override func read_positive(_ i: Int) -> String {
-        if i <= 0 {
-            fatalError("read_1_() called with \(i)")
-        }
-        if i > 999_999_999_999_999 { fatalError("too large") }
-        
-        if let ret = override(i) { return ret }
-        
-        if i <= 999 {
-            return read_group(i)
-        }
-
-        if i <= 999_999 {
-            var ret: String = read_group(i.E3)
-            ret += connector_4_3.before + connector_4_3.name
-            if i.E3x > 0 {
-                ret += connector_4_3.after
-                ret += read_group(i.E3x)
-            }
-            return ret
-        }
-
-        if i <= 999_999_999 {
-            var ret: String
-            if i.E6 == 1 && connector_7_6.one != nil {
-                ret = connector_7_6.one!
-            } else {
-                ret = read_group(i.E6)
-                ret += connector_7_6.before + connector_7_6.name
-            }
-            if i.E6x > 0 {
-                ret += connector_7_6.after
-                ret += read_positive(i.E6x)
-            }
-            return ret
-        }
-
-        if i <= 999_999_999_999 {
-            var ret: String
-            if i.E9 == 1 && connector_10_9.one != nil {
-                ret = connector_10_9.one!
-            } else {
-                ret = read_group(i.E9)
-                ret += connector_10_9.before + connector_10_9.name
-            }
-            if i.E9x > 0 {
-                ret += connector_10_9.after
-                ret += read_positive(i.E9x)
-            }
-            return ret
-        }
-
-        if i <= 999_999_999_999_999 {
-            var ret: String
-            if i.E12 == 1 && connector_13_12.one != nil {
-                ret = connector_13_12.one!
-            } else {
-                ret = read_group(i.E12)
-                ret += connector_13_12.before + connector_13_12.name
-            }
-            if i.E12x > 0 {
-                ret += connector_13_12.after
-                ret += read_positive(i.E12x)
-            }
-            return ret
-        }
-        return "ERROR in NewLanguageGroup3.read_positive()"
-    }
-}
-
-@Observable class GroupedLanguage {
+@Observable class Language {
     var name: String
     var nameDescription: String? = nil
-    var grouping: Grouping
-    var group_2_inverted = false
-    var tenString: String? = nil
-    var teensString: String? = nil
     let zero: String?
     var negativeString: String
     var dotString: String
@@ -170,13 +33,6 @@ struct Connector {
     let LanguageError = "ERROR"
     var allowExponent = true
     var allowFraction = true
-    var connector_2_1: Connector = Connector()
-    var connector_3_2: Connector = Connector()
-    var connector_4_3: Connector = Connector()
-    var connector_7_6: Connector = Connector()
-    var connector_10_9: Connector = Connector()
-    var connector_13_12: Connector = Connector()
-    var filler_empty_2: String? = nil
 
     init(name: String,
          zero: String?,
@@ -188,68 +44,15 @@ struct Connector {
         self.negativeString = negativeString
         self.dotString = dotString
         self.exponentString = exponentString
-        self.grouping = Grouping.three
     }
     
-    func read_group(_ i: Int) -> String {
-        fatalError("read_group not implmented")
+    func _0_9(_ i: Int) -> String {
+        fatalError("_0_9() not implmented")
     }
-
-    func read_group_1(_ i: Int) -> String {
-        if let overridden = override(i) {
-            return overridden
-        } else {
-            return String(i)
-        }
-    }
-
-    func read_group_2(_ i: Int) -> String {
-        let ret: String
-        if let overridden = override(i) {
-            ret = overridden
-        } else {
-            ret = 
-            if i < 20 {
-                if let tenString = tenString {
-                    ret = tenString + connector_2_1.name + read_group_1(i.E1x)
-                } else {
-                    ret = connector_2_1.name + read_group_1(i.E1)
-                }
-            } else {
-                // >= 20
-                if let teensString = teensString {
-                    ret = teensString + connector_2_1.name + read_group_1(i.E1x)
-                } else {
-                    ret = connector_2_1.name + read_group_1(i.E1x)
-                }
-            }
-        }
-        return ret
-    }
-
-    func read_group_3(_ i: Int) -> String {
-        if let overridden = override(i) {
-            return overridden
-        } else {
-            var ret = read_group_1(i.E2)
-            ret += connector_3_2.before + connector_3_2.name
-            if i.E2x > 0 {
-                if filler_empty_2 != nil && i.E2x / 10 == 0 {
-                    // filler for second last digit is defined and the second last digit is 0
-                    ret += connector_3_2.after + filler_empty_2! + read_group_2(i.E2x)
-                } else {
-                    ret += connector_3_2.after + read_group_2(i.E2x)
-                }
-            }
-            return ret
-        }
-    }
-
+    
     func read_positive(_ i: Int) -> String {
-        fatalError("read_positive not implmented")
+        fatalError("read_positive() not implmented")
     }
-
-    func override(_ i: Int) -> String? { return nil }
     
     func read(_ i: Int) -> String {
         var ret: String
@@ -262,6 +65,10 @@ struct Connector {
                 ret = negativeString + afterNegative + read(-i)
             }
         } else {
+            if i <= 0 {
+                fatalError("read() negative integer \(i)")
+            }
+            if i > 999_999_999_999_999 { fatalError("read() too large parameter \(i)") }
             ret = read_positive(i)
         }
         if let postProcessing = postProcessing {

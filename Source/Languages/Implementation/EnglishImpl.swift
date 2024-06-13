@@ -11,7 +11,7 @@ class EnglishImpl: LanguageGroup3 {
     @AppStorage("EnglishUseAndAfterHundredKey", store: .standard)
     var useAndAfterHundred: Bool = false {
         didSet {
-            connector_3_2.after = useAndAfterHundred ? " and " : " "
+            _100_999_connector.after = useAndAfterHundred ? " and " : " "
         }
     }
     
@@ -23,9 +23,9 @@ class EnglishImpl: LanguageGroup3 {
             dotString: "point",
             exponentString: " times ten to the power of ")
         voiceLanguageCode = "en"
-        connector_2_1.after = "-"
-        connector_3_2.before = " "
-        connector_3_2.name = "hundred"
+        _10_99_connector.name = "-"
+        _100_999_connector.before = " "
+        _100_999_connector.name = "hundred"
         //connector_3_2.after set by AppStorage
         connector_4_3.before = " "
         connector_4_3.name = "thousand"
@@ -41,8 +41,9 @@ class EnglishImpl: LanguageGroup3 {
         connector_13_12.after = " "
     }
     
-    override func override(_ i: Int) -> String? {
+    override func _0_9(_ i: Int) -> String {
         switch i {
+        case 0:  return zero!
         case 1:  return "one"
         case 2:  return "two"
         case 3:  return "three"
@@ -52,7 +53,30 @@ class EnglishImpl: LanguageGroup3 {
         case 7:  return "seven"
         case 8:  return "eight"
         case 9:  return "nine"
-        case 10: return "ten"
+        default:
+            fatalError("_0_9() parameter \(i)")
+        }
+    }
+    
+    override func _10s(_ i: Int) -> String? {
+        switch i {
+        case 1: return "ten"
+        case 2: return "twenty"
+        case 3: return "thirty"
+        case 4: return "forty"
+        case 5: return "fifty"
+        case 6: return "sixty"
+        case 7: return "seventy"
+        case 8: return "eighty"
+        case 9: return "ninety"
+        default:
+            fatalError("_10s() parameter \(i)")
+        }
+    }
+    
+    override func _10_19(_ i: Int) -> String? {
+        switch i {
+        case 10: return _10s(1)
         case 11: return "eleven"
         case 12: return "twelve"
         case 13: return "thirteen"
@@ -62,16 +86,11 @@ class EnglishImpl: LanguageGroup3 {
         case 17: return "seventeen"
         case 18: return "eighteen"
         case 19: return "nineteen"
-        case 20: return "twenty"
-        case 30: return "thirty"
-        case 40: return "forty"
-        case 50: return "fifty"
-        case 60: return "sixty"
-        case 70: return "seventy"
-        case 80: return "eighty"
-        case 90: return "ninety"
         default:
-            return nil
+            fatalError("_11_19() parameter \(i)")
         }
     }
+
+
+    
 }

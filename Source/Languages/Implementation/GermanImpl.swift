@@ -21,11 +21,11 @@ class GermanImpl: LanguageGroup3 {
 
         voiceLanguageCode = "de"
         
-        connector_2_1.before = Languages.WordSplitter
-        connector_2_1.name = "und"
-        connector_2_1.before = Languages.WordSplitter
-        group_2_inverted = true
-        connector_3_2.name = "hundert"
+        _10_99_connector.before = Languages.WordSplitter
+        _10_99_connector.name = "und"
+        _10_99_connector.before = Languages.WordSplitter
+        _11_99_inverted = true
+        _100_999_connector.name = "hundert"
         connector_4_3.name = "tausend"
         connector_7_6.before = " "
         connector_7_6.name = "Millionen"
@@ -67,9 +67,11 @@ class GermanImpl: LanguageGroup3 {
 
         return ret
     }
+
     
-    override func override(_ i: Int) -> String? {
+    override func _0_9(_ i: Int) -> String {
         switch i {
+        case 0:  return zero!
         case 1:  return "eins"
         case 2:  return "zwei"
         case 3:  return "drei"
@@ -79,7 +81,30 @@ class GermanImpl: LanguageGroup3 {
         case 7:  return "sieben"
         case 8:  return "acht"
         case 9:  return "neun"
-        case 10: return "zehn"
+        default:
+            fatalError("_0_9() parameter \(i)")
+        }
+    }
+    
+    override func _10s(_ i: Int) -> String? {
+        switch i {
+        case 1: return "zehn"
+        case 2: return "zwanzig"
+        case 3: return "dreißig"
+        case 4: return "vierzig"
+        case 5: return "fünfzig"
+        case 6: return "sechzig"
+        case 7: return "siebzig"
+        case 8: return "achtzig"
+        case 9: return "neunzig"
+        default:
+            fatalError("_10s() parameter \(i)")
+        }
+    }
+    
+    override func _10_19(_ i: Int) -> String? {
+        switch i {
+        case 10: return _10s(1)
         case 11: return "elf"
         case 12: return "zwölf"
         case 13: return "dreizehn"
@@ -89,16 +114,8 @@ class GermanImpl: LanguageGroup3 {
         case 17: return "siebzehn"
         case 18: return "achtzehn"
         case 19: return "neunzehn"
-        case 20: return "zwanzig"
-        case 30: return "dreißig"
-        case 40: return "vierzig"
-        case 50: return "fünfzig"
-        case 60: return "sechzig"
-        case 70: return "siebzig"
-        case 80: return "achtzig"
-        case 90: return "neunzig"
         default:
-            return nil
+            fatalError("_11_19() parameter \(i)")
         }
     }
 }
