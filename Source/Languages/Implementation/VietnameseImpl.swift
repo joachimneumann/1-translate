@@ -20,9 +20,7 @@ class VietnameseImpl: LanguageGroup3 {
     @AppStorage("VietnameseSecondLastKey")
     var secondLast: VietnameseImpl.SecondLast = .lẻ {
         didSet {
-//            connector_2_1.before = " "
-//            connector_2_1.name = secondLast.rawValue
-//            connector_2_1.after = " "
+            filler_empty_2 = secondLast.rawValue + " "
         }
     }
     
@@ -49,7 +47,8 @@ class VietnameseImpl: LanguageGroup3 {
         voiceLanguageCode = "vi"
         afterNegative = " "
         nameDescription = "Vietnamese"
-        
+        tenString = "mười"
+        teensString = "mươi"
         connector_2_1.after = " "
         connector_3_2.before = " "
         connector_3_2.name = "trăm"
@@ -82,15 +81,6 @@ class VietnameseImpl: LanguageGroup3 {
         case 9:  return "chín"
         case 10: return "mười"
         default:
-            if i > 19 && i <= 99 {
-                if compact {
-                    connector_2_1.before = ""
-                    connector_2_1.name = ""
-                } else {
-                    connector_2_1.before = " "
-                    connector_2_1.name = "mươi"
-                }
-            }
             return nil
         }
     }
