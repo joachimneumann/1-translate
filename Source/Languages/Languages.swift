@@ -48,7 +48,7 @@ class Languages {
     let roman               = RomanImpl()
     let thai                = ThaiImpl()
     let thaiNumerals        = ThaiNumeralsImpl()
-    var vietnamese    = VietnameseImpl()
+    var vietnamese          = VietnameseImpl()
 
     init() {
         list = [
@@ -81,7 +81,7 @@ class Languages {
 //        swahili,
 //        thai,
 //        thaiNumerals,
-//        vietnamese
+        vietnamese
         ]
         
         first = english

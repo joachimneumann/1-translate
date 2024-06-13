@@ -154,6 +154,7 @@ struct Connector {
 
 @Observable class GroupedLanguage {
     var name: String
+    var nameDescription: String? = nil
     var grouping: Grouping
     var group_2_inverted = false
     let zero: String?
@@ -215,6 +216,9 @@ struct Connector {
                 } else {
                     ret += connector_2_1.before + connector_2_1.name + connector_2_1.after + read_group_1(i.E1x)
                 }
+            } else {
+                // if the teens are overridden, this code will not be executed
+                ret += connector_2_1.before + connector_2_1.name
             }
             return ret
         }

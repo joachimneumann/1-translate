@@ -14,7 +14,6 @@ final class Test_vietnamese: XCTestCase {
         language.thousand = .nghìn
 
         language.secondLast = .lẻ
-        XCTAssertEqual(language.read(1001).x, "một nghìn không trăm lẻ một")
         XCTAssertEqual(language.read(0).x, "không")
         XCTAssertEqual(language.read(1).x, "một")
         XCTAssertEqual(language.read(2).x, "hai")
@@ -125,6 +124,7 @@ final class Test_vietnamese: XCTestCase {
         XCTAssertEqual(language.read(107).x, "một trăm lẻ bảy")
         XCTAssertEqual(language.read(108).x, "một trăm lẻ tám")
         XCTAssertEqual(language.read(109).x, "một trăm lẻ chín")
+        XCTAssertEqual(language.read(1001).x, "một nghìn không trăm lẻ một")
 
         language.secondLast = .linh
         XCTAssertEqual(language.read(101).x, "một trăm linh một")
