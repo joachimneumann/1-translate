@@ -12,6 +12,10 @@
 		AA0523472B27024800DDAAD4 /* LanguageSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0523462B27024800DDAAD4 /* LanguageSelector.swift */; };
 		AA08C7C6272EDA4A001B8575 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA08C7C5272EDA4A001B8575 /* Assets.xcassets */; };
 		AA08C7C9272EDA4A001B8575 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA08C7C8272EDA4A001B8575 /* Preview Assets.xcassets */; };
+		AA16CFA02C1C764C0023D79E /* DigitsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16CF9F2C1C764C0023D79E /* DigitsImpl.swift */; };
+		AA16CFA12C1C764C0023D79E /* DigitsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16CF9F2C1C764C0023D79E /* DigitsImpl.swift */; };
+		AA16CFA32C1C76550023D79E /* digits.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16CFA22C1C76550023D79E /* digits.swift */; };
+		AA16CFA42C1C76550023D79E /* digits.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16CFA22C1C76550023D79E /* digits.swift */; };
 		AA29F58A293CD608001ADF5A /* PortraitDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29F589293CD608001ADF5A /* PortraitDisplay.swift */; };
 		AA2FABEB272F2135006DE4C8 /* mpfr.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA2FABEA272F2135006DE4C8 /* mpfr.xcframework */; };
 		AA2FABF2272F217F006DE4C8 /* Gmp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FABF1272F217F006DE4C8 /* Gmp.swift */; };
@@ -79,6 +83,8 @@
 		AA08C7C8272EDA4A001B8575 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AA08C7EB272F1241001B8575 /* TranslateNumbers.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TranslateNumbers.entitlements; sourceTree = "<group>"; };
 		AA08C7EC272F1572001B8575 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		AA16CF9F2C1C764C0023D79E /* DigitsImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DigitsImpl.swift; sourceTree = "<group>"; };
+		AA16CFA22C1C76550023D79E /* digits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = digits.swift; sourceTree = "<group>"; };
 		AA1B007C294777180054C851 /* gmp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gmp.h; path = dist/include/gmp.h; sourceTree = SOURCE_ROOT; };
 		AA1B007D294777180054C851 /* bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bridge.h; path = dist/include/bridge.h; sourceTree = SOURCE_ROOT; };
 		AA1B007E294777190054C851 /* mpfr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mpfr.h; path = dist/include/mpfr.h; sourceTree = SOURCE_ROOT; };
@@ -247,6 +253,7 @@
 		AAB253BB2B3BBAD400860F93 /* Implementation */ = {
 			isa = PBXGroup;
 			children = (
+				AA16CF9F2C1C764C0023D79E /* DigitsImpl.swift */,
 				AAA3C3092C1C326B0071FBE4 /* SpanishImpl.swift */,
 				AA326E482B32F0430092E8E6 /* EnglishImpl.swift */,
 				AA326E4B2B332DCC0092E8E6 /* GermanImpl.swift */,
@@ -258,6 +265,7 @@
 		AAF9EC122B4A5051007D0B1D /* LanguageTest */ = {
 			isa = PBXGroup;
 			children = (
+				AA16CFA22C1C76550023D79E /* digits.swift */,
 				AAA3C3062C1C325D0071FBE4 /* spanish.swift */,
 				AAA5537A2C19F2B7001ED86E /* vietnamese.swift */,
 				AAA553782C19D3E8001ED86E /* german.swift */,
@@ -369,10 +377,12 @@
 			files = (
 				AA01B9D42957E44300617AFB /* Display.swift in Sources */,
 				AAB10B9C292A2222004707E9 /* NonScientificKeyboard.swift in Sources */,
+				AA16CFA02C1C764C0023D79E /* DigitsImpl.swift in Sources */,
 				AA0523472B27024800DDAAD4 /* LanguageSelector.swift in Sources */,
 				AA831BA02B35238C003307A2 /* VietnameseImpl.swift in Sources */,
 				AA326E492B32F0430092E8E6 /* EnglishImpl.swift in Sources */,
 				AA8A91122B1D7B7100CE7185 /* TranslateNumbers.swift in Sources */,
+				AA16CFA32C1C76550023D79E /* digits.swift in Sources */,
 				AA32853B297248B800D86CB4 /* ViewModel.swift in Sources */,
 				AAEF2FB92B20D54B0012DDDD /* Separators.swift in Sources */,
 				AA2FAC0F272F2349006DE4C8 /* Number.swift in Sources */,
@@ -411,8 +421,10 @@
 				AAF9EC1B2B4A51B2007D0B1D /* Language.swift in Sources */,
 				AAA3C3052C1B0E1A0071FBE4 /* LanguageGroup3.swift in Sources */,
 				AA6474652C18A23100BEA8A2 /* Extension.swift in Sources */,
+				AA16CFA12C1C764C0023D79E /* DigitsImpl.swift in Sources */,
 				AAF9EC532B4B0D8F007D0B1D /* english.swift in Sources */,
 				AAA3C30B2C1C326B0071FBE4 /* SpanishImpl.swift in Sources */,
+				AA16CFA42C1C76550023D79E /* digits.swift in Sources */,
 				AAA5537B2C19F2B7001ED86E /* vietnamese.swift in Sources */,
 				AAA553792C19D3E8001ED86E /* german.swift in Sources */,
 				AAA553772C19B73F001ED86E /* languageTest.swift in Sources */,
