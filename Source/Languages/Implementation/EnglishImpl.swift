@@ -20,23 +20,16 @@ class EnglishImpl: LanguageGroup3 {
             exponentString: " times ten to the power of ")
         voiceLanguageCode = "en"
         _10_99_connector.name = "-"
-        connector_4_3.before = " "
-        connector_4_3.name = "thousand"
-        connector_4_3.after = " "
-        connector_7_6.before = " "
-        connector_7_6.name = "million"
-        connector_7_6.after = " "
-        connector_10_9.before = " "
-        connector_10_9.name = "billion"
-        connector_10_9.after = " "
-        connector_13_12.before = " "
-        connector_13_12.name = "trillion"
-        connector_13_12.after = " "
     }
     
-    override func hundred(_ i: Int) -> Connector {
-        return Connector(before: " ", name: "hundred", after: useAndAfterHundred ? " and " : " ")
+    override func hundred(_ hundreds: Int, _0_99: Int) -> String {
+        var ret = _1_99(hundreds, isLargestGroup: false) + " hundred"
+        if _0_99 > 0 {
+            ret += " " + _1_99(_0_99, isLargestGroup: false)
+        }
+        return ret
     }
+    
     override func _0_9(_ i: Int) -> String {
         switch i {
         case 0:  return zero!

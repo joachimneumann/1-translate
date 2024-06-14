@@ -38,7 +38,7 @@ final class Test_spanish: XCTestCase {
         XCTAssertEqual(language.read(27).x, "veintisiete")
         XCTAssertEqual(language.read(28).x, "veintiocho")
         XCTAssertEqual(language.read(29).x, "veintinueve")
-        XCTAssertEqual(language.read(20).x, "veinte")
+        XCTAssertEqual(language.read(30).x, "treinta")
         XCTAssertEqual(language.read(31).x, "treinta y uno")
         XCTAssertEqual(language.read(32).x, "treinta y dos")
         XCTAssertEqual(language.read(33).x, "treinta y tres")

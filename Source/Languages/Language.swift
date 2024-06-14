@@ -45,7 +45,7 @@ struct Translation {
         self.dotString = dotString
         self.exponentString = exponentString
     }
-    
+
     func _0_9(_ i: Int) -> String {
         fatalError("_0_9() not implmented")
     }

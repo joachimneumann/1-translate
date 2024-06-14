@@ -12,17 +12,13 @@ class VietnameseImpl: LanguageGroup3 {
     @AppStorage("VietnameseThousandKey")
     var thousand: VietnameseImpl.Thousand = .nghìn {
         didSet {
-            connector_4_3.before = " "
-            connector_4_3.name = thousand.rawValue
+//            connector_4_3.before = " "
+//            connector_4_3.name = thousand.rawValue
         }
     }
     
     @AppStorage("VietnameseSecondLastKey")
-    var secondLast: VietnameseImpl.SecondLast = .lẻ {
-        didSet {
-            filler_empty_2 = secondLast.rawValue + " "
-        }
-    }
+    var secondLast: VietnameseImpl.SecondLast = .lẻ
     
     @AppStorage("VietnameseCompactKey")
     var compact: Bool = false
@@ -48,6 +44,7 @@ class VietnameseImpl: LanguageGroup3 {
         afterNegative = " "
         nameDescription = "Vietnamese"
         _10_99_connector.before = " "
+        secondLast = secondLast
 
 //        e2 = "trăm"
 //        e3 = "nghìn"
@@ -56,9 +53,23 @@ class VietnameseImpl: LanguageGroup3 {
         postProcessing = vietnamesePostProcessing
     }
     
-    override func hundred(_ i: Int) -> Connector {
-        return Connector(before: " ", name: "trăm", after: " ")
+    override func hundred(_ hundreds: Int, _0_99: Int) -> String {
+        var ret = _1_99(hundreds, isLargestGroup: true) + " trăm"
+        if _0_99 > 0 {
+            ret += " " + _1_99(_0_99, isLargestGroup: false)
+        }
+        return ret
     }
+    
+    
+    override func _1_99(_ i: Int, isLargestGroup: Bool) -> String {
+        var ret = super._1_99(i, isLargestGroup: isLargestGroup)
+        if i <= 9 && !isLargestGroup {
+            ret = secondLast.rawValue + " " + ret
+        }
+        return ret
+    }
+
     
     func vietnamesePostProcessing(_ unprocessed: String) -> String {
         var ret = unprocessed

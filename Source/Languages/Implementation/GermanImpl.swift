@@ -25,33 +25,27 @@ class GermanImpl: LanguageGroup3 {
         _10_99_connector.name = "und"
         _10_99_connector.before = Languages.WordSplitter
         _11_99_inverted = true
-        connector_4_3.name = "tausend"
-        connector_7_6.before = " "
-        connector_7_6.name = "Millionen"
-//        connector_7_6.one = "eine Million"
-        connector_7_6.after = " und "
-        connector_10_9.before = " "
-        connector_10_9.name = "Milliarden"
-//        connector_10_9.one = "eine Milliarde"
-        connector_10_9.after = " "
-        connector_13_12.before = " "
-        connector_13_12.name = "Billionen"
-//        connector_13_12.one = "eine Billion"
-        connector_13_12.after = " "
 
         afterNegative = " "
         postProcessing = germanPostProcessing
     }
     
-    override func hundred(_ i: Int) -> Connector {
-        return Connector(before: "", name: "hundert", after: "")
+    override func hundred(_ hundreds: Int, _0_99: Int) -> String {
+        var ret: String
+        if hundreds == 1 {
+            ret = "einhundert"
+        } else {
+            ret = _1_99(hundreds, isLargestGroup: false) + "hundert"
+        }
+        if _0_99 > 0 {
+            ret += _1_99(_0_99, isLargestGroup: false)
+        }
+        return ret
     }
     
     func germanPostProcessing(_ unprocessed: String) -> String {
         var ret = unprocessed
         ret = ret.replacingOccurrences(of: "eins"+Languages.WordSplitter+"und", with: "ein"+Languages.WordSplitter+"und")
-        ret = ret.replacingOccurrences(of: "einshundert", with: "einhundert")
-        ret = ret.replacingOccurrences(of: "einstausend", with: "eintausend")
 
         if capitalisation {
             let words = ret.split(separator: " ")

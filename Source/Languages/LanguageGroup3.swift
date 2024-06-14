@@ -55,27 +55,21 @@ struct Connector {
 
 @Observable class LanguageGroup3: Language {
     var _10_99_connector: Connector = Connector()
-    var connector_4_3: Connector = Connector()
-    var connector_7_6: Connector = Connector()
-    var connector_10_9: Connector = Connector()
-    var connector_13_12: Connector = Connector()
+//    var connector_4_3: Connector = Connector()
+//    var connector_7_6: Connector = Connector()
+//    var connector_10_9: Connector = Connector()
+//    var connector_13_12: Connector = Connector()
     var _11_99_inverted = false
-    var filler_empty_2: String? = nil
 
-    func hundred(_ i: Int) -> Connector {
-        fatalError("hundred not implemented")
+    func hundred(_ hundreds: Int, _0_99: Int) -> String {
+        fatalError("hundred() not implmented")
     }
+
     func _10s(_ i: Int) -> String? { return nil }
     func _10_19(_ i: Int) -> String? { return nil }
     func _1_99(_ i: Int, isLargestGroup: Bool) -> String {
-        var ret = ""
         if i <= 9 {
-            if !isLargestGroup {
-                if let filler_empty_2 = filler_empty_2 {
-                    ret += filler_empty_2
-                }
-            }
-            return ret + _0_9(i)
+            return _0_9(i)
         }
         return _10_99(i)
     }
@@ -89,7 +83,7 @@ struct Connector {
         }
         
         if i <= 999 {
-            return _100_999(i)
+            return hundred(i.E2, _0_99: i.E2x)
         }
         return "ERROR in NewLanguageGroup3.read_group()"
     }
@@ -99,15 +93,15 @@ struct Connector {
             return _0_999(i, isLargestGroup: true)
         }
 
-        if i <= 999_999 {
-            var ret: String = _0_999(i.E3, isLargestGroup: false)
-            ret += connector_4_3.before + connector_4_3.name
-            if i.E3x > 0 {
-                ret += connector_4_3.after
-                ret += _0_999(i.E3x, isLargestGroup: false)
-            }
-            return ret
-        }
+//        if i <= 999_999 {
+//            var ret: String = _0_999(i.E3, isLargestGroup: false)
+//            ret += connector_4_3.before + connector_4_3.name
+//            if i.E3x > 0 {
+//                ret += connector_4_3.after
+//                ret += _0_999(i.E3x, isLargestGroup: false)
+//            }
+//            return ret
+//        }
 
 //        if i <= 999_999_999 {
 //            var ret: String
@@ -175,19 +169,5 @@ struct Connector {
         return ret
     }
 
-    func _100_999(_ i: Int) -> String {
-        var ret = _0_9(i.E2)
-        ret += hundred(i).before + hundred(i).name
-        if i.E2x > 0 {
-            ret += hundred(i).after + _1_99(i.E2x, isLargestGroup: false)
-//            if filler_empty_2 != nil && i.E2x / 10 == 0 {
-//                // filler for second last digit is defined and the second last digit is 0
-//                ret += connector_3_2.after + filler_empty_2! + _10_99(i.E2x)
-//            } else {
-//                ret += _100_999_connector.after + _10_99(i.E2x)
-//            }
-        }
-        return ret
-    }
 }
 
