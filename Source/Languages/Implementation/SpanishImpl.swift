@@ -49,7 +49,19 @@ class SpanishImpl: LanguageGroup3 {
 
 
     override func hundred(_ hundreds: Int, _0_99: Int) -> String {
-        var ret = _1_99(hundreds, isLargestGroup: false) + " hundred"
+        var ret: String = ""
+        switch hundreds {
+        case 1:
+            ret = _0_99 == 0 ? "cien" : "ciento"
+        case 5:
+            ret = "quinientos"
+        case 7:
+            ret = "setecientos"
+        case 9:
+            ret = "novecientos"
+        default:
+            ret = _1_99(hundreds, isLargestGroup: false) + "cientos"
+        }
         if _0_99 > 0 {
             ret += " " + _1_99(_0_99, isLargestGroup: false)
         }
