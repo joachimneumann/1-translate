@@ -30,6 +30,8 @@ struct Translation {
     var allowNegativeNumbers = true
     var afterNegative = " "
     var postProcessing: ((String) -> String)? = nil
+    var speakingPostProcessing: ((String) -> String)?
+    func read_OVERLINE(_ i: Int) -> String? { nil }
     let LanguageError = "ERROR"
     var allowExponent = true
     var allowFraction = true

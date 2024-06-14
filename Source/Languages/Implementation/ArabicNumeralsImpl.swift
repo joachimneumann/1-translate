@@ -20,7 +20,7 @@ class ArabicNumeralsImpl: Language {
         speakingPostProcessing = speakingPostProcessing
     }
     
-    override func read_1_(_ i: Int) -> String {
+    override func read_positive(_ i: Int) -> String {
         var ret = i.string
         ret = ret.replacingOccurrences(of: "1", with: "١")
         ret = ret.replacingOccurrences(of: "2", with: "٢")

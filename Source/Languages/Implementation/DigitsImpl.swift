@@ -18,7 +18,7 @@ class DigitsImpl: Language {
         afterNegative = ""
     }
     
-    override func _0_9(_ i: Int) -> String {
+    override func read_positive(_ i: Int) -> String {
         i.string
     }
 }
