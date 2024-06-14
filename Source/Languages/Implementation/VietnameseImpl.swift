@@ -10,12 +10,7 @@ import SwiftUI
 class VietnameseImpl: LanguageGroup3 {
     
     @AppStorage("VietnameseThousandKey")
-    var thousand: VietnameseImpl.Thousand = .nghìn {
-        didSet {
-//            connector_4_3.before = " "
-//            connector_4_3.name = thousand.rawValue
-        }
-    }
+    var vietnameseThousand: VietnameseImpl.VietnameseThousand = .nghìn
     
     @AppStorage("VietnameseSecondLastKey")
     var secondLast: VietnameseImpl.SecondLast = .lẻ
@@ -23,7 +18,7 @@ class VietnameseImpl: LanguageGroup3 {
     @AppStorage("VietnameseCompactKey")
     var compact: Bool = false
 
-    enum Thousand: String, Codable, CaseIterable {
+    enum VietnameseThousand: String, Codable, CaseIterable {
         case ngàn
         case nghìn
     }
@@ -43,7 +38,7 @@ class VietnameseImpl: LanguageGroup3 {
         voiceLanguageCode = "vi"
         afterNegative = " "
         nameDescription = "Vietnamese"
-        _10_99_connector.before = " "
+        _11_99_connector.before = " "
         secondLast = secondLast
 
 //        e2 = "trăm"
@@ -53,14 +48,21 @@ class VietnameseImpl: LanguageGroup3 {
         postProcessing = vietnamesePostProcessing
     }
     
-    override func hundred(_ hundreds: Int, _0_99: Int) -> String {
+    override func hundred(_ hundreds: Int, below: Int) -> String {
         var ret = _1_99(hundreds, isLargestGroup: true) + " trăm"
-        if _0_99 > 0 {
-            ret += " " + _1_99(_0_99, isLargestGroup: false)
+        if below > 0 {
+            ret += " " + _1_99(below, isLargestGroup: false)
         }
         return ret
     }
     
+    override func thousand(_ thousands: Int, below: Int) -> String {
+        var ret = _0_999(thousands, isLargestGroup: false) + " " + vietnameseThousand.rawValue
+        if below > 0 {
+            ret += " " + _0_999(below, isLargestGroup: false)
+        }
+        return ret
+    }
     
     override func _1_99(_ i: Int, isLargestGroup: Bool) -> String {
         var ret = super._1_99(i, isLargestGroup: isLargestGroup)
@@ -109,59 +111,6 @@ class VietnameseImpl: LanguageGroup3 {
         return _0_9(i) + " mươi"
     }
     
-//    override func read_10_99(_ i: Int) -> String {
-//        var ret = ""
-//        if i.E1 == 1 {
-//            ret = "mười"
-//        } else {
-//            ret = read_1_9(i.E1)
-//            if !compact || i.E1x == 0 { ret += " mươi" }
-//        }
-//        if i.E1x > 0 {
-//            ret += " " + read_1_9(i.E1x)
-//        }
-//
-//        if ret.hasSuffix("năm") {
-//            ret = String(ret.dropLast(3))
-//            ret += "lăm"
-//        }
-//        if i.E1 > 1 && ret.hasSuffix("một") {
-//            ret = String(ret.dropLast(3))
-//            ret += "mốt"
-//        }
-//        return ret
-//    }
-//    
-//
-//    func read_trailing_tens(_ i: Int) -> String {
-//        var ret = ""
-//        if i > 0 {
-//            ret = read_1_(i)
-//            if i.E1x > 0 && i.secondLastDigit == 0 {
-//                ret = secondLast.rawValue + " " + ret
-//            }
-//            ret = " " + ret
-//        }
-//        return ret
-//    }
-//    
-//    func read_trailing_3digits(_ i: Int, _ name: String = "") -> String {
-//        if i < 1 || i > 999 {
-//            return "read_trailing_3digits: outside range"
-//        }
-//        var ret = ""
-//        if i > 0 {
-//            ret = " "
-//            if i.E2 == 0 {
-//                ret += "không trăm"
-//            } else {
-//                ret += read_1_9(i.E2) + " " + "trăm"
-//            }
-//            ret += read_trailing_tens(i.E2x)
-//            ret += name
-//        }
-//        return ret
-//    }
 //    
 //    override func read_e2_e3(_ i: Int) -> String {
 //        return read_1_9(i.E2) + " trăm" + read_trailing_tens(i.E2x)

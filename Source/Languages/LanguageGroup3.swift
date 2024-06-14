@@ -54,28 +54,51 @@ struct Connector {
 }
 
 @Observable class LanguageGroup3: Language {
-    var _10_99_connector: Connector = Connector()
+    var _11_99_connector: Connector = Connector()
 //    var connector_4_3: Connector = Connector()
 //    var connector_7_6: Connector = Connector()
 //    var connector_10_9: Connector = Connector()
 //    var connector_13_12: Connector = Connector()
     var _11_99_inverted = false
 
-    func hundred(_ hundreds: Int, _0_99: Int) -> String {
+    func hundred(_ hundreds: Int, below: Int) -> String {
         fatalError("hundred() not implmented")
+    }    
+    func thousand(_ thousands: Int, below: Int) -> String {
+        fatalError("thousand() not implmented")
     }
 
     func _10s(_ i: Int) -> String? { return nil }
     func _10_19(_ i: Int) -> String? { return nil }
+    
     func _1_99(_ i: Int, isLargestGroup: Bool) -> String {
         if i <= 9 {
             return _0_9(i)
         }
         return _10_99(i)
     }
+    
+    func _10_99(_ i: Int) -> String {
+        if i <= 19 {
+            if let ret = _10_19(i) {
+                return ret
+            }
+        }
+        var ret = _10s(i.E1) ?? _0_9(i.E1)
+        if i.E1x > 0 {
+            if _11_99_inverted {
+                ret = _0_9(i.E1x) + _11_99_connector.before + _11_99_connector.name + _11_99_connector.after + ret
+            } else {
+                ret += _11_99_connector.before + _11_99_connector.name + _11_99_connector.after + _0_9(i.E1x)
+            }
+        }
+        
+        return ret
+    }
+
     func _0_999(_ i: Int, isLargestGroup: Bool) -> String {
         if i <= 9 {
-            return _0_9(i)
+            return _0_9(i) // from Language
         }
         
         if i <= 99 {
@@ -83,14 +106,19 @@ struct Connector {
         }
         
         if i <= 999 {
-            return hundred(i.E2, _0_99: i.E2x)
+            return hundred(i.E2, below: i.E2x)
         }
+
         return "ERROR in NewLanguageGroup3.read_group()"
     }
     
     override func read_positive(_ i: Int) -> String {
         if i <= 999 {
             return _0_999(i, isLargestGroup: true)
+        }
+
+        if i <= 999_999 {
+            return thousand(i.E3, below: i.E3x)
         }
 
 //        if i <= 999_999 {
@@ -150,24 +178,6 @@ struct Connector {
         return "ERROR in NewLanguageGroup3.read_positive()"
     }
     
-    func _10_99(_ i: Int) -> String {
-        if i >= 10 && i <= 19 {
-            if let ret = _10_19(i) {
-                return ret
-            }
-        }
-        let l = _10s(i.E1) ?? _0_9(i.E1)
-        var ret = l
-        if i.E1x > 0 {
-            if _11_99_inverted {
-                ret = _0_9(i.E1x) + _10_99_connector.before + _10_99_connector.name + _10_99_connector.after + ret
-            } else {
-                ret += _10_99_connector.before + _10_99_connector.name + _10_99_connector.after + _0_9(i.E1x)
-            }
-        }
-        
-        return ret
-    }
 
 }
 

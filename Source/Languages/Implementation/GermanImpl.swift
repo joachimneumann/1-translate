@@ -21,24 +21,35 @@ class GermanImpl: LanguageGroup3 {
 
         voiceLanguageCode = "de"
         
-        _10_99_connector.before = Languages.WordSplitter
-        _10_99_connector.name = "und"
-        _10_99_connector.before = Languages.WordSplitter
+        _11_99_connector.before = Languages.WordSplitter
+        _11_99_connector.name = "und"
+        _11_99_connector.before = Languages.WordSplitter
         _11_99_inverted = true
 
         afterNegative = " "
         postProcessing = germanPostProcessing
     }
     
-    override func hundred(_ hundreds: Int, _0_99: Int) -> String {
+    override func hundred(_ hundreds: Int, below: Int) -> String {
         var ret: String
         if hundreds == 1 {
             ret = "einhundert"
         } else {
             ret = _1_99(hundreds, isLargestGroup: false) + "hundert"
         }
-        if _0_99 > 0 {
-            ret += _1_99(_0_99, isLargestGroup: false)
+        if below > 0 {
+            ret += _1_99(below, isLargestGroup: false)
+        }
+        return ret
+    }
+    
+    override func thousand(_ thousands: Int, below: Int) -> String {
+        var ret = _0_999(thousands, isLargestGroup: false) + "tausend"
+        if thousands % 10 == 1 {
+            ret = ret.replacingOccurrences(of: "einstausend", with: "eintausend")
+        }
+        if below > 0 {
+            ret += _0_999(below, isLargestGroup: false)
         }
         return ret
     }

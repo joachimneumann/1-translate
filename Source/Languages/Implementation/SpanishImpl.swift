@@ -30,7 +30,7 @@ class SpanishImpl: LanguageGroup3 {
             exponentString: " por diez elevado a ")
 
         voiceLanguageCode = "es"
-        _10_99_connector.name = " y "
+        _11_99_connector.name = " y "
         afterNegative = " "
         puntoComma = puntoComma
     }
@@ -48,11 +48,11 @@ class SpanishImpl: LanguageGroup3 {
 
 
 
-    override func hundred(_ hundreds: Int, _0_99: Int) -> String {
+    override func hundred(_ hundreds: Int, below: Int) -> String {
         var ret: String = ""
         switch hundreds {
         case 1:
-            ret = _0_99 == 0 ? "cien" : "ciento"
+            ret = below == 0 ? "cien" : "ciento"
         case 5:
             ret = "quinientos"
         case 7:
@@ -62,8 +62,21 @@ class SpanishImpl: LanguageGroup3 {
         default:
             ret = _1_99(hundreds, isLargestGroup: false) + "cientos"
         }
-        if _0_99 > 0 {
-            ret += " " + _1_99(_0_99, isLargestGroup: false)
+        if below > 0 {
+            ret += " " + _1_99(below, isLargestGroup: false)
+        }
+        return ret
+    }
+    
+    override func thousand(_ thousands: Int, below: Int) -> String {
+        var ret: String
+        if thousands == 1 {
+            ret = "mil"
+        } else {
+            ret = _0_999(thousands, isLargestGroup: false) + " mil"
+        }
+        if below > 0 {
+            ret += " " + _0_999(below, isLargestGroup: false)
         }
         return ret
     }

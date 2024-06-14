@@ -19,13 +19,21 @@ class EnglishImpl: LanguageGroup3 {
             dotString: "point",
             exponentString: " times ten to the power of ")
         voiceLanguageCode = "en"
-        _10_99_connector.name = "-"
+        _11_99_connector.name = "-"
     }
     
-    override func hundred(_ hundreds: Int, _0_99: Int) -> String {
+    override func hundred(_ hundreds: Int, below: Int) -> String {
         var ret = _1_99(hundreds, isLargestGroup: false) + " hundred"
-        if _0_99 > 0 {
-            ret += " " + _1_99(_0_99, isLargestGroup: false)
+        if below > 0 {
+            ret += " " + _1_99(below, isLargestGroup: false)
+        }
+        return ret
+    }
+    
+    override func thousand(_ thousands: Int, below: Int) -> String {
+        var ret = _0_999(thousands, isLargestGroup: false) + " thousand"
+        if below > 0 {
+            ret += " " + _0_999(below, isLargestGroup: false)
         }
         return ret
     }
