@@ -43,18 +43,18 @@ class VietnameseImpl: LanguageGroup3 {
     }
     
     override func _100_999(_ hundreds: Int, below: Int) -> String {
-        var ret = _0_999(hundreds, isLargestGroup: true) + " trăm"
+        var ret = read_positive(hundreds) + " trăm"
         if below > 0 {
             if below <= 9 {
                 ret += " " + secondLast.rawValue
             }
-            ret += " " + _0_999(below, isLargestGroup: false)
+            ret += " " + read_positive(below)
         }
         return ret
     }
     
     override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
-        var ret: String = _0_999(above)
+        var ret: String = read_positive(above)
         switch groupIndex {
         case 3:
             ret += " " + vietnameseThousand.rawValue
@@ -95,17 +95,14 @@ class VietnameseImpl: LanguageGroup3 {
                 } else if below <= 99 {
                     ret += " không trăm"
                 }
-                ret += " " + _0_999(below)
+                ret += " " + read_positive(below)
             }
         }
         return ret
     }
     
-    override func _10_99(_ i: Int) -> String {
+    override func _20_99(_ i: Int) -> String {
         var ret = ""
-        if i <= 19 {
-            return _10_19(i)
-        }
         ret = _0_9(i.E1)
         ret += (!compact || i.E1x == 0) ? " mươi" : ""
         if i.E1x > 0 {

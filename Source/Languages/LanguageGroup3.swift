@@ -67,10 +67,7 @@ func belowLimit(_ i: Int, _ limit: Int) -> Int {
         fatalError("_100_999() not implmented")
     }
     
-    func _10_99(_ i: Int) -> String {
-        if i <= 19 {
-            return _10_19(i)
-        }
+    func _20_99(_ i: Int) -> String {
         var ret = _10s(i.E1)
         if i.E1x > 0 {
             if _11_99_inverted {
@@ -79,11 +76,10 @@ func belowLimit(_ i: Int, _ limit: Int) -> Int {
                 ret += _11_99_connector + _0_9(i.E1x)
             }
         }
-        
         return ret
     }
-
-    func _0_999(_ i: Int, isLargestGroup: Bool = false) -> String {
+    
+    override func read_positive(_ i: Int) -> String {
         if i <= 9 {
             return _0_9(i) // implemented in Language
         }
@@ -93,19 +89,11 @@ func belowLimit(_ i: Int, _ limit: Int) -> Int {
         }
         
         if i <= 99 {
-            return _10_99(i)
+            return _20_99(i)
         }
         
         if i <= 999 {
             return _100_999(i.E2, below: i.E2x)
-        }
-
-        return "ERROR in NewLanguageGroup3._0_999()"
-    }
-    
-    override func read_positive(_ i: Int) -> String {
-        if i <= 999 {
-            return _0_999(i, isLargestGroup: true)
         }
 
         if i <= 999_999 {

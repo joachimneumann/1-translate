@@ -47,10 +47,10 @@ class SpanishImpl: LanguageGroup3 {
         case 9:
             ret = "novecientos"
         default:
-            ret = _0_999(hundreds) + "cientos"
+            ret = read_positive(hundreds) + "cientos"
         }
         if below > 0 {
-            ret += " " + _0_999(below)
+            ret += " " + read_positive(below)
         }
         return ret
     }
@@ -62,29 +62,29 @@ class SpanishImpl: LanguageGroup3 {
             if above == 1 {
                 ret = "mil"
             } else {
-                ret = _0_999(above) + " mil"
+                ret = read_positive(above) + " mil"
             }
             if below > 0 {
-                ret += " " + _0_999(below)
+                ret += " " + read_positive(below)
             }
         case 6:
             if above == 1 {
                 ret = "un millón"
             } else {
-                ret = _0_999(above) + " millones"
+                ret = read_positive(above) + " millones"
             }
             if below > 0 {
                 if below.E3 > 0 {
                     ret += " " + group(3, below.E3, below: below.E3x)
                 } else {
-                    ret += " " + _0_999(below)
+                    ret += " " + read_positive(below)
                 }
             }
         case 9:
             if above == 1 {
                 ret = "mil millones"
             } else {
-                ret = _0_999(above) + " mil millones"
+                ret = read_positive(above) + " mil millones"
             }
             if below > 0 {
                 if below.E6 > 0 {
@@ -92,14 +92,14 @@ class SpanishImpl: LanguageGroup3 {
                 } else if below.E3 > 0 {
                     ret += " " + group(3, below.E3, below: below.E3x)
                 } else {
-                    ret += " " + _0_999(below)
+                    ret += " " + read_positive(below)
                 }
             }
         case 12:
             if above == 1 {
                 ret = "un billón"
             } else {
-                ret = _0_999(above) + " billiones"
+                ret = read_positive(above) + " billiones"
             }
             if below > 0 {
                 if below.E9 > 0 {
@@ -109,7 +109,7 @@ class SpanishImpl: LanguageGroup3 {
                 } else if below.E3 > 0 {
                     ret += " y " + group(3, below.E3, below: below.E3x)
                 } else {
-                    ret += " y " + _0_999(below)
+                    ret += " y " + read_positive(below)
                 }
             }
         default:
@@ -168,8 +168,8 @@ class SpanishImpl: LanguageGroup3 {
         }
     }
     
-    override func _10_99(_ i: Int) -> String {
-        var ret = super._10_99(i)
+    override func _20_99(_ i: Int) -> String {
+        var ret = super._20_99(i)
         ret = ret.replacingOccurrences(of: "veinte y dos", with: "veintidós")
         ret = ret.replacingOccurrences(of: "veinte y tres", with: "veintitrés")
         ret = ret.replacingOccurrences(of: "veinte y seis", with: "veintiséis")

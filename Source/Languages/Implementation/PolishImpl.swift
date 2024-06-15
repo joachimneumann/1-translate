@@ -79,13 +79,13 @@ class PolishImpl: LanguageGroup3 {
         case 2:
             ret = "dwieście"
         case 3, 4:
-            ret = _0_999(hundreds) + "sta"
+            ret = read_positive(hundreds) + "sta"
         default:
-            ret = _0_999(hundreds) + "set"
+            ret = read_positive(hundreds) + "set"
         }
 
         if below > 0 {
-            ret += " " + _0_999(below)
+            ret += " " + read_positive(below)
         }
         return ret
     }
@@ -114,25 +114,25 @@ class PolishImpl: LanguageGroup3 {
             if above == 1 {
                 ret = "tysiąc"
             } else {
-                ret = _0_999(above) + " " + use(above, "tysiące", "tysięcy")
+                ret = read_positive(above) + " " + use(above, "tysiące", "tysięcy")
             }
         case 6:
             if above == 1 {
-                ret = _0_999(above) + " " + "milion"
+                ret = read_positive(above) + " " + "milion"
             } else {
-                ret = _0_999(above) + " " + use(above, "miliony", "milionów")
+                ret = read_positive(above) + " " + use(above, "miliony", "milionów")
             }
         case 9:
             if above == 1 {
-                ret = _0_999(above) + " " + "miliard"
+                ret = read_positive(above) + " " + "miliard"
             } else {
-                ret = _0_999(above) + " " + use(above, "miliardy", "miliardów")
+                ret = read_positive(above) + " " + use(above, "miliardy", "miliardów")
             }
         case 12:
             if above == 1 {
-                ret = _0_999(above) + " " + "bilion"
+                ret = read_positive(above) + " " + "bilion"
             } else {
-                ret = _0_999(above) + " " + use(above, "biliony", "bilionów")
+                ret = read_positive(above) + " " + use(above, "biliony", "bilionów")
             }
         default:
             fatalError("wrong groupindex \(groupIndex)")
@@ -140,12 +140,12 @@ class PolishImpl: LanguageGroup3 {
         if below > 0 {
             switch groupIndex {
             case 3:
-                ret += " " + _0_999(below)
+                ret += " " + read_positive(below)
             case 6:
                 if below.E3 > 0 {
                     ret += " " + group(3, below.E3, below: below.E3x)
                 } else {
-                    ret += " " + _0_999(below)
+                    ret += " " + read_positive(below)
                 }
             case 9:
                 if below.E6 > 0 {
@@ -153,7 +153,7 @@ class PolishImpl: LanguageGroup3 {
                 } else if below.E3 > 0 {
                     ret += " " + group(3, below.E3, below: below.E3x)
                 } else {
-                    ret += " " + _0_999(below)
+                    ret += " " + read_positive(below)
                 }
             default:
                 fatalError("wrong groupindex \(groupIndex)")

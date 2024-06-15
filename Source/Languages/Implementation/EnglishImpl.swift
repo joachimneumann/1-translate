@@ -23,9 +23,9 @@ class EnglishImpl: LanguageGroup3 {
     }
     
     override func _100_999(_ hundreds: Int, below: Int) -> String {
-        var ret = _0_999(hundreds) + " hundred"
+        var ret = read_positive(hundreds) + " hundred"
         if below > 0 {
-            ret += (useAndAfterHundred ? " and " : " ") + _0_999(below)
+            ret += (useAndAfterHundred ? " and " : " ") + read_positive(below)
         }
         return ret
     }
@@ -40,16 +40,16 @@ class EnglishImpl: LanguageGroup3 {
         default:
             fatalError("wrong groupindex \(groupIndex)")
         }
-        var ret = _0_999(above) + " " + name
+        var ret = read_positive(above) + " " + name
         if below > 0 {
             switch groupIndex {
             case 3:
-                ret += " " + _0_999(below)
+                ret += " " + read_positive(below)
             case 6:
                 if below.E3 > 0 {
                     ret += " " + group(3, below.E3, below: below.E3x)
                 } else {
-                    ret += " " + _0_999(below)
+                    ret += " " + read_positive(below)
                 }
             case 9:
                 if below.E6 > 0 {
@@ -57,7 +57,7 @@ class EnglishImpl: LanguageGroup3 {
                 } else if below.E3 > 0 {
                     ret += " " + group(3, below.E3, below: below.E3x)
                 } else {
-                    ret += " " + _0_999(below)
+                    ret += " " + read_positive(below)
                 }
             case 12:
                 if below.E9 > 0 {
@@ -67,7 +67,7 @@ class EnglishImpl: LanguageGroup3 {
                 } else if below.E3 > 0 {
                     ret += " " + group(3, below.E3, below: below.E3x)
                 } else {
-                    ret += " " + _0_999(below)
+                    ret += " " + read_positive(below)
                 }
             default:
                 fatalError("wrong groupindex \(groupIndex)")

@@ -33,10 +33,10 @@ class GermanImpl: LanguageGroup3 {
         if hundreds == 1 {
             ret = "einhundert"
         } else {
-            ret = _0_999(hundreds) + "hundert"
+            ret = read_positive(hundreds) + "hundert"
         }
         if below > 0 {
-            ret += _0_999(below)
+            ret += read_positive(below)
         }
         return ret
     }
@@ -45,44 +45,44 @@ class GermanImpl: LanguageGroup3 {
         var ret: String = ""
         switch groupIndex {
         case 3:
-            ret = _0_999(above) + "tausend"
+            ret = read_positive(above) + "tausend"
             if above % 10 == 1 { // also handle 201_000, etc
                 ret = ret.replacingOccurrences(of: "einstausend", with: "eintausend")
             }
             if below > 0 {
-                ret += _0_999(below)
+                ret += read_positive(below)
             }
         case 6:
             if above == 1 {
                 ret = "eine Million"
             } else {
-                ret = _0_999(above) + " Millionen"
+                ret = read_positive(above) + " Millionen"
             }
             if below > 0 {
                 if below.E3 > 0 {
                     ret += " und " + group(3, below.E3, below: below.E3x)
                 } else {
-                    ret += " " + _0_999(below)
+                    ret += " " + read_positive(below)
                 }
             }
         case 9:
             if above == 1 {
                 ret = "eine Milliarde"
             } else {
-                ret = _0_999(above) + " Milliarden"
+                ret = read_positive(above) + " Milliarden"
             }
             if below > 0 {
                 if below.E6 > 0 {
                     ret += " " + group(6, below.E6, below: below.E6x)
                 } else {
-                    ret += " " + _0_999(below)
+                    ret += " " + read_positive(below)
                 }
             }
         case 12:
             if above == 1 {
                 ret = "eine Billion"
             } else {
-                ret = _0_999(above) + " Billionen"
+                ret = read_positive(above) + " Billionen"
             }
             if below > 0 {
                 if below.E9 > 0 {
@@ -90,7 +90,7 @@ class GermanImpl: LanguageGroup3 {
                 } else if below.E6 > 0 {
                     ret += " " + group(6, below.E6, below: below.E6x)
                 } else {
-                    ret += " " + _0_999(below)
+                    ret += " " + read_positive(below)
                 }
             }
         default:
