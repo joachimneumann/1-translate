@@ -40,11 +40,6 @@ class VietnameseImpl: LanguageGroup3 {
         nameDescription = "Vietnamese"
         _11_99_connector.before = " "
         secondLast = secondLast
-
-//        e2 = "trăm"
-//        e3 = "nghìn"
-//        e6 = "triệu"
-//        e9 = "tỷ"
         postProcessing = vietnamesePostProcessing
     }
     
@@ -59,6 +54,11 @@ class VietnameseImpl: LanguageGroup3 {
     override func thousand(_ thousands: Int, below: Int) -> String {
         var ret = _0_999(thousands, isLargestGroup: false) + " " + vietnameseThousand.rawValue
         if below > 0 {
+            if below <= 9 {
+                ret += " không trăm " + secondLast.rawValue
+            } else if below <= 99 {
+                ret += " không trăm"
+            }
             ret += " " + _0_999(below, isLargestGroup: false)
         }
         return ret
@@ -71,7 +71,6 @@ class VietnameseImpl: LanguageGroup3 {
         }
         return ret
     }
-
     
     func vietnamesePostProcessing(_ unprocessed: String) -> String {
         var ret = unprocessed
@@ -111,19 +110,7 @@ class VietnameseImpl: LanguageGroup3 {
         return _0_9(i) + " mươi"
     }
     
-//    
-//    override func read_e2_e3(_ i: Int) -> String {
-//        return read_1_9(i.E2) + " trăm" + read_trailing_tens(i.E2x)
-//    }
-//
-//    override func read_e3_e6(_ i: Int) -> String {
-//        var ret = read_1_(i.E3) + " " + e3!
-//        if i.E3x > 0 {
-//            ret += read_trailing_3digits(i.E3x)
-//        }
-//        return ret
-//    }
-//
+
 //    override func read_e6_e9(_ i: Int) -> String {
 //        var ret = read_1_(i.E6) + " " + e6!
 //        let thousands = i.E6x - i.E3x

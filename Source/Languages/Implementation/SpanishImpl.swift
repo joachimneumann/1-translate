@@ -34,19 +34,6 @@ class SpanishImpl: LanguageGroup3 {
         afterNegative = " "
         puntoComma = puntoComma
     }
-    
-    //        e3 = "mil"
-    //        e3_one = "mil"
-    //        e6_one = "un millón"
-    //        e6 = "millones"
-    //        e9_one = "mil millones"
-    //        e9 = "mil millones"
-    //        e12_one = "un billón"
-    //        e12 = "billiones"
-//        tensConnector = " y "
-//        eSpace = " "
-
-
 
     override func hundred(_ hundreds: Int, below: Int) -> String {
         var ret: String = ""
