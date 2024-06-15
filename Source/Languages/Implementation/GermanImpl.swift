@@ -28,6 +28,7 @@ class GermanImpl: LanguageGroup3 {
     }
     
     override func _20_99(_ i: Int) -> String {
+        // inverted order in German
         var ret = _10s(i.E1)
         if i.E1x > 0 {
             ret = _0_9(i.E1x) + _20_99_connector + ret
