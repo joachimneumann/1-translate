@@ -47,7 +47,6 @@
 		AAA3C3082C1C325D0071FBE4 /* spanish.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA3C3062C1C325D0071FBE4 /* spanish.swift */; };
 		AAA3C30A2C1C326B0071FBE4 /* SpanishImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA3C3092C1C326B0071FBE4 /* SpanishImpl.swift */; };
 		AAA3C30B2C1C326B0071FBE4 /* SpanishImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA3C3092C1C326B0071FBE4 /* SpanishImpl.swift */; };
-		AAA553772C19B73F001ED86E /* languageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA553752C19B6BA001ED86E /* languageTest.swift */; };
 		AAA553792C19D3E8001ED86E /* german.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA553782C19D3E8001ED86E /* german.swift */; };
 		AAA5537B2C19F2B7001ED86E /* vietnamese.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA5537A2C19F2B7001ED86E /* vietnamese.swift */; };
 		AAB10B9A292A2222004707E9 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB10B94292A2222004707E9 /* Label.swift */; };
@@ -126,7 +125,6 @@
 		AAA3C3032C1B0E1A0071FBE4 /* LanguageGroup3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageGroup3.swift; sourceTree = "<group>"; };
 		AAA3C3062C1C325D0071FBE4 /* spanish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spanish.swift; sourceTree = "<group>"; };
 		AAA3C3092C1C326B0071FBE4 /* SpanishImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpanishImpl.swift; sourceTree = "<group>"; };
-		AAA553752C19B6BA001ED86E /* languageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = languageTest.swift; sourceTree = "<group>"; };
 		AAA553782C19D3E8001ED86E /* german.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = german.swift; sourceTree = "<group>"; };
 		AAA5537A2C19F2B7001ED86E /* vietnamese.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = vietnamese.swift; sourceTree = "<group>"; };
 		AAB10B94292A2222004707E9 /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
@@ -287,7 +285,6 @@
 				AAA553782C19D3E8001ED86E /* german.swift */,
 				AA6474642C18A23100BEA8A2 /* Extension.swift */,
 				AAF9EC512B4B0D8F007D0B1D /* english.swift */,
-				AAA553752C19B6BA001ED86E /* languageTest.swift */,
 			);
 			path = LanguageTest;
 			sourceTree = "<group>";
@@ -448,7 +445,6 @@
 				AAA5537B2C19F2B7001ED86E /* vietnamese.swift in Sources */,
 				AAA553792C19D3E8001ED86E /* german.swift in Sources */,
 				AAD4112C2C1D4D8C00B67D7C /* polish.swift in Sources */,
-				AAA553772C19B73F001ED86E /* languageTest.swift in Sources */,
 				AAF9EC292B4A51C4007D0B1D /* VietnameseImpl.swift in Sources */,
 				AAD4112A2C1D3F9700B67D7C /* PolishImpl.swift in Sources */,
 				AAA3C3082C1C325D0071FBE4 /* spanish.swift in Sources */,

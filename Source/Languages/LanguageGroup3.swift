@@ -7,14 +7,6 @@
 
 import Foundation
 
-func aboveLimit(_ i: Int, _ limit: Int) -> Int {
-    return (i / Int(pow(10.0, Double(limit))))
-}
-func belowLimit(_ i: Int, _ limit: Int) -> Int {
-    return (i % Int(pow(10.0, Double(limit))))
-}
-
-
 @Observable class LanguageGroup3: Language {
     var _11_99_connector: String = ""
     var _11_99_inverted = false
