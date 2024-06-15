@@ -40,7 +40,6 @@ class VietnameseImpl: LanguageGroup3 {
         nameDescription = "Vietnamese"
         _11_99_connector.before = " "
         secondLast = secondLast
-        postProcessing = vietnamesePostProcessing
     }
     
     override func _100_999(_ hundreds: Int, below: Int) -> String {
@@ -178,14 +177,6 @@ class VietnameseImpl: LanguageGroup3 {
         return ret
     }
     
-    func vietnamesePostProcessing(_ unprocessed: String) -> String {
-        var ret = unprocessed
-        ret = ret.replacingOccurrences(of: "mười năm", with: "mười lăm")
-        ret = ret.replacingOccurrences(of: "mươi năm", with: "mươi lăm")
-        ret = ret.replacingOccurrences(of: "mươi một", with: "mươi mốt")
-        return ret
-    }
-    
     override func _0_9(_ i: Int) -> String {
         switch i {
         case 0:  return zero!
@@ -206,7 +197,11 @@ class VietnameseImpl: LanguageGroup3 {
     override func _10_19(_ i: Int) -> String? {
         var ret = "mười"
         if i.E1x > 0 {
-            ret += " " + _0_9(i.E1x)
+            if i.E1x == 5 {
+                ret += " lăm"
+            } else {
+                ret += " " + _0_9(i.E1x)
+            }
         }
         return ret
     }
