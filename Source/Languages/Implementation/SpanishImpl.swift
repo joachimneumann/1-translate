@@ -55,15 +55,33 @@ class SpanishImpl: LanguageGroup3 {
         return ret
     }
     
-    override func thousand(_ thousands: Int, below: Int) -> String {
-        var ret: String
-        if thousands == 1 {
-            ret = "mil"
-        } else {
-            ret = _0_999(thousands, isLargestGroup: false) + " mil"
-        }
-        if below > 0 {
-            ret += " " + _0_999(below, isLargestGroup: false)
+    override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
+        var ret: String = ""
+        switch groupIndex {
+        case 3:
+            if above == 1 {
+                ret = "mil"
+            } else {
+                ret = _0_999(above) + " mil"
+            }
+            if below > 0 {
+                ret += " " + _0_999(below)
+            }
+        case 6:
+            if above == 1 {
+                ret = "un millón"
+            } else {
+                ret = _0_999(above) + " millones"
+            }
+            if below > 0 {
+                if below.E3 > 0 {
+                    ret += " " + group(3, below.E3, below: below.E3x)
+                } else {
+                    ret += " " + _0_999(below)
+                }
+            }
+        default:
+            fatalError("wrong groupindex \(groupIndex)")
         }
         return ret
     }

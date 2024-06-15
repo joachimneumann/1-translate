@@ -157,6 +157,7 @@ final class Test_german: XCTestCase {
         XCTAssertEqual(language.read(502_305).x, "fünfhundertzweitausenddreihundertfünf")
         XCTAssertEqual(language.read(999_999).x, "neunhundertneunundneunzigtausendneunhundertneunundneunzig")
         XCTAssertEqual(language.read(1_000_000).x, "eine Million")
+        XCTAssertEqual(language.read(1_000_050).x, "eine Million fünfzig")
         XCTAssertEqual(language.read(62_000_000).x, "zweiundsechzig Millionen")
         XCTAssertEqual(language.read(62_003_005).x, "zweiundsechzig Millionen und dreitausendfünf")
         XCTAssertEqual(language.read(62_003_105).x, "zweiundsechzig Millionen und dreitausendeinhundertfünf")

@@ -64,8 +64,8 @@ struct Connector {
     func hundred(_ hundreds: Int, below: Int) -> String {
         fatalError("hundred() not implmented")
     }    
-    func thousand(_ thousands: Int, below: Int) -> String {
-        fatalError("thousand() not implmented")
+    func group(_ groupIndex: Int, _ thousands: Int, below: Int) -> String {
+        fatalError("group() not implmented")
     }
 
     func _10s(_ i: Int) -> String? { return nil }
@@ -96,7 +96,7 @@ struct Connector {
         return ret
     }
 
-    func _0_999(_ i: Int, isLargestGroup: Bool) -> String {
+    func _0_999(_ i: Int, isLargestGroup: Bool = false) -> String {
         if i <= 9 {
             return _0_9(i) // from Language
         }
@@ -109,7 +109,7 @@ struct Connector {
             return hundred(i.E2, below: i.E2x)
         }
 
-        return "ERROR in NewLanguageGroup3.read_group()"
+        return "ERROR in NewLanguageGroup3._0_999()"
     }
     
     override func read_positive(_ i: Int) -> String {
@@ -118,63 +118,16 @@ struct Connector {
         }
 
         if i <= 999_999 {
-            return thousand(i.E3, below: i.E3x)
+            return group(3, i.E3, below: i.E3x)
         }
 
-//        if i <= 999_999 {
-//            var ret: String = _0_999(i.E3, isLargestGroup: false)
-//            ret += connector_4_3.before + connector_4_3.name
-//            if i.E3x > 0 {
-//                ret += connector_4_3.after
-//                ret += _0_999(i.E3x, isLargestGroup: false)
-//            }
-//            return ret
-//        }
+        if i <= 999_999_999 {
+            return group(6, i.E6, below: i.E6x)
+        }
 
 //        if i <= 999_999_999 {
-//            var ret: String
-//            if i.E6 == 1 && connector_7_6.one != nil {
-//                ret = connector_7_6.one!
-//            } else {
-//                ret = _0_999(i.E6, isLargestGroup: false)
-//                ret += connector_7_6.before + connector_7_6.name
-//            }
-//            if i.E6x > 0 {
-//                ret += connector_7_6.after
-//                ret += read_positive(i.E6x)
-//            }
-//            return ret
-//        }
-//
 //        if i <= 999_999_999_999 {
-//            var ret: String
-//            if i.E9 == 1 && connector_10_9.one != nil {
-//                ret = connector_10_9.one!
-//            } else {
-//                ret = _0_999(i.E9, isLargestGroup: false)
-//                ret += connector_10_9.before + connector_10_9.name
-//            }
-//            if i.E9x > 0 {
-//                ret += connector_10_9.after
-//                ret += read_positive(i.E9x)
-//            }
-//            return ret
-//        }
-//
 //        if i <= 999_999_999_999_999 {
-//            var ret: String
-//            if i.E12 == 1 && connector_13_12.one != nil {
-//                ret = connector_13_12.one!
-//            } else {
-//                ret = _0_999(i.E12, isLargestGroup: false)
-//                ret += connector_13_12.before + connector_13_12.name
-//            }
-//            if i.E12x > 0 {
-//                ret += connector_13_12.after
-//                ret += read_positive(i.E12x)
-//            }
-//            return ret
-//        }
         return "ERROR in NewLanguageGroup3.read_positive()"
     }
     

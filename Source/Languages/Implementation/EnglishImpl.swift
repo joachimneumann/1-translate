@@ -30,10 +30,28 @@ class EnglishImpl: LanguageGroup3 {
         return ret
     }
     
-    override func thousand(_ thousands: Int, below: Int) -> String {
-        var ret = _0_999(thousands, isLargestGroup: false) + " thousand"
+    override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
+        let name: String
+        switch groupIndex {
+        case 3: name = "thousand"
+        case 6: name = "million"
+        default:
+            fatalError("wrong groupindex \(groupIndex)")
+        }
+        var ret = _0_999(above) + " " + name
         if below > 0 {
-            ret += " " + _0_999(below, isLargestGroup: false)
+            switch groupIndex {
+            case 3:
+                ret += " " + _0_999(below)
+            case 6:
+                if below.E3 > 0 {
+                    ret += " " + group(3, below.E3, below: below.E3x)
+                } else {
+                    ret += " " + _0_999(below)
+                }
+            default:
+                fatalError("wrong groupindex \(groupIndex)")
+            }
         }
         return ret
     }

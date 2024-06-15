@@ -51,15 +51,15 @@ class VietnameseImpl: LanguageGroup3 {
         return ret
     }
     
-    override func thousand(_ thousands: Int, below: Int) -> String {
-        var ret = _0_999(thousands, isLargestGroup: false) + " " + vietnameseThousand.rawValue
+    override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
+        var ret = _0_999(above) + " " + vietnameseThousand.rawValue
         if below > 0 {
             if below <= 9 {
                 ret += " không trăm " + secondLast.rawValue
             } else if below <= 99 {
                 ret += " không trăm"
             }
-            ret += " " + _0_999(below, isLargestGroup: false)
+            ret += " " + _0_999(below)
         }
         return ret
     }
