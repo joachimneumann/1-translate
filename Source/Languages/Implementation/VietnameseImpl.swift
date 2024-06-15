@@ -38,7 +38,7 @@ class VietnameseImpl: LanguageGroup3 {
         voiceLanguageCode = "vi"
         afterNegative = " "
         nameDescription = "Vietnamese"
-        _11_99_connector.before = " "
+        _11_99_connector = " "
         secondLast = secondLast
     }
     

@@ -30,7 +30,7 @@ class SpanishImpl: LanguageGroup3 {
             exponentString: " por diez elevado a ")
 
         voiceLanguageCode = "es"
-        _11_99_connector.name = " y "
+        _11_99_connector = " y "
         afterNegative = " "
         puntoComma = puntoComma
     }

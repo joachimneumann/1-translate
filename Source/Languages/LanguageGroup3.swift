@@ -47,18 +47,9 @@ func belowLimit(_ i: Int, _ limit: Int) -> Int {
     return (i % Int(pow(10.0, Double(limit))))
 }
 
-struct Connector {
-    var before: String = ""
-    var name: String = ""
-    var after: String = ""
-}
 
 @Observable class LanguageGroup3: Language {
-    var _11_99_connector: Connector = Connector()
-//    var connector_4_3: Connector = Connector()
-//    var connector_7_6: Connector = Connector()
-//    var connector_10_9: Connector = Connector()
-//    var connector_13_12: Connector = Connector()
+    var _11_99_connector: String = ""
     var _11_99_inverted = false
 
     func _100_999(_ hundreds: Int, below: Int) -> String {
@@ -87,9 +78,9 @@ struct Connector {
         var ret = _10s(i.E1) ?? _0_9(i.E1)
         if i.E1x > 0 {
             if _11_99_inverted {
-                ret = _0_9(i.E1x) + _11_99_connector.before + _11_99_connector.name + _11_99_connector.after + ret
+                ret = _0_9(i.E1x) + _11_99_connector + ret
             } else {
-                ret += _11_99_connector.before + _11_99_connector.name + _11_99_connector.after + _0_9(i.E1x)
+                ret += _11_99_connector + _0_9(i.E1x)
             }
         }
         

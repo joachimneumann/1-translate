@@ -21,9 +21,7 @@ class GermanImpl: LanguageGroup3 {
 
         voiceLanguageCode = "de"
         
-        _11_99_connector.before = Languages.WordSplitter
-        _11_99_connector.name = "und"
-        _11_99_connector.before = Languages.WordSplitter
+        _11_99_connector = Languages.WordSplitter + "und"
         _11_99_inverted = true
 
         afterNegative = " "
