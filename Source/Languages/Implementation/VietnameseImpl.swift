@@ -51,11 +51,42 @@ class VietnameseImpl: LanguageGroup3 {
     }
     
     override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
-        var ret: String = ""
+        var ret: String = _0_999(above)
         switch groupIndex {
         case 3:
-            ret = _0_999(above) + " " + vietnameseThousand.rawValue
-            if below > 0 {
+            ret += " " + vietnameseThousand.rawValue
+        case 6:
+            ret += " triệu"
+        case 9:
+            ret += " tỷ"
+        case 12:
+            ret += " " + vietnameseThousand.rawValue + " tỷ"
+        default:
+            fatalError("wrong groupindex \(groupIndex)")
+        }
+        if below > 0 {
+            if below.E9 > 0 {
+                if below.E9 <= 9 {
+                    ret += " không trăm " + secondLast.rawValue
+                } else if below.E9 <= 99 {
+                    ret += " không trăm"
+                }
+                ret += " " + group(9, below.E9, below: below.E9x)
+            } else if below.E6 > 0 {
+                if below.E6 <= 9 {
+                    ret += " không trăm " + secondLast.rawValue
+                } else if below.E6 <= 99 {
+                    ret += " không trăm"
+                }
+                ret += " " + group(6, below.E6, below: below.E6x)
+            } else if below.E3 > 0 {
+                if below.E3 <= 9 {
+                    ret += " không trăm " + secondLast.rawValue
+                } else if below.E3 <= 99 {
+                    ret += " không trăm"
+                }
+                ret += " " + group(3, below.E3, below: below.E3x)
+            } else {
                 if below <= 9 {
                     ret += " không trăm " + secondLast.rawValue
                 } else if below <= 99 {
@@ -63,86 +94,6 @@ class VietnameseImpl: LanguageGroup3 {
                 }
                 ret += " " + _0_999(below)
             }
-        case 6:
-            ret = _0_999(above) + " triệu"
-            if below > 0 {
-                if below.E3 > 0 {
-                    if below.E3 <= 9 {
-                        ret += " không trăm " + secondLast.rawValue
-                    } else if below.E3 <= 99 {
-                        ret += " không trăm"
-                    }
-                    ret += " " + group(3, below.E3, below: below.E3x)
-                } else {
-                    if below <= 9 {
-                        ret += " không trăm " + secondLast.rawValue
-                    } else if below <= 99 {
-                        ret += " không trăm"
-                    }
-                    ret += " " + _0_999(below)
-                }
-            }
-        case 9:
-            ret = _0_999(above) + " tỷ"
-            if below > 0 {
-                if below.E6 > 0 {
-                    if below.E6 <= 9 {
-                        ret += " không trăm " + secondLast.rawValue
-                    } else if below.E6 <= 99 {
-                        ret += " không trăm"
-                    }
-                    ret += " " + group(6, below.E6, below: below.E6x)
-                } else if below.E6 > 0 {
-                    if below.E6 <= 9 {
-                        ret += " không trăm " + secondLast.rawValue
-                    } else if below.E6 <= 99 {
-                        ret += " không trăm"
-                    }
-                    ret += " " + group(6, below.E6, below: below.E6x)
-                } else {
-                    if below <= 9 {
-                        ret += " không trăm " + secondLast.rawValue
-                    } else if below <= 99 {
-                        ret += " không trăm"
-                    }
-                    ret += " " + _0_999(below)
-                }
-            }
-        case 12:
-            ret = _0_999(above) + " " + vietnameseThousand.rawValue + " tỷ"
-            if below > 0 {
-                if below.E9 > 0 {
-                    if below.E9 <= 9 {
-                        ret += " không trăm " + secondLast.rawValue
-                    } else if below.E9 <= 99 {
-                        ret += " không trăm"
-                    }
-                    ret += " " + group(9, below.E9, below: below.E9x)
-                } else if below.E6 > 0 {
-                    if below.E6 <= 9 {
-                        ret += " không trăm " + secondLast.rawValue
-                    } else if below.E6 <= 99 {
-                        ret += " không trăm"
-                    }
-                    ret += " " + group(6, below.E6, below: below.E6x)
-                } else if below.E6 > 0 {
-                    if below.E6 <= 9 {
-                        ret += " không trăm " + secondLast.rawValue
-                    } else if below.E6 <= 99 {
-                        ret += " không trăm"
-                    }
-                    ret += " " + group(6, below.E6, below: below.E6x)
-                } else {
-                    if below <= 9 {
-                        ret += " không trăm " + secondLast.rawValue
-                    } else if below <= 99 {
-                        ret += " không trăm"
-                    }
-                    ret += " " + _0_999(below)
-                }
-            }
-        default:
-            fatalError("wrong groupindex \(groupIndex)")
         }
         return ret
     }
