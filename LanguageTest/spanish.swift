@@ -174,6 +174,9 @@ final class Test_spanish: XCTestCase {
         XCTAssertEqual(language.read(1_000_000_000_000).x, "un billón")
         XCTAssertEqual(language.read(3_000_000_000_000).x, "tres billiones")
         XCTAssertEqual(language.read(3_000_000_000_003).x, "tres billiones y tres")
+        XCTAssertEqual(language.read(3_000_000_003_000).x, "tres billiones y tres mil")
+        XCTAssertEqual(language.read(3_000_003_000_000).x, "tres billiones y tres millones")
+        XCTAssertEqual(language.read(3_003_000_000_000).x, "tres billiones y tres mil millones")
 
         language.puntoComma = .coma
         XCTAssertEqual(language.read(-1).x, "menos uno")

@@ -83,9 +83,90 @@ class VietnameseImpl: LanguageGroup3 {
                     ret += " " + _0_999(below)
                 }
             }
+        case 9:
+            ret = _0_999(above) + " tỷ"
+            if below > 0 {
+                if below.E6 > 0 {
+                    if below.E6 <= 9 {
+                        ret += " không trăm " + secondLast.rawValue
+                    } else if below.E6 <= 99 {
+                        ret += " không trăm"
+                    }
+                    ret += " " + group(6, below.E6, below: below.E6x)
+                } else if below.E6 > 0 {
+                    if below.E6 <= 9 {
+                        ret += " không trăm " + secondLast.rawValue
+                    } else if below.E6 <= 99 {
+                        ret += " không trăm"
+                    }
+                    ret += " " + group(6, below.E6, below: below.E6x)
+                } else {
+                    if below <= 9 {
+                        ret += " không trăm " + secondLast.rawValue
+                    } else if below <= 99 {
+                        ret += " không trăm"
+                    }
+                    ret += " " + _0_999(below)
+                }
+            }
+        case 12:
+            ret = _0_999(above) + " " + vietnameseThousand.rawValue + " tỷ"
+            if below > 0 {
+                if below.E9 > 0 {
+                    if below.E9 <= 9 {
+                        ret += " không trăm " + secondLast.rawValue
+                    } else if below.E9 <= 99 {
+                        ret += " không trăm"
+                    }
+                    ret += " " + group(9, below.E9, below: below.E9x)
+                } else if below.E6 > 0 {
+                    if below.E6 <= 9 {
+                        ret += " không trăm " + secondLast.rawValue
+                    } else if below.E6 <= 99 {
+                        ret += " không trăm"
+                    }
+                    ret += " " + group(6, below.E6, below: below.E6x)
+                } else if below.E6 > 0 {
+                    if below.E6 <= 9 {
+                        ret += " không trăm " + secondLast.rawValue
+                    } else if below.E6 <= 99 {
+                        ret += " không trăm"
+                    }
+                    ret += " " + group(6, below.E6, below: below.E6x)
+                } else {
+                    if below <= 9 {
+                        ret += " không trăm " + secondLast.rawValue
+                    } else if below <= 99 {
+                        ret += " không trăm"
+                    }
+                    ret += " " + _0_999(below)
+                }
+            }
         default:
             fatalError("wrong groupindex \(groupIndex)")
         }
+        return ret
+    }
+    
+    override func _10_99(_ i: Int) -> String {
+        var ret = ""
+        if i <= 19 {
+            if let ret = _10_19(i) {
+                return ret
+            }
+        }
+        ret = _0_9(i.E1)
+        ret += (!compact || i.E1x == 0) ? " mươi" : ""
+        if i.E1x > 0 {
+            if i.E1x == 1 {
+                ret += " mốt"
+            } else if i.E1x == 5 {
+                ret += " lăm"
+            } else {
+                ret += " " + _0_9(i.E1x)
+            }
+        }
+        
         return ret
     }
     
@@ -134,57 +215,5 @@ class VietnameseImpl: LanguageGroup3 {
         if i == 1 { return _10_19(10) }
         return _0_9(i) + " mươi"
     }
-    
 
-//    override func read_e6_e9(_ i: Int) -> String {
-//        var ret = read_1_(i.E6) + " " + e6!
-//        let thousands = i.E6x - i.E3x
-//        if thousands > 0 {
-//            ret += read_trailing_3digits(thousands.E3, " " + e3!)
-//        }
-//        let lastThree = i.E3x
-//        if lastThree > 0 {
-//            ret += read_trailing_3digits(lastThree)
-//        }
-//        return ret
-//    }
-//    
-//    override func read_e9_e12(_ i: Int) -> String {
-//        var ret = read_1_(i.E9) + " " + e9!
-//        let millions = i.E9x - i.E6x
-//        if millions > 0 {
-//            ret += read_trailing_3digits(millions.E6, " " + e6!)
-//        }
-//        let thousands = i.E6x - i.E3x
-//        if thousands > 0 {
-//            ret += read_trailing_3digits(thousands.E3, " " + e3!)
-//        }
-//        let lastThree = i.E3x
-//        if lastThree > 0 {
-//            ret += read_trailing_3digits(lastThree)
-//        }
-//        return ret
-//    }
-//
-//    override func read_e12_e15(_ i: Int) -> String {
-//        var ret = ""
-//        ret = read_1_(i.E12) + " " + e3! + " " + e9!
-//        let billions = i.E12x - i.E9x
-//        if billions > 0 {
-//            ret += read_trailing_3digits(billions.E9, " " + e9!)
-//        }
-//        let millions = i.E9x - i.E6x
-//        if millions > 0 {
-//            ret += read_trailing_3digits(millions.E6, " " + e6!)
-//        }
-//        let thousands = i.E6x - i.E3x
-//        if thousands > 0 {
-//            ret += read_trailing_3digits(thousands.E3, " " + e3!)
-//        }
-//        let lastThree = i.E3x
-//        if lastThree > 0 {
-//            ret += read_trailing_3digits(lastThree)
-//        }
-//        return ret
-//    }
 }

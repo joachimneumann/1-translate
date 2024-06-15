@@ -80,6 +80,38 @@ class SpanishImpl: LanguageGroup3 {
                     ret += " " + _0_999(below)
                 }
             }
+        case 9:
+            if above == 1 {
+                ret = "mil millones"
+            } else {
+                ret = _0_999(above) + " mil millones"
+            }
+            if below > 0 {
+                if below.E6 > 0 {
+                    ret += " " + group(6, below.E6, below: below.E6x)
+                } else if below.E3 > 0 {
+                    ret += " " + group(3, below.E3, below: below.E3x)
+                } else {
+                    ret += " " + _0_999(below)
+                }
+            }
+        case 12:
+            if above == 1 {
+                ret = "un billón"
+            } else {
+                ret = _0_999(above) + " billiones"
+            }
+            if below > 0 {
+                if below.E9 > 0 {
+                    ret += " y " + group(9, below.E9, below: below.E9x)
+                } else if below.E6 > 0 {
+                    ret += " y " + group(6, below.E6, below: below.E6x)
+                } else if below.E3 > 0 {
+                    ret += " y " + group(3, below.E3, below: below.E3x)
+                } else {
+                    ret += " y " + _0_999(below)
+                }
+            }
         default:
             fatalError("wrong groupindex \(groupIndex)")
         }

@@ -365,7 +365,7 @@ final class Test_vietnamese: XCTestCase {
         language.vietnameseThousand = .nghìn
         XCTAssertEqual(language.read(1_000_000_000_000).x, "một nghìn tỷ")
         XCTAssertEqual(language.read(999_000_000_000_000).x, "chín trăm chín chín nghìn tỷ")
-        XCTAssertEqual(language.read(1_000_000_000_003).x, "một nghìn tỷ ba")
+        XCTAssertEqual(language.read(1_000_000_000_003).x, "một nghìn tỷ không trăm lẻ ba")
 
         language.vietnameseThousand = .ngàn
         XCTAssertEqual(language.read(1_000_000_000_000).x, "một ngàn tỷ")

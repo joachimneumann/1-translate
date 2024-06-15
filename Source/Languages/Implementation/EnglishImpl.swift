@@ -35,6 +35,8 @@ class EnglishImpl: LanguageGroup3 {
         switch groupIndex {
         case 3: name = "thousand"
         case 6: name = "million"
+        case 9: name = "billion"
+        case 12: name = "trillion"
         default:
             fatalError("wrong groupindex \(groupIndex)")
         }
@@ -45,6 +47,24 @@ class EnglishImpl: LanguageGroup3 {
                 ret += " " + _0_999(below)
             case 6:
                 if below.E3 > 0 {
+                    ret += " " + group(3, below.E3, below: below.E3x)
+                } else {
+                    ret += " " + _0_999(below)
+                }
+            case 9:
+                if below.E6 > 0 {
+                    ret += " " + group(6, below.E6, below: below.E6x)
+                } else if below.E3 > 0 {
+                    ret += " " + group(3, below.E3, below: below.E3x)
+                } else {
+                    ret += " " + _0_999(below)
+                }
+            case 12:
+                if below.E9 > 0 {
+                    ret += " " + group(9, below.E9, below: below.E9x)
+                } else if below.E6 > 0 {
+                    ret += " " + group(6, below.E6, below: below.E6x)
+                } else if below.E3 > 0 {
                     ret += " " + group(3, below.E3, below: below.E3x)
                 } else {
                     ret += " " + _0_999(below)

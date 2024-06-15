@@ -125,6 +125,14 @@ struct Connector {
             return group(6, i.E6, below: i.E6x)
         }
 
+        if i <= 999_999_999_999 {
+            return group(9, i.E9, below: i.E9x)
+        }
+
+        if i <= 999_999_999_999_999 {
+            return group(12, i.E12, below: i.E12x)
+        }
+
         return "ERROR in NewLanguageGroup3.read_positive()"
     }
     

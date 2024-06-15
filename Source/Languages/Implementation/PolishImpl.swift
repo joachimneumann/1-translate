@@ -116,11 +116,23 @@ class PolishImpl: LanguageGroup3 {
             } else {
                 ret = _0_999(above) + " " + use(above, "tysiące", "tysięcy")
             }
-        case 6: 
+        case 6:
             if above == 1 {
                 ret = _0_999(above) + " " + "milion"
             } else {
                 ret = _0_999(above) + " " + use(above, "miliony", "milionów")
+            }
+        case 9:
+            if above == 1 {
+                ret = _0_999(above) + " " + "miliard"
+            } else {
+                ret = _0_999(above) + " " + use(above, "miliardy", "miliardów")
+            }
+        case 12:
+            if above == 1 {
+                ret = _0_999(above) + " " + "bilion"
+            } else {
+                ret = _0_999(above) + " " + use(above, "biliony", "bilionów")
             }
         default:
             fatalError("wrong groupindex \(groupIndex)")
@@ -131,6 +143,14 @@ class PolishImpl: LanguageGroup3 {
                 ret += " " + _0_999(below)
             case 6:
                 if below.E3 > 0 {
+                    ret += " " + group(3, below.E3, below: below.E3x)
+                } else {
+                    ret += " " + _0_999(below)
+                }
+            case 9:
+                if below.E6 > 0 {
+                    ret += " " + group(6, below.E6, below: below.E6x)
+                } else if below.E3 > 0 {
                     ret += " " + group(3, below.E3, below: below.E3x)
                 } else {
                     ret += " " + _0_999(below)

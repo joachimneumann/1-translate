@@ -67,6 +67,34 @@ class GermanImpl: LanguageGroup3 {
                     ret += " " + _0_999(below)
                 }
             }
+        case 9:
+            if above == 1 {
+                ret = "eine Milliarde"
+            } else {
+                ret = _0_999(above) + " Milliarden"
+            }
+            if below > 0 {
+                if below.E6 > 0 {
+                    ret += " " + group(6, below.E6, below: below.E6x)
+                } else {
+                    ret += " " + _0_999(below)
+                }
+            }
+        case 12:
+            if above == 1 {
+                ret = "eine Billion"
+            } else {
+                ret = _0_999(above) + " Billionen"
+            }
+            if below > 0 {
+                if below.E9 > 0 {
+                    ret += " " + group(9, below.E9, below: below.E9x)
+                } else if below.E6 > 0 {
+                    ret += " " + group(6, below.E6, below: below.E6x)
+                } else {
+                    ret += " " + _0_999(below)
+                }
+            }
         default:
             fatalError("wrong groupindex \(groupIndex)")
         }
