@@ -7,39 +7,6 @@
 
 import Foundation
 
-//enum Grouping: Int {
-//    case one
-//    case three
-//    case four
-//    var int: Int {
-//        get {
-//            switch self {
-//            case .one: return 1
-//            case .three: return 3
-//            case .four: return 4
-//            }
-//        }
-//    }
-//    var string: String {
-//        get {
-//            switch self {
-//            case .one: return "1"
-//            case .three: return "3"
-//            case .four: return "4"
-//            }
-//        }
-//    }
-//    var limits: [Int] {
-//        get {
-//            switch self {
-//            case .one: return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-//            case .three: return [3, 6, 9, 12]
-//            case .four: return [4, 9, 12]
-//            }
-//        }
-//    }
-//}
-
 func aboveLimit(_ i: Int, _ limit: Int) -> Int {
     return (i / Int(pow(10.0, Double(limit))))
 }
