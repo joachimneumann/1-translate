@@ -25,7 +25,7 @@ class EnglishImpl: LanguageGroup3 {
     override func _100_999(_ hundreds: Int, below: Int) -> String {
         var ret = _1_99(hundreds) + " hundred"
         if below > 0 {
-            ret += " " + _1_99(below)
+            ret += (useAndAfterHundred ? " and " : " ") + _1_99(below)
         }
         return ret
     }
