@@ -59,17 +59,19 @@ func belowLimit(_ i: Int, _ limit: Int) -> Int {
         fatalError("group() not implmented")
     }
 
-    func _10s(_ i: Int) -> String? { return nil }
-    func _10_19(_ i: Int) -> String? { return nil }
-
+    func _10s(_ i: Int) -> String {
+        fatalError("_100_999() not implmented")
+    }
+    
+    func _10_19(_ i: Int) -> String  {
+        fatalError("_100_999() not implmented")
+    }
     
     func _10_99(_ i: Int) -> String {
         if i <= 19 {
-            if let ret = _10_19(i) {
-                return ret
-            }
+            return _10_19(i)
         }
-        var ret = _10s(i.E1) ?? _0_9(i.E1)
+        var ret = _10s(i.E1)
         if i.E1x > 0 {
             if _11_99_inverted {
                 ret = _0_9(i.E1x) + _11_99_connector + ret
@@ -84,6 +86,10 @@ func belowLimit(_ i: Int, _ limit: Int) -> Int {
     func _0_999(_ i: Int, isLargestGroup: Bool = false) -> String {
         if i <= 9 {
             return _0_9(i) // implemented in Language
+        }
+        
+        if i <= 19 {
+            return _10_19(i)
         }
         
         if i <= 99 {

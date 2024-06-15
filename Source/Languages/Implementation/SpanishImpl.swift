@@ -135,7 +135,7 @@ class SpanishImpl: LanguageGroup3 {
         }
     }
     
-    override func _10s(_ i: Int) -> String? {
+    override func _10s(_ i: Int) -> String {
         switch i {
         case 1: return "diez"
         case 2: return "veinte"
@@ -151,7 +151,7 @@ class SpanishImpl: LanguageGroup3 {
         }
     }
     
-    override func _10_19(_ i: Int) -> String? {
+    override func _10_19(_ i: Int) -> String {
         switch i {
         case 10: return _10s(1)
         case 11: return "once"

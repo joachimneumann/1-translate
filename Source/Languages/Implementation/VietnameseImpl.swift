@@ -104,9 +104,7 @@ class VietnameseImpl: LanguageGroup3 {
     override func _10_99(_ i: Int) -> String {
         var ret = ""
         if i <= 19 {
-            if let ret = _10_19(i) {
-                return ret
-            }
+            return _10_19(i)
         }
         ret = _0_9(i.E1)
         ret += (!compact || i.E1x == 0) ? " mươi" : ""
@@ -140,7 +138,7 @@ class VietnameseImpl: LanguageGroup3 {
         }
     }
     
-    override func _10_19(_ i: Int) -> String? {
+    override func _10_19(_ i: Int) -> String {
         var ret = "mười"
         if i.E1x > 0 {
             if i.E1x == 5 {
@@ -152,7 +150,7 @@ class VietnameseImpl: LanguageGroup3 {
         return ret
     }
     
-    override func _10s(_ i: Int) -> String? {
+    override func _10s(_ i: Int) -> String {
         if i == 1 { return _10_19(10) }
         return _0_9(i) + " mươi"
     }
