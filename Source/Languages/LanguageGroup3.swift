@@ -61,13 +61,7 @@ func belowLimit(_ i: Int, _ limit: Int) -> Int {
 
     func _10s(_ i: Int) -> String? { return nil }
     func _10_19(_ i: Int) -> String? { return nil }
-    
-    func _1_99(_ i: Int, isLargestGroup: Bool = false) -> String {
-        if i <= 9 {
-            return _0_9(i)
-        }
-        return _10_99(i)
-    }
+
     
     func _10_99(_ i: Int) -> String {
         if i <= 19 {

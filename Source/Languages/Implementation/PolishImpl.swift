@@ -79,13 +79,13 @@ class PolishImpl: LanguageGroup3 {
         case 2:
             ret = "dwieście"
         case 3, 4:
-            ret = _1_99(hundreds) + "sta"
+            ret = _0_999(hundreds) + "sta"
         default:
-            ret = _1_99(hundreds) + "set"
+            ret = _0_999(hundreds) + "set"
         }
 
         if below > 0 {
-            ret += " " + _1_99(below)
+            ret += " " + _0_999(below)
         }
         return ret
     }

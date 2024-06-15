@@ -47,10 +47,10 @@ class SpanishImpl: LanguageGroup3 {
         case 9:
             ret = "novecientos"
         default:
-            ret = _1_99(hundreds) + "cientos"
+            ret = _0_999(hundreds) + "cientos"
         }
         if below > 0 {
-            ret += " " + _1_99(below)
+            ret += " " + _0_999(below)
         }
         return ret
     }

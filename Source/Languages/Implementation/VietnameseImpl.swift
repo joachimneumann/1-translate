@@ -43,9 +43,12 @@ class VietnameseImpl: LanguageGroup3 {
     }
     
     override func _100_999(_ hundreds: Int, below: Int) -> String {
-        var ret = _1_99(hundreds, isLargestGroup: true) + " trăm"
+        var ret = _0_999(hundreds, isLargestGroup: true) + " trăm"
         if below > 0 {
-            ret += " " + _1_99(below, isLargestGroup: false)
+            if below <= 9 {
+                ret += " " + secondLast.rawValue
+            }
+            ret += " " + _0_999(below, isLargestGroup: false)
         }
         return ret
     }
@@ -117,14 +120,6 @@ class VietnameseImpl: LanguageGroup3 {
             }
         }
         
-        return ret
-    }
-    
-    override func _1_99(_ i: Int, isLargestGroup: Bool) -> String {
-        var ret = super._1_99(i, isLargestGroup: isLargestGroup)
-        if i <= 9 && !isLargestGroup {
-            ret = secondLast.rawValue + " " + ret
-        }
         return ret
     }
     
