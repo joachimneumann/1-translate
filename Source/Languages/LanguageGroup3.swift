@@ -8,32 +8,30 @@
 import Foundation
 
 @Observable class LanguageGroup3: Language {
-    var _11_99_connector: String = ""
-    var _11_99_inverted = false
+    var _20_99_connector: String = ""
 
     func _100_999(_ hundreds: Int, below: Int) -> String {
         fatalError("_100_999() not implmented")
     }    
-    func group(_ groupIndex: Int, _ thousands: Int, below: Int) -> String {
+    func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
         fatalError("group() not implmented")
     }
 
     func _10s(_ i: Int) -> String {
-        fatalError("_100_999() not implmented")
+        if let zero = zero {
+            return _10s(i.E1) + zero
+        }
+        return String(i)
     }
     
-    func _10_19(_ i: Int) -> String  {
-        fatalError("_100_999() not implmented")
+    func _10_19(_ i: Int) -> String {
+        return _20_99(i)
     }
     
     func _20_99(_ i: Int) -> String {
         var ret = _10s(i.E1)
         if i.E1x > 0 {
-            if _11_99_inverted {
-                ret = _0_9(i.E1x) + _11_99_connector + ret
-            } else {
-                ret += _11_99_connector + _0_9(i.E1x)
-            }
+            ret += _20_99_connector + _0_9(i.E1x)
         }
         return ret
     }

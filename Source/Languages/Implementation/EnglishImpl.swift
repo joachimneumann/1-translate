@@ -19,7 +19,7 @@ class EnglishImpl: LanguageGroup3 {
             dotString: "point",
             exponentString: " times ten to the power of ")
         voiceLanguageCode = "en"
-        _11_99_connector = "-"
+        _20_99_connector = "-"
     }
     
     override func _100_999(_ hundreds: Int, below: Int) -> String {

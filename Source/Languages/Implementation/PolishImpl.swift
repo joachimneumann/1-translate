@@ -17,7 +17,7 @@ class PolishImpl: LanguageGroup3 {
             exponentString: " razy dziesięć do potęgi ")
         
         voiceLanguageCode = "pl"
-        _11_99_connector = " "
+        _20_99_connector = " "
     }
     
     

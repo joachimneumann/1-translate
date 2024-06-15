@@ -21,11 +21,18 @@ class GermanImpl: LanguageGroup3 {
 
         voiceLanguageCode = "de"
         
-        _11_99_connector = Languages.WordSplitter + "und"
-        _11_99_inverted = true
+        _20_99_connector = Languages.WordSplitter + "und"
 
         afterNegative = " "
         postProcessing = germanPostProcessing
+    }
+    
+    override func _20_99(_ i: Int) -> String {
+        var ret = _10s(i.E1)
+        if i.E1x > 0 {
+            ret = _0_9(i.E1x) + _20_99_connector + ret
+        }
+        return ret
     }
     
     override func _100_999(_ hundreds: Int, below: Int) -> String {
