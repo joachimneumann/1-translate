@@ -62,7 +62,7 @@ struct Connector {
     var _11_99_inverted = false
 
     func _100_999(_ hundreds: Int, below: Int) -> String {
-        fatalError("hundred() not implmented")
+        fatalError("_100_999() not implmented")
     }    
     func group(_ groupIndex: Int, _ thousands: Int, below: Int) -> String {
         fatalError("group() not implmented")
@@ -71,7 +71,7 @@ struct Connector {
     func _10s(_ i: Int) -> String? { return nil }
     func _10_19(_ i: Int) -> String? { return nil }
     
-    func _1_99(_ i: Int, isLargestGroup: Bool) -> String {
+    func _1_99(_ i: Int, isLargestGroup: Bool = false) -> String {
         if i <= 9 {
             return _0_9(i)
         }

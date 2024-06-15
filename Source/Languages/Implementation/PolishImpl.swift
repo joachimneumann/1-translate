@@ -7,7 +7,7 @@
 
 import Foundation
 
-class PolishImpl: Language {
+class PolishImpl: LanguageGroup3 {
     init() {
         super.init(
             name: "Polski",
@@ -17,70 +17,75 @@ class PolishImpl: Language {
             exponentString: " razy dziesięć do potęgi ")
         
         voiceLanguageCode = "pl"
-        e2 = "sto"
-        e2_one = "sto"
-        afterGroup = " "
-        tensConnector = " "
+        _11_99_connector.name = " "
     }
     
-    override func read_1_9(_ i: Int) -> String {
+    
+    override func _0_9(_ i: Int) -> String {
         switch i {
-        case 1:         return "jeden"
-        case 2:         return "dwa"
-        case 3:         return "trzy"
-        case 4:         return "cztery"
-        case 5:         return "pięć"
-        case 6:         return "sześć"
-        case 7:         return "siedem"
-        case 8:         return "osiem"
-        case 9:         return "dziewięć"
-        default: return "read_0_9: outside range"
+        case 0:  return zero!
+        case 1:  return "jeden"
+        case 2:  return "dwa"
+        case 3:  return "trzy"
+        case 4:  return "cztery"
+        case 5:  return "pięć"
+        case 6:  return "sześć"
+        case 7:  return "siedem"
+        case 8:  return "osiem"
+        case 9:  return "dziewięć" //dziewipoęć" 
+        default:
+            fatalError("_0_9() parameter \(i)")
         }
     }
     
-    override func read_10s(_ i: Int) -> String {
+    override func _10s(_ i: Int) -> String? {
         switch i {
-        case 1:         return "dziesięć"
-        case 2:         return "dwadzieścia"
-        case 3:         return "trzydzieści"
-        case 4:         return "czterdzieści"
-        case 5:         return "pięćdziesiąt"
-        case 6:         return "sześćdziesiąt"
-        case 7:         return "siedemdziesiąt"
-        case 8:         return "osiemdziesiąt"
-        case 9:         return "dziewięćdziesiąt"
-        default: return "read_10s outside range"
+        case 1: return "dziesięć"
+        case 2: return "dwadzieścia"
+        case 3: return "trzydzieści"
+        case 4: return "czterdzieści"
+        case 5: return "pięćdziesiąt"
+        case 6: return "sześćdziesiąt"
+        case 7: return "siedemdziesiąt"
+        case 8: return "osiemdziesiąt"
+        case 9: return "dziewięćdziesiąt"
+        default:
+            fatalError("_10s() parameter \(i)")
         }
     }
     
-    override func read_10_99(_ i: Int) -> String {
-        if i == 11 { return "jedenaście" }
-        if i == 12 { return "dwanaście" }
-        if i == 13 { return "trzynaście" }
-        if i == 14 { return "czternaście" }
-        if i == 15 { return "piętnaście" }
-        if i == 16 { return "szesnaście" }
-        if i == 17 { return "siedemnaście" }
-        if i == 18 { return "osiemnaście" }
-        if i == 19 { return "dziewiętnaście" }
-        return super.read_10_99(i)
+    override func _10_19(_ i: Int) -> String? {
+        switch i {
+        case 10: return _10s(1)
+        case 11: return "jedenaście"
+        case 12: return "dwanaście"
+        case 13: return "trzynaście"
+        case 14: return "czternaście"
+        case 15: return "piętnaście"
+        case 16: return "szesnaście"
+        case 17: return "siedemnaście"
+        case 18: return "osiemnaście"
+        case 19: return "dziewiętnaście"
+        default:
+            fatalError("_11_19() parameter \(i)")
+        }
     }
     
-    override func read_e2_e3(_ i: Int) -> String {
+    override func _100_999(_ hundreds: Int, below: Int) -> String {
         var ret = ""
-        switch i.E2 {
+        switch hundreds {
         case 1:
             ret = "sto"
         case 2:
             ret = "dwieście"
         case 3, 4:
-            ret = read_1_9(i.E2) + "sta"
+            ret = _1_99(hundreds) + "sta"
         default:
-            ret = read_1_9(i.E2) + "set"
+            ret = _1_99(hundreds) + "set"
         }
-        if i.E2x > 0 {
-            if ret.count > 0 { ret += " " }
-            ret += read_1_(i.E2x)
+
+        if below > 0 {
+            ret += " " + _1_99(below)
         }
         return ret
     }
@@ -102,31 +107,103 @@ class PolishImpl: Language {
         return use1 ? s1 : s2
     }
     
-    override func read_e3_e6(_ i: Int) -> String {
-        var ret = read_1_(i.E3) + " " + use(i.E3, "tysiące", "tysięcy")
-        if i.E3 == 1 { ret = "tysiąc" }
-        if i.E3x > 0 { ret += " " + read_1_(i.E3x) }
+    override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
+        var ret = ""
+        switch groupIndex {
+        case 3: 
+            if above == 1 {
+                ret = "tysiąc"
+            } else {
+                ret = _0_999(above) + " " + use(above, "tysiące", "tysięcy")
+            }
+        case 6: 
+            if above == 1 {
+                ret = _0_999(above) + " " + "milion"
+            } else {
+                ret = _0_999(above) + " " + use(above, "miliony", "milionów")
+            }
+        default:
+            fatalError("wrong groupindex \(groupIndex)")
+        }
+        if below > 0 {
+            switch groupIndex {
+            case 3:
+                ret += " " + _0_999(below)
+            case 6:
+                if below.E3 > 0 {
+                    ret += " " + group(3, below.E3, below: below.E3x)
+                } else {
+                    ret += " " + _0_999(below)
+                }
+            default:
+                fatalError("wrong groupindex \(groupIndex)")
+            }
+        }
         return ret
     }
     
-    override func read_e6_e9(_ i: Int) -> String {
-        var ret = read_1_(i.E6) + " " + use(i.E6, "miliony", "milionów")
-        if i.E6 == 1 { ret = "jeden milion" }
-        if i.E6x > 0 { ret += " " + read_1_(i.E6x) }
-        return ret
-    }
-    
-    override func read_e9_e12(_ i: Int) -> String {
-        var ret = read_1_(i.E9) + " " + use(i.E9, "miliardy", "miliardów")
-        if i.E9 == 1 { ret = "jeden miliard" }
-        if i.E9x > 0 { ret += " " + read_1_(i.E9x) }
-        return ret
-    }
-    
-    override func read_e12_e15(_ i: Int) -> String {
-        var ret = read_1_(i.E12) + " " + use(i.E12, "biliony", "bilionów")
-        if i.E12 == 1 { ret = "jeden bilion" }
-        if i.E12x > 0 { ret += " " + read_1_(i.E12x) }
-        return ret
-    }
+//
+//    override func read_e2_e3(_ i: Int) -> String {
+//        var ret = ""
+//        switch i.E2 {
+//        case 1:
+//            ret = "sto"
+//        case 2:
+//            ret = "dwieście"
+//        case 3, 4:
+//            ret = read_1_9(i.E2) + "sta"
+//        default:
+//            ret = read_1_9(i.E2) + "set"
+//        }
+//        if i.E2x > 0 {
+//            if ret.count > 0 { ret += " " }
+//            ret += read_1_(i.E2x)
+//        }
+//        return ret
+//    }
+//    
+//    private func use(_ i: Int, _ s1: String, _ s2: String) -> String {
+//        var use1 = false
+//        switch i % 10 {
+//        case 2, 3, 4:
+//            use1 = true
+//        default:
+//            use1 = false
+//        }
+//        switch i % 100 {
+//        case 11, 12, 13, 14:
+//            use1 = false
+//        default:
+//            break
+//        }
+//        return use1 ? s1 : s2
+//    }
+//    
+//    override func read_e3_e6(_ i: Int) -> String {
+//        var ret = read_1_(i.E3) + " " + use(i.E3, "tysiące", "tysięcy")
+//        if i.E3 == 1 { ret = "tysiąc" }
+//        if i.E3x > 0 { ret += " " + read_1_(i.E3x) }
+//        return ret
+//    }
+//    
+//    override func read_e6_e9(_ i: Int) -> String {
+//        var ret = read_1_(i.E6) + " " + use(i.E6, "miliony", "milionów")
+//        if i.E6 == 1 { ret = "jeden milion" }
+//        if i.E6x > 0 { ret += " " + read_1_(i.E6x) }
+//        return ret
+//    }
+//    
+//    override func read_e9_e12(_ i: Int) -> String {
+//        var ret = read_1_(i.E9) + " " + use(i.E9, "miliardy", "miliardów")
+//        if i.E9 == 1 { ret = "jeden miliard" }
+//        if i.E9x > 0 { ret += " " + read_1_(i.E9x) }
+//        return ret
+//    }
+//    
+//    override func read_e12_e15(_ i: Int) -> String {
+//        var ret = read_1_(i.E12) + " " + use(i.E12, "biliony", "bilionów")
+//        if i.E12 == 1 { ret = "jeden bilion" }
+//        if i.E12x > 0 { ret += " " + read_1_(i.E12x) }
+//        return ret
+//    }
 }

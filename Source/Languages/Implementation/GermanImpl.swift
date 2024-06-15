@@ -35,10 +35,10 @@ class GermanImpl: LanguageGroup3 {
         if hundreds == 1 {
             ret = "einhundert"
         } else {
-            ret = _1_99(hundreds, isLargestGroup: false) + "hundert"
+            ret = _1_99(hundreds) + "hundert"
         }
         if below > 0 {
-            ret += _1_99(below, isLargestGroup: false)
+            ret += _1_99(below)
         }
         return ret
     }
