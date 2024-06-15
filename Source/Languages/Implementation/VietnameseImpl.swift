@@ -43,7 +43,7 @@ class VietnameseImpl: LanguageGroup3 {
         postProcessing = vietnamesePostProcessing
     }
     
-    override func hundred(_ hundreds: Int, below: Int) -> String {
+    override func _100_999(_ hundreds: Int, below: Int) -> String {
         var ret = _1_99(hundreds, isLargestGroup: true) + " trăm"
         if below > 0 {
             ret += " " + _1_99(below, isLargestGroup: false)
@@ -52,14 +52,39 @@ class VietnameseImpl: LanguageGroup3 {
     }
     
     override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
-        var ret = _0_999(above) + " " + vietnameseThousand.rawValue
-        if below > 0 {
-            if below <= 9 {
-                ret += " không trăm " + secondLast.rawValue
-            } else if below <= 99 {
-                ret += " không trăm"
+        var ret: String = ""
+        switch groupIndex {
+        case 3:
+            ret = _0_999(above) + " " + vietnameseThousand.rawValue
+            if below > 0 {
+                if below <= 9 {
+                    ret += " không trăm " + secondLast.rawValue
+                } else if below <= 99 {
+                    ret += " không trăm"
+                }
+                ret += " " + _0_999(below)
             }
-            ret += " " + _0_999(below)
+        case 6:
+            ret = _0_999(above) + " triệu"
+            if below > 0 {
+                if below.E3 > 0 {
+                    if below.E3 <= 9 {
+                        ret += " không trăm " + secondLast.rawValue
+                    } else if below.E3 <= 99 {
+                        ret += " không trăm"
+                    }
+                    ret += " " + group(3, below.E3, below: below.E3x)
+                } else {
+                    if below <= 9 {
+                        ret += " không trăm " + secondLast.rawValue
+                    } else if below <= 99 {
+                        ret += " không trăm"
+                    }
+                    ret += " " + _0_999(below)
+                }
+            }
+        default:
+            fatalError("wrong groupindex \(groupIndex)")
         }
         return ret
     }

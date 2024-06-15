@@ -30,7 +30,7 @@ class GermanImpl: LanguageGroup3 {
         postProcessing = germanPostProcessing
     }
     
-    override func hundred(_ hundreds: Int, below: Int) -> String {
+    override func _100_999(_ hundreds: Int, below: Int) -> String {
         var ret: String
         if hundreds == 1 {
             ret = "einhundert"

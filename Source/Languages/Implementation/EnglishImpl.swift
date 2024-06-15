@@ -22,7 +22,7 @@ class EnglishImpl: LanguageGroup3 {
         _11_99_connector.name = "-"
     }
     
-    override func hundred(_ hundreds: Int, below: Int) -> String {
+    override func _100_999(_ hundreds: Int, below: Int) -> String {
         var ret = _1_99(hundreds, isLargestGroup: false) + " hundred"
         if below > 0 {
             ret += " " + _1_99(below, isLargestGroup: false)

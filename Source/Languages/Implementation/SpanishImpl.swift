@@ -35,7 +35,7 @@ class SpanishImpl: LanguageGroup3 {
         puntoComma = puntoComma
     }
 
-    override func hundred(_ hundreds: Int, below: Int) -> String {
+    override func _100_999(_ hundreds: Int, below: Int) -> String {
         var ret: String = ""
         switch hundreds {
         case 1:

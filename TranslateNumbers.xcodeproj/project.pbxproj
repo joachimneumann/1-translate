@@ -57,6 +57,8 @@
 		AAB10B9C292A2222004707E9 /* NonScientificKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB10B96292A2222004707E9 /* NonScientificKeyboard.swift */; };
 		AAB253B52B3AE79500860F93 /* Languages.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB253B42B3AE79400860F93 /* Languages.swift */; };
 		AABEFC132972A8780023A3C9 /* KeyColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABEFC122972A8780023A3C9 /* KeyColor.swift */; };
+		AAD411292C1D3F9700B67D7C /* PolishImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD411282C1D3F9700B67D7C /* PolishImpl.swift */; };
+		AAD4112A2C1D3F9700B67D7C /* PolishImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD411282C1D3F9700B67D7C /* PolishImpl.swift */; };
 		AAE426F729597AE3005FE365 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE426F629597AE3005FE365 /* Screen.swift */; };
 		AAEF2FB92B20D54B0012DDDD /* Separators.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEF2FB82B20D54B0012DDDD /* Separators.swift */; };
 		AAF472672B452BD000E7B986 /* Voices.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF472662B452BD000E7B986 /* Voices.swift */; };
@@ -134,6 +136,7 @@
 		AAB253B42B3AE79400860F93 /* Languages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Languages.swift; sourceTree = "<group>"; };
 		AABEFC122972A8780023A3C9 /* KeyColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyColor.swift; sourceTree = "<group>"; };
 		AACCD0772B43A89A00D545C5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = "../1-translate-tests/README.md"; sourceTree = "<group>"; };
+		AAD411282C1D3F9700B67D7C /* PolishImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolishImpl.swift; sourceTree = "<group>"; };
 		AAE426F629597AE3005FE365 /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
 		AAEF2FB82B20D54B0012DDDD /* Separators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Separators.swift; sourceTree = "<group>"; };
 		AAF472662B452BD000E7B986 /* Voices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voices.swift; sourceTree = "<group>"; };
@@ -262,6 +265,7 @@
 		AAB253BB2B3BBAD400860F93 /* Implementation */ = {
 			isa = PBXGroup;
 			children = (
+				AAD411282C1D3F9700B67D7C /* PolishImpl.swift */,
 				AA16CFAE2C1C79D10023D79E /* ArabicNumeralsImpl.swift */,
 				AA16CFA82C1C79920023D79E /* ArmenianNumeralsImpl.swift */,
 				AA16CF9F2C1C764C0023D79E /* DigitsImpl.swift */,
@@ -403,6 +407,7 @@
 				AA29F58A293CD608001ADF5A /* PortraitDisplay.swift in Sources */,
 				AA3565B02B32588B009B58D2 /* Language.swift in Sources */,
 				AA8A91142B1D7FD000CE7185 /* TranslatedDisplay.swift in Sources */,
+				AAD411292C1D3F9700B67D7C /* PolishImpl.swift in Sources */,
 				AAF472672B452BD000E7B986 /* Voices.swift in Sources */,
 				AA2FAC17272F2349006DE4C8 /* BrainEngine.swift in Sources */,
 				AAB253B52B3AE79500860F93 /* Languages.swift in Sources */,
@@ -447,6 +452,7 @@
 				AAA553792C19D3E8001ED86E /* german.swift in Sources */,
 				AAA553772C19B73F001ED86E /* languageTest.swift in Sources */,
 				AAF9EC292B4A51C4007D0B1D /* VietnameseImpl.swift in Sources */,
+				AAD4112A2C1D3F9700B67D7C /* PolishImpl.swift in Sources */,
 				AAA3C3082C1C325D0071FBE4 /* spanish.swift in Sources */,
 				AAF9EC182B4A5094007D0B1D /* Languages.swift in Sources */,
 			);

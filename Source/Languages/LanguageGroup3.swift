@@ -61,7 +61,7 @@ struct Connector {
 //    var connector_13_12: Connector = Connector()
     var _11_99_inverted = false
 
-    func hundred(_ hundreds: Int, below: Int) -> String {
+    func _100_999(_ hundreds: Int, below: Int) -> String {
         fatalError("hundred() not implmented")
     }    
     func group(_ groupIndex: Int, _ thousands: Int, below: Int) -> String {
@@ -98,7 +98,7 @@ struct Connector {
 
     func _0_999(_ i: Int, isLargestGroup: Bool = false) -> String {
         if i <= 9 {
-            return _0_9(i) // from Language
+            return _0_9(i) // implemented in Language
         }
         
         if i <= 99 {
@@ -106,7 +106,7 @@ struct Connector {
         }
         
         if i <= 999 {
-            return hundred(i.E2, below: i.E2x)
+            return _100_999(i.E2, below: i.E2x)
         }
 
         return "ERROR in NewLanguageGroup3._0_999()"
@@ -125,9 +125,6 @@ struct Connector {
             return group(6, i.E6, below: i.E6x)
         }
 
-//        if i <= 999_999_999 {
-//        if i <= 999_999_999_999 {
-//        if i <= 999_999_999_999_999 {
         return "ERROR in NewLanguageGroup3.read_positive()"
     }
     
