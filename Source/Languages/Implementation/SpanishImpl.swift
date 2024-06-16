@@ -55,65 +55,39 @@ class SpanishImpl: LanguageGroup3 {
         return ret
     }
     
-    override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
-        var ret: String = ""
+    private func groupName(_ groupIndex: Int, _ isOne: Bool) -> String {
         switch groupIndex {
         case 3:
-            if above == 1 {
-                ret = "mil"
-            } else {
-                ret = read_positive(above) + " mil"
-            }
-            if below > 0 {
-                ret += " " + read_positive(below)
-            }
+            return "mil"
         case 6:
-            if above == 1 {
-                ret = "un millón"
+            if isOne {
+                return "un millón"
             } else {
-                ret = read_positive(above) + " millones"
-            }
-            if below > 0 {
-                if below.E3 > 0 {
-                    ret += " " + group(3, below.E3, below: below.E3x)
-                } else {
-                    ret += " " + read_positive(below)
-                }
+                return "millones"
             }
         case 9:
-            if above == 1 {
-                ret = "mil millones"
-            } else {
-                ret = read_positive(above) + " mil millones"
-            }
-            if below > 0 {
-                if below.E6 > 0 {
-                    ret += " " + group(6, below.E6, below: below.E6x)
-                } else if below.E3 > 0 {
-                    ret += " " + group(3, below.E3, below: below.E3x)
-                } else {
-                    ret += " " + read_positive(below)
-                }
-            }
+            return "mil millones"
         case 12:
-            if above == 1 {
-                ret = "un billón"
+            if isOne {
+                return "un billón"
             } else {
-                ret = read_positive(above) + " billiones"
+                return "billiones"
             }
-            if below > 0 {
-                if below.E9 > 0 {
-                    ret += " y " + group(9, below.E9, below: below.E9x)
-                } else if below.E6 > 0 {
-                    ret += " y " + group(6, below.E6, below: below.E6x)
-                } else if below.E3 > 0 {
-                    ret += " y " + group(3, below.E3, below: below.E3x)
-                } else {
-                    ret += " y " + read_positive(below)
-                }
-            }
-        default:
-            fatalError("wrong groupindex \(groupIndex)")
+        default: return "ERROR in Spanish Group"
+        }
+    }
+
+    override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
+        var ret: String = ""
+        
+        if above == 1 {
+            ret = groupName(groupIndex, true)
+        } else {
+            ret = read_positive(above) + " " + groupName(groupIndex, false)
+        }
+        if below > 0 {
+            ret += groupIndex == 12 ? " y " : " "
+            ret += read_positive(below)
         }
         return ret
     }

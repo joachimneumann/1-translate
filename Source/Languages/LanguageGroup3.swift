@@ -50,23 +50,13 @@ import Foundation
         }
         
         if i <= 999 {
-            return _100_999(i.E2, below: i.E2x)
+            return _100_999(i.E(2), below: i.Ex(2))
         }
 
-        if i <= 999_999 {
-            return group(3, i.E3, below: i.E3x)
-        }
-
-        if i <= 999_999_999 {
-            return group(6, i.E6, below: i.E6x)
-        }
-
-        if i <= 999_999_999_999 {
-            return group(9, i.E9, below: i.E9x)
-        }
-
-        if i <= 999_999_999_999_999 {
-            return group(12, i.E12, below: i.E12x)
+        for exponent in stride(from: 3, to: 15, by: 3){
+            if i <= (exponent+3).pow10 - 1 {
+                return group(exponent, i.E(exponent), below: i.Ex(exponent))
+            }
         }
 
         return "ERROR in NewLanguageGroup3.read_positive()"

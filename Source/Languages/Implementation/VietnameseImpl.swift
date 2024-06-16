@@ -40,6 +40,7 @@ class VietnameseImpl: LanguageGroup3 {
         nameDescription = "Vietnamese"
         _20_99_connector = " "
         secondLast = secondLast
+        vietnameseThousand = vietnameseThousand
     }
     
     override func _100_999(_ hundreds: Int, below: Int) -> String {

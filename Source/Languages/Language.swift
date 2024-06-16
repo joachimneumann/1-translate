@@ -133,6 +133,16 @@ struct Translation {
 }
 
 extension Int {
+    func E(_ i: Int) -> Int {
+        let factor = Int(pow(10.0, Double(i)))
+        return self / factor
+    }
+    func Ex(_ i: Int) -> Int {
+        let factor = Int(pow(10.0, Double(i)))
+        
+        return self - self / factor * factor
+    }
+    var pow10: Int { Int(pow(10.0, Double(self))) }
     var E1: Int { self / 10 }
     var E1x: Int { self - self / 10 * 10 }
     var E2: Int { self / 100 }
