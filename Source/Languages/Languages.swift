@@ -29,7 +29,7 @@ class Languages {
 //    let chineseFinancial    = ChineseImpl(variant: .financial)
 //    let chineseSimplified   = ChineseImpl(variant: .simplified)
 //    let chineseTraditional  = ChineseImpl(variant: .traditional)
-//    let danish              = DanishImpl()
+    let danish              = DanishImpl()
     let digits              = DigitsImpl()
     var english             = EnglishImpl()
 //    var esperanto           = EsperantoImpl()

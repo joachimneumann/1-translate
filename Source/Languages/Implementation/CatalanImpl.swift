@@ -34,21 +34,6 @@ class CatalanImpl: LanguageGroup3 {
         return ret
     }
     
-    override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
-        var ret: String = ""
-        
-        if above == 1 {
-            ret = groupName(groupIndex, true)
-        } else {
-            ret = read_positive(above) + " " + groupName(groupIndex, false)
-        }
-        if below > 0 {
-            ret += groupIndex == 12 ? " y " : " "
-            ret += read_positive(below)
-        }
-        return ret
-    }
-    
     private func groupName(_ groupIndex: Int, _ isOne: Bool) -> String {
         switch groupIndex {
         case 3:
@@ -71,7 +56,21 @@ class CatalanImpl: LanguageGroup3 {
         }
     }
 
-    
+    override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
+        var ret: String = ""
+        
+        if above == 1 {
+            ret = groupName(groupIndex, true)
+        } else {
+            ret = read_positive(above) + " " + groupName(groupIndex, false)
+        }
+        if below > 0 {
+            ret += groupIndex == 12 ? " y " : " "
+            ret += read_positive(below)
+        }
+        return ret
+    }
+
     override func _0_9(_ i: Int) -> String {
         switch i {
         case 0:  return zero!

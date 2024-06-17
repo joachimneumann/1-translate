@@ -7,7 +7,7 @@
 
 import Foundation
 
-class DanishImpl: Language {
+class DanishImpl: LanguageGroup3 {
 
     init() {
         super.init(
@@ -18,21 +18,21 @@ class DanishImpl: Language {
             exponentString: " gange ti i ")
         
         voiceLanguageCode = "da"
-        e2 = "hundrede"
-        e2_one = "hundred"
-        afterGroup = " og"
-        e3 = "tusinde"
-        e3_one = "ettusind"
-        e6 = "millioner"
-        e6_one = "en million"
-        e9 = "milliarder"
-        e9_one = "en milliard"
-        e12 = "billioner"
-        e12_one = "en billion"
-        eSpace = " "
+//        e2 = "hundrede"
+//        e2_one = "hundred"
+//        afterGroup = " og"
+//        e3 = "tusinde"
+//        e3_one = "ettusind"
+//        e6 = "millioner"
+//        e6_one = "en million"
+//        e9 = "milliarder"
+//        e9_one = "en milliard"
+//        e12 = "billioner"
+//        e12_one = "en billion"
+//        eSpace = " "
     }
 
-    override func read_1_9(_ i: Int) -> String {
+    override func _0_9(_ i: Int) -> String {
         switch i {
         case 1:     return "en"
         case 2:     return "to"
@@ -43,11 +43,12 @@ class DanishImpl: Language {
         case 7:     return "syv"
         case 8:     return "otte"
         case 9:     return "ni"
-        default: return "read_0_9: outside range"
+        default:
+            fatalError("_0_9() parameter \(i)")
         }
     }
     
-    override func read_10s(_ i: Int) -> String {
+    override func _10s(_ i: Int) -> String {
         switch i {
         case 1:     return "ti"
         case 2:     return "tyve"
@@ -58,90 +59,100 @@ class DanishImpl: Language {
         case 7:     return "halvfjerds"
         case 8:     return "firs"
         case 9:     return "halvfems"
-        default: return "read_10s: outside range"
+        default:
+            fatalError("_0_9() parameter \(i)")
         }
     }
 
-    override func read_10_99(_ i: Int) -> String {
-        if i == 11 { return "elleve" }
-        if i == 12 { return "tolv" }
-        if i == 13 { return "tretten" }
-        if i == 14 { return "fjorten" }
-        if i == 15 { return "femten" }
-        if i == 16 { return "seksten" }
-        if i == 17 { return "sytten" }
-        if i == 18 { return "atten" }
-        if i == 19 { return "nitten" }
-        // reversed order
-        return (i.E1x > 0 ? read_1_9(i.E1x) + "og" : "") + read_10s(i.E1)
+    override func _10_19(_ i: Int) -> String {
+        switch i {
+        case 10: return _10s(1)
+        case 11: return "elleve"
+        case 12: return "tolv"
+        case 13: return "tretten"
+        case 14: return "fjorten"
+        case 15: return "femten"
+        case 16: return "seksten"
+        case 17: return "sytten"
+        case 18: return "atten"
+        case 19: return "nitten"
+        default:
+            fatalError("_10_19() parameter \(i)")
+        }
     }
     
-    override func read_e3_e6(_ i: Int) -> String {
-        var ret = ""
-        if i.E3 == 1 {
-            ret = e3_one!
-        } else {
-            ret = read_1_(i.E3)
-            if i.E3 >= 100 && i.E3 < 200 {
-                ret = ret.replacingOccurrences(of: "hundred", with: "hundrede")
-            }
-            ret += " " + e3!
-        }
-        if i.E3x > 0 {
-            ret += " og " + read_1_(i.E3x)
+    override func _20_99(_ i: Int) -> String {
+        let first = i / 10
+        let rest = i - 10 * first
+        var ret = _10s(first)
+        if rest > 0 {
+            ret =  _0_9(rest) + "og" + ret
         }
         return ret
     }
 
-    override func read_e6_e9(_ i: Int) -> String {
-        var ret = ""
-        if i.E6 == 1 {
-            ret = e6_one!
+    override func _100_999(_ hundreds: Int, below: Int) -> String {
+        var ret: String = ""
+        if hundreds == 1 {
+            ret = "hundred"
         } else {
-            ret = read_1_(i.E6)
-            if i.E6 >= 100 && i.E6 < 200 {
-                ret = ret.replacingOccurrences(of: "hundred", with: "hundrede")
-            }
-            ret += " " + e6!
+            ret = read_positive(hundreds) + " hundrede"
         }
-        if i.E6x > 0 {
-            ret += " og " + read_1_(i.E6x)
+        if below > 0 {
+            ret += " og " + read_positive(below)
         }
         return ret
     }
 
-    override func read_e9_e12(_ i: Int) -> String {
-        var ret = ""
-        if i.E9 == 1 {
-            ret = e9_one!
-        } else {
-            ret = read_1_(i.E9)
-            if i.E9 >= 100 && i.E9 < 200 {
-                ret = ret.replacingOccurrences(of: "hundred", with: "hundrede")
+    private func groupName(_ groupIndex: Int, _ isOne: Bool) -> String {
+        switch groupIndex {
+        case 3:
+            if isOne {
+                return "ettusind"
+            } else {
+                return "tusinde"
             }
-            ret += " " + e9!
+        case 6:
+            if isOne {
+                return "en million"
+            } else {
+                return "millioner"
+            }
+        case 9:
+            if isOne {
+                return "en milliard"
+            } else {
+                return "milliarder"
+            }
+        case 12:
+            if isOne {
+                return "en billion"
+            } else {
+                return "billioner"
+            }
+        default: return "ERROR in Danish Group"
         }
-        if i.E9x > 0 {
-            ret += " og " + read_1_(i.E9x)
+    }
+
+    override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
+        var ret: String = ""
+        
+        if above == 1 {
+            ret = groupName(groupIndex, true)
+        } else {
+            if above / 100 == 1 {
+                ret = read_positive(above).replacingOccurrences(of: "hundred", with: "hundrede")
+            } else {
+                ret = read_positive(above)
+            }
+            ret += " " + groupName(groupIndex, false)
+        }
+        if below > 0 {
+            ret += " og "
+            ret += read_positive(below)
         }
         return ret
     }
-    
-    override func read_e12_e15(_ i: Int) -> String {
-        var ret = ""
-        if i.E12 == 1 {
-            ret = e12_one!
-        } else {
-            ret = read_1_(i.E12)
-            if i.E12 >= 100 && i.E12 < 200 {
-                ret = ret.replacingOccurrences(of: "hundred", with: "hundrede")
-            }
-            ret += " " + e12!
-        }
-        if i.E12x > 0 {
-            ret += " og " + read_1_(i.E12x)
-        }
-        return ret
-    }
+
 }
 
