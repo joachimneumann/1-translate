@@ -15,6 +15,7 @@ class EsperantoImpl: LanguageGroup3 {
             negativeString: "minus",
             dotString: "kaj",
             exponentString: " EE ")
+        _20_99_connector = " "
 //        tensConnector = " "
 //        e2 = "cent"
 //        e2_one = e2
@@ -47,15 +48,62 @@ class EsperantoImpl: LanguageGroup3 {
         }
     }
     
-    override func read_10s(_ i: Int) -> String {
+    override func _10s(_ i: Int) -> String {
         if i == 1 { return "dek"}
-        return read_1_9(i) + "dek"
+        return _0_9(i) + "dek"
     }
     
-    override func read_e2_e3(_ i: Int) -> String {
-        var ret = super.read_e2_e3(i)
-        ret = ret.replacingOccurrences(of: " cent", with: "cent")
+    override func _100_999(_ hundreds: Int, below: Int) -> String {
+        var ret = ""
+        if hundreds == 1 {
+            ret = "cent"
+        } else {
+            ret = read_positive(hundreds) + "cent"
+        }
+        if below > 0 {
+            ret += " " + read_positive(below)
+        }
         return ret
     }
     
+    private func groupName(_ groupIndex: Int, _ isOne: Bool) -> String {
+        switch groupIndex {
+        case 3:
+            return "mil"
+        case 6:
+            if isOne {
+                return "miliono"
+            } else {
+                return "milionoj"
+            }
+        case 9:
+            if isOne {
+                return "miliardo"
+            } else {
+                return "miliardoj"
+            }
+        case 12:
+            if isOne {
+                return "biliono"
+            } else {
+                return "bilionoj"
+            }
+        default: return "ERROR in Esperanto Group"
+        }
+    }
+
+    override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
+        var ret: String = ""
+        
+        if above == 1 {
+            ret = groupName(groupIndex, true)
+        } else {
+            ret = read_positive(above) + " " + groupName(groupIndex, false)
+        }
+        if below > 0 {
+            ret += " " + read_positive(below)
+        }
+        return ret
+    }
+
 }
