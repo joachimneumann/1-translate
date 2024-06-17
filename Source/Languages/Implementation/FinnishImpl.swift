@@ -7,7 +7,7 @@
 
 import Foundation
 
-class FinnishImpl: Language {
+class FinnishImpl: LanguageGroup3 {
     init() {
         super.init(
             name: "Suomalainen",
@@ -17,22 +17,10 @@ class FinnishImpl: Language {
             exponentString: " EE ")
         nameDescription = "Finnish"
         voiceLanguageCode = "fi"
-        e2 = "sataa"
-        e2_one = "sata"
-        e3 = "tuhatta"
-        e3_one = "tuhat"
-        e6 = "miljoonaa"
-        e6_one = "miljoona"
-        e9 = "miljardia"
-        e9_one = "miljardi"
-        e12 = "biljoonaa"
-        e12_one = "biljoona"
-        e3Space = Languages.WordSplitter
-        e69Space = " "
     }
 
 
-    override func read_1_9(_ i: Int) -> String {
+    override func _0_9(_ i: Int) -> String {
         switch i {
         case 1: return "yksi"
         case 2: return "kaksi"
@@ -47,29 +35,89 @@ class FinnishImpl: Language {
         }
     }
     
-    override func read_10s(_ i: Int) -> String {
+    override func _10s(_ i: Int) -> String {
         if i == 1 { return "toista" } //kymmenen"}
-        return read_1_9(i) + Languages.WordSplitter + "kymmentä"
+        return _0_9(i) + Languages.WordSplitter + "kymmentä"
     }
     
-    override func read_10_99(_ i: Int) -> String {
+    override func _20_99(_ i: Int) -> String {
+        let first = i / 10
+        let rest = i - 10 * first
         if i == 10 { return "kymmenen" }
-        var ret = read_10s(i.E1)
+        var ret = _10s(first)
         if i < 20 {
-            if i.E1x > 0 {
-                ret = read_1_9(i.E1x) + Languages.WordSplitter + ret
+            if rest > 0 {
+                ret = _0_9(rest) + Languages.WordSplitter + ret
             }
         } else {
-            if i.E1x > 0 {
-                ret += Languages.WordSplitter + read_1_9(i.E1x)
+            if rest > 0 {
+                ret += Languages.WordSplitter + _0_9(rest)
             }
         }
         return ret
     }
-    override func read_e2_e3(_ i: Int) -> String {
-        var ret = super.read_e2_e3(i)
-        ret = ret.replacingOccurrences(of: " cent", with: "cent")
+    
+    override func _100_999(_ hundreds: Int, below: Int) -> String {
+        var ret: String = ""
+        if hundreds == 1 {
+            ret = "sata"
+        } else {
+            ret = read_positive(hundreds) + "sataa"
+        }
+        if below > 0 {
+            ret += read_positive(below)
+        }
         return ret
     }
-    
+
+    private func groupName(_ groupIndex: Int, _ isOne: Bool) -> String {
+        switch groupIndex {
+        case 3:
+            if isOne {
+                return "tuhat"
+            } else {
+                return "tuhatta"
+            }
+        case 6:
+            if isOne {
+                return "miljoona"
+            } else {
+                return "miljoonaa"
+            }
+        case 9:
+            if isOne {
+                return "miljardi"
+            } else {
+                return "miljardia"
+            }
+        case 12:
+            if isOne {
+                return "biljoona"
+            } else {
+                return "biljoonaa"
+            }
+        default: return "ERROR in Finnish Group"
+        }
+    }
+
+    override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
+        var ret: String = ""
+        
+        if above == 1 {
+            ret = groupName(groupIndex, true)
+        } else {
+            ret = read_positive(above)
+            if groupIndex >= 6 {
+                ret += " "
+            }
+            ret += groupName(groupIndex, false)
+        }
+        if below > 0 {
+            if groupIndex >= 6 {
+                ret += " "
+            }
+            ret += read_positive(below)
+        }
+        return ret
+    }
 }

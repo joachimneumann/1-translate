@@ -34,7 +34,7 @@ class Languages {
     var english             = EnglishImpl()
 //    var esperanto           = EsperantoImpl()
     var spanish             = SpanishImpl()
-//    let finnish             = FinnishImpl()
+    let finnish             = FinnishImpl()
 //    let french              = FrenchImpl()
     var german              = GermanImpl()
 //    var hieroglyphs         = HieroglyphsImpl()
