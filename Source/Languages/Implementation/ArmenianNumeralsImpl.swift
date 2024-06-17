@@ -96,23 +96,29 @@ class ArmenianNumeralsImpl: Language {
         }
         var ret = ""
         if i <= 99 {
-            ret = read_armenianTens(i.E1)
-            if i.E1x > 0 {
-                ret += read_armenian_1_9(i.E1x)
+            let first = i / 10
+            let rest = i - i / 10 * 10
+            ret = read_armenianTens(first)
+            if rest > 0 {
+                ret += read_armenian_1_9(rest)
             }
             return ret
         }
         if i <= 999 {
-            ret = read_armenianHundreds(i.E2)
-            if i.E2x > 0 {
-                ret += read_positive(i.E2x)
+            let first = i / 100
+            let rest = i - i / 100 * 100
+            ret = read_armenianHundreds(first)
+            if rest > 0 {
+                ret += read_positive(rest)
             }
             return ret
         }
         if i <= 9_999 {
-            ret = read_armenianThousands(i.E3)
-            if i.E3x > 0 {
-                ret += read_positive(i.E3x)
+            let first = i / 1000
+            let rest = i - i / 1000 * 1000
+            ret = read_armenianThousands(first)
+            if rest > 0 {
+                ret += read_positive(rest)
             }
             return ret
         }
