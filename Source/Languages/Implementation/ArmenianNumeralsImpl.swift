@@ -97,7 +97,7 @@ class ArmenianNumeralsImpl: Language {
         var ret = ""
         if i <= 99 {
             let first = i / 10
-            let rest = i - i / 10 * 10
+            let rest = i - 10 * first
             ret = read_armenianTens(first)
             if rest > 0 {
                 ret += read_armenian_1_9(rest)
@@ -106,7 +106,7 @@ class ArmenianNumeralsImpl: Language {
         }
         if i <= 999 {
             let first = i / 100
-            let rest = i - i / 100 * 100
+            let rest = i - 100 * first
             ret = read_armenianHundreds(first)
             if rest > 0 {
                 ret += read_positive(rest)
@@ -115,7 +115,7 @@ class ArmenianNumeralsImpl: Language {
         }
         if i <= 9_999 {
             let first = i / 1000
-            let rest = i - i / 1000 * 1000
+            let rest = i - 1000 * first
             ret = read_armenianThousands(first)
             if rest > 0 {
                 ret += read_positive(rest)
