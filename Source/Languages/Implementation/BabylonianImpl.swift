@@ -45,8 +45,10 @@ class BabylonianImpl: Language {
     }
     
     private func representation(_ i: Int) -> String {
+        let first = i / 10
+        let rest = i - 10 * first
         var ret = ""
-        switch i.E1 {
+        switch first {
         case 0: break
         case 1: ret += Self.symbolTen
         case 2: ret += Self.symbolTwenty
@@ -55,7 +57,7 @@ class BabylonianImpl: Language {
         case 5: ret += Self.symbolFifty
         default: fatalError("representation: outside")
         }
-        switch i.E1x {
+        switch rest {
         case 0: break
         case 1: ret += Self.symbolOne
         case 2: ret += Self.symbolTwo
@@ -71,7 +73,7 @@ class BabylonianImpl: Language {
         return ret
     }
     
-    override func read_1_(_ i: Int) -> String {
+    override func read_positive(_ i: Int) -> String {
         if i > 60*60*60*60 {
             return "too big"
         }        

@@ -21,7 +21,6 @@ class SpanishImpl: LanguageGroup3 {
     }
     
     init() {
-
         super.init(
             name: "Español",
             zero: "cero",
