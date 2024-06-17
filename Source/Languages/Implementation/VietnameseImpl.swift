@@ -54,50 +54,47 @@ class VietnameseImpl: LanguageGroup3 {
         return ret
     }
     
-    override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
-        var ret: String = read_positive(above)
+    private func groupName(_ groupIndex: Int) -> String {
         switch groupIndex {
+        case 0:
+            return ""
         case 3:
-            ret += " " + vietnameseThousand.rawValue
+            return " " + vietnameseThousand.rawValue
         case 6:
-            ret += " triệu"
+            return " triệu"
         case 9:
-            ret += " tỷ"
+            return " tỷ"
         case 12:
-            ret += " " + vietnameseThousand.rawValue + " tỷ"
-        default:
-            fatalError("wrong groupindex \(groupIndex)")
+            return " " + vietnameseThousand.rawValue + " tỷ"
+        default: return "ERROR in English Group"
         }
-        if below > 0 {
-            if below.E9 > 0 {
-                if below.E9 <= 9 {
-                    ret += " không trăm " + secondLast.rawValue
-                } else if below.E9 <= 99 {
-                    ret += " không trăm"
-                }
-                ret += " " + group(9, below.E9, below: below.E9x)
-            } else if below.E6 > 0 {
-                if below.E6 <= 9 {
-                    ret += " không trăm " + secondLast.rawValue
-                } else if below.E6 <= 99 {
-                    ret += " không trăm"
-                }
-                ret += " " + group(6, below.E6, below: below.E6x)
-            } else if below.E3 > 0 {
-                if below.E3 <= 9 {
-                    ret += " không trăm " + secondLast.rawValue
-                } else if below.E3 <= 99 {
-                    ret += " không trăm"
-                }
-                ret += " " + group(3, below.E3, below: below.E3x)
-            } else {
-                if below <= 9 {
-                    ret += " không trăm " + secondLast.rawValue
-                } else if below <= 99 {
-                    ret += " không trăm"
-                }
-                ret += " " + read_positive(below)
+    }
+    
+    private func notLargestGroup(_ groupIndex: Int, _ i: Int) -> String {
+        var ret = ""
+        let above = i.E(groupIndex)
+        let below = i.Ex(groupIndex)
+        if above == 0 {
+            ret += notLargestGroup(groupIndex - 3, i)
+        } else {
+            if above <= 9 {
+                ret += " không trăm " + secondLast.rawValue
+            } else if above <= 99 {
+                ret += " không trăm"
             }
+            ret += " " + read_positive(above)
+            ret += groupName(groupIndex)
+            if groupIndex >= 3 && below > 0 {
+                ret += notLargestGroup(groupIndex - 3, below)
+            }
+        }
+        return ret
+    }
+        
+    override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
+        var ret = read_positive(above) + groupName(groupIndex)
+        if below > 0 {
+            ret += notLargestGroup(groupIndex - 3, below)
         }
         return ret
     }

@@ -30,48 +30,24 @@ class EnglishImpl: LanguageGroup3 {
         return ret
     }
     
-    override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
-        let name: String
+    private func groupName(_ groupIndex: Int) -> String {
         switch groupIndex {
-        case 3: name = "thousand"
-        case 6: name = "million"
-        case 9: name = "billion"
-        case 12: name = "trillion"
-        default:
-            fatalError("wrong groupindex \(groupIndex)")
+        case 3:
+            return "thousand"
+        case 6:
+            return "million"
+        case 9:
+            return "billion"
+        case 12:
+            return "trillion"
+        default: return "ERROR in English Group"
         }
-        var ret = read_positive(above) + " " + name
+    }
+    
+    override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
+        var ret = read_positive(above) + " " + groupName(groupIndex)
         if below > 0 {
-            switch groupIndex {
-            case 3:
-                ret += " " + read_positive(below)
-            case 6:
-                if below.E3 > 0 {
-                    ret += " " + group(3, below.E3, below: below.E3x)
-                } else {
-                    ret += " " + read_positive(below)
-                }
-            case 9:
-                if below.E6 > 0 {
-                    ret += " " + group(6, below.E6, below: below.E6x)
-                } else if below.E3 > 0 {
-                    ret += " " + group(3, below.E3, below: below.E3x)
-                } else {
-                    ret += " " + read_positive(below)
-                }
-            case 12:
-                if below.E9 > 0 {
-                    ret += " " + group(9, below.E9, below: below.E9x)
-                } else if below.E6 > 0 {
-                    ret += " " + group(6, below.E6, below: below.E6x)
-                } else if below.E3 > 0 {
-                    ret += " " + group(3, below.E3, below: below.E3x)
-                } else {
-                    ret += " " + read_positive(below)
-                }
-            default:
-                fatalError("wrong groupindex \(groupIndex)")
-            }
+            ret += " " + read_positive(below)
         }
         return ret
     }

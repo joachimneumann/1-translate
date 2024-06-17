@@ -49,61 +49,49 @@ class GermanImpl: LanguageGroup3 {
         return ret
     }
     
-    override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
-        var ret: String = ""
+    private func groupName(_ groupIndex: Int, _ isOne: Bool) -> String {
         switch groupIndex {
         case 3:
-            ret = read_positive(above) + "tausend"
-            if above % 10 == 1 { // also handle 201_000, etc
-                ret = ret.replacingOccurrences(of: "einstausend", with: "eintausend")
-            }
-            if below > 0 {
-                ret += read_positive(below)
+            if isOne {
+                return "eintausend"
+            } else {
+                return "tausend"
             }
         case 6:
-            if above == 1 {
-                ret = "eine Million"
+            if isOne {
+                return "eine Million"
             } else {
-                ret = read_positive(above) + " Millionen"
-            }
-            if below > 0 {
-                if below.E3 > 0 {
-                    ret += " und " + group(3, below.E3, below: below.E3x)
-                } else {
-                    ret += " " + read_positive(below)
-                }
+                return " Millionen"
             }
         case 9:
-            if above == 1 {
-                ret = "eine Milliarde"
+            if isOne {
+                return "eine Milliarde"
             } else {
-                ret = read_positive(above) + " Milliarden"
-            }
-            if below > 0 {
-                if below.E6 > 0 {
-                    ret += " " + group(6, below.E6, below: below.E6x)
-                } else {
-                    ret += " " + read_positive(below)
-                }
+                return " Milliarden"
             }
         case 12:
-            if above == 1 {
-                ret = "eine Billion"
+            if isOne {
+                return "eine Billion"
             } else {
-                ret = read_positive(above) + " Billionen"
+                return " Billionen"
             }
-            if below > 0 {
-                if below.E9 > 0 {
-                    ret += " " + group(9, below.E9, below: below.E9x)
-                } else if below.E6 > 0 {
-                    ret += " " + group(6, below.E6, below: below.E6x)
-                } else {
-                    ret += " " + read_positive(below)
-                }
-            }
-        default:
-            fatalError("wrong groupindex \(groupIndex)")
+        default: return "ERROR in German Group"
         }
+    }
+
+    override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
+        var ret: String = ""
+        if above == 1 {
+            ret = groupName(groupIndex, true)
+        } else {
+            ret = read_positive(above) + groupName(groupIndex, false)
+        }
+        if below > 0 {
+            if groupIndex == 6 { ret += " und " }
+            if groupIndex > 6 { ret += " " }
+            ret += read_positive(below)
+        }
+        ret = ret.replacingOccurrences(of: "einstausend", with: "eintausend")
         return ret
     }
     
@@ -116,10 +104,11 @@ class GermanImpl: LanguageGroup3 {
             ret = ""
             for word in words {
                 if word == "und" {
-                    ret += word + " "
+                    ret += word
                 } else {
-                    ret += word.prefix(1).uppercased() + word.dropFirst() + " "
+                    ret += word.prefix(1).uppercased() + word.dropFirst()
                 }
+                ret += " "
             }
             if ret.hasSuffix(" ") {
                 ret = String(ret.dropLast())

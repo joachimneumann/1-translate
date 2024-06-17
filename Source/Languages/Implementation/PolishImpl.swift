@@ -90,140 +90,41 @@ class PolishImpl: LanguageGroup3 {
         return ret
     }
     
-    private func use(_ i: Int, _ s1: String, _ s2: String) -> String {
+    private func use(_ i: Int, _ s0: String, _ s1: String, _ s2: String) -> String {
+        if i == 1 { return s0 }
         var use1 = false
-        switch i % 10 {
-        case 2, 3, 4:
-            use1 = true
-        default:
-            use1 = false
-        }
-        switch i % 100 {
-        case 11, 12, 13, 14:
-            use1 = false
-        default:
-            break
-        }
+        
+        if [2,3,4].contains(i % 10) { use1 = true }
+        if [11, 12, 13, 14].contains(i % 100) { use1 = false }
         return use1 ? s1 : s2
+    }
+    
+    private func groupName(_ groupIndex: Int, _ above: Int) -> String {
+        switch groupIndex {
+        case 3:
+            return use(above, "tysiąc", "tysiące", "tysięcy")
+        case 6:
+            return use(above, "milion", "miliony", "milionów")
+        case 9:
+            return use(above, "miliard", "miliardy", "miliardów")
+        case 12:
+            return use(above, "bilion", "biliony", "bilionów")
+        default:
+            fatalError("wrong groupindex \(groupIndex)")
+        }
     }
     
     override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
         var ret = ""
-        switch groupIndex {
-        case 3: 
-            if above == 1 {
-                ret = "tysiąc"
-            } else {
-                ret = read_positive(above) + " " + use(above, "tysiące", "tysięcy")
-            }
-        case 6:
-            if above == 1 {
-                ret = read_positive(above) + " " + "milion"
-            } else {
-                ret = read_positive(above) + " " + use(above, "miliony", "milionów")
-            }
-        case 9:
-            if above == 1 {
-                ret = read_positive(above) + " " + "miliard"
-            } else {
-                ret = read_positive(above) + " " + use(above, "miliardy", "miliardów")
-            }
-        case 12:
-            if above == 1 {
-                ret = read_positive(above) + " " + "bilion"
-            } else {
-                ret = read_positive(above) + " " + use(above, "biliony", "bilionów")
-            }
-        default:
-            fatalError("wrong groupindex \(groupIndex)")
+        if groupIndex != 3 || above != 1 { // tysiąc without leading "one"
+            ret = read_positive(above) + " "
         }
+        ret += groupName(groupIndex, above)
+
         if below > 0 {
-            switch groupIndex {
-            case 3:
-                ret += " " + read_positive(below)
-            case 6:
-                if below.E3 > 0 {
-                    ret += " " + group(3, below.E3, below: below.E3x)
-                } else {
-                    ret += " " + read_positive(below)
-                }
-            case 9:
-                if below.E6 > 0 {
-                    ret += " " + group(6, below.E6, below: below.E6x)
-                } else if below.E3 > 0 {
-                    ret += " " + group(3, below.E3, below: below.E3x)
-                } else {
-                    ret += " " + read_positive(below)
-                }
-            default:
-                fatalError("wrong groupindex \(groupIndex)")
-            }
+            ret += " " + read_positive(below)
         }
         return ret
     }
-    
-//
-//    override func read_e2_e3(_ i: Int) -> String {
-//        var ret = ""
-//        switch i.E2 {
-//        case 1:
-//            ret = "sto"
-//        case 2:
-//            ret = "dwieście"
-//        case 3, 4:
-//            ret = read_1_9(i.E2) + "sta"
-//        default:
-//            ret = read_1_9(i.E2) + "set"
-//        }
-//        if i.E2x > 0 {
-//            if ret.count > 0 { ret += " " }
-//            ret += read_1_(i.E2x)
-//        }
-//        return ret
-//    }
-//    
-//    private func use(_ i: Int, _ s1: String, _ s2: String) -> String {
-//        var use1 = false
-//        switch i % 10 {
-//        case 2, 3, 4:
-//            use1 = true
-//        default:
-//            use1 = false
-//        }
-//        switch i % 100 {
-//        case 11, 12, 13, 14:
-//            use1 = false
-//        default:
-//            break
-//        }
-//        return use1 ? s1 : s2
-//    }
-//    
-//    override func read_e3_e6(_ i: Int) -> String {
-//        var ret = read_1_(i.E3) + " " + use(i.E3, "tysiące", "tysięcy")
-//        if i.E3 == 1 { ret = "tysiąc" }
-//        if i.E3x > 0 { ret += " " + read_1_(i.E3x) }
-//        return ret
-//    }
-//    
-//    override func read_e6_e9(_ i: Int) -> String {
-//        var ret = read_1_(i.E6) + " " + use(i.E6, "miliony", "milionów")
-//        if i.E6 == 1 { ret = "jeden milion" }
-//        if i.E6x > 0 { ret += " " + read_1_(i.E6x) }
-//        return ret
-//    }
-//    
-//    override func read_e9_e12(_ i: Int) -> String {
-//        var ret = read_1_(i.E9) + " " + use(i.E9, "miliardy", "miliardów")
-//        if i.E9 == 1 { ret = "jeden miliard" }
-//        if i.E9x > 0 { ret += " " + read_1_(i.E9x) }
-//        return ret
-//    }
-//    
-//    override func read_e12_e15(_ i: Int) -> String {
-//        var ret = read_1_(i.E12) + " " + use(i.E12, "biliony", "bilionów")
-//        if i.E12 == 1 { ret = "jeden bilion" }
-//        if i.E12x > 0 { ret += " " + read_1_(i.E12x) }
-//        return ret
-//    }
+
 }
