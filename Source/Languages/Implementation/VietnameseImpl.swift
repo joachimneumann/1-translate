@@ -136,20 +136,26 @@ class VietnameseImpl: LanguageGroup3 {
     }
     
     override func _10_19(_ i: Int) -> String {
+        let left = i / 10
+        let right = i - left * 10
+
         var ret = "mười"
-        if i.E1x > 0 {
-            if i.E1x == 5 {
+        if right > 0 {
+            if right == 5 {
                 ret += " lăm"
             } else {
-                ret += " " + _0_9(i.E1x)
+                ret += " " + _0_9(right)
             }
         }
         return ret
     }
     
     override func _10s(_ i: Int) -> String {
-        if i == 1 { return _10_19(10) }
-        return _0_9(i) + " mươi"
+        var ret = " mươi"
+        if i > 1 {
+            ret = _0_9(i) + ret
+        }
+        return ret
     }
 
 }

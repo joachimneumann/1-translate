@@ -18,10 +18,7 @@ import Foundation
     }
 
     func _10s(_ i: Int) -> String {
-        if let zero = zero {
-            return _10s(i / 10) + zero
-        }
-        return String(i)
+        fatalError("_10s() not implmented")
     }
     
     func _10_19(_ i: Int) -> String {
@@ -29,8 +26,8 @@ import Foundation
     }
     
     func _20_99(_ i: Int) -> String {
-        var left = i / 10
-        var right = i - left * 10
+        let left = i / 10
+        let right = i - left * 10
         var ret = _10s(left)
         if right > 0 {
             ret += _20_99_connector + _0_9(right)
