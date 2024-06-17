@@ -66,6 +66,8 @@
 		AAC58E642C200C33009B01BE /* DanishImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC58E632C200C32009B01BE /* DanishImpl.swift */; };
 		AAC58E662C201C67009B01BE /* FinnishImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC58E652C201C67009B01BE /* FinnishImpl.swift */; };
 		AAC58E682C201C6F009B01BE /* finnish.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC58E672C201C6F009B01BE /* finnish.swift */; };
+		AAC58E6A2C20272B009B01BE /* EsperantoImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC58E692C20272A009B01BE /* EsperantoImpl.swift */; };
+		AAC58E6C2C202737009B01BE /* esperanto.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC58E6B2C202737009B01BE /* esperanto.swift */; };
 		AAD411292C1D3F9700B67D7C /* PolishImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD411282C1D3F9700B67D7C /* PolishImpl.swift */; };
 		AAD4112A2C1D3F9700B67D7C /* PolishImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD411282C1D3F9700B67D7C /* PolishImpl.swift */; };
 		AAD4112C2C1D4D8C00B67D7C /* polish.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD4112B2C1D4D8C00B67D7C /* polish.swift */; };
@@ -152,6 +154,8 @@
 		AAC58E632C200C32009B01BE /* DanishImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DanishImpl.swift; sourceTree = "<group>"; };
 		AAC58E652C201C67009B01BE /* FinnishImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinnishImpl.swift; sourceTree = "<group>"; };
 		AAC58E672C201C6F009B01BE /* finnish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = finnish.swift; sourceTree = "<group>"; };
+		AAC58E692C20272A009B01BE /* EsperantoImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EsperantoImpl.swift; sourceTree = "<group>"; };
+		AAC58E6B2C202737009B01BE /* esperanto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = esperanto.swift; sourceTree = "<group>"; };
 		AACCD0772B43A89A00D545C5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = "../1-translate-tests/README.md"; sourceTree = "<group>"; };
 		AAD411282C1D3F9700B67D7C /* PolishImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolishImpl.swift; sourceTree = "<group>"; };
 		AAD4112B2C1D4D8C00B67D7C /* polish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = polish.swift; sourceTree = "<group>"; };
@@ -283,6 +287,7 @@
 		AAB253BB2B3BBAD400860F93 /* Implementation */ = {
 			isa = PBXGroup;
 			children = (
+				AAC58E692C20272A009B01BE /* EsperantoImpl.swift */,
 				AAC58E652C201C67009B01BE /* FinnishImpl.swift */,
 				AAC58E632C200C32009B01BE /* DanishImpl.swift */,
 				AAC58E582C200728009B01BE /* CatalanImpl.swift */,
@@ -302,6 +307,7 @@
 		AAF9EC122B4A5051007D0B1D /* LanguageTest */ = {
 			isa = PBXGroup;
 			children = (
+				AAC58E6B2C202737009B01BE /* esperanto.swift */,
 				AAC58E672C201C6F009B01BE /* finnish.swift */,
 				AAC58E612C200C2C009B01BE /* danish.swift */,
 				AAC58E5B2C200733009B01BE /* catalan.swift */,
@@ -467,6 +473,7 @@
 				AAF9EC2A2B4A51C4007D0B1D /* EnglishImpl.swift in Sources */,
 				AAF9EC232B4A51C4007D0B1D /* GermanImpl.swift in Sources */,
 				AAF9EC1B2B4A51B2007D0B1D /* Language.swift in Sources */,
+				AAC58E6C2C202737009B01BE /* esperanto.swift in Sources */,
 				AAC58E662C201C67009B01BE /* FinnishImpl.swift in Sources */,
 				AAC58E5D2C200733009B01BE /* catalan.swift in Sources */,
 				AAC58E4E2C1FCDCB009B01BE /* ArmenianNumeralsImpl.swift in Sources */,
@@ -489,6 +496,7 @@
 				AAF9EC292B4A51C4007D0B1D /* VietnameseImpl.swift in Sources */,
 				AAD4112A2C1D3F9700B67D7C /* PolishImpl.swift in Sources */,
 				AAA3C3082C1C325D0071FBE4 /* spanish.swift in Sources */,
+				AAC58E6A2C20272B009B01BE /* EsperantoImpl.swift in Sources */,
 				AAC58E622C200C2C009B01BE /* danish.swift in Sources */,
 				AAF9EC182B4A5094007D0B1D /* Languages.swift in Sources */,
 			);

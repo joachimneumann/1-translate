@@ -22,6 +22,7 @@ class FinnishImpl: LanguageGroup3 {
 
     override func _0_9(_ i: Int) -> String {
         switch i {
+        case 0: return zero!
         case 1: return "yksi"
         case 2: return "kaksi"
         case 3: return "kolme"

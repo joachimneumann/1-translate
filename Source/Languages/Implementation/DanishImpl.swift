@@ -34,15 +34,16 @@ class DanishImpl: LanguageGroup3 {
 
     override func _0_9(_ i: Int) -> String {
         switch i {
-        case 1:     return "en"
-        case 2:     return "to"
-        case 3:     return "tre"
-        case 4:     return "fire"
-        case 5:     return "fem"
-        case 6:     return "seks"
-        case 7:     return "syv"
-        case 8:     return "otte"
-        case 9:     return "ni"
+        case 0: return zero!
+        case 1: return "en"
+        case 2: return "to"
+        case 3: return "tre"
+        case 4: return "fire"
+        case 5: return "fem"
+        case 6: return "seks"
+        case 7: return "syv"
+        case 8: return "otte"
+        case 9: return "ni"
         default:
             fatalError("_0_9() parameter \(i)")
         }
@@ -50,15 +51,15 @@ class DanishImpl: LanguageGroup3 {
     
     override func _10s(_ i: Int) -> String {
         switch i {
-        case 1:     return "ti"
-        case 2:     return "tyve"
-        case 3:     return "tredive"
-        case 4:     return "fyrre"
-        case 5:     return "halvtreds"
-        case 6:     return "tres"
-        case 7:     return "halvfjerds"
-        case 8:     return "firs"
-        case 9:     return "halvfems"
+        case 1: return "ti"
+        case 2: return "tyve"
+        case 3: return "tredive"
+        case 4: return "fyrre"
+        case 5: return "halvtreds"
+        case 6: return "tres"
+        case 7: return "halvfjerds"
+        case 8: return "firs"
+        case 9: return "halvfems"
         default:
             fatalError("_0_9() parameter \(i)")
         }

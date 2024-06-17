@@ -7,7 +7,7 @@
 
 import Foundation
 
-class EsperantoImpl: Language {
+class EsperantoImpl: LanguageGroup3 {
     init() {
         super.init(
             name: "Esperanto",
@@ -15,24 +15,25 @@ class EsperantoImpl: Language {
             negativeString: "minus",
             dotString: "kaj",
             exponentString: " EE ")
-        tensConnector = " "
-        e2 = "cent"
-        e2_one = e2
-        eSpace = " "
-        e3 = "mil"
-        e3_one = e3
-        e6 = "milionoj"
-        e6_one = "miliono"
-        e9 = "miliardoj"
-        e9_one = "miliardo"
-        e12 = "bilionoj"
-        e12_one = "biliono"
+//        tensConnector = " "
+//        e2 = "cent"
+//        e2_one = e2
+//        eSpace = " "
+//        e3 = "mil"
+//        e3_one = e3
+//        e6 = "milionoj"
+//        e6_one = "miliono"
+//        e9 = "miliardoj"
+//        e9_one = "miliardo"
+//        e12 = "bilionoj"
+//        e12_one = "biliono"
         afterNegative = " "
     }
 
     
-    override func read_1_9(_ i: Int) -> String {
+    override func _0_9(_ i: Int) -> String {
         switch i {
+        case 0: return zero!
         case 1: return "unu"
         case 2: return "du"
         case 3: return "tri"

@@ -120,16 +120,16 @@ class VietnameseImpl: LanguageGroup3 {
     
     override func _0_9(_ i: Int) -> String {
         switch i {
-        case 0:  return zero!
-        case 1:  return "một"
-        case 2:  return "hai"
-        case 3:  return "ba"
-        case 4:  return "bốn"
-        case 5:  return "năm"
-        case 6:  return "sáu"
-        case 7:  return "bảy"
-        case 8:  return "tám"
-        case 9:  return "chín"
+        case 0: return zero!
+        case 1: return "một"
+        case 2: return "hai"
+        case 3: return "ba"
+        case 4: return "bốn"
+        case 5: return "năm"
+        case 6: return "sáu"
+        case 7: return "bảy"
+        case 8: return "tám"
+        case 9: return "chín"
         default:
             fatalError("_0_9() parameter \(i)")
         }

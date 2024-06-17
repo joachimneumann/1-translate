@@ -73,16 +73,16 @@ class CatalanImpl: LanguageGroup3 {
 
     override func _0_9(_ i: Int) -> String {
         switch i {
-        case 0:  return zero!
-        case 1:  return "u"
-        case 2:  return "dos"
-        case 3:  return "tres"
-        case 4:  return "quatre"
-        case 5:  return "cinc"
-        case 6:  return "sis"
-        case 7:  return "set"
-        case 8:  return "vuit"
-        case 9:  return "nou"
+        case 0: return zero!
+        case 1: return "u"
+        case 2: return "dos"
+        case 3: return "tres"
+        case 4: return "quatre"
+        case 5: return "cinc"
+        case 6: return "sis"
+        case 7: return "set"
+        case 8: return "vuit"
+        case 9: return "nou"
         default:
             fatalError("_0_9() parameter \(i)")
         }
@@ -90,15 +90,15 @@ class CatalanImpl: LanguageGroup3 {
     
     override func _10s(_ i: Int) -> String {
         switch i {
-        case 1:  return "deu"
-        case 2:  return "vint"
-        case 3:  return "trenta"
-        case 4:  return "quaranta"
-        case 5:  return "cinquanta"
-        case 6:  return "seixanta"
-        case 7:  return "setanta"
-        case 8:  return "vuitanta"
-        case 9:  return "noranta"
+        case 1: return "deu"
+        case 2: return "vint"
+        case 3: return "trenta"
+        case 4: return "quaranta"
+        case 5: return "cinquanta"
+        case 6: return "seixanta"
+        case 7: return "setanta"
+        case 8: return "vuitanta"
+        case 9: return "noranta"
         default:
             fatalError("_0_9() parameter \(i)")
         }

@@ -32,7 +32,7 @@ class Languages {
     let danish              = DanishImpl()
     let digits              = DigitsImpl()
     var english             = EnglishImpl()
-//    var esperanto           = EsperantoImpl()
+    var esperanto           = EsperantoImpl()
     var spanish             = SpanishImpl()
     let finnish             = FinnishImpl()
 //    let french              = FrenchImpl()
