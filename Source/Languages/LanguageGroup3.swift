@@ -19,7 +19,7 @@ import Foundation
 
     func _10s(_ i: Int) -> String {
         if let zero = zero {
-            return _10s(i.E1) + zero
+            return _10s(i / 10) + zero
         }
         return String(i)
     }
@@ -29,9 +29,11 @@ import Foundation
     }
     
     func _20_99(_ i: Int) -> String {
-        var ret = _10s(i.E1)
-        if i.E1x > 0 {
-            ret += _20_99_connector + _0_9(i.E1x)
+        var left = i / 10
+        var right = i - left * 10
+        var ret = _10s(left)
+        if right > 0 {
+            ret += _20_99_connector + _0_9(right)
         }
         return ret
     }

@@ -151,24 +151,4 @@ class SpanishImpl: LanguageGroup3 {
         return ret
     }
 
-
-//    override func read_e2_e3(_ i: Int) -> String {
-//        var ret = ""
-//        switch i.E2 {
-//        case 1:
-//            ret = i.E2x == 0 ? "cien" : "ciento"
-//        case 5:
-//            ret = "quinientos"
-//        case 7:
-//            ret = "setecientos"
-//        case 9:
-//            ret = "novecientos"
-//        default:
-//            ret = read_1_(i.E2) + "cientos"
-//        }
-//        if i.E2x > 0 {
-//            ret += " " + read_1_(i.E2x)
-//        }
-//        return ret
-//    }
 }

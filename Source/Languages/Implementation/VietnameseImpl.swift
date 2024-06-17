@@ -100,19 +100,21 @@ class VietnameseImpl: LanguageGroup3 {
     }
     
     override func _20_99(_ i: Int) -> String {
-        var ret = ""
-        ret = _0_9(i.E1)
-        ret += (!compact || i.E1x == 0) ? " mươi" : ""
-        if i.E1x > 0 {
-            if i.E1x == 1 {
+        let left = i / 10
+        let right = i - left * 10
+        var ret = _0_9(left)
+        if right == 0 {
+            ret += " mươi"
+        } else {
+            ret += (!compact || right == 0) ? " mươi" : ""
+            if right == 1 {
                 ret += " mốt"
-            } else if i.E1x == 5 {
+            } else if right == 5 {
                 ret += " lăm"
             } else {
-                ret += " " + _0_9(i.E1x)
+                ret += " " + _0_9(right)
             }
         }
-        
         return ret
     }
     
