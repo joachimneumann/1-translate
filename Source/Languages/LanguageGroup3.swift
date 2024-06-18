@@ -12,6 +12,7 @@ import Foundation
     var use_single_hundreds = false
     var before_hundreds: String = " "
     var after_hundreds: String = " "
+    var use_single_group = false
     var before_groupName: String = " "
     var after_groupName: String = " "
 
@@ -77,12 +78,12 @@ import Foundation
     
     func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
         var ret: String = ""
-        
-        if above == 1 {
-            ret = groupName(groupIndex, above)
-        } else {
-            ret = read_positive(above) + before_groupName + groupName(groupIndex, above)
+
+        if above > 1 || use_single_group {
+            ret = read_positive(above) + before_groupName
         }
+        ret += groupName(groupIndex, above)
+
         if below > 0 {
             ret += after_groupName + read_positive(below)
         }

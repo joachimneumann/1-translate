@@ -25,6 +25,8 @@ class GermanImpl: LanguageGroup3 {
         _20_99_connector = Languages.WordSplitter + "und"
         before_hundreds = ""
         after_hundreds = ""
+        before_groupName = ""
+        after_groupName = ""
     }
     
     override func _20_99(_ i: Int) -> String {
@@ -73,19 +75,16 @@ class GermanImpl: LanguageGroup3 {
         default: return "ERROR in German Group"
         }
     }
-
+    
     override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
-        var ret: String = ""
-        if above == 1 {
-            ret = groupName(groupIndex, above)
-        } else {
-            ret = read_positive(above) + groupName(groupIndex, above)
+        after_groupName = ""
+        if groupIndex == 6 {
+            after_groupName = " und "
         }
-        if below > 0 {
-            if groupIndex == 6 { ret += " und " }
-            if groupIndex > 6 { ret += " " }
-            ret += read_positive(below)
+        if groupIndex >= 9 {
+            after_groupName = " "
         }
+        var ret = super.group(groupIndex, above, below: below)
         ret = ret.replacingOccurrences(of: "einstausend", with: "eintausend")
         return ret
     }

@@ -106,26 +106,5 @@ class FinnishImpl: LanguageGroup3 {
         }
         return super.group(groupIndex, above, below: below)
     }
-
-
-//    override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
-//        var ret: String = ""
-//        
-//        if above == 1 {
-//            ret = groupName(groupIndex, above)
-//        } else {
-//            ret = read_positive(above)
-//            if groupIndex >= 6 {
-//                ret += " "
-//            }
-//            ret += groupName(groupIndex, above)
-//        }
-//        if below > 0 {
-//            if groupIndex >= 6 {
-//                ret += " "
-//            }
-//            ret += read_positive(below)
-//        }
-//        return ret
-//    }
+    
 }

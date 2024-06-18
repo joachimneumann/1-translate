@@ -19,6 +19,7 @@ class DanishImpl: LanguageGroup3 {
         
         voiceLanguageCode = "da"
         after_hundreds = " og "
+        after_groupName = " og "
     }
 
     override func _0_9(_ i: Int) -> String {
@@ -118,21 +119,9 @@ class DanishImpl: LanguageGroup3 {
     }
 
     override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
-        var ret: String = ""
-        
-        if above == 1 {
-            ret = groupName(groupIndex, above)
-        } else {
-            if above / 100 == 1 {
-                ret = read_positive(above).replacingOccurrences(of: "hundred", with: "hundrede")
-            } else {
-                ret = read_positive(above)
-            }
-            ret += " " + groupName(groupIndex, above)
-        }
-        if below > 0 {
-            ret += " og "
-            ret += read_positive(below)
+        var ret = super.group(groupIndex, above, below: below)
+        if above / 100 == 1 {
+            ret = ret.replacingOccurrences(of: "hundred ", with: "hundrede ")
         }
         return ret
     }

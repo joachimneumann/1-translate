@@ -26,6 +26,7 @@ class EnglishImpl: LanguageGroup3 {
         _20_99_connector = "-"
         use_single_hundreds = true
         after_hundreds = useAndAfterHundred ? " and " : " "
+        use_single_group = true
     }
     
     override func groupName(_ groupIndex: Int, _ above: Int) -> String {
@@ -43,15 +44,7 @@ class EnglishImpl: LanguageGroup3 {
         default: return "ERROR in English Group"
         }
     }
-    
-    override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
-        var ret = read_positive(above) + " " + groupName(groupIndex, above)
-        if below > 0 {
-            ret += " " + read_positive(below)
-        }
-        return ret
-    }
-    
+
     override func _0_9(_ i: Int) -> String {
         switch i {
         case 0: return zero!

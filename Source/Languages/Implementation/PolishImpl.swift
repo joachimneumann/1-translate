@@ -19,6 +19,7 @@ class PolishImpl: LanguageGroup3 {
         voiceLanguageCode = "pl"
         _20_99_connector = " "
         before_hundreds = ""
+        use_single_group = false
     }
     
     
@@ -106,17 +107,14 @@ class PolishImpl: LanguageGroup3 {
         }
     }
     
+    
     override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
-        var ret = ""
-        if groupIndex != 3 || above != 1 { // tysiąc without leading "one"
-            ret = read_positive(above) + " "
+        if groupIndex > 3 {
+            use_single_group = true
+        } else {
+            use_single_group = false
         }
-        ret += groupName(groupIndex, above)
-
-        if below > 0 {
-            ret += " " + read_positive(below)
-        }
-        return ret
+        return super.group(groupIndex, above, below: below)
     }
 
 }
