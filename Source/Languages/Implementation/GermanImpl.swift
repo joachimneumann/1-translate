@@ -146,9 +146,8 @@ class GermanImpl: LanguageGroup3 {
         }
     }
     
-    override func _10_19(_ i: Int) -> String {
+    override func _11_19(_ i: Int) -> String {
         switch i {
-        case 10: return _10s(1)
         case 11: return "elf"
         case 12: return "zwölf"
         case 13: return "dreizehn"

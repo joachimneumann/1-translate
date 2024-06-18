@@ -137,7 +137,7 @@ class VietnameseImpl: LanguageGroup3 {
         }
     }
     
-    override func _10_19(_ i: Int) -> String {
+    override func _11_19(_ i: Int) -> String {
         let left = i / 10
         let right = i - left * 10
 
@@ -153,11 +153,7 @@ class VietnameseImpl: LanguageGroup3 {
     }
     
     override func _10s(_ i: Int) -> String {
-        var ret = " mươi"
-        if i > 1 {
-            ret = _0_9(i) + ret
-        }
-        return ret
+        return "mười" // the other cases are handled above
     }
 
 }

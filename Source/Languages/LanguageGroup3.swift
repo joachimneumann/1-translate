@@ -21,8 +21,12 @@ import Foundation
             return _0_9(i) // implemented in Language
         }
         
+        if i == 10 {
+            return _10s(1)
+        }
+        
         if i <= 19 {
-            return _10_19(i)
+            return _11_19(i)
         }
         
         if i <= 99 {
@@ -50,7 +54,7 @@ import Foundation
         fatalError("_10s() not implmented")
     }
     
-    func _10_19(_ i: Int) -> String {
+    func _11_19(_ i: Int) -> String {
         return _20_99(i)
     }
     

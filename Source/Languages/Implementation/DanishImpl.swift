@@ -55,9 +55,8 @@ class DanishImpl: LanguageGroup3 {
         }
     }
 
-    override func _10_19(_ i: Int) -> String {
+    override func _11_19(_ i: Int) -> String {
         switch i {
-        case 10: return _10s(1)
         case 11: return "elleve"
         case 12: return "tolv"
         case 13: return "tretten"

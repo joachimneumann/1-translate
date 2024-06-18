@@ -54,7 +54,7 @@ class ArmenianImpl: LanguageGroup3 {
     
     override func _10s(_ i: Int) -> String {
         switch i {
-        case 1:     return _10_19(10)
+        case 1:     return "տասը"
         case 2:     return "քսան"
         case 3:     return "երեսուն"
         case 4:     return "քառասուն"
@@ -68,8 +68,8 @@ class ArmenianImpl: LanguageGroup3 {
         }
     }
     
-    override func _10_19(_ i: Int) -> String {
-        return i == 10 ? "տասը" : "տասն" + _0_9(i - 10)
+    override func _11_19(_ i: Int) -> String {
+        return "տասն" + _0_9(i - 10)
     }
 }
 

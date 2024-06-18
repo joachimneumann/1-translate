@@ -39,8 +39,12 @@ class FinnishImpl: LanguageGroup3 {
     }
     
     override func _10s(_ i: Int) -> String {
-        if i == 1 { return "toista" } //kymmenen"}
+        if i == 1 { return "kymmenen" }
         return _0_9(i) + Languages.WordSplitter + "kymmentä"
+    }
+    
+    override func _11_19(_ i: Int) -> String {
+        return _0_9(i - 10) + Languages.WordSplitter + "toista"
     }
     
     override func _20_99(_ i: Int) -> String {

@@ -78,9 +78,8 @@ class EnglishImpl: LanguageGroup3 {
         }
     }
     
-    override func _10_19(_ i: Int) -> String {
+    override func _11_19(_ i: Int) -> String {
         switch i {
-        case 10: return _10s(1)
         case 11: return "eleven"
         case 12: return "twelve"
         case 13: return "thirteen"
