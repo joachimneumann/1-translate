@@ -36,28 +36,30 @@ class VietnameseImpl: LanguageGroup3 {
             dotString: "phẩy",
             exponentString: " nhân mười mũ ")
         voiceLanguageCode = "vi"
+        secondLast = secondLast
+        vietnameseThousand = vietnameseThousand
         afterNegative = " "
         nameDescription = "Vietnamese"
         _20_99_connector = " "
-        secondLast = secondLast
-        vietnameseThousand = vietnameseThousand
+        use_single_hundreds = true
     }
     
     override func _100_999(_ hundreds: Int, below: Int) -> String {
-        var ret = read_positive(hundreds) + " trăm"
+        after_hundreds = " "
         if below > 0 {
             if below <= 9 {
-                ret += " " + secondLast.rawValue
+                after_hundreds = " " + secondLast.rawValue + " "
             }
-            ret += " " + read_positive(below)
         }
-        return ret
+        return super._100_999(hundreds, below: below)
     }
     
     override func groupName(_ groupIndex: Int, _ above: Int) -> String {
         switch groupIndex {
         case 0:
             return ""
+        case 2:
+            return "trăm"
         case 3:
             return " " + vietnameseThousand.rawValue
         case 6:
@@ -66,7 +68,7 @@ class VietnameseImpl: LanguageGroup3 {
             return " tỷ"
         case 12:
             return " " + vietnameseThousand.rawValue + " tỷ"
-        default: return "ERROR in English Group"
+        default: return "ERROR in Vietnamese Group"
         }
     }
     

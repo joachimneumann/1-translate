@@ -32,30 +32,28 @@ class SpanishImpl: LanguageGroup3 {
         _20_99_connector = " y "
         afterNegative = " "
         puntoComma = puntoComma
+        before_hundreds = ""
     }
 
     override func _100_999(_ hundreds: Int, below: Int) -> String {
-        var ret: String = ""
-        switch hundreds {
-        case 1:
-            ret = below == 0 ? "cien" : "ciento"
-        case 5:
-            ret = "quinientos"
-        case 7:
-            ret = "setecientos"
-        case 9:
-            ret = "novecientos"
-        default:
-            ret = read_positive(hundreds) + "cientos"
+        var ret = super._100_999(hundreds, below: below)
+        if hundreds == 1 && below == 0 {
+            ret = ret.replacingOccurrences(of: "ciento", with: "cien")
         }
-        if below > 0 {
-            ret += " " + read_positive(below)
-        }
+        ret = ret.replacingOccurrences(of: "cincocientos", with: "quinientos")
+        ret = ret.replacingOccurrences(of: "sietecientos", with: "setecientos")
+        ret = ret.replacingOccurrences(of: "nuevecientos", with: "novecientos")
         return ret
     }
-    
+
     override func groupName(_ groupIndex: Int, _ above: Int) -> String {
         switch groupIndex {
+        case 2:
+            if above == 1 {
+                return "ciento"
+            } else {
+                return "cientos"
+            }
         case 3:
             return "mil"
         case 6:

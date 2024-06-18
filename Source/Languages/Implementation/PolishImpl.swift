@@ -18,6 +18,7 @@ class PolishImpl: LanguageGroup3 {
         
         voiceLanguageCode = "pl"
         _20_99_connector = " "
+        before_hundreds = ""
     }
     
     
@@ -72,24 +73,13 @@ class PolishImpl: LanguageGroup3 {
     }
     
     override func _100_999(_ hundreds: Int, below: Int) -> String {
-        var ret = ""
-        switch hundreds {
-        case 1:
-            ret = "sto"
-        case 2:
-            ret = "dwieście" // special case
-        case 3, 4:
-            ret = read_positive(hundreds) + "sta"
-        default:
-            ret = read_positive(hundreds) + "set"
-        }
-
-        if below > 0 {
-            ret += " " + read_positive(below)
+        var ret = super._100_999(hundreds, below: below)
+        if hundreds == 2 {
+            ret = ret.replacingOccurrences(of: "dwasta", with: "dwieście")
         }
         return ret
     }
-    
+   
     private func use(_ i: Int, _ s0: String, _ s1: String, _ s2: String) -> String {
         if i == 1 { return s0 }
         var use1 = false
@@ -101,6 +91,8 @@ class PolishImpl: LanguageGroup3 {
     
     override func groupName(_ groupIndex: Int, _ above: Int) -> String {
         switch groupIndex {
+        case 2:
+            return use(above, "sto", "sta", "set")
         case 3:
             return use(above, "tysiąc", "tysiące", "tysięcy")
         case 6:
