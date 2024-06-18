@@ -35,54 +35,6 @@ class SpanishImpl: LanguageGroup3 {
         before_hundreds = ""
     }
 
-    override func _100_999(_ hundreds: Int, below: Int) -> String {
-        var ret = super._100_999(hundreds, below: below)
-        if hundreds == 1 && below == 0 {
-            ret = ret.replacingOccurrences(of: "ciento", with: "cien")
-        }
-        ret = ret.replacingOccurrences(of: "cincocientos", with: "quinientos")
-        ret = ret.replacingOccurrences(of: "sietecientos", with: "setecientos")
-        ret = ret.replacingOccurrences(of: "nuevecientos", with: "novecientos")
-        return ret
-    }
-
-    override func groupName(_ groupIndex: Int, _ above: Int) -> String {
-        switch groupIndex {
-        case 2:
-            if above == 1 {
-                return "ciento"
-            } else {
-                return "cientos"
-            }
-        case 3:
-            return "mil"
-        case 6:
-            if above == 1 {
-                return "un millón"
-            } else {
-                return "millones"
-            }
-        case 9:
-            return "mil millones"
-        case 12:
-            if above == 1 {
-                return "un billón"
-            } else {
-                return "billiones"
-            }
-        default: return "ERROR in Spanish Group"
-        }
-    }
-    
-    override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
-        if groupIndex == 12 {
-            after_groupName = " y "
-        } else {
-            after_groupName = " "
-        }
-        return super.group(groupIndex, above, below: below)
-    }
-
     override func _0_9(_ i: Int) -> String {
         switch i {
         case 0: return zero!
@@ -139,6 +91,54 @@ class SpanishImpl: LanguageGroup3 {
         ret = ret.replacingOccurrences(of: "veinte y seis", with: "veintiséis")
         ret = ret.replacingOccurrences(of: "veinte y ", with: "veinti")
         return ret
+    }
+
+    override func _100_999(_ hundreds: Int, below: Int) -> String {
+        var ret = super._100_999(hundreds, below: below)
+        if hundreds == 1 && below == 0 {
+            ret = ret.replacingOccurrences(of: "ciento", with: "cien")
+        }
+        ret = ret.replacingOccurrences(of: "cincocientos", with: "quinientos")
+        ret = ret.replacingOccurrences(of: "sietecientos", with: "setecientos")
+        ret = ret.replacingOccurrences(of: "nuevecientos", with: "novecientos")
+        return ret
+    }
+
+    override func groupName(_ groupIndex: Int, _ above: Int) -> String {
+        switch groupIndex {
+        case 2:
+            if above == 1 {
+                return "ciento"
+            } else {
+                return "cientos"
+            }
+        case 3:
+            return "mil"
+        case 6:
+            if above == 1 {
+                return "un millón"
+            } else {
+                return "millones"
+            }
+        case 9:
+            return "mil millones"
+        case 12:
+            if above == 1 {
+                return "un billón"
+            } else {
+                return "billiones"
+            }
+        default: return "ERROR in Spanish Group"
+        }
+    }
+    
+    override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
+        if groupIndex == 12 {
+            after_groupName = " y "
+        } else {
+            after_groupName = " "
+        }
+        return super.group(groupIndex, above, below: below)
     }
 
 }
