@@ -19,7 +19,6 @@ class CatalanImpl: LanguageGroup3 {
         voiceLanguageCode = "ca"
         _20_99_connector = "-"
         before_hundreds = "-"
-        after_hundreds = " "
     }
     
     override func groupName(_ groupIndex: Int, _ above: Int) -> String {

@@ -18,7 +18,6 @@ class PolishImpl: LanguageGroup3 {
         
         voiceLanguageCode = "pl"
         _20_99_connector = " "
-        after_hundreds = " "
     }
     
     

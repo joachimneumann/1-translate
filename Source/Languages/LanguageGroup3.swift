@@ -10,8 +10,10 @@ import Foundation
 @Observable class LanguageGroup3: Language {
     var _20_99_connector: String = ""
     var use_single_hundreds = false
-    var before_hundreds: String = ""
-    var after_hundreds: String = ""
+    var before_hundreds: String = " "
+    var after_hundreds: String = " "
+    var before_groupName: String = " "
+    var after_groupName: String = " "
 
     override func read_positive(_ i: Int) -> String {
         if i <= 9 {
@@ -74,7 +76,17 @@ import Foundation
     }
     
     func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
-        fatalError("group() not implmented")
+        var ret: String = ""
+        
+        if above == 1 {
+            ret = groupName(groupIndex, above)
+        } else {
+            ret = read_positive(above) + before_groupName + groupName(groupIndex, above)
+        }
+        if below > 0 {
+            ret += after_groupName + read_positive(below)
+        }
+        return ret
     }
 
 }

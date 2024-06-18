@@ -17,6 +17,8 @@ class FinnishImpl: LanguageGroup3 {
             exponentString: " EE ")
         nameDescription = "Finnish"
         voiceLanguageCode = "fi"
+        before_hundreds = ""
+        after_hundreds = ""
     }
 
 
@@ -93,25 +95,37 @@ class FinnishImpl: LanguageGroup3 {
         default: return "ERROR in Finnish Group"
         }
     }
-
+    
     override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
-        var ret: String = ""
-        
-        if above == 1 {
-            ret = groupName(groupIndex, above)
+        if groupIndex >= 6 {
+            before_groupName = " "
+            after_groupName = " "
         } else {
-            ret = read_positive(above)
-            if groupIndex >= 6 {
-                ret += " "
-            }
-            ret += groupName(groupIndex, above)
+            before_groupName = ""
+            after_groupName = ""
         }
-        if below > 0 {
-            if groupIndex >= 6 {
-                ret += " "
-            }
-            ret += read_positive(below)
-        }
-        return ret
+        return super.group(groupIndex, above, below: below)
     }
+
+
+//    override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
+//        var ret: String = ""
+//        
+//        if above == 1 {
+//            ret = groupName(groupIndex, above)
+//        } else {
+//            ret = read_positive(above)
+//            if groupIndex >= 6 {
+//                ret += " "
+//            }
+//            ret += groupName(groupIndex, above)
+//        }
+//        if below > 0 {
+//            if groupIndex >= 6 {
+//                ret += " "
+//            }
+//            ret += read_positive(below)
+//        }
+//        return ret
+//    }
 }

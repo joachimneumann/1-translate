@@ -16,20 +16,7 @@ class EsperantoImpl: LanguageGroup3 {
             dotString: "kaj",
             exponentString: " EE ")
         _20_99_connector = " "
-        after_hundreds = " "
-//        tensConnector = " "
-//        e2 = "cent"
-//        e2_one = e2
-//        eSpace = " "
-//        e3 = "mil"
-//        e3_one = e3
-//        e6 = "milionoj"
-//        e6_one = "miliono"
-//        e9 = "miliardoj"
-//        e9_one = "miliardo"
-//        e12 = "bilionoj"
-//        e12_one = "biliono"
-        afterNegative = " "
+        before_hundreds = ""
     }
 
     
@@ -80,20 +67,6 @@ class EsperantoImpl: LanguageGroup3 {
             }
         default: return "ERROR in Esperanto Group"
         }
-    }
-
-    override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
-        var ret: String = ""
-        
-        if above == 1 {
-            ret = groupName(groupIndex, above)
-        } else {
-            ret = read_positive(above) + " " + groupName(groupIndex, above)
-        }
-        if below > 0 {
-            ret += " " + read_positive(below)
-        }
-        return ret
     }
 
 }

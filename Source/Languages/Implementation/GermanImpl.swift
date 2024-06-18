@@ -23,6 +23,8 @@ class GermanImpl: LanguageGroup3 {
         afterNegative = " "
         voiceLanguageCode = "de"
         _20_99_connector = Languages.WordSplitter + "und"
+        before_hundreds = ""
+        after_hundreds = ""
     }
     
     override func _20_99(_ i: Int) -> String {

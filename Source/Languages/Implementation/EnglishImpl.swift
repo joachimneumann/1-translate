@@ -25,7 +25,6 @@ class EnglishImpl: LanguageGroup3 {
         voiceLanguageCode = "en"
         _20_99_connector = "-"
         use_single_hundreds = true
-        before_hundreds = " "
         after_hundreds = useAndAfterHundred ? " and " : " "
     }
     

@@ -18,7 +18,6 @@ class DanishImpl: LanguageGroup3 {
             exponentString: " gange ti i ")
         
         voiceLanguageCode = "da"
-        before_hundreds = " "
         after_hundreds = " og "
     }
 
