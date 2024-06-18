@@ -23,7 +23,7 @@ class Languages {
 //    let arabic              = ArabicImpl() // not working
 //    let arabicNumerals      = ArabicNumeralsImpl()
     let armenianNumerals    = ArmenianNumeralsImpl()
-//    let armenian            = ArmenianImpl()
+    let armenian            = ArmenianImpl()
     var babylonian          = BabylonianImpl()
     let catalan             = CatalanImpl()
 //    let chineseFinancial    = ChineseImpl(variant: .financial)
