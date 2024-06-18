@@ -51,7 +51,7 @@ class GermanImpl: LanguageGroup3 {
         return ret
     }
     
-    private func groupName(_ groupIndex: Int, _ isOne: Bool) -> String {
+    override func groupName(_ groupIndex: Int, _ isOne: Bool) -> String {
         switch groupIndex {
         case 3:
             if isOne {

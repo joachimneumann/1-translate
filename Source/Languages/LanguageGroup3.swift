@@ -9,10 +9,27 @@ import Foundation
 
 @Observable class LanguageGroup3: Language {
     var _20_99_connector: String = ""
+    var drop_single_hundreds = true
+    var before_hundreds: String = ""
+    var after_hundreds: String = ""
 
+    func groupName(_ groupIndex: Int, _ isOne: Bool) -> String {
+        fatalError("groupName() not implmented")
+    }
+    
     func _100_999(_ hundreds: Int, below: Int) -> String {
-        fatalError("_100_999() not implmented")
-    }    
+        var ret = ""
+        if hundreds == 1 && drop_single_hundreds {
+            ret = groupName(2, true)
+        } else {
+            ret = read_positive(hundreds) + before_hundreds + groupName(2, false)
+        }
+        if below > 0 {
+            ret += after_hundreds + read_positive(below)
+        }
+        return ret
+    }
+    
     func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
         fatalError("group() not implmented")
     }

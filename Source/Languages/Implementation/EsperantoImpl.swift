@@ -16,6 +16,7 @@ class EsperantoImpl: LanguageGroup3 {
             dotString: "kaj",
             exponentString: " EE ")
         _20_99_connector = " "
+        after_hundreds = " "
 //        tensConnector = " "
 //        e2 = "cent"
 //        e2_one = e2
@@ -53,21 +54,10 @@ class EsperantoImpl: LanguageGroup3 {
         return _0_9(i) + "dek"
     }
     
-    override func _100_999(_ hundreds: Int, below: Int) -> String {
-        var ret = ""
-        if hundreds == 1 {
-            ret = "cent"
-        } else {
-            ret = read_positive(hundreds) + "cent"
-        }
-        if below > 0 {
-            ret += " " + read_positive(below)
-        }
-        return ret
-    }
-    
-    private func groupName(_ groupIndex: Int, _ isOne: Bool) -> String {
+    override func groupName(_ groupIndex: Int, _ isOne: Bool) -> String {
         switch groupIndex {
+        case 2:
+            return "cent"
         case 3:
             return "mil"
         case 6:
