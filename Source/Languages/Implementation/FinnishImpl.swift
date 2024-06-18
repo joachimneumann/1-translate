@@ -58,41 +58,34 @@ class FinnishImpl: LanguageGroup3 {
         return ret
     }
     
-    override func _100_999(_ hundreds: Int, below: Int) -> String {
-        var ret: String = ""
-        if hundreds == 1 {
-            ret = "sata"
-        } else {
-            ret = read_positive(hundreds) + "sataa"
-        }
-        if below > 0 {
-            ret += read_positive(below)
-        }
-        return ret
-    }
-
-    override func groupName(_ groupIndex: Int, _ isOne: Bool) -> String {
+    override func groupName(_ groupIndex: Int, _ above: Int) -> String {
         switch groupIndex {
+        case 2:
+            if above == 1 {
+                return "sata"
+            } else {
+                return "sataa"
+            }
         case 3:
-            if isOne {
+            if above == 1 {
                 return "tuhat"
             } else {
                 return "tuhatta"
             }
         case 6:
-            if isOne {
+            if above == 1 {
                 return "miljoona"
             } else {
                 return "miljoonaa"
             }
         case 9:
-            if isOne {
+            if above == 1 {
                 return "miljardi"
             } else {
                 return "miljardia"
             }
         case 12:
-            if isOne {
+            if above == 1 {
                 return "biljoona"
             } else {
                 return "biljoonaa"
@@ -105,13 +98,13 @@ class FinnishImpl: LanguageGroup3 {
         var ret: String = ""
         
         if above == 1 {
-            ret = groupName(groupIndex, true)
+            ret = groupName(groupIndex, above)
         } else {
             ret = read_positive(above)
             if groupIndex >= 6 {
                 ret += " "
             }
-            ret += groupName(groupIndex, false)
+            ret += groupName(groupIndex, above)
         }
         if below > 0 {
             if groupIndex >= 6 {

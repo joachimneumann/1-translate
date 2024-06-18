@@ -54,12 +54,12 @@ class SpanishImpl: LanguageGroup3 {
         return ret
     }
     
-    override func groupName(_ groupIndex: Int, _ isOne: Bool) -> String {
+    override func groupName(_ groupIndex: Int, _ above: Int) -> String {
         switch groupIndex {
         case 3:
             return "mil"
         case 6:
-            if isOne {
+            if above == 1 {
                 return "un millón"
             } else {
                 return "millones"
@@ -67,7 +67,7 @@ class SpanishImpl: LanguageGroup3 {
         case 9:
             return "mil millones"
         case 12:
-            if isOne {
+            if above == 1 {
                 return "un billón"
             } else {
                 return "billiones"
@@ -80,9 +80,9 @@ class SpanishImpl: LanguageGroup3 {
         var ret: String = ""
         
         if above == 1 {
-            ret = groupName(groupIndex, true)
+            ret = groupName(groupIndex, above)
         } else {
-            ret = read_positive(above) + " " + groupName(groupIndex, false)
+            ret = read_positive(above) + " " + groupName(groupIndex, above)
         }
         if below > 0 {
             ret += groupIndex == 12 ? " y " : " "

@@ -54,7 +54,7 @@ class VietnameseImpl: LanguageGroup3 {
         return ret
     }
     
-    private func groupName(_ groupIndex: Int) -> String {
+    override func groupName(_ groupIndex: Int, _ above: Int) -> String {
         switch groupIndex {
         case 0:
             return ""
@@ -83,7 +83,7 @@ class VietnameseImpl: LanguageGroup3 {
                 ret += " không trăm"
             }
             ret += " " + read_positive(above)
-            ret += groupName(groupIndex)
+            ret += groupName(groupIndex, above)
             if groupIndex >= 3 && below > 0 {
                 ret += notLargestGroup(groupIndex - 3, below)
             }
@@ -92,7 +92,7 @@ class VietnameseImpl: LanguageGroup3 {
     }
         
     override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
-        var ret = read_positive(above) + groupName(groupIndex)
+        var ret = read_positive(above) + groupName(groupIndex, above)
         if below > 0 {
             ret += notLargestGroup(groupIndex - 3, below)
         }

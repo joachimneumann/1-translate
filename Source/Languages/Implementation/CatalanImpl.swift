@@ -18,28 +18,22 @@ class CatalanImpl: LanguageGroup3 {
             exponentString: " por diez elevat a ")        
         voiceLanguageCode = "ca"
         _20_99_connector = "-"
-    }
-
-    override func _100_999(_ hundreds: Int, below: Int) -> String {
-        var ret: String = ""
-        switch hundreds {
-        case 1:
-            ret = hundreds == 1 ? "cent" : "cents"
-        default:
-            ret = read_positive(hundreds) + "-cents"
-        }
-        if below > 0 {
-            ret += " " + read_positive(below)
-        }
-        return ret
+        before_hundreds = "-"
+        after_hundreds = " "
     }
     
-    override func groupName(_ groupIndex: Int, _ isOne: Bool) -> String {
+    override func groupName(_ groupIndex: Int, _ above: Int) -> String {
         switch groupIndex {
+        case 2:
+            if above == 1 {
+                return "cent"
+            } else {
+                return "cents"
+            }
         case 3:
             return "mil"
         case 6:
-            if isOne {
+            if above == 1 {
                 return "un milió"
             } else {
                 return "milions"
@@ -47,7 +41,7 @@ class CatalanImpl: LanguageGroup3 {
         case 9:
             return "mil milions"
         case 12:
-            if isOne {
+            if above == 1 {
                 return "un bilió"
             } else {
                 return "bilions"
@@ -60,9 +54,9 @@ class CatalanImpl: LanguageGroup3 {
         var ret: String = ""
         
         if above == 1 {
-            ret = groupName(groupIndex, true)
+            ret = groupName(groupIndex, above)
         } else {
-            ret = read_positive(above) + " " + groupName(groupIndex, false)
+            ret = read_positive(above) + " " + groupName(groupIndex, above)
         }
         if below > 0 {
             ret += groupIndex == 12 ? " y " : " "

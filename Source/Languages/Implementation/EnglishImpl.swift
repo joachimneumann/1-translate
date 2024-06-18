@@ -9,7 +9,11 @@ import SwiftUI
 
 class EnglishImpl: LanguageGroup3 {
     @AppStorage("EnglishUseAndAfterHundredKey", store: .standard)
-    var useAndAfterHundred: Bool = false
+    var useAndAfterHundred: Bool = false {
+        didSet {
+            after_hundreds = useAndAfterHundred ? " and " : " "
+        }
+    }
     
     init() {
         super.init(
@@ -20,18 +24,15 @@ class EnglishImpl: LanguageGroup3 {
             exponentString: " times ten to the power of ")
         voiceLanguageCode = "en"
         _20_99_connector = "-"
+        use_single_hundreds = true
+        before_hundreds = " "
+        after_hundreds = useAndAfterHundred ? " and " : " "
     }
     
-    override func _100_999(_ hundreds: Int, below: Int) -> String {
-        var ret = read_positive(hundreds) + " hundred"
-        if below > 0 {
-            ret += (useAndAfterHundred ? " and " : " ") + read_positive(below)
-        }
-        return ret
-    }
-    
-    private func groupName(_ groupIndex: Int) -> String {
+    override func groupName(_ groupIndex: Int, _ above: Int) -> String {
         switch groupIndex {
+        case 2:
+            return "hundred"
         case 3:
             return "thousand"
         case 6:
@@ -45,7 +46,7 @@ class EnglishImpl: LanguageGroup3 {
     }
     
     override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
-        var ret = read_positive(above) + " " + groupName(groupIndex)
+        var ret = read_positive(above) + " " + groupName(groupIndex, above)
         if below > 0 {
             ret += " " + read_positive(below)
         }

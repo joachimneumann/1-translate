@@ -18,18 +18,8 @@ class DanishImpl: LanguageGroup3 {
             exponentString: " gange ti i ")
         
         voiceLanguageCode = "da"
-//        e2 = "hundrede"
-//        e2_one = "hundred"
-//        afterGroup = " og"
-//        e3 = "tusinde"
-//        e3_one = "ettusind"
-//        e6 = "millioner"
-//        e6_one = "en million"
-//        e9 = "milliarder"
-//        e9_one = "en milliard"
-//        e12 = "billioner"
-//        e12_one = "en billion"
-//        eSpace = " "
+        before_hundreds = " "
+        after_hundreds = " og "
     }
 
     override func _0_9(_ i: Int) -> String {
@@ -92,41 +82,34 @@ class DanishImpl: LanguageGroup3 {
         return ret
     }
 
-    override func _100_999(_ hundreds: Int, below: Int) -> String {
-        var ret: String = ""
-        if hundreds == 1 {
-            ret = "hundred"
-        } else {
-            ret = read_positive(hundreds) + " hundrede"
-        }
-        if below > 0 {
-            ret += " og " + read_positive(below)
-        }
-        return ret
-    }
-
-    override func groupName(_ groupIndex: Int, _ isOne: Bool) -> String {
+    override func groupName(_ groupIndex: Int, _ above: Int) -> String {
         switch groupIndex {
+        case 2:
+            if above == 1 {
+                return "hundred"
+            } else {
+                return "hundrede"
+            }
         case 3:
-            if isOne {
+            if above == 1 {
                 return "ettusind"
             } else {
                 return "tusinde"
             }
         case 6:
-            if isOne {
+            if above == 1 {
                 return "en million"
             } else {
                 return "millioner"
             }
         case 9:
-            if isOne {
+            if above == 1 {
                 return "en milliard"
             } else {
                 return "milliarder"
             }
         case 12:
-            if isOne {
+            if above == 1 {
                 return "en billion"
             } else {
                 return "billioner"
@@ -139,14 +122,14 @@ class DanishImpl: LanguageGroup3 {
         var ret: String = ""
         
         if above == 1 {
-            ret = groupName(groupIndex, true)
+            ret = groupName(groupIndex, above)
         } else {
             if above / 100 == 1 {
                 ret = read_positive(above).replacingOccurrences(of: "hundred", with: "hundrede")
             } else {
                 ret = read_positive(above)
             }
-            ret += " " + groupName(groupIndex, false)
+            ret += " " + groupName(groupIndex, above)
         }
         if below > 0 {
             ret += " og "

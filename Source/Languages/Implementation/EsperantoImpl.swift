@@ -54,26 +54,26 @@ class EsperantoImpl: LanguageGroup3 {
         return _0_9(i) + "dek"
     }
     
-    override func groupName(_ groupIndex: Int, _ isOne: Bool) -> String {
+    override func groupName(_ groupIndex: Int, _ above: Int) -> String {
         switch groupIndex {
         case 2:
             return "cent"
         case 3:
             return "mil"
         case 6:
-            if isOne {
+            if above == 1 {
                 return "miliono"
             } else {
                 return "milionoj"
             }
         case 9:
-            if isOne {
+            if above == 1 {
                 return "miliardo"
             } else {
                 return "miliardoj"
             }
         case 12:
-            if isOne {
+            if above == 1 {
                 return "biliono"
             } else {
                 return "bilionoj"
@@ -86,9 +86,9 @@ class EsperantoImpl: LanguageGroup3 {
         var ret: String = ""
         
         if above == 1 {
-            ret = groupName(groupIndex, true)
+            ret = groupName(groupIndex, above)
         } else {
-            ret = read_positive(above) + " " + groupName(groupIndex, false)
+            ret = read_positive(above) + " " + groupName(groupIndex, above)
         }
         if below > 0 {
             ret += " " + read_positive(below)

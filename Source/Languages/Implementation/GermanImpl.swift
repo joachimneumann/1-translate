@@ -19,12 +19,10 @@ class GermanImpl: LanguageGroup3 {
             dotString: "Komma",
             exponentString: " mal zehn hoch ")
 
-        voiceLanguageCode = "de"
-        
-        _20_99_connector = Languages.WordSplitter + "und"
-
-        afterNegative = " "
         postProcessing = germanPostProcessing
+        afterNegative = " "
+        voiceLanguageCode = "de"
+        _20_99_connector = Languages.WordSplitter + "und"
     }
     
     override func _20_99(_ i: Int) -> String {
@@ -38,41 +36,34 @@ class GermanImpl: LanguageGroup3 {
         return ret
     }
     
-    override func _100_999(_ hundreds: Int, below: Int) -> String {
-        var ret: String
-        if hundreds == 1 {
-            ret = "einhundert"
-        } else {
-            ret = read_positive(hundreds) + "hundert"
-        }
-        if below > 0 {
-            ret += read_positive(below)
-        }
-        return ret
-    }
-    
-    override func groupName(_ groupIndex: Int, _ isOne: Bool) -> String {
+    override func groupName(_ groupIndex: Int, _ above: Int) -> String {
         switch groupIndex {
+        case 2:
+            if above == 1 {
+                return "einhundert"
+            } else {
+                return "hundert"
+            }
         case 3:
-            if isOne {
+            if above == 1 {
                 return "eintausend"
             } else {
                 return "tausend"
             }
         case 6:
-            if isOne {
+            if above == 1 {
                 return "eine Million"
             } else {
                 return " Millionen"
             }
         case 9:
-            if isOne {
+            if above == 1 {
                 return "eine Milliarde"
             } else {
                 return " Milliarden"
             }
         case 12:
-            if isOne {
+            if above == 1 {
                 return "eine Billion"
             } else {
                 return " Billionen"
@@ -84,9 +75,9 @@ class GermanImpl: LanguageGroup3 {
     override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
         var ret: String = ""
         if above == 1 {
-            ret = groupName(groupIndex, true)
+            ret = groupName(groupIndex, above)
         } else {
-            ret = read_positive(above) + groupName(groupIndex, false)
+            ret = read_positive(above) + groupName(groupIndex, above)
         }
         if below > 0 {
             if groupIndex == 6 { ret += " und " }

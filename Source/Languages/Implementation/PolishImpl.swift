@@ -18,6 +18,7 @@ class PolishImpl: LanguageGroup3 {
         
         voiceLanguageCode = "pl"
         _20_99_connector = " "
+        after_hundreds = " "
     }
     
     
@@ -77,7 +78,7 @@ class PolishImpl: LanguageGroup3 {
         case 1:
             ret = "sto"
         case 2:
-            ret = "dwieście"
+            ret = "dwieście" // special case
         case 3, 4:
             ret = read_positive(hundreds) + "sta"
         default:
@@ -99,7 +100,7 @@ class PolishImpl: LanguageGroup3 {
         return use1 ? s1 : s2
     }
     
-    private func groupName(_ groupIndex: Int, _ above: Int) -> String {
+    override func groupName(_ groupIndex: Int, _ above: Int) -> String {
         switch groupIndex {
         case 3:
             return use(above, "tysiąc", "tysiące", "tysięcy")
