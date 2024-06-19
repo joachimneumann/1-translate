@@ -46,7 +46,7 @@ class Languages {
 //    let ukrainian           = UkrainianImpl()
     let swahili             = SwahiliImpl()
 //    let roman               = RomanImpl()
-//    let thai                = ThaiImpl()
+    let thai                = ThaiImpl()
 //    let thaiNumerals        = ThaiNumeralsImpl()
     var vietnamese          = VietnameseImpl()
 
