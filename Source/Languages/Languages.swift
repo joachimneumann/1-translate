@@ -44,7 +44,7 @@ class Languages {
     var portugueseBrazil    = PortugueseImpl(variant: .Brazilian)
 //    let russian             = RussianImpl()
 //    let ukrainian           = UkrainianImpl()
-//    let swahili             = SwahiliImpl()
+    let swahili             = SwahiliImpl()
 //    let roman               = RomanImpl()
 //    let thai                = ThaiImpl()
 //    let thaiNumerals        = ThaiNumeralsImpl()
