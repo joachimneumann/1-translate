@@ -46,8 +46,8 @@ import Foundation
         return "ERROR in NewLanguageGroup3.read_positive()"
     }
 
-    func groupName(_ groupIndex: Int, _ above: Int) -> String {
-        fatalError("groupName() not implmented")
+    func groupName(_ groupIndex: Int, _ above: Int) -> String? {
+        return nil
     }
     
     func _10s(_ i: Int) -> String {
@@ -73,7 +73,9 @@ import Foundation
         if hundreds > 1 || use_single_hundreds {
             ret = read_positive(hundreds) + before_hundreds
         }
-        ret += groupName(2, hundreds)
+        if let hundredsName = groupName(2, hundreds) {
+            ret += hundredsName
+        }
         if below > 0 {
             ret += after_hundreds + read_positive(below)
         }
@@ -86,7 +88,9 @@ import Foundation
         if above > 1 || use_single_group {
             ret = read_positive(above) + before_groupName
         }
-        ret += groupName(groupIndex, above)
+        if let groupName = groupName(groupIndex, above) {
+            ret += groupName
+        }
 
         if below > 0 {
             ret += after_groupName + read_positive(below)

@@ -85,7 +85,7 @@ class PortugueseImpl: LanguageGroup3 {
         }
     }
     
-    override func groupName(_ groupIndex: Int, _ above: Int) -> String {
+    override func groupName(_ groupIndex: Int, _ above: Int) -> String? {
         switch groupIndex {
         case 2:
             switch above {
@@ -127,7 +127,7 @@ class PortugueseImpl: LanguageGroup3 {
                     return "biliões"
                 }
             }
-        default: return "ERROR in portuguese Group"
+        default: return nil
         }
     }
     

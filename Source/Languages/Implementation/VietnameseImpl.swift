@@ -54,7 +54,7 @@ class VietnameseImpl: LanguageGroup3 {
         return super._100_999(hundreds, below: below)
     }
     
-    override func groupName(_ groupIndex: Int, _ above: Int) -> String {
+    override func groupName(_ groupIndex: Int, _ above: Int) -> String? {
         switch groupIndex {
         case 0:
             return ""
@@ -68,7 +68,7 @@ class VietnameseImpl: LanguageGroup3 {
             return " tỷ"
         case 12:
             return " " + vietnameseThousand.rawValue + " tỷ"
-        default: return "ERROR in Vietnamese Group"
+        default: return nil
         }
     }
     
@@ -85,7 +85,9 @@ class VietnameseImpl: LanguageGroup3 {
                 ret += " không trăm"
             }
             ret += " " + read_positive(above)
-            ret += groupName(groupIndex, above)
+            if let groupName = groupName(groupIndex, above) {
+                ret += groupName
+            }
             if groupIndex >= 3 && below > 0 {
                 ret += notLargestGroup(groupIndex - 3, below)
             }
@@ -94,7 +96,10 @@ class VietnameseImpl: LanguageGroup3 {
     }
         
     override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
-        var ret = read_positive(above) + groupName(groupIndex, above)
+        var ret = read_positive(above)
+        if let groupName = groupName(groupIndex, above) {
+            ret += groupName
+        }
         if below > 0 {
             ret += notLargestGroup(groupIndex - 3, below)
         }

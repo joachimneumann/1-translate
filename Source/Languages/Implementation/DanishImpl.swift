@@ -81,7 +81,7 @@ class DanishImpl: LanguageGroup3 {
         return ret
     }
 
-    override func groupName(_ groupIndex: Int, _ above: Int) -> String {
+    override func groupName(_ groupIndex: Int, _ above: Int) -> String? {
         switch groupIndex {
         case 2:
             if above == 1 {
@@ -113,7 +113,7 @@ class DanishImpl: LanguageGroup3 {
             } else {
                 return "billioner"
             }
-        default: return "ERROR in Danish Group"
+        default: return nil
         }
     }
 

@@ -21,7 +21,7 @@ class CatalanImpl: LanguageGroup3 {
         before_hundreds = "-"
     }
     
-    override func groupName(_ groupIndex: Int, _ above: Int) -> String {
+    override func groupName(_ groupIndex: Int, _ above: Int) -> String? {
         switch groupIndex {
         case 2:
             if above == 1 {
@@ -45,7 +45,7 @@ class CatalanImpl: LanguageGroup3 {
             } else {
                 return "bilions"
             }
-        default: return "ERROR in Catalan Group"
+        default: return nil
         }
     }
 

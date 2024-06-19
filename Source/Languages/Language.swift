@@ -25,6 +25,7 @@ struct Translation {
     let zero: String?
     var negativeString: String
     var dotString: String
+    var beforeAndAfterDotString: String = " "
     var exponentString: String
     var voiceLanguageCode: String? = nil
     var allowNegativeNumbers = true
@@ -108,11 +109,11 @@ struct Translation {
         
         if let fractionalPart = fractionalPart {
             var count = 0
-            ret += " " + dotString
+            ret += beforeAndAfterDotString + dotString
             for char in fractionalPart {
                 if count < 10 {
                     guard let digit = Int(String(char)) else { return LanguageError }
-                    ret += " " + read_positive(digit)
+                    ret += beforeAndAfterDotString + read_positive(digit)
                 }
                 count += 1
             }

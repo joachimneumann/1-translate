@@ -41,7 +41,7 @@ class EsperantoImpl: LanguageGroup3 {
         return _0_9(i) + "dek"
     }
     
-    override func groupName(_ groupIndex: Int, _ above: Int) -> String {
+    override func groupName(_ groupIndex: Int, _ above: Int) -> String? {
         switch groupIndex {
         case 2:
             return "cent"
@@ -65,7 +65,7 @@ class EsperantoImpl: LanguageGroup3 {
             } else {
                 return "bilionoj"
             }
-        default: return "ERROR in Esperanto Group"
+        default: return nil
         }
     }
 

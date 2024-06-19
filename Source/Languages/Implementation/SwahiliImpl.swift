@@ -58,7 +58,7 @@ class SwahiliImpl: LanguageGroup3 {
         return ret
     }
 
-    override func groupName(_ groupIndex: Int, _ above: Int) -> String {
+    override func groupName(_ groupIndex: Int, _ above: Int) -> String? {
         switch groupIndex {
         case 3:
             return "elfu"
@@ -68,12 +68,12 @@ class SwahiliImpl: LanguageGroup3 {
             return "bilioni"
         case 12:
             return "trilioni"
-        default: return "ERROR in English Group"
+        default: return nil
         }
     }
     
     override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
-        var ret: String = groupName(groupIndex, above) + before_groupName + read_positive(above)
+        var ret: String = ""
 
         if groupIndex == 3 && above >= 100 {
             ret = "laki " + read_positive(above / 100)
@@ -82,6 +82,10 @@ class SwahiliImpl: LanguageGroup3 {
                 ret += ", " + read_positive(below)
             }
             return ret
+        } else {
+            if let groupName = groupName(groupIndex, above) {
+                ret = groupName + after_groupName + read_positive(above)
+            }
         }
         if below > 0 {
             ret += below <= 9 ? " na " : ", "

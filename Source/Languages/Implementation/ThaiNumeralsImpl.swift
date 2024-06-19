@@ -18,20 +18,33 @@ class ThaiNumeralsImpl: Language {
 
         voiceLanguageCode = "th"
         nameDescription = "Thai Numerals"
+        beforeAndAfterDotString = ""
+    }
+    
+    override func read_positive(_ i: Int) -> String {
+        let as_string = i.string
+        var ret = ""
+        for digit in as_string {
+            ret += transformDigit(digit)
+        }
+        return ret
     }
         
-    override func read_1_(_ i: Int) -> String {
-        var ret = i.string
-        ret = ret.replacingOccurrences(of: "1", with: "๑"+Languages.WordSplitter)
-        ret = ret.replacingOccurrences(of: "2", with: "๒"+Languages.WordSplitter)
-        ret = ret.replacingOccurrences(of: "3", with: "๓"+Languages.WordSplitter)
-        ret = ret.replacingOccurrences(of: "4", with: "๔"+Languages.WordSplitter)
-        ret = ret.replacingOccurrences(of: "5", with: "๕"+Languages.WordSplitter)
-        ret = ret.replacingOccurrences(of: "6", with: "๖"+Languages.WordSplitter)
-        ret = ret.replacingOccurrences(of: "7", with: "๗"+Languages.WordSplitter)
-        ret = ret.replacingOccurrences(of: "8", with: "๘"+Languages.WordSplitter)
-        ret = ret.replacingOccurrences(of: "9", with: "๙"+Languages.WordSplitter)
-        return ret
+    private func transformDigit(_ digit: Character) -> String {
+        switch digit {
+        case "0": return "๐"
+        case "1": return "๑"
+        case "2": return "๒"
+        case "3": return "๓"
+        case "4": return "๔"
+        case "5": return "๕"
+        case "6": return "๖"
+        case "7": return "๗"
+        case "8": return "๘"
+        case "9": return "๙"
+        case ".": return "."
+        default: return ""
+        }
     }
 
 }

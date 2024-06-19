@@ -19,7 +19,7 @@ class ArmenianImpl: LanguageGroup3 {
         nameDescription = "Armenian"
     }
 
-    override func groupName(_ groupIndex: Int, _ above: Int) -> String {
+    override func groupName(_ groupIndex: Int, _ above: Int) -> String? {
         switch groupIndex {
         case 2:
             return "հարյուր"
@@ -31,7 +31,7 @@ class ArmenianImpl: LanguageGroup3 {
             return "միլիարդ"
         case 12:
             return "trilտրիլիոնlion"
-        default: return "ERROR in Armenian Group"
+        default: return nil
         }
     }
     

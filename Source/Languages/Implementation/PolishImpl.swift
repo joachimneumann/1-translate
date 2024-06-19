@@ -89,7 +89,7 @@ class PolishImpl: LanguageGroup3 {
         return use1 ? s1 : s2
     }
     
-    override func groupName(_ groupIndex: Int, _ above: Int) -> String {
+    override func groupName(_ groupIndex: Int, _ above: Int) -> String? {
         switch groupIndex {
         case 2:
             return use(above, "sto", "sta", "set")
@@ -102,7 +102,7 @@ class PolishImpl: LanguageGroup3 {
         case 12:
             return use(above, "bilion", "biliony", "bilionów")
         default:
-            fatalError("wrong groupindex \(groupIndex)")
+            return nil
         }
     }
     

@@ -21,7 +21,7 @@ class FrenchImpl: LanguageGroup3 {
         _20_99_connector = "-"
     }
 
-    override func groupName(_ groupIndex: Int, _ above: Int) -> String {
+    override func groupName(_ groupIndex: Int, _ above: Int) -> String? {
         switch groupIndex {
         case 2:
             if above == 1 {
@@ -49,7 +49,7 @@ class FrenchImpl: LanguageGroup3 {
             } else {
                 return "billions"
             }
-        default: return "ERROR in English Group"
+        default: return nil
         }
     }
     

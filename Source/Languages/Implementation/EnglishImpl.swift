@@ -29,7 +29,7 @@ class EnglishImpl: LanguageGroup3 {
         use_single_group = true
     }
     
-    override func groupName(_ groupIndex: Int, _ above: Int) -> String {
+    override func groupName(_ groupIndex: Int, _ above: Int) -> String? {
         switch groupIndex {
         case 2:
             return "hundred"
@@ -41,7 +41,7 @@ class EnglishImpl: LanguageGroup3 {
             return "billion"
         case 12:
             return "trillion"
-        default: return "ERROR in English Group"
+        default: return nil
         }
     }
 
