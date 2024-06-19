@@ -25,14 +25,7 @@ class ThaiImpl: LanguageGroup3 {
         use_single_group = true
         before_groupName = ""
         after_groupName = ""
-//        e2 = "ร้อย"
-//        e3 = "พัน"
-//        e4 = "หมื่น"
-//        e5 = "แสน"
-//        e6 = "ล้าน"
-//        e9 = "พันล้าน"
-//        e12 = "ล้านล้าน"
-//        eSpace = Languages.WordSplitter
+        beforeAndAfterDotString = ""
     }
     
     override func groupName(_ groupIndex: Int, _ above: Int) -> String? {
@@ -41,10 +34,6 @@ class ThaiImpl: LanguageGroup3 {
             return "ร้อย"
         case 3:
             return "พัน"
-        case 4:
-            return "หมื่น"
-        case 5:
-            return "แสน"
         case 6:
             return "ล้าน"
         case 9:
@@ -54,6 +43,50 @@ class ThaiImpl: LanguageGroup3 {
         default: return nil
         }
     }
+    
+    override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
+        var ret: String = ""
+
+//    case 4:
+//        return "หมื่น"
+//    case 5:
+//        return "แสน"
+
+        if groupIndex == 3 && above >= 100 {
+            ret = read_positive(above / 100) + "แสน"
+            let below = (above - above / 100 * 100) * 1000 + below
+            if below > 0 {
+                ret += read_positive(below)
+            }
+            return ret
+        } else if groupIndex == 3 && above >= 10 {
+            ret = read_positive(above / 10) + "หมื่น"
+            let below = (above - above / 10 * 10) * 1000 + below
+            if below > 0 {
+                ret += read_positive(below)
+            }
+            return ret
+        } else {
+            if let groupName = groupName(groupIndex, above) {
+                ret = groupName + after_groupName + read_positive(above)
+            }
+        }
+        
+        if groupIndex == 3 {
+            // handle groupindex 4
+            
+        }
+        ret = read_positive(above) + before_groupName
+        if let groupName = groupName(groupIndex, above) {
+            ret += groupName
+        }
+
+        if below > 0 {
+            ret += after_groupName + read_positive(below)
+        }
+        return ret
+    }
+    
     override func _0_9(_ i: Int) -> String {
         switch i {
         case 0: return zero!
