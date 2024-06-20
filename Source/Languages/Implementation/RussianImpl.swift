@@ -45,22 +45,28 @@ class RussianImpl: LanguageGroup3 {
                 return "тысяч"
             }
         case 6:
-            if above == 1 {
-                return "тысяча"
+            if above % 10 == 1 && (above < 10 || above > 20)  {
+                return "миллион"
+            } else if (above % 10 >= 1 && above % 10 <= 4) && (above < 10 || above > 20) {
+                return "миллиона"
             } else {
-                return "тысячи"
+                return "миллионов"
             }
         case 9:
-            if above == 1 {
+            if above % 10 == 1 && (above < 10 || above > 20)  {
                 return "миллиард"
-            } else {
+            } else if (above % 10 >= 1 && above % 10 <= 4) && (above < 10 || above > 20) {
                 return "миллиарда"
+            } else {
+                return "миллиардов"
             }
         case 12:
-            if above == 1 {
+            if above % 10 == 1 && (above < 10 || above > 20)  {
                 return "триллион"
-            } else {
+            } else if (above % 10 >= 1 && above % 10 <= 4) && (above < 10 || above > 20) {
                 return "триллиона"
+            } else {
+                return "триллионов"
             }
         default: return nil
         }
@@ -146,9 +152,16 @@ class RussianImpl: LanguageGroup3 {
     }
 
     override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
+        if groupIndex == 3 {
+            use_single_group = false
+        } else {
+            use_single_group = true
+        }
         var ret = super.group(groupIndex, above, below: below)
         ret = ret.replacingOccurrences(of: "два тыся", with: "две тыся")
-        ret = ret.replacingOccurrences(of: "один ", with: "одна ")
+        if groupIndex == 3 {
+            ret = ret.replacingOccurrences(of: "один тыся", with: "одна тыся")
+        }
         return ret
     }
     
