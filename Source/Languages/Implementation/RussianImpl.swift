@@ -20,12 +20,6 @@ class RussianImpl: LanguageGroup3 {
         before_hundreds = ""
         after_hundreds = " "
         _20_99_connector = " "
-//        e9 = "миллиарда"
-//        e9_one = "один миллиард"
-//        e12 = "триллиона"
-//        e12_one = "один триллион"
-//        tensConnector = " "
-//        eSpace = " "
     }
     
     override func groupName(_ groupIndex: Int, _ above: Int) -> String? {
@@ -164,91 +158,5 @@ class RussianImpl: LanguageGroup3 {
         }
         return ret
     }
-    
-//    override func read_e3_e6(_ i: Int) -> String {
-//        var ret = ""
-//        switch i.E3 {
-//        case 1:
-//            ret = "тысяча"
-//        case 2:
-//            ret = "две тысячи"
-//        case 3:
-//            ret = "три тысячи"
-//        case 4:
-//            ret = "четыре тысячи"
-//        case 5:
-//            ret = "пять тысяч"
-//        case 6:
-//            ret = "шесть тысяч"
-//        case 7:
-//            ret = "семь тысяч"
-//        case 8:
-//            ret = "восемь тысяч"
-//        case 9:
-//            ret = "девять тысяч"
-//        default:
-//            ret = read_1_(i.E3)
-//            if i.E3 == 22 { ret = "двадцать две"}
-//            if i.E3 <= 20 {
-//                ret += " " + "тысяч"
-//            } else {
-//                if i.E3 % 10 == 0 {
-//                    ret += " " + "тысяч"
-//                } else if i.E3 % 10 == 1 {
-//                    ret += " " + "тысяча"
-//                } else if i.E3 % 10 <= 4 {
-//                    ret += " " + "тысячи"
-//                } else {
-//                    ret += " " + "тысяч"
-//                }
-//            }
-//        }
-//        if i.E3x > 0 {
-//            ret += " "
-//            ret += read_1_(i.E3x)
-//        }
-//        ret = ret.replacingOccurrences(of: "один ", with: "одна ")
-//        return ret
-//    }
-//    
-//    override func read_e6_e9(_ i: Int) -> String {
-//        var ret = super.read_1_(i.E6)
-//        if i.E6 == 1 {
-//            ret = "один миллион"
-//        } else if i.E6 % 10 == 0 {
-//            ret += " " + "миллионов"
-//        } else if i.E6 % 10 == 1 {
-//            ret += " " + "миллион"
-//        } else if i.E6 % 10 <= 4 {
-//            ret += " " + "миллиона"
-//        } else {
-//            ret += " " + "миллионов"
-//        }
-//        if i.E6x > 0 {
-//            let leftover = read(i.E6x)
-//            ret += " " + leftover
-//        }
-//    //        if i.E6 % 10 == 1 {
-//    //            ret = ret.replacingOccurrences(of: "миллиона", with: "миллион")
-//    //        } else if i.E6 % 10 > 4 { ret = ret.replacingOccurrences(of: "миллиона", with: "миллионов") }
-//    return ret
-//}
-//
-//override func read_e9_e12(_ i: Int) -> String {
-//    var ret = super.read_e9_e12(i)
-//    if i.E9 > 4 { ret = ret.replacingOccurrences(of: "миллиарда", with: "миллиардов")}
-//    if i.E9 > 1 {
-//        ret = ret.replacingOccurrences(of: "один ", with: "одна ")
-//    }
-//    return ret
-//}
-//
-//override func read_e12_e15(_ i: Int) -> String {
-//    var ret = super.read_e12_e15(i)
-//    if i.E12 > 4 { ret = ret.replacingOccurrences(of: "триллиона", with: "триллионов")}
-//    if i.E12 > 1 {
-//        ret = ret.replacingOccurrences(of: "один ", with: "одна ")
-//    }
-//    return ret
-//}
+
 }
