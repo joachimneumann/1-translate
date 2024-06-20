@@ -88,8 +88,6 @@
 		AAA671052C24467B00F28659 /* ThaiNumeralsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA4F5C42C22B1FF008EC1C2 /* ThaiNumeralsImpl.swift */; };
 		AAA671062C24468200F28659 /* EsperantoImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC58E692C20272A009B01BE /* EsperantoImpl.swift */; };
 		AAA671072C24468500F28659 /* FinnishImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC58E652C201C67009B01BE /* FinnishImpl.swift */; };
-		AAA6710C2C2449AD00F28659 /* LanguageImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA6710B2C2449AD00F28659 /* LanguageImpl.swift */; };
-		AAA6710D2C2449AD00F28659 /* LanguageImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA6710B2C2449AD00F28659 /* LanguageImpl.swift */; };
 		AAB10B9A292A2222004707E9 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB10B94292A2222004707E9 /* Label.swift */; };
 		AAB10B9C292A2222004707E9 /* NonScientificKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB10B96292A2222004707E9 /* NonScientificKeyboard.swift */; };
 		AAB253B52B3AE79500860F93 /* Languages.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB253B42B3AE79400860F93 /* Languages.swift */; };
@@ -208,7 +206,6 @@
 		AAA4F5CB2C23D5FC008EC1C2 /* ukrainian.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ukrainian.swift; sourceTree = "<group>"; };
 		AAA553782C19D3E8001ED86E /* german.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = german.swift; sourceTree = "<group>"; };
 		AAA5537A2C19F2B7001ED86E /* vietnamese.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = vietnamese.swift; sourceTree = "<group>"; };
-		AAA6710B2C2449AD00F28659 /* LanguageImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageImpl.swift; sourceTree = "<group>"; };
 		AAB10B94292A2222004707E9 /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		AAB10B96292A2222004707E9 /* NonScientificKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonScientificKeyboard.swift; sourceTree = "<group>"; };
 		AAB253B42B3AE79400860F93 /* Languages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Languages.swift; sourceTree = "<group>"; };
@@ -346,7 +343,6 @@
 			isa = PBXGroup;
 			children = (
 				AA3565AF2B32588B009B58D2 /* Language.swift */,
-				AAA6710B2C2449AD00F28659 /* LanguageImpl.swift */,
 				AAA3C3032C1B0E1A0071FBE4 /* LanguageImplGroup3.swift */,
 				AAB253B42B3AE79400860F93 /* Languages.swift */,
 				AAB253BB2B3BBAD400860F93 /* Implementation */,
@@ -540,7 +536,6 @@
 				AAD411292C1D3F9700B67D7C /* PolishImpl.swift in Sources */,
 				AA4BEEB32C2421EE004C55CB /* HieroglyphsImpl.swift in Sources */,
 				AAF472672B452BD000E7B986 /* Voices.swift in Sources */,
-				AAA6710C2C2449AD00F28659 /* LanguageImpl.swift in Sources */,
 				AA2FAC17272F2349006DE4C8 /* BrainEngine.swift in Sources */,
 				AAA671062C24468200F28659 /* EsperantoImpl.swift in Sources */,
 				AAB253B52B3AE79500860F93 /* Languages.swift in Sources */,
@@ -634,7 +629,6 @@
 				AA4BEEB12C241FF4004C55CB /* roman.swift in Sources */,
 				AAA4F5C52C22B1FF008EC1C2 /* ThaiNumeralsImpl.swift in Sources */,
 				AAC58E6A2C20272B009B01BE /* EsperantoImpl.swift in Sources */,
-				AAA6710D2C2449AD00F28659 /* LanguageImpl.swift in Sources */,
 				AAC58E622C200C2C009B01BE /* danish.swift in Sources */,
 				AAF9EC182B4A5094007D0B1D /* Languages.swift in Sources */,
 			);

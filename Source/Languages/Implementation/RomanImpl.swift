@@ -7,7 +7,7 @@
 
 import Foundation
 
-class RomanImpl: LanguageImpl {
+class RomanImpl: Language {
 
     init() {
         super.init(

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class BabylonianImpl: LanguageImpl {
+class BabylonianImpl: Language {
     static let symbolSpace = ""
     static let symbolNone = ""
     static let symbolEmptyColumn = "𒑊"
