@@ -7,7 +7,7 @@
 
 import Foundation
 
-@Observable class LanguageImplGroup3: LanguageImpl {
+class LanguageImplGroup3: LanguageImpl {
     var _20_99_connector: String = ""
     var use_single_hundreds = false
     var before_hundreds: String = " "
@@ -71,7 +71,7 @@ import Foundation
     func _100_999(_ hundreds: Int, below: Int) -> String {
         var ret = ""
         if hundreds > 1 || use_single_hundreds {
-            ret = read_positive(hundreds) + before_hundreds
+            ret = _0_9(hundreds) + before_hundreds
         }
         if let hundredsName = groupName(2, hundreds) {
             ret += hundredsName

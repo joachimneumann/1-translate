@@ -76,13 +76,11 @@ class Number: CustomDebugStringConvertible, Equatable {
         self.precision = precision
     }
     init(_ gmp: Gmp) {
-        //print("Number init()")
         _str = nil
         _gmp = gmp.copy()
         self.precision = gmp.precision
     }
     fileprivate init() {
-        //print("Number init()")
         _str = nil
         _gmp = nil
         precision = 0

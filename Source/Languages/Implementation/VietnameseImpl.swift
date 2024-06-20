@@ -10,7 +10,7 @@ import SwiftUI
 class VietnameseImpl: LanguageImplGroup3 {
     
     @AppStorage("VietnameseThousandKey")
-    var vietnameseThousand: VietnameseImpl.VietnameseThousand = .nghìn
+    var vietnameseThousand: VietnameseThousand = .nghìn
     
     @AppStorage("VietnameseSecondLastKey")
     var secondLast: VietnameseImpl.SecondLast = .lẻ

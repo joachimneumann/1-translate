@@ -7,7 +7,7 @@
 
 import Foundation
 
-@Observable class LanguageImpl: Language {
+class LanguageImpl: Language {
     let zero: String?
     var negativeString: String
     var dotString: String
