@@ -19,7 +19,7 @@ struct Translation {
     }
 }
 
-@Observable class Language {
+@Observable class Language: Identifiable {
     var name: String
     var nameDescription: String? = nil
     let zero: String?
@@ -36,7 +36,12 @@ struct Translation {
     let LanguageError = "ERROR"
     var allowExponent = true
     var allowFraction = true
+    var flagName: String { nameDescription != nil ? nameDescription! : name }
 
+    var nameWithDescription: String {
+        name + (nameDescription != nil ? "/"+nameDescription! : "")
+    }
+    
     init(name: String,
          zero: String?,
          negativeString: String,

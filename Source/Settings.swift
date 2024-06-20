@@ -289,8 +289,8 @@ struct Settings: View {
                 Grid(alignment: .leading) {
                     GridRow {
                         Text("1000")
-                        Picker("", selection: $viewModel.languages.vietnamese.thousand) {
-                            ForEach(VietnameseImpl.Thousand.allCases, id: \.self) { value in
+                        Picker("", selection: $viewModel.languages.vietnamese.vietnameseThousand) {
+                            ForEach(VietnameseImpl.VietnameseThousand.allCases, id: \.self) { value in
                                 Text("\(value.rawValue)")
                                     .tag(value)
                             }
