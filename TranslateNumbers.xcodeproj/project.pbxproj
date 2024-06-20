@@ -45,6 +45,10 @@
 		AA44A0AE2C21BFE400D18267 /* portugueseEuropean.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA44A0AB2C21BFE400D18267 /* portugueseEuropean.swift */; };
 		AA44A0AF2C21BFE400D18267 /* portugueseBrazil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA44A0AC2C21BFE400D18267 /* portugueseBrazil.swift */; };
 		AA44A0B02C21BFE400D18267 /* portugueseBrazil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA44A0AC2C21BFE400D18267 /* portugueseBrazil.swift */; };
+		AA4BEEA72C2417CF004C55CB /* HindiImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4BEEA62C2417CF004C55CB /* HindiImpl.swift */; };
+		AA4BEEA82C2417CF004C55CB /* HindiImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4BEEA62C2417CF004C55CB /* HindiImpl.swift */; };
+		AA4BEEAA2C2417D7004C55CB /* hindi.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4BEEA92C2417D7004C55CB /* hindi.swift */; };
+		AA4BEEAB2C2417D7004C55CB /* hindi.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4BEEA92C2417D7004C55CB /* hindi.swift */; };
 		AA6474652C18A23100BEA8A2 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6474642C18A23100BEA8A2 /* Extension.swift */; };
 		AA659AB82B3FDE73004CF20A /* Persistent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA659AB72B3FDE73004CF20A /* Persistent.swift */; };
 		AA689125295E681400129593 /* Brain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA689124295E681400129593 /* Brain.swift */; };
@@ -161,6 +165,8 @@
 		AA44A0A82C21BFCD00D18267 /* PortugueseImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PortugueseImpl.swift; sourceTree = "<group>"; };
 		AA44A0AB2C21BFE400D18267 /* portugueseEuropean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = portugueseEuropean.swift; sourceTree = "<group>"; };
 		AA44A0AC2C21BFE400D18267 /* portugueseBrazil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = portugueseBrazil.swift; sourceTree = "<group>"; };
+		AA4BEEA62C2417CF004C55CB /* HindiImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HindiImpl.swift; sourceTree = "<group>"; };
+		AA4BEEA92C2417D7004C55CB /* hindi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = hindi.swift; sourceTree = "<group>"; };
 		AA6352B02B296C3B00CABC0C /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		AA6474642C18A23100BEA8A2 /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		AA659AB72B3FDE73004CF20A /* Persistent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistent.swift; sourceTree = "<group>"; };
@@ -331,6 +337,7 @@
 		AAB253BB2B3BBAD400860F93 /* Implementation */ = {
 			isa = PBXGroup;
 			children = (
+				AA4BEEA62C2417CF004C55CB /* HindiImpl.swift */,
 				AAA4F5C82C23D5F2008EC1C2 /* UkrainianImpl.swift */,
 				AAA4F5C62C23D5DC008EC1C2 /* RussianImpl.swift */,
 				AAA4F5C42C22B1FF008EC1C2 /* ThaiNumeralsImpl.swift */,
@@ -359,6 +366,7 @@
 		AAF9EC122B4A5051007D0B1D /* LanguageTest */ = {
 			isa = PBXGroup;
 			children = (
+				AA4BEEA92C2417D7004C55CB /* hindi.swift */,
 				AAA4F5CA2C23D5FC008EC1C2 /* russian.swift */,
 				AAA4F5CB2C23D5FC008EC1C2 /* ukrainian.swift */,
 				AAA4F5C22C22B17C008EC1C2 /* thaiNumerals.swift */,
@@ -494,6 +502,7 @@
 				AA8A91122B1D7B7100CE7185 /* TranslateNumbers.swift in Sources */,
 				AA32853B297248B800D86CB4 /* ViewModel.swift in Sources */,
 				AAEF2FB92B20D54B0012DDDD /* Separators.swift in Sources */,
+				AA4BEEA72C2417CF004C55CB /* HindiImpl.swift in Sources */,
 				AA2FAC0F272F2349006DE4C8 /* Number.swift in Sources */,
 				AA370C2D293352960041AE4E /* Extensions.swift in Sources */,
 				AAA3C3042C1B0E1A0071FBE4 /* LanguageGroup3.swift in Sources */,
@@ -513,6 +522,7 @@
 				AABEFC132972A8780023A3C9 /* KeyColor.swift in Sources */,
 				AA659AB82B3FDE73004CF20A /* Persistent.swift in Sources */,
 				AA44A0A02C21AEC900D18267 /* armenian.swift in Sources */,
+				AA4BEEAA2C2417D7004C55CB /* hindi.swift in Sources */,
 				AAB10B9A292A2222004707E9 /* Label.swift in Sources */,
 				AAE426F729597AE3005FE365 /* Screen.swift in Sources */,
 				AA44A0AF2C21BFE400D18267 /* portugueseBrazil.swift in Sources */,
@@ -544,6 +554,7 @@
 				AAF9EC2A2B4A51C4007D0B1D /* EnglishImpl.swift in Sources */,
 				AAF9EC232B4A51C4007D0B1D /* GermanImpl.swift in Sources */,
 				AAF9EC1B2B4A51B2007D0B1D /* Language.swift in Sources */,
+				AA4BEEA82C2417CF004C55CB /* HindiImpl.swift in Sources */,
 				AA44A0A12C21AEC900D18267 /* armenian.swift in Sources */,
 				AAA4F5C72C23D5DC008EC1C2 /* RussianImpl.swift in Sources */,
 				AAC58E6C2C202737009B01BE /* esperanto.swift in Sources */,
@@ -574,6 +585,7 @@
 				AA44A0A42C21B35700D18267 /* FrenchImpl.swift in Sources */,
 				AA16CFA42C1C76550023D79E /* digits.swift in Sources */,
 				AAA5537B2C19F2B7001ED86E /* vietnamese.swift in Sources */,
+				AA4BEEAB2C2417D7004C55CB /* hindi.swift in Sources */,
 				AA44A09E2C21AEC200D18267 /* ArmenianImpl.swift in Sources */,
 				AAA553792C19D3E8001ED86E /* german.swift in Sources */,
 				AAD4112C2C1D4D8C00B67D7C /* polish.swift in Sources */,

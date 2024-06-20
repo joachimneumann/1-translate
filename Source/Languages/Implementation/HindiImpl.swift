@@ -21,7 +21,7 @@ class HindiImpl: Language {
     }
     
     
-    override func read_1_9(_ i: Int) -> String {
+    override func _0_9(_ i: Int) -> String {
         switch i {
         case 1:     return "एक"
         case 2:     return "दो"
@@ -36,7 +36,7 @@ class HindiImpl: Language {
         }
     }
     
-    override func read_10_99(_ i: Int) -> String {
+    func read_10_99(_ i: Int) -> String {
         switch i {
         case 10: return "दश"
         case 11: return "ग्यारह"
@@ -132,12 +132,12 @@ class HindiImpl: Language {
         }
     }
     
-    override func read_1_(_ i: Int) -> String {
-        if i < 10 { return read_1_9(i) }
+    override func read_positive(_ i: Int) -> String {
+        if i < 10 { return _0_9(i) }
         if i < 100 { return read_10_99(i) }
         if i < 1000 {
             var ret = ""
-            ret = read_1_9(i.E2) + " " + "सौ"
+            ret = _0_9(i.E2) + " " + "सौ"
             if i.E2x > 0 {
                 ret += " " + read(i.E2x)
             }
