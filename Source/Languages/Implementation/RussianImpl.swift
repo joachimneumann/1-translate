@@ -7,7 +7,7 @@
 
 import Foundation
 
-class RussianImpl: Language {
+class RussianImpl: LanguageGroup3 {
     init() {
         super.init(
             name: "Русский",
@@ -17,61 +17,58 @@ class RussianImpl: Language {
             exponentString: " EE ")
         voiceLanguageCode = "ru"
         nameDescription = "Russian"
-        e9 = "миллиарда"
-        e9_one = "один миллиард"
-        e12 = "триллиона"
-        e12_one = "один триллион"
-        tensConnector = " "
-        eSpace = " "
+        before_hundreds = ""
+        after_hundreds = " "
+        _20_99_connector = " "
+//        e9 = "миллиарда"
+//        e9_one = "один миллиард"
+//        e12 = "триллиона"
+//        e12_one = "один триллион"
+//        tensConnector = " "
+//        eSpace = " "
     }
     
-    
-    override func read_1_9(_ i: Int) -> String {
-        switch i {
-        case 1:     return "один"
-        case 2:     return "два"
-        case 3:     return "три"
-        case 4:     return "четыре"
-        case 5:     return "пять"
-        case 6:     return "шесть"
-        case 7:     return "семь"
-        case 8:     return "восемь"
-        case 9:     return "девять"
-        default: return "read_0_9: outside range"
+    override func groupName(_ groupIndex: Int, _ above: Int) -> String? {
+        switch groupIndex {
+        case 2:
+            if above == 1 {
+                return "стo"
+            } else {
+                return "сти"
+            }
+        case 3:
+            if above % 10 == 1 && (above < 10 || above > 20)  {
+                return "тысяча"
+            } else if (above % 10 >= 1 && above % 10 <= 4) && (above < 10 || above > 20) {
+                return "тысячи"
+            } else {
+                return "тысяч"
+            }
+        case 6:
+            if above == 1 {
+                return "тысяча"
+            } else {
+                return "тысячи"
+            }
+        case 9:
+            if above == 1 {
+                return "миллиард"
+            } else {
+                return "миллиарда"
+            }
+        case 12:
+            if above == 1 {
+                return "триллион"
+            } else {
+                return "триллиона"
+            }
+        default: return nil
         }
     }
     
-    override func read_10s(_ i: Int) -> String {
-        switch i {
-        case 1:     return "десять"
-        case 2:     return "двадцать"
-        case 3:     return "тридцать"
-        case 4:     return "сорок"
-        case 5:     return "пятьдесят"
-        case 6:     return "шестьдесят"
-        case 7:     return "семьдесят"
-        case 8:     return "восемьдесят"
-        case 9:     return "девяносто"
-        default: return "read_10s: outside range"
-        }
-    }
-    
-    override func read_10_99(_ i: Int) -> String {
-        if i == 11 { return "одиннадцать" }
-        if i == 12 { return "двенадцать" }
-        if i == 13 { return "тринадцать" }
-        if i == 14 { return "четырнадцать" }
-        if i == 15 { return "пятнадцать" }
-        if i == 16 { return "шестнадцать" }
-        if i == 17 { return "семнадцать" }
-        if i == 18 { return "восемнадцать" }
-        if i == 19 { return "девятнадцать" }
-        return super.read_10_99(i)
-    }
-    
-    override func read_e2_e3(_ i: Int) -> String {
+    override func _100_999(_ hundreds: Int, below: Int) -> String {
         var ret = ""
-        switch i.E2 {
+        switch hundreds {
         case 1:
             ret = "стo"
         case 2:
@@ -91,99 +88,154 @@ class RussianImpl: Language {
         case 9:
             ret = "девятьсот"
         default:
-            fatalError("read_e2_e3 out of range")
+            fatalError("_100_999() out of range")
         }
-        if i.E2x > 0 {
+        if below > 0 {
             if ret.count > 0 { ret += " " }
-            ret += read_1_(i.E2x)
+            ret += read_positive(below)
         }
         return ret
     }
+
     
-    override func read_e3_e6(_ i: Int) -> String {
-        var ret = ""
-        switch i.E3 {
-        case 1:
-            ret = "тысяча"
-        case 2:
-            ret = "две тысячи"
-        case 3:
-            ret = "три тысячи"
-        case 4:
-            ret = "четыре тысячи"
-        case 5:
-            ret = "пять тысяч"
-        case 6:
-            ret = "шесть тысяч"
-        case 7:
-            ret = "семь тысяч"
-        case 8:
-            ret = "восемь тысяч"
-        case 9:
-            ret = "девять тысяч"
+    override func _0_9(_ i: Int) -> String {
+        switch i {
+        case 0: return zero!
+        case 1: return "один"
+        case 2: return "два"
+        case 3: return "три"
+        case 4: return "четыре"
+        case 5: return "пять"
+        case 6: return "шесть"
+        case 7: return "семь"
+        case 8: return "восемь"
+        case 9: return "девять"
+        default: return "read_0_9: outside range"
+        }
+    }
+    
+    override func _10s(_ i: Int) -> String {
+        switch i {
+        case 1:     return "десять"
+        case 2:     return "двадцать"
+        case 3:     return "тридцать"
+        case 4:     return "сорок"
+        case 5:     return "пятьдесят"
+        case 6:     return "шестьдесят"
+        case 7:     return "семьдесят"
+        case 8:     return "восемьдесят"
+        case 9:     return "девяносто"
+        default: return "read_10s: outside range"
+        }
+    }
+    
+    override func _11_19(_ i: Int) -> String {
+        switch i {
+        case 11: return "одиннадцать"
+        case 12: return "двенадцать"
+        case 13: return "тринадцать"
+        case 14: return "четырнадцать"
+        case 15: return "пятнадцать"
+        case 16: return "шестнадцать"
+        case 17: return "семнадцать"
+        case 18: return "восемнадцать"
+        case 19: return "девятнадцать"
         default:
-            ret = read_1_(i.E3)
-            if i.E3 == 22 { ret = "двадцать две"}
-            if i.E3 <= 20 {
-                ret += " " + "тысяч"
-            } else {
-                if i.E3 % 10 == 0 {
-                    ret += " " + "тысяч"
-                } else if i.E3 % 10 == 1 {
-                    ret += " " + "тысяча"
-                } else if i.E3 % 10 <= 4 {
-                    ret += " " + "тысячи"
-                } else {
-                    ret += " " + "тысяч"
-                }
-            }
+            fatalError("_11_19() parameter \(i)")
         }
-        if i.E3x > 0 {
-            ret += " "
-            ret += read_1_(i.E3x)
-        }
+    }
+
+    override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
+        var ret = super.group(groupIndex, above, below: below)
+        ret = ret.replacingOccurrences(of: "два тыся", with: "две тыся")
         ret = ret.replacingOccurrences(of: "один ", with: "одна ")
         return ret
     }
     
-    override func read_e6_e9(_ i: Int) -> String {
-        var ret = super.read_1_(i.E6)
-        if i.E6 == 1 {
-            ret = "один миллион"
-        } else if i.E6 % 10 == 0 {
-            ret += " " + "миллионов"
-        } else if i.E6 % 10 == 1 {
-            ret += " " + "миллион"
-        } else if i.E6 % 10 <= 4 {
-            ret += " " + "миллиона"
-        } else {
-            ret += " " + "миллионов"
-        }
-        if i.E6x > 0 {
-            let leftover = read(i.E6x)
-            ret += " " + leftover
-        }
-    //        if i.E6 % 10 == 1 {
-    //            ret = ret.replacingOccurrences(of: "миллиона", with: "миллион")
-    //        } else if i.E6 % 10 > 4 { ret = ret.replacingOccurrences(of: "миллиона", with: "миллионов") }
-    return ret
-}
-
-override func read_e9_e12(_ i: Int) -> String {
-    var ret = super.read_e9_e12(i)
-    if i.E9 > 4 { ret = ret.replacingOccurrences(of: "миллиарда", with: "миллиардов")}
-    if i.E9 > 1 {
-        ret = ret.replacingOccurrences(of: "один ", with: "одна ")
-    }
-    return ret
-}
-
-override func read_e12_e15(_ i: Int) -> String {
-    var ret = super.read_e12_e15(i)
-    if i.E12 > 4 { ret = ret.replacingOccurrences(of: "триллиона", with: "триллионов")}
-    if i.E12 > 1 {
-        ret = ret.replacingOccurrences(of: "один ", with: "одна ")
-    }
-    return ret
-}
+//    override func read_e3_e6(_ i: Int) -> String {
+//        var ret = ""
+//        switch i.E3 {
+//        case 1:
+//            ret = "тысяча"
+//        case 2:
+//            ret = "две тысячи"
+//        case 3:
+//            ret = "три тысячи"
+//        case 4:
+//            ret = "четыре тысячи"
+//        case 5:
+//            ret = "пять тысяч"
+//        case 6:
+//            ret = "шесть тысяч"
+//        case 7:
+//            ret = "семь тысяч"
+//        case 8:
+//            ret = "восемь тысяч"
+//        case 9:
+//            ret = "девять тысяч"
+//        default:
+//            ret = read_1_(i.E3)
+//            if i.E3 == 22 { ret = "двадцать две"}
+//            if i.E3 <= 20 {
+//                ret += " " + "тысяч"
+//            } else {
+//                if i.E3 % 10 == 0 {
+//                    ret += " " + "тысяч"
+//                } else if i.E3 % 10 == 1 {
+//                    ret += " " + "тысяча"
+//                } else if i.E3 % 10 <= 4 {
+//                    ret += " " + "тысячи"
+//                } else {
+//                    ret += " " + "тысяч"
+//                }
+//            }
+//        }
+//        if i.E3x > 0 {
+//            ret += " "
+//            ret += read_1_(i.E3x)
+//        }
+//        ret = ret.replacingOccurrences(of: "один ", with: "одна ")
+//        return ret
+//    }
+//    
+//    override func read_e6_e9(_ i: Int) -> String {
+//        var ret = super.read_1_(i.E6)
+//        if i.E6 == 1 {
+//            ret = "один миллион"
+//        } else if i.E6 % 10 == 0 {
+//            ret += " " + "миллионов"
+//        } else if i.E6 % 10 == 1 {
+//            ret += " " + "миллион"
+//        } else if i.E6 % 10 <= 4 {
+//            ret += " " + "миллиона"
+//        } else {
+//            ret += " " + "миллионов"
+//        }
+//        if i.E6x > 0 {
+//            let leftover = read(i.E6x)
+//            ret += " " + leftover
+//        }
+//    //        if i.E6 % 10 == 1 {
+//    //            ret = ret.replacingOccurrences(of: "миллиона", with: "миллион")
+//    //        } else if i.E6 % 10 > 4 { ret = ret.replacingOccurrences(of: "миллиона", with: "миллионов") }
+//    return ret
+//}
+//
+//override func read_e9_e12(_ i: Int) -> String {
+//    var ret = super.read_e9_e12(i)
+//    if i.E9 > 4 { ret = ret.replacingOccurrences(of: "миллиарда", with: "миллиардов")}
+//    if i.E9 > 1 {
+//        ret = ret.replacingOccurrences(of: "один ", with: "одна ")
+//    }
+//    return ret
+//}
+//
+//override func read_e12_e15(_ i: Int) -> String {
+//    var ret = super.read_e12_e15(i)
+//    if i.E12 > 4 { ret = ret.replacingOccurrences(of: "триллиона", with: "триллионов")}
+//    if i.E12 > 1 {
+//        ret = ret.replacingOccurrences(of: "один ", with: "одна ")
+//    }
+//    return ret
+//}
 }

@@ -39,7 +39,6 @@ final class Test_ukrainian: XCTestCase {
         XCTAssertEqual(language.read(90).x, "дев'яносто")
         XCTAssertEqual(language.read(100).x, "сто")
         XCTAssertEqual(language.read(1000).x, "тисяча")
-        // translated from russian
         XCTAssertEqual(language.read(0).x, "нуль")
         XCTAssertEqual(language.read(1).x, "один")
         XCTAssertEqual(language.read(2).x, "два")
