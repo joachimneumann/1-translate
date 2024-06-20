@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class SpanishImpl: LanguageGroup3 {
+class SpanishImpl: LanguageImplGroup3 {
     enum PuntoComma: String, Codable, CaseIterable {
         case coma
         case punto

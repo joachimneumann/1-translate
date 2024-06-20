@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CatalanImpl: LanguageGroup3 {
+class CatalanImpl: LanguageImplGroup3 {
     
     init() {
         super.init(

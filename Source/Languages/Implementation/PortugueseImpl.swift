@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class PortugueseImpl: LanguageGroup3 {
+class PortugueseImpl: LanguageImplGroup3 {
     
     enum Variant: String, Codable, CaseIterable {
         case European

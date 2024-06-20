@@ -7,7 +7,7 @@
 
 import Foundation
 
-class DanishImpl: LanguageGroup3 {
+class DanishImpl: LanguageImplGroup3 {
 
     init() {
         super.init(

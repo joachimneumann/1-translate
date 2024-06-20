@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class SwahiliImpl: LanguageGroup3 {
+class SwahiliImpl: LanguageImplGroup3 {
     init() {
         super.init(
             name: "Swahili",

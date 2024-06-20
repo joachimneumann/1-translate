@@ -8,7 +8,7 @@
 import Foundation
 
 
-class UkrainianImpl: LanguageGroup3 {
+class UkrainianImpl: LanguageImplGroup3 {
     init() {
         super.init(
             name: "українська",

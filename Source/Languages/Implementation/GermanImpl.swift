@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class GermanImpl: LanguageGroup3 {
+class GermanImpl: LanguageImplGroup3 {
     @AppStorage("germanCaptalisationKey")
     var capitalisation: Bool = true
     

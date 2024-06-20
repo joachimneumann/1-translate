@@ -7,7 +7,7 @@
 
 import Foundation
 
-class FrenchImpl: LanguageGroup3 {
+class FrenchImpl: LanguageImplGroup3 {
     init() {
         super.init(
             name: "Française",

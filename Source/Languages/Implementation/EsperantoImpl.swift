@@ -7,7 +7,7 @@
 
 import Foundation
 
-class EsperantoImpl: LanguageGroup3 {
+class EsperantoImpl: LanguageImplGroup3 {
     init() {
         super.init(
             name: "Esperanto",

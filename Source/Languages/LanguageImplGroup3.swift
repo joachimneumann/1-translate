@@ -7,7 +7,7 @@
 
 import Foundation
 
-@Observable class LanguageGroup3: Language {
+@Observable class LanguageImplGroup3: LanguageImpl {
     var _20_99_connector: String = ""
     var use_single_hundreds = false
     var before_hundreds: String = " "

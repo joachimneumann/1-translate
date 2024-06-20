@@ -53,10 +53,6 @@ struct Translation {
         self.dotString = dotString
         self.exponentString = exponentString
     }
-
-    func _0_9(_ i: Int) -> String {
-        fatalError("_0_9() not implmented")
-    }
     
     func read_positive(_ i: Int) -> String {
         fatalError("read_positive() not implmented")
@@ -158,18 +154,5 @@ struct Translation {
 
 }
 
-extension Int {
-    func E(_ i: Int) -> Int {
-        let factor = Int(pow(10.0, Double(i)))
-        return self / factor
-    }
-    func Ex(_ i: Int) -> Int {
-        let factor = Int(pow(10.0, Double(i)))
-        
-        return self - self / factor * factor
-    }
-    var pow10: Int { Int(pow(10.0, Double(self))) }
-    var secondLastDigit: Int { (self /  10) % 10 }
-    var thirdLastDigit:  Int { (self / 100) % 10 }
-}
+
 

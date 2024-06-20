@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class EnglishImpl: LanguageGroup3 {
+class EnglishImpl: LanguageImplGroup3 {
     @AppStorage("EnglishUseAndAfterHundredKey", store: .standard)
     var useAndAfterHundred: Bool = false {
         didSet {
