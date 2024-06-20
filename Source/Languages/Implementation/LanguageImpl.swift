@@ -8,7 +8,40 @@
 import Foundation
 
 @Observable class LanguageImpl: Language {
+    let zero: String?
+    var negativeString: String
+    var dotString: String
+    var beforeAndAfterDotString: String = " "
+    var exponentString: String
+    var allowNegativeNumbers = true
+    var afterNegative = " "
+    var postProcessing: ((String) -> String)? = nil
+    let LanguageError = "ERROR"
+    var allowExponent = true
+    var allowFraction = true
+
     
+    init(name: String,
+         zero: String?,
+         negativeString: String,
+         dotString: String,
+         exponentString: String) {
+        self.zero = zero
+        self.negativeString = negativeString
+        self.dotString = dotString
+        self.exponentString = exponentString
+        super.init(name: name)
+    }
+
+    
+    func _0_9(_ i: Int) -> String {
+        fatalError("_0_9() not implmented")
+    }
+
+    func read_positive(_ i: Int) -> String {
+        fatalError("read_positive() not implmented")
+    }
+
     
     func read(_ i: Int) -> String {
         var ret: String
@@ -84,4 +117,19 @@ import Foundation
         }
         return ret;
     }
+}
+
+extension Int {
+    func E(_ i: Int) -> Int {
+        let factor = Int(pow(10.0, Double(i)))
+        return self / factor
+    }
+    func Ex(_ i: Int) -> Int {
+        let factor = Int(pow(10.0, Double(i)))
+        
+        return self - self / factor * factor
+    }
+    var pow10: Int { Int(pow(10.0, Double(self))) }
+    var secondLastDigit: Int { (self /  10) % 10 }
+    var thirdLastDigit:  Int { (self / 100) % 10 }
 }

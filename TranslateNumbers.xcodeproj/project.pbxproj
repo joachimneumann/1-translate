@@ -346,8 +346,6 @@
 			isa = PBXGroup;
 			children = (
 				AA3565AF2B32588B009B58D2 /* Language.swift */,
-				AAE8D9462C2455340073AA5B /* LanguageImpl.swift */,
-				AAA3C3032C1B0E1A0071FBE4 /* LanguageImplGroup3.swift */,
 				AAB253B42B3AE79400860F93 /* Languages.swift */,
 				AAB253BB2B3BBAD400860F93 /* Implementation */,
 			);
@@ -357,6 +355,8 @@
 		AAB253BB2B3BBAD400860F93 /* Implementation */ = {
 			isa = PBXGroup;
 			children = (
+				AAE8D9462C2455340073AA5B /* LanguageImpl.swift */,
+				AAA3C3032C1B0E1A0071FBE4 /* LanguageImplGroup3.swift */,
 				AA4BEEB82C242256004C55CB /* ChineseImpl.swift */,
 				AA4BEEB22C2421EE004C55CB /* HieroglyphsImpl.swift */,
 				AA4BEEAC2C241FE5004C55CB /* RomanImpl.swift */,
