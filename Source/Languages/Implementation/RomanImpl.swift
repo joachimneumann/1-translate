@@ -38,7 +38,7 @@ class RomanImpl: Language {
         return result
     }
     
-    override func read_1_(_ i: Int) -> String {
+    override func read_positive(_ i: Int) -> String {
         if i <= 3_999 {
             return romanUpTp3999(i)
         } else {

@@ -8,17 +8,6 @@ final class Test_roman: XCTestCase {
     let language = Languages().roman
 
     func test_roman() {
-        // / https: en.wikipedia.org/wiki/Roman_numerals
-        XCTAssertEqual(language.read(39).x, "XXXIX")
-        XCTAssertEqual(language.read(246).x, "CCXLVI")
-        XCTAssertEqual(language.read(789).x, "DCCLXXXIX")
-        XCTAssertEqual(language.read(2_421).x, "MMCDXXI")
-        XCTAssertEqual(language.read(160).x, "CLX")
-        XCTAssertEqual(language.read(207).x, "CCVII")
-        XCTAssertEqual(language.read(1_009).x, "MIX")
-        XCTAssertEqual(language.read(1_066).x, "MLXVI")
-        XCTAssertEqual(language.read(3_999).x, "MMMCMXCIX")
-        // / https: www.rapidtables.com/convert/number/roman-numerals-converter.html?x1=&x2=888
         XCTAssertEqual(language.read(1).x, "I") // 1
         XCTAssertEqual(language.read(2).x, "II") // 1+1
         XCTAssertEqual(language.read(3).x, "III") // 1+1+1
@@ -119,61 +108,54 @@ final class Test_roman: XCTestCase {
         XCTAssertEqual(language.read(98).x, "XCVIII") // 100-10+5+1+1+1
         XCTAssertEqual(language.read(99).x, "XCIX") // 100-10-1+10
         XCTAssertEqual(language.read(100).x, "C") // 100
+        XCTAssertEqual(language.read(101).x, "CI")
+        XCTAssertEqual(language.read(160).x, "CLX")
         XCTAssertEqual(language.read(200).x, "CC") // 100+100
+        XCTAssertEqual(language.read(207).x, "CCVII")
+        XCTAssertEqual(language.read(222).x, "CCXXII")
+        XCTAssertEqual(language.read(246).x, "CCXLVI")
         XCTAssertEqual(language.read(300).x, "CCC") // 100+100+100
+        XCTAssertEqual(language.read(333).x, "CCCXXXIII")
         XCTAssertEqual(language.read(400).x, "CD") // 500-100
+        XCTAssertEqual(language.read(444).x, "CDXLIV")
         XCTAssertEqual(language.read(500).x, "D") // 500
+        XCTAssertEqual(language.read(555).x, "DLV")
         XCTAssertEqual(language.read(600).x, "DC") // 500+100
+        XCTAssertEqual(language.read(654).x, "DCLIV")
         XCTAssertEqual(language.read(700).x, "DCC") // 500+100+100
+        XCTAssertEqual(language.read(777).x, "DCCLXXVII")
+        XCTAssertEqual(language.read(789).x, "DCCLXXXIX")
         XCTAssertEqual(language.read(800).x, "DCCC") // 500+100+100+100
+        XCTAssertEqual(language.read(888).x, "DCCCLXXXVIII")
         XCTAssertEqual(language.read(900).x, "CM") // 1000-100
         XCTAssertEqual(language.read(1000).x, "M") // 1000
-
-        XCTAssertEqual(language.read(5000).x, "")
-        XCTAssertEqual(language.read_OVERLINE(5000)!.x, "V")
-
-        XCTAssertEqual(language.read(10000).x, "")
-        XCTAssertEqual(language.read_OVERLINE(10000)!.x, "X")
-
-        XCTAssertEqual(language.read(36000).x, "")
-        XCTAssertEqual(language.read_OVERLINE(36000)!.x, "XXXVI")
-
-        XCTAssertEqual(language.read(50000).x, "")
-        XCTAssertEqual(language.read_OVERLINE(50000)!.x, "L")
-
-        XCTAssertEqual(language.read(100000).x, "")
-        XCTAssertEqual(language.read_OVERLINE(100000)!.x, "C")
-
-        XCTAssertEqual(language.read(500000).x, "")
-        XCTAssertEqual(language.read_OVERLINE(500000)!.x, "D")
-
-        XCTAssertEqual(language.read(1000000).x, "")
-        XCTAssertEqual(language.read_OVERLINE(1000000)!.x, "M")
-        XCTAssertEqual(language.read(14).x, "XIV")
-        XCTAssertEqual(language.read(19).x, "XIX")
-        XCTAssertEqual(language.read(50).x, "L")
-        XCTAssertEqual(language.read(87).x, "LXXXVII")
-        XCTAssertEqual(language.read(89).x, "LXXXIX")
-        XCTAssertEqual(language.read(101).x, "CI")
-        XCTAssertEqual(language.read(222).x, "CCXXII")
-        XCTAssertEqual(language.read(333).x, "CCCXXXIII")
-        XCTAssertEqual(language.read(444).x, "CDXLIV")
-        XCTAssertEqual(language.read(555).x, "DLV")
-        XCTAssertEqual(language.read(654).x, "DCLIV")
-        XCTAssertEqual(language.read(777).x, "DCCLXXVII")
-        XCTAssertEqual(language.read(888).x, "DCCCLXXXVIII")
         XCTAssertEqual(language.read(1001).x, "MI")
-        XCTAssertEqual(language.read(1222).x, "MCCXXII")
-        XCTAssertEqual(language.read(1444).x, "MCDXLIV")
-        XCTAssertEqual(language.read(1666).x, "MDCLXVI")
-        XCTAssertEqual(language.read(2000).x, "MM")
-        XCTAssertEqual(language.read(2999).x, "MMCMXCIX")
-        XCTAssertEqual(language.read(3000).x, "MMM")
-        XCTAssertEqual(language.read(3500).x, "MMMD")
-        XCTAssertEqual(language.read(3999).x, "MMMCMXCIX")
+        XCTAssertEqual(language.read(1_009).x, "MIX")
+        XCTAssertEqual(language.read(1_066).x, "MLXVI")
+        XCTAssertEqual(language.read(1_222).x, "MCCXXII")
+        XCTAssertEqual(language.read(1_444).x, "MCDXLIV")
+        XCTAssertEqual(language.read(1_666).x, "MDCLXVI")
+        XCTAssertEqual(language.read(2_000).x, "MM")
+        XCTAssertEqual(language.read(2_421).x, "MMCDXXI")
+        XCTAssertEqual(language.read(2_999).x, "MMCMXCIX")
+        XCTAssertEqual(language.read(3_000).x, "MMM")
+        XCTAssertEqual(language.read(3_500).x, "MMMD")
+        XCTAssertEqual(language.read(3_999).x, "MMMCMXCIX")
+
+        XCTAssertEqual(language.read(5_000).x, "")
+        XCTAssertEqual(language.read_OVERLINE(5_000)!.x, "V")
+
+        XCTAssertEqual(language.read(10_000).x, "")
+        XCTAssertEqual(language.read_OVERLINE(10_000)!.x, "X")
 
         XCTAssertEqual(language.read(19876).x, "DCCCLXXVI")
         XCTAssertEqual(language.read_OVERLINE(19876)!.x, "XIX")
+
+        XCTAssertEqual(language.read(36_000).x, "")
+        XCTAssertEqual(language.read_OVERLINE(36_000)!.x, "XXXVI")
+
+        XCTAssertEqual(language.read(50_000).x, "")
+        XCTAssertEqual(language.read_OVERLINE(50_000)!.x, "L")
 
         XCTAssertEqual(language.read(54321).x, "CCCXXI")
         XCTAssertEqual(language.read_OVERLINE(54321)!.x, "LIV")
@@ -181,19 +163,25 @@ final class Test_roman: XCTestCase {
         XCTAssertEqual(language.read(87654).x, "DCLIV")
         XCTAssertEqual(language.read_OVERLINE(87654)!.x, "LXXXVII")
 
-        XCTAssertEqual(language.read(10000).x, "")
-        XCTAssertEqual(language.read_OVERLINE(10000)!.x, "X")
-
         XCTAssertEqual(language.read(98765).x, "DCCLXV")
         XCTAssertEqual(language.read_OVERLINE(98765)!.x, "XCVIII")
 
-        XCTAssertEqual(language.read(123456).x, "CDLVI")
-        XCTAssertEqual(language.read_OVERLINE(123456)!.x, "CXXIII")
+        XCTAssertEqual(language.read(100_000).x, "")
+        XCTAssertEqual(language.read_OVERLINE(100_000)!.x, "C")
 
-        XCTAssertEqual(language.read(987654).x, "DCLIV")
-        XCTAssertEqual(language.read_OVERLINE(987654)!.x, "CMLXXXVII")
+        XCTAssertEqual(language.read(123_456).x, "CDLVI")
+        XCTAssertEqual(language.read_OVERLINE(123_456)!.x, "CXXIII")
 
         XCTAssertEqual(language.read(300000).x, "")
         XCTAssertEqual(language.read_OVERLINE(300000)!.x, "CCC")
+
+        XCTAssertEqual(language.read(500_000).x, "")
+        XCTAssertEqual(language.read_OVERLINE(500_000)!.x, "D")
+
+        XCTAssertEqual(language.read(987_654).x, "DCLIV")
+        XCTAssertEqual(language.read_OVERLINE(987_654)!.x, "CMLXXXVII")
+
+        XCTAssertEqual(language.read(1_000_000).x, "")
+        XCTAssertEqual(language.read_OVERLINE(1_000_000)!.x, "M")
     }
 }
