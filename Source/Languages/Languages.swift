@@ -21,7 +21,7 @@ class Languages {
     var second: Language!
     var list: [Language] = []
 //    let arabic              = ArabicImpl() // not working
-//    let arabicNumerals      = ArabicNumeralsImpl()
+    let arabicNumerals      = ArabicNumeralsImpl()
     let armenianNumerals    = ArmenianNumeralsImpl()
     let armenian            = ArmenianImpl()
     var babylonian          = BabylonianImpl()
