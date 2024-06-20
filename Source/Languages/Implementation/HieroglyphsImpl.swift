@@ -7,7 +7,7 @@
 
 import Foundation
 
-class HieroglyphsImpl: Language {
+class HieroglyphsImpl: LanguageImpl {
     // static, because I will use it in the tests
     static let symbolZero = "\u{13124}"
     static let symbolOne = "\u{133E4}"

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class HindiImpl: Language {
+class HindiImpl: LanguageImpl {
     
     init() {
         super.init(

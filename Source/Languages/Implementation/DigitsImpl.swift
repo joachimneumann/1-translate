@@ -7,7 +7,7 @@
 
 import Foundation
 
-class DigitsImpl: Language {
+class DigitsImpl: LanguageImpl {
     init() {
         super.init(
             name: "Digits",
