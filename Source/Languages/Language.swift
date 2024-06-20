@@ -131,6 +131,26 @@ struct Translation {
         }
         return ret;
     }
+    
+    func translate(_ s: String) -> Translation {
+        let displayText = read(s)
+        var overline: String? = nil
+        if let i = Int(s) {
+            overline = read_OVERLINE(i)
+        }
+        var spokenText: String? = nil
+        if voiceLanguageCode != nil {
+            spokenText = displayText.replacingOccurrences(of: Languages.WordSplitter, with: " ")
+            if let speakingPostProcessing = speakingPostProcessing {
+                spokenText = speakingPostProcessing(spokenText!)
+            }
+        }
+        return Translation(
+            displayText: displayText,
+            overline: overline,
+            spokenText: spokenText)
+    }
+
 }
 
 extension Int {
@@ -147,3 +167,4 @@ extension Int {
     var secondLastDigit: Int { (self /  10) % 10 }
     var thirdLastDigit:  Int { (self / 100) % 10 }
 }
+
