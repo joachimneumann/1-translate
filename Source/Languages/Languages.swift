@@ -38,7 +38,7 @@ class Languages {
     let french              = FrenchImpl()
     var german              = GermanImpl()
 //    var hieroglyphs         = HieroglyphsImpl()
-//    var hindi               = HindiImpl()
+    var hindi               = HindiImpl()
     let polish              = PolishImpl()
     var portugueseEuropean  = PortugueseImpl(variant: .European)
     var portugueseBrazil    = PortugueseImpl(variant: .Brazilian)
