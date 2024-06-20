@@ -195,7 +195,7 @@ class HindiImpl: Language {
     }
 }
 
-fileprivate extension Int {
+extension Int {
     var E1: Int { self / 10 }
     var E1x: Int { self - self / 10 * 10 } // self % 10?
     var E2: Int { self / 100 }

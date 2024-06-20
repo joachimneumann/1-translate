@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ChineseImpl: Language {
+class ChineseImpl: LanguageGroup3 {
     
     enum Variant {
         case traditional
@@ -67,7 +67,7 @@ class ChineseImpl: Language {
         var e12: String {
            "兆"
         }
-        func read_1_9(_ i: Int) -> String {
+        func _0_9(_ i: Int) -> String {
             switch i {
             case 1:
                 switch self {
@@ -121,6 +121,10 @@ class ChineseImpl: Language {
     
     let variant: Variant
     let filler = "零"
+    var e1: String = ""
+    var e2: String = ""
+    var e3: String = ""
+    var e4: String = ""
     
     init(variant: Variant) {
         self.variant = variant
@@ -133,20 +137,21 @@ class ChineseImpl: Language {
             exponentString: " 乘以 十的 ")
         voiceLanguageCode = "zh"
         nameDescription = variant.englishName
+        e1 = variant.e1
         e2 = variant.e2
         e3 = variant.e3
         e4 = variant.e4
     }
     
-    override func read_1_9(_ i: Int) -> String {
-        return variant.read_1_9(i)
+    override func _0_9(_ i: Int) -> String {
+        return variant._0_9(i)
     }
     
-    override func read_10s(_ i: Int) -> String {
+    override func _10s(_ i: Int) -> String {
         if i == 1 {
             return variant.e1
         } else {
-            return read_1_9(i) + variant.e1
+            return _0_9(i) + variant.e1
         }
     }
     
@@ -158,52 +163,71 @@ class ChineseImpl: Language {
         return ret
     }
     
-    override func read_10_99(_ i: Int) -> String {
+    override func _11_19(_ i: Int) -> String {
         var ret = ""
         if i.E1 > 0 {
-            ret = read_1_9(i.E1)
+            ret = _0_9(i.E1)
         }
         ret += variant.e1
         if i.E1x > 0 {
-            ret += read_1_9(i.E1x)
+            ret += _0_9(i.E1x)
         }
         return ret
     }
     
-    override func read_e2_e3(_ i: Int) -> String {
-        var ret = read_1_9(i.E2) + variant.e2
-        
-        if i.E2x > 0 {
-            ret += " "
-            if i.E2x < 10 {
-                ret += filler
-            }
-            ret += readChinese(i.E2x)
-        }
-        return ret
+    override func _20_99(_ i: Int) -> String {
+        return _11_19(i)
     }
 
-    override func read_e3_e6(_ i: Int) -> String {
-        var ret = readChinese(i.E3) + variant.e3
-        
-        if i.E3x > 0 {
-            ret += " "
-            if i.E3x < 100 {
-                ret += filler
-            }
-            ret += readChinese(i.E3x)
-        }
-        return ret
-    }
+//    override func read_e2_e3(_ i: Int) -> String {
+//        var ret = _0_9(i.E2) + variant.e2
+//        
+//        if i.E2x > 0 {
+//            ret += " "
+//            if i.E2x < 10 {
+//                ret += filler
+//            }
+//            ret += readChinese(i.E2x)
+//        }
+//        return ret
+//    }
+//
+//    override func read_e3_e6(_ i: Int) -> String {
+//        var ret = readChinese(i.E3) + variant.e3
+//        
+//        if i.E3x > 0 {
+//            ret += " "
+//            if i.E3x < 100 {
+//                ret += filler
+//            }
+//            ret += readChinese(i.E3x)
+//        }
+//        return ret
+//    }
     
     private func readChinese(_ i: Int) -> String {
         var ret = ""
+        if i < 100 {
+            return super.read_positive(i)
+        }
         if i < 10_000 {
-            return super.read_1_(i)
+            var ret = _0_9(i.E2) + variant.e2
+
+            if i.E2x > 0 {
+                ret += " "
+                if i.E2x < 10 {
+                    ret += filler
+                }
+                ret += readChinese(i.E2x)
+            }
+            return ret
+        }
+        if i < 10_000 {
+            return super.read_positive(i)
         }
 
         if i < 100_000_000 {
-            ret += read_1_(i.E4)
+            ret += read_positive(i.E4)
             ret += variant.e4
             if i.E4x > 0 {
                 ret += " "
@@ -216,7 +240,7 @@ class ChineseImpl: Language {
         }
 
         if i < 1_000_000_000_000 {
-            ret += read_1_(i.E8)
+            ret += read_positive(i.E8)
             ret += variant.e8
             if i.E8x > 0 {
                 ret += " "
@@ -240,10 +264,10 @@ class ChineseImpl: Language {
         return ret
     }
     
-    override func read_1_(_ i: Int) -> String {
-        if i >= 10 && i < 20 {
+    override func read_positive(_ i: Int) -> String {
+        if i > 10 && i < 20 {
             var ret = ""
-            ret = super.read_1_(i)
+            ret = super.read_positive(i)
             ret = String(ret.dropFirst())
             return ret
         } else {

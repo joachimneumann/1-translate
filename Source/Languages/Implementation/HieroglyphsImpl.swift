@@ -85,7 +85,7 @@ class HieroglyphsImpl: Language {
         return ret
     }
     
-    override func read_1_(_ i: Int) -> String {
+    override func read_positive(_ i: Int) -> String {
         if i > 10_000_000 {
             return "too big"
         }        
