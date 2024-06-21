@@ -19,6 +19,30 @@ struct Translation {
     }
 }
 
+enum GroupSize: Int, Codable, CaseIterable {
+    case three
+    case four
+    case five
+    var int: Int {
+        get {
+            switch self {
+            case .three: return 3
+            case .four: return 4
+            case .five: return 5
+            }
+        }
+    }
+    var string: String {
+        get {
+            switch self {
+            case .three: return "3"
+            case .four: return "4"
+            case .five: return "2,3"
+            }
+        }
+    }
+}
+
 @Observable class Language: Identifiable {
     var name: String
     var nameDescription: String? = nil

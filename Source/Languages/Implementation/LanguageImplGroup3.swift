@@ -68,6 +68,13 @@ class LanguageImplGroup3: LanguageImpl {
         return ret
     }
     
+    func _0_99(_ i: Int) -> String {
+        if i <= 9 { return _0_9(i) }
+        if i == 10 { return _10s(1) }
+        if i <= 19 { return _11_19(i) }
+        return _20_99(i)
+    }
+    
     func _100_999(_ hundreds: Int, below: Int) -> String {
         var ret = ""
         if hundreds > 1 || use_single_hundreds {
@@ -77,7 +84,7 @@ class LanguageImplGroup3: LanguageImpl {
             ret += hundredsName
         }
         if below > 0 {
-            ret += after_hundreds + read_positive(below)
+            ret += after_hundreds + _0_99(below)
         }
         return ret
     }
