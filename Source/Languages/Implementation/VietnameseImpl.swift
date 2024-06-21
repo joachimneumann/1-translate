@@ -31,6 +31,7 @@ class VietnameseImpl: LanguageImplGroup3 {
     init() {
         super.init(
             name: "Tiếng Việt",
+            groupSize: GroupSize.three,
             zero: "không",
             negativeString: "âm",
             dotString: "phẩy",

@@ -21,6 +21,7 @@ class HieroglyphsImpl: LanguageImpl {
     init() {
         super.init(
             name: "Hieroglyphs",
+            groupSize: GroupSize.three,
             zero: HieroglyphsImpl.symbolZero,
             negativeString: "",
             dotString: "",

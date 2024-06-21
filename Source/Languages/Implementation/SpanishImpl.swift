@@ -23,6 +23,7 @@ class SpanishImpl: LanguageImplGroup3 {
     init() {
         super.init(
             name: "Español",
+            groupSize: GroupSize.three,
             zero: "cero",
             negativeString: "menos",
             dotString: "coma",

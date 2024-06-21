@@ -26,6 +26,7 @@ class PortugueseImpl: LanguageImplGroup3 {
         self.variant = variant
         super.init(
             name: variant.name,
+            groupSize: GroupSize.three,
             zero: "zero",
             negativeString: "menos",
             dotString: "vírgula",

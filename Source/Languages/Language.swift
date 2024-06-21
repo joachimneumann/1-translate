@@ -9,6 +9,7 @@ import Foundation
 
 struct Translation {
     let displayText: String
+    let groupSize: GroupSize
     let overline: String?
     var spokenText: String?
     var copyText: String {
@@ -23,6 +24,7 @@ struct Translation {
     var name: String
     var nameDescription: String? = nil
     var voiceLanguageCode: String? = nil
+    let groupSize: GroupSize
 
     var flagName: String {
         nameDescription != nil ? nameDescription! : name
@@ -32,8 +34,9 @@ struct Translation {
     }
     var speakingPostProcessing: ((String) -> String)?
 
-    init(name: String) {
+    init(name: String, groupSize: GroupSize) {
         self.name = name
+        self.groupSize = groupSize
     }
     
     func read(_ s: String) -> String {
@@ -58,6 +61,7 @@ struct Translation {
         }
         return Translation(
             displayText: displayText,
+            groupSize: groupSize,
             overline: overline,
             spokenText: spokenText)
     }

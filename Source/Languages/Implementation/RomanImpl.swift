@@ -12,6 +12,7 @@ class RomanImpl: LanguageImpl {
     init() {
         super.init(
             name: "Roman",
+            groupSize: GroupSize.three,
             zero: nil,
             negativeString: "",
             dotString: "",

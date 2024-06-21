@@ -11,6 +11,7 @@ class ArabicNumeralsImpl: LanguageImpl {
     init() {
         super.init(
             name: "الترقيم العربي",
+            groupSize: GroupSize.three,
             zero: "٠",
             negativeString: "-",
             dotString: ".",

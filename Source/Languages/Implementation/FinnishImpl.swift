@@ -11,6 +11,7 @@ class FinnishImpl: LanguageImplGroup3 {
     init() {
         super.init(
             name: "Suomalainen",
+            groupSize: GroupSize.three,
             zero: "nolla",
             negativeString: "miinus",
             dotString: "pilkku",

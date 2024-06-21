@@ -11,6 +11,7 @@ class PolishImpl: LanguageImplGroup3 {
     init() {
         super.init(
             name: "Polski",
+            groupSize: GroupSize.three,
             zero: "zero",
             negativeString: "minus",
             dotString: "przecinek",

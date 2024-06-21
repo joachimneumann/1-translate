@@ -12,6 +12,7 @@ class CatalanImpl: LanguageImplGroup3 {
     init() {
         super.init(
             name: "Català",
+            groupSize: GroupSize.three,
             zero: "zero",
             negativeString: "menys",
             dotString: "coma",

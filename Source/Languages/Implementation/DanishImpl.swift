@@ -12,6 +12,7 @@ class DanishImpl: LanguageImplGroup3 {
     init() {
         super.init(
             name: "Dansk",
+            groupSize: GroupSize.three,
             zero: "nul",
             negativeString: "minus",
             dotString: "komma",

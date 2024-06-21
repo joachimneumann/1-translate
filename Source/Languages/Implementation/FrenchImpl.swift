@@ -11,6 +11,7 @@ class FrenchImpl: LanguageImplGroup3 {
     init() {
         super.init(
             name: "Française",
+            groupSize: GroupSize.three,
             zero: "zéro",
             negativeString: "moins",
             dotString: "virgule",

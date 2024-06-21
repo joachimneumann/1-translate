@@ -11,6 +11,7 @@ class ThaiImpl: LanguageImplGroup3 {
     init() {
         super.init(
             name: "ภาษาไทย",
+            groupSize: GroupSize.three,
             zero: "ศูนย์",
             negativeString: "ลบ",
             dotString: "จุด",

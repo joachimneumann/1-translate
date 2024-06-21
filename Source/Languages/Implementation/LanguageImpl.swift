@@ -22,6 +22,7 @@ class LanguageImpl: Language {
 
     
     init(name: String,
+         groupSize: GroupSize,
          zero: String?,
          negativeString: String,
          dotString: String,
@@ -30,7 +31,7 @@ class LanguageImpl: Language {
         self.negativeString = negativeString
         self.dotString = dotString
         self.exponentString = exponentString
-        super.init(name: name)
+        super.init(name: name, groupSize: groupSize)
     }
 
     

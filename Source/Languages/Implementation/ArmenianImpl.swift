@@ -11,6 +11,7 @@ class ArmenianImpl: LanguageImplGroup3 {
     init() {
         super.init(
             name: "հայերեն",
+            groupSize: GroupSize.three,
             zero: "զրո",
             negativeString: "մինուս",
             dotString: "կետ",

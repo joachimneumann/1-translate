@@ -11,6 +11,7 @@ class RussianImpl: LanguageImplGroup3 {
     init() {
         super.init(
             name: "Русский",
+            groupSize: GroupSize.three,
             zero: "ноль",
             negativeString: "минус",
             dotString: "целых",

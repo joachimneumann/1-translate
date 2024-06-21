@@ -35,6 +35,7 @@ class BabylonianImpl: LanguageImpl {
     init() {
         super.init(
             name: "Babylonian",
+            groupSize: GroupSize.three,
             zero: nil,
             negativeString: "",
             dotString: "",

@@ -10,7 +10,8 @@ import Foundation
 class ArmenianNumeralsImpl: LanguageImpl {
     init() {
         super.init(
-            name: "թիվ", 
+            name: "թիվ",
+            groupSize: GroupSize.five,
             zero: nil,
             negativeString: "",
             dotString: "",

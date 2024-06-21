@@ -12,6 +12,7 @@ class HindiImpl: LanguageImpl {
     init() {
         super.init(
             name: "हिंदी",
+            groupSize: GroupSize.four,
             zero: "शून्य",
             negativeString: "शून्य से",
             dotString: "बिंदु",

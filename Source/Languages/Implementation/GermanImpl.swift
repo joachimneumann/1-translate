@@ -14,6 +14,7 @@ class GermanImpl: LanguageImplGroup3 {
     init() {
         super.init(
             name: "Deutsch",
+            groupSize: GroupSize.three,
             zero: "null",
             negativeString: "minus",
             dotString: "Komma",

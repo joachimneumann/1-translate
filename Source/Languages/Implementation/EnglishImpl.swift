@@ -18,6 +18,7 @@ class EnglishImpl: LanguageImplGroup3 {
     init() {
         super.init(
             name: "English",
+            groupSize: GroupSize.three,
             zero: "zero",
             negativeString: "minus",
             dotString: "point",

@@ -12,6 +12,7 @@ class UkrainianImpl: LanguageImplGroup3 {
     init() {
         super.init(
             name: "українська",
+            groupSize: GroupSize.three,
             zero: "нуль",
             negativeString: "мінус",
             dotString: "кома",

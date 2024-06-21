@@ -131,6 +131,7 @@ class ChineseImpl: LanguageImplGroup3 {
         
         super.init(
             name: variant.name,
+            groupSize: GroupSize.three,
             zero: variant.zero,
             negativeString: "负",
             dotString: "点",

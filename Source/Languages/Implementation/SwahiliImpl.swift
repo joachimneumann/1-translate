@@ -11,6 +11,7 @@ class SwahiliImpl: LanguageImplGroup3 {
     init() {
         super.init(
             name: "Swahili",
+            groupSize: GroupSize.three,
             zero: "sifuri",
             negativeString: "menos",
             dotString: "kaj",

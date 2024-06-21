@@ -11,6 +11,7 @@ class EsperantoImpl: LanguageImplGroup3 {
     init() {
         super.init(
             name: "Esperanto",
+            groupSize: GroupSize.three,
             zero: "nul",
             negativeString: "minus",
             dotString: "kaj",

@@ -12,8 +12,8 @@ import SwiftUI
     var keyStatusColor: [String: Color] = [:]
     var textColor: [String: Color] = [:]
     var currentDisplay: Display
-    var _1Translation: Translation = Translation(displayText: "", overline: nil, spokenText: nil)
-    var _2Translation: Translation = Translation(displayText: "", overline: nil, spokenText: nil)
+    var _1Translation: Translation = Translation(displayText: "", groupSize: GroupSize.three, overline: nil, spokenText: nil)
+    var _2Translation: Translation = Translation(displayText: "", groupSize: GroupSize.three, overline: nil, spokenText: nil)
     var persistent = Persistent()
     var languages = Languages()
 

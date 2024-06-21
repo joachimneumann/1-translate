@@ -11,6 +11,7 @@ class ThaiNumeralsImpl: LanguageImpl {
     init() {
         super.init(
             name: "แบบดั้งเดิม",
+            groupSize: GroupSize.three,
             zero: "๐"+Languages.WordSplitter,
             negativeString: "-",
             dotString: ".",

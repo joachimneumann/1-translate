@@ -11,6 +11,7 @@ class DigitsImpl: LanguageImpl {
     init() {
         super.init(
             name: "Digits",
+            groupSize: GroupSize.three,
             zero: "0",
             negativeString: "-",
             dotString: ".",
