@@ -92,7 +92,7 @@ struct Settings: View {
     }
     
     var DigitsSettings: some View {
-        let example =  Display(left: "").withSeparators(numberString: "120000.5", isNegative: false, separators: viewModel.persistent)
+        let example =  Display(left: "").withSeparators(numberString: "120000.5", isNegative: false, separators: viewModel.persistent, groupSize: GroupSize.three)
         return Section(header: Text("Display and Seperators")) {
             Grid(alignment: .leading, verticalSpacing: 10) {
                 GridRow {
@@ -126,17 +126,6 @@ struct Settings: View {
                     .pickerStyle(.segmented)
                 }
                 .padding(.bottom, 5)
-                GridRow {
-                    Text("GroupSize")
-                        .padding(.trailing, 5)
-                    Picker("", selection: $viewModel.persistent.groupSize) {
-                        ForEach(GroupSize.allCases, id: \.self) { value in
-                            Text("\(value.string)")
-                                .tag(value)
-                        }
-                    }
-                    .pickerStyle(.segmented)
-                }
             }
         }
     }

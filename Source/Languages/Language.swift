@@ -9,7 +9,6 @@ import Foundation
 
 struct Translation {
     let displayText: String
-    let groupSize: GroupSize
     let overline: String?
     var spokenText: String?
     var copyText: String {
@@ -61,7 +60,6 @@ struct Translation {
         }
         return Translation(
             displayText: displayText,
-            groupSize: groupSize,
             overline: overline,
             spokenText: spokenText)
     }

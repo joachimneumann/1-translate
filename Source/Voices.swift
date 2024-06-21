@@ -28,7 +28,6 @@ import AVFoundation
     static let synthesizer = AVSpeechSynthesizer()
     var voiceDict: VoiceDict = [:]
 
-
     init() {}
     
     func updateSelectedVoice(reducedIdentifier: String, for code: String, languageList: [Language]) {
@@ -63,7 +62,6 @@ import AVFoundation
                 }
             }
 
-            /// premium?
             for voice in allSystemVoices {
                 if voice.languageCode == code {
                     if !voiceDict[code]!.dict.keys.contains(voice.reducedIdentifier) {
@@ -82,7 +80,6 @@ import AVFoundation
                 }
             }
 
-            /// enhanced?
             for voice in allSystemVoices {
                 if voice.languageCode == code {
                     if !voiceDict[code]!.dict.keys.contains(voice.reducedIdentifier) {
@@ -101,7 +98,6 @@ import AVFoundation
                 }
             }
             
-            /// enhanced?
             for voice in allSystemVoices {
                 if voice.languageCode == code {
                     if !voiceDict[code]!.dict.keys.contains(voice.reducedIdentifier) {

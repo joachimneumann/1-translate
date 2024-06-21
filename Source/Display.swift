@@ -66,19 +66,19 @@ extension Display {
         canBeInteger = false
         canBeFloat = false
     }
-    init(_ number: Number, screen: Screen, separators: Separators, noLimits: Bool = false, showAs: ShowAs, forceScientific: Bool) {
+    init(_ number: Number, screen: Screen, separators: Separators, groupSize: GroupSize, noLimits: Bool = false, showAs: ShowAs, forceScientific: Bool) {
         self.left = "0"
         right = nil
         canBeInteger = false
         canBeFloat = false
-        self = fromNumber(number, displayLengthLimiter: noLimits ? nil : screen, separators: separators, showAs: showAs, forceScientific: scientific(number))
+        self = fromNumber(number, displayLengthLimiter: noLimits ? nil : screen, separators: separators, groupSize: groupSize, showAs: showAs, forceScientific: scientific(number))
     }
-    init(_ stringNumber: String, screen: Screen, separators: Separators, showAs: ShowAs, forceScientific: Bool) {
+    init(_ stringNumber: String, screen: Screen, separators: Separators, groupSize: GroupSize, showAs: ShowAs, forceScientific: Bool) {
         self.left = "0"
         right = nil
         canBeInteger = false
         canBeFloat = false
-        self = fromStringNumber(stringNumber, displayLengthLimiter: screen, separators: separators, showAs: showAs, forceScientific: scientific(Number(stringNumber, precision: 10000)))
+        self = fromStringNumber(stringNumber, displayLengthLimiter: screen, separators: separators, groupSize: groupSize, showAs: showAs, forceScientific: scientific(Number(stringNumber, precision: 10000)))
     }
     
     func scientific(_ number: Number) -> Bool {
@@ -103,10 +103,11 @@ extension Display {
         _ number: Number,
         displayLengthLimiter: DisplayLengthLimiter?,
         separators: Separators,
+        groupSize: GroupSize,
         showAs: ShowAs,
         forceScientific: Bool) -> Display {
         if number.str != nil {
-            return fromStringNumber(number.str!, displayLengthLimiter: displayLengthLimiter, separators: separators, showAs: showAs, forceScientific: forceScientific)
+            return fromStringNumber(number.str!, displayLengthLimiter: displayLengthLimiter, separators: separators, groupSize: groupSize, showAs: showAs, forceScientific: forceScientific)
         }
 
         guard number.gmp != nil else {
@@ -135,13 +136,14 @@ extension Display {
         }
         let (mantissa, exponent) = displayGmp.mantissaExponent(len: mantissaLength)
         
-        return fromMantissaAndExponent(mantissa, exponent, displayLengthLimiter: displayLengthLimiter, separators: separators, showAs: showAs, forceScientific: forceScientific)
+        return fromMantissaAndExponent(mantissa, exponent, displayLengthLimiter: displayLengthLimiter, separators: separators, groupSize: groupSize, showAs: showAs, forceScientific: forceScientific)
     }
 
     func fromStringNumber(
         _ stringNumber: String,
         displayLengthLimiter: DisplayLengthLimiter?,
         separators: Separators,
+        groupSize: GroupSize,
         showAs: ShowAs,
         forceScientific: Bool) -> Display {
         
@@ -156,9 +158,9 @@ extension Display {
         mantissa = stringNumber
         if stringNumber.starts(with: "-") {
             let temp = String(mantissa.dropFirst())
-            signAndSeparator = withSeparators(numberString: temp, isNegative: true, separators: separators)
+            signAndSeparator = withSeparators(numberString: temp, isNegative: true, separators: separators, groupSize: groupSize)
         } else {
-            signAndSeparator = withSeparators(numberString: mantissa, isNegative: false, separators: separators)
+            signAndSeparator = withSeparators(numberString: mantissa, isNegative: false, separators: separators, groupSize: groupSize)
         }
 
         if let displayLengthLimiter = displayLengthLimiter {
@@ -200,10 +202,10 @@ extension Display {
             exponent = stringNumber.count - 1
         }
         if mantissa.starts(with: "-") { exponent -= 1 }
-        return fromMantissaAndExponent(mantissa, exponent, displayLengthLimiter: displayLengthLimiter, separators: separators, showAs: showAs, forceScientific: forceScientific)
+        return fromMantissaAndExponent(mantissa, exponent, displayLengthLimiter: displayLengthLimiter, separators: separators, groupSize: groupSize, showAs: showAs, forceScientific: forceScientific)
     }
     
-    func withSeparators(numberString: String, isNegative: Bool, separators: Separators) -> String {
+    func withSeparators(numberString: String, isNegative: Bool, separators: Separators, groupSize: GroupSize) -> String {
         var integerPart: String
         let fractionalPart: String
         
@@ -218,14 +220,14 @@ extension Display {
         
         if let c = separators.groupSeparator.character {
             var count = integerPart.count
-            if separators.groupSize.int == 5 {
+            if groupSize.int == 5 {
                 while count >= 4 {
                     count -= 2
                     integerPart.insert(c, at: integerPart.index(integerPart.startIndex, offsetBy: count-1))
                 }
             } else {
-                while count >= separators.groupSize.int+1 {
-                    count -= separators.groupSize.int
+                while count >= groupSize.int+1 {
+                    count -= groupSize.int
                     integerPart.insert(c, at: integerPart.index(integerPart.startIndex, offsetBy: count))
                 }
             }
@@ -243,6 +245,7 @@ extension Display {
         _ exponent: Int,
         displayLengthLimiter: DisplayLengthLimiter?,
         separators: Separators,
+        groupSize: GroupSize,
         showAs: ShowAs,
         forceScientific: Bool) -> Display {
 
@@ -268,7 +271,7 @@ extension Display {
          */
         if mantissa.count <= exponent + 1 && !forceScientific { /// smaller than because of possible trailing zeroes in the integer
             mantissa = mantissa.padding(toLength: exponent+1, withPad: "0", startingAt: 0)
-            let withSeparators = withSeparators(numberString: mantissa, isNegative: isNegative, separators: separators)
+            let withSeparators = withSeparators(numberString: mantissa, isNegative: isNegative, separators: separators, groupSize: groupSize)
             if let displayLengthLimiter = displayLengthLimiter {
                 let w = withSeparators.textWidth(kerning: displayLengthLimiter.kerning, appleFont: displayLengthLimiter.appleFont)
                 let fitsInOneLine = w <= displayLengthLimiter.displayWidth - displayLengthLimiter.ePadding
@@ -289,7 +292,7 @@ extension Display {
             let index = floatString.index(floatString.startIndex, offsetBy: exponent+1)
             var indexInt: Int = floatString.distance(from: floatString.startIndex, to: index)
             floatString.insert(".", at: index)
-            floatString = withSeparators(numberString: floatString, isNegative: isNegative, separators: separators)
+            floatString = withSeparators(numberString: floatString, isNegative: isNegative, separators: separators, groupSize: groupSize)
             if let displayLengthLimiter = displayLengthLimiter {
                 if let index = floatString.firstIndex(of: separators.decimalSeparator.character) {
                     indexInt = floatString.distance(from: floatString.startIndex, to: index)
@@ -367,7 +370,7 @@ extension Display {
             // 4.
             mantissa.append("0")
         }
-        mantissa = withSeparators(numberString: mantissa, isNegative: isNegative, separators: separators)
+        mantissa = withSeparators(numberString: mantissa, isNegative: isNegative, separators: separators, groupSize: groupSize)
         let exponentString = "e\(exponent)"
         if let displayLengthLimiter = displayLengthLimiter {
             var indexInt = 3 /// minimum: X,x

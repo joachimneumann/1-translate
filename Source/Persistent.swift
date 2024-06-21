@@ -34,9 +34,6 @@ class Persistent: Separators {
         }
     }
     
-    @AppStorage("groupSizeKey", store: .standard)
-    var groupSize: GroupSize = .three
-    
     @AppStorage("offerReadingAloudKey", store: .standard)
     var offerReadingAloud: Bool = true
 }

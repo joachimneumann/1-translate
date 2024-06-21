@@ -72,5 +72,4 @@ enum GroupSize: Int, Codable, CaseIterable {
 protocol Separators {
     var decimalSeparator: DecimalSeparator   { get }
     var groupSeparator: GroupSeparator { get }
-    var groupSize: GroupSize { get }
 }
