@@ -150,7 +150,6 @@ final class Test_hindi: XCTestCase {
         XCTAssertEqual(language.read(2_500_000_000).x, "दो अरब पचास करोड़") // दो अरब पांच सौ करोड़
         XCTAssertEqual(language.read(10_000_000_000).x, "दश अरब")
         XCTAssertEqual(language.read(100_000_000_000).x, "एक खरब") // एक सौ अरब
-        // xx
         // Is google translate wrong?
         // एक सौ अरब = 100_000_000_000
         // एक खरब = 1_000_000_000_000
