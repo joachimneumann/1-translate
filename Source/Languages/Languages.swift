@@ -39,6 +39,7 @@ class Languages {
     var german              = GermanImpl()
     var hieroglyphs         = HieroglyphsImpl()
     var hindi               = HindiImpl()
+    var italian             = ItalianImpl()
     let polish              = PolishImpl()
     var portugueseEuropean  = PortugueseImpl(variant: .European)
     var portugueseBrazil    = PortugueseImpl(variant: .Brazilian)
@@ -71,6 +72,7 @@ class Languages {
         german,
         hieroglyphs,
         hindi,
+        italian,
 //        // XXjapanese,
         polish,
         portugueseBrazil,
