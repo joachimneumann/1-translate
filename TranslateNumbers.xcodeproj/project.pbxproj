@@ -93,6 +93,7 @@
 		AAB10B9A292A2222004707E9 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB10B94292A2222004707E9 /* Label.swift */; };
 		AAB10B9C292A2222004707E9 /* NonScientificKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB10B96292A2222004707E9 /* NonScientificKeyboard.swift */; };
 		AAB253B52B3AE79500860F93 /* Languages.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB253B42B3AE79400860F93 /* Languages.swift */; };
+		AAB3C65E2C7316D9003AC50B /* ItalianImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA83B8492C5163F20092BB88 /* ItalianImpl.swift */; };
 		AABEFC132972A8780023A3C9 /* KeyColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABEFC122972A8780023A3C9 /* KeyColor.swift */; };
 		AAC58E4D2C1FCDCB009B01BE /* ArmenianNumeralsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC58E4C2C1FCDCB009B01BE /* ArmenianNumeralsImpl.swift */; };
 		AAC58E4E2C1FCDCB009B01BE /* ArmenianNumeralsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC58E4C2C1FCDCB009B01BE /* ArmenianNumeralsImpl.swift */; };
@@ -558,6 +559,7 @@
 				AAA671042C24467700F28659 /* RussianImpl.swift in Sources */,
 				AAA671072C24468500F28659 /* FinnishImpl.swift in Sources */,
 				AAB10B9A292A2222004707E9 /* Label.swift in Sources */,
+				AAB3C65E2C7316D9003AC50B /* ItalianImpl.swift in Sources */,
 				AAE426F729597AE3005FE365 /* Screen.swift in Sources */,
 				AA899D422B3E914700ADDC16 /* VoiceSelection.swift in Sources */,
 				AA2FAC23272F2349006DE4C8 /* OperatorStack.swift in Sources */,
