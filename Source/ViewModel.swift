@@ -65,7 +65,7 @@ import SwiftUI
         }
         updateTranslation()
     }
-        
+
     var firstFont: Font {
         switch languages.first.name {
         case languages.arabicNumerals.name:
@@ -74,6 +74,7 @@ import SwiftUI
             languages.secondLanguageAllowed ? Font.title : Font.largeTitle
         }
     }
+    
     var secondFont: Font {
         switch languages.second.name {
         case languages.arabicNumerals.name:
@@ -82,7 +83,6 @@ import SwiftUI
             Font.title
         }
     }
-
     
     func cleanSeperators(_ text: String) -> String {
         var ret = text
