@@ -75,7 +75,7 @@ extension Display {
         self = fromStringNumber(stringNumber, displayLengthLimiter: screen, separators: separators, groupSize: groupSize, forceScientific: scientific(Number(stringNumber, precision: 10000)))
     }
     
-    func s -> Bool {
+    func scientific(_ number: Number) -> Bool {
         var ret = false
         let me: Number = number.copy()
         me.toGmp()
