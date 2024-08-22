@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-@Observable class ViewModel: ShowAs {
+@Observable class ViewModel {
     var showAC = true
     var keyStatusColor: [String: Color] = [:]
     var textColor: [String: Color] = [:]
@@ -17,8 +17,6 @@ import SwiftUI
     var persistent = Persistent()
     var languages = Languages()
 
-    var showAsInt = false /// This will update the "-> Int or -> sci button texts
-    var showAsFloat = false
     private var stupidBrain = BrainEngine(precision: 1_000) /// I want to call fast sync functions
     private let keysThatRequireValidNumber = ["±", "%", "/", "x", "-", "+", "="]
     private static let MAX_DISPLAY_LEN = 10_000 /// too long strings in Text() crash the app
@@ -218,9 +216,6 @@ import SwiftUI
     }
     
     func defaultTask(for symbol: String, screen: Screen) {
-        showAsInt = false
-        showAsFloat = false
-        
         keyState = .highPrecisionProcessing
         displayNumber = stupidBrain.operation(symbol)
         refreshDisplay(screen: screen)
@@ -234,7 +229,7 @@ import SwiftUI
     }
 
     func refreshDisplay(screen: Screen) {
-        let tempDisplay = Display(displayNumber, screen: screen, separators: self.persistent, groupSize: languages.first.groupSize, showAs: self, forceScientific: false )
+        let tempDisplay = Display(displayNumber, screen: screen, separators: self.persistent, groupSize: languages.first.groupSize, forceScientific: false )
         currentDisplay = tempDisplay
         updateTranslation()
         self.showAC = currentDisplay.isZero
