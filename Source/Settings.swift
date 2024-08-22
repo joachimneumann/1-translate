@@ -41,11 +41,14 @@ struct Settings: View {
                     GridRow {
                         let size: CGFloat = 20.0
                         VStack {
+                            Text("One Language")
+                                .frame(height: 48)
+                                .padding(.horizontal, 10)
+                                .multilineTextAlignment(.center)
                             Image("oneLanguage")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .padding(.horizontal, 20)
-                            Text("One")
                             if !temp {
                                 Image(systemName: "checkmark.circle.fill")
                                     .resizable()
@@ -63,11 +66,14 @@ struct Settings: View {
                             temp = false
                         }
                         VStack {
+                            Text("Main and secondary language")
+                                .frame(height: 48)
+                                .padding(.horizontal, 10)
+                                .multilineTextAlignment(.center)
                             Image("twoLanguages")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .padding(.horizontal, 20)
-                            Text("Two")
                             if temp {
                                 Image(systemName: "checkmark.circle.fill")
                                     .resizable()
