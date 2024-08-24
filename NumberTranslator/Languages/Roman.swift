@@ -1,0 +1,47 @@
+//
+//  Roman.swift
+//  TranslateNumbers
+//
+//  Created by Joachim Neumann on 24.08.24.
+//
+
+import Foundation
+
+public class Roman: DigitLanguage, Language  {
+    public var name = "Roman"
+    
+    override public func numberToText(_ s: String) -> String {
+        if let i = Int(s) {
+            return numberToText(i)
+        } else {
+            return "not a whole number"
+        }
+    }
+
+    override public func numberToText(_ i: Int) -> String {
+        if i <= 3_999 {
+            return romanUpTp3999(i)
+        } else {
+            if i < 3_999_999 {
+                return romanUpTp3999(i % 1000)
+            }
+        }
+        return "too large"
+    }
+    
+    private func romanUpTp3999(_ i: Int) -> String {
+        let values = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
+        let numerals = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
+        
+        var result = ""
+        var remaining = i
+        
+        for (index, value) in values.enumerated() {
+            while remaining >= value {
+                result += numerals[index]
+                remaining -= value
+            }
+        }
+        return result
+    }
+}

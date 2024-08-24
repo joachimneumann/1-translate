@@ -47,12 +47,18 @@
 		AA47203A2C785BD5000B700E /* NumberTranslator.h in Headers */ = {isa = PBXBuildFile; fileRef = AA47202A2C785BD5000B700E /* NumberTranslator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA47203D2C785BD5000B700E /* NumberTranslator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA4720282C785BD5000B700E /* NumberTranslator.framework */; };
 		AA47203E2C785BD5000B700E /* NumberTranslator.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AA4720282C785BD5000B700E /* NumberTranslator.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		AA4720472C785C2E000B700E /* NumberTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4720452C785C2E000B700E /* NumberTranslator.swift */; };
-		AA4720482C785C2E000B700E /* NumberTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4720452C785C2E000B700E /* NumberTranslator.swift */; };
+		AA4720472C785C2E000B700E /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4720452C785C2E000B700E /* Language.swift */; };
+		AA4720482C785C2E000B700E /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4720452C785C2E000B700E /* Language.swift */; };
 		AA4720492C785C2E000B700E /* ThaiNumerals.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4720462C785C2E000B700E /* ThaiNumerals.swift */; };
 		AA47204A2C785C2E000B700E /* ThaiNumerals.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4720462C785C2E000B700E /* ThaiNumerals.swift */; };
 		AA47204C2C78F3C6000B700E /* German.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA47204B2C78F3C6000B700E /* German.swift */; };
 		AA47204D2C78F3C6000B700E /* German.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA47204B2C78F3C6000B700E /* German.swift */; };
+		AA47204F2C797E90000B700E /* SimpleLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA47204E2C797E90000B700E /* SimpleLanguage.swift */; };
+		AA4720502C797E90000B700E /* SimpleLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA47204E2C797E90000B700E /* SimpleLanguage.swift */; };
+		AA4720522C7982B1000B700E /* DigitLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4720512C7982B1000B700E /* DigitLanguage.swift */; };
+		AA4720532C7982B1000B700E /* DigitLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4720512C7982B1000B700E /* DigitLanguage.swift */; };
+		AA4720562C798646000B700E /* Roman.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4720552C798646000B700E /* Roman.swift */; };
+		AA4720572C798646000B700E /* Roman.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4720552C798646000B700E /* Roman.swift */; };
 		AA4BEEA72C2417CF004C55CB /* HindiImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4BEEA62C2417CF004C55CB /* HindiImpl.swift */; };
 		AA4BEEA82C2417CF004C55CB /* HindiImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4BEEA62C2417CF004C55CB /* HindiImpl.swift */; };
 		AA4BEEAB2C2417D7004C55CB /* hindi.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4BEEA92C2417D7004C55CB /* hindi.swift */; };
@@ -220,9 +226,12 @@
 		AA47202B2C785BD5000B700E /* NumberTranslator.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = NumberTranslator.docc; sourceTree = "<group>"; };
 		AA4720312C785BD5000B700E /* NumberTranslatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NumberTranslatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA4720382C785BD5000B700E /* NumberTranslatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberTranslatorTests.swift; sourceTree = "<group>"; };
-		AA4720452C785C2E000B700E /* NumberTranslator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberTranslator.swift; sourceTree = "<group>"; };
+		AA4720452C785C2E000B700E /* Language.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		AA4720462C785C2E000B700E /* ThaiNumerals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThaiNumerals.swift; sourceTree = "<group>"; };
 		AA47204B2C78F3C6000B700E /* German.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = German.swift; sourceTree = "<group>"; };
+		AA47204E2C797E90000B700E /* SimpleLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleLanguage.swift; sourceTree = "<group>"; };
+		AA4720512C7982B1000B700E /* DigitLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitLanguage.swift; sourceTree = "<group>"; };
+		AA4720552C798646000B700E /* Roman.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Roman.swift; sourceTree = "<group>"; };
 		AA4BEEA62C2417CF004C55CB /* HindiImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HindiImpl.swift; sourceTree = "<group>"; };
 		AA4BEEA92C2417D7004C55CB /* hindi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = hindi.swift; sourceTree = "<group>"; };
 		AA4BEEAC2C241FE5004C55CB /* RomanImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RomanImpl.swift; sourceTree = "<group>"; };
@@ -425,9 +434,10 @@
 		AA4720292C785BD5000B700E /* NumberTranslator */ = {
 			isa = PBXGroup;
 			children = (
-				AA4720452C785C2E000B700E /* NumberTranslator.swift */,
-				AA47204B2C78F3C6000B700E /* German.swift */,
-				AA4720462C785C2E000B700E /* ThaiNumerals.swift */,
+				AA4720542C79861C000B700E /* Languages */,
+				AA4720452C785C2E000B700E /* Language.swift */,
+				AA4720512C7982B1000B700E /* DigitLanguage.swift */,
+				AA47204E2C797E90000B700E /* SimpleLanguage.swift */,
 				AA47202A2C785BD5000B700E /* NumberTranslator.h */,
 				AA47202B2C785BD5000B700E /* NumberTranslator.docc */,
 			);
@@ -440,6 +450,16 @@
 				AA4720382C785BD5000B700E /* NumberTranslatorTests.swift */,
 			);
 			path = NumberTranslatorTests;
+			sourceTree = "<group>";
+		};
+		AA4720542C79861C000B700E /* Languages */ = {
+			isa = PBXGroup;
+			children = (
+				AA47204B2C78F3C6000B700E /* German.swift */,
+				AA4720552C798646000B700E /* Roman.swift */,
+				AA4720462C785C2E000B700E /* ThaiNumerals.swift */,
+			);
+			path = Languages;
 			sourceTree = "<group>";
 		};
 		AAB253BB2B3BBAD400860F93 /* Implementation */ = {
@@ -747,7 +767,10 @@
 			files = (
 				AA47202C2C785BD5000B700E /* NumberTranslator.docc in Sources */,
 				AA47204C2C78F3C6000B700E /* German.swift in Sources */,
-				AA4720472C785C2E000B700E /* NumberTranslator.swift in Sources */,
+				AA4720562C798646000B700E /* Roman.swift in Sources */,
+				AA4720472C785C2E000B700E /* Language.swift in Sources */,
+				AA4720522C7982B1000B700E /* DigitLanguage.swift in Sources */,
+				AA47204F2C797E90000B700E /* SimpleLanguage.swift in Sources */,
 				AA4720492C785C2E000B700E /* ThaiNumerals.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -758,7 +781,10 @@
 			files = (
 				AA4720392C785BD5000B700E /* NumberTranslatorTests.swift in Sources */,
 				AA47204D2C78F3C6000B700E /* German.swift in Sources */,
-				AA4720482C785C2E000B700E /* NumberTranslator.swift in Sources */,
+				AA4720572C798646000B700E /* Roman.swift in Sources */,
+				AA4720482C785C2E000B700E /* Language.swift in Sources */,
+				AA4720532C7982B1000B700E /* DigitLanguage.swift in Sources */,
+				AA4720502C797E90000B700E /* SimpleLanguage.swift in Sources */,
 				AA47204A2C785C2E000B700E /* ThaiNumerals.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

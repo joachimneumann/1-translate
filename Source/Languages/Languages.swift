@@ -98,10 +98,11 @@ class Languages {
             }
         }
         
-        var thaiN = ThaiNumerals()
-        var x = thaiN.translate("123")
-        var g = German()
-        let xx = g.translate("123")
+        var l = Roman()
+//        var x = thaiN.numberToText("123e3")
+        var x = l.numberToText(1233)
+//        var g = German()
+//        let xx = g.translate("123")
         let xxx = "xxx"
     }
         
