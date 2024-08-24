@@ -23,7 +23,7 @@ class ThaiNumeralsImpl: LanguageImpl {
     }
     
     override func read_positive(_ i: Int) -> String {
-        let as_string = i.string
+        let as_string = String(i)
         var ret = ""
         for digit in as_string {
             ret += transformDigit(digit)

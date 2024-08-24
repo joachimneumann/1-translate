@@ -49,6 +49,17 @@
                ReferencedContainer = "container:TranslateNumbers.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AA4720302C785BD5000B700E"
+               BuildableName = "NumberTranslatorTests.xctest"
+               BlueprintName = "NumberTranslatorTests"
+               ReferencedContainer = "container:TranslateNumbers.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
