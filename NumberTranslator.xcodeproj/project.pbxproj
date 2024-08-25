@@ -25,8 +25,6 @@
 		AA6DAF9E2C7AE76300F8E9DA /* Group3Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6DAF962C7AE5EB00F8E9DA /* Group3Language.swift */; };
 		AA6DAFA32C7B331400F8E9DA /* GeneralLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6DAFA22C7B331400F8E9DA /* GeneralLanguage.swift */; };
 		AA6DAFA42C7B331400F8E9DA /* GeneralLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6DAFA22C7B331400F8E9DA /* GeneralLanguage.swift */; };
-		AA6DAFA62C7B36B200F8E9DA /* GeneralLanguageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6DAFA52C7B36B200F8E9DA /* GeneralLanguageProtocol.swift */; };
-		AA6DAFA72C7B36B200F8E9DA /* GeneralLanguageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6DAFA52C7B36B200F8E9DA /* GeneralLanguageProtocol.swift */; };
 		AA6DAFA92C7B586700F8E9DA /* German.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6DAFA82C7B586700F8E9DA /* German.swift */; };
 		AA6DAFAA2C7B586700F8E9DA /* German.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6DAFA82C7B586700F8E9DA /* German.swift */; };
 		AA6DAFAD2C7B595600F8E9DA /* GermanTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6DAFAB2C7B595600F8E9DA /* GermanTest.swift */; };
@@ -78,7 +76,6 @@
 		AA6DAF982C7AE62400F8E9DA /* English.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = English.swift; sourceTree = "<group>"; };
 		AA6DAF9B2C7AE67000F8E9DA /* EnglishTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnglishTest.swift; sourceTree = "<group>"; };
 		AA6DAFA22C7B331400F8E9DA /* GeneralLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralLanguage.swift; sourceTree = "<group>"; };
-		AA6DAFA52C7B36B200F8E9DA /* GeneralLanguageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralLanguageProtocol.swift; sourceTree = "<group>"; };
 		AA6DAFA82C7B586700F8E9DA /* German.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = German.swift; sourceTree = "<group>"; };
 		AA6DAFAB2C7B595600F8E9DA /* GermanTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GermanTest.swift; sourceTree = "<group>"; };
 		AAAA72452C7A0D2800D9FC48 /* Roman.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Roman.swift; sourceTree = "<group>"; };
@@ -141,7 +138,6 @@
 			isa = PBXGroup;
 			children = (
 				AA11B7CF2C79921600FAA562 /* LanguageProtocol.swift */,
-				AA6DAFA52C7B36B200F8E9DA /* GeneralLanguageProtocol.swift */,
 				AA6DAFA22C7B331400F8E9DA /* GeneralLanguage.swift */,
 				AA11B7D02C79921600FAA562 /* DigitLanguage.swift */,
 				AA6DAF962C7AE5EB00F8E9DA /* Group3Language.swift */,
@@ -284,7 +280,6 @@
 				AA11B7D32C79921600FAA562 /* DigitLanguage.swift in Sources */,
 				AA6DAF972C7AE5EB00F8E9DA /* Group3Language.swift in Sources */,
 				AA11B7DA2C79928900FAA562 /* ThaiNumerals.swift in Sources */,
-				AA6DAFA62C7B36B200F8E9DA /* GeneralLanguageProtocol.swift in Sources */,
 				AA6DAF902C7AE43D00F8E9DA /* Hindi.swift in Sources */,
 				AA6DAFA32C7B331400F8E9DA /* GeneralLanguage.swift in Sources */,
 				AA11B7D12C79921600FAA562 /* LanguageProtocol.swift in Sources */,
@@ -299,7 +294,6 @@
 				AA6DAF9D2C7AE67000F8E9DA /* EnglishTest.swift in Sources */,
 				AA6DAF932C7AE45D00F8E9DA /* Hindi.swift in Sources */,
 				AA6DAF9A2C7AE62400F8E9DA /* English.swift in Sources */,
-				AA6DAFA72C7B36B200F8E9DA /* GeneralLanguageProtocol.swift in Sources */,
 				AA6DAFAD2C7B595600F8E9DA /* GermanTest.swift in Sources */,
 				AAAA72902C7A249B00D9FC48 /* ThainumeralsTest.swift in Sources */,
 				AAAA72942C7A280B00D9FC48 /* TestExtension.swift in Sources */,
