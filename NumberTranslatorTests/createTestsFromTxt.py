@@ -59,12 +59,12 @@ def assertEqual(components):
 #        else:
         if not "Impl." in translated:
             translated = "\""+translated+"\""
-        writeln("")
+        #writeln("")
         write_("XCTAssertEqual(language.numberToText(")
         write(number)
         write(").x, ")
         write(translated)
-        write(")\n")
+        write(")")
     else:
         write_("// "+" ".join(components))
 

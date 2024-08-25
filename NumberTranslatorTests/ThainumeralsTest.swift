@@ -8,62 +8,24 @@ final class Test_ThaiNumerals: XCTestCase {
     let language = ThaiNumerals()
 
     func test_ThaiNumerals() {
-
         XCTAssertEqual(language.numberToText(0).x, "๐")
-
-
         XCTAssertEqual(language.numberToText(1).x, "๑")
-
-
         XCTAssertEqual(language.numberToText(2).x, "๒")
-
-
         XCTAssertEqual(language.numberToText(3).x, "๓")
-
-
         XCTAssertEqual(language.numberToText(4).x, "๔")
-
-
         XCTAssertEqual(language.numberToText(5).x, "๕")
-
-
         XCTAssertEqual(language.numberToText(6).x, "๖")
-
-
         XCTAssertEqual(language.numberToText(7).x, "๗")
-
-
         XCTAssertEqual(language.numberToText(8).x, "๘")
-
-
         XCTAssertEqual(language.numberToText(9).x, "๙")
-
-
         XCTAssertEqual(language.numberToText(10).x, "๑๐")
-
-
         XCTAssertEqual(language.numberToText(11).x, "๑๑")
-
-
         XCTAssertEqual(language.numberToText(12).x, "๑๒")
-
-
         XCTAssertEqual(language.numberToText(13).x, "๑๓")
-
-
         XCTAssertEqual(language.numberToText(14).x, "๑๔")
-
-
         XCTAssertEqual(language.numberToText(114).x, "๑๑๔")
-
-
         XCTAssertEqual(language.numberToText("114.7").x, "๑๑๔.๗")
-
-
         XCTAssertEqual(language.numberToText(1_147).x, "๑๑๔๗")
-
-
         XCTAssertEqual(language.numberToText(1_000).x, "๑๐๐๐")
-
     }
 }
