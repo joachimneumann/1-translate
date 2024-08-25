@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class GeneralLanguage: LanguageProtocol {
+public class GeneralLanguage: NumberTranslatorProtocol {
     public var name: String = "name"
     var allowNegative: Bool = true
     var allowExponent: Bool = true
