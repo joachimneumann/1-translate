@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import NumberTranslator
 
 class Languages {
     @AppStorage("firstNameKey") 
@@ -97,13 +96,6 @@ class Languages {
                 second = language
             }
         }
-        
-        var l = Roman()
-//        var x = thaiN.numberToText("123e3")
-        var x = l.numberToText(1233)
-//        var g = German()
-//        let xx = g.translate("123")
-        let xxx = "xxx"
     }
         
     static let WordSplitter = "\u{200A}" // the SoftHyphen "@\u{00AD}" did not seperate words well

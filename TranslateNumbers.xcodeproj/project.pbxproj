@@ -67,23 +67,6 @@
 		AAF472672B452BD000E7B986 /* Voices.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF472662B452BD000E7B986 /* Voices.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		AAAA723E2C79E47200D9FC48 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AAAA72392C79E47200D9FC48 /* NumberTranslator.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = AA471FEC2C783EAA000B700E;
-			remoteInfo = NumberTranslator;
-		};
-		AAAA72402C79E47200D9FC48 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AAAA72392C79E47200D9FC48 /* NumberTranslator.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = AA471FF62C783EAA000B700E;
-			remoteInfo = NumberTranslatorTests;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		AA2FABED272F2136006DE4C8 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -171,7 +154,6 @@
 		AAA4F5CB2C23D5FC008EC1C2 /* ukrainian.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ukrainian.swift; sourceTree = "<group>"; };
 		AAA553782C19D3E8001ED86E /* german.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = german.swift; sourceTree = "<group>"; };
 		AAA5537A2C19F2B7001ED86E /* vietnamese.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = vietnamese.swift; sourceTree = "<group>"; };
-		AAAA72392C79E47200D9FC48 /* NumberTranslator.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = NumberTranslator.xcodeproj; sourceTree = "<group>"; };
 		AAB10B94292A2222004707E9 /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		AAB10B96292A2222004707E9 /* NonScientificKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonScientificKeyboard.swift; sourceTree = "<group>"; };
 		AAB253B42B3AE79400860F93 /* Languages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Languages.swift; sourceTree = "<group>"; };
@@ -214,7 +196,6 @@
 		AA08C7B5272EDA48001B8575 = {
 			isa = PBXGroup;
 			children = (
-				AAAA72392C79E47200D9FC48 /* NumberTranslator.xcodeproj */,
 				AACCD0772B43A89A00D545C5 /* README.md */,
 				AA6352B02B296C3B00CABC0C /* TODO.md */,
 				AA08C7EB272F1241001B8575 /* TranslateNumbers.entitlements */,
@@ -306,15 +287,6 @@
 				AAB253BB2B3BBAD400860F93 /* Implementation */,
 			);
 			path = Languages;
-			sourceTree = "<group>";
-		};
-		AAAA723A2C79E47200D9FC48 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				AAAA723F2C79E47200D9FC48 /* NumberTranslator.framework */,
-				AAAA72412C79E47200D9FC48 /* NumberTranslatorTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		AAB253BB2B3BBAD400860F93 /* Implementation */ = {
@@ -435,35 +407,12 @@
 			mainGroup = AA08C7B5272EDA48001B8575;
 			productRefGroup = AA08C7BF272EDA48001B8575 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = AAAA723A2C79E47200D9FC48 /* Products */;
-					ProjectRef = AAAA72392C79E47200D9FC48 /* NumberTranslator.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				AA08C7BD272EDA48001B8575 /* TranslateNumbers */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		AAAA723F2C79E47200D9FC48 /* NumberTranslator.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = NumberTranslator.framework;
-			remoteRef = AAAA723E2C79E47200D9FC48 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		AAAA72412C79E47200D9FC48 /* NumberTranslatorTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = NumberTranslatorTests.xctest;
-			remoteRef = AAAA72402C79E47200D9FC48 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		AA08C7BC272EDA48001B8575 /* Resources */ = {
