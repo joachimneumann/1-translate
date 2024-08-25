@@ -17,7 +17,8 @@ public class GeneralLanguage: GeneralLanguageProtocol {
     var dotString: String = "."
     var beforeAndAfterDotString: String = ""
     var exponentString: String = " EE "
-    
+    var postProcessing: ((String) -> String)? = nil
+
     func _0_9(_ i: UInt) -> String {
         return String(i)
     }
@@ -25,4 +26,9 @@ public class GeneralLanguage: GeneralLanguageProtocol {
     func fromUInt(_ i: UInt) -> String {
         return String(i)
     }
+    
+    static let WordSplitter = "\u{200A}" // the SoftHyphen "@\u{00AD}" did not seperate words well
+//    static let WordSplitter = "@"
+
 }
+

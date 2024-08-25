@@ -24,10 +24,10 @@ final class Test_ThaiNumerals: XCTestCase {
         XCTAssertEqual(language.translate(13).x, "๑๓")
         XCTAssertEqual(language.translate(14).x, "๑๔")
         XCTAssertEqual(language.translate(114).x, "๑๑๔")
-        XCTAssertEqual(language.translate("114.7").x, "๑๑๔.๗")
+        XCTAssertEqual(language.translate(114.7).x, "๑๑๔.๗")
         XCTAssertEqual(language.translate(1_147).x, "๑๑๔๗")
         XCTAssertEqual(language.translate(1_000).x, "๑๐๐๐")
         XCTAssertEqual(language.translate(-1).x, "-๑")
-        XCTAssertEqual(language.translate("1.3").x, "๑.๓")
+        XCTAssertEqual(language.translate(1.3).x, "๑.๓")
     }
 }

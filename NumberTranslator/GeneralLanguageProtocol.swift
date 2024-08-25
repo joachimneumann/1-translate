@@ -16,18 +16,24 @@ protocol GeneralLanguageProtocol: LanguageProtocol {
     var dotString: String { get }
     var beforeAndAfterDotString: String { get }
     var exponentString: String { get }
+    var postProcessing: ((String) -> String)? { get }
     func fromUInt(_ i: UInt) -> String
     func _0_9(_ i: UInt) -> String
 }
 
 extension GeneralLanguageProtocol {
     public func translate(_ i: Int) -> String {
+        var ret: String = ""
         if i >= 0 {
-            return fromUInt(UInt(i))
+            ret =  fromUInt(UInt(i))
         } else {
             guard allowNegative else { return "negative not allowed" }
-            return negativeString + afterNegative + fromUInt(UInt(-i))
+            ret =  negativeString + afterNegative + fromUInt(UInt(-i))
         }
+        if let postProcessing = postProcessing {
+            ret = postProcessing(ret)
+        }
+        return ret
     }
     
     public func translate(_ s: String) -> String {
@@ -73,9 +79,9 @@ extension GeneralLanguageProtocol {
             ret += exponentString + translate(exponentAsString)
         }
         
-//        if let postProcessing = postProcessing {
-//            ret = postProcessing(ret)
-//        }
+        if let postProcessing = postProcessing {
+            ret = postProcessing(ret)
+        }
         return ret;
     }
 }

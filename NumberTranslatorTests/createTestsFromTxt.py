@@ -44,22 +44,12 @@ def assertEqual(components):
         number = temp
         tempIndex = tempIndex + 1
     if is_number(number) or number.startswith("temp"):
-        if "." in number or "e" in number and not number.startswith("temp"):
+        #if "." in number or "e" in number and not number.startswith("temp"):
+        if "e" in number and not number.startswith("temp"):
             number = "\""+number+"\""
         translated = " ".join(components[1:])
-#        normalAndOverline = translated.split("OVERLINE")
-#        if len(normalAndOverline) != 2:
-#            if not "Impl." in translated:
-#                translated = "\""+translated+"\""
-#            write_("XCTAssertEqual(language.numberToText(")
-#            write(number)
-#            write(").x, ")
-#            write(translated)
-#            write(")")
-#        else:
         if not "Impl." in translated:
             translated = "\""+translated+"\""
-        #writeln("")
         write_("XCTAssertEqual(language.translate(")
         write(number)
         write(").x, ")

@@ -151,6 +151,6 @@ final class Test_Hindi: XCTestCase {
         XCTAssertEqual(language.translate(10_000_000_000).x, "दश अरब")
         XCTAssertEqual(language.translate(100_000_000_000).x, "एक खरब") // एक सौ अरब
         XCTAssertEqual(language.translate(-1).x, "ऋण एक")
-        XCTAssertEqual(language.translate("1.3").x, "एक दशमलव तीन")
+        XCTAssertEqual(language.translate(1.3).x, "एक दशमलव तीन")
     }
 }
