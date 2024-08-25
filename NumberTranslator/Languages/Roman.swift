@@ -7,18 +7,17 @@
 
 import Foundation
 
-public class Roman: DigitLanguage, Language  {
-    public var name = "Roman"
+public class Roman: GeneralLanguage  {
     
-    override public func numberToText(_ s: String) -> String {
-        if let i = Int(s) {
-            return numberToText(i)
-        } else {
-            return "not a whole number"
-        }
+    override init() {
+        super.init()
+        name = "Roman"
+        allowNegative = false
+        allowFraction = false
+        allowExponent = false
     }
-
-    override public func numberToText(_ i: Int) -> String {
+    
+    override func fromUInt(_ i: UInt) -> String {
         if i <= 3_999 {
             return romanUpTp3999(i)
         } else {
@@ -35,8 +34,8 @@ public class Roman: DigitLanguage, Language  {
         return "too large"
     }
     
-    private func romanUpTp3999(_ i: Int) -> String {
-        let values = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
+    private func romanUpTp3999(_ i: UInt) -> String {
+        let values: [UInt] = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
         let numerals = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
         
         var result = ""

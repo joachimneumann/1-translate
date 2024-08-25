@@ -7,52 +7,37 @@
 
 import Foundation
 
-public class DigitLanguage {
-    let negativeString = "-"
-    let dotString = "."
-    let exponentString = " EE "
+public class DigitLanguage: GeneralLanguage {
     
-    public init() {}
-
-//    public var name: String = ""
-    
-    public func numberToText(_ s: String) -> String {
-        var ret = ""
-        for digit in s {
-            if digit == "e" {
-                ret += exponentString
-            } else if digit == "." {
-                ret += dotString
-            } else if digit == "-" {
-                ret += negativeString
-            } else if let i = digit.wholeNumberValue {
-                ret += _0_9(i)
-            } else {
-                ret += "?"
-            }
-        }
-        return ret
-    }
-    
-    public func numberToText(_ i: Int) -> String {
+    override func fromUInt(_ i: UInt) -> String {
         var ret = ""
         for digit in i.digits {
-            ret += _0_9(digit)
+            ret += _0_9(UInt(digit))
         }
         return ret
     }
-    
-    public func numberToText(_ f: Float) -> String {
-        return numberToText(String(f))
-    }
-    
-    public func numberToText(_ d: Double) -> String {
-        return numberToText(String(d))
-    }
-    
-    func _0_9(_ i: Int) -> String {
-        return String(i)
-    }
+//    
+//    public func uInt2String(_ s: String) -> String {
+//        var ret = ""
+//        for digit in s {
+//            if digit == "e" {
+//                ret += exponentString
+//            } else if digit == "." {
+//                ret += dotString
+//            } else if digit == "-" {
+//                ret += negativeString
+//            } else {
+//                let i = digit.wholeNumberValue
+//                if i != nil && i! >= 0 {
+//                    ret += fromUInt(UInt(i!))
+//                } else {
+//                    ret += "?"
+//                }
+//            }
+//        }
+//        return ret
+//    }
+        
 }
 
 extension BinaryInteger {

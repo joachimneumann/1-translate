@@ -7,10 +7,17 @@
 
 import Foundation
 
-public class Hindi: DigitLanguage, Language  {
-    public var name = "हिंदी"
+public class Hindi: DigitLanguage  {
+    override init() {
+        super.init()
+        name = "हिंदी"
+        dotString = "दशमलव"
+        negativeString = "ऋण"
+        afterNegative = " "
+        beforeAndAfterDotString = " "
+    }
     
-    override func _0_9(_ i: Int) -> String {
+    override func _0_9(_ i: UInt) -> String {
         switch i {
         case 0: return "शून्य"
         case 1: return "एक"
@@ -26,7 +33,7 @@ public class Hindi: DigitLanguage, Language  {
         }
     }
     
-    func read_10_99(_ i: Int) -> String {
+    func read_10_99(_ i: UInt) -> String {
         switch i {
         case 10: return "दश"
         case 11: return "ग्यारह"
@@ -122,62 +129,62 @@ public class Hindi: DigitLanguage, Language  {
         }
     }
     
-    public override func numberToText(_ i: Int) -> String {
+    override func fromUInt(_ i: UInt) -> String {
         if i < 10 { return _0_9(i) }
         if i < 100 { return read_10_99(i) }
         if i < 1000 {
             var ret = ""
-            ret = _0_9(i.E2) + " " + "सौ"
-            if i.E2x > 0 {
-                ret += " " + numberToText(i.E2x)
+            ret = _0_9(i.E(2)) + " " + "सौ"
+            if i.Ex(2) > 0 {
+                ret += " " + fromUInt(i.Ex(2))
             }
             return ret
         }
         if i < 100_000 {
             var ret = ""
-            ret = numberToText(i.E3) + " " + "हज़ार"
-            if i.E3x > 0 {
-                ret += " " + numberToText(i.E3x)
+            ret = fromUInt(i.E(3)) + " " + "हज़ार"
+            if i.Ex(3) > 0 {
+                ret += " " + fromUInt(i.Ex(3))
             }
             return ret
         }
         if i < 100*100_000 {
             var ret = ""
-            ret = numberToText(i.E5) + " " + "लाख" // lakh
-            if i.E5x > 0 {
-                ret += " " + numberToText(i.E5x)
+            ret = fromUInt(i.E(5)) + " " + "लाख" // lakh
+            if i.Ex(5) > 0 {
+                ret += " " + fromUInt(i.Ex(5))
             }
             return ret
         }
         if i < 100*100*100_000 {
             var ret = ""
-            ret = numberToText(i.E7) + " " + "करोड़" // crore
-            if i.E7x > 0 {
-                ret += " " + numberToText(i.E7x)
+            ret = fromUInt(i.E(7)) + " " + "करोड़" // crore
+            if i.Ex(7) > 0 {
+                ret += " " + fromUInt(i.Ex(7))
             }
             return ret
         }
         if i < 100*100*100*100_000 {
             var ret = ""
-            ret = numberToText(i.E9) + " " + "अरब" // arab
-            if i.E9x > 0 {
-                ret += " " + numberToText(i.E9x)
+            ret = fromUInt(i.E(9)) + " " + "अरब" // arab
+            if i.Ex(9) > 0 {
+                ret += " " + fromUInt(i.Ex(9))
             }
             return ret
         }
         if i < 100*100*100*100*100_000 {
             var ret = ""
-            ret = numberToText(i.E11) + " " + "खरब" // kharab
-            if i.E11x > 0 {
-                ret += " " + numberToText(i.E11x)
+            ret = fromUInt(i.E(11)) + " " + "खरब" // kharab
+            if i.Ex(11) > 0 {
+                ret += " " + fromUInt(i.Ex(11))
             }
             return ret
         }
         if i < 100*100*100*100*100*100_000 {
             var ret = ""
-            ret = numberToText(i.E13) + " " + "नील" // nil
-            if i.E13x > 0 {
-                ret += " " + numberToText(i.E13x)
+            ret = fromUInt(i.E(13)) + " " + "नील" // nil
+            if i.Ex(13) > 0 {
+                ret += " " + fromUInt(i.Ex(13))
             }
             return ret
         }
@@ -185,29 +192,3 @@ public class Hindi: DigitLanguage, Language  {
     }
 }
 
-extension Int {
-    var E1: Int { self / 10 }
-    var E1x: Int { self - self / 10 * 10 } // self % 10?
-    var E2: Int { self / 100 }
-    var E2x: Int { self - self / 100 * 100 }
-    var E3: Int { self / 1_000 }
-    var E3x: Int { self - self / 1_000 * 1_000}
-    var E4: Int { self / 10_000 }
-    var E4x: Int { self - self / 10_000 * 10_000 }
-    var E5: Int { self / 100_000 }
-    var E5x: Int { self - self / 100_000 * 100_000 }
-    var E6: Int { self / 1_000_000 }
-    var E6x: Int { self - self / 1_000_000 * 1_000_000 }
-    var E7: Int { self / 10_000_000 }
-    var E7x: Int { self - self / 10_000_000 * 10_000_000 }
-    var E8: Int { self / 100_000_000 }
-    var E8x: Int { self - self / 100_000_000 * 100_000_000 }
-    var E9: Int { self / 1_000_000_000 }
-    var E9x: Int { self - self / 1_000_000_000 * 1_000_000_000 }
-    var E11: Int { self / 100_000_000_000 }
-    var E11x: Int { self - self / 100_000_000_000 * 100_000_000_000 }
-    var E12: Int { self / 1_000_000_000_000 }
-    var E12x: Int { self - self / 1_000_000_000_000 * 1_000_000_000_000 }
-    var E13: Int { self / 10_000_000_000_000 }
-    var E13x: Int { self - self / 10_000_000_000_000 * 10_000_000_000_000 }
-}

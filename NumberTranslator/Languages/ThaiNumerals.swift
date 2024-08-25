@@ -7,10 +7,13 @@
 
 import Foundation
 
-public class ThaiNumerals: DigitLanguage, Language  {
-    public var name = "แบบดั้งเดิม"
+public class ThaiNumerals: DigitLanguage  {
+    override init() {
+        super.init()
+        name = "แบบดั้งเดิม"
+    }
     
-    override func _0_9(_ i: Int) -> String {
+    override func _0_9(_ i: UInt) -> String {
         switch i {
         case 0: return "๐"
         case 1: return "๑"
