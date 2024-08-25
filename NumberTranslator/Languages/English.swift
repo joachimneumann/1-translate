@@ -8,7 +8,7 @@
 import Foundation
 
 public class English: Group3Language  {
-    override init() {
+    public override init() {
         super.init()
         name = "English"
         _20_99_connector = "-"

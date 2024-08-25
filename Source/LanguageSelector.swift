@@ -17,10 +17,10 @@ struct LanguageSelector: View {
             if let currentLanguage = currentLanguage {
                 if isFirstLanguage {
                     viewModel.languages.first = currentLanguage
-                    viewModel.languages.firstName = currentLanguage.name
+                    viewModel.languages.firstName = currentLanguage.translator.name
                 } else {
                     viewModel.languages.second = currentLanguage
-                    viewModel.languages.secondName = currentLanguage.name
+                    viewModel.languages.secondName = currentLanguage.translator.name
                 }
             }
             viewModel.updateTranslation()
@@ -28,9 +28,9 @@ struct LanguageSelector: View {
     }
     
     var body: some View {
-        ScrollViewReader { scrollViewReaderProxy in
+         ScrollViewReader { scrollViewReaderProxy in
             List(viewModel.languages.list)  { language in
-                let selected: Bool = language.name == currentLanguage?.name
+                let selected: Bool = (language.translator.name == currentLanguage?.translator.name)
                 Button {
                     currentLanguage = language
                 } label: {
@@ -41,7 +41,7 @@ struct LanguageSelector: View {
                             .padding(.vertical, 1)
                             .border(.white, width: 1)
                             .frame(height: 20)
-                        Text(language.name)
+                        Text(language.translator.name)
                             .padding(.leading, 10)
                         if language.nameDescription != nil {
                             Text(" ("+language.nameDescription!+")")
@@ -59,11 +59,11 @@ struct LanguageSelector: View {
                         }
                     }
                 }
-                .id(language.name)
+                .id(language.translator.name)
                 .listRowBackground(selected ? Color(white: 0.18) : Color(white: 0.1))
             }
             .onAppear() {
-                scrollViewReaderProxy.scrollTo(isFirstLanguage ? viewModel.languages.first.name : viewModel.languages.second.name, anchor: .top)
+                scrollViewReaderProxy.scrollTo(isFirstLanguage ? viewModel.languages.first.translator.name : viewModel.languages.second.translator.name, anchor: .top)
             }
             .listStyle(.sidebar)
         }

@@ -10,7 +10,7 @@ import Foundation
 public class German: Group3Language  {
     var capitalisation: Bool = true
 
-    override init() {
+    public override init() {
         super.init()
         name = "Deutsch"
         negativeString = "minus"

@@ -20,11 +20,11 @@ struct Settings: View {
                 Appearance(temp: $viewModel.languages.secondLanguageAllowed)
                 DigitsSettings
                 VoiceSettings
-                English
-                German
-                Spanish
-                Vietnamese
-                Babylonian
+//                English
+//                German
+//                Spanish
+//                Vietnamese
+//                Babylonian
                 HobbyProject
             }
         }
@@ -147,7 +147,7 @@ struct Settings: View {
         return Section(header: Text("Read Aloud")) {
             VStack(alignment: .leading) {
                 Button {
-                    let text = viewModel.languages.english.read("100")
+                    let text = "XX"//viewModel.languages.english.read("100")
                     viewModel.voices.readAloud(text, in: viewModel.languages.english)
                 } label: {
                     Image(systemName: symbolName)
@@ -210,7 +210,7 @@ struct Settings: View {
                     .frame(height: 13)
                     .padding(.trailing, 3)
                 Text(language.nameWithDescription) }) {
-                    Text(example + ": " + language.read(example))
+                    Text(example + ": " + "language.read(example)")
                         .fontWeight(.semibold)
                         .frame(height: 25)
                         .foregroundColor(.yellow)
@@ -219,124 +219,124 @@ struct Settings: View {
         }
     }
     
-    var English: some View {
-        return LanguageSection(
-            language: viewModel.languages.english,
-            example: "150") {
-                HStack {
-                    Text("Use \"and\"")
-                    Spacer()
-                    Toggle("", isOn: $viewModel.languages.english.useAndAfterHundred)
-                        .frame(width: 40)
-                        .toggleStyle(
-                            ColoredToggleStyle(onColor: Color(white: 0.6),
-                                               offColor: Color(white: 0.25),
-                                               thumbColor: .white))
-                        .buttonStyle(.plain)
-                        .padding(.trailing, 10)
-                }
-            }
-    }
-    
-    
-    var German: some View {
-        return LanguageSection(
-            language: viewModel.languages.german,
-            example: "88") {
-                HStack {
-                    Text("Großschreibung")
-                    Spacer()
-                    Toggle("", isOn: $viewModel.languages.german.capitalisation)
-                        .frame(width: 40)
-                        .toggleStyle(
-                            ColoredToggleStyle(onColor: Color(white: 0.6),
-                                               offColor: Color(white: 0.25),
-                                               thumbColor: .white))
-                        .buttonStyle(.plain)
-                        .padding(.trailing, 10)
-                }
-            }
-    }
-    
-    
-    var Spanish: some View {
-        return LanguageSection(
-            language: viewModel.languages.spanish,
-            example: "1.5") {
-                HStack {
-                    Text("Coma o punto:")
-                    Spacer()
-                    Picker("", selection: $viewModel.languages.spanish.puntoComma) {
-                        ForEach(SpanishImpl.PuntoComma.allCases, id: \.self) { value in
-                            Text("\(value.rawValue)")
-                                .tag(value)
-                        }
-                    }
-                    .pickerStyle(.segmented)
-                }
-            }
-    }
-    
-    var Vietnamese: some View {
-        return LanguageSection(
-            language: viewModel.languages.vietnamese,
-            example: "33303") {
-                Grid(alignment: .leading) {
-                    GridRow {
-                        Text("1000")
-                        Picker("", selection: $viewModel.languages.vietnamese.vietnameseThousand) {
-                            ForEach(VietnameseImpl.VietnameseThousand.allCases, id: \.self) { value in
-                                Text("\(value.rawValue)")
-                                    .tag(value)
-                            }
-                        }
-                        .pickerStyle(.segmented)
-                        .padding(.bottom, 5)
-                    }
-                    GridRow {
-                        Text("Linh hoặc lẻ")
-                        Picker("", selection: $viewModel.languages.vietnamese.secondLast) {
-                            ForEach(VietnameseImpl.SecondLast.allCases, id: \.self) { value in
-                                Text("\(value.rawValue)")
-                                    .tag(value)
-                            }
-                        }
-                        .pickerStyle(.segmented)
-                    }
-                }
-                HStack {
-                    Text("Ngắn gọn")
-                    Spacer()
-                    Toggle("", isOn: $viewModel.languages.vietnamese.compact)
-                        .frame(width: 40)
-                        .toggleStyle(
-                            ColoredToggleStyle(onColor: Color(white: 0.6),
-                                               offColor: Color(white: 0.25),
-                                               thumbColor: .white))
-                        .buttonStyle(.plain)
-                        .padding(.trailing, 10)
-                }
-            }
-    }
-    
-    var Babylonian: some View {
-        return LanguageSection(
-            language: viewModel.languages.babylonian,
-            example: "3601") {
-                HStack {
-                    Text("Empty column")
-                    Spacer()
-                    Toggle("", isOn: $viewModel.languages.babylonian.babylonianEmptyColumn)
-                        .frame(width: 40)
-                        .toggleStyle(
-                            ColoredToggleStyle(onColor: Color(white: 0.6),
-                                               offColor: Color(white: 0.25),
-                                               thumbColor: .white))
-                        .buttonStyle(.plain)
-                        .padding(.trailing, 10)
-                }
-            }
-    }
+//    var English: some View {
+//        return LanguageSection(
+//            language: viewModel.languages.english,
+//            example: "150") {
+//                HStack {
+//                    Text("Use \"and\"")
+//                    Spacer()
+//                    Toggle("", isOn: $viewModel.languages.english.useAndAfterHundred)
+//                        .frame(width: 40)
+//                        .toggleStyle(
+//                            ColoredToggleStyle(onColor: Color(white: 0.6),
+//                                               offColor: Color(white: 0.25),
+//                                               thumbColor: .white))
+//                        .buttonStyle(.plain)
+//                        .padding(.trailing, 10)
+//                }
+//            }
+//    }
+//    
+//    
+//    var German: some View {
+//        return LanguageSection(
+//            language: viewModel.languages.german,
+//            example: "88") {
+//                HStack {
+//                    Text("Großschreibung")
+//                    Spacer()
+//                    Toggle("", isOn: $viewModel.languages.german.capitalisation)
+//                        .frame(width: 40)
+//                        .toggleStyle(
+//                            ColoredToggleStyle(onColor: Color(white: 0.6),
+//                                               offColor: Color(white: 0.25),
+//                                               thumbColor: .white))
+//                        .buttonStyle(.plain)
+//                        .padding(.trailing, 10)
+//                }
+//            }
+//    }
+//    
+//    
+//    var Spanish: some View {
+//        return LanguageSection(
+//            language: viewModel.languages.spanish,
+//            example: "1.5") {
+//                HStack {
+//                    Text("Coma o punto:")
+//                    Spacer()
+//                    Picker("", selection: $viewModel.languages.spanish.puntoComma) {
+//                        ForEach(SpanishImpl.PuntoComma.allCases, id: \.self) { value in
+//                            Text("\(value.rawValue)")
+//                                .tag(value)
+//                        }
+//                    }
+//                    .pickerStyle(.segmented)
+//                }
+//            }
+//    }
+//    
+//    var Vietnamese: some View {
+//        return LanguageSection(
+//            language: viewModel.languages.vietnamese,
+//            example: "33303") {
+//                Grid(alignment: .leading) {
+//                    GridRow {
+//                        Text("1000")
+//                        Picker("", selection: $viewModel.languages.vietnamese.vietnameseThousand) {
+//                            ForEach(VietnameseImpl.VietnameseThousand.allCases, id: \.self) { value in
+//                                Text("\(value.rawValue)")
+//                                    .tag(value)
+//                            }
+//                        }
+//                        .pickerStyle(.segmented)
+//                        .padding(.bottom, 5)
+//                    }
+//                    GridRow {
+//                        Text("Linh hoặc lẻ")
+//                        Picker("", selection: $viewModel.languages.vietnamese.secondLast) {
+//                            ForEach(VietnameseImpl.SecondLast.allCases, id: \.self) { value in
+//                                Text("\(value.rawValue)")
+//                                    .tag(value)
+//                            }
+//                        }
+//                        .pickerStyle(.segmented)
+//                    }
+//                }
+//                HStack {
+//                    Text("Ngắn gọn")
+//                    Spacer()
+//                    Toggle("", isOn: $viewModel.languages.vietnamese.compact)
+//                        .frame(width: 40)
+//                        .toggleStyle(
+//                            ColoredToggleStyle(onColor: Color(white: 0.6),
+//                                               offColor: Color(white: 0.25),
+//                                               thumbColor: .white))
+//                        .buttonStyle(.plain)
+//                        .padding(.trailing, 10)
+//                }
+//            }
+//    }
+//    
+//    var Babylonian: some View {
+//        return LanguageSection(
+//            language: viewModel.languages.babylonian,
+//            example: "3601") {
+//                HStack {
+//                    Text("Empty column")
+//                    Spacer()
+//                    Toggle("", isOn: $viewModel.languages.babylonian.babylonianEmptyColumn)
+//                        .frame(width: 40)
+//                        .toggleStyle(
+//                            ColoredToggleStyle(onColor: Color(white: 0.6),
+//                                               offColor: Color(white: 0.25),
+//                                               thumbColor: .white))
+//                        .buttonStyle(.plain)
+//                        .padding(.trailing, 10)
+//                }
+//            }
+//    }
     
     var HobbyProject: some View {
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String

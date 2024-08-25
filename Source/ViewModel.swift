@@ -15,7 +15,7 @@ import SwiftUI
     var _1Translation: Translation = Translation(displayText: "", overline: nil, spokenText: nil)
     var _2Translation: Translation = Translation(displayText: "", overline: nil, spokenText: nil)
     var persistent = Persistent()
-    var languages = Languages()
+    var languages: Languages = Languages()
 
     private var stupidBrain = BrainEngine(precision: 1_000) /// I want to call fast sync functions
     private let keysThatRequireValidNumber = ["±", "%", "/", "x", "-", "+", "="]
@@ -65,18 +65,18 @@ import SwiftUI
     }
 
     var firstFont: Font {
-        switch languages.first.name {
-        case languages.arabicNumerals.name:
-            Font(UIFont(name: "Avenir", size: languages.secondLanguageAllowed ? 40 : 50)!)
+        switch languages.first.translator.name {
+//        case languages.arabicNumerals.name:
+//            Font(UIFont(name: "Avenir", size: languages.secondLanguageAllowed ? 40 : 50)!)
         default:
             languages.secondLanguageAllowed ? Font.title : Font.largeTitle
         }
     }
     
     var secondFont: Font {
-        switch languages.second.name {
-        case languages.arabicNumerals.name:
-            Font(UIFont(name: "Avenir", size: 40)!)
+        switch languages.second.translator.name {
+//        case languages.arabicNumerals.name:
+//            Font(UIFont(name: "Avenir", size: 40)!)
         default:
             Font.title
         }

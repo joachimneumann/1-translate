@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import NumberTranslator
 
 struct Translation {
     let displayText: String
@@ -44,37 +45,30 @@ enum GroupSize: Int, Codable, CaseIterable {
 }
 
 @Observable class Language: Identifiable {
-    var name: String
     var nameDescription: String? = nil
     var voiceLanguageCode: String? = nil
     let groupSize: GroupSize
+    let translator: GeneralLanguage
 
     var flagName: String {
-        nameDescription != nil ? nameDescription! : name
+        nameDescription != nil ? nameDescription! : translator.name
     }
     var nameWithDescription: String {
-        name + (nameDescription != nil ? "/"+nameDescription! : "")
+        translator.name + (nameDescription != nil ? "/"+nameDescription! : "")
     }
     var speakingPostProcessing: ((String) -> String)?
 
-    init(name: String, groupSize: GroupSize) {
-        self.name = name
+    init(translator: GeneralLanguage, groupSize: GroupSize) {
         self.groupSize = groupSize
+        self.translator = translator
     }
     
-    func read(_ s: String) -> String {
-        fatalError("read() not implmented")
-    }
-    func read_OVERLINE(_ i: Int) -> String? {
-        nil
-    }
-
     func translate(_ s: String) -> Translation {
-        let displayText = read(s)
-        var overline: String? = nil
-        if let i = Int(s) {
-            overline = read_OVERLINE(i)
-        }
+        let displayText = translator.translate(s)
+//        var overline: String? = nil
+//        if let i = Int(s) {
+//            overline = read_OVERLINE(i)
+//        }
         var spokenText: String? = nil
         if voiceLanguageCode != nil {
             spokenText = displayText.replacingOccurrences(of: Languages.WordSplitter, with: " ")
@@ -84,7 +78,7 @@ enum GroupSize: Int, Codable, CaseIterable {
         }
         return Translation(
             displayText: displayText,
-            overline: overline,
+            overline: nil,
             spokenText: spokenText)
     }
 }

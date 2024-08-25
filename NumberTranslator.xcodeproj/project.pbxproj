@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AA11B7D12C79921600FAA562 /* LanguageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11B7CF2C79921600FAA562 /* LanguageProtocol.swift */; };
-		AA11B7D22C79921600FAA562 /* LanguageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11B7CF2C79921600FAA562 /* LanguageProtocol.swift */; };
+		AA11B7D12C79921600FAA562 /* NumberTranslatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11B7CF2C79921600FAA562 /* NumberTranslatorProtocol.swift */; };
+		AA11B7D22C79921600FAA562 /* NumberTranslatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11B7CF2C79921600FAA562 /* NumberTranslatorProtocol.swift */; };
 		AA11B7D32C79921600FAA562 /* DigitLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11B7D02C79921600FAA562 /* DigitLanguage.swift */; };
 		AA11B7D42C79921600FAA562 /* DigitLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11B7D02C79921600FAA562 /* DigitLanguage.swift */; };
 		AA11B7DA2C79928900FAA562 /* ThaiNumerals.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11B7D92C79928900FAA562 /* ThaiNumerals.swift */; };
@@ -63,7 +63,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		AA11B7CF2C79921600FAA562 /* LanguageProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageProtocol.swift; sourceTree = "<group>"; };
+		AA11B7CF2C79921600FAA562 /* NumberTranslatorProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberTranslatorProtocol.swift; sourceTree = "<group>"; };
 		AA11B7D02C79921600FAA562 /* DigitLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DigitLanguage.swift; sourceTree = "<group>"; };
 		AA11B7D92C79928900FAA562 /* ThaiNumerals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThaiNumerals.swift; sourceTree = "<group>"; };
 		AA471FEC2C783EAA000B700E /* NumberTranslator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NumberTranslator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,7 +137,7 @@
 		AA471FEE2C783EAA000B700E /* NumberTranslator */ = {
 			isa = PBXGroup;
 			children = (
-				AA11B7CF2C79921600FAA562 /* LanguageProtocol.swift */,
+				AA11B7CF2C79921600FAA562 /* NumberTranslatorProtocol.swift */,
 				AA6DAFA22C7B331400F8E9DA /* GeneralLanguage.swift */,
 				AA11B7D02C79921600FAA562 /* DigitLanguage.swift */,
 				AA6DAF962C7AE5EB00F8E9DA /* Group3Language.swift */,
@@ -282,7 +282,7 @@
 				AA11B7DA2C79928900FAA562 /* ThaiNumerals.swift in Sources */,
 				AA6DAF902C7AE43D00F8E9DA /* Hindi.swift in Sources */,
 				AA6DAFA32C7B331400F8E9DA /* GeneralLanguage.swift in Sources */,
-				AA11B7D12C79921600FAA562 /* LanguageProtocol.swift in Sources */,
+				AA11B7D12C79921600FAA562 /* NumberTranslatorProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,7 +301,7 @@
 				AA11B7DB2C79928900FAA562 /* ThaiNumerals.swift in Sources */,
 				AA6DAF9E2C7AE76300F8E9DA /* Group3Language.swift in Sources */,
 				AAAA72842C7A162E00D9FC48 /* Roman.swift in Sources */,
-				AA11B7D22C79921600FAA562 /* LanguageProtocol.swift in Sources */,
+				AA11B7D22C79921600FAA562 /* NumberTranslatorProtocol.swift in Sources */,
 				AA6DAF922C7AE45100F8E9DA /* HindiTest.swift in Sources */,
 				AA6DAFA42C7B331400F8E9DA /* GeneralLanguage.swift in Sources */,
 				AAAA728F2C7A249B00D9FC48 /* RomanTest.swift in Sources */,
