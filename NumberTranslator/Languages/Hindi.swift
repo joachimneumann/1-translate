@@ -8,7 +8,7 @@
 import Foundation
 
 public class Hindi: DigitLanguage  {
-    override init() {
+    public override init() {
         super.init()
         name = "हिंदी"
         dotString = "दशमलव"

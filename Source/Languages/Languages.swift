@@ -39,7 +39,7 @@ class Languages {
 //    let french              = FrenchImpl()
     var german              = Language(translator: German(), groupSize: GroupSize.three)
 //    var hieroglyphs         = HieroglyphsImpl()
-//    var hindi               = HindiImpl()
+    var hindi               = Language(translator: Hindi(), groupSize: GroupSize.five)
 //    var italian             = ItalianImpl()
 //    let polish              = PolishImpl()
 //    var portugueseEuropean  = PortugueseImpl(variant: .European)
@@ -49,10 +49,12 @@ class Languages {
 //    let swahili             = SwahiliImpl()
 //    let roman               = RomanImpl()
 //    let thai                = ThaiImpl()
-//    let thaiNumerals        = ThaiNumeralsImpl()
+    let thaiNumerals        =  Language(translator: ThaiNumerals(), groupSize: GroupSize.three)
 //    var vietnamese          = VietnameseImpl()
 
     init() {
+        hindi.nameDescription = "Hindi"
+        thaiNumerals.nameDescription = "Thai Numerals"
         list = [
         // XXarabic,
 //        arabicNumerals,
@@ -72,7 +74,7 @@ class Languages {
 //        spanish,
         german,
 //        hieroglyphs,
-//        hindi,
+        hindi,
 //        italian,
 //        // XXjapanese,
 //        polish,
@@ -83,7 +85,7 @@ class Languages {
 //        ukrainian,
 //        swahili,
 //        thai,
-//        thaiNumerals,
+        thaiNumerals,
 //        vietnamese
         ]
         
