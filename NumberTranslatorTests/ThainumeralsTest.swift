@@ -5,9 +5,7 @@ import XCTest
 import NumberTranslator
 
 final class Test_ThaiNumerals: XCTestCase {
-
-    let language = Translators().thaiNumerals
-
+    let language = ThaiNumeralsImplementation()
     func testThaiNumerals() {
         XCTAssertEqual(language.translate(0).x, "๐")
         XCTAssertEqual(language.translate(1).x, "๑")

@@ -83,9 +83,7 @@ for file in glob.glob("../../1-translate-tests/language/*.txt"):
     writeln("import NumberTranslator")
     writeln("")
     writeln("final class Test_"+basenameCapitalized+": XCTestCase {")
-    writeln("")
-    writeln("    let language = Translators()."+basename)
-    writeln("")
+    writeln("    let language = "+basenameCapitalized+"Implementation()")
     writeln("    func test"+basenameCapitalized+"() {")
 
     with open(file) as file:

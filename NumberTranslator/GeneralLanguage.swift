@@ -41,6 +41,9 @@ class GeneralLanguage {
         return ret
     }
     
+    func translate(_ f: Float)  -> String { translate(String(f)) }
+    func translate(_ d: Double) -> String { translate(String(d)) }
+    
     func translate(_ s: String) -> String {
         // exponent and mantissa part
         var parts = s.components(separatedBy: "e")

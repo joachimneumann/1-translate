@@ -6,7 +6,7 @@ import NumberTranslator
 
 final class Test_English: XCTestCase {
     func test_English() {
-        let language = Translators().english
+        let language = EnglishImplementation()
         language.useAndAfterHundred = false
         XCTAssertEqual(language.translate(0).x, "zero")
         XCTAssertEqual(language.translate(1).x, "one")

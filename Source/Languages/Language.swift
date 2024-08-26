@@ -58,7 +58,7 @@ enum GroupSize: Int, Codable, CaseIterable {
     }
     var speakingPostProcessing: ((String) -> String)?
 
-    init(translator: Translator, groupSize: GroupSize) {
+    init(_ translator: Translator, _ groupSize: GroupSize) {
         self.groupSize = groupSize
         self.translator = translator
     }
@@ -83,4 +83,23 @@ enum GroupSize: Int, Codable, CaseIterable {
     }
 }
 
+class GermanLanguage: Language {
+    var capitalisation: Bool = false {
+        didSet {
+            if let german = self.translator as? GermanTranslator {
+                german.capitalisation = capitalisation
+            }
+        }
+    }
+}
+
+class EnglishLanguage: Language {
+    var useAndAfterHundred: Bool = false {
+        didSet {
+            if let english = self.translator as? EnglishTranslator {
+                english.useAndAfterHundred = useAndAfterHundred
+            }
+        }
+    }
+}
 

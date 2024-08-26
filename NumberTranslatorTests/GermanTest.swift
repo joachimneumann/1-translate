@@ -5,9 +5,7 @@ import XCTest
 import NumberTranslator
 
 final class Test_German: XCTestCase {
-
-    let language = Translators().german
-
+    let language = GermanImplementation()
     func testGerman() {
 
         language.capitalisation = false

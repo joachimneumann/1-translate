@@ -11,8 +11,8 @@ public class Translator {
     public var name: String { implementation.name }
     public func translate(_ s: String) -> String { implementation.translate(s) }
     public func translate(_ i: Int)    -> String { implementation.translate(i) }
-    public func translate(_ f: Float)  -> String { translate(String(f)) }
-    public func translate(_ d: Double) -> String { translate(String(d)) }
+    public func translate(_ f: Float)  -> String { implementation.translate(f) }
+    public func translate(_ d: Double) -> String { implementation.translate(d) }
     
     var implementation: GeneralLanguage
     init(_ implementation: GeneralLanguage) {
@@ -40,11 +40,9 @@ public class EnglishTranslator: Translator {
     }
 }
 
-public class Translators {
-    public let english     : EnglishTranslator = EnglishTranslator(EnglishImplementation()      )
-    public let german      : GermanTranslator  = GermanTranslator (GermanImplementation()       )
-    public let hindi       : Translator        = Translator       (HindiImplementation()        )
-    public let roman       : Translator        = Translator       (RomanImplementation()        )
-    public let thaiNumerals: Translator        = Translator       (ThaiNumeralsImplementation() )
-    public init() {}
-}
+public let englishTranslator      : EnglishTranslator = EnglishTranslator(EnglishImplementation()      )
+public let germanTranslator       : GermanTranslator  = GermanTranslator (GermanImplementation()       )
+public let hindiTranslator        : Translator        = Translator       (HindiImplementation()        )
+public let romanTranslator        : Translator        = Translator       (RomanImplementation()        )
+public let thaiNumeralsTranslator : Translator        = Translator       (ThaiNumeralsImplementation() )
+

@@ -18,7 +18,6 @@ class Languages {
     @AppStorage("secondLanguageAllowedKey")
     var secondLanguageAllowed: Bool = false
     
-    let translators = Translators()
     var first: Language
     var second: Language
     var list: [Language] = []
@@ -33,12 +32,12 @@ class Languages {
 //    let chineseTraditional  = ChineseImpl(variant: .traditional)
 //    let danish              = DanishImpl()
 //    let digits              = DigitsImpl()
-    var english: Language
+    var english: EnglishLanguage
 //    var esperanto           = EsperantoImpl()
 //    var spanish             = SpanishImpl()
 //    let finnish             = FinnishImpl()
 //    let french              = FrenchImpl()
-    var german :Language
+    var german: GermanLanguage
 //    var hieroglyphs         = HieroglyphsImpl()
     var hindi: Language
 //    var italian             = ItalianImpl()
@@ -54,13 +53,18 @@ class Languages {
 //    var vietnamese          = VietnameseImpl()
 
     init() {
-        english = Language(translator: translators.english,      groupSize: GroupSize.three)
-        german = Language(translator: translators.german,       groupSize: GroupSize.three)
-        hindi = Language(translator: translators.hindi,        groupSize: GroupSize.three)
-        roman = Language(translator: translators.roman,        groupSize: GroupSize.three)
-        thaiNumerals = Language(translator: translators.thaiNumerals, groupSize: GroupSize.three)
+        english      = EnglishLanguage(englishTranslator,      GroupSize.three)
+        german       = GermanLanguage( germanTranslator,       GroupSize.three)
+        hindi        = Language(       hindiTranslator,        GroupSize.three)
+        roman        = Language(       romanTranslator,        GroupSize.three)
+        thaiNumerals = Language(       thaiNumeralsTranslator, GroupSize.three)
+
+        german.capitalisation = true
+        english.useAndAfterHundred = true
+
         hindi.nameDescription = "Hindi"
         thaiNumerals.nameDescription = "Thai Numerals"
+
         list.append(english)
         list.append(german)
         list.append(hindi)
