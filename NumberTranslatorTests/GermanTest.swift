@@ -2,12 +2,13 @@
 //       It will be overwritten when testing
 
 import XCTest
+import NumberTranslator
 
 final class Test_German: XCTestCase {
 
-    let language = translators[1] as! German
+    let language = Translators().german
 
-    func test_German() {
+    func testGerman() {
 
         language.capitalisation = false
         XCTAssertEqual(language.translate(0).x, "null")

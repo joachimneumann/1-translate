@@ -7,28 +7,6 @@
 
 import Foundation
 
-//public enum Translators {
-//    case english
-//    case german
-//    var translator: GeneralLanguage {
-//        get {
-//            switch self {
-//            case .english: English()
-//            case .german: German()
-//            }
-//        }
-//    }
-//}
-//
-//public func translate(_ s: String, into: Translators) -> String {
-//    into.translator.translate(s)
-//}
-////public let translators: [GeneralLanguage] = [
-////    English(),
-////    German(),
-////    Hindi(),
-////    ThaiNumerals()]
-
 class GeneralLanguage {
     var name: String = "name"
     var allowNegative: Bool = true

@@ -2,12 +2,13 @@
 //       It will be overwritten when testing
 
 import XCTest
+import NumberTranslator
 
 final class Test_Roman: XCTestCase {
 
-    let language = translators[0] as! English
+    let language = Translators().roman
 
-    func test_Roman() {
+    func testRoman() {
         XCTAssertEqual(language.translate(1).x, "I") // 1
         XCTAssertEqual(language.translate(2).x, "II") // 1+1
         XCTAssertEqual(language.translate(3).x, "III") // 1+1+1

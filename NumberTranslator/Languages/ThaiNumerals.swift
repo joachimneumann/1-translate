@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ThaiNumerals: DigitLanguage  {
+class ThaiNumeralsImplementation: DigitLanguage  {
     override init() {
         super.init()
         name = "แบบดั้งเดิม"

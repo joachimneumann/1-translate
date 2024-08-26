@@ -2,12 +2,13 @@
 //       It will be overwritten when testing
 
 import XCTest
+import NumberTranslator
 
 final class Test_Hindi: XCTestCase {
 
-    let language = translators[0] as! English
+    let language = Translators().hindi
 
-    func test_Hindi() {
+    func testHindi() {
         XCTAssertEqual(language.translate(0).x, "शून्य")
         XCTAssertEqual(language.translate(1).x, "एक")
         XCTAssertEqual(language.translate(2).x, "दो")

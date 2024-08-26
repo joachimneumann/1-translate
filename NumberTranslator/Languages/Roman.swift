@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Roman: GeneralLanguage  {
+class RomanImplementation: GeneralLanguage  {
     
     override init() {
         super.init()
