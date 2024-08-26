@@ -27,14 +27,13 @@ class Languages {
     let armenianNumerals: Language
     var babylonian: BabylonianLanguage
     let catalan: Language
-//    let chineseFinancial    = ChineseImpl(variant: .financial)
-//    let chineseSimplified   = ChineseImpl(variant: .simplified)
-//    let chineseTraditional  = ChineseImpl(variant: .traditional)
+    let chineseFinancial: Language
+    let chineseSimplified: Language
+    let chineseTraditional: Language
     let danish: Language
-    let digits: Language? = nil
     let english: EnglishLanguage
-    var esperanto: Language? = nil
-    var spanish: Language? = nil
+    var esperanto: Language
+    var spanish: Language
     let finnish: Language? = nil
     let french: Language? = nil
     let german: GermanLanguage
@@ -53,25 +52,33 @@ class Languages {
     var vietnamese: Language
 
     init() {
-        arabicNumerals   = Language(          arabicNumeralsTranslator,   "ar", GroupSize.three)
-        armenian         = Language(          armenianTranslator,         "hy", GroupSize.three)
-        armenianNumerals = Language(          armenianNumeralsTranslator, "hy", GroupSize.three)
-        babylonian       = BabylonianLanguage(babylonianTranslator,        nil, GroupSize.three)
-        catalan          = Language(          catalanTranslator,          "hi", GroupSize.four)
-        danish           = Language(          danishTranslator,           "hi", GroupSize.four)
-        english          = EnglishLanguage(   englishTranslator,          "en", GroupSize.three)
-        german           = GermanLanguage(    germanTranslator,           "de", GroupSize.three)
-        hindi            = Language(          hindiTranslator,            "hi", GroupSize.four)
-        roman            = Language(          romanTranslator,            "la", GroupSize.three)
-        thaiNumerals     = Language(          thaiNumeralsTranslator,     "th", GroupSize.three)
-        vietnamese       = Language(          vietnameseTranslator,       "vi", GroupSize.three)
+        arabicNumerals     = Language(          arabicNumeralsTranslator,     "ar", GroupSize.three)
+        armenian           = Language(          armenianTranslator,           "hy", GroupSize.three)
+        armenianNumerals   = Language(          armenianNumeralsTranslator,   "hy", GroupSize.three)
+        babylonian         = BabylonianLanguage(babylonianTranslator,          nil, GroupSize.three)
+        catalan            = Language(          catalanTranslator,            "hi", GroupSize.four)
+        chineseFinancial   = Language(          chineseFinancialTranslator,   "zh", GroupSize.three)
+        chineseSimplified  = Language(          chineseSimplifiedTranslator,  "zh", GroupSize.three)
+        chineseTraditional = Language(          chineseTraditionalTranslator, "zh", GroupSize.three)
+        danish             = Language(          danishTranslator,             "hi", GroupSize.four)
+        english            = EnglishLanguage(   englishTranslator,            "en", GroupSize.three)
+        esperanto          = Language(          esperantoTranslator,          "eo", GroupSize.three)
+        german             = GermanLanguage(    germanTranslator,             "de", GroupSize.three)
+        hindi              = Language(          hindiTranslator,              "hi", GroupSize.four)
+        spanish            = Language(          spanishTranslator,            "es", GroupSize.three)
+        roman              = Language(          romanTranslator,              "la", GroupSize.three)
+        thaiNumerals       = Language(          thaiNumeralsTranslator,       "th", GroupSize.three)
+        vietnamese         = Language(          vietnameseTranslator,         "vi", GroupSize.three)
 
         arabicNumerals.nameDescription = "Arabic Numerals"
         armenian.nameDescription = "Armenian"
         armenianNumerals.nameDescription = "Armenian Numerals"
         babylonian.allowEmptyColumn = false
-        german.capitalisation = true
+        chineseFinancial.nameDescription = "Financial Chinese"
+        chineseSimplified.nameDescription = "Simplified Chinese"
+        chineseTraditional.nameDescription = "Traditional Chinese"
         english.useAndAfterHundred = true
+        german.capitalisation = true
         hindi.nameDescription = "Hindi"
         thaiNumerals.nameDescription = "Thai Numerals"
         vietnamese.nameDescription = "Vietnamese"
@@ -81,10 +88,15 @@ class Languages {
         list.append(armenianNumerals)
         list.append(babylonian)
         list.append(catalan)
+        list.append(chineseFinancial)
+        list.append(chineseSimplified)
+        list.append(chineseTraditional)
         list.append(danish)
         list.append(english)
+        list.append(esperanto)
         list.append(german)
         list.append(hindi)
+        list.append(spanish)
         list.append(roman)
         list.append(thaiNumerals)
         list.append(vietnamese)
