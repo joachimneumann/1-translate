@@ -4,9 +4,9 @@
 import XCTest
 import NumberTranslator
 
-final class Test_PortugueseBrazil: XCTestCase {
-    let language = PortugueseImplementation(variant: ChineseImplementation.Variant.brazil)
-    func testPortugueseBrazil() {
+final class Test_PortugueseBrazilian: XCTestCase {
+    let language = PortugueseImplementation(variant: PortugueseImplementation.Variant.brazilian)
+    func testPortugueseBrazilian() {
         // https: www.fluentu.com/blog/portuguese/portuguese-numbers/
         XCTAssertEqual(language.translate(0).x, "zero")
         XCTAssertEqual(language.translate(1).x, "um")

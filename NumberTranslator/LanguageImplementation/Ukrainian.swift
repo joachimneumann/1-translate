@@ -1,5 +1,5 @@
 //
-//  Russian.swift
+//  Ukrainian.swift
 //  NumberTranslator
 //
 //  Created by Joachim Neumann on 26.08.24.
@@ -7,29 +7,29 @@
 
 import Foundation
 
-class RussianImplementation: Group3Language  {
+class UkrainianImplementation: Group3Language  {
     override init() {
         super.init()
-        name = "Русский"
+        name = "українська"
         _20_99_connector = " "
-        negativeString = "минус"
+        negativeString = "мінус"
         afterNegative = " "
-        dotString = "целых"
+        dotString = "кома"
         before_hundreds = ""
     }
     
     override func _0_9(_ i: UInt) -> String {
         switch i {
-        case 0: return "ноль"
+        case 0: return "нуль"
         case 1: return "один"
         case 2: return "два"
         case 3: return "три"
-        case 4: return "четыре"
-        case 5: return "пять"
-        case 6: return "шесть"
-        case 7: return "семь"
-        case 8: return "восемь"
-        case 9: return "девять"
+        case 4: return "чотири"
+        case 5: return "п'ять"
+        case 6: return "шість"
+        case 7: return "сім"
+        case 8: return "вісім"
+        case 9: return "дев'ять"
         default:
             fatalError("_0_9() parameter \(i)")
         }
@@ -38,14 +38,14 @@ class RussianImplementation: Group3Language  {
     override func _10s(_ i: UInt) -> String {
         switch i {
         case 1:     return "десять"
-        case 2:     return "двадцать"
-        case 3:     return "тридцать"
+        case 2:     return "двадцять"
+        case 3:     return "тридцять"
         case 4:     return "сорок"
-        case 5:     return "пятьдесят"
-        case 6:     return "шестьдесят"
-        case 7:     return "семьдесят"
-        case 8:     return "восемьдесят"
-        case 9:     return "девяносто"
+        case 5:     return "п'ятдесят"
+        case 6:     return "шістдесят"
+        case 7:     return "сімдесят"
+        case 8:     return "вісімдесят"
+        case 9:     return "дев'яносто"
         default:
             fatalError("_10s() parameter \(i)")
         }
@@ -53,15 +53,15 @@ class RussianImplementation: Group3Language  {
     
     override func _11_19(_ i: UInt) -> String {
         switch i {
-        case 11: return "одиннадцать"
-        case 12: return "двенадцать"
-        case 13: return "тринадцать"
-        case 14: return "четырнадцать"
-        case 15: return "пятнадцать"
-        case 16: return "шестнадцать"
-        case 17: return "семнадцать"
-        case 18: return "восемнадцать"
-        case 19: return "девятнадцать"
+        case 11: return "одинадцять"
+        case 12: return "дванадцять"
+        case 13: return "тринадцять"
+        case 14: return "чотирнадцять"
+        case 15: return "п'ятнадцять"
+        case 16: return "шістнадцять"
+        case 17: return "сімнадцять"
+        case 18: return "вісімнадцять"
+        case 19: return "дев'ятнадцять"
         default:
             fatalError("_11_19() parameter \(i)")
         }
@@ -73,23 +73,23 @@ class RussianImplementation: Group3Language  {
         var ret = ""
         switch hundreds {
         case 1:
-            ret = "стo"
+            ret = "сто"
         case 2:
-            ret = "двести"
+            ret = "двісті"
         case 3:
             ret = "триста"
         case 4:
-            ret = "четыреста"
+            ret = "чотириста"
         case 5:
-            ret = "пятьсот"
+            ret = "п'ятсот"
         case 6:
-            ret = "шестьсот"
+            ret = "шістсот"
         case 7:
-            ret = "семьсот"
+            ret = "сімсот"
         case 8:
-            ret = "восемьсот"
+            ret = "вісімсот"
         case 9:
-            ret = "девятьсот"
+            ret = "дев'ятсот"
         default:
             fatalError("_100_999() out of range")
         }
@@ -102,43 +102,37 @@ class RussianImplementation: Group3Language  {
     
     override func groupName(_ groupIndex: UInt, _ above: UInt) -> String? {
         switch groupIndex {
-        case 2:
-            if above == 1 {
-                return "стo"
-            } else {
-                return "сти"
-            }
         case 3:
             if above % 10 == 1 && (above < 10 || above > 20)  {
-                return "тысяча"
+                return "тисяча"
             } else if (above % 10 >= 1 && above % 10 <= 4) && (above < 10 || above > 20) {
-                return "тысячи"
+                return "тисячі"
             } else {
-                return "тысяч"
+                return "тисяч"
             }
         case 6:
             if above % 10 == 1 && (above < 10 || above > 20)  {
-                return "миллион"
+                return "мільйон"
             } else if (above % 10 >= 1 && above % 10 <= 4) && (above < 10 || above > 20) {
-                return "миллиона"
+                return "мільйони"
             } else {
-                return "миллионов"
+                return "мільйонів"
             }
         case 9:
             if above % 10 == 1 && (above < 10 || above > 20)  {
-                return "миллиард"
+                return "мільярд"
             } else if (above % 10 >= 1 && above % 10 <= 4) && (above < 10 || above > 20) {
-                return "миллиарда"
+                return "мільярди"
             } else {
-                return "миллиардов"
+                return "мільярдів"
             }
         case 12:
             if above % 10 == 1 && (above < 10 || above > 20)  {
-                return "триллион"
+                return "трильйон"
             } else if (above % 10 >= 1 && above % 10 <= 4) && (above < 10 || above > 20) {
-                return "триллиона"
+                return "трильйони"
             } else {
-                return "триллионов"
+                return "трильйонів"
             }
         default: return nil
         }
@@ -151,9 +145,9 @@ class RussianImplementation: Group3Language  {
             use_single_group = true
         }
         var ret = super.group(groupIndex, above, below: below)
-        ret = ret.replacingOccurrences(of: "два тыся", with: "две тыся")
+        ret = ret.replacingOccurrences(of: "два тисячі", with: "дві тисячі")
         if groupIndex == 3 {
-            ret = ret.replacingOccurrences(of: "один тыся", with: "одна тыся")
+            ret = ret.replacingOccurrences(of: "один ", with: "одна ")
         }
         return ret
     }

@@ -5,7 +5,7 @@ import XCTest
 import NumberTranslator
 
 final class Test_PortugueseEuropean: XCTestCase {
-    let language = PortugueseImplementation(variant: ChineseImplementation.Variant.european)
+    let language = PortugueseImplementation(variant: PortugueseImplementation.Variant.european)
     func testPortugueseEuropean() {
         // https: www.fluentu.com/blog/portuguese/portuguese-numbers/
         XCTAssertEqual(language.translate(0).x, "zero")

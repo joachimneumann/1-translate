@@ -98,7 +98,7 @@ for file in glob.glob("../../1-translate-tests/language/*.txt"):
         writeln("    func test"+basenameCapitalized+"() {")
     else:
         writeln("final class Test_"+basenameCapitalized+variantCapitalized+": XCTestCase {")
-        writeln("    let language = "+basenameCapitalized+"Implementation(variant: ChineseImplementation.Variant."+variant+")")
+        writeln("    let language = "+basenameCapitalized+"Implementation(variant: "+basenameCapitalized+"Implementation.Variant."+variant+")")
         writeln("    func test"+basenameCapitalized+variantCapitalized+"() {")
 
     with open(file) as file:

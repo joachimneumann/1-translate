@@ -8,7 +8,7 @@
 import SwiftUI
 
 class PortugueseImpl: LanguageImplGroup3 {
-    
+
     enum Variant: String, Codable, CaseIterable {
         case European
         case Brazilian
@@ -19,9 +19,9 @@ class PortugueseImpl: LanguageImplGroup3 {
             }
         }
     }
-    
+
     var variant: Variant
-    
+
     init(variant: Variant) {
         self.variant = variant
         super.init(
@@ -38,7 +38,7 @@ class PortugueseImpl: LanguageImplGroup3 {
         before_groupName = " "
         after_groupName = " e "
     }
-    
+
     override func _0_9(_ i: Int) -> String {
         switch i {
         case 0: return zero!
@@ -54,7 +54,7 @@ class PortugueseImpl: LanguageImplGroup3 {
         default: return "read_0_9: outside range"
         }
     }
-    
+
     override func _10s(_ i: Int) -> String {
         switch i {
         case 1: return "dez"
@@ -69,7 +69,7 @@ class PortugueseImpl: LanguageImplGroup3 {
         default: return "read_10s: outside range"
         }
     }
-    
+
     override func _11_19(_ i: Int) -> String {
         switch i {
         case 11: return "onze"
@@ -85,7 +85,7 @@ class PortugueseImpl: LanguageImplGroup3 {
             fatalError("_11_19() parameter \(i)")
         }
     }
-    
+
     override func groupName(_ groupIndex: Int, _ above: Int) -> String? {
         switch groupIndex {
         case 2:
@@ -131,7 +131,7 @@ class PortugueseImpl: LanguageImplGroup3 {
         default: return nil
         }
     }
-    
+
     override func _100_999(_ hundreds: Int, below: Int) -> String {
         if hundreds == 1 && below == 0 { return "cem" }
         var ret = super._100_999(hundreds, below: below)
@@ -140,7 +140,7 @@ class PortugueseImpl: LanguageImplGroup3 {
         ret = ret.replacingOccurrences(of: "cincocentos", with: "quinhentos")
         return ret
     }
-    
+
     override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
         if below < 100 || below % 100 == 0 {
             after_groupName = " e "
@@ -149,5 +149,5 @@ class PortugueseImpl: LanguageImplGroup3 {
         }
         return super.group(groupIndex, above, below: below)
     }
-    
+
 }
