@@ -65,6 +65,7 @@ class Languages {
 
         hindi.nameDescription = "Hindi"
         thaiNumerals.nameDescription = "Thai Numerals"
+        vietnamese.nameDescription = "Vietnamese"
 
         list.append(english)
         list.append(german)

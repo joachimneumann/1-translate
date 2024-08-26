@@ -32,6 +32,12 @@
 		AAA0E4352C7C28EF00338227 /* Vietnamese.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA0E4342C7C28EF00338227 /* Vietnamese.swift */; };
 		AAA15FC82C7C2C5600A1082A /* VietnameseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA15FC72C7C2C5600A1082A /* VietnameseTest.swift */; };
 		AAA15FC92C7C2C6D00A1082A /* Vietnamese.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA0E4342C7C28EF00338227 /* Vietnamese.swift */; };
+		AAA15FCB2C7C2F9E00A1082A /* ArabicNumerals.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA15FCA2C7C2F9E00A1082A /* ArabicNumerals.swift */; };
+		AAA15FCD2C7C329200A1082A /* ArabicNumeralsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA15FCC2C7C329200A1082A /* ArabicNumeralsTest.swift */; };
+		AAA15FCE2C7C32A200A1082A /* ArabicNumerals.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA15FCA2C7C2F9E00A1082A /* ArabicNumerals.swift */; };
+		AAA15FD02C7C32DF00A1082A /* ArmenianNumerals.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA15FCF2C7C32DF00A1082A /* ArmenianNumerals.swift */; };
+		AAA15FD12C7C34CB00A1082A /* ArmenianNumerals.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA15FCF2C7C32DF00A1082A /* ArmenianNumerals.swift */; };
+		AAA15FD32C7C34D300A1082A /* ArmenianNumeralsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA15FD22C7C34D300A1082A /* ArmenianNumeralsTest.swift */; };
 		AAAA72462C7A0D2800D9FC48 /* Roman.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA72452C7A0D2800D9FC48 /* Roman.swift */; };
 		AAAA72492C7A15A700D9FC48 /* createTestsFromTxt.py in Resources */ = {isa = PBXBuildFile; fileRef = AAAA72472C7A15A300D9FC48 /* createTestsFromTxt.py */; };
 		AAAA72842C7A162E00D9FC48 /* Roman.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA72452C7A0D2800D9FC48 /* Roman.swift */; };
@@ -82,6 +88,10 @@
 		AA7BE6222C7C112600F3EA7E /* NumberTranslator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberTranslator.swift; sourceTree = "<group>"; };
 		AAA0E4342C7C28EF00338227 /* Vietnamese.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vietnamese.swift; sourceTree = "<group>"; };
 		AAA15FC72C7C2C5600A1082A /* VietnameseTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VietnameseTest.swift; sourceTree = "<group>"; };
+		AAA15FCA2C7C2F9E00A1082A /* ArabicNumerals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArabicNumerals.swift; sourceTree = "<group>"; };
+		AAA15FCC2C7C329200A1082A /* ArabicNumeralsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArabicNumeralsTest.swift; sourceTree = "<group>"; };
+		AAA15FCF2C7C32DF00A1082A /* ArmenianNumerals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmenianNumerals.swift; sourceTree = "<group>"; };
+		AAA15FD22C7C34D300A1082A /* ArmenianNumeralsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArmenianNumeralsTest.swift; sourceTree = "<group>"; };
 		AAAA72452C7A0D2800D9FC48 /* Roman.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Roman.swift; sourceTree = "<group>"; };
 		AAAA72472C7A15A300D9FC48 /* createTestsFromTxt.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = createTestsFromTxt.py; sourceTree = "<group>"; };
 		AAAA728D2C7A249B00D9FC48 /* RomanTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RomanTest.swift; sourceTree = "<group>"; };
@@ -111,6 +121,8 @@
 		AA11B7D82C79927800FAA562 /* LanguageImplementation */ = {
 			isa = PBXGroup;
 			children = (
+				AAA15FCA2C7C2F9E00A1082A /* ArabicNumerals.swift */,
+				AAA15FCF2C7C32DF00A1082A /* ArmenianNumerals.swift */,
 				AA6DAF982C7AE62400F8E9DA /* English.swift */,
 				AA6DAFA82C7B586700F8E9DA /* German.swift */,
 				AA6DAF8F2C7AE43D00F8E9DA /* Hindi.swift */,
@@ -156,6 +168,8 @@
 		AA471FFA2C783EAA000B700E /* NumberTranslatorTests */ = {
 			isa = PBXGroup;
 			children = (
+				AAA15FCC2C7C329200A1082A /* ArabicNumeralsTest.swift */,
+				AAA15FD22C7C34D300A1082A /* ArmenianNumeralsTest.swift */,
 				AAA15FC72C7C2C5600A1082A /* VietnameseTest.swift */,
 				AA6DAF9B2C7AE67000F8E9DA /* EnglishTest.swift */,
 				AA6DAFAB2C7B595600F8E9DA /* GermanTest.swift */,
@@ -283,6 +297,7 @@
 				AA6DAFA92C7B586700F8E9DA /* German.swift in Sources */,
 				AA7BE6232C7C112600F3EA7E /* NumberTranslator.swift in Sources */,
 				AAA0E4352C7C28EF00338227 /* Vietnamese.swift in Sources */,
+				AAA15FCB2C7C2F9E00A1082A /* ArabicNumerals.swift in Sources */,
 				AAAA72462C7A0D2800D9FC48 /* Roman.swift in Sources */,
 				AA6DAF992C7AE62400F8E9DA /* English.swift in Sources */,
 				AA11B7D32C79921600FAA562 /* DigitLanguage.swift in Sources */,
@@ -290,6 +305,7 @@
 				AA11B7DA2C79928900FAA562 /* ThaiNumerals.swift in Sources */,
 				AA6DAF902C7AE43D00F8E9DA /* Hindi.swift in Sources */,
 				AA6DAFA32C7B331400F8E9DA /* GeneralLanguage.swift in Sources */,
+				AAA15FD02C7C32DF00A1082A /* ArmenianNumerals.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,6 +320,7 @@
 				AA6DAF9A2C7AE62400F8E9DA /* English.swift in Sources */,
 				AA6DAFAD2C7B595600F8E9DA /* GermanTest.swift in Sources */,
 				AAAA72902C7A249B00D9FC48 /* ThainumeralsTest.swift in Sources */,
+				AAA15FD32C7C34D300A1082A /* ArmenianNumeralsTest.swift in Sources */,
 				AAAA72942C7A280B00D9FC48 /* TestExtension.swift in Sources */,
 				AA6DAFAA2C7B586700F8E9DA /* German.swift in Sources */,
 				AA11B7DB2C79928900FAA562 /* ThaiNumerals.swift in Sources */,
@@ -311,7 +328,10 @@
 				AAAA72842C7A162E00D9FC48 /* Roman.swift in Sources */,
 				AAA15FC92C7C2C6D00A1082A /* Vietnamese.swift in Sources */,
 				AA6DAF922C7AE45100F8E9DA /* HindiTest.swift in Sources */,
+				AAA15FD12C7C34CB00A1082A /* ArmenianNumerals.swift in Sources */,
 				AA6DAFA42C7B331400F8E9DA /* GeneralLanguage.swift in Sources */,
+				AAA15FCD2C7C329200A1082A /* ArabicNumeralsTest.swift in Sources */,
+				AAA15FCE2C7C32A200A1082A /* ArabicNumerals.swift in Sources */,
 				AAAA728F2C7A249B00D9FC48 /* RomanTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
