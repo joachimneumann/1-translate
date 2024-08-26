@@ -67,7 +67,7 @@ for file in glob.glob("../../1-translate-tests/language/*.txt"):
 
     # is this language implemented?
     implementation = basenameCapitalized+".swift"
-    implementationWithPath = "../NumberTranslator/Languages/" + implementation
+    implementationWithPath = "../NumberTranslator/LanguageImplementation/" + implementation
     if not os.path.isfile(implementationWithPath):
         #print(implementationWithPath, "not found")
         continue

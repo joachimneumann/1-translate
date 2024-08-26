@@ -21,36 +21,36 @@ class Languages {
     var first: Language
     var second: Language
     var list: [Language] = []
-//    let arabic              = ArabicImpl() // not working
-//    let arabicNumerals      = ArabicNumeralsImpl()
-//    let armenianNumerals    = ArmenianNumeralsImpl()
-//    let armenian            = ArmenianImpl()
-//    var babylonian          = BabylonianImpl()
-//    let catalan             = CatalanImpl()
+    let arabic: Language? = nil // not working
+    let arabicNumerals: Language? = nil
+    let armenianNumerals: Language? = nil
+    let armenian: Language? = nil
+    var babylonian: Language? = nil
+    let catalan: Language? = nil
 //    let chineseFinancial    = ChineseImpl(variant: .financial)
 //    let chineseSimplified   = ChineseImpl(variant: .simplified)
 //    let chineseTraditional  = ChineseImpl(variant: .traditional)
-//    let danish              = DanishImpl()
-//    let digits              = DigitsImpl()
-    var english: EnglishLanguage
-//    var esperanto           = EsperantoImpl()
-//    var spanish             = SpanishImpl()
-//    let finnish             = FinnishImpl()
-//    let french              = FrenchImpl()
-    var german: GermanLanguage
-//    var hieroglyphs         = HieroglyphsImpl()
-    var hindi: Language
-//    var italian             = ItalianImpl()
-//    let polish              = PolishImpl()
+    let danish: Language? = nil
+    let digits: Language? = nil
+    let english: EnglishLanguage
+    var esperanto: Language? = nil
+    var spanish: Language? = nil
+    let finnish: Language? = nil
+    let french: Language? = nil
+    let german: GermanLanguage
+    var hieroglyphs: Language? = nil
+    let hindi: Language
+    var italian: Language? = nil
+    let polish: Language? = nil
 //    var portugueseEuropean  = PortugueseImpl(variant: .European)
 //    var portugueseBrazil    = PortugueseImpl(variant: .Brazilian)
-//    let russian             = RussianImpl()
-//    let ukrainian           = UkrainianImpl()
-//    let swahili             = SwahiliImpl()
+    let russian: Language? = nil
+    let ukrainian: Language? = nil
+    let swahili: Language? = nil
     let roman: Language
-//    let thai                = ThaiImpl()
+    let thai: Language? = nil
     let thaiNumerals: Language
-//    var vietnamese          = VietnameseImpl()
+    var vietnamese: Language
 
     init() {
         english      = EnglishLanguage(englishTranslator,      "en", GroupSize.three)
@@ -58,6 +58,7 @@ class Languages {
         hindi        = Language(       hindiTranslator,        "hi", GroupSize.four)
         roman        = Language(       romanTranslator,        "la", GroupSize.three)
         thaiNumerals = Language(       thaiNumeralsTranslator, "th", GroupSize.three)
+        vietnamese   = Language(       vietnameseTranslator,   "vi", GroupSize.three)
 
         german.capitalisation = true
         english.useAndAfterHundred = true
@@ -70,6 +71,7 @@ class Languages {
         list.append(hindi)
         list.append(roman)
         list.append(thaiNumerals)
+        list.append(vietnamese)
 
         first = english
         second = german

@@ -45,4 +45,5 @@ public let germanTranslator       : GermanTranslator  = GermanTranslator (German
 public let hindiTranslator        : Translator        = Translator       (HindiImplementation()        )
 public let romanTranslator        : Translator        = Translator       (RomanImplementation()        )
 public let thaiNumeralsTranslator : Translator        = Translator       (ThaiNumeralsImplementation() )
+public let vietnameseTranslator   : Translator        = Translator       (VietnameseImplementation() )
 
