@@ -55,9 +55,9 @@ class Languages {
     init() {
         english      = EnglishLanguage(englishTranslator,      "en", GroupSize.three)
         german       = GermanLanguage( germanTranslator,       "de", GroupSize.three)
-        hindi        = Language(       hindiTranslator,        nil, GroupSize.three)
-        roman        = Language(       romanTranslator,        GroupSize.three)
-        thaiNumerals = Language(       thaiNumeralsTranslator, GroupSize.three)
+        hindi        = Language(       hindiTranslator,        "hi", GroupSize.four)
+        roman        = Language(       romanTranslator,        "la", GroupSize.three)
+        thaiNumerals = Language(       thaiNumeralsTranslator, "th", GroupSize.three)
 
         german.capitalisation = true
         english.useAndAfterHundred = true
