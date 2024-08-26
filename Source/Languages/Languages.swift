@@ -25,7 +25,7 @@ class Languages {
     let arabicNumerals: Language
     let armenian: Language
     let armenianNumerals: Language
-    var babylonian: Language? = nil
+    var babylonian: BabylonianLanguage
     let catalan: Language? = nil
 //    let chineseFinancial    = ChineseImpl(variant: .financial)
 //    let chineseSimplified   = ChineseImpl(variant: .simplified)
@@ -53,19 +53,21 @@ class Languages {
     var vietnamese: Language
 
     init() {
-        arabicNumerals   = Language(       arabicNumeralsTranslator,   "ar", GroupSize.three)
-        armenian         = Language(       armenianTranslator,         "hy", GroupSize.three)
-        armenianNumerals = Language(       armenianNumeralsTranslator, "hy", GroupSize.three)
-        english          = EnglishLanguage(englishTranslator,          "en", GroupSize.three)
-        german           = GermanLanguage( germanTranslator,           "de", GroupSize.three)
-        hindi            = Language(       hindiTranslator,            "hi", GroupSize.four)
-        roman            = Language(       romanTranslator,            "la", GroupSize.three)
-        thaiNumerals     = Language(       thaiNumeralsTranslator,     "th", GroupSize.three)
-        vietnamese       = Language(       vietnameseTranslator,       "vi", GroupSize.three)
+        arabicNumerals   = Language(          arabicNumeralsTranslator,   "ar", GroupSize.three)
+        armenian         = Language(          armenianTranslator,         "hy", GroupSize.three)
+        armenianNumerals = Language(          armenianNumeralsTranslator, "hy", GroupSize.three)
+        babylonian       = BabylonianLanguage(babylonianTranslator,        nil, GroupSize.three)
+        english          = EnglishLanguage(   englishTranslator,          "en", GroupSize.three)
+        german           = GermanLanguage(    germanTranslator,           "de", GroupSize.three)
+        hindi            = Language(          hindiTranslator,            "hi", GroupSize.four)
+        roman            = Language(          romanTranslator,            "la", GroupSize.three)
+        thaiNumerals     = Language(          thaiNumeralsTranslator,     "th", GroupSize.three)
+        vietnamese       = Language(          vietnameseTranslator,       "vi", GroupSize.three)
 
         arabicNumerals.nameDescription = "Arabic Numerals"
         armenian.nameDescription = "Armenian"
         armenianNumerals.nameDescription = "Armenian Numerals"
+        babylonian.allowEmptyColumn = false
         german.capitalisation = true
         english.useAndAfterHundred = true
         hindi.nameDescription = "Hindi"
@@ -75,6 +77,7 @@ class Languages {
         list.append(arabicNumerals)
         list.append(armenian)
         list.append(armenianNumerals)
+        list.append(babylonian)
         list.append(english)
         list.append(german)
         list.append(hindi)

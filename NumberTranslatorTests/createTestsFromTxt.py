@@ -48,7 +48,7 @@ def assertEqual(components):
         if "e" in number and not number.startswith("temp"):
             number = "\""+number+"\""
         translated = " ".join(components[1:])
-        if not "Impl." in translated:
+        if not "Implementation." in translated:
             translated = "\""+translated+"\""
         write_("XCTAssertEqual(language.translate(")
         write(number)

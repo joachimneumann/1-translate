@@ -40,13 +40,24 @@ public class EnglishTranslator: Translator {
     }
 }
 
-public let arabicNumeralsTranslator   : Translator        = Translator       (ArabicNumeralsImplementation())
-public let armenianTranslator         : Translator        = Translator       (ArmenianImplementation())
-public let armenianNumeralsTranslator : Translator        = Translator       (ArmenianNumeralsImplementation())
-public let englishTranslator          : EnglishTranslator = EnglishTranslator(EnglishImplementation())
-public let germanTranslator           : GermanTranslator  = GermanTranslator (GermanImplementation())
-public let hindiTranslator            : Translator        = Translator       (HindiImplementation())
-public let romanTranslator            : Translator        = Translator       (RomanImplementation())
-public let thaiNumeralsTranslator     : Translator        = Translator       (ThaiNumeralsImplementation())
-public let vietnameseTranslator       : Translator        = Translator       (VietnameseImplementation())
+public class BabylonianTranslator: Translator {
+    public var allowEmptyColumn: Bool = false {
+        didSet {
+            if let babylonian = self.implementation as? BabylonianImplementation {
+                babylonian.allowEmptyColumn = allowEmptyColumn
+            }
+        }
+    }
+}
+   
+public let arabicNumeralsTranslator   : Translator           = Translator          (ArabicNumeralsImplementation())
+public let armenianTranslator         : Translator           = Translator          (ArmenianImplementation())
+public let armenianNumeralsTranslator : Translator           = Translator          (ArmenianNumeralsImplementation())
+public let babylonianTranslator       : BabylonianTranslator = BabylonianTranslator(BabylonianImplementation())
+public let englishTranslator          : EnglishTranslator    = EnglishTranslator   (EnglishImplementation())
+public let germanTranslator           : GermanTranslator     = GermanTranslator    (GermanImplementation())
+public let hindiTranslator            : Translator           = Translator          (HindiImplementation())
+public let romanTranslator            : Translator           = Translator          (RomanImplementation())
+public let thaiNumeralsTranslator     : Translator           = Translator          (ThaiNumeralsImplementation())
+public let vietnameseTranslator       : Translator           = Translator          (VietnameseImplementation())
 

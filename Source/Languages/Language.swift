@@ -104,3 +104,13 @@ class EnglishLanguage: Language {
     }
 }
 
+class BabylonianLanguage: Language {
+    var allowEmptyColumn: Bool = false {
+        didSet {
+            if let babylonian = self.translator as? BabylonianTranslator {
+                babylonian.allowEmptyColumn = allowEmptyColumn
+            }
+        }
+    }
+}
+
