@@ -33,14 +33,14 @@ class Languages {
 //    let chineseTraditional  = ChineseImpl(variant: .traditional)
 //    let danish              = DanishImpl()
 //    let digits              = DigitsImpl()
-//    var english          = Language(translator: translators.english, groupSize: GroupSize.three)
+    var english: Language
 //    var esperanto           = EsperantoImpl()
 //    var spanish             = SpanishImpl()
 //    let finnish             = FinnishImpl()
 //    let french              = FrenchImpl()
-//    var german              = Language(translator: German(), groupSize: GroupSize.three)
+    var german :Language
 //    var hieroglyphs         = HieroglyphsImpl()
-//    var hindi               = Language(translator: Hindi(), groupSize: GroupSize.five)
+    var hindi: Language
 //    var italian             = ItalianImpl()
 //    let polish              = PolishImpl()
 //    var portugueseEuropean  = PortugueseImpl(variant: .European)
@@ -48,30 +48,27 @@ class Languages {
 //    let russian             = RussianImpl()
 //    let ukrainian           = UkrainianImpl()
 //    let swahili             = SwahiliImpl()
-//    let roman               = RomanImpl()
+    let roman: Language
 //    let thai                = ThaiImpl()
-//    let thaiNumerals        =  Language(translator: ThaiNumerals(), groupSize: GroupSize.three)
+    let thaiNumerals: Language
 //    var vietnamese          = VietnameseImpl()
 
     init() {
-//        translators.hindi.nameDescription = "Hindi"
-//        translators.thaiNumerals.nameDescription = "Thai Numerals"
-        list.append(Language(translator: translators.english,      groupSize: GroupSize.three))
-        list.append(Language(translator: translators.german,       groupSize: GroupSize.three))
-        list.append(Language(translator: translators.hindi,        groupSize: GroupSize.three))
-        list.append(Language(translator: translators.roman,        groupSize: GroupSize.three))
-        list.append(Language(translator: translators.thaiNumerals, groupSize: GroupSize.three))
+        english = Language(translator: translators.english,      groupSize: GroupSize.three)
+        german = Language(translator: translators.german,       groupSize: GroupSize.three)
+        hindi = Language(translator: translators.hindi,        groupSize: GroupSize.three)
+        roman = Language(translator: translators.roman,        groupSize: GroupSize.three)
+        thaiNumerals = Language(translator: translators.thaiNumerals, groupSize: GroupSize.three)
+        hindi.nameDescription = "Hindi"
+        thaiNumerals.nameDescription = "Thai Numerals"
+        list.append(english)
+        list.append(german)
+        list.append(hindi)
+        list.append(roman)
+        list.append(thaiNumerals)
 
-        first = list[0]
-        second = list[1]
-//        for language in list {
-//            if language.name == firstName {
-//                first = language
-//            }
-//            if language.name == secondName {
-//                second = language
-//            }
-//        }
+        first = english
+        second = german
     }
         
     static let WordSplitter = "\u{200A}" // the SoftHyphen "@\u{00AD}" did not seperate words well
