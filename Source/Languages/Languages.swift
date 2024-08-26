@@ -53,9 +53,9 @@ class Languages {
 //    var vietnamese          = VietnameseImpl()
 
     init() {
-        english      = EnglishLanguage(englishTranslator,      GroupSize.three)
-        german       = GermanLanguage( germanTranslator,       GroupSize.three)
-        hindi        = Language(       hindiTranslator,        GroupSize.three)
+        english      = EnglishLanguage(englishTranslator,      "en", GroupSize.three)
+        german       = GermanLanguage( germanTranslator,       "de", GroupSize.three)
+        hindi        = Language(       hindiTranslator,        nil, GroupSize.three)
         roman        = Language(       romanTranslator,        GroupSize.three)
         thaiNumerals = Language(       thaiNumeralsTranslator, GroupSize.three)
 

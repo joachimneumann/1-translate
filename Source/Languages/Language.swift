@@ -58,9 +58,10 @@ enum GroupSize: Int, Codable, CaseIterable {
     }
     var speakingPostProcessing: ((String) -> String)?
 
-    init(_ translator: Translator, _ groupSize: GroupSize) {
-        self.groupSize = groupSize
+    init(_ translator: Translator, _ code: String?, _ groupSize: GroupSize) {
         self.translator = translator
+        self.voiceLanguageCode = code
+        self.groupSize = groupSize
     }
     
     func translate(_ s: String) -> Translation {
