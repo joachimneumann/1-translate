@@ -9,7 +9,7 @@ import Foundation
 
 class BabylonianImplementation: GeneralLanguage  {
     static let symbolSpace = ""
-    static let symbolNone = ""
+    static let symbolNone = "\u{00a0}"//  " "
     static let symbolEmptyColumn = "𒑊"
     static let symbolOne = "𒐕"
     static let symbolTwo = "𒐖"
@@ -103,9 +103,9 @@ class BabylonianImplementation: GeneralLanguage  {
         }
         
         
-        while ret.hasSuffix(" ") {
-            ret.removeLast()
-        }
+//        while ret.hasSuffix(" ") {
+//            ret.removeLast()
+//        }
         while ret.hasSuffix(Self.symbolEmptyColumn) {
             /// sadly, 60 and 1 will have the same value :(
             ret.removeLast(Self.symbolEmptyColumn.count)

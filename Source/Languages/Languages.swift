@@ -26,11 +26,11 @@ class Languages {
     let armenian: Language
     let armenianNumerals: Language
     var babylonian: BabylonianLanguage
-    let catalan: Language? = nil
+    let catalan: Language
 //    let chineseFinancial    = ChineseImpl(variant: .financial)
 //    let chineseSimplified   = ChineseImpl(variant: .simplified)
 //    let chineseTraditional  = ChineseImpl(variant: .traditional)
-    let danish: Language? = nil
+    let danish: Language
     let digits: Language? = nil
     let english: EnglishLanguage
     var esperanto: Language? = nil
@@ -57,6 +57,8 @@ class Languages {
         armenian         = Language(          armenianTranslator,         "hy", GroupSize.three)
         armenianNumerals = Language(          armenianNumeralsTranslator, "hy", GroupSize.three)
         babylonian       = BabylonianLanguage(babylonianTranslator,        nil, GroupSize.three)
+        catalan          = Language(          catalanTranslator,          "hi", GroupSize.four)
+        danish           = Language(          danishTranslator,           "hi", GroupSize.four)
         english          = EnglishLanguage(   englishTranslator,          "en", GroupSize.three)
         german           = GermanLanguage(    germanTranslator,           "de", GroupSize.three)
         hindi            = Language(          hindiTranslator,            "hi", GroupSize.four)
@@ -78,6 +80,8 @@ class Languages {
         list.append(armenian)
         list.append(armenianNumerals)
         list.append(babylonian)
+        list.append(catalan)
+        list.append(danish)
         list.append(english)
         list.append(german)
         list.append(hindi)
