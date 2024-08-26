@@ -18,6 +18,7 @@ class Languages {
     @AppStorage("secondLanguageAllowedKey")
     var secondLanguageAllowed: Bool = false
     
+    let translators = Translators()
     var first: Language
     var second: Language
     var list: [Language] = []
@@ -32,14 +33,14 @@ class Languages {
 //    let chineseTraditional  = ChineseImpl(variant: .traditional)
 //    let danish              = DanishImpl()
 //    let digits              = DigitsImpl()
-    var english          = Language(translator: English(), groupSize: GroupSize.three)
+//    var english          = Language(translator: translators.english, groupSize: GroupSize.three)
 //    var esperanto           = EsperantoImpl()
 //    var spanish             = SpanishImpl()
 //    let finnish             = FinnishImpl()
 //    let french              = FrenchImpl()
-    var german              = Language(translator: German(), groupSize: GroupSize.three)
+//    var german              = Language(translator: German(), groupSize: GroupSize.three)
 //    var hieroglyphs         = HieroglyphsImpl()
-    var hindi               = Language(translator: Hindi(), groupSize: GroupSize.five)
+//    var hindi               = Language(translator: Hindi(), groupSize: GroupSize.five)
 //    var italian             = ItalianImpl()
 //    let polish              = PolishImpl()
 //    var portugueseEuropean  = PortugueseImpl(variant: .European)
@@ -49,48 +50,20 @@ class Languages {
 //    let swahili             = SwahiliImpl()
 //    let roman               = RomanImpl()
 //    let thai                = ThaiImpl()
-    let thaiNumerals        =  Language(translator: ThaiNumerals(), groupSize: GroupSize.three)
+//    let thaiNumerals        =  Language(translator: ThaiNumerals(), groupSize: GroupSize.three)
 //    var vietnamese          = VietnameseImpl()
 
     init() {
-        hindi.nameDescription = "Hindi"
-        thaiNumerals.nameDescription = "Thai Numerals"
-        list = [
-        // XXarabic,
-//        arabicNumerals,
-//        armenianNumerals,
-//        armenian,
-//        babylonian,
-//        catalan,
-//        chineseFinancial,
-//        chineseSimplified,
-//        chineseTraditional,
-//        danish,
-        // XXdigits,
-        english,
-//        esperanto,
-//        finnish,
-//        french,
-//        spanish,
-        german,
-//        hieroglyphs,
-        hindi,
-//        italian,
-//        // XXjapanese,
-//        polish,
-//        portugueseBrazil,
-//        portugueseEuropean,
-//        roman,
-//        russian,
-//        ukrainian,
-//        swahili,
-//        thai,
-        thaiNumerals,
-//        vietnamese
-        ]
-        
-        first = english
-        second = german
+//        translators.hindi.nameDescription = "Hindi"
+//        translators.thaiNumerals.nameDescription = "Thai Numerals"
+        list.append(Language(translator: translators.english,      groupSize: GroupSize.three))
+        list.append(Language(translator: translators.german,       groupSize: GroupSize.three))
+        list.append(Language(translator: translators.hindi,        groupSize: GroupSize.three))
+        list.append(Language(translator: translators.roman,        groupSize: GroupSize.three))
+        list.append(Language(translator: translators.thaiNumerals, groupSize: GroupSize.three))
+
+        first = list[0]
+        second = list[1]
 //        for language in list {
 //            if language.name == firstName {
 //                first = language

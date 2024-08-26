@@ -8,15 +8,16 @@
 import Foundation
 
 public class Translator {
-    var implementation: GeneralLanguage
-    
-    init(_ implementation: GeneralLanguage) {
-        self.implementation = implementation
-    }
+    public var name: String { implementation.name }
     public func translate(_ s: String) -> String { implementation.translate(s) }
     public func translate(_ i: Int)    -> String { implementation.translate(i) }
     public func translate(_ f: Float)  -> String { translate(String(f)) }
     public func translate(_ d: Double) -> String { translate(String(d)) }
+    
+    var implementation: GeneralLanguage
+    init(_ implementation: GeneralLanguage) {
+        self.implementation = implementation
+    }
 }
 
 public class GermanTranslator: Translator {

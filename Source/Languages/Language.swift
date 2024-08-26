@@ -48,7 +48,7 @@ enum GroupSize: Int, Codable, CaseIterable {
     var nameDescription: String? = nil
     var voiceLanguageCode: String? = nil
     let groupSize: GroupSize
-    let translator: GeneralLanguage
+    let translator: Translator
 
     var flagName: String {
         nameDescription != nil ? nameDescription! : translator.name
@@ -58,7 +58,7 @@ enum GroupSize: Int, Codable, CaseIterable {
     }
     var speakingPostProcessing: ((String) -> String)?
 
-    init(translator: GeneralLanguage, groupSize: GroupSize) {
+    init(translator: Translator, groupSize: GroupSize) {
         self.groupSize = groupSize
         self.translator = translator
     }

@@ -148,7 +148,7 @@ struct Settings: View {
             VStack(alignment: .leading) {
                 Button {
                     let text = "XX"//viewModel.languages.english.read("100")
-                    viewModel.voices.readAloud(text, in: viewModel.languages.english)
+//                    viewModel.voices.readAloud(text, in: viewModel.translators.english)
                 } label: {
                     Image(systemName: symbolName)
                         .resizable()
