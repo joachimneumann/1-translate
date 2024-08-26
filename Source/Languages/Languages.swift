@@ -22,9 +22,9 @@ class Languages {
     var second: Language
     var list: [Language] = []
     let arabic: Language? = nil // not working
-    let arabicNumerals: Language? = nil
-    let armenianNumerals: Language? = nil
-    let armenian: Language? = nil
+    let arabicNumerals: Language
+    let armenian: Language
+    let armenianNumerals: Language
     var babylonian: Language? = nil
     let catalan: Language? = nil
 //    let chineseFinancial    = ChineseImpl(variant: .financial)
@@ -53,20 +53,28 @@ class Languages {
     var vietnamese: Language
 
     init() {
-        english      = EnglishLanguage(englishTranslator,      "en", GroupSize.three)
-        german       = GermanLanguage( germanTranslator,       "de", GroupSize.three)
-        hindi        = Language(       hindiTranslator,        "hi", GroupSize.four)
-        roman        = Language(       romanTranslator,        "la", GroupSize.three)
-        thaiNumerals = Language(       thaiNumeralsTranslator, "th", GroupSize.three)
-        vietnamese   = Language(       vietnameseTranslator,   "vi", GroupSize.three)
+        arabicNumerals   = Language(       arabicNumeralsTranslator,   "ar", GroupSize.three)
+        armenian         = Language(       armenianTranslator,         "hy", GroupSize.three)
+        armenianNumerals = Language(       armenianNumeralsTranslator, "hy", GroupSize.three)
+        english          = EnglishLanguage(englishTranslator,          "en", GroupSize.three)
+        german           = GermanLanguage( germanTranslator,           "de", GroupSize.three)
+        hindi            = Language(       hindiTranslator,            "hi", GroupSize.four)
+        roman            = Language(       romanTranslator,            "la", GroupSize.three)
+        thaiNumerals     = Language(       thaiNumeralsTranslator,     "th", GroupSize.three)
+        vietnamese       = Language(       vietnameseTranslator,       "vi", GroupSize.three)
 
+        arabicNumerals.nameDescription = "Arabic Numerals"
+        armenian.nameDescription = "Armenian"
+        armenianNumerals.nameDescription = "Armenian Numerals"
         german.capitalisation = true
         english.useAndAfterHundred = true
-
         hindi.nameDescription = "Hindi"
         thaiNumerals.nameDescription = "Thai Numerals"
         vietnamese.nameDescription = "Vietnamese"
 
+        list.append(arabicNumerals)
+        list.append(armenian)
+        list.append(armenianNumerals)
         list.append(english)
         list.append(german)
         list.append(hindi)

@@ -40,10 +40,13 @@ public class EnglishTranslator: Translator {
     }
 }
 
-public let englishTranslator      : EnglishTranslator = EnglishTranslator(EnglishImplementation()      )
-public let germanTranslator       : GermanTranslator  = GermanTranslator (GermanImplementation()       )
-public let hindiTranslator        : Translator        = Translator       (HindiImplementation()        )
-public let romanTranslator        : Translator        = Translator       (RomanImplementation()        )
-public let thaiNumeralsTranslator : Translator        = Translator       (ThaiNumeralsImplementation() )
-public let vietnameseTranslator   : Translator        = Translator       (VietnameseImplementation() )
+public let arabicNumeralsTranslator   : Translator        = Translator       (ArabicNumeralsImplementation())
+public let armenianTranslator         : Translator        = Translator       (ArmenianImplementation())
+public let armenianNumeralsTranslator : Translator        = Translator       (ArmenianNumeralsImplementation())
+public let englishTranslator          : EnglishTranslator = EnglishTranslator(EnglishImplementation())
+public let germanTranslator           : GermanTranslator  = GermanTranslator (GermanImplementation())
+public let hindiTranslator            : Translator        = Translator       (HindiImplementation())
+public let romanTranslator            : Translator        = Translator       (RomanImplementation())
+public let thaiNumeralsTranslator     : Translator        = Translator       (ThaiNumeralsImplementation())
+public let vietnameseTranslator       : Translator        = Translator       (VietnameseImplementation())
 
