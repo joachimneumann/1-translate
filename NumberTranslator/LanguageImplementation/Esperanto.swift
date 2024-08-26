@@ -15,7 +15,6 @@ class EsperantoImplementation: Group3Language  {
         negativeString = "minus"
         afterNegative = " "
         dotString = "kaj"
-        beforeAndAfterDotString = " "
         before_hundreds = ""
     }
     

@@ -16,7 +16,6 @@ class CatalanImplementation: Group3Language  {
         negativeString = "menys"
         afterNegative = " "
         dotString = "coma"
-        beforeAndAfterDotString = " "
         exponentString = " por diez elevat a "
     }
     

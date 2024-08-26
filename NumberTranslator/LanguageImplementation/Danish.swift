@@ -17,7 +17,6 @@ class DanishImplementation: Group3Language  {
         negativeString = "minus"
         afterNegative = " "
         dotString = "komma"
-        beforeAndAfterDotString = " "
         exponentString = " gange ti i "
     }
      

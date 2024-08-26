@@ -11,6 +11,7 @@ class ArabicNumeralsImplementation: DigitLanguage  {
     override init() {
         super.init()
         name = "الترقيم العرب"
+        beforeAndAfterDotString = ""
     }
 
     override func _0_9(_ i: UInt) -> String {

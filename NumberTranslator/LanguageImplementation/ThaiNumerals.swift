@@ -11,6 +11,7 @@ class ThaiNumeralsImplementation: DigitLanguage  {
     override init() {
         super.init()
         name = "แบบดั้งเดิม"
+        beforeAndAfterDotString = ""
     }
     
     override func _0_9(_ i: UInt) -> String {

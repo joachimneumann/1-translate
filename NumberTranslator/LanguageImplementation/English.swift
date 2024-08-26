@@ -17,7 +17,6 @@ class EnglishImplementation: Group3Language  {
         negativeString = "minus"
         afterNegative = " "
         dotString = "point"
-        beforeAndAfterDotString = " "
     }
     
     var useAndAfterHundred: Bool = false {

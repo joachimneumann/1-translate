@@ -16,7 +16,6 @@ class GermanImplementation: Group3Language  {
         negativeString = "minus"
         afterNegative = " "
         dotString = "Komma"
-        beforeAndAfterDotString = " "
         exponentString = "mal zehn hoch"
         _20_99_connector = GeneralLanguage.WordSplitter + "und"
         after_hundreds = ""

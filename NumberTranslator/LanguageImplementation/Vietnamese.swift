@@ -28,7 +28,6 @@ class VietnameseImplementation: Group3Language  {
         negativeString = "âm"
         afterNegative = " "
         dotString = "phẩy"
-        beforeAndAfterDotString = " "
         exponentString = " nhân mười mũ "
         _20_99_connector = " "
         use_single_hundreds = true

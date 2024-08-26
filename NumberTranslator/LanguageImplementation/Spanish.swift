@@ -26,7 +26,6 @@ class SpanishImplementation: Group3Language  {
         negativeString = "menos"
         afterNegative = " "
         dotString = "coma"
-        beforeAndAfterDotString = " "
         exponentString = " por diez elevado a "
         before_hundreds = ""
     }

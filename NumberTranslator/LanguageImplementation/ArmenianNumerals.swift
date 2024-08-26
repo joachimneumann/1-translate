@@ -14,6 +14,7 @@ class ArmenianNumeralsImplementation: GeneralLanguage  {
         allowNegative = false
         allowExponent = false
         allowFraction = false
+        beforeAndAfterDotString = ""
     }
 
     private func read_armenian_1_9(_ i: UInt) -> String {

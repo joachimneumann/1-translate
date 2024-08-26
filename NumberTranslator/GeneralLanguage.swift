@@ -15,7 +15,7 @@ class GeneralLanguage {
     var negativeString: String = "-"
     var afterNegative: String = ""
     var dotString: String = "."
-    var beforeAndAfterDotString: String = ""
+    var beforeAndAfterDotString: String = " "
     var exponentString: String = " EE "
     var postProcessing: ((String) -> String)? = nil
 

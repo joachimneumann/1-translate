@@ -14,7 +14,6 @@ class HindiImplementation: DigitLanguage  {
         dotString = "दशमलव"
         negativeString = "ऋण"
         afterNegative = " "
-        beforeAndAfterDotString = " "
     }
     
     override func _0_9(_ i: UInt) -> String {
