@@ -18,7 +18,7 @@ class SwahiliImpl: LanguageImplGroup3 {
             exponentString: " EE ")
         _20_99_connector = " na "
     }
-    
+
     override func _0_9(_ i: Int) -> String {
         switch i {
         case 0: return zero!
@@ -34,7 +34,7 @@ class SwahiliImpl: LanguageImplGroup3 {
         default: return "read_0_9: outside range"
         }
     }
-    
+
     override func _10s(_ i: Int) -> String {
         switch i {
         case 1: return "kumi"
@@ -49,7 +49,7 @@ class SwahiliImpl: LanguageImplGroup3 {
         default: return "read_10s: outside range"
         }
     }
-    
+
     override func _100_999(_ hundreds: Int, below: Int) -> String {
         var ret = "mia " + _0_9(hundreds)
         if below > 0 {
@@ -72,7 +72,7 @@ class SwahiliImpl: LanguageImplGroup3 {
         default: return nil
         }
     }
-    
+
     override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
         var ret: String = ""
 

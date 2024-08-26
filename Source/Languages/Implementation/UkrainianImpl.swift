@@ -24,8 +24,8 @@ class UkrainianImpl: LanguageImplGroup3 {
         before_hundreds = ""
         use_single_group = true
     }
-    
-    
+
+
     override func _0_9(_ i: Int) -> String {
         switch i {
         case 0: return zero!
@@ -41,7 +41,7 @@ class UkrainianImpl: LanguageImplGroup3 {
         default: return "read_0_9: outside range"
         }
     }
-    
+
     override func _10s(_ i: Int) -> String {
         switch i {
         case 1:     return "десять"
@@ -56,7 +56,7 @@ class UkrainianImpl: LanguageImplGroup3 {
         default: return "read_10s: outside range"
         }
     }
-    
+
     override func _11_19(_ i: Int) -> String {
         switch i {
         case 11: return "одинадцять"
@@ -72,7 +72,7 @@ class UkrainianImpl: LanguageImplGroup3 {
             fatalError("_11_19() parameter \(i)")
         }
     }
-    
+
     override func groupName(_ groupIndex: Int, _ above: Int) -> String? {
         switch groupIndex {
         case 3:
@@ -110,7 +110,7 @@ class UkrainianImpl: LanguageImplGroup3 {
         default: return nil
         }
     }
-    
+
 
     override func _100_999(_ hundreds: Int, below: Int) -> String {
         var ret = ""
@@ -143,7 +143,7 @@ class UkrainianImpl: LanguageImplGroup3 {
         return ret
     }
 
-    
+
     override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
         if groupIndex == 3 {
             use_single_group = false
