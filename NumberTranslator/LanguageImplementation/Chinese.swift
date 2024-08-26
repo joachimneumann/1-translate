@@ -1,65 +1,41 @@
 //
 //  Chinese.swift
-//  TranslateNumbers
+//  NumberTranslator
 //
-//  Created by Joachim Neumann on 12/23/23.
+//  Created by Joachim Neumann on 26.08.24.
 //
 
 import Foundation
 
-class ChineseImpl: LanguageImplGroup3 {
-
+class ChineseImplementation: Group3Language  {
     var secondLast = "零"
-
     let variant: Variant
-
+    
     init(variant: Variant) {
         self.variant = variant
-        super.init(
-            name: variant.name,
-            groupSize: GroupSize.three,
-            zero: variant.zero,
-            negativeString: "负",
-            dotString: "点",
-            exponentString: " 乘以 十的 ")
-
-        voiceLanguageCode = "zh"
-        nameDescription = variant.englishName
-        _20_99_connector = " "
+        super.init()
+        name = variant.name
         use_single_hundreds = true
-        before_hundreds = ""
         use_single_group = true
-        before_groupName = ""
+        before_hundreds = ""
+        negativeString = "负"
+        dotString = "点"
+        exponentString = " 乘以 十的 "
     }
-
-    private func _0_999(_ i: Int, is_largest_group: Bool) -> String {
-        var ret = ""
-        if i <= 9 {
-            ret += variant._0_9(i)
-            return ret
-        }
-
-        if i <= 19 {
-            if !is_largest_group {
-                ret += variant._0_9(1)
-            }
-            ret += variant.e1
-            if i % 10 > 0 {
-                ret += variant._0_9(i % 10)
-            }
-            return ret
-        }
-
-        if i <= 99 {
-            ret += _20_99(i)
-            return ret
-        }
-
-        return _100_999(i.E(2), below: i.Ex(2))
-
+    
+    override func _0_9(_ i: UInt) -> String {
+        return variant._0_9(i)
     }
-
-    private func read_positive(_ i: Int, is_largest_group: Bool) -> String {
+    
+    override func _10s(_ i: UInt) -> String {
+        return _0_9(i) + variant.e1
+    }
+    
+    override func fromUInt(_ i: UInt) -> String {
+        return fromUInt(i, is_largest_group: true)
+    }
+    
+    private func fromUInt(_ i: UInt, is_largest_group: Bool) -> String {
         var ret = ""
         if i <= 999 {
             return ret + _0_999(i, is_largest_group: is_largest_group)
@@ -82,102 +58,84 @@ class ChineseImpl: LanguageImplGroup3 {
         if i <= 99_999_999 {
             let left = i / 10_000
             let right = i - left * 10_000
-            ret = read_positive(left, is_largest_group: is_largest_group) + variant.e4
+            ret = fromUInt(left, is_largest_group: is_largest_group) + variant.e4
             if right > 0 {
                 ret += " "
                 if right < 1000 {
                     ret += secondLast
                 }
-                ret += read_positive(right, is_largest_group: false)
+                ret += fromUInt(right, is_largest_group: false)
             }
             return ret
         }
-
+        
         if i <= 9999_9999_9999 {
             let left = i / 1_0000_0000
             let right = i - left * 1_0000_0000
-            ret = read_positive(left, is_largest_group: is_largest_group) + variant.e8
+            ret = fromUInt(left, is_largest_group: is_largest_group) + variant.e8
             if right > 0 {
                 ret += " "
                 if right < 1000_0000 {
                     ret += secondLast
                 }
-                ret += read_positive(right, is_largest_group: false)
+                ret += fromUInt(right, is_largest_group: false)
             }
             return ret
         }
 
         let left = i / 1_0000_0000_0000
         let right = i - left * 1_0000_0000_0000
-        ret = read_positive(left, is_largest_group: is_largest_group) + variant.e12
+        ret = fromUInt(left, is_largest_group: is_largest_group) + variant.e12
         if right > 0 {
             ret += " "
             if right < 1000_0000_0000 {
                 ret += secondLast
             }
-            ret += read_positive(right, is_largest_group: false)
+            ret += fromUInt(right, is_largest_group: false)
         }
         return ret
     }
-
-    override func read_positive(_ i: Int) -> String {
-        return read_positive(i, is_largest_group: true)
-    }
     
-    override func _100_999(_ hundreds: Int, below: Int) -> String {
+    override func _100_999(_ i: UInt) -> String {
         after_hundreds = " "
+        let hundreds: UInt = i / 100
+        let below: UInt = i - hundreds * 100
         if below > 0 {
             if below <= 9 {
                 after_hundreds = " " + secondLast
             }
         }
-        return super._100_999(hundreds, below: below)
+        return super._100_999(i)
     }
-
-    private func not_largest_group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
-        return ""
-    }
-
-    private func _0_999(_ i: Int) -> String {
+    
+    private func _0_999(_ i: UInt, is_largest_group: Bool) -> String {
+        var ret = ""
         if i <= 9 {
-            return _0_9(i) // implemented in Language
+            ret += variant._0_9(i)
+            return ret
         }
-
+        
         if i <= 19 {
-            return _11_19(i)
-        }
-
-        if i <= 99 {
-            return _20_99(i)
-        }
-
-        return _100_999(i.E(2), below: i.Ex(2))
-    }
-
-    override func group(_ groupIndex: Int, _ above: Int, below: Int) -> String {
-        after_groupName = " "
-        if below > 0 {
-            if below <= 99 {
-                after_groupName = " " + secondLast
+            if !is_largest_group {
+                ret += variant._0_9(1)
             }
+            ret += variant.e1
+            if i % 10 > 0 {
+                ret += variant._0_9(i % 10)
+            }
+            return ret
         }
-
-        var ret: String = ""
-
-        if above > 1 || use_single_group {
-            ret = _0_999(above) + before_groupName
+        
+        if i <= 99 {
+            ret += _20_99(i)
+            return ret
         }
-        if let groupName = groupName(groupIndex, above) {
-            ret += groupName
-        }
-
-        if below > 0 {
-            ret += after_groupName + read_positive(below)
-        }
-        return ret
+        
+        return _100_999(i)//.E(2), below: i.Ex(2))
+        
     }
-
-    override func groupName(_ groupIndex: Int, _ above: Int) -> String? {
+    
+    override func groupName(_ groupIndex: UInt, _ above: UInt) -> String? {
         switch groupIndex {
         case 0:
             return ""
@@ -192,37 +150,7 @@ class ChineseImpl: LanguageImplGroup3 {
         default: return nil
         }
     }
-
-    override func _20_99(_ i: Int) -> String {
-        let left = i / 10
-        let right = i - left * 10
-        var ret = _0_9(left)
-        ret += variant.e1
-        if right > 0 {
-            ret += _0_9(right)
-        }
-        return ret
-    }
-
-    override func _0_9(_ i: Int) -> String {
-        return variant._0_9(i)
-    }
-
-    override func _11_19(_ i: Int) -> String {
-        let left = i / 10
-        let right = i - left * 10
-
-        var ret = _0_9(1) + variant.e1
-        if right > 0 {
-            ret += _0_9(right)
-        }
-        return ret
-    }
-
-    override func _10s(_ i: Int) -> String {
-        return _0_9(i) + variant.e1
-    }
-
+    
     enum Variant {
         case traditional
         case simplified
@@ -279,9 +207,9 @@ class ChineseImpl: LanguageImplGroup3 {
             }
         }
         var e12: String {
-           "兆"
+            "兆"
         }
-        func _0_9(_ i: Int) -> String {
+        func _0_9(_ i: UInt) -> String {
             switch i {
             case 0:
                 zero!
@@ -336,3 +264,4 @@ class ChineseImpl: LanguageImplGroup3 {
         }
     }
 }
+    
