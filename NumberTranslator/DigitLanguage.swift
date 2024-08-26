@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class DigitLanguage: GeneralLanguage {
+class DigitLanguage: GeneralLanguage {
     override func fromUInt(_ i: UInt) -> String {
         var ret = ""
         for digit in i.digits {

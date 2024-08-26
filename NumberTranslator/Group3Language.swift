@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class Group3Language: GeneralLanguage {
+class Group3Language: GeneralLanguage {
     var use_single_group = false
     var before_groupName: String = " "
     var after_groupName: String = " "

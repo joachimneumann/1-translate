@@ -7,8 +7,8 @@
 
 import Foundation
 
-public class English: Group3Language  {
-    public override init() {
+class English: Group3Language  {
+    override init() {
         super.init()
         name = "English"
         _20_99_connector = "-"
@@ -20,7 +20,7 @@ public class English: Group3Language  {
         beforeAndAfterDotString = " "
     }
     
-    public var useAndAfterHundred: Bool = false {
+    var useAndAfterHundred: Bool = false {
         didSet {
             after_hundreds = useAndAfterHundred ? " and " : " "
         }

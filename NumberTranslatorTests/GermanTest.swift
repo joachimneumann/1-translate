@@ -5,7 +5,7 @@ import XCTest
 
 final class Test_German: XCTestCase {
 
-    let language = German()
+    let language = translators[1] as! German
 
     func test_German() {
 

@@ -5,8 +5,8 @@ import XCTest
 
 final class Test_English: XCTestCase {
 
-    let language = English()
-
+    let language = translators[0] as! English
+    
     func test_English() {
 
         language.useAndAfterHundred = false

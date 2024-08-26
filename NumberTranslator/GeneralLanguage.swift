@@ -7,8 +7,30 @@
 
 import Foundation
 
-public class GeneralLanguage: NumberTranslatorProtocol {
-    public var name: String = "name"
+//public enum Translators {
+//    case english
+//    case german
+//    var translator: GeneralLanguage {
+//        get {
+//            switch self {
+//            case .english: English()
+//            case .german: German()
+//            }
+//        }
+//    }
+//}
+//
+//public func translate(_ s: String, into: Translators) -> String {
+//    into.translator.translate(s)
+//}
+////public let translators: [GeneralLanguage] = [
+////    English(),
+////    German(),
+////    Hindi(),
+////    ThaiNumerals()]
+
+class GeneralLanguage {
+    var name: String = "name"
     var allowNegative: Bool = true
     var allowExponent: Bool = true
     var allowFraction: Bool = true
@@ -27,7 +49,7 @@ public class GeneralLanguage: NumberTranslatorProtocol {
         return String(i)
     }
     
-    public func translate(_ i: Int) -> String {
+    func translate(_ i: Int) -> String {
         var ret: String = ""
         if i >= 0 {
             ret =  fromUInt(UInt(i))
@@ -41,7 +63,7 @@ public class GeneralLanguage: NumberTranslatorProtocol {
         return ret
     }
     
-    public func translate(_ s: String) -> String {
+    func translate(_ s: String) -> String {
         // exponent and mantissa part
         var parts = s.components(separatedBy: "e")
         guard parts.count > 0 && parts.count <= 2 else { return "Exponent Error" }

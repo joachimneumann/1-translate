@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AA11B7D12C79921600FAA562 /* NumberTranslatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11B7CF2C79921600FAA562 /* NumberTranslatorProtocol.swift */; };
-		AA11B7D22C79921600FAA562 /* NumberTranslatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11B7CF2C79921600FAA562 /* NumberTranslatorProtocol.swift */; };
 		AA11B7D32C79921600FAA562 /* DigitLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11B7D02C79921600FAA562 /* DigitLanguage.swift */; };
 		AA11B7D42C79921600FAA562 /* DigitLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11B7D02C79921600FAA562 /* DigitLanguage.swift */; };
 		AA11B7DA2C79928900FAA562 /* ThaiNumerals.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11B7D92C79928900FAA562 /* ThaiNumerals.swift */; };
@@ -28,8 +26,8 @@
 		AA6DAFA92C7B586700F8E9DA /* German.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6DAFA82C7B586700F8E9DA /* German.swift */; };
 		AA6DAFAA2C7B586700F8E9DA /* German.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6DAFA82C7B586700F8E9DA /* German.swift */; };
 		AA6DAFAD2C7B595600F8E9DA /* GermanTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6DAFAB2C7B595600F8E9DA /* GermanTest.swift */; };
-		AAAA72422C79E48700D9FC48 /* NumberTranslator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA471FEC2C783EAA000B700E /* NumberTranslator.framework */; };
-		AAAA72432C79E48700D9FC48 /* NumberTranslator.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AA471FEC2C783EAA000B700E /* NumberTranslator.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AA7BE61F2C7BB0FE00F3EA7E /* NumberTranslator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA471FEC2C783EAA000B700E /* NumberTranslator.framework */; };
+		AA7BE6202C7BB0FE00F3EA7E /* NumberTranslator.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AA471FEC2C783EAA000B700E /* NumberTranslator.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AAAA72462C7A0D2800D9FC48 /* Roman.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA72452C7A0D2800D9FC48 /* Roman.swift */; };
 		AAAA72492C7A15A700D9FC48 /* createTestsFromTxt.py in Resources */ = {isa = PBXBuildFile; fileRef = AAAA72472C7A15A300D9FC48 /* createTestsFromTxt.py */; };
 		AAAA72842C7A162E00D9FC48 /* Roman.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA72452C7A0D2800D9FC48 /* Roman.swift */; };
@@ -49,13 +47,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		AAAA72442C79E48700D9FC48 /* Embed Frameworks */ = {
+		AA7BE6212C7BB0FE00F3EA7E /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				AAAA72432C79E48700D9FC48 /* NumberTranslator.framework in Embed Frameworks */,
+				AA7BE6202C7BB0FE00F3EA7E /* NumberTranslator.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -63,7 +61,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		AA11B7CF2C79921600FAA562 /* NumberTranslatorProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberTranslatorProtocol.swift; sourceTree = "<group>"; };
 		AA11B7D02C79921600FAA562 /* DigitLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DigitLanguage.swift; sourceTree = "<group>"; };
 		AA11B7D92C79928900FAA562 /* ThaiNumerals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThaiNumerals.swift; sourceTree = "<group>"; };
 		AA471FEC2C783EAA000B700E /* NumberTranslator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NumberTranslator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,7 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AAAA72422C79E48700D9FC48 /* NumberTranslator.framework in Frameworks */,
+				AA7BE61F2C7BB0FE00F3EA7E /* NumberTranslator.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,7 +134,6 @@
 		AA471FEE2C783EAA000B700E /* NumberTranslator */ = {
 			isa = PBXGroup;
 			children = (
-				AA11B7CF2C79921600FAA562 /* NumberTranslatorProtocol.swift */,
 				AA6DAFA22C7B331400F8E9DA /* GeneralLanguage.swift */,
 				AA11B7D02C79921600FAA562 /* DigitLanguage.swift */,
 				AA6DAF962C7AE5EB00F8E9DA /* Group3Language.swift */,
@@ -201,7 +197,7 @@
 				AA471FF22C783EAA000B700E /* Sources */,
 				AA471FF32C783EAA000B700E /* Frameworks */,
 				AA471FF42C783EAA000B700E /* Resources */,
-				AAAA72442C79E48700D9FC48 /* Embed Frameworks */,
+				AA7BE6212C7BB0FE00F3EA7E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -282,7 +278,6 @@
 				AA11B7DA2C79928900FAA562 /* ThaiNumerals.swift in Sources */,
 				AA6DAF902C7AE43D00F8E9DA /* Hindi.swift in Sources */,
 				AA6DAFA32C7B331400F8E9DA /* GeneralLanguage.swift in Sources */,
-				AA11B7D12C79921600FAA562 /* NumberTranslatorProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,7 +296,6 @@
 				AA11B7DB2C79928900FAA562 /* ThaiNumerals.swift in Sources */,
 				AA6DAF9E2C7AE76300F8E9DA /* Group3Language.swift in Sources */,
 				AAAA72842C7A162E00D9FC48 /* Roman.swift in Sources */,
-				AA11B7D22C79921600FAA562 /* NumberTranslatorProtocol.swift in Sources */,
 				AA6DAF922C7AE45100F8E9DA /* HindiTest.swift in Sources */,
 				AA6DAFA42C7B331400F8E9DA /* GeneralLanguage.swift in Sources */,
 				AAAA728F2C7A249B00D9FC48 /* RomanTest.swift in Sources */,
@@ -470,7 +464,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.joachimneumann.NumberTranslator;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -507,7 +501,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.joachimneumann.NumberTranslator;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;

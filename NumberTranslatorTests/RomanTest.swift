@@ -5,7 +5,7 @@ import XCTest
 
 final class Test_Roman: XCTestCase {
 
-    let language = Roman()
+    let language = translators[0] as! English
 
     func test_Roman() {
         XCTAssertEqual(language.translate(1).x, "I") // 1
