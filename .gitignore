@@ -1,7 +1,6 @@
 NumberTranslator.framework
+*.xcuserstate
 */xcuserdata
-*/UserInterfaceState.xcuserstate
-TranslateNumbers.xcodeproj/project.xcworkspace/xcuserdata/joachim.xcuserdatad/UserInterfaceState.xcuserstate
 dist.old
 dist/gmp/*
 dist/mpfr/*
