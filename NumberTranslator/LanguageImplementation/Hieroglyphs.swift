@@ -20,13 +20,13 @@ class HieroglyphsImplementation: GeneralLanguage  {
     override init() {
         super.init()
         name = "Hieroglyphs"
+        allowZero = false
         allowNegative = false
         allowFraction = false
         allowExponent = false
     }
 
     override func fromUInt(_ i: UInt) -> String {
-        if i == 0 { return "zero unknown" }
         if i > 10_000_000 {
             return "too big"
         }

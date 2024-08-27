@@ -32,6 +32,7 @@ class GeneralLanguage {
     }
     
     func translate(_ i: Int) -> String {
+        if i == 0 && !allowZero { return "zero unknown" }
         var ret: String = ""
         if i >= 0 {
             ret =  fromUInt(UInt(i))
@@ -49,6 +50,7 @@ class GeneralLanguage {
     func translate(_ d: Double) -> String { translate(String(d)) }
     
     func translate(_ s: String) -> String {
+        if s == "0" && !allowZero { return "zero unknown" }
         // exponent and mantissa part
         var parts = s.components(separatedBy: "e")
         guard parts.count > 0 && parts.count <= 2 else { return "Exponent Error" }

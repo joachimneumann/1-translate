@@ -63,6 +63,8 @@ for file in glob.glob("../../1-translate-tests/language/*.txt"):
     tempIndex = 1
     
     basename = os.path.basename(file).replace(".txt", "")
+    if (basename == "roman numerals"):
+        basename = "romanNumerals"
     variant = None
     variantCapitalized = None
     if "VARIANT" in basename:

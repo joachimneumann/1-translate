@@ -9,6 +9,6 @@ import Foundation
 
 extension String {
     var x: String {
-        self.replacingOccurrences(of: GeneralLanguage.WordSplitter, with: "")
+        self.replacingOccurrences(of: Translator.wordSplitter, with: "")
     }
 }

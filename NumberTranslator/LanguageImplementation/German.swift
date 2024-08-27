@@ -7,7 +7,7 @@
 
 import Foundation
 
-class GermanImplementation: Group3Language, GermanParameterProtocol  {
+class GermanImplementation: Group3Language  {
     var capitalisation: Bool = true
 
     override init() {

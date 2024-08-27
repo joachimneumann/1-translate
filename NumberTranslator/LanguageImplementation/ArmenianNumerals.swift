@@ -13,6 +13,7 @@ class ArmenianNumeralsImplementation: GeneralLanguage  {
         name = "թիվ"
         englishName = "Armenian Numerals"
         code = "hy"
+        allowZero = false
         allowNegative = false
         allowExponent = false
         allowFraction = false
@@ -124,7 +125,6 @@ class ArmenianNumeralsImplementation: GeneralLanguage  {
     }
     
     override func fromUInt(_ i: UInt) -> String {
-        if i == 0 { return "zero unknown" }
         if i <= 9_999 {
             return armenianUpTo9999(i)
         } else {
