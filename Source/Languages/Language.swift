@@ -46,7 +46,7 @@ struct Translation {
 
 @Observable class Language: Identifiable {
     var translator: Translator
-
+    var hasVoice: Bool = false
     var flagName: String {
         translator.englishName ?? translator.name
     }
@@ -61,8 +61,18 @@ struct Translation {
     
     func setParameter(_ parameter: String, to value: Bool) {
         if parameter == "useAndAfterHundred" {
-            if var selfWithEnglishParameterProtocol = self as? EnglishParameterProtocol {
-                selfWithEnglishParameterProtocol.useAndAfterHundred = value
+            if var selfWithProtocol = self as? EnglishParameterProtocol {
+                selfWithProtocol.useAndAfterHundred = value
+            }
+        }
+        if parameter == "capitalisation" {
+            if var selfWithProtocol = self as? GermanParameterProtocol {
+                selfWithProtocol.capitalisation = value
+            }
+        }
+        if parameter == "allowEmptyColumn" {
+            if var selfWithProtocol = self as? BabylonianParameterProtocol {
+                selfWithProtocol.allowEmptyColumn = value
             }
         }
     }
@@ -74,7 +84,7 @@ struct Translation {
 //            overline = read_OVERLINE(i)
 //        }
         var spokenText: String? = nil
-        if translator.code != nil {
+        if translator.code != nil && hasVoice {
             spokenText = displayText.replacingOccurrences(of: Translator.wordSplitter, with: " ")
             if let speakingPostProcessing = speakingPostProcessing {
                 spokenText = speakingPostProcessing(spokenText!)

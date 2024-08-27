@@ -54,13 +54,14 @@ import SwiftUI
         // print("viewModel init")
         voices.refreshVoiceDict(list: languages.list)
         
-//        for language in languages.list {
-//            if language.translator.code != nil {
-//                if voices.voiceDict[language.translator.code!] == nil {
-//                    language.translator.code = nil
-//                }
-//            }
-//        }
+        for language in languages.list {
+            language.hasVoice = false
+            if language.translator.code != nil {
+                if voices.voiceDict[language.translator.code!] != nil {
+                    language.hasVoice = true
+                }
+            }
+        }
         updateTranslation()
     }
 
