@@ -66,7 +66,7 @@ struct LanguageSelector: View {
             currentLanguage = viewModel.languages.first
         }
         .padding(.top, 20)
-        .navigationTitle("Language")
+        .navigationTitle("Select Language")
         .toolbar {
             NavigationLink {
                 Settings(viewModel: viewModel, font: Font(screen.infoUiFont))

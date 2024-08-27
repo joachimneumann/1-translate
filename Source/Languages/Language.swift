@@ -78,11 +78,19 @@ struct Translation {
     }
     
     func translate(_ s: String) -> Translation {
-        let displayText = translator.translate(s)
-//        var overline: String? = nil
-//        if let i = Int(s) {
-//            overline = read_OVERLINE(i)
-//        }
+        var displayText = translator.translate(s)
+        var overline: String? = nil
+        if displayText.contains("OVERLINE") {
+            let parts = displayText.split(separator: "OVERLINE")
+            if parts.count == 1 {
+                overline = String(parts[0]).trimmingCharacters(in: .whitespacesAndNewlines)
+                displayText = ""
+            }
+            if parts.count == 2 {
+                overline = String(parts[0]).trimmingCharacters(in: .whitespacesAndNewlines)
+                displayText = " " + String(parts[1]).trimmingCharacters(in: .whitespacesAndNewlines)
+            }
+        }
         var spokenText: String? = nil
         if translator.code != nil && hasVoice {
             spokenText = displayText.replacingOccurrences(of: Translator.wordSplitter, with: " ")
@@ -92,7 +100,7 @@ struct Translation {
         }
         return Translation(
             displayText: displayText,
-            overline: nil,
+            overline: overline,
             spokenText: spokenText)
     }
 }

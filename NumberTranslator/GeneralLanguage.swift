@@ -12,6 +12,7 @@ class GeneralLanguage {
     var englishName: String? = nil
     var code: String? = nil
     var groupSize: Int = 3
+    var allowZero: Bool = true
     var allowNegative: Bool = true
     var allowExponent: Bool = true
     var allowFraction: Bool = true

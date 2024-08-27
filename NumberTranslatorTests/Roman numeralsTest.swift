@@ -4,9 +4,9 @@
 import XCTest
 import NumberTranslator
 
-final class Test_Roman: XCTestCase {
-    let language = RomanImplementation()
-    func testRoman() {
+final class Test_Roman numerals: XCTestCase {
+    let language = Roman numeralsImplementation()
+    func testRoman numerals() {
         XCTAssertEqual(language.translate(1).x, "I") // 1
         XCTAssertEqual(language.translate(2).x, "II") // 1+1
         XCTAssertEqual(language.translate(3).x, "III") // 1+1+1

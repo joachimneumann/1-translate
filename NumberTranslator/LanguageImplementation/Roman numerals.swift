@@ -1,5 +1,5 @@
 //
-//  Roman.swift
+//  Roman numerals.swift
 //  TranslateNumbers
 //
 //  Created by Joachim Neumann on 24.08.24.
@@ -7,11 +7,11 @@
 
 import Foundation
 
-class RomanImplementation: GeneralLanguage  {
+class RomanNumeralsImplementation: GeneralLanguage  {
     
     override init() {
         super.init()
-        name = "Roman"
+        name = "Roman Numerals"
         code = "la"
         allowNegative = false
         allowFraction = false
@@ -19,6 +19,7 @@ class RomanImplementation: GeneralLanguage  {
     }
     
     override func fromUInt(_ i: UInt) -> String {
+        if i == 0 { return "zero unknown" }
         if i <= 3_999 {
             return romanUpTp3999(i)
         } else {

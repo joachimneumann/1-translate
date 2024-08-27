@@ -1,13 +1,10 @@
-- Ukrainian
+- settings for each language
+- voice for each language
+
+- implement allow zero as parameter of general language. Do not trigger the error message by 3.0 or by 5e0
+
 - Thai trennung, 1e5
 - Vietnamese: compact?
-
-- 3, 5 as property of language
-- settings for each language
-
-Tests base on text files:
-https://medium.com/bleeding-edge/writing-better-unit-tests-in-swift-part-one-e4a06fbc682b
-https://medium.com/bleeding-edge/writing-better-unit-tests-in-swift-part-two-d19b69f3d794
 
 Delete old compiler warnings:
 rm -rf ~/Library/Developer/Xcode/DerivedData
