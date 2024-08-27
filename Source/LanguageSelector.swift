@@ -15,8 +15,8 @@ struct LanguageSelector: View {
     @State var currentLanguage: Language? {
         didSet {
             if let currentLanguage = currentLanguage {
-                viewModel.languages.first = currentLanguage
-                viewModel.languages.firstName = currentLanguage.translator.name
+                viewModel.languages.language = currentLanguage
+                viewModel.languages.name = currentLanguage.translator.name
             }
             viewModel.updateTranslation()
         }
@@ -58,12 +58,12 @@ struct LanguageSelector: View {
                 .listRowBackground(selected ? Color(white: 0.18) : Color(white: 0.1))
             }
             .onAppear() {
-                scrollViewReaderProxy.scrollTo(viewModel.languages.first.translator.name, anchor: .top)
+                scrollViewReaderProxy.scrollTo(viewModel.languages.language.translator.name, anchor: .top)
             }
             .listStyle(.sidebar)
         }
         .onAppear() {
-            currentLanguage = viewModel.languages.first
+            currentLanguage = viewModel.languages.language
         }
         .padding(.top, 20)
         .navigationTitle("Select Language")

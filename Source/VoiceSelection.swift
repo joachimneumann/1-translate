@@ -18,21 +18,23 @@ private func hasMultipleVariants(_ list: [AVSpeechSynthesisVoice]) -> Bool {
 }
 
 struct VoiceSelection: View {
+    private let code: String
+    private let languageName: String
     private var voiceDict: Voices.VoiceDict
     private var callback: ((String, String) -> ())?
     
-    init(voiceDict: Voices.VoiceDict, callback: ((String, String) -> ())?) {
-        self.callback = callback
+    init(code: String, voiceDict: Voices.VoiceDict, callback: ((String, String) -> ())?) {
+        self.code = code
         self.voiceDict = voiceDict
-    }
-    
-    private func languageName(_ code: String) -> String {
+        self.callback = callback
+        
         let locale: Locale = .current
         let variant = locale.localizedString(forIdentifier: code)
         if let variant = variant {
-            return variant + " (" + code + ")"
+            languageName = variant + " (" + code + ")"
+        } else {
+            languageName = code
         }
-        return code
     }
     
     private struct VoiceView: View {
@@ -85,8 +87,17 @@ struct VoiceSelection: View {
 
     var body: some View {
         VStack {
+            List {
+                Section(header: Text("Voice for " + languageName)) {
+                    VoiceListView(quality: .premium, code: code, voiceDict: voiceDict, callback: callback)
+                    VoiceListView(quality: .enhanced, code: code, voiceDict: voiceDict, callback: callback)
+                    VoiceListView(quality: .default, code: code, voiceDict: voiceDict, callback: callback)
+                }
+            }
+            .padding(.top, 20)
+
             HStack(spacing: 0) {
-                Text("Add Premium or Enhanced voices in ") +
+                Text("Go to Settings to add Premium or Enhanced voices in ") +
                 Text("Accessibility → Spoken Content → Voices")
                     .italic()
             }
@@ -101,19 +112,7 @@ struct VoiceSelection: View {
                     UIApplication.shared.open(url)
                 }
             }
-            List {
-                ForEach(Array(voiceDict.keys.sorted()), id: \.self) { code in
-                    let name = languageName(code)
-                    Section(header: Text(name)) {
-                        VoiceListView(quality: .premium, code: code, voiceDict: voiceDict, callback: callback)
-                        VoiceListView(quality: .enhanced, code: code, voiceDict: voiceDict, callback: callback)
-                        VoiceListView(quality: .default, code: code, voiceDict: voiceDict, callback: callback)
-                    }
-                }
-            }
-            .padding(.top, 10)
         }
-        .navigationTitle("Voice Selector")
     }
 }
 
@@ -129,5 +128,5 @@ extension AVSpeechSynthesisVoiceQuality {
 }
 
 #Preview {
-    return VoiceSelection(voiceDict: ViewModel().voices.voiceDict, callback: nil)
+    return VoiceSelection(code: "en", voiceDict: ViewModel().voices.voiceDict, callback: nil)
 }

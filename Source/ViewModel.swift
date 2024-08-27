@@ -68,7 +68,7 @@ import SwiftUI
         Font.largeTitle
     }
         
-    func cleanSeperators(_ text: String) -> String {
+    func cleanSeparators(_ text: String) -> String {
         var ret = text
         if persistent.groupSeparator != .none {
             ret = ret.replacingOccurrences(of: persistent.groupSeparator.string, with: "")
@@ -80,8 +80,8 @@ import SwiftUI
     }
 
     func updateTranslation() {
-        let allInOneLine = cleanSeperators(currentDisplay.allInOneLine)
-        _1Translation = languages.first.translate(allInOneLine)
+        let allInOneLine = cleanSeparators(currentDisplay.allInOneLine)
+        _1Translation = languages.language.translate(allInOneLine)
     }
     
     ///  To give a clear visual feedback to the user that the button has been pressed,
@@ -212,7 +212,7 @@ import SwiftUI
     }
 
     func refreshDisplay(screen: Screen) {
-        let tempDisplay = Display(displayNumber, screen: screen, separators: self.persistent, groupSize: languages.first.translator.groupSize, forceScientific: false )
+        let tempDisplay = Display(displayNumber, screen: screen, separators: self.persistent, groupSize: languages.language.translator.groupSize, forceScientific: false )
         currentDisplay = tempDisplay
         updateTranslation()
         self.showAC = currentDisplay.isZero

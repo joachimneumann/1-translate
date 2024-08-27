@@ -18,7 +18,9 @@ struct Settings: View {
         VStack {
             List {
                 DigitsSettings
-                VoiceSettings
+                if viewModel.languages.language.translator.code != nil {
+                    VoiceSettings
+                }
 //                English
 //                German
 //                Spanish
@@ -34,7 +36,7 @@ struct Settings: View {
     
     var DigitsSettings: some View {
         let example =  Display(left: "").withSeparators(numberString: "120000.5", isNegative: false, separators: viewModel.persistent, groupSize: 3)
-        return Section(header: Text("Display and Seperators")) {
+        return Section(header: Text("Separators")) {
             Grid(alignment: .leading, verticalSpacing: 10) {
                 GridRow {
                     Text("\(example)")
@@ -81,19 +83,24 @@ struct Settings: View {
         let symbolName = noVoice ? "speaker.slash.fill" : "speaker.wave.3.fill"
         return Section(header: Text("Read Aloud")) {
             VStack(alignment: .leading) {
+                let text = viewModel.languages.language.translator.translate("200")
                 Button {
-                    let text = "XX"//viewModel.languages.english.read("100")
-//                    viewModel.voices.readAloud(text, in: viewModel.translators.english)
+                    viewModel.voices.readAloud(text, in: viewModel.languages.language)
                 } label: {
-                    Image(systemName: symbolName)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .foregroundColor(color)
-                        .frame(height: 23)
-                        .padding(.bottom, 5)
-                        .padding(.leading, noVoice ? 0 : 5)
-                        .frame(height: 23)
-                        .padding(.top, 10)
+                    HStack {
+                        Image(systemName: symbolName)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 23)
+                            .padding(.bottom, 5)
+                            .padding(.leading, noVoice ? 0 : 5)
+                            .frame(height: 23)
+                            .padding(.top, 10)
+                            .padding(.trailing, 10)
+                        Text(text)
+                            .padding(.top, 5)
+                    }
+                    .foregroundColor(color)
                 }
                 .buttonStyle(.plain)
                 .disabled(noVoice)
@@ -113,10 +120,9 @@ struct Settings: View {
             }
             VStack(alignment: .leading) {
                 NavigationLink {
-                    VoiceSelection(voiceDict: viewModel.voices.voiceDict, callback: updateSelectedVoice)
+                    VoiceSelection(code: viewModel.languages.language.translator.code!, voiceDict: viewModel.voices.voiceDict, callback: updateSelectedVoice)
                 } label: {
-                    Text("Select Voices")
-//                                            .buttonStyle(.plain)
+                    Text("Select Voice")
                 }
                 .disabled(!viewModel.persistent.offerReadingAloud)
             }

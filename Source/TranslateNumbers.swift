@@ -60,7 +60,7 @@ struct TranslateNumbers: View {
                 OneLanguage(isFirstLanguage: true,
                             viewModel: viewModel,
                             screen: screen,
-                            language: viewModel.languages.first,
+                            language: viewModel.languages.language,
                             translation: viewModel._1Translation)
                 TranslatedDisplay(translation: viewModel._1Translation,
                                   screen: screen)

@@ -9,24 +9,19 @@ import SwiftUI
 import NumberTranslator
 
 class Languages {
-    @AppStorage("firstNameKey") 
-    var firstName: String = "English"
+    @AppStorage("nameKey")
+    var name: String = "English"
     
-    @AppStorage("secondNameKey")
-    var secondName: String = "German"
-    
-    var first: Language
+    var language: Language
     var list: [Language] = []
 
     init() {
         let translators = Translators()
-        first = Language(translators.list[0])
+        language = Language(translators.list[0])
         for translator in translators.list {
-            let language = Language(translator)
-            for language in list {
-                if language.translator.name == firstName { first = language }
-            }
-            list.append(language)
+            let newLanguage = Language(translator)
+            list.append(newLanguage)
+            if translator.name == name { language = newLanguage }
         }
     }
 }
