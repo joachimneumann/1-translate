@@ -11,6 +11,7 @@ class EsperantoImplementation: Group3Language  {
     override init() {
         super.init()
         name = "Esperanto"
+        code = "eo"
         _20_99_connector = " "
         negativeString = "minus"
         afterNegative = " "

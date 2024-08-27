@@ -11,6 +11,8 @@ class ArabicNumeralsImplementation: DigitLanguage  {
     override init() {
         super.init()
         name = "الترقيم العرب"
+        englishName = "Arabic Numerals"
+        code = "ar"
         beforeAndAfterDotString = ""
     }
 

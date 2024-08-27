@@ -11,6 +11,7 @@ class DanishImplementation: Group3Language  {
     override init() {
         super.init()
         name = "Dansk"
+        code = "da"
         _20_99_connector = "-"
         after_hundreds = " og "
         after_groupName = " og "

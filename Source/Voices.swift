@@ -38,7 +38,7 @@ import AVFoundation
     func refreshVoiceDict(list: [Language]) {
         var uniqueVoiceLanguageCodes: [String] = []
         for language in list {
-            if let code = language.voiceLanguageCode {
+            if let code = language.translator.code {
                 if !uniqueVoiceLanguageCodes.contains(code) {
                     uniqueVoiceLanguageCodes.append(code)
                 }
@@ -138,7 +138,7 @@ import AVFoundation
         }
 
 
-        guard let voiceLanguageCode = language.voiceLanguageCode else { return }
+        guard let voiceLanguageCode = language.translator.code else { return }
         guard let (selectedID, dict) = voiceDict[voiceLanguageCode] else { return }
         guard let selectedID = selectedID else { return }
         guard let (_, voice) = dict[selectedID] else { return }

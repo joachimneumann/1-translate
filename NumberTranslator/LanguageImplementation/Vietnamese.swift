@@ -25,6 +25,8 @@ class VietnameseImplementation: Group3Language  {
     override init() {
         super.init()
         name = "Tiếng Việt"
+        englishName = "Vietnamese"
+        code = "vi"
         negativeString = "âm"
         afterNegative = " "
         dotString = "phẩy"

@@ -7,10 +7,11 @@
 
 import Foundation
 
-class EnglishImplementation: Group3Language  {
+class EnglishImplementation: Group3Language, EnglishParameterProtocol {
     override init() {
         super.init()
         name = "English"
+        code = "en"
         _20_99_connector = "-"
         use_single_hundreds = true
         use_single_group = true
@@ -19,7 +20,7 @@ class EnglishImplementation: Group3Language  {
         dotString = "point"
     }
     
-    var useAndAfterHundred: Bool = false {
+    var useAndAfterHundred: Bool = true {
         didSet {
             after_hundreds = useAndAfterHundred ? " and " : " "
         }

@@ -11,6 +11,8 @@ class ThaiImplementation: Group3Language  {
     override init() {
         super.init()
         name = "ภาษาไทย"
+        englishName = "Thai"
+        code = "th"
         negativeString = "ลบ"
         afterNegative = " "
         dotString = "จุด"

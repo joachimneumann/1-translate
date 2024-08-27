@@ -9,6 +9,9 @@ import Foundation
 
 class GeneralLanguage {
     var name: String = "name"
+    var englishName: String? = nil
+    var code: String? = nil
+    var groupSize: Int = 3
     var allowNegative: Bool = true
     var allowExponent: Bool = true
     var allowFraction: Bool = true
@@ -92,10 +95,6 @@ class GeneralLanguage {
         }
         return ret;
     }
-    
-    static let WordSplitter = "\u{200A}" // the SoftHyphen "@\u{00AD}" did not seperate words well
-//    static let WordSplitter = "@"
-
 }
 
 extension UInt {

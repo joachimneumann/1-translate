@@ -11,6 +11,7 @@ class PolishImplementation: Group3Language  {
     override init() {
         super.init()
         name = "Polski"
+        code = "pl"
         _20_99_connector = " "
         negativeString = "minus"
         afterNegative = " "

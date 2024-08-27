@@ -7,17 +7,18 @@
 
 import Foundation
 
-class GermanImplementation: Group3Language  {
+class GermanImplementation: Group3Language, GermanParameterProtocol  {
     var capitalisation: Bool = true
 
     override init() {
         super.init()
         name = "Deutsch"
+        code = "de"
         negativeString = "minus"
         afterNegative = " "
         dotString = "Komma"
         exponentString = "mal zehn hoch"
-        _20_99_connector = GeneralLanguage.WordSplitter + "und"
+        _20_99_connector = Translator.wordSplitter + "und"
         after_hundreds = ""
         before_hundreds = ""
         before_groupName = ""
@@ -135,7 +136,7 @@ class GermanImplementation: Group3Language  {
     
     private func germanPostProcessing(_ unprocessed: String) -> String {
         var ret = unprocessed
-        ret = ret.replacingOccurrences(of: "eins"+GeneralLanguage.WordSplitter+"und", with: "ein"+GeneralLanguage.WordSplitter+"und")
+        ret = ret.replacingOccurrences(of: "eins"+Translator.wordSplitter+"und", with: "ein"+Translator.wordSplitter+"und")
 
         if capitalisation {
             let words = ret.split(separator: " ")

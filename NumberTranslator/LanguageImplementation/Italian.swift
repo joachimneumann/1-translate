@@ -11,6 +11,7 @@ class ItalianImplementation: Group3Language  {
     override init() {
         super.init()
         name = "Italiano"
+        code = "it"
         negativeString = "meno"
         afterNegative = " "
         dotString = "virgola"

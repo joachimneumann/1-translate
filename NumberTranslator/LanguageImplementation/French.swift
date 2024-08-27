@@ -11,6 +11,7 @@ class FrenchImplementation: Group3Language  {
     override init() {
         super.init()
         name = "Française"
+        code = "fr"
         _20_99_connector = "-"
         negativeString = "moins"
         afterNegative = " "

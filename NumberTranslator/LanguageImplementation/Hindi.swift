@@ -11,6 +11,9 @@ class HindiImplementation: DigitLanguage  {
     override init() {
         super.init()
         name = "हिंदी"
+        englishName = "Hindi"
+        code = "hi"
+        groupSize = 4
         dotString = "दशमलव"
         negativeString = "ऋण"
         afterNegative = " "

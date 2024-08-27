@@ -13,55 +13,58 @@ struct Translation {
     let overline: String?
     var spokenText: String?
     var copyText: String {
-        let text = displayText.replacingOccurrences(of: Languages.WordSplitter, with: "")
+        let text = displayText.replacingOccurrences(of: Translator.wordSplitter, with: "")
         guard var overline = overline else { return text }
-        overline = overline.replacingOccurrences(of: Languages.WordSplitter, with: "")
+        overline = overline.replacingOccurrences(of: Translator.wordSplitter, with: "")
         return "<overline>" + overline + "</overline>" + text
     }
 }
 
-enum GroupSize: Int, Codable, CaseIterable {
-    case three
-    case four
-    case five
-    var int: Int {
-        get {
-            switch self {
-            case .three: return 3
-            case .four: return 4
-            case .five: return 5
-            }
-        }
-    }
-    var string: String {
-        get {
-            switch self {
-            case .three: return "3"
-            case .four: return "4"
-            case .five: return "2,3"
-            }
-        }
-    }
-}
+//enum GroupSize: Int, Codable, CaseIterable {
+//    case three
+//    case four
+//    case five
+//    var int: Int {
+//        get {
+//            switch self {
+//            case .three: return 3
+//            case .four: return 4
+//            case .five: return 5
+//            }
+//        }
+//    }
+//    var string: String {
+//        get {
+//            switch self {
+//            case .three: return "3"
+//            case .four: return "4"
+//            case .five: return "2,3"
+//            }
+//        }
+//    }
+//}
 
 @Observable class Language: Identifiable {
-    var nameDescription: String? = nil
-    var voiceLanguageCode: String? = nil
-    let groupSize: GroupSize
-    let translator: Translator
+    var translator: Translator
 
     var flagName: String {
-        nameDescription != nil ? nameDescription! : translator.name
+        translator.englishName ?? translator.name
     }
     var nameWithDescription: String {
-        translator.name + (nameDescription != nil ? "/"+nameDescription! : "")
+        translator.name + (translator.englishName != nil ? "/"+translator.englishName! : "")
     }
     var speakingPostProcessing: ((String) -> String)?
 
-    init(_ translator: Translator, _ code: String?, _ groupSize: GroupSize) {
+    init(_ translator: Translator) {
         self.translator = translator
-        self.voiceLanguageCode = code
-        self.groupSize = groupSize
+    }
+    
+    func setParameter(_ parameter: String, to value: Bool) {
+        if parameter == "useAndAfterHundred" {
+            if var selfWithEnglishParameterProtocol = self as? EnglishParameterProtocol {
+                selfWithEnglishParameterProtocol.useAndAfterHundred = value
+            }
+        }
     }
     
     func translate(_ s: String) -> Translation {
@@ -71,8 +74,8 @@ enum GroupSize: Int, Codable, CaseIterable {
 //            overline = read_OVERLINE(i)
 //        }
         var spokenText: String? = nil
-        if voiceLanguageCode != nil {
-            spokenText = displayText.replacingOccurrences(of: Languages.WordSplitter, with: " ")
+        if translator.code != nil {
+            spokenText = displayText.replacingOccurrences(of: Translator.wordSplitter, with: " ")
             if let speakingPostProcessing = speakingPostProcessing {
                 spokenText = speakingPostProcessing(spokenText!)
             }
@@ -83,34 +86,3 @@ enum GroupSize: Int, Codable, CaseIterable {
             spokenText: spokenText)
     }
 }
-
-class GermanLanguage: Language {
-    var capitalisation: Bool = false {
-        didSet {
-            if let german = self.translator as? GermanTranslator {
-                german.capitalisation = capitalisation
-            }
-        }
-    }
-}
-
-class EnglishLanguage: Language {
-    var useAndAfterHundred: Bool = false {
-        didSet {
-            if let english = self.translator as? EnglishTranslator {
-                english.useAndAfterHundred = useAndAfterHundred
-            }
-        }
-    }
-}
-
-class BabylonianLanguage: Language {
-    var allowEmptyColumn: Bool = false {
-        didSet {
-            if let babylonian = self.translator as? BabylonianTranslator {
-                babylonian.allowEmptyColumn = allowEmptyColumn
-            }
-        }
-    }
-}
-

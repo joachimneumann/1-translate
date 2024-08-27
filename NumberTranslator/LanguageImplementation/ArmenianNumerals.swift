@@ -11,6 +11,8 @@ class ArmenianNumeralsImplementation: GeneralLanguage  {
     override init() {
         super.init()
         name = "թիվ"
+        englishName = "Armenian Numerals"
+        code = "hy"
         allowNegative = false
         allowExponent = false
         allowFraction = false

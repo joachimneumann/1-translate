@@ -12,6 +12,7 @@ class RomanImplementation: GeneralLanguage  {
     override init() {
         super.init()
         name = "Roman"
+        code = "la"
         allowNegative = false
         allowFraction = false
         allowExponent = false

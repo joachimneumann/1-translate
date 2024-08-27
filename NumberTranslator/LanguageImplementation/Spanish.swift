@@ -22,6 +22,7 @@ class SpanishImplementation: Group3Language  {
     override init() {
         super.init()
         name = "Español"
+        code = "es"
         _20_99_connector = " y "
         negativeString = "menos"
         afterNegative = " "

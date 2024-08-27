@@ -11,6 +11,8 @@ class ArmenianImplementation: Group3Language  {
     override init() {
         super.init()
         name = "հայերեն"
+        englishName = "Armenian"
+        code = "hy"
         negativeString = "մինուս"
         dotString = "կետ"
     }

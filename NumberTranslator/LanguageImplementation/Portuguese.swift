@@ -14,6 +14,7 @@ class PortugueseImplementation: Group3Language  {
         self.variant = variant
         super.init()
         name = variant.name
+        code = "pt"
         before_hundreds = ""
         _20_99_connector = " e "
         negativeString = "menos"

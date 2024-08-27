@@ -54,13 +54,13 @@ import SwiftUI
         // print("viewModel init")
         voices.refreshVoiceDict(list: languages.list)
         
-        for language in languages.list {
-            if language.voiceLanguageCode != nil {
-                if voices.voiceDict[language.voiceLanguageCode!] == nil {
-                    language.voiceLanguageCode = nil
-                }
-            }
-        }
+//        for language in languages.list {
+//            if language.translator.code != nil {
+//                if voices.voiceDict[language.translator.code!] == nil {
+//                    language.translator.code = nil
+//                }
+//            }
+//        }
         updateTranslation()
     }
 
@@ -229,7 +229,7 @@ import SwiftUI
     }
 
     func refreshDisplay(screen: Screen) {
-        let tempDisplay = Display(displayNumber, screen: screen, separators: self.persistent, groupSize: languages.first.groupSize, forceScientific: false )
+        let tempDisplay = Display(displayNumber, screen: screen, separators: self.persistent, groupSize: languages.first.translator.groupSize, forceScientific: false )
         currentDisplay = tempDisplay
         updateTranslation()
         self.showAC = currentDisplay.isZero

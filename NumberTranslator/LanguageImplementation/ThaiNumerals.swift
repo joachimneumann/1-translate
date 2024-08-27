@@ -11,6 +11,8 @@ class ThaiNumeralsImplementation: DigitLanguage  {
     override init() {
         super.init()
         name = "แบบดั้งเดิม"
+        englishName = "Thai Numerals"
+        code = "th"
         beforeAndAfterDotString = ""
     }
     

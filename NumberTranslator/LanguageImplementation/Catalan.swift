@@ -11,6 +11,7 @@ class CatalanImplementation: Group3Language  {
     override init() {
         super.init()
         name = "Català"
+        code = "ca"
         _20_99_connector = "-"
         before_hundreds = "-"
         negativeString = "menys"

@@ -11,6 +11,7 @@ class SwahiliImplementation: Group3Language  {
     override init() {
         super.init()
         name = "Swahili"
+        code = "tz"
         negativeString = "negativi"
         _20_99_connector = " na "
         afterNegative = " "

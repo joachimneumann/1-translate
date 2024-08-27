@@ -43,8 +43,8 @@ struct LanguageSelector: View {
                             .frame(height: 20)
                         Text(language.translator.name)
                             .padding(.leading, 10)
-                        if language.nameDescription != nil {
-                            Text(" ("+language.nameDescription!+")")
+                        if language.translator.englishName != nil {
+                            Text(" ("+language.translator.englishName!+")")
                         }
                         Spacer()
                         if selected {

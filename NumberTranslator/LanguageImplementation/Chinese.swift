@@ -15,6 +15,8 @@ class ChineseImplementation: Group3Language  {
         self.variant = variant
         super.init()
         name = variant.name
+        englishName = variant.englishName
+        code = "zh"
         use_single_hundreds = true
         use_single_group = true
         before_hundreds = ""

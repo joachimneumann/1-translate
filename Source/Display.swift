@@ -60,14 +60,14 @@ extension Display {
         canBeInteger = false
         canBeFloat = false
     }
-    init(_ number: Number, screen: Screen, separators: Separators, groupSize: GroupSize, noLimits: Bool = false, forceScientific: Bool) {
+    init(_ number: Number, screen: Screen, separators: Separators, groupSize: Int, noLimits: Bool = false, forceScientific: Bool) {
         self.left = "0"
         right = nil
         canBeInteger = false
         canBeFloat = false
         self = fromNumber(number, displayLengthLimiter: noLimits ? nil : screen, separators: separators, groupSize: groupSize, forceScientific: scientific(number))
     }
-    init(_ stringNumber: String, screen: Screen, separators: Separators, groupSize: GroupSize, forceScientific: Bool) {
+    init(_ stringNumber: String, screen: Screen, separators: Separators, groupSize: Int, forceScientific: Bool) {
         self.left = "0"
         right = nil
         canBeInteger = false
@@ -97,7 +97,7 @@ extension Display {
         _ number: Number,
         displayLengthLimiter: DisplayLengthLimiter?,
         separators: Separators,
-        groupSize: GroupSize,
+        groupSize: Int,
         forceScientific: Bool) -> Display {
         if number.str != nil {
             return fromStringNumber(number.str!, displayLengthLimiter: displayLengthLimiter, separators: separators, groupSize: groupSize, forceScientific: forceScientific)
@@ -136,7 +136,7 @@ extension Display {
         _ stringNumber: String,
         displayLengthLimiter: DisplayLengthLimiter?,
         separators: Separators,
-        groupSize: GroupSize,
+        groupSize: Int,
         forceScientific: Bool) -> Display {
         
         assert(!stringNumber.contains(","))
@@ -197,7 +197,7 @@ extension Display {
         return fromMantissaAndExponent(mantissa, exponent, displayLengthLimiter: displayLengthLimiter, separators: separators, groupSize: groupSize, forceScientific: forceScientific)
     }
     
-    func withSeparators(numberString: String, isNegative: Bool, separators: Separators, groupSize: GroupSize) -> String {
+    func withSeparators(numberString: String, isNegative: Bool, separators: Separators, groupSize: Int) -> String {
         var integerPart: String
         let fractionalPart: String
         
@@ -212,14 +212,14 @@ extension Display {
         
         if let c = separators.groupSeparator.character {
             var count = integerPart.count
-            if groupSize.int == 5 {
+            if groupSize == 5 {
                 while count >= 4 {
                     count -= 2
                     integerPart.insert(c, at: integerPart.index(integerPart.startIndex, offsetBy: count-1))
                 }
             } else {
-                while count >= groupSize.int+1 {
-                    count -= groupSize.int
+                while count >= groupSize + 1 {
+                    count -= groupSize
                     integerPart.insert(c, at: integerPart.index(integerPart.startIndex, offsetBy: count))
                 }
             }
@@ -237,7 +237,7 @@ extension Display {
         _ exponent: Int,
         displayLengthLimiter: DisplayLengthLimiter?,
         separators: Separators,
-        groupSize: GroupSize,
+        groupSize: Int,
         forceScientific: Bool) -> Display {
 
         var returnValue: Display = Display(left: "error")

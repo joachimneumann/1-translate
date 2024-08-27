@@ -98,7 +98,7 @@ struct Settings: View {
     }
     
     var DigitsSettings: some View {
-        let example =  Display(left: "").withSeparators(numberString: "120000.5", isNegative: false, separators: viewModel.persistent, groupSize: GroupSize.three)
+        let example =  Display(left: "").withSeparators(numberString: "120000.5", isNegative: false, separators: viewModel.persistent, groupSize: 3)
         return Section(header: Text("Display and Seperators")) {
             Grid(alignment: .leading, verticalSpacing: 10) {
                 GridRow {

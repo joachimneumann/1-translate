@@ -11,6 +11,8 @@ class UkrainianImplementation: Group3Language  {
     override init() {
         super.init()
         name = "українська"
+        englishName = "Ukrainian"
+        code = "uk"
         _20_99_connector = " "
         negativeString = "мінус"
         afterNegative = " "
