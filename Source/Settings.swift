@@ -19,22 +19,22 @@ struct Settings: View {
         VStack {
             List {
                 DigitsSettings
-                if viewModel.languages.language.translator.code != nil {
+                if viewModel.translator.code != nil {
                     VoiceSettings
                 }
-                if viewModel.languages.language.translator.name == "English" {
+                if viewModel.translator.name == "English" {
                     EnglishParameters
                 }
-                if viewModel.languages.language.translator.name == "Deutsch" {
+                if viewModel.translator.name == "Deutsch" {
                     GermanParameters
                 }
-                if viewModel.languages.language.translator.name == "Español" {
+                if viewModel.translator.name == "Español" {
                     SpanishParameters
                 }
-                if viewModel.languages.language.translator.name == "Babylonian" {
+                if viewModel.translator.name == "Babylonian" {
                     BabylonianParameters
                 }
-                if viewModel.languages.language.translator.name == "Tiếng Việt" {
+                if viewModel.translator.name == "Tiếng Việt" {
                     VietnameseParameters
                 }
                 HobbyProject
@@ -94,7 +94,7 @@ struct Settings: View {
         let symbolName = noVoice ? "speaker.slash.fill" : "speaker.wave.3.fill"
         return Section(header: Text("Read Aloud")) {
             VStack(alignment: .leading) {
-                let text = viewModel.languages.language.translator.translate("200")
+                let text = viewModel.translator.translate("200")
                 Button {
                     viewModel.voices.readAloud(text, in: viewModel.languages.language)
                 } label: {
@@ -131,7 +131,7 @@ struct Settings: View {
             }
             VStack(alignment: .leading) {
                 NavigationLink {
-                    VoiceSelection(code: viewModel.languages.language.translator.code!, voiceDict: viewModel.voices.voiceDict, callback: updateSelectedVoice)
+                    VoiceSelection(code: viewModel.translator.code!, voiceDict: viewModel.voices.voiceDict, callback: updateSelectedVoice)
                 } label: {
                     Text("Select Voice")
                 }
@@ -178,7 +178,7 @@ struct Settings: View {
                 HStack {
                     Text("\"and\" after hundred")
                     Spacer()
-                    Toggle("", isOn: $viewModel.languages.language.translator.englishUseAndAfterHundred)
+                    Toggle("", isOn: $viewModel.translator.englishUseAndAfterHundred)
                         .frame(width: 40)
                         .toggleStyle(
                             ColoredToggleStyle(onColor: Color(white: 0.6),
@@ -198,7 +198,7 @@ struct Settings: View {
                 HStack {
                     Text("Großschreibung")
                     Spacer()
-                    Toggle("", isOn: $viewModel.languages.language.translator.germanCapitalisation)
+                    Toggle("", isOn: $viewModel.translator.germanCapitalisation)
                         .frame(width: 40)
                         .toggleStyle(
                             ColoredToggleStyle(onColor: Color(white: 0.6),
@@ -217,7 +217,7 @@ struct Settings: View {
                 HStack {
                     Text("Empty column")
                     Spacer()
-                    Toggle("", isOn: $viewModel.languages.language.translator.babylonianAllowEmptyColumn)
+                    Toggle("", isOn: $viewModel.translator.babylonianAllowEmptyColumn)
                         .frame(width: 40)
                         .toggleStyle(
                             ColoredToggleStyle(onColor: Color(white: 0.6),
@@ -237,7 +237,7 @@ struct Settings: View {
                 HStack {
                     Text("Coma o punto:")
                     Spacer()
-                    Picker("", selection: $viewModel.languages.language.translator.puntoComma) {
+                    Picker("", selection: $viewModel.translator.puntoComma) {
                         ForEach(Translator.SpanishPuntoComma.allCases, id: \.self) { value in
                             Text("\(value.rawValue)")
                                 .tag(value)
@@ -255,7 +255,7 @@ struct Settings: View {
                 Grid(alignment: .leading) {
                     GridRow {
                         Text("1000")
-                        Picker("", selection: $viewModel.languages.language.translator.vietnameseThousand) {
+                        Picker("", selection: $viewModel.translator.vietnameseThousand) {
                             ForEach(Translator.VietnameseThousand.allCases, id: \.self) { value in
                                 Text("\(value.rawValue)")
                                     .tag(value)
@@ -266,7 +266,7 @@ struct Settings: View {
                     }
                     GridRow {
                         Text("Linh hoặc lẻ")
-                        Picker("", selection: $viewModel.languages.language.translator.vietnameseSecondLast) {
+                        Picker("", selection: $viewModel.translator.vietnameseSecondLast) {
                             ForEach(Translator.VietnameseSecondLast.allCases, id: \.self) { value in
                                 Text("\(value.rawValue)")
                                     .tag(value)
@@ -278,7 +278,7 @@ struct Settings: View {
                 HStack {
                     Text("Ngắn gọn")
                     Spacer()
-                    Toggle("", isOn: $viewModel.languages.language.translator.vietnameseCompact)
+                    Toggle("", isOn: $viewModel.translator.vietnameseCompact)
                         .frame(width: 40)
                         .toggleStyle(
                             ColoredToggleStyle(onColor: Color(white: 0.6),

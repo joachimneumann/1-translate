@@ -58,7 +58,7 @@ struct LanguageSelector: View {
                 .listRowBackground(selected ? Color(white: 0.18) : Color(white: 0.1))
             }
             .onAppear() {
-                scrollViewReaderProxy.scrollTo(viewModel.languages.language.translator.name, anchor: .top)
+                scrollViewReaderProxy.scrollTo(viewModel.translator.name, anchor: .top)
             }
             .listStyle(.sidebar)
         }

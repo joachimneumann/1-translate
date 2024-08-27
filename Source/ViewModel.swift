@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NumberTranslator
 
 @Observable class ViewModel {
     var showAC = true
@@ -66,6 +67,15 @@ import SwiftUI
 
     var firstFont: Font {
         Font.largeTitle
+    }
+    
+    var translator: Translator {
+        get {
+            languages.language.translator
+        }
+        set(newValue) {
+            languages.language.translator = newValue
+        }
     }
         
     func cleanSeparators(_ text: String) -> String {
@@ -212,7 +222,7 @@ import SwiftUI
     }
 
     func refreshDisplay(screen: Screen) {
-        let tempDisplay = Display(displayNumber, screen: screen, separators: self.persistent, groupSize: languages.language.translator.groupSize, forceScientific: false )
+        let tempDisplay = Display(displayNumber, screen: screen, separators: self.persistent, groupSize: translator.groupSize, forceScientific: false )
         currentDisplay = tempDisplay
         updateTranslation()
         self.showAC = currentDisplay.isZero
