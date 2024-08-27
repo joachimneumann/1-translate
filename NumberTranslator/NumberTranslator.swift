@@ -32,7 +32,6 @@ public class Translators {
     }
     public init() {
         add(ArabicNumeralsImplementation())
-        add(ArabicNumeralsImplementation())
         add(ArmenianImplementation())
         add(ArmenianNumeralsImplementation())
         add(BabylonianImplementation())
