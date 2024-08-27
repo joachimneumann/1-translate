@@ -13,7 +13,6 @@ import SwiftUI
     var textColor: [String: Color] = [:]
     var currentDisplay: Display
     var _1Translation: Translation = Translation(displayText: "", overline: nil, spokenText: nil)
-    var _2Translation: Translation = Translation(displayText: "", overline: nil, spokenText: nil)
     var persistent = Persistent()
     var languages: Languages = Languages()
 
@@ -66,23 +65,9 @@ import SwiftUI
     }
 
     var firstFont: Font {
-        switch languages.first.translator.name {
-//        case languages.arabicNumerals.name:
-//            Font(UIFont(name: "Avenir", size: languages.secondLanguageAllowed ? 40 : 50)!)
-        default:
-            languages.secondLanguageAllowed ? Font.title : Font.largeTitle
-        }
+        Font.largeTitle
     }
-    
-    var secondFont: Font {
-        switch languages.second.translator.name {
-//        case languages.arabicNumerals.name:
-//            Font(UIFont(name: "Avenir", size: 40)!)
-        default:
-            Font.title
-        }
-    }
-    
+        
     func cleanSeperators(_ text: String) -> String {
         var ret = text
         if persistent.groupSeparator != .none {
@@ -97,9 +82,6 @@ import SwiftUI
     func updateTranslation() {
         let allInOneLine = cleanSeperators(currentDisplay.allInOneLine)
         _1Translation = languages.first.translate(allInOneLine)
-        if languages.secondLanguageAllowed {
-            _2Translation = languages.second.translate(allInOneLine)
-        }
     }
     
     ///  To give a clear visual feedback to the user that the button has been pressed,

@@ -17,7 +17,6 @@ struct Settings: View {
     var body: some View {
         VStack {
             List {
-                Appearance(temp: $viewModel.languages.secondLanguageAllowed)
                 DigitsSettings
                 VoiceSettings
 //                English
@@ -30,70 +29,6 @@ struct Settings: View {
         }
         .onDisappear() {
             viewModel.refreshDisplay()
-        }
-    }
-    
-    struct Appearance: View {
-        @Binding var temp: Bool
-        var body: some View {
-            Section(header: Text("Appearance")) {
-                Grid(alignment: .center, horizontalSpacing: 0.0, verticalSpacing: 10.0) {
-                    GridRow {
-                        let size: CGFloat = 20.0
-                        VStack {
-                            Text("One Language")
-                                .frame(height: 48)
-                                .padding(.horizontal, 10)
-                                .multilineTextAlignment(.center)
-                            Image("oneLanguage")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .padding(.horizontal, 20)
-                            if !temp {
-                                Image(systemName: "checkmark.circle.fill")
-                                    .resizable()
-                                    .scaledToFill()
-                                    .foregroundColor(.yellow)
-                                    .frame(width: size, height: size)
-                            } else {
-                                Circle()
-                                    .stroke(lineWidth: 2)
-                                    .foregroundColor(Color(UIColor.tertiaryLabel))
-                                    .frame(width: size, height: size)
-                            }
-                        }
-                        .onTapGesture {
-                            temp = false
-                        }
-                        VStack {
-                            Text("Main and secondary language")
-                                .frame(height: 48)
-                                .padding(.horizontal, 10)
-                                .multilineTextAlignment(.center)
-                            Image("twoLanguages")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .padding(.horizontal, 20)
-                            if temp {
-                                Image(systemName: "checkmark.circle.fill")
-                                    .resizable()
-                                    .scaledToFill()
-                                    .foregroundColor(.yellow)
-                                    .frame(width: size, height: size)
-                            } else {
-                                Circle()
-                                    .stroke(lineWidth: 2)
-                                    .foregroundColor(Color(UIColor.tertiaryLabel))
-                                    .frame(width: size, height: size)
-                            }
-                        }
-                        .onTapGesture {
-                            temp = true
-                        }
-                    }
-                }
-                .padding(.top, 20)
-            }
         }
     }
     

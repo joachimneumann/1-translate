@@ -69,3 +69,10 @@ struct PortraitDisplay: View {
         }
     }
 }
+
+#Preview {
+    return PortraitDisplay(display: Display(left: "111", right: "222", canBeInteger: true, canBeFloat: true), screen: Screen(CGSize(width: 100, height: 100)))
+        .frame(height: 300)
+        .background(Color.black)
+        .foregroundColor(.white)
+}

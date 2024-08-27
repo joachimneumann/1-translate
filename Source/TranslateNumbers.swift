@@ -67,18 +67,6 @@ struct TranslateNumbers: View {
                 .font(viewModel.firstFont)
                 .padding(.horizontal, 0)
                 Spacer(minLength: 0.0)
-                if viewModel.languages.secondLanguageAllowed {
-                    OneLanguage(isFirstLanguage: false,
-                                viewModel: viewModel,
-                                screen: screen,
-                                language: viewModel.languages.second,
-                                translation: viewModel._2Translation)
-                    Spacer(minLength: 0.0)
-                    TranslatedDisplay(translation: viewModel._2Translation,
-                                      screen: screen)
-                    .font(viewModel.secondFont)
-                    .padding(.horizontal, 0)
-                }
             }
             
             PortraitDisplay(
@@ -87,6 +75,7 @@ struct TranslateNumbers: View {
             .padding(.bottom, screen.portraitIPhoneDisplayBottomPadding)
             .padding(.horizontal, 0)
             .frame(height: 65)
+            .background(.red)
             NonScientificKeyboard(
                 screen: screen,
                 viewModel: viewModel)

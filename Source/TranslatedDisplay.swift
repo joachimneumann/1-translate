@@ -58,3 +58,7 @@ struct TranslatedDisplay: View {
         }
     }
 }
+
+#Preview {
+    return TranslatedDisplay(translation: Translation(displayText: "hello", overline: nil, spokenText: nil), screen: Screen(CGSize(width: 100, height: 100)))
+}

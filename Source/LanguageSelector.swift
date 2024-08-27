@@ -15,13 +15,8 @@ struct LanguageSelector: View {
     @State var currentLanguage: Language? {
         didSet {
             if let currentLanguage = currentLanguage {
-                if isFirstLanguage {
-                    viewModel.languages.first = currentLanguage
-                    viewModel.languages.firstName = currentLanguage.translator.name
-                } else {
-                    viewModel.languages.second = currentLanguage
-                    viewModel.languages.secondName = currentLanguage.translator.name
-                }
+                viewModel.languages.first = currentLanguage
+                viewModel.languages.firstName = currentLanguage.translator.name
             }
             viewModel.updateTranslation()
         }
@@ -63,19 +58,15 @@ struct LanguageSelector: View {
                 .listRowBackground(selected ? Color(white: 0.18) : Color(white: 0.1))
             }
             .onAppear() {
-                scrollViewReaderProxy.scrollTo(isFirstLanguage ? viewModel.languages.first.translator.name : viewModel.languages.second.translator.name, anchor: .top)
+                scrollViewReaderProxy.scrollTo(viewModel.languages.first.translator.name, anchor: .top)
             }
             .listStyle(.sidebar)
         }
         .onAppear() {
-            if isFirstLanguage {
-                currentLanguage = viewModel.languages.first
-            } else {
-                currentLanguage = viewModel.languages.second
-            }
+            currentLanguage = viewModel.languages.first
         }
         .padding(.top, 20)
-        .navigationTitle(isFirstLanguage ? "First Language" : "Second Language")
+        .navigationTitle("Language")
         .toolbar {
             NavigationLink {
                 Settings(viewModel: viewModel, font: Font(screen.infoUiFont))

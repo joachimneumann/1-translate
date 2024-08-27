@@ -23,9 +23,7 @@ struct Key: View {
         self.screen = screen
         self.symbol = symbol
         var keyHeight = screen.keySize.height
-        if !viewModel.languages.secondLanguageAllowed {
-            keyHeight *= 1.5
-        }
+        keyHeight *= 1.5
         if symbol == "0" {
             self.keySize = CGSize(
                 width: 2.0 * screen.keySize.width + screen.keySpacing,
