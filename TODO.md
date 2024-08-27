@@ -1,5 +1,4 @@
-- settings for each language
-- voice for each language
+- show language specific group in Display and in settings example
 
 - Thai trennung, 1e5
 - Vietnamese: compact?

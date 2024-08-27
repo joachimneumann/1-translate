@@ -7,7 +7,9 @@
 
 import Foundation
 
-class BabylonianImplementation: GeneralLanguage {
+class BabylonianImplementation: GeneralLanguage, BabylonianParameterProtocol {
+    var allowEmptyColumn: Bool = false
+
     static let symbolSpace = ""
     static let symbolNone = "\u{00a0}"//  " "
     static let symbolEmptyColumn = "𒑊"
@@ -26,7 +28,6 @@ class BabylonianImplementation: GeneralLanguage {
     static let symbolForty = "𒐏"
     static let symbolFifty = "𒐐"
 
-    var allowEmptyColumn: Bool = false
 
     var none: String {
         allowEmptyColumn ? BabylonianImplementation.symbolEmptyColumn : BabylonianImplementation.symbolNone

@@ -7,20 +7,10 @@
 
 import Foundation
 
-class VietnameseImplementation: Group3Language  {
-    var vietnameseThousand: VietnameseThousand = .nghìn
-    var secondLast: SecondLast = .lẻ
-    var compact: Bool = false
-
-    enum VietnameseThousand: String, Codable, CaseIterable {
-        case ngàn
-        case nghìn
-    }
-
-    enum SecondLast: String, Codable, CaseIterable {
-        case linh
-        case lẻ
-    }
+class VietnameseImplementation: Group3Language, VietnameseParameterProtocol  {
+    var vietnameseThousand: Translator.VietnameseThousand = .nghìn
+    var vietnameseSecondLast: Translator.VietnameseSecondLast = .lẻ
+    var vietnameseCompact: Bool = false
     
     override init() {
         super.init()
@@ -78,7 +68,7 @@ class VietnameseImplementation: Group3Language  {
         if right == 0 {
             ret += " mươi"
         } else {
-            ret += (!compact || right == 0) ? " mươi" : ""
+            ret += (!vietnameseCompact || right == 0) ? " mươi" : ""
             if right == 1 {
                 ret += " mốt"
             } else if right == 5 {
@@ -96,7 +86,7 @@ class VietnameseImplementation: Group3Language  {
         let below: UInt = i - hundreds * 100
         if below > 0 {
             if below <= 9 {
-                after_hundreds = " " + secondLast.rawValue + " "
+                after_hundreds = " " + vietnameseSecondLast.rawValue + " "
             }
         }
         return super._100_999(i)
@@ -139,7 +129,7 @@ class VietnameseImplementation: Group3Language  {
             ret += notLargestGroup(groupIndex - 3, i)
         } else {
             if above <= 9 {
-                ret += " không trăm " + secondLast.rawValue
+                ret += " không trăm " + vietnameseSecondLast.rawValue
             } else if above <= 99 {
                 ret += " không trăm"
             }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class EnglishImplementation: Group3Language {
+class EnglishImplementation: Group3Language, EnglishParameterProtocol {
     override init() {
         super.init()
         name = "English"

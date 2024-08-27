@@ -7,13 +7,8 @@
 
 import Foundation
 
-class SpanishImplementation: Group3Language  {
-    enum PuntoComma: String, Codable, CaseIterable {
-        case coma
-        case punto
-    }
-
-    var puntoComma: PuntoComma = .coma {
+class SpanishImplementation: Group3Language, SpanishParameterProtocol  {
+    var puntoComma: Translator.SpanishPuntoComma = .coma {
         didSet {
             dotString = puntoComma.rawValue
         }

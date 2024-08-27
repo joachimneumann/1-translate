@@ -50,7 +50,7 @@ def assertEqual(components):
         translated = " ".join(components[1:])
         if not "Implementation." in translated:
             translated = "\""+translated+"\""
-        write_("XCTAssertEqual(language.translate(")
+        write_("XCTAssertEqual(translator.translate(")
         write(number)
         write(").x, ")
         write(translated)
@@ -96,11 +96,11 @@ for file in glob.glob("../../1-translate-tests/language/*.txt"):
     writeln("")
     if variant == None:
         writeln("final class Test_"+basenameCapitalized+": XCTestCase {")
-        writeln("    let language = "+basenameCapitalized+"Implementation()")
+        writeln("    let translator = "+basenameCapitalized+"Implementation()")
         writeln("    func test"+basenameCapitalized+"() {")
     else:
         writeln("final class Test_"+basenameCapitalized+variantCapitalized+": XCTestCase {")
-        writeln("    let language = "+basenameCapitalized+"Implementation(variant: "+basenameCapitalized+"Implementation.Variant."+variant+")")
+        writeln("    let translator = "+basenameCapitalized+"Implementation(variant: "+basenameCapitalized+"Implementation.Variant."+variant+")")
         writeln("    func test"+basenameCapitalized+variantCapitalized+"() {")
 
     with open(file) as file:
@@ -121,7 +121,7 @@ for file in glob.glob("../../1-translate-tests/language/*.txt"):
                     else:
                         if components[0] == "SETTINGS":
                             writeln("")
-                            write_("language.")
+                            write_("translator.")
                             write(components[1])
                             write(" = ")
                             write(components[2])

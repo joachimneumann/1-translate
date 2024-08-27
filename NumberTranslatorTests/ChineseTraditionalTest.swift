@@ -5,10 +5,10 @@ import XCTest
 import NumberTranslator
 
 final class Test_ChineseTraditional: XCTestCase {
-    let language = ChineseImplementation(variant: ChineseImplementation.Variant.traditional)
+    let translator = ChineseImplementation(variant: ChineseImplementation.Variant.traditional)
     func testChineseTraditional() {
-        XCTAssertEqual(language.translate(0).x, "零")
-        XCTAssertEqual(language.translate(10_000).x, "一萬")
-        XCTAssertEqual(language.translate(789_0298).x, "七百 八十九萬 零二百 九十八")
+        XCTAssertEqual(translator.translate(0).x, "零")
+        XCTAssertEqual(translator.translate(10_000).x, "一萬")
+        XCTAssertEqual(translator.translate(789_0298).x, "七百 八十九萬 零二百 九十八")
     }
 }

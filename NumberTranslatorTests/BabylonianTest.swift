@@ -5,25 +5,25 @@ import XCTest
 import NumberTranslator
 
 final class Test_Babylonian: XCTestCase {
-    let language = BabylonianImplementation()
+    let translator = BabylonianImplementation()
     func testBabylonian() {
 
-        language.allowEmptyColumn = false
-        XCTAssertEqual(language.translate(1).x, BabylonianImplementation.symbolOne)
-        XCTAssertEqual(language.translate(60).x, BabylonianImplementation.symbolOne+BabylonianImplementation.symbolNone) // 6,0
-        XCTAssertEqual(language.translate(61).x, BabylonianImplementation.symbolOne+BabylonianImplementation.symbolOne) // 6,1
-        XCTAssertEqual(language.translate(147).x, BabylonianImplementation.symbolTwo+BabylonianImplementation.symbolTwenty+BabylonianImplementation.symbolSeven) // 2,27
-        XCTAssertEqual(language.translate(3661).x, BabylonianImplementation.symbolOne+BabylonianImplementation.symbolOne+BabylonianImplementation.symbolOne) // 1,1,1
-        XCTAssertEqual(language.translate(21609).x, BabylonianImplementation.symbolSix+BabylonianImplementation.symbolNone+BabylonianImplementation.symbolNine) // 6,0 9.
-        XCTAssertEqual(language.translate(424000).x,  BabylonianImplementation.symbolOne+BabylonianImplementation.symbolFifty+BabylonianImplementation.symbolSeven+BabylonianImplementation.symbolForty+BabylonianImplementation.symbolSix+BabylonianImplementation.symbolForty) // 1,57,46,40
+        translator.allowEmptyColumn = false
+        XCTAssertEqual(translator.translate(1).x, BabylonianImplementation.symbolOne)
+        XCTAssertEqual(translator.translate(60).x, BabylonianImplementation.symbolOne+BabylonianImplementation.symbolNone) // 6,0
+        XCTAssertEqual(translator.translate(61).x, BabylonianImplementation.symbolOne+BabylonianImplementation.symbolOne) // 6,1
+        XCTAssertEqual(translator.translate(147).x, BabylonianImplementation.symbolTwo+BabylonianImplementation.symbolTwenty+BabylonianImplementation.symbolSeven) // 2,27
+        XCTAssertEqual(translator.translate(3661).x, BabylonianImplementation.symbolOne+BabylonianImplementation.symbolOne+BabylonianImplementation.symbolOne) // 1,1,1
+        XCTAssertEqual(translator.translate(21609).x, BabylonianImplementation.symbolSix+BabylonianImplementation.symbolNone+BabylonianImplementation.symbolNine) // 6,0 9.
+        XCTAssertEqual(translator.translate(424000).x,  BabylonianImplementation.symbolOne+BabylonianImplementation.symbolFifty+BabylonianImplementation.symbolSeven+BabylonianImplementation.symbolForty+BabylonianImplementation.symbolSix+BabylonianImplementation.symbolForty) // 1,57,46,40
 
-        language.allowEmptyColumn = true
-        XCTAssertEqual(language.translate(1).x, BabylonianImplementation.symbolOne)
-        XCTAssertEqual(language.translate(60).x, BabylonianImplementation.symbolOne) // 6,0 but no empty column :(
-        XCTAssertEqual(language.translate(61).x, BabylonianImplementation.symbolOne+BabylonianImplementation.symbolOne) // 6,1
-        XCTAssertEqual(language.translate(147).x, BabylonianImplementation.symbolTwo+BabylonianImplementation.symbolTwenty+BabylonianImplementation.symbolSeven) // 2,27
-        XCTAssertEqual(language.translate(3661).x, BabylonianImplementation.symbolOne+BabylonianImplementation.symbolOne+BabylonianImplementation.symbolOne) // 1,1,1
-        XCTAssertEqual(language.translate(21609).x, BabylonianImplementation.symbolSix+BabylonianImplementation.symbolEmptyColumn+BabylonianImplementation.symbolNine) // 6,0 9.
-        XCTAssertEqual(language.translate(424000).x, BabylonianImplementation.symbolOne+BabylonianImplementation.symbolFifty+BabylonianImplementation.symbolSeven+BabylonianImplementation.symbolForty+BabylonianImplementation.symbolSix+BabylonianImplementation.symbolForty) // 1,57,46,40
+        translator.allowEmptyColumn = true
+        XCTAssertEqual(translator.translate(1).x, BabylonianImplementation.symbolOne)
+        XCTAssertEqual(translator.translate(60).x, BabylonianImplementation.symbolOne) // 6,0 but no empty column :(
+        XCTAssertEqual(translator.translate(61).x, BabylonianImplementation.symbolOne+BabylonianImplementation.symbolOne) // 6,1
+        XCTAssertEqual(translator.translate(147).x, BabylonianImplementation.symbolTwo+BabylonianImplementation.symbolTwenty+BabylonianImplementation.symbolSeven) // 2,27
+        XCTAssertEqual(translator.translate(3661).x, BabylonianImplementation.symbolOne+BabylonianImplementation.symbolOne+BabylonianImplementation.symbolOne) // 1,1,1
+        XCTAssertEqual(translator.translate(21609).x, BabylonianImplementation.symbolSix+BabylonianImplementation.symbolEmptyColumn+BabylonianImplementation.symbolNine) // 6,0 9.
+        XCTAssertEqual(translator.translate(424000).x, BabylonianImplementation.symbolOne+BabylonianImplementation.symbolFifty+BabylonianImplementation.symbolSeven+BabylonianImplementation.symbolForty+BabylonianImplementation.symbolSix+BabylonianImplementation.symbolForty) // 1,57,46,40
     }
 }

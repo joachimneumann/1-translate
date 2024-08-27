@@ -8,6 +8,21 @@
 import Foundation
 
 public class Translator {
+    public enum SpanishPuntoComma: String, Codable, CaseIterable {
+        case coma
+        case punto
+    }
+    public enum VietnameseThousand: String, Codable, CaseIterable {
+        case ngàn
+        case nghìn
+    }
+
+    public enum VietnameseSecondLast: String, Codable, CaseIterable {
+        case linh
+        case lẻ
+    }
+
+    
     public static let wordSplitter = "\u{200A}" // the SoftHyphen "@\u{00AD}" did not seperate words well
 //    static let WordSplitter = "@"
     public var name: String { implementation.name }
@@ -23,7 +38,106 @@ public class Translator {
     init(_ implementation: GeneralLanguage) {
         self.implementation = implementation
     }
+    public var germanCapitalisation: Bool {
+        get {
+            if let selfWithProtocol = self.implementation as? GermanParameterProtocol {
+                selfWithProtocol.capitalisation
+            } else {
+                false
+            }
+        }
+        set(newValue) {
+            if var selfWithProtocol = self.implementation as? GermanParameterProtocol {
+                selfWithProtocol.capitalisation = newValue
+            }
+        }
+    }
+    public var englishUseAndAfterHundred: Bool {
+        get {
+            if let selfWithProtocol = self.implementation as? EnglishParameterProtocol {
+                selfWithProtocol.useAndAfterHundred
+            } else {
+                false
+            }
+        }
+        set(newValue) {
+            if var selfWithProtocol = self.implementation as? EnglishParameterProtocol {
+                selfWithProtocol.useAndAfterHundred = newValue
+            }
+        }
+    }
+    public var babylonianAllowEmptyColumn: Bool {
+        get {
+            if let selfWithProtocol = self.implementation as? BabylonianParameterProtocol {
+                selfWithProtocol.allowEmptyColumn
+            } else {
+                false
+            }
+        }
+        set(newValue) {
+            if var selfWithProtocol = self.implementation as? BabylonianParameterProtocol {
+                selfWithProtocol.allowEmptyColumn = newValue
+            }
+        }
+    }
+    public var puntoComma: SpanishPuntoComma {
+        get {
+            if let selfWithProtocol = self.implementation as? SpanishParameterProtocol {
+                selfWithProtocol.puntoComma
+            } else {
+                .punto
+            }
+        }
+        set(newValue) {
+            if var selfWithProtocol = self.implementation as? SpanishParameterProtocol {
+                selfWithProtocol.puntoComma = newValue
+            }
+        }
+    }
+    public var vietnameseThousand: VietnameseThousand {
+        get {
+            if let selfWithProtocol = self.implementation as? VietnameseParameterProtocol {
+                selfWithProtocol.vietnameseThousand
+            } else {
+                .nghìn
+            }
+        }
+        set(newValue) {
+            if var selfWithProtocol = self.implementation as? VietnameseParameterProtocol {
+                selfWithProtocol.vietnameseThousand = newValue
+            }
+        }
+    }
+    public var vietnameseSecondLast: VietnameseSecondLast {
+        get {
+            if let selfWithProtocol = self.implementation as? VietnameseParameterProtocol {
+                selfWithProtocol.vietnameseSecondLast
+            } else {
+                .lẻ
+            }
+        }
+        set(newValue) {
+            if var selfWithProtocol = self.implementation as? VietnameseParameterProtocol {
+                selfWithProtocol.vietnameseSecondLast = newValue
+            }
+        }
+    }
+    public var vietnameseCompact: Bool {
+        get {
+            if let selfWithProtocol = self.implementation as? VietnameseParameterProtocol {
+                selfWithProtocol.vietnameseCompact
+            } else {
+                false
+            }
+        }
+        set(newValue) {
+            if var selfWithProtocol = self.implementation as? VietnameseParameterProtocol {
+                selfWithProtocol.vietnameseCompact = newValue
+            }
+        }
+    }
 }
+
 
 public class Translators {
     public var list: [Translator] = []
@@ -72,4 +186,14 @@ public protocol EnglishParameterProtocol {
 
 public protocol BabylonianParameterProtocol {
     var allowEmptyColumn: Bool { get set }
+}
+
+public protocol SpanishParameterProtocol {
+    var puntoComma: Translator.SpanishPuntoComma { get set }
+}
+
+public protocol VietnameseParameterProtocol {
+    var vietnameseThousand: Translator.VietnameseThousand { get set }
+    var vietnameseSecondLast: Translator.VietnameseSecondLast { get set }
+    var vietnameseCompact: Bool { get set }
 }

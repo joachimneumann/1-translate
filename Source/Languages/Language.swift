@@ -20,30 +20,6 @@ struct Translation {
     }
 }
 
-//enum GroupSize: Int, Codable, CaseIterable {
-//    case three
-//    case four
-//    case five
-//    var int: Int {
-//        get {
-//            switch self {
-//            case .three: return 3
-//            case .four: return 4
-//            case .five: return 5
-//            }
-//        }
-//    }
-//    var string: String {
-//        get {
-//            switch self {
-//            case .three: return "3"
-//            case .four: return "4"
-//            case .five: return "2,3"
-//            }
-//        }
-//    }
-//}
-
 @Observable class Language: Identifiable {
     var translator: Translator
     var hasVoice: Bool = false
@@ -57,24 +33,6 @@ struct Translation {
 
     init(_ translator: Translator) {
         self.translator = translator
-    }
-    
-    func setParameter(_ parameter: String, to value: Bool) {
-        if parameter == "useAndAfterHundred" {
-            if var selfWithProtocol = self as? EnglishParameterProtocol {
-                selfWithProtocol.useAndAfterHundred = value
-            }
-        }
-        if parameter == "capitalisation" {
-            if var selfWithProtocol = self as? GermanParameterProtocol {
-                selfWithProtocol.capitalisation = value
-            }
-        }
-        if parameter == "allowEmptyColumn" {
-            if var selfWithProtocol = self as? BabylonianParameterProtocol {
-                selfWithProtocol.allowEmptyColumn = value
-            }
-        }
     }
     
     func translate(_ s: String) -> Translation {
