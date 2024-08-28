@@ -8,11 +8,11 @@ final class Test_Vietnamese: XCTestCase {
     let translator = VietnameseImplementation()
     func testVietnamese() {
 
-        translator.compact = false
+        translator.vietnameseCompact = false
 
         translator.vietnameseThousand = .nghìn
 
-        translator.secondLast = .lẻ
+        translator.vietnameseSecondLast = .lẻ
         XCTAssertEqual(translator.translate(0).x, "không")
         XCTAssertEqual(translator.translate(1).x, "một")
         XCTAssertEqual(translator.translate(2).x, "hai")
@@ -124,7 +124,7 @@ final class Test_Vietnamese: XCTestCase {
         XCTAssertEqual(translator.translate(108).x, "một trăm lẻ tám")
         XCTAssertEqual(translator.translate(109).x, "một trăm lẻ chín")
 
-        translator.secondLast = .linh
+        translator.vietnameseSecondLast = .linh
         XCTAssertEqual(translator.translate(101).x, "một trăm linh một")
         XCTAssertEqual(translator.translate(102).x, "một trăm linh hai")
         XCTAssertEqual(translator.translate(103).x, "một trăm linh ba")
@@ -135,7 +135,7 @@ final class Test_Vietnamese: XCTestCase {
         XCTAssertEqual(translator.translate(108).x, "một trăm linh tám")
         XCTAssertEqual(translator.translate(109).x, "một trăm linh chín")
 
-        translator.secondLast = .lẻ
+        translator.vietnameseSecondLast = .lẻ
         XCTAssertEqual(translator.translate(110).x, "một trăm mười")
         XCTAssertEqual(translator.translate(111).x, "một trăm mười một")
         XCTAssertEqual(translator.translate(119).x, "một trăm mười chín")
@@ -197,7 +197,7 @@ final class Test_Vietnamese: XCTestCase {
         XCTAssertEqual(translator.translate(99_000_000_909).x, "chín mươi chín tỷ chín trăm lẻ chín")
         XCTAssertEqual(translator.translate(99_999_999_999).x, "chín mươi chín tỷ chín trăm chín mươi chín triệu chín trăm chín mươi chín nghìn chín trăm chín mươi chín")
 
-        translator.compact = true
+        translator.vietnameseCompact = true
         XCTAssertEqual(translator.translate(0).x, "không")
         XCTAssertEqual(translator.translate(1).x, "một")
         XCTAssertEqual(translator.translate(2).x, "hai")
@@ -309,7 +309,7 @@ final class Test_Vietnamese: XCTestCase {
         XCTAssertEqual(translator.translate(108).x, "một trăm lẻ tám")
         XCTAssertEqual(translator.translate(109).x, "một trăm lẻ chín")
 
-        translator.secondLast = .linh
+        translator.vietnameseSecondLast = .linh
         XCTAssertEqual(translator.translate(101).x, "một trăm linh một")
         XCTAssertEqual(translator.translate(102).x, "một trăm linh hai")
         XCTAssertEqual(translator.translate(103).x, "một trăm linh ba")
@@ -320,7 +320,7 @@ final class Test_Vietnamese: XCTestCase {
         XCTAssertEqual(translator.translate(108).x, "một trăm linh tám")
         XCTAssertEqual(translator.translate(109).x, "một trăm linh chín")
 
-        translator.secondLast = .lẻ
+        translator.vietnameseSecondLast = .lẻ
         XCTAssertEqual(translator.translate(110).x, "một trăm mười")
         XCTAssertEqual(translator.translate(111).x, "một trăm mười một")
         XCTAssertEqual(translator.translate(119).x, "một trăm mười chín")

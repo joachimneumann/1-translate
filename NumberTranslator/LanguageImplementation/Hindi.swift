@@ -13,7 +13,7 @@ class HindiImplementation: DigitLanguage  {
         name = "हिंदी"
         englishName = "Hindi"
         code = "hi"
-        groupSize = 4
+        groupSize = 42
         dotString = "दशमलव"
         negativeString = "ऋण"
         afterNegative = " "

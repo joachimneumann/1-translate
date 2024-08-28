@@ -212,7 +212,7 @@ extension Display {
         
         if let c = separators.groupSeparator.character {
             var count = integerPart.count
-            if groupSize == 5 {
+            if groupSize == 42 {
                 while count >= 4 {
                     count -= 2
                     integerPart.insert(c, at: integerPart.index(integerPart.startIndex, offsetBy: count-1))
