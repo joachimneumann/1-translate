@@ -10,7 +10,6 @@ import SwiftUI
 struct LanguageSelector: View {
     @Bindable var viewModel: ViewModel
     let screen : Screen
-    let isFirstLanguage: Bool
         
     @State var currentLanguage: Language? {
         didSet {
@@ -88,6 +87,6 @@ struct LanguageSelector: View {
 
 #Preview {
     GeometryReader { geo in
-        LanguageSelector(viewModel: ViewModel(), screen: Screen(geo.size), isFirstLanguage: true)
+        LanguageSelector(viewModel: ViewModel(), screen: Screen(geo.size))
     }
 }

@@ -18,14 +18,16 @@ private func hasMultipleVariants(_ list: [AVSpeechSynthesisVoice]) -> Bool {
 }
 
 struct VoiceSelection: View {
+    @Bindable var viewModel: ViewModel
     private let code: String
     private let languageName: String
     private var voiceDict: Voices.VoiceDict
     private var callback: ((String, String) -> ())?
     
-    init(code: String, voiceDict: Voices.VoiceDict, callback: ((String, String) -> ())?) {
+    init(viewModel: ViewModel, code: String, callback: ((String, String) -> ())?) {
+        self.viewModel = viewModel
         self.code = code
-        self.voiceDict = voiceDict
+        self.voiceDict = viewModel.voices.voiceDict
         self.callback = callback
         
         let locale: Locale = .current
@@ -86,7 +88,31 @@ struct VoiceSelection: View {
     }
 
     var body: some View {
+        let text = viewModel.translator.translate("200")
+        let noVoice = !viewModel.persistent.offerReadingAloud
+        let yellow = Color(red: 242.0/255.0, green: 203.0/255.0, blue: 48.0/255.0)
+        let color =  noVoice ? yellow.opacity(0.7) : yellow
+        let symbolName = noVoice ? "speaker.slash.fill" : "speaker.wave.3.fill"
         VStack {
+            Button {
+                viewModel.voices.readAloud(text, in: viewModel.languages.language)
+            } label: {
+                HStack {
+                    Image(systemName: symbolName)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 23)
+                        .padding(.bottom, 5)
+                        .padding(.leading, noVoice ? 0 : 5)
+                        .frame(height: 23)
+                        .padding(.top, 10)
+                        .padding(.trailing, 10)
+                    Text(text)
+                        .padding(.top, 5)
+                }
+                .foregroundColor(color)
+            }
+            .buttonStyle(.plain)
             List {
                 Section(header: Text("Voice for " + languageName)) {
                     VoiceListView(quality: .premium, code: code, voiceDict: voiceDict, callback: callback)
@@ -128,5 +154,5 @@ extension AVSpeechSynthesisVoiceQuality {
 }
 
 #Preview {
-    return VoiceSelection(code: "en", voiceDict: ViewModel().voices.voiceDict, callback: nil)
+    return VoiceSelection(viewModel: ViewModel(), code: "en", callback: nil)
 }

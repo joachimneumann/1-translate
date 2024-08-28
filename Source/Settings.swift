@@ -19,9 +19,6 @@ struct Settings: View {
         VStack {
             List {
                 DigitsSettings
-                if viewModel.translator.code != nil {
-                    VoiceSettings
-                }
                 if viewModel.translator.name == "English" {
                     EnglishParameters
                 }
@@ -36,6 +33,9 @@ struct Settings: View {
                 }
                 if viewModel.translator.name == "Tiếng Việt" {
                     VietnameseParameters
+                }
+                if viewModel.translator.code != nil {
+                    VoiceSettings
                 }
                 HobbyProject
             }
@@ -89,34 +89,10 @@ struct Settings: View {
     }
     
     var VoiceSettings: some View {
-        let noVoice = !viewModel.persistent.offerReadingAloud
-        let color =  noVoice ? yellow.opacity(0.7) : yellow
-        let symbolName = noVoice ? "speaker.slash.fill" : "speaker.wave.3.fill"
         return Section(header: Text("Read Aloud")) {
             VStack(alignment: .leading) {
-                let text = viewModel.translator.translate("200")
-                Button {
-                    viewModel.voices.readAloud(text, in: viewModel.languages.language)
-                } label: {
-                    HStack {
-                        Image(systemName: symbolName)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 23)
-                            .padding(.bottom, 5)
-                            .padding(.leading, noVoice ? 0 : 5)
-                            .frame(height: 23)
-                            .padding(.top, 10)
-                            .padding(.trailing, 10)
-                        Text(text)
-                            .padding(.top, 5)
-                    }
-                    .foregroundColor(color)
-                }
-                .buttonStyle(.plain)
-                .disabled(noVoice)
                 HStack {
-                    Text("Read Aloud")
+                    Text("Offer to read aloud")
                     Spacer()
                     Toggle("", isOn: $viewModel.persistent.offerReadingAloud)
                         .frame(width: 40)
@@ -131,7 +107,7 @@ struct Settings: View {
             }
             VStack(alignment: .leading) {
                 NavigationLink {
-                    VoiceSelection(code: viewModel.translator.code!, voiceDict: viewModel.voices.voiceDict, callback: updateSelectedVoice)
+                    VoiceSelection(viewModel: viewModel, code: viewModel.translator.code!, callback: updateSelectedVoice)
                 } label: {
                     Text("Select Voice")
                 }

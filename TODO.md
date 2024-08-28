@@ -1,4 +1,4 @@
-- show language specific group in Display and in settings example
+- settings: voice example in select voice screen!
 
 - Thai trennung, 1e5
 - Vietnamese: compact?

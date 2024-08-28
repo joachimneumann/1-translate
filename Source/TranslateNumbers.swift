@@ -19,7 +19,6 @@ struct TranslateNumbers: View {
     @State private var settingsDetent = PresentationDetent.medium
     
     struct OneLanguage: View {
-        let isFirstLanguage: Bool
         var viewModel: ViewModel
         let screen: Screen
         let language: Language
@@ -46,7 +45,7 @@ struct TranslateNumbers: View {
                     .disabled(noVoice)
                     .padding(.trailing, 10)
                 }
-                LanguageButton(language: language, isFirstLanguage: isFirstLanguage, viewModel: viewModel, screen: screen)
+                LanguageButton(language: language, viewModel: viewModel, screen: screen)
             }
             .frame(height: 34.0)
             .padding(.bottom, 10)
@@ -57,8 +56,7 @@ struct TranslateNumbers: View {
     var portraitView: some View {
         VStack(spacing: 0.0) {
             VStack(spacing: 0.0) {
-                OneLanguage(isFirstLanguage: true,
-                            viewModel: viewModel,
+                OneLanguage(viewModel: viewModel,
                             screen: screen,
                             language: viewModel.languages.language,
                             translation: viewModel._1Translation)
@@ -82,13 +80,11 @@ struct TranslateNumbers: View {
     }
     
     struct LanguageButton: View {
-        let isFirstLanguage: Bool
         private let language: Language
         private let viewModel: ViewModel
         private let screen: Screen
 
-        init(language: Language, isFirstLanguage: Bool, viewModel: ViewModel, screen: Screen) {
-            self.isFirstLanguage = isFirstLanguage
+        init(language: Language, viewModel: ViewModel, screen: Screen) {
             self.language = language
             self.viewModel = viewModel
             self.screen = screen
@@ -96,7 +92,7 @@ struct TranslateNumbers: View {
         
         var body: some View {
             NavigationLink {
-                LanguageSelector(viewModel: viewModel, screen: screen, isFirstLanguage: isFirstLanguage)
+                LanguageSelector(viewModel: viewModel, screen: screen)
             } label: {
                 Image(language.flagName)
                     .resizable()
