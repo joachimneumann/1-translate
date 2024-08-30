@@ -21,10 +21,10 @@ class EnglishImplementation: Group3Language, EnglishParameterProtocol {
         dotString = "point"
     }
     
-    @AppStorage("englishAseAndAfterHundred", store: .standard)
-    var englishAseAndAfterHundred: Bool = true {
+    @AppStorage("englishUseAndAfterHundred", store: .standard)
+    var englishUseAndAfterHundred: Bool = true {
         didSet {
-            after_hundreds = englishAseAndAfterHundred ? " and " : " "
+            after_hundreds = englishUseAndAfterHundred ? " and " : " "
         }
     }
      

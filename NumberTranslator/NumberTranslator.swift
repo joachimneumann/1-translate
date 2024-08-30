@@ -56,14 +56,14 @@ public class Translator {
     public var englishUseAndAfterHundred: Bool {
         get {
             if let selfWithProtocol = self.implementation as? EnglishParameterProtocol {
-                selfWithProtocol.englishAseAndAfterHundred
+                selfWithProtocol.englishUseAndAfterHundred
             } else {
                 false
             }
         }
         set(newValue) {
             if var selfWithProtocol = self.implementation as? EnglishParameterProtocol {
-                selfWithProtocol.englishAseAndAfterHundred = newValue
+                selfWithProtocol.englishUseAndAfterHundred = newValue
             }
         }
     }
@@ -182,7 +182,7 @@ public protocol GermanParameterProtocol {
 }
 
 public protocol EnglishParameterProtocol {
-    var englishAseAndAfterHundred: Bool { get set }
+    var englishUseAndAfterHundred: Bool { get set }
 }
 
 public protocol BabylonianParameterProtocol {
