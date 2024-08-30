@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class EnglishImplementation: Group3Language, EnglishParameterProtocol {
     override init() {
@@ -20,9 +21,10 @@ class EnglishImplementation: Group3Language, EnglishParameterProtocol {
         dotString = "point"
     }
     
-    var useAndAfterHundred: Bool = true {
+    @AppStorage("englishAseAndAfterHundred", store: .standard)
+    var englishAseAndAfterHundred: Bool = true {
         didSet {
-            after_hundreds = useAndAfterHundred ? " and " : " "
+            after_hundreds = englishAseAndAfterHundred ? " and " : " "
         }
     }
      

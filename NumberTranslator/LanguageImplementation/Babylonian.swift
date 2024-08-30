@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import SwiftUI
 
 class BabylonianImplementation: GeneralLanguage, BabylonianParameterProtocol {
-    var allowEmptyColumn: Bool = false
+    @AppStorage("babylonianAllowEmptyColumn", store: .standard)
+    var babylonianAllowEmptyColumn: Bool = false
 
     let symbolSpace = ""
     let symbolNone = "\u{00a0}"//  " "
@@ -30,7 +32,7 @@ class BabylonianImplementation: GeneralLanguage, BabylonianParameterProtocol {
 
 
     var none: String {
-        allowEmptyColumn ? symbolEmptyColumn : symbolNone
+        babylonianAllowEmptyColumn ? symbolEmptyColumn : symbolNone
     }
     
     override init() {

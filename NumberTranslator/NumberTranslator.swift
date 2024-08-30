@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftUI
 
 public class Translator {
     public enum SpanishPuntoComma: String, Codable, CaseIterable {
@@ -43,56 +42,56 @@ public class Translator {
     public var germanCapitalisation: Bool {
         get {
             if let selfWithProtocol = self.implementation as? GermanParameterProtocol {
-                selfWithProtocol.capitalisation
+                selfWithProtocol.germanCapitalisation
             } else {
                 false
             }
         }
         set(newValue) {
             if var selfWithProtocol = self.implementation as? GermanParameterProtocol {
-                selfWithProtocol.capitalisation = newValue
+                selfWithProtocol.germanCapitalisation = newValue
             }
         }
     }
     public var englishUseAndAfterHundred: Bool {
         get {
             if let selfWithProtocol = self.implementation as? EnglishParameterProtocol {
-                selfWithProtocol.useAndAfterHundred
+                selfWithProtocol.englishAseAndAfterHundred
             } else {
                 false
             }
         }
         set(newValue) {
             if var selfWithProtocol = self.implementation as? EnglishParameterProtocol {
-                selfWithProtocol.useAndAfterHundred = newValue
+                selfWithProtocol.englishAseAndAfterHundred = newValue
             }
         }
     }
     public var babylonianAllowEmptyColumn: Bool {
         get {
             if let selfWithProtocol = self.implementation as? BabylonianParameterProtocol {
-                selfWithProtocol.allowEmptyColumn
+                selfWithProtocol.babylonianAllowEmptyColumn
             } else {
                 false
             }
         }
         set(newValue) {
             if var selfWithProtocol = self.implementation as? BabylonianParameterProtocol {
-                selfWithProtocol.allowEmptyColumn = newValue
+                selfWithProtocol.babylonianAllowEmptyColumn = newValue
             }
         }
     }
     public var puntoComma: SpanishPuntoComma {
         get {
             if let selfWithProtocol = self.implementation as? SpanishParameterProtocol {
-                selfWithProtocol.puntoComma
+                selfWithProtocol.spanishPuntoComma
             } else {
                 .punto
             }
         }
         set(newValue) {
             if var selfWithProtocol = self.implementation as? SpanishParameterProtocol {
-                selfWithProtocol.puntoComma = newValue
+                selfWithProtocol.spanishPuntoComma = newValue
             }
         }
     }
@@ -179,19 +178,19 @@ public class Translators {
 }
 
 public protocol GermanParameterProtocol {
-    var capitalisation: Bool { get set }
+    var germanCapitalisation: Bool { get set }
 }
 
 public protocol EnglishParameterProtocol {
-    var useAndAfterHundred: Bool { get set }
+    var englishAseAndAfterHundred: Bool { get set }
 }
 
 public protocol BabylonianParameterProtocol {
-    var allowEmptyColumn: Bool { get set }
+    var babylonianAllowEmptyColumn: Bool { get set }
 }
 
 public protocol SpanishParameterProtocol {
-    var puntoComma: Translator.SpanishPuntoComma { get set }
+    var spanishPuntoComma: Translator.SpanishPuntoComma { get set }
 }
 
 public protocol VietnameseParameterProtocol {

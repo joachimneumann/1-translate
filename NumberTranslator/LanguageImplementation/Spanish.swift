@@ -6,11 +6,14 @@
 //
 
 import Foundation
+import SwiftUI
 
 class SpanishImplementation: Group3Language, SpanishParameterProtocol  {
-    var puntoComma: Translator.SpanishPuntoComma = .coma {
+    
+    @AppStorage("spanishPuntoComma", store: .standard)
+    var spanishPuntoComma: Translator.SpanishPuntoComma = .coma {
         didSet {
-            dotString = puntoComma.rawValue
+            dotString = spanishPuntoComma.rawValue
         }
     }
 

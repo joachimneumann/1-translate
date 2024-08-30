@@ -6,9 +6,12 @@
 //
 
 import Foundation
+import SwiftUI
 
 class GermanImplementation: Group3Language, GermanParameterProtocol  {
-    var capitalisation: Bool = true
+    
+    @AppStorage("germanCapitalisation", store: .standard)
+    var germanCapitalisation: Bool = true
 
     override init() {
         super.init()
@@ -138,7 +141,7 @@ class GermanImplementation: Group3Language, GermanParameterProtocol  {
         var ret = unprocessed
         ret = ret.replacingOccurrences(of: "eins"+Translator.wordSplitter+"und", with: "ein"+Translator.wordSplitter+"und")
 
-        if capitalisation {
+        if germanCapitalisation {
             let words = ret.split(separator: " ")
             ret = ""
             for word in words {

@@ -6,10 +6,17 @@
 //
 
 import Foundation
+import SwiftUI
 
 class VietnameseImplementation: Group3Language, VietnameseParameterProtocol  {
+    
+    @AppStorage("vietnameseThousand", store: .standard)
     var vietnameseThousand: Translator.VietnameseThousand = .nghìn
+
+    @AppStorage("vietnameseSecondLast", store: .standard)
     var vietnameseSecondLast: Translator.VietnameseSecondLast = .lẻ
+
+    @AppStorage("vietnameseCompact", store: .standard)
     var vietnameseCompact: Bool = false
     
     override init() {
