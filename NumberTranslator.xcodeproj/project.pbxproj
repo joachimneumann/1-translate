@@ -11,6 +11,7 @@
 		AA11B7D42C79921600FAA562 /* DigitLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11B7D02C79921600FAA562 /* DigitLanguage.swift */; };
 		AA11B7DA2C79928900FAA562 /* ThaiNumerals.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11B7D92C79928900FAA562 /* ThaiNumerals.swift */; };
 		AA11B7DB2C79928900FAA562 /* ThaiNumerals.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA11B7D92C79928900FAA562 /* ThaiNumerals.swift */; };
+		AA32BC542C80D428002D8A65 /* BabylonianTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA32BC532C80D428002D8A65 /* BabylonianTest.swift */; };
 		AA471FF12C783EAA000B700E /* NumberTranslator.docc in Sources */ = {isa = PBXBuildFile; fileRef = AA471FF02C783EAA000B700E /* NumberTranslator.docc */; };
 		AA471FFD2C783EAA000B700E /* NumberTranslator.h in Headers */ = {isa = PBXBuildFile; fileRef = AA471FEF2C783EAA000B700E /* NumberTranslator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA6DAF902C7AE43D00F8E9DA /* Hindi.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6DAF8F2C7AE43D00F8E9DA /* Hindi.swift */; };
@@ -60,7 +61,7 @@
 		AAA15FD82C7C372400A1082A /* Armenian.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA15FD42C7C367300A1082A /* Armenian.swift */; };
 		AAA15FDA2C7C3DD000A1082A /* Babylonian.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA15FD92C7C3DD000A1082A /* Babylonian.swift */; };
 		AAA15FDB2C7C3E8600A1082A /* Babylonian.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA15FD92C7C3DD000A1082A /* Babylonian.swift */; };
-		AAA15FDD2C7C3EBE00A1082A /* BabylonianTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA15FDC2C7C3EBE00A1082A /* BabylonianTest.swift */; };
+		AAA15FDD2C7C3EBE00A1082A /* BabylonianTestx.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA15FDC2C7C3EBE00A1082A /* BabylonianTestx.swift */; };
 		AAAA72462C7A0D2800D9FC48 /* RomanNumerals.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA72452C7A0D2800D9FC48 /* RomanNumerals.swift */; };
 		AAAA72492C7A15A700D9FC48 /* createTestsFromTxt.py in Resources */ = {isa = PBXBuildFile; fileRef = AAAA72472C7A15A300D9FC48 /* createTestsFromTxt.py */; };
 		AAAA72842C7A162E00D9FC48 /* RomanNumerals.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAA72452C7A0D2800D9FC48 /* RomanNumerals.swift */; };
@@ -128,6 +129,7 @@
 /* Begin PBXFileReference section */
 		AA11B7D02C79921600FAA562 /* DigitLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DigitLanguage.swift; sourceTree = "<group>"; };
 		AA11B7D92C79928900FAA562 /* ThaiNumerals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThaiNumerals.swift; sourceTree = "<group>"; };
+		AA32BC532C80D428002D8A65 /* BabylonianTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabylonianTest.swift; sourceTree = "<group>"; };
 		AA471FEC2C783EAA000B700E /* NumberTranslator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NumberTranslator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA471FEF2C783EAA000B700E /* NumberTranslator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NumberTranslator.h; sourceTree = "<group>"; };
 		AA471FF02C783EAA000B700E /* NumberTranslator.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = NumberTranslator.docc; sourceTree = "<group>"; };
@@ -160,7 +162,7 @@
 		AAA15FD42C7C367300A1082A /* Armenian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Armenian.swift; sourceTree = "<group>"; };
 		AAA15FD62C7C371900A1082A /* ArmenianTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArmenianTest.swift; sourceTree = "<group>"; };
 		AAA15FD92C7C3DD000A1082A /* Babylonian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Babylonian.swift; sourceTree = "<group>"; };
-		AAA15FDC2C7C3EBE00A1082A /* BabylonianTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BabylonianTest.swift; sourceTree = "<group>"; };
+		AAA15FDC2C7C3EBE00A1082A /* BabylonianTestx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BabylonianTestx.swift; sourceTree = "<group>"; };
 		AAAA72452C7A0D2800D9FC48 /* RomanNumerals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomanNumerals.swift; sourceTree = "<group>"; };
 		AAAA72472C7A15A300D9FC48 /* createTestsFromTxt.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = createTestsFromTxt.py; sourceTree = "<group>"; };
 		AAAA728E2C7A249B00D9FC48 /* ThainumeralsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThainumeralsTest.swift; sourceTree = "<group>"; };
@@ -281,7 +283,8 @@
 				AAA15FCC2C7C329200A1082A /* ArabicNumeralsTest.swift */,
 				AAA15FD62C7C371900A1082A /* ArmenianTest.swift */,
 				AAA15FD22C7C34D300A1082A /* ArmenianNumeralsTest.swift */,
-				AAA15FDC2C7C3EBE00A1082A /* BabylonianTest.swift */,
+				AA32BC532C80D428002D8A65 /* BabylonianTest.swift */,
+				AAA15FDC2C7C3EBE00A1082A /* BabylonianTestx.swift */,
 				AAC79CCA2C7C68FE00A40ADD /* CatalanTest.swift */,
 				AAC79CD22C7C8B3300A40ADD /* ChineseFinancialTest.swift */,
 				AAC79CD42C7C8B3300A40ADD /* ChineseSimplifiedTest.swift */,
@@ -370,7 +373,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1540;
-				LastUpgradeCheck = 1540;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					AA471FEB2C783EAA000B700E = {
 						CreatedOnToolsVersion = 15.4;
@@ -459,6 +462,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA32BC542C80D428002D8A65 /* BabylonianTest.swift in Sources */,
 				AA11B7D42C79921600FAA562 /* DigitLanguage.swift in Sources */,
 				AAD4E3582C7CC74D003AFF4A /* FrenchTest.swift in Sources */,
 				AA808E402C7CDC14008F56E3 /* Hieroglyphs.swift in Sources */,
@@ -498,7 +502,7 @@
 				AAAA72942C7A280B00D9FC48 /* TestExtension.swift in Sources */,
 				AA6DAFAA2C7B586700F8E9DA /* German.swift in Sources */,
 				AA11B7DB2C79928900FAA562 /* ThaiNumerals.swift in Sources */,
-				AAA15FDD2C7C3EBE00A1082A /* BabylonianTest.swift in Sources */,
+				AAA15FDD2C7C3EBE00A1082A /* BabylonianTestx.swift in Sources */,
 				AA6DAF9E2C7AE76300F8E9DA /* Group3Language.swift in Sources */,
 				AA808E3A2C7CD49D008F56E3 /* ThaiTest.swift in Sources */,
 				AAAA72842C7A162E00D9FC48 /* RomanNumerals.swift in Sources */,
@@ -660,6 +664,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -698,6 +703,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;

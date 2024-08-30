@@ -10,27 +10,27 @@ import Foundation
 class BabylonianImplementation: GeneralLanguage, BabylonianParameterProtocol {
     var allowEmptyColumn: Bool = false
 
-    static let symbolSpace = ""
-    static let symbolNone = "\u{00a0}"//  " "
-    static let symbolEmptyColumn = "𒑊"
-    static let symbolOne = "𒐕"
-    static let symbolTwo = "𒐖"
-    static let symbolThree = "𒐗"
-    static let symbolFour = "𒐘"
-    static let symbolFive = "𒐙"
-    static let symbolSix = "𒐚"
-    static let symbolSeven = "𒐛"
-    static let symbolEight = "𒐜"
-    static let symbolNine = "𒐝"
-    static let symbolTen = "𒌋"
-    static let symbolTwenty = "𒎙"
-    static let symbolThirty = "𒌍"
-    static let symbolForty = "𒐏"
-    static let symbolFifty = "𒐐"
+    let symbolSpace = ""
+    let symbolNone = "\u{00a0}"//  " "
+    let symbolEmptyColumn = "𒑊"
+    let symbolOne = "𒐕"
+    let symbolTwo = "𒐖"
+    let symbolThree = "𒐗"
+    let symbolFour = "𒐘"
+    let symbolFive = "𒐙"
+    let symbolSix = "𒐚"
+    let symbolSeven = "𒐛"
+    let symbolEight = "𒐜"
+    let symbolNine = "𒐝"
+    let symbolTen = "𒌋"
+    let symbolTwenty = "𒎙"
+    let symbolThirty = "𒌍"
+    let symbolForty = "𒐏"
+    let symbolFifty = "𒐐"
 
 
     var none: String {
-        allowEmptyColumn ? BabylonianImplementation.symbolEmptyColumn : BabylonianImplementation.symbolNone
+        allowEmptyColumn ? symbolEmptyColumn : symbolNone
     }
     
     override init() {
@@ -47,24 +47,24 @@ class BabylonianImplementation: GeneralLanguage, BabylonianParameterProtocol {
         var ret = ""
         switch first {
         case 0: break
-        case 1: ret += Self.symbolTen
-        case 2: ret += Self.symbolTwenty
-        case 3: ret += Self.symbolThirty
-        case 4: ret += Self.symbolForty
-        case 5: ret += Self.symbolFifty
+        case 1: ret += symbolTen
+        case 2: ret += symbolTwenty
+        case 3: ret += symbolThirty
+        case 4: ret += symbolForty
+        case 5: ret += symbolFifty
         default: fatalError("representation: outside")
         }
         switch rest {
         case 0: break
-        case 1: ret += Self.symbolOne
-        case 2: ret += Self.symbolTwo
-        case 3: ret += Self.symbolThree
-        case 4: ret += Self.symbolFour
-        case 5: ret += Self.symbolFive
-        case 6: ret += Self.symbolSix
-        case 7: ret += Self.symbolSeven
-        case 8: ret += Self.symbolEight
-        case 9: ret += Self.symbolNine
+        case 1: ret += symbolOne
+        case 2: ret += symbolTwo
+        case 3: ret += symbolThree
+        case 4: ret += symbolFour
+        case 5: ret += symbolFive
+        case 6: ret += symbolSix
+        case 7: ret += symbolSeven
+        case 8: ret += symbolEight
+        case 9: ret += symbolNine
         default: fatalError("representation: outside")
         }
         return ret
@@ -81,7 +81,7 @@ class BabylonianImplementation: GeneralLanguage, BabylonianParameterProtocol {
             value -= 60*60*60 * group
         }
         if value >= 60*60 {
-            if ret.count > 0 {  ret += Self.symbolSpace }
+            if ret.count > 0 {  ret += symbolSpace }
             let group = value / (60*60)
             ret += representation(group)
             value -= 60*60 * group
@@ -89,7 +89,7 @@ class BabylonianImplementation: GeneralLanguage, BabylonianParameterProtocol {
             if ret.count > 0 { ret += none }
         }
         if value >= 60 {
-            if ret.count > 0 {  ret += Self.symbolSpace }
+            if ret.count > 0 {  ret += symbolSpace }
             let group = value / (60)
             ret += representation(group)
             value -= 60 * group
@@ -97,7 +97,7 @@ class BabylonianImplementation: GeneralLanguage, BabylonianParameterProtocol {
             if ret.count > 0 { ret += none }
         }
         if value > 0 {
-            if ret.count > 0 {  ret += Self.symbolSpace }
+            if ret.count > 0 {  ret += symbolSpace }
             ret += representation(value)
         } else {
             if ret.count > 0 { ret += none }
@@ -107,9 +107,9 @@ class BabylonianImplementation: GeneralLanguage, BabylonianParameterProtocol {
 //        while ret.hasSuffix(" ") {
 //            ret.removeLast()
 //        }
-        while ret.hasSuffix(Self.symbolEmptyColumn) {
+        while ret.hasSuffix(symbolEmptyColumn) {
             /// sadly, 60 and 1 will have the same value :(
-            ret.removeLast(Self.symbolEmptyColumn.count)
+            ret.removeLast(symbolEmptyColumn.count)
         }
 
         return ret

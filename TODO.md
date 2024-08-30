@@ -1,4 +1,4 @@
-- settings: voice example in select voice screen!
+remember settings
 
 - Thai trennung, 1e5
 - Vietnamese: compact?

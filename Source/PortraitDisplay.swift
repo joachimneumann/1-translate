@@ -61,6 +61,7 @@ struct PortraitDisplay: View {
     }
     
     var body: some View {
+        // add a blue circle
         //let _ = print(display.data.left)
         HStack(alignment: .bottom, spacing: 0.0) {
             Spacer(minLength: 0.0)

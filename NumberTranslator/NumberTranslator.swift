@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 public class Translator {
     public enum SpanishPuntoComma: String, Codable, CaseIterable {
@@ -38,6 +39,7 @@ public class Translator {
     init(_ implementation: GeneralLanguage) {
         self.implementation = implementation
     }
+    
     public var germanCapitalisation: Bool {
         get {
             if let selfWithProtocol = self.implementation as? GermanParameterProtocol {
