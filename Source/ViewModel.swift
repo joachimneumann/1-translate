@@ -51,8 +51,6 @@ import NumberTranslator
             textColor[symbol] = keyColor.textColor(for: symbol, isPending: false)
         }
         keyStatusColor["plus"] = keyColor.upColor(for: "+", isPending: false)
-        // print("viewModel init")
-        voices.refreshVoiceDict(list: languages.list)
         
         for language in languages.list {
             language.hasVoice = false

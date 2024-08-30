@@ -9,6 +9,8 @@ import SwiftUI
 let testColors = false
 
 struct TranslateNumbers: View {
+    @Environment(\.scenePhase) var scenePhase
+
     @State var viewModel: ViewModel = ViewModel()
     var screen: Screen
     
@@ -113,6 +115,16 @@ struct TranslateNumbers: View {
                 .preferredColorScheme(.dark)
         }
         .accentColor(.white)
+        .onChange(of: scenePhase) { oldPhase, newPhase in
+            if newPhase == .active {
+                viewModel.voices.refreshVoiceDict(list: viewModel.languages.list)
+                print("Active")
+            } else if newPhase == .inactive {
+                print("Inactive")
+            } else if newPhase == .background {
+                print("Background")
+            }
+        }
     }
 }
 
