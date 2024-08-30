@@ -7,7 +7,7 @@ import Testing
 @Test func German() {
     let translator = GermanImplementation()
 
-    translator.capitalisation = false
+    translator.germanCapitalisation = false
     #expect(translator.translate(0).x == "null")
     #expect(translator.translate(1).x == "eins")
     #expect(translator.translate(2).x == "zwei")
@@ -175,7 +175,7 @@ import Testing
     #expect(translator.translate(-15).x == "minus fünfzehn")
     #expect(translator.translate(-12.334).x == "minus zwölf Komma drei drei vier")
 
-    translator.capitalisation = true
+    translator.germanCapitalisation = true
     #expect(translator.translate(0).x == "Null")
     #expect(translator.translate(1).x == "Eins")
     #expect(translator.translate(2).x == "Zwei")

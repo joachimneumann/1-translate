@@ -7,7 +7,7 @@ import Testing
 @Test func English() {
     let translator = EnglishImplementation()
 
-    translator.useAndAfterHundred = false
+    translator.englishUseAndAfterHundred = false
     #expect(translator.translate(0).x == "zero")
     #expect(translator.translate(1).x == "one")
     #expect(translator.translate(2).x == "two")
@@ -174,7 +174,7 @@ import Testing
     #expect(translator.translate(temp2).x == "minus three point one four one five nine two six")
     // "3.4e22" three point four times ten to the power of twenty-two
 
-    translator.useAndAfterHundred = true
+    translator.englishUseAndAfterHundred = true
     #expect(translator.translate(0).x == "zero")
     #expect(translator.translate(1).x == "one")
     #expect(translator.translate(2).x == "two")

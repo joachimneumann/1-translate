@@ -13,9 +13,9 @@ struct Translation {
     let overline: String?
     var spokenText: String?
     var copyText: String {
-        let text = displayText.replacingOccurrences(of: Translator.wordSplitter, with: "")
+        let text = displayText.x
         guard var overline = overline else { return text }
-        overline = overline.replacingOccurrences(of: Translator.wordSplitter, with: "")
+        overline = overline.x
         return "<overline>" + overline + "</overline>" + text
     }
 }
@@ -51,7 +51,7 @@ struct Translation {
         }
         var spokenText: String? = nil
         if translator.code != nil && hasVoice {
-            spokenText = displayText.replacingOccurrences(of: Translator.wordSplitter, with: " ")
+            spokenText = displayText.x
             if let speakingPostProcessing = speakingPostProcessing {
                 spokenText = speakingPostProcessing(spokenText!)
             }

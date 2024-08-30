@@ -176,7 +176,7 @@ import Testing
     #expect(translator.translate(3_000_003_000_000).x == "tres billiones y tres millones")
     #expect(translator.translate(3_003_000_000_000).x == "tres billiones y tres mil millones")
 
-    translator.puntoComma = .coma
+    translator.spanishPuntoComma = .coma
     #expect(translator.translate(-1).x == "menos uno")
     #expect(translator.translate(1.5).x == "uno coma cinco")
     #expect(translator.translate(-1.5).x == "menos uno coma cinco")

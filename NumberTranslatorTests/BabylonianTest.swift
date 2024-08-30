@@ -7,7 +7,7 @@ import Testing
 @Test func Babylonian() {
     let translator = BabylonianImplementation()
 
-    translator.allowEmptyColumn = false
+    translator.babylonianAllowEmptyColumn = false
     #expect(translator.translate(1).x == translator.symbolOne)
     #expect(translator.translate(60).x == translator.symbolOne+translator.symbolNone) // 6,0
     #expect(translator.translate(61).x == translator.symbolOne+translator.symbolOne) // 6,1
@@ -16,7 +16,7 @@ import Testing
     #expect(translator.translate(21609).x == translator.symbolSix+translator.symbolNone+translator.symbolNine) // 6,0 9.
     #expect(translator.translate(424000).x ==  translator.symbolOne+translator.symbolFifty+translator.symbolSeven+translator.symbolForty+translator.symbolSix+translator.symbolForty) // 1,57,46,40
 
-    translator.allowEmptyColumn = true
+    translator.babylonianAllowEmptyColumn = true
     #expect(translator.translate(1).x == translator.symbolOne)
     #expect(translator.translate(60).x == translator.symbolOne) // 6,0 but no empty column :(
     #expect(translator.translate(61).x == translator.symbolOne+translator.symbolOne) // 6,1

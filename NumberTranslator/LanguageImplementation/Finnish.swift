@@ -41,11 +41,11 @@ class FinnishImplementation: Group3Language  {
     
     override func _10s(_ i: UInt) -> String {
         if i == 1 { return "kymmenen" }
-        return _0_9(i) + Translator.wordSplitter + "kymmentä"
+        return _0_9(i) + wordSplitter + "kymmentä"
     }
     
     override func _11_19(_ i: UInt) -> String {
-        return _0_9(i - 10) + Translator.wordSplitter + "toista"
+        return _0_9(i - 10) + wordSplitter + "toista"
     }
 
     override func _20_99(_ i: UInt) -> String {
@@ -55,11 +55,11 @@ class FinnishImplementation: Group3Language  {
         var ret = _10s(first)
         if i < 20 {
             if rest > 0 {
-                ret = _0_9(rest) + Translator.wordSplitter + ret
+                ret = _0_9(rest) + wordSplitter + ret
             }
         } else {
             if rest > 0 {
-                ret += Translator.wordSplitter + _0_9(rest)
+                ret += wordSplitter + _0_9(rest)
             }
         }
         return ret

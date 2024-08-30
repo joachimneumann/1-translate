@@ -23,6 +23,8 @@ class GeneralLanguage {
     var exponentString: String = " EE "
     var postProcessing: ((String) -> String)? = nil
 
+    let wordSplitter = "\u{200A}" // the SoftHyphen "@\u{00AD}" did not seperate words well
+
     func _0_9(_ i: UInt) -> String {
         return String(i)
     }

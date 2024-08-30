@@ -21,7 +21,7 @@ class GermanImplementation: Group3Language, GermanParameterProtocol  {
         afterNegative = " "
         dotString = "Komma"
         exponentString = "mal zehn hoch"
-        _20_99_connector = Translator.wordSplitter + "und"
+        _20_99_connector = wordSplitter + "und"
         after_hundreds = ""
         before_hundreds = ""
         before_groupName = ""
@@ -139,7 +139,7 @@ class GermanImplementation: Group3Language, GermanParameterProtocol  {
     
     private func germanPostProcessing(_ unprocessed: String) -> String {
         var ret = unprocessed
-        ret = ret.replacingOccurrences(of: "eins"+Translator.wordSplitter+"und", with: "ein"+Translator.wordSplitter+"und")
+        ret = ret.replacingOccurrences(of: "eins" + wordSplitter + "und", with: "ein" + wordSplitter + "und")
 
         if germanCapitalisation {
             let words = ret.split(separator: " ")

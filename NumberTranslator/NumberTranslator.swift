@@ -23,8 +23,6 @@ public class Translator {
     }
 
     
-    public static let wordSplitter = "\u{200A}" // the SoftHyphen "@\u{00AD}" did not seperate words well
-//    static let WordSplitter = "@"
     public var name: String { implementation.name }
     public var englishName: String? { implementation.englishName }
     public var code: String? { implementation.code }
