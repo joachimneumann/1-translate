@@ -3,6 +3,10 @@ NumberTranslator.framework
 */xcuserdata
 dist.old
 dist/gmp/*
+dist/iPhone
+dist/simulator
+dist/arm64-catalyst
+fist/x86_64-catalyst
 dist/mpfr/*
 dist/build.log
 dist/signed
