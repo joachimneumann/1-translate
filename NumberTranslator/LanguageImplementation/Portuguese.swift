@@ -13,7 +13,7 @@ class PortugueseImplementation: Group3Language  {
     init(variant: Variant) {
         self.variant = variant
         super.init()
-        name = variant.name
+        name = variant.rawValue
         code = "pt"
         before_hundreds = ""
         _20_99_connector = " e "
@@ -138,15 +138,9 @@ class PortugueseImplementation: Group3Language  {
         return super.group(groupIndex, above, below: below)
     }
 
-    enum Variant: String, Codable, CaseIterable {
-        case european
-        case brazilian
-        var name: String {
-            switch self {
-            case .european: "Português Europeu"
-            case .brazilian:  "Português Brasileiro"
-            }
-        }
+    enum Variant: String {
+        case european  = "Português Europeu"
+        case brazilian = "Português Brasileiro"
     }
 }
     

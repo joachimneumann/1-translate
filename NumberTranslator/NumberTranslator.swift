@@ -8,16 +8,16 @@
 import Foundation
 
 public class Translator {
-    public enum SpanishPuntoComma: String, Codable, CaseIterable {
+    public enum SpanishPuntoComma: String, CaseIterable {
         case coma
         case punto
     }
-    public enum VietnameseThousand: String, Codable, CaseIterable {
+    public enum VietnameseThousand: String, CaseIterable {
         case ngàn
         case nghìn
     }
 
-    public enum VietnameseSecondLast: String, Codable, CaseIterable {
+    public enum VietnameseSecondLast: String, CaseIterable {
         case linh
         case lẻ
     }

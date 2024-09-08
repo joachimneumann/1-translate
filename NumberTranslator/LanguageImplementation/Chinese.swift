@@ -14,7 +14,7 @@ class ChineseImplementation: Group3Language  {
     init(variant: Variant) {
         self.variant = variant
         super.init()
-        name = variant.name
+        name = variant.rawValue
         englishName = variant.englishName
         code = "zh"
         use_single_hundreds = true
@@ -153,17 +153,10 @@ class ChineseImplementation: Group3Language  {
         }
     }
     
-    enum Variant {
-        case traditional
-        case simplified
-        case financial
-        var name: String {
-            switch self {
-            case .traditional: "傳統中國"
-            case .simplified:  "简体中文"
-            case .financial:   "金融的"
-            }
-        }
+    enum Variant: String {
+        case traditional = "傳統中國"
+        case simplified  = "简体中文"
+        case financial   = "金融的"
         var englishName: String {
             switch self {
             case .traditional: "Traditional Chinese"

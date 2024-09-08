@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum DecimalSeparator: String, Codable, CaseIterable {
+enum DecimalSeparator: String, CaseIterable {
     case comma
     case dot
     var character: Character {
@@ -24,7 +24,7 @@ enum DecimalSeparator: String, Codable, CaseIterable {
         }
     }
 }
-enum GroupSeparator: String, Codable, CaseIterable {
+enum GroupSeparator: String, CaseIterable {
     case comma
     case dot
     case none
