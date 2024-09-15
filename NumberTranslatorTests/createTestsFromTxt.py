@@ -50,7 +50,7 @@ def assertEqual(components):
         translated = " ".join(components[1:])
         if not "translator." in translated:
             translated = "\""+translated+"\""
-        write_("#expect(translator.translate(")
+        write_("#expect(translator.transl ate(")
         write(number)
         write(").x == ")
         write(translated)

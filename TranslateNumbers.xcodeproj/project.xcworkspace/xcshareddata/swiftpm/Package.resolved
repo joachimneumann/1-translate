@@ -1,0 +1,15 @@
+{
+  "originHash" : "be73bb3b5feb63f9c656173f658170237d779d5c8b8f9117dcfe952000e9ef17",
+  "pins" : [
+    {
+      "identity" : "numbertranslator",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/joachimneumann/NumberTranslator",
+      "state" : {
+        "branch" : "main",
+        "revision" : "8fc14bbeca36f895be55003e4e4d3b40dfef187c"
+      }
+    }
+  ],
+  "version" : 3
+}

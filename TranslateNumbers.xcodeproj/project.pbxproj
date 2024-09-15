@@ -12,6 +12,7 @@
 		AA0523472B27024800DDAAD4 /* LanguageSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0523462B27024800DDAAD4 /* LanguageSelector.swift */; };
 		AA08C7C6272EDA4A001B8575 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA08C7C5272EDA4A001B8575 /* Assets.xcassets */; };
 		AA08C7C9272EDA4A001B8575 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA08C7C8272EDA4A001B8575 /* Preview Assets.xcassets */; };
+		AA1934532C96956100FE0848 /* NumberTranslator in Frameworks */ = {isa = PBXBuildFile; productRef = AA1934522C96956100FE0848 /* NumberTranslator */; };
 		AA29F58A293CD608001ADF5A /* PortraitDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29F589293CD608001ADF5A /* PortraitDisplay.swift */; };
 		AA2FABEB272F2135006DE4C8 /* mpfr.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA2FABEA272F2135006DE4C8 /* mpfr.xcframework */; };
 		AA2FABF2272F217F006DE4C8 /* Gmp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FABF1272F217F006DE4C8 /* Gmp.swift */; };
@@ -34,8 +35,6 @@
 		AAB10B9C292A2222004707E9 /* NonScientificKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB10B96292A2222004707E9 /* NonScientificKeyboard.swift */; };
 		AAB253B52B3AE79500860F93 /* Languages.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB253B42B3AE79400860F93 /* Languages.swift */; };
 		AABEFC132972A8780023A3C9 /* KeyColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABEFC122972A8780023A3C9 /* KeyColor.swift */; };
-		AAC2342D2C8DC1F700B54AEE /* NumberTranslator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAC2342C2C8DC1F700B54AEE /* NumberTranslator.framework */; };
-		AAC2342E2C8DC1F800B54AEE /* NumberTranslator.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AAC2342C2C8DC1F700B54AEE /* NumberTranslator.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AAE426F729597AE3005FE365 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE426F629597AE3005FE365 /* Screen.swift */; };
 		AAEF2FB92B20D54B0012DDDD /* Separators.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEF2FB82B20D54B0012DDDD /* Separators.swift */; };
 		AAF472672B452BD000E7B986 /* Voices.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF472662B452BD000E7B986 /* Voices.swift */; };
@@ -48,7 +47,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				AAC2342E2C8DC1F800B54AEE /* NumberTranslator.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -92,7 +90,6 @@
 		AAB10B96292A2222004707E9 /* NonScientificKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonScientificKeyboard.swift; sourceTree = "<group>"; };
 		AAB253B42B3AE79400860F93 /* Languages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Languages.swift; sourceTree = "<group>"; };
 		AABEFC122972A8780023A3C9 /* KeyColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyColor.swift; sourceTree = "<group>"; };
-		AAC2342C2C8DC1F700B54AEE /* NumberTranslator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NumberTranslator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AACCD0772B43A89A00D545C5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = "../1-translate-tests/README.md"; sourceTree = "<group>"; };
 		AAE426F629597AE3005FE365 /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
 		AAEF2FB82B20D54B0012DDDD /* Separators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Separators.swift; sourceTree = "<group>"; };
@@ -104,8 +101,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA1934532C96956100FE0848 /* NumberTranslator in Frameworks */,
 				AA03B1F2298F639100A7837A /* gmp.xcframework in Frameworks */,
-				AAC2342D2C8DC1F700B54AEE /* NumberTranslator.framework in Frameworks */,
 				AA2FABEB272F2135006DE4C8 /* mpfr.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -192,7 +189,6 @@
 		AA2FABE9272F2135006DE4C8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				AAC2342C2C8DC1F700B54AEE /* NumberTranslator.framework */,
 				AA2FABEE272F2141006DE4C8 /* gmp.xcframework */,
 				AA2FABEA272F2135006DE4C8 /* mpfr.xcframework */,
 			);
@@ -253,6 +249,9 @@
 				Base,
 			);
 			mainGroup = AA08C7B5272EDA48001B8575;
+			packageReferences = (
+				AA1934512C96956100FE0848 /* XCRemoteSwiftPackageReference "NumberTranslator" */,
+			);
 			productRefGroup = AA08C7BF272EDA48001B8575 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -544,6 +543,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AA1934512C96956100FE0848 /* XCRemoteSwiftPackageReference "NumberTranslator" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/joachimneumann/NumberTranslator";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AA1934522C96956100FE0848 /* NumberTranslator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA1934512C96956100FE0848 /* XCRemoteSwiftPackageReference "NumberTranslator" */;
+			productName = NumberTranslator;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AA08C7B6272EDA48001B8575 /* Project object */;
 }

@@ -49,61 +49,46 @@ build()
 }
 
 
-rm -rf iPhone simulator x86_64-catalyst arm64-catalyst
-mkdir iPhone simulator x86_64-catalyst arm64-catalyst
-
-cd gmp
-build "arm64" "${IPHONEOS_SDK}" "${IPHONEOS_PLATFORM}"
-cp .libs/libgmp.a ../iPhone/libgmp.a
-
-build "x86_64" "${IPHONESIMULATOR_SDK}" "${IPHONESIMULATOR_PLATFORM}"
-cp .libs/libgmp.a ../simulator/libgmp.a
-
-build "x86_64" "${OSX_SDK}" "${OSX_PLATFORM}" "-target x86_64-apple-ios-macabi"
-cp .libs/libgmp.a ../x86_64-catalyst/libgmp.a
-
-build "arm64" "${OSX_SDK}" "${OSX_PLATFORM}" "-target x86_64-apple-ios-macabi"
-cp .libs/libgmp.a ../arm64-catalyst/libgmp.a
-cd ..
+# rm -rf iPhone simulator mac
+# mkdir iPhone simulator mac
+#
+# cd gmp
+# build "arm64" "${IPHONEOS_SDK}" "${IPHONEOS_PLATFORM}"
+# cp .libs/libgmp.a ../iPhone/libgmp.a
+#
+# build "arm64" "${IPHONESIMULATOR_SDK}" "${IPHONESIMULATOR_PLATFORM}"
+# cp .libs/libgmp.a ../simulator/libgmp.a
+#
+# build "arm64" "${OSX_SDK}" "${OSX_PLATFORM}"
+# cp .libs/libgmp.a ../mac/libgmp.a
+# cd ..
 
 pwd=`pwd`
 
 cd mpfr
-build "arm64" "${IPHONEOS_SDK}" "${IPHONEOS_PLATFORM}" "" "--with-gmp-lib=${pwd}/iPhone --with-gmp-include=${pwd}/include"
-cp src/.libs/libmpfr.a ../iPhone/libmpfr.a
+# build "arm64" "${IPHONEOS_SDK}" "${IPHONEOS_PLATFORM}" "" "--with-gmp-lib=${pwd}/iPhone --with-gmp-include=${pwd}/include"
+# cp src/.libs/libmpfr.a ../iPhone/libmpfr.a
+#
+# build "arm64" "${IPHONESIMULATOR_SDK}" "${IPHONESIMULATOR_PLATFORM}" "" "--with-gmp-lib=${pwd}/simulator --with-gmp-include=${pwd}/include"
+# cp src/.libs/libmpfr.a ../simulator/libmpfr.a
 
-build "x86_64" "${IPHONESIMULATOR_SDK}" "${IPHONESIMULATOR_PLATFORM}" "" "--with-gmp-lib=${pwd}/simulator --with-gmp-include=${pwd}/include"
-cp src/.libs/libmpfr.a ../simulator/libmpfr.a
-
-build "x86_64" "${OSX_SDK}" "${OSX_PLATFORM}" "-target x86_64-apple-ios-macabi" "--with-gmp-lib=${pwd}/x86_64-catalyst --with-gmp-include=${pwd}/include"
-cp src/.libs/libmpfr.a ../x86_64-catalyst/libmpfr.a
-
-build "arm64" "${OSX_SDK}" "${OSX_PLATFORM}" "-target x86_64-apple-ios-macabi" "--with-gmp-lib=${pwd}/arm64-catalyst --with-gmp-include=${pwd}/include"
-cp src/.libs/libmpfr.a ../arm64-catalyst/libmpfr.a
+build "arm64" "${OSX_SDK}" "${OSX_PLATFORM}" "" "--with-gmp-lib=${pwd}/mac --with-gmp-include=${pwd}/include"
+cp src/.libs/libmpfr.a ../mac/libmpfr.a
 cd ..
 
 rm -rf signed
 mkdir signed
-cp -r iPhone simulator x86_64-catalyst arm64-catalyst signed
+cp -r iPhone simulator mac signed
 
 # code signing: get the correct expanded identity with the command $security find-identity
 identity='039E5E0C8815FFF5080702599A3C31A7212AA454'
 codesign -s ${identity} signed/iPhone/libgmp.a
 codesign -s ${identity} signed/simulator/libgmp.a
-codesign -s ${identity} signed/x86_64-catalyst/libgmp.a
-codesign -s ${identity} signed/arm64-catalyst/libgmp.a
+codesign -s ${identity} signed/mac/libgmp.a
 codesign -s ${identity} signed/iPhone/libmpfr.a
 codesign -s ${identity} signed/simulator/libmpfr.a
-codesign -s ${identity} signed/x86_64-catalyst/libmpfr.a
-codesign -s ${identity} signed/arm64-catalyst/libmpfr.a
+codesign -s ${identity} signed/mac/libmpfr.a
 
-mkdir signed/catalyst;
-lipo -create signed/x86_64-catalyst/libgmp.a  signed/arm64-catalyst/libgmp.a -output signed/catalyst/libgmp.a
-lipo -create signed/x86_64-catalyst/libmpfr.a  signed/arm64-catalyst/libmpfr.a -output signed/catalyst/libmpfr.a
-
-xcodebuild -create-xcframework -library signed/catalyst/libgmp.a -library signed/iPhone/libgmp.a -library signed/simulator/libgmp.a -output gmp.xcframework
-xcodebuild -create-xcframework -library signed/catalyst/libmpfr.a -library signed/iPhone/libmpfr.a -library signed/simulator/libmpfr.a -output mpfr.xcframework
-
-# Troubleshooting:
-# remove frameworks from copy in build phases
-# Exclusive Access to memory: compile time only
+rm -rf gmp.xcframework mpfr.xcframework
+xcodebuild -create-xcframework -library signed/mac/libgmp.a -library signed/iPhone/libgmp.a -library signed/simulator/libgmp.a -output gmp.xcframework
+xcodebuild -create-xcframework -library signed/mac/libmpfr.a -library signed/iPhone/libmpfr.a -library signed/simulator/libmpfr.a -output mpfr.xcframework
