@@ -49,28 +49,28 @@ build()
 }
 
 
-# rm -rf iPhone simulator mac
-# mkdir iPhone simulator mac
-#
-# cd gmp
-# build "arm64" "${IPHONEOS_SDK}" "${IPHONEOS_PLATFORM}"
-# cp .libs/libgmp.a ../iPhone/libgmp.a
-#
-# build "arm64" "${IPHONESIMULATOR_SDK}" "${IPHONESIMULATOR_PLATFORM}"
-# cp .libs/libgmp.a ../simulator/libgmp.a
-#
-# build "arm64" "${OSX_SDK}" "${OSX_PLATFORM}"
-# cp .libs/libgmp.a ../mac/libgmp.a
-# cd ..
+rm -rf iPhone simulator mac
+mkdir iPhone simulator mac
+
+cd gmp
+build "arm64" "${IPHONEOS_SDK}" "${IPHONEOS_PLATFORM}"
+cp .libs/libgmp.a ../iPhone/libgmp.a
+
+build "arm64" "${IPHONESIMULATOR_SDK}" "${IPHONESIMULATOR_PLATFORM}"
+cp .libs/libgmp.a ../simulator/libgmp.a
+
+build "arm64" "${OSX_SDK}" "${OSX_PLATFORM}"
+cp .libs/libgmp.a ../mac/libgmp.a
+cd ..
 
 pwd=`pwd`
 
 cd mpfr
-# build "arm64" "${IPHONEOS_SDK}" "${IPHONEOS_PLATFORM}" "" "--with-gmp-lib=${pwd}/iPhone --with-gmp-include=${pwd}/include"
-# cp src/.libs/libmpfr.a ../iPhone/libmpfr.a
-#
-# build "arm64" "${IPHONESIMULATOR_SDK}" "${IPHONESIMULATOR_PLATFORM}" "" "--with-gmp-lib=${pwd}/simulator --with-gmp-include=${pwd}/include"
-# cp src/.libs/libmpfr.a ../simulator/libmpfr.a
+build "arm64" "${IPHONEOS_SDK}" "${IPHONEOS_PLATFORM}" "" "--with-gmp-lib=${pwd}/iPhone --with-gmp-include=${pwd}/include"
+cp src/.libs/libmpfr.a ../iPhone/libmpfr.a
+
+build "arm64" "${IPHONESIMULATOR_SDK}" "${IPHONESIMULATOR_PLATFORM}" "" "--with-gmp-lib=${pwd}/simulator --with-gmp-include=${pwd}/include"
+cp src/.libs/libmpfr.a ../simulator/libmpfr.a
 
 build "arm64" "${OSX_SDK}" "${OSX_PLATFORM}" "" "--with-gmp-lib=${pwd}/mac --with-gmp-include=${pwd}/include"
 cp src/.libs/libmpfr.a ../mac/libmpfr.a
