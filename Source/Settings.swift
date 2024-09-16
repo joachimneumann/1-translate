@@ -19,19 +19,19 @@ struct Settings: View {
         VStack {
             List {
                 DigitsSettings
-                if viewModel.translator.name == "English" {
+                if viewModel.translator.currentLanguage.rawValue == "english" {
                     EnglishParameters
                 }
-                if viewModel.translator.name == "Deutsch" {
+                if viewModel.translator.currentLanguage.rawValue == "german" {
                     GermanParameters
                 }
-                if viewModel.translator.name == "Español" {
+                if viewModel.translator.currentLanguage.rawValue == "spanish" {
                     SpanishParameters
                 }
-                if viewModel.translator.name == "Babylonian" {
+                if viewModel.translator.currentLanguage.rawValue == "babylonian" {
                     BabylonianParameters
                 }
-                if viewModel.translator.name == "Tiếng Việt" {
+                if viewModel.translator.currentLanguage.rawValue == "vietnamese" {
                     VietnameseParameters
                 }
                 if viewModel.translator.code != nil {
@@ -85,7 +85,7 @@ struct Settings: View {
     }
     
     func updateSelectedVoice(reducedIdentifier: String, for code: String) {
-        viewModel.voices.updateSelectedVoice(reducedIdentifier: reducedIdentifier, for: code, languageList: viewModel.languages.list)
+        viewModel.voices.updateSelectedVoice(reducedIdentifier: reducedIdentifier, for: code)
     }
     
     var VoiceSettings: some View {
@@ -117,28 +117,34 @@ struct Settings: View {
     }
     
     struct LanguageSection <Content: View>: View {
-        let language: Language
+        let flagName: String
+        let name: String
         let example: String
+        let translatedExample: String
         var content: () -> Content
-        init(language: Language,
+        init(flagName: String,
+             name: String,
              example: String,
+             translatedExample: String,
              @ViewBuilder content: @escaping () -> Content) {
-            self.language = language
+            self.flagName = flagName
+            self.name = name
             self.example = example
+            self.translatedExample = translatedExample
             self.content = content
         }
         
         var body: some View {
             Section(header: HStack {
-                Image(language.flagName)
+                Image(flagName)
                     .resizable()
                     .scaledToFit()
                     .padding(1)
                     .border(.white)
                     .frame(height: 13)
                     .padding(.trailing, 3)
-                Text(language.nameWithDescription) }) {
-                    Text(example + ": " + language.translator.translate(example))
+                Text(name) }) {
+                    Text(example + ": " + translatedExample)
                         .fontWeight(.semibold)
                         .frame(height: 25)
                         .foregroundColor(.yellow)
@@ -149,28 +155,31 @@ struct Settings: View {
     
     var EnglishParameters: some View {
         return LanguageSection(
-            language: viewModel.languages.language,
-            example: "150") {
-                HStack {
-                    Text("\"and\" after hundred")
-                    Spacer()
-                    Toggle("", isOn: $viewModel.translator.englishUseAndAfterHundred)
-                        .frame(width: 40)
-                        .toggleStyle(
-                            ColoredToggleStyle(onColor: Color(white: 0.6),
-                                               offColor: Color(white: 0.25),
-                                               thumbColor: .white))
-                        .buttonStyle(.plain)
-                        .padding(.trailing, 10)
-                }
+            flagName: viewModel.translator.flagName(.english),
+            name: viewModel.translator.name(.english),
+            example: "150",
+            translatedExample: viewModel.translator.translate("150", to: .english))
+            {
+                Text("\"and\" after hundred")
+                Spacer()
+                Toggle("", isOn: $viewModel.translator.englishUseAndAfterHundred)
+                    .frame(width: 40)
+                    .toggleStyle(
+                        ColoredToggleStyle(onColor: Color(white: 0.6),
+                                           offColor: Color(white: 0.25),
+                                           thumbColor: .white))
+                    .buttonStyle(.plain)
+                    .padding(.trailing, 10)
             }
     }
     
     
     var GermanParameters: some View {
         return LanguageSection(
-            language: viewModel.languages.language,
-            example: "88") {
+            flagName: viewModel.translator.flagName(.german),
+            name: viewModel.translator.name(.german),
+            example: "88",
+            translatedExample: viewModel.translator.translate("88", to: .german)) {
                 HStack {
                     Text("Großschreibung")
                     Spacer()
@@ -188,8 +197,10 @@ struct Settings: View {
     
     var BabylonianParameters: some View {
         return LanguageSection(
-            language: viewModel.languages.language,
-            example: "3601") {
+            flagName: viewModel.translator.flagName(.babylonian),
+            name: viewModel.translator.name(.babylonian),
+            example: "3601",
+            translatedExample: viewModel.translator.translate("3601", to: .babylonian)) {
                 HStack {
                     Text("Empty column")
                     Spacer()
@@ -208,13 +219,15 @@ struct Settings: View {
     
     var SpanishParameters: some View {
         return LanguageSection(
-            language: viewModel.languages.language,
-            example: "1.5") {
+            flagName: viewModel.translator.flagName(.spanish),
+            name: viewModel.translator.name(.spanish),
+            example: "1.5",
+            translatedExample: viewModel.translator.translate("1.5", to: .spanish)) {
                 HStack {
                     Text("Coma o punto:")
                     Spacer()
-                    Picker("", selection: $viewModel.translator.puntoComma) {
-                        ForEach(Translator.SpanishPuntoComma.allCases, id: \.self) { value in
+                    Picker("", selection: $viewModel.translator.spanishPuntoComma) {
+                        ForEach(NumberTranslator.SpanishPuntoComma.allCases, id: \.self) { value in
                             Text("\(value.rawValue)")
                                 .tag(value)
                         }
@@ -226,13 +239,15 @@ struct Settings: View {
     
     var VietnameseParameters: some View {
         return LanguageSection(
-            language: viewModel.languages.language,
-            example: "33303") {
+            flagName: viewModel.translator.flagName(.vietnamese),
+            name: viewModel.translator.name(.vietnamese),
+            example: "33303",
+            translatedExample: viewModel.translator.translate("33303", to: .vietnamese)) {
                 Grid(alignment: .leading) {
                     GridRow {
                         Text("1000")
                         Picker("", selection: $viewModel.translator.vietnameseThousand) {
-                            ForEach(Translator.VietnameseThousand.allCases, id: \.self) { value in
+                            ForEach(NumberTranslator.VietnameseThousand.allCases, id: \.self) { value in
                                 Text("\(value.rawValue)")
                                     .tag(value)
                             }
@@ -243,7 +258,7 @@ struct Settings: View {
                     GridRow {
                         Text("Linh hoặc lẻ")
                         Picker("", selection: $viewModel.translator.vietnameseSecondLast) {
-                            ForEach(Translator.VietnameseSecondLast.allCases, id: \.self) { value in
+                            ForEach(NumberTranslator.VietnameseSecondLast.allCases, id: \.self) { value in
                                 Text("\(value.rawValue)")
                                     .tag(value)
                             }

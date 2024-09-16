@@ -8,7 +8,7 @@
 import Foundation
 import NumberTranslator
 
-struct Translation {
+struct TranslationResult {
     let displayText: String
     let overline: String?
     var spokenText: String?
@@ -20,28 +20,28 @@ struct Translation {
     }
 }
 
-@Observable class Translator: Identifiable {
-    private var translatorIplementation: NumberTranslator
-    private var currentLanguage: NumberTranslator.Language = .english
+@Observable class Translator: NumberTranslator, Identifiable {
+
+    var currentLanguage: NumberTranslator.Language = .english
+    
     var hasVoice: Bool = false
+    
     func flagName(_ language: NumberTranslator.Language) -> String {
-        translatorIplementation.englishName(language) ?? language.rawValue
+        englishName(language) ?? name(language)
     }
     var flagName: String { flagName(currentLanguage) }
-    
+    var code: String? { code(currentLanguage) }
+    var groupSize: Int { groupSize(currentLanguage) }
+
     func nameWithDescription(_ language: NumberTranslator.Language) -> String {
-        language.rawValue + (translatorIplementation.englishName(language) != nil ? "/"+translatorIplementation.englishName(language)! : "")
+        language.rawValue + (englishName(language) != nil ? "/"+englishName(language)! : "")
     }
     var nameWithDescription: String { nameWithDescription(currentLanguage) }
 
     var speakingPostProcessing: ((String) -> String)?
 
-    init() {
-        self.translatorIplementation = NumberTranslator()
-    }
-    
-    func translate(_ s: String, to language: NumberTranslator.Language) -> Translation {
-        var displayText = translatorIplementation.translate(s, to: language)
+    func getResult(_ s: String, to language: NumberTranslator.Language) -> TranslationResult {
+        var displayText = translate(s, to: language)
         var overline: String? = nil
         if displayText.contains("OVERLINE") {
             let parts = displayText.split(separator: "OVERLINE")
@@ -55,18 +55,18 @@ struct Translation {
             }
         }
         var spokenText: String? = nil
-        if translatorIplementation.code(language) != nil && hasVoice {
+        if code(language) != nil && hasVoice {
             spokenText = displayText.replacingOccurrences(of: "\u{200A}", with: "")
-            if let speakingPostProcessing = speakingPostProcessing {
+            if let speakingPostProcessing {
                 spokenText = speakingPostProcessing(spokenText!)
             }
         }
-        return Translation(
+        return TranslationResult(
             displayText: displayText,
             overline: overline,
             spokenText: spokenText)
     }
-    func translate(_ s: String) -> Translation {
-        translate(s, to: currentLanguage)
+    func getResult(_ s: String) -> TranslationResult {
+        getResult(s, to: currentLanguage)
     }
 }

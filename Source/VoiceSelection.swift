@@ -32,7 +32,7 @@ struct VoiceSelection: View {
         
         let locale: Locale = .current
         let variant = locale.localizedString(forIdentifier: code)
-        if let variant = variant {
+        if let variant {
             languageName = variant + " (" + code + ")"
         } else {
             languageName = code
@@ -78,7 +78,7 @@ struct VoiceSelection: View {
                 if voice.quality == quality {
                     VoiceView(displayData: displayData)
                         .onTapGesture {
-                            if let callback = callback {
+                            if let callback {
                                 callback(reducedIdentifier, code)
                             }
                         }
@@ -88,14 +88,15 @@ struct VoiceSelection: View {
     }
 
     var body: some View {
-        let text = viewModel.translator.translate("200")
+        let translation = viewModel.translator.getResult("200")
+        let spokenText = translation.spokenText ?? "error"
         let noVoice = !viewModel.persistent.offerReadingAloud
         let yellow = Color(red: 242.0/255.0, green: 203.0/255.0, blue: 48.0/255.0)
         let color =  noVoice ? yellow.opacity(0.7) : yellow
         let symbolName = noVoice ? "speaker.slash.fill" : "speaker.wave.3.fill"
         VStack {
             Button {
-                viewModel.voices.readAloud(text, in: viewModel.languages.language)
+                viewModel.voices.readAloud(spokenText, in: viewModel.translator)
             } label: {
                 HStack {
                     Image(systemName: symbolName)
@@ -107,7 +108,7 @@ struct VoiceSelection: View {
                         .frame(height: 23)
                         .padding(.top, 10)
                         .padding(.trailing, 10)
-                    Text(text)
+                    Text(spokenText)
                         .padding(.top, 5)
                 }
                 .foregroundColor(color)

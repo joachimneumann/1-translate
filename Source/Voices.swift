@@ -7,8 +7,10 @@
 
 import Foundation
 import AVFoundation
+import NumberTranslator
 
 @Observable class Voices {
+    let translator: Translator
     struct VoiceDisplayData {
         let variant: String?
         let name: String
@@ -28,17 +30,20 @@ import AVFoundation
     static let synthesizer = AVSpeechSynthesizer()
     var voiceDict: VoiceDict = [:]
 
-    init() {}
-    
-    func updateSelectedVoice(reducedIdentifier: String, for code: String, languageList: [Language]) {
-        UserDefaults.standard.set(reducedIdentifier, forKey: code.voiceIdentifierKey)
-        refreshVoiceDict(list: languageList)
+    init(translator: Translator) {
+        self.translator = translator
     }
     
-    func refreshVoiceDict(list: [Language]) {
+    func updateSelectedVoice(reducedIdentifier: String, for code: String) {
+        UserDefaults.standard.set(reducedIdentifier, forKey: code.voiceIdentifierKey)
+        refreshVoiceDict()
+    }
+    
+    func refreshVoiceDict() {
         var uniqueVoiceLanguageCodes: [String] = []
-        for language in list {
-            if let code = language.translator.code {
+        for l in NumberTranslator.Language.allCases {
+            translator.currentLanguage = l
+            if let code = translator.code(translator.currentLanguage) {
                 if !uniqueVoiceLanguageCodes.contains(code) {
                     uniqueVoiceLanguageCodes.append(code)
                 }
@@ -124,7 +129,7 @@ import AVFoundation
     }
     
     
-    func readAloud(_ text: String, in language: Language) {
+    func readAloud(_ text: String, in translator: Translator) {
         
         /// also speak when the phone is in silent mode
         if AVAudioSession.sharedInstance().category != .playback {
@@ -138,7 +143,7 @@ import AVFoundation
         }
 
 
-        guard let voiceLanguageCode = language.translator.code else { return }
+        guard let voiceLanguageCode = translator.code(translator.currentLanguage) else { return }
         guard let (selectedID, dict) = voiceDict[voiceLanguageCode] else { return }
         guard let selectedID = selectedID else { return }
         guard let (_, voice) = dict[selectedID] else { return }

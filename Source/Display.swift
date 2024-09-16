@@ -155,7 +155,7 @@ extension Display {
             signAndSeparator = withSeparators(numberString: mantissa, isNegative: false, separators: separators, groupSize: groupSize)
         }
 
-        if let displayLengthLimiter = displayLengthLimiter {
+        if let displayLengthLimiter {
             let w = signAndSeparator.textWidth(kerning: displayLengthLimiter.kerning, appleFont: displayLengthLimiter.appleFont)
             if !forceScientific && w <= displayLengthLimiter.displayWidth - displayLengthLimiter.ePadding {
                 return fromLeft(signAndSeparator)
@@ -262,7 +262,7 @@ extension Display {
         if mantissa.count <= exponent + 1 && !forceScientific { /// smaller than because of possible trailing zeroes in the integer
             mantissa = mantissa.padding(toLength: exponent+1, withPad: "0", startingAt: 0)
             let withSeparators = withSeparators(numberString: mantissa, isNegative: isNegative, separators: separators, groupSize: groupSize)
-            if let displayLengthLimiter = displayLengthLimiter {
+            if let displayLengthLimiter {
                 let w = withSeparators.textWidth(kerning: displayLengthLimiter.kerning, appleFont: displayLengthLimiter.appleFont)
                 let fitsInOneLine = w <= displayLengthLimiter.displayWidth - displayLengthLimiter.ePadding
                 if !fitsInOneLine && exponent < Self.MAX_DISPLAY_LENGTH { returnValue.canBeInteger = true }
@@ -283,7 +283,7 @@ extension Display {
             var indexInt: Int = floatString.distance(from: floatString.startIndex, to: index)
             floatString.insert(".", at: index)
             floatString = withSeparators(numberString: floatString, isNegative: isNegative, separators: separators, groupSize: groupSize)
-            if let displayLengthLimiter = displayLengthLimiter {
+            if let displayLengthLimiter {
                 if let index = floatString.firstIndex(of: separators.decimalSeparator.character) {
                     indexInt = floatString.distance(from: floatString.startIndex, to: index)
                     var floatCandidate = String(floatString.prefix(indexInt+1))
@@ -324,7 +324,7 @@ extension Display {
             }
             testFloat += "x"
             floatString = minusSign + "0" + separators.decimalSeparator.string + floatString
-            if let displayLengthLimiter = displayLengthLimiter {
+            if let displayLengthLimiter {
                 let w = testFloat.textWidth(kerning: displayLengthLimiter.kerning, appleFont: displayLengthLimiter.appleFont)
                 let fitsInOneLine = w <= displayLengthLimiter.displayWidth - displayLengthLimiter.ePadding
                 if !fitsInOneLine && exponent > -Self.MAX_DISPLAY_LENGTH { returnValue.canBeFloat = true }
@@ -362,7 +362,7 @@ extension Display {
         }
         mantissa = withSeparators(numberString: mantissa, isNegative: isNegative, separators: separators, groupSize: groupSize)
         let exponentString = "e\(exponent)"
-        if let displayLengthLimiter = displayLengthLimiter {
+        if let displayLengthLimiter {
             var indexInt = 3 /// minimum: X,x
             var floatString = String(mantissa.prefix(indexInt))
             let w = (floatString + exponentString).textWidth(kerning: displayLengthLimiter.kerning, appleFont: displayLengthLimiter.appleFont)

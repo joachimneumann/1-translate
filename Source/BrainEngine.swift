@@ -322,7 +322,7 @@ class DebugBrain: BrainEngine {
             return duration!
         }
         var duration: CFAbsoluteTime? {
-            if let endTime = endTime {
+            if let endTime {
                 return endTime - startTime
             } else {
                 return nil

@@ -13,19 +13,17 @@ import NumberTranslator
     var keyStatusColor: [String: Color] = [:]
     var textColor: [String: Color] = [:]
     var currentDisplay: Display
-    var _1Translation: Translation = Translation(displayText: "", overline: nil, spokenText: nil)
+    var _1Translation: TranslationResult = TranslationResult(displayText: "", overline: nil, spokenText: nil)
     var persistent = Persistent()
-    var languages: Languages = Languages()
 
     private var stupidBrain = BrainEngine(precision: 1_000) /// I want to call fast sync functions
     private let keysThatRequireValidNumber = ["±", "%", "/", "x", "-", "+", "="]
     private static let MAX_DISPLAY_LEN = 10_000 /// too long strings in Text() crash the app
     private let keyColor = KeyColor()
-    
+
     private var upHasHappended = false
     private var downAnimationFinished = false
-    var voices: Voices = Voices()
-
+    
     private enum KeyState {
         case notPressed
         case pressed
@@ -38,11 +36,21 @@ import NumberTranslator
     private let upTime = 0.4
     private var displayNumber = Number("0", precision: 10)
     private var previouslyPendingOperator: String? = nil
-            
+    var translator: Translator
+    private(set) var _voices: Voices!
+    var voices: Voices {
+        return _voices
+    }
+//    var voices: Voices
+
     init() {
+        translator = Translator()
+        currentDisplay = Display(left: "0", right: nil, canBeInteger: false, canBeFloat: false)
+        self._voices = Voices(translator: translator)
+
+
         /// currentDisplay will be updated shortly by refreshDisplay in onAppear() of Calculator
         /// I set some values here
-        currentDisplay = Display(left: "0", right: nil, canBeInteger: false, canBeFloat: false)
 
         for symbol in [
             "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", ",",
@@ -52,14 +60,14 @@ import NumberTranslator
         }
         keyStatusColor["plus"] = keyColor.upColor(for: "+", isPending: false)
         
-        for language in languages.list {
-            language.hasVoice = false
-            if language.translator.code != nil {
-                if voices.voiceDict[language.translator.code!] != nil {
-                    language.hasVoice = true
-                }
-            }
-        }
+//        for language in languages.list {
+//            language.hasVoice = false
+//            if language.translator.code != nil {
+//                if voices.voiceDict[language.translator.code!] != nil {
+//                    language.hasVoice = true
+//                }
+//            }
+//        }
         updateTranslation()
     }
 
@@ -67,14 +75,14 @@ import NumberTranslator
         Font.largeTitle
     }
     
-    var translator: Translator {
-        get {
-            languages.language.translator
-        }
-        set(newValue) {
-            languages.language.translator = newValue
-        }
-    }
+//    var translator: Translator {
+//        get {
+//            languages.language.translator
+//        }
+//        set(newValue) {
+//            languages.language.translator = newValue
+//        }
+//    }
         
     func cleanSeparators(_ text: String) -> String {
         var ret = text
@@ -89,7 +97,7 @@ import NumberTranslator
 
     func updateTranslation() {
         let allInOneLine = cleanSeparators(currentDisplay.allInOneLine)
-        _1Translation = languages.language.translate(allInOneLine)
+        _1Translation = translator.getResult(allInOneLine)
     }
     
     ///  To give a clear visual feedback to the user that the button has been pressed,
@@ -214,7 +222,7 @@ import NumberTranslator
     }
     var lastScreen: Screen?
     func refreshDisplay() {
-        if let lastScreen = lastScreen {
+        if let lastScreen {
             refreshDisplay(screen: lastScreen)
         }
     }

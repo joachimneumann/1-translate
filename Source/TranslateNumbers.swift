@@ -23,8 +23,8 @@ struct TranslateNumbers: View {
     struct OneLanguage: View {
         var viewModel: ViewModel
         let screen: Screen
-        let language: Language
-        let translation: Translation
+        let translator: Translator
+        let translation: TranslationResult
 
         var body: some View {
             HStack(spacing: 30.0) {
@@ -35,7 +35,7 @@ struct TranslateNumbers: View {
                     let symbolName = noVoice ? "speaker.slash.fill" : "speaker.wave.3.fill"
                     let symbolSize: CGFloat = noVoice ? 23.0 : 18.0
                     Button {
-                        viewModel.voices.readAloud(translation.spokenText!, in: language)
+                        viewModel.voices.readAloud(translation.spokenText!, in: translator)
                     } label: {
                         Image(systemName: symbolName)
                             .resizable()
@@ -47,7 +47,7 @@ struct TranslateNumbers: View {
                     .disabled(noVoice)
                     .padding(.trailing, 10)
                 }
-                LanguageButton(language: language, viewModel: viewModel, screen: screen)
+                LanguageButton(viewModel: viewModel, screen: screen)
             }
             .frame(height: 34.0)
             .padding(.bottom, 10)
@@ -60,7 +60,7 @@ struct TranslateNumbers: View {
             VStack(spacing: 0.0) {
                 OneLanguage(viewModel: viewModel,
                             screen: screen,
-                            language: viewModel.languages.language,
+                            translator: viewModel.translator,
                             translation: viewModel._1Translation)
                 TranslatedDisplay(translation: viewModel._1Translation,
                                   screen: screen)
@@ -82,21 +82,19 @@ struct TranslateNumbers: View {
     }
     
     struct LanguageButton: View {
-        private let language: Language
         private let viewModel: ViewModel
         private let screen: Screen
 
-        init(language: Language, viewModel: ViewModel, screen: Screen) {
-            self.language = language
+        init(viewModel: ViewModel, screen: Screen) {
             self.viewModel = viewModel
             self.screen = screen
         }
         
         var body: some View {
             NavigationLink {
-                LanguageSelector(viewModel: viewModel, screen: screen)
+                LanguageSelector(viewModel: viewModel, screen: screen, currentLanguage: viewModel.translator.currentLanguage)
             } label: {
-                Image(language.flagName)
+                Image(viewModel.translator.flagName)
                     .resizable()
                     .scaledToFit()
                     .padding(2)
@@ -116,15 +114,10 @@ struct TranslateNumbers: View {
         }
         .accentColor(.white)
         .onChange(of: scenePhase) { oldPhase, newPhase in
-            if newPhase == .active {
-                viewModel.voices.refreshVoiceDict(list: viewModel.languages.list)
-                print("Active")
-            } else if newPhase == .inactive {
-                print("Inactive")
-            } else if newPhase == .background {
-                print("Background")
-            }
-        }
+                        if newPhase == .active {
+//                            viewModel.voices.refreshVoiceDict(list: viewModel.languages.list)
+                        }
+                    }
     }
 }
 

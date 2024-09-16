@@ -6,40 +6,61 @@
 //
 
 import SwiftUI
+import NumberTranslator
+
+struct ContentView: View {
+    enum LanguageX: String, Identifiable, CaseIterable {
+        case english = "English"
+        case french = "French"
+        case spanish = "Spanish"
+        
+        var id: String { rawValue }
+    }
+    
+    let languages = LanguageX.allCases
+    
+    var body: some View {
+        List(languages) { language in
+            Text(language.rawValue)
+        }
+    }
+}
+
+extension NumberTranslator.Language: @retroactive Identifiable {
+    public var id: String { rawValue }
+}
 
 struct LanguageSelector: View {
     @Bindable var viewModel: ViewModel
     let screen : Screen
-        
-    @State var currentLanguage: Language? {
+    
+    @State var currentLanguage: NumberTranslator.Language {
         didSet {
-            if let currentLanguage = currentLanguage {
-                viewModel.languages.language = currentLanguage
-                viewModel.languages.name = currentLanguage.translator.name
-            }
+            viewModel.translator.currentLanguage = currentLanguage
             viewModel.updateTranslation()
         }
     }
     
     var body: some View {
-         ScrollViewReader { scrollViewReaderProxy in
-            List(viewModel.languages.list)  { language in
-                let selected: Bool = (language.translator.name == currentLanguage?.translator.name)
+        ScrollViewReader { scrollViewReaderProxy in
+            List(NumberTranslator.Language.allCases) { listLanguage in
+                let selected: Bool = (listLanguage == currentLanguage)
+                let name = viewModel.translator.name(listLanguage)
+                let x = viewModel.translator.englishName(listLanguage)
+                let englishName = (x != nil ? " (\(x!))" : "")
                 Button {
-                    currentLanguage = language
+                    currentLanguage = listLanguage
                 } label: {
                     HStack(spacing: 0) {
-                        Image(language.flagName)
+                        Image(viewModel.translator.flagName(listLanguage))
                             .resizable()
                             .scaledToFit()
                             .padding(.vertical, 1)
                             .border(.white, width: 1)
                             .frame(height: 20)
-                        Text(language.translator.name)
+                        Text(name)
                             .padding(.leading, 10)
-                        if language.translator.englishName != nil {
-                            Text(" ("+language.translator.englishName!+")")
-                        }
+                        Text(englishName)
                         Spacer()
                         if selected {
                             Image(systemName: "checkmark")
@@ -53,16 +74,16 @@ struct LanguageSelector: View {
                         }
                     }
                 }
-                .id(language.translator.name)
+                .id(viewModel.translator.currentLanguage.rawValue)
                 .listRowBackground(selected ? Color(white: 0.18) : Color(white: 0.1))
             }
             .onAppear() {
-                scrollViewReaderProxy.scrollTo(viewModel.translator.name, anchor: .top)
+                scrollViewReaderProxy.scrollTo(viewModel.translator.currentLanguage.rawValue, anchor: .top)
             }
             .listStyle(.sidebar)
         }
         .onAppear() {
-            currentLanguage = viewModel.languages.language
+            currentLanguage = viewModel.translator.currentLanguage
         }
         .padding(.top, 20)
         .navigationTitle("Select Language")
@@ -87,6 +108,6 @@ struct LanguageSelector: View {
 
 #Preview {
     GeometryReader { geo in
-        LanguageSelector(viewModel: ViewModel(), screen: Screen(geo.size))
+        LanguageSelector(viewModel: ViewModel(), screen: Screen(geo.size), currentLanguage: .english)
     }
 }
