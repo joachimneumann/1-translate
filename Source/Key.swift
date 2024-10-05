@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftGmp
 
 struct Key: View {
     let screen: Screen
@@ -14,14 +15,15 @@ struct Key: View {
     let xOffset: CGFloat
     let keyStatusColor: Color
     let textColor: Color
-    let touchDown: (String) -> ()
-    let touchUp: (String, Screen) -> ()
+    let touchDown: (Key) -> ()
+    let touchUp: (Key, Screen) -> ()
+    let op: OpProtocol
     
-    init(_ symbol: String,
-         _ screen: Screen,
-         _ viewModel: ViewModel) {
+    init(_ screen: Screen,
+         _ viewModel: ViewModel,
+         _ op: OpProtocol) {
         self.screen = screen
-        self.symbol = symbol
+        self.symbol = op.getRawValue()
         var keyHeight = screen.keySize.height
         keyHeight *= 1.5
         if symbol == "0" {
@@ -39,6 +41,7 @@ struct Key: View {
         self.textColor = viewModel.textColor[symbol]           ?? .green
         self.touchDown = viewModel.touchDown
         self.touchUp   = viewModel.touchUp
+        self.op = op
     }
     
     var body: some View {
@@ -55,10 +58,10 @@ struct Key: View {
 #endif
             .simultaneousGesture(DragGesture(minimumDistance: 0)
                 .onChanged { _ in
-                    touchDown(symbol)
+                    touchDown(self)
                 }
                 .onEnded { _ in
-                    touchUp(symbol, screen)
+                    touchUp(self, screen)
                 })
     }
 }
@@ -69,10 +72,10 @@ struct Key_Previews: PreviewProvider {
         let viewModel = ViewModel()
         VStack {
             HStack {
-                Key("√", screen, viewModel)
-                Key("5", screen, viewModel)
+                Key(screen, viewModel, InplaceOperation.sqrt)
+                Key(screen, viewModel, ConstantOperation.pi)
             }
-            Key("0", screen, viewModel)
+            Key(screen, viewModel, ConstantOperation.pi)
         }
         .foregroundColor(.white)
     }

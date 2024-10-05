@@ -31,6 +31,7 @@ import SwiftGmp
     private var previouslyPendingOperator: String? = nil
     var numberTranslator: XNumberTranslator
     private(set) var _voices: Voices!
+    public var currentLR: LR = LR("0")
     var voices: Voices {
         return _voices
     }
@@ -39,10 +40,6 @@ import SwiftGmp
     init() {
         numberTranslator = XNumberTranslator()
         self._voices = Voices(numberTranslator: numberTranslator)
-
-
-        /// currentDisplay will be updated shortly by refreshDisplay in onAppear() of Calculator
-        /// I set some values here
 
         for symbol in [
             "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", ",",
@@ -115,25 +112,26 @@ import SwiftGmp
         }
     }
     
-    func touchDown(for symbol: String) {
-        upHasHappended[symbol] = false
-        downAnimationFinished[symbol] = false
+    func touchDown(for key: Key) {
+        upHasHappended[key.symbol] = false
+        downAnimationFinished[key.symbol] = false
         withAnimation(.easeIn(duration: downTime)) {
-            keyStatusColor[symbol] = keyColor.downColor(for: symbol, isPending: symbol == previouslyPendingOperator)
+            keyStatusColor[key.symbol] = keyColor.downColor(for: key.symbol, isPending: key.symbol == previouslyPendingOperator)
         }
         Task(priority: .userInitiated) {
             try? await Task.sleep(nanoseconds: UInt64(downTime * 1_000_000_000))
-            downAnimationFinished[symbol] = true
-            if upHasHappended[symbol] ?? false {
-                showUpColors(for: symbol)
+            downAnimationFinished[key.symbol] = true
+            if upHasHappended[key.symbol] ?? false {
+                showUpColors(for: key.symbol)
             }
         }
     }
     
-    func touchUp(of symbol: String, screen: Screen) {
-        upHasHappended[symbol] = true
-        if downAnimationFinished[symbol] ?? false {
-            showUpColors(for: symbol)
+    func touchUp(of key: Key, screen: Screen) {
+        defaultTask(for: key, screen: screen)
+        upHasHappended[key.symbol] = true
+        if downAnimationFinished[key.symbol] ?? false {
+            showUpColors(for: key.symbol)
         }
     }
     
@@ -159,12 +157,13 @@ import SwiftGmp
 //        }
 //    }
     
-//    func defaultTask(for symbol: String, screen: Screen) {
-//        calculator.asResult(symbol)
-//        refreshDisplay(screen: screen)
-//        lastScreen = screen
-//    }
-    var lastScreen: Screen?
+    func defaultTask(for key: Key, screen: Screen) {
+        calculator.press(key.op)
+        refreshDisplay(screen: screen)
+        lastScreen = screen
+    }
+    
+    var lastScreen: Screen? = nil
     func refreshDisplay() {
         if let lastScreen {
             refreshDisplay(screen: lastScreen)
@@ -172,9 +171,8 @@ import SwiftGmp
     }
 
     func refreshDisplay(screen: Screen) {
-//        let tempDisplay = Display(displayNumber, screen: screen, separators: self.persistent, groupSize: translator.groupSize, forceScientific: false )
-//        currentDisplay = tempDisplay
-//        updateTranslation()
+        currentLR = calculator.lr
+        updateTranslation()
 //        self.showAC = currentDisplay.isZero
     }
 

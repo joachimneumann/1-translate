@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftGmp
 
 struct NonScientificKeyboard: View {
     let screen: Screen
@@ -15,33 +16,33 @@ struct NonScientificKeyboard: View {
         let spacing = screen.keySpacing
         VStack(spacing: spacing) {
             HStack(spacing: spacing) {
-                Key(viewModel.showAC ? "AC" : "C", screen, viewModel)
-                Key("±", screen, viewModel)
-                Key("%", screen, viewModel)
-                Key("/", screen, viewModel)
+                Key(screen, viewModel, AuxOperation.clear)
+                Key(screen, viewModel, InplaceOperation.changeSign)
+                Key(screen, viewModel, AuxOperation.percent)
+                Key(screen, viewModel, TwoOperantOperation.div)
             }
             HStack(spacing: spacing) {
-                Key("7", screen, viewModel)
-                Key("8", screen, viewModel)
-                Key("9", screen, viewModel)
-                Key("x", screen, viewModel)
+                Key(screen, viewModel, DigitOperation.seven)
+                Key(screen, viewModel, DigitOperation.eight)
+                Key(screen, viewModel, DigitOperation.nine)
+                Key(screen, viewModel, TwoOperantOperation.mul)
             }
             HStack(spacing: spacing) {
-                Key("4", screen, viewModel)
-                Key("5", screen, viewModel)
-                Key("6", screen, viewModel)
-                Key("-", screen, viewModel)
+                Key(screen, viewModel, DigitOperation.four)
+                Key(screen, viewModel, DigitOperation.five)
+                Key(screen, viewModel, DigitOperation.six)
+                Key(screen, viewModel, TwoOperantOperation.sub)
             }
             HStack(spacing: spacing) {
-                Key("1", screen, viewModel)
-                Key("2", screen, viewModel)
-                Key("3", screen, viewModel)
-                Key("+", screen, viewModel)
+                Key(screen, viewModel, DigitOperation.one)
+                Key(screen, viewModel, DigitOperation.two)
+                Key(screen, viewModel, DigitOperation.three)
+                Key(screen, viewModel, TwoOperantOperation.add)
             }
             HStack(spacing: spacing) {
-                Key("0", screen, viewModel)
-                Key(viewModel.persistent.decimalSeparator.string, screen, viewModel)
-                Key("=", screen, viewModel)
+                Key(screen, viewModel, DigitOperation.zero)
+                Key(screen, viewModel, DigitOperation.dot)
+                Key(screen, viewModel, AuxOperation.equal)
             }
         }
     }
