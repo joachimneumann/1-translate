@@ -7,16 +7,17 @@
 
 import SwiftUI
 import NumberTranslator
+import SwiftGmp
 
+@MainActor
 @Observable class ViewModel {
     var showAC = true
     var keyStatusColor: [String: Color] = [:]
     var textColor: [String: Color] = [:]
-    var currentDisplay: Display
     var _1Translation: TranslationResult = TranslationResult(displayText: "", overline: nil, spokenText: nil)
     var persistent = Persistent()
 
-    private var stupidBrain = BrainEngine(precision: 1_000) /// I want to call fast sync functions
+    var calculator = Calculator(precision: 40) /// I want to call fast sync functions
     private let keysThatRequireValidNumber = ["±", "%", "/", "x", "-", "+", "="]
     private static let MAX_DISPLAY_LEN = 10_000 /// too long strings in Text() crash the app
     private let keyColor = KeyColor()
@@ -27,16 +28,13 @@ import NumberTranslator
     private enum KeyState {
         case notPressed
         case pressed
-        case highPrecisionProcessing
-        case highPrecisionProcessingDisabled
     }
     
     private var keyState: KeyState = .notPressed //{ didSet { print("keyState ->", keyState) } }
     private let downTime = 0.1
     private let upTime = 0.4
-    private var displayNumber = Number("0", precision: 10)
     private var previouslyPendingOperator: String? = nil
-    var translator: Translator
+    var numberTranslator: XNumberTranslator
     private(set) var _voices: Voices!
     var voices: Voices {
         return _voices
@@ -44,9 +42,8 @@ import NumberTranslator
 //    var voices: Voices
 
     init() {
-        translator = Translator()
-        currentDisplay = Display(left: "0", right: nil, canBeInteger: false, canBeFloat: false)
-        self._voices = Voices(translator: translator)
+        numberTranslator = XNumberTranslator()
+        self._voices = Voices(numberTranslator: numberTranslator)
 
 
         /// currentDisplay will be updated shortly by refreshDisplay in onAppear() of Calculator
@@ -96,8 +93,8 @@ import NumberTranslator
     }
 
     func updateTranslation() {
-        let allInOneLine = cleanSeparators(currentDisplay.allInOneLine)
-        _1Translation = translator.getResult(allInOneLine)
+        let allInOneLine = cleanSeparators(calculator.lr.string)
+        _1Translation = numberTranslator.getResult(allInOneLine)
     }
     
     ///  To give a clear visual feedback to the user that the button has been pressed,
@@ -134,92 +131,62 @@ import NumberTranslator
         }
     }
     
-    func showUpColors(for symbol: String) async {
+    func showUpColors(for symbol: String) {
         /// Set the background color back to normal
-        await MainActor.run {
-            withAnimation(.easeIn(duration: upTime)) {
-                keyStatusColor[symbol] = keyColor.upColor(for: symbol, isPending: symbol == previouslyPendingOperator)
-            }
+        withAnimation(.easeIn(duration: upTime)) {
+            keyStatusColor[symbol] = keyColor.upColor(for: symbol, isPending: symbol == previouslyPendingOperator)
         }
     }
     
     func touchDown(for symbol: String) {
-        //print("touchDown1 keyState =", keyState)
-        if keyState == .highPrecisionProcessing {
-            keyState = .highPrecisionProcessingDisabled
-            Task(priority: .userInitiated) {
-                await showDisabledColors(for: symbol)
-            }
-            return
-        }
-        
         Task(priority: .userInitiated) {
-            let validOrAllowed = displayNumber.isValid || !keysThatRequireValidNumber.contains(symbol)
-            //print("touchDown2 keyState =", keyState, "validOrAllowed =", validOrAllowed)
-            guard keyState == .notPressed && validOrAllowed else {
-                //keyState = .disabledPressed
-                await showDisabledColors(for: symbol)
-                return
-            }
             await showDownColors(for: symbol)
         }
+//        Task(priority: .userInitiated) {
+//            let validOrAllowed = displayNumber.isValid || !keysThatRequireValidNumber.contains(symbol)
+//            //print("touchDown2 keyState =", keyState, "validOrAllowed =", validOrAllowed)
+//            guard keyState == .notPressed && validOrAllowed else {
+//                //keyState = .disabledPressed
+//                await showDisabledColors(for: symbol)
+//                return
+//            }
+//        }
     }
     
     func touchUp(of symbol: String, screen: Screen) {
-        if keyState == .highPrecisionProcessingDisabled {
-            keyState = .notPressed
-            /// this allows the user to try pressing a button again
-            return
-        }
-        
-        switch symbol {
-        default:
-            guard keyState == .notPressed else { return }
-            
-            let valid = displayNumber.isValid || !keysThatRequireValidNumber.contains(symbol)
-            guard valid else { return }
-            
-            keyState = .pressed
-            upHasHappended = true
-            Task(priority: .high) {
-                if downAnimationFinished {
-                    await showUpColors(for: symbol)
-                }
-                await setPendingColors(for: symbol)
-            }
-            self.defaultTask(for: symbol, screen: screen)
-            self.keyState = .notPressed
-        }
+        showUpColors(for: symbol)
+        keyState = .notPressed
+        showUpColors(for: symbol)
     }
     
-    func setPendingColors(for symbol: String) async {
-        if let previous = previouslyPendingOperator {
-            await MainActor.run() {
-                withAnimation(.easeIn(duration: downTime)) {
-                    keyStatusColor[previous] = keyColor.upColor(for: previous, isPending: false)
-                    textColor[previous] = keyColor.textColor(for: previous, isPending: false)
-                }
-            }
-        }
-        if ["/", "x", "-", "+", "x^y", "y^x", "y√"].contains(symbol) {
-            await MainActor.run() {
-                withAnimation(.easeIn(duration: downTime)) {
-                    keyStatusColor[symbol] = keyColor.upColor(for: symbol, isPending: true)
-                    textColor[symbol] = keyColor.textColor(for: symbol, isPending: true)
-                    previouslyPendingOperator = symbol
-                }
-            }
-        } else {
-            previouslyPendingOperator = nil
-        }
-    }
+//    func setPendingColors(for symbol: String) async {
+//        if let previous = previouslyPendingOperator {
+//            await MainActor.run() {
+//                withAnimation(.easeIn(duration: downTime)) {
+//                    keyStatusColor[previous] = keyColor.upColor(for: previous, isPending: false)
+//                    textColor[previous] = keyColor.textColor(for: previous, isPending: false)
+//                }
+//            }
+//        }
+//        if ["/", "x", "-", "+", "x^y", "y^x", "y√"].contains(symbol) {
+//            await MainActor.run() {
+//                withAnimation(.easeIn(duration: downTime)) {
+//                    keyStatusColor[symbol] = keyColor.upColor(for: symbol, isPending: true)
+//                    textColor[symbol] = keyColor.textColor(for: symbol, isPending: true)
+//                    previouslyPendingOperator = symbol
+//                }
+//            }
+//        } else {
+//            previouslyPendingOperator = nil
+//        }
+//    }
     
-    func defaultTask(for symbol: String, screen: Screen) {
-        keyState = .highPrecisionProcessing
-        displayNumber = stupidBrain.operation(symbol)
-        refreshDisplay(screen: screen)
-        lastScreen = screen
-    }
+//    func defaultTask(for symbol: String, screen: Screen) {
+//        keyState = .notPressed
+//        calculator.asResult(symbol)
+//        refreshDisplay(screen: screen)
+//        lastScreen = screen
+//    }
     var lastScreen: Screen?
     func refreshDisplay() {
         if let lastScreen {
@@ -228,10 +195,10 @@ import NumberTranslator
     }
 
     func refreshDisplay(screen: Screen) {
-        let tempDisplay = Display(displayNumber, screen: screen, separators: self.persistent, groupSize: translator.groupSize, forceScientific: false )
-        currentDisplay = tempDisplay
-        updateTranslation()
-        self.showAC = currentDisplay.isZero
+//        let tempDisplay = Display(displayNumber, screen: screen, separators: self.persistent, groupSize: translator.groupSize, forceScientific: false )
+//        currentDisplay = tempDisplay
+//        updateTranslation()
+//        self.showAC = currentDisplay.isZero
     }
 
 }

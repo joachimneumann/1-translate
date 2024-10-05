@@ -8,27 +8,9 @@
 import SwiftUI
 import NumberTranslator
 
-struct ContentView: View {
-    enum LanguageX: String, Identifiable, CaseIterable {
-        case english = "English"
-        case french = "French"
-        case spanish = "Spanish"
-        
-        var id: String { rawValue }
-    }
-    
-    let languages = LanguageX.allCases
-    
-    var body: some View {
-        List(languages) { language in
-            Text(language.rawValue)
-        }
-    }
-}
-
-extension NumberTranslator.Language: @retroactive Identifiable {
-    public var id: String { rawValue }
-}
+//extension NumberTranslator.XXXX: @retroactive Identifiable {
+//    public var id: String { rawValue }
+//}
 
 struct LanguageSelector: View {
     @Bindable var viewModel: ViewModel
@@ -36,23 +18,23 @@ struct LanguageSelector: View {
     
     @State var currentLanguage: NumberTranslator.Language {
         didSet {
-            viewModel.translator.currentLanguage = currentLanguage
+            viewModel.numberTranslator.currentLanguage = currentLanguage
             viewModel.updateTranslation()
         }
     }
-    
+        
     var body: some View {
         ScrollViewReader { scrollViewReaderProxy in
             List(NumberTranslator.Language.allCases) { listLanguage in
-                let selected: Bool = (listLanguage == currentLanguage)
-                let name = viewModel.translator.name(listLanguage)
-                let x = viewModel.translator.englishName(listLanguage)
+                let selected: Bool = (viewModel.numberTranslator.name(listLanguage) == viewModel.numberTranslator.name(currentLanguage))
+                let name = viewModel.numberTranslator.name(listLanguage)
+                let x = viewModel.numberTranslator.englishName(listLanguage)
                 let englishName = (x != nil ? " (\(x!))" : "")
                 Button {
                     currentLanguage = listLanguage
                 } label: {
                     HStack(spacing: 0) {
-                        Image(viewModel.translator.flagName(listLanguage))
+                        Image(viewModel.numberTranslator.flagName(listLanguage))
                             .resizable()
                             .scaledToFit()
                             .padding(.vertical, 1)
@@ -74,16 +56,16 @@ struct LanguageSelector: View {
                         }
                     }
                 }
-                .id(viewModel.translator.currentLanguage.rawValue)
+                .id(viewModel.numberTranslator.currentLanguage.rawValue)
                 .listRowBackground(selected ? Color(white: 0.18) : Color(white: 0.1))
             }
             .onAppear() {
-                scrollViewReaderProxy.scrollTo(viewModel.translator.currentLanguage.rawValue, anchor: .top)
+                scrollViewReaderProxy.scrollTo(viewModel.numberTranslator.currentLanguage.rawValue, anchor: .top)
             }
             .listStyle(.sidebar)
         }
         .onAppear() {
-            currentLanguage = viewModel.translator.currentLanguage
+            currentLanguage = viewModel.numberTranslator.currentLanguage
         }
         .padding(.top, 20)
         .navigationTitle("Select Language")
@@ -106,8 +88,8 @@ struct LanguageSelector: View {
 }
 
 
-#Preview {
-    GeometryReader { geo in
-        LanguageSelector(viewModel: ViewModel(), screen: Screen(geo.size), currentLanguage: .english)
-    }
-}
+//#Preview {
+//    GeometryReader { geo in
+//        LanguageSelector(viewModel: ViewModel(), screen: Screen(geo.size), currentLanguage: .english)
+//    }
+//}

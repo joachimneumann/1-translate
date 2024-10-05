@@ -7,6 +7,7 @@
 
 import SwiftUI
 import NumberTranslator
+import SwiftGmp
 
 struct Settings: View {
     @Environment(\.presentationMode) var presentation /// for dismissing the Settings View
@@ -19,22 +20,22 @@ struct Settings: View {
         VStack {
             List {
                 DigitsSettings
-                if viewModel.translator.currentLanguage.rawValue == "english" {
+                if viewModel.numberTranslator.currentLanguage.rawValue == "english" {
                     EnglishParameters
                 }
-                if viewModel.translator.currentLanguage.rawValue == "german" {
+                if viewModel.numberTranslator.currentLanguage.rawValue == "german" {
                     GermanParameters
                 }
-                if viewModel.translator.currentLanguage.rawValue == "spanish" {
+                if viewModel.numberTranslator.currentLanguage.rawValue == "spanish" {
                     SpanishParameters
                 }
-                if viewModel.translator.currentLanguage.rawValue == "babylonian" {
+                if viewModel.numberTranslator.currentLanguage.rawValue == "babylonian" {
                     BabylonianParameters
                 }
-                if viewModel.translator.currentLanguage.rawValue == "vietnamese" {
+                if viewModel.numberTranslator.currentLanguage.rawValue == "vietnamese" {
                     VietnameseParameters
                 }
-                if viewModel.translator.code != nil {
+                if viewModel.numberTranslator.code != nil {
                     VoiceSettings
                 }
                 HobbyProject
@@ -46,7 +47,7 @@ struct Settings: View {
     }
     
     var DigitsSettings: some View {
-        let example =  Display(left: "").withSeparators(numberString: "120000.5", isNegative: false, separators: viewModel.persistent, groupSize: viewModel.translator.groupSize)
+        let example =  LR("")//.withSeparators(numberString: "120000.5", isNegative: false, separators: viewModel.persistent, groupSize: viewModel.translator.groupSize)
         return Section(header: Text("Separators")) {
             Grid(alignment: .leading, verticalSpacing: 10) {
                 GridRow {
@@ -107,7 +108,7 @@ struct Settings: View {
             }
             VStack(alignment: .leading) {
                 NavigationLink {
-                    VoiceSelection(viewModel: viewModel, code: viewModel.translator.code!, callback: updateSelectedVoice)
+                    VoiceSelection(viewModel: viewModel, code: viewModel.numberTranslator.code!, callback: updateSelectedVoice)
                 } label: {
                     Text("Select Voice")
                 }
@@ -120,12 +121,12 @@ struct Settings: View {
         let flagName: String
         let name: String
         let example: String
-        let translatedExample: String
+        let translatedExample: TranslationResult
         var content: () -> Content
         init(flagName: String,
              name: String,
              example: String,
-             translatedExample: String,
+             translatedExample: TranslationResult,
              @ViewBuilder content: @escaping () -> Content) {
             self.flagName = flagName
             self.name = name
@@ -144,7 +145,7 @@ struct Settings: View {
                     .frame(height: 13)
                     .padding(.trailing, 3)
                 Text(name) }) {
-                    Text(example + ": " + translatedExample)
+                    Text(example + ": " + translatedExample.displayText)
                         .fontWeight(.semibold)
                         .frame(height: 25)
                         .foregroundColor(.yellow)
@@ -155,14 +156,14 @@ struct Settings: View {
     
     var EnglishParameters: some View {
         return LanguageSection(
-            flagName: viewModel.translator.flagName(.english),
-            name: viewModel.translator.name(.english),
+            flagName: viewModel.numberTranslator.flagName(.english),
+            name: viewModel.numberTranslator.name(.english),
             example: "150",
-            translatedExample: viewModel.translator.translate("150", to: .english))
+            translatedExample: viewModel.numberTranslator.getResult("150", to: .english))
             {
                 Text("\"and\" after hundred")
                 Spacer()
-                Toggle("", isOn: $viewModel.translator.englishUseAndAfterHundred)
+                Toggle("", isOn: $viewModel.numberTranslator.englishUseAndAfterHundred)
                     .frame(width: 40)
                     .toggleStyle(
                         ColoredToggleStyle(onColor: Color(white: 0.6),
@@ -176,14 +177,14 @@ struct Settings: View {
     
     var GermanParameters: some View {
         return LanguageSection(
-            flagName: viewModel.translator.flagName(.german),
-            name: viewModel.translator.name(.german),
+            flagName: viewModel.numberTranslator.flagName(.german),
+            name: viewModel.numberTranslator.name(.german),
             example: "88",
-            translatedExample: viewModel.translator.translate("88", to: .german)) {
+            translatedExample: viewModel.numberTranslator.getResult("88", to: .german)) {
                 HStack {
                     Text("Großschreibung")
                     Spacer()
-                    Toggle("", isOn: $viewModel.translator.germanCapitalisation)
+                    Toggle("", isOn: $viewModel.numberTranslator.germanCapitalisation)
                         .frame(width: 40)
                         .toggleStyle(
                             ColoredToggleStyle(onColor: Color(white: 0.6),
@@ -197,14 +198,14 @@ struct Settings: View {
     
     var BabylonianParameters: some View {
         return LanguageSection(
-            flagName: viewModel.translator.flagName(.babylonian),
-            name: viewModel.translator.name(.babylonian),
+            flagName: viewModel.numberTranslator.flagName(.babylonian),
+            name: viewModel.numberTranslator.name(.babylonian),
             example: "3601",
-            translatedExample: viewModel.translator.translate("3601", to: .babylonian)) {
+            translatedExample: viewModel.numberTranslator.getResult("3601", to: .babylonian)) {
                 HStack {
                     Text("Empty column")
                     Spacer()
-                    Toggle("", isOn: $viewModel.translator.babylonianAllowEmptyColumn)
+                    Toggle("", isOn: $viewModel.numberTranslator.babylonianAllowEmptyColumn)
                         .frame(width: 40)
                         .toggleStyle(
                             ColoredToggleStyle(onColor: Color(white: 0.6),
@@ -219,14 +220,14 @@ struct Settings: View {
     
     var SpanishParameters: some View {
         return LanguageSection(
-            flagName: viewModel.translator.flagName(.spanish),
-            name: viewModel.translator.name(.spanish),
+            flagName: viewModel.numberTranslator.flagName(.spanish),
+            name: viewModel.numberTranslator.name(.spanish),
             example: "1.5",
-            translatedExample: viewModel.translator.translate("1.5", to: .spanish)) {
+            translatedExample: viewModel.numberTranslator.getResult("1.5", to: .spanish)) {
                 HStack {
                     Text("Coma o punto:")
                     Spacer()
-                    Picker("", selection: $viewModel.translator.spanishPuntoComma) {
+                    Picker("", selection: $viewModel.numberTranslator.spanishPuntoComma) {
                         ForEach(NumberTranslator.SpanishPuntoComma.allCases, id: \.self) { value in
                             Text("\(value.rawValue)")
                                 .tag(value)
@@ -239,14 +240,14 @@ struct Settings: View {
     
     var VietnameseParameters: some View {
         return LanguageSection(
-            flagName: viewModel.translator.flagName(.vietnamese),
-            name: viewModel.translator.name(.vietnamese),
+            flagName: viewModel.numberTranslator.flagName(.vietnamese),
+            name: viewModel.numberTranslator.name(.vietnamese),
             example: "33303",
-            translatedExample: viewModel.translator.translate("33303", to: .vietnamese)) {
+            translatedExample: viewModel.numberTranslator.getResult("33303", to: .vietnamese)) {
                 Grid(alignment: .leading) {
                     GridRow {
                         Text("1000")
-                        Picker("", selection: $viewModel.translator.vietnameseThousand) {
+                        Picker("", selection: $viewModel.numberTranslator.vietnameseThousand) {
                             ForEach(NumberTranslator.VietnameseThousand.allCases, id: \.self) { value in
                                 Text("\(value.rawValue)")
                                     .tag(value)
@@ -257,7 +258,7 @@ struct Settings: View {
                     }
                     GridRow {
                         Text("Linh hoặc lẻ")
-                        Picker("", selection: $viewModel.translator.vietnameseSecondLast) {
+                        Picker("", selection: $viewModel.numberTranslator.vietnameseSecondLast) {
                             ForEach(NumberTranslator.VietnameseSecondLast.allCases, id: \.self) { value in
                                 Text("\(value.rawValue)")
                                     .tag(value)
@@ -269,7 +270,7 @@ struct Settings: View {
                 HStack {
                     Text("Ngắn gọn")
                     Spacer()
-                    Toggle("", isOn: $viewModel.translator.vietnameseCompact)
+                    Toggle("", isOn: $viewModel.numberTranslator.vietnameseCompact)
                         .frame(width: 40)
                         .toggleStyle(
                             ColoredToggleStyle(onColor: Color(white: 0.6),

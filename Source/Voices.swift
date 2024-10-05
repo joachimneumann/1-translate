@@ -10,7 +10,7 @@ import AVFoundation
 import NumberTranslator
 
 @Observable class Voices {
-    let translator: Translator
+    let numberTranslator: NumberTranslator
     struct VoiceDisplayData {
         let variant: String?
         let name: String
@@ -30,8 +30,8 @@ import NumberTranslator
     static let synthesizer = AVSpeechSynthesizer()
     var voiceDict: VoiceDict = [:]
 
-    init(translator: Translator) {
-        self.translator = translator
+    init(numberTranslator: NumberTranslator) {
+        self.numberTranslator = numberTranslator
     }
     
     func updateSelectedVoice(reducedIdentifier: String, for code: String) {
@@ -42,8 +42,7 @@ import NumberTranslator
     func refreshVoiceDict() {
         var uniqueVoiceLanguageCodes: [String] = []
         for l in NumberTranslator.Language.allCases {
-            translator.currentLanguage = l
-            if let code = translator.code(translator.currentLanguage) {
+            if let code = numberTranslator.code(l) {
                 if !uniqueVoiceLanguageCodes.contains(code) {
                     uniqueVoiceLanguageCodes.append(code)
                 }
@@ -129,7 +128,7 @@ import NumberTranslator
     }
     
     
-    func readAloud(_ text: String, in translator: Translator) {
+    func readAloud(_ text: String, in language: NumberTranslator.Language) {
         
         /// also speak when the phone is in silent mode
         if AVAudioSession.sharedInstance().category != .playback {
@@ -143,7 +142,7 @@ import NumberTranslator
         }
 
 
-        guard let voiceLanguageCode = translator.code(translator.currentLanguage) else { return }
+        guard let voiceLanguageCode = numberTranslator.code(language) else { return }
         guard let (selectedID, dict) = voiceDict[voiceLanguageCode] else { return }
         guard let selectedID = selectedID else { return }
         guard let (_, voice) = dict[selectedID] else { return }

@@ -36,7 +36,7 @@ struct Key: View {
             xOffset = 0.0
         }
         self.keyStatusColor = viewModel.keyStatusColor[symbol] ?? .green
-        self.textColor = viewModel.textColor[symbol]             ?? .green
+        self.textColor = viewModel.textColor[symbol]           ?? .green
         self.touchDown = viewModel.touchDown
         self.touchUp   = viewModel.touchUp
     }

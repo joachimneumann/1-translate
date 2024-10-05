@@ -23,7 +23,6 @@ struct TranslateNumbers: View {
     struct OneLanguage: View {
         var viewModel: ViewModel
         let screen: Screen
-        let translator: Translator
         let translation: TranslationResult
 
         var body: some View {
@@ -35,7 +34,7 @@ struct TranslateNumbers: View {
                     let symbolName = noVoice ? "speaker.slash.fill" : "speaker.wave.3.fill"
                     let symbolSize: CGFloat = noVoice ? 23.0 : 18.0
                     Button {
-                        viewModel.voices.readAloud(translation.spokenText!, in: translator)
+                        viewModel.voices.readAloud(translation.spokenText!, in: viewModel.numberTranslator.currentLanguage)
                     } label: {
                         Image(systemName: symbolName)
                             .resizable()
@@ -60,7 +59,6 @@ struct TranslateNumbers: View {
             VStack(spacing: 0.0) {
                 OneLanguage(viewModel: viewModel,
                             screen: screen,
-                            translator: viewModel.translator,
                             translation: viewModel._1Translation)
                 TranslatedDisplay(translation: viewModel._1Translation,
                                   screen: screen)
@@ -70,7 +68,7 @@ struct TranslateNumbers: View {
             }
             
             PortraitDisplay(
-                display: viewModel.currentDisplay,
+                lr: viewModel.calculator.lr,
                 screen: screen)
             .padding(.bottom, screen.portraitIPhoneDisplayBottomPadding)
             .padding(.horizontal, 0)
@@ -92,9 +90,9 @@ struct TranslateNumbers: View {
         
         var body: some View {
             NavigationLink {
-                LanguageSelector(viewModel: viewModel, screen: screen, currentLanguage: viewModel.translator.currentLanguage)
+                LanguageSelector(viewModel: viewModel, screen: screen, currentLanguage: viewModel.numberTranslator.currentLanguage)
             } label: {
-                Image(viewModel.translator.flagName)
+                Image(viewModel.numberTranslator.flagName)
                     .resizable()
                     .scaledToFit()
                     .padding(2)

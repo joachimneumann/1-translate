@@ -88,7 +88,7 @@ struct VoiceSelection: View {
     }
 
     var body: some View {
-        let translation = viewModel.translator.getResult("200")
+        let translation = viewModel.numberTranslator.getResult("200")
         let spokenText = translation.spokenText ?? "error"
         let noVoice = !viewModel.persistent.offerReadingAloud
         let yellow = Color(red: 242.0/255.0, green: 203.0/255.0, blue: 48.0/255.0)
@@ -96,7 +96,7 @@ struct VoiceSelection: View {
         let symbolName = noVoice ? "speaker.slash.fill" : "speaker.wave.3.fill"
         VStack {
             Button {
-                viewModel.voices.readAloud(spokenText, in: viewModel.translator)
+                viewModel.voices.readAloud(spokenText, in: viewModel.numberTranslator.currentLanguage)
             } label: {
                 HStack {
                     Image(systemName: symbolName)

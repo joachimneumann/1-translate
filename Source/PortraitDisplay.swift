@@ -6,22 +6,23 @@
 //
 
 import SwiftUI
+import SwiftGmp
 
 struct PortraitDisplay: View {
-    let display: Display
+    let lr: LR
     let screen: Screen
     private let font: Font
     
-    init(display: Display, screen: Screen) {
-        self.display = display
+    init(lr: LR, screen: Screen) {
+        self.lr = lr
         self.screen = screen
         
         /// calculate possibly expanded font
         var availableDisplayWidth = screen.displayWidth
-        if display.right != nil {
+        if lr.right != nil {
             availableDisplayWidth -= screen.ePadding
         }
-        let text = display.left + (display.right ?? "")
+        let text = lr.string
         let n = CGFloat(text.count)
         let lengthOfNulls = n * screen.digitWidth
         var factor: CGFloat = 1.0
@@ -38,22 +39,22 @@ struct PortraitDisplay: View {
     
     @ViewBuilder
     var mantissa: some View {
-        let toShow = display.left
+        let toShow = lr.left
         Text(toShow)
             .kerning(screen.kerning)
             .font(font)
             .lineLimit(0)
-            .foregroundColor(display.color)
+            .foregroundColor(.white)
             .multilineTextAlignment(.trailing)
     }
 
     @ViewBuilder
     var exponent: some View {
-        if let exponent = display.right {
+        if let exponent = lr.right {
             Text(exponent)
                 .kerning(screen.kerning)
                 .font(font)
-                .foregroundColor(display.color)
+                .foregroundColor(.white)
                 .multilineTextAlignment(.trailing)
                 .lineLimit(1)
                 .padding(.leading, screen.ePadding)
@@ -72,7 +73,7 @@ struct PortraitDisplay: View {
 }
 
 #Preview {
-    return PortraitDisplay(display: Display(left: "111", right: "222", canBeInteger: true, canBeFloat: true), screen: Screen(CGSize(width: 100, height: 100)))
+    PortraitDisplay(lr: LR("111"), screen: Screen(CGSize(width: 100, height: 100)))
         .frame(height: 300)
         .background(Color.black)
         .foregroundColor(.white)

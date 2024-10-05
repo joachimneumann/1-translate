@@ -1,5 +1,5 @@
 //
-//  Language.swift
+//  XNumberTranslator.swift
 //  TranslateNumbers
 //
 //  Created by Joachim Neumann on 12/20/23.
@@ -20,7 +20,7 @@ struct TranslationResult {
     }
 }
 
-@Observable class Translator: NumberTranslator, Identifiable {
+@Observable class XNumberTranslator: NumberTranslator, Identifiable {
 
     var currentLanguage: NumberTranslator.Language = .english
     
