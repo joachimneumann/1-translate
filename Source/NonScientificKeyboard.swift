@@ -16,9 +16,9 @@ struct NonScientificKeyboard: View {
         let spacing = screen.keySpacing
         VStack(spacing: spacing) {
             HStack(spacing: spacing) {
-                Key(screen, viewModel, AuxOperation.clear)
+                Key(screen, viewModel, ClearOperation.clear)
                 Key(screen, viewModel, InplaceOperation.changeSign)
-                Key(screen, viewModel, AuxOperation.percent)
+                Key(screen, viewModel, PercentOperation.percent)
                 Key(screen, viewModel, TwoOperantOperation.div)
             }
             HStack(spacing: spacing) {
@@ -42,7 +42,7 @@ struct NonScientificKeyboard: View {
             HStack(spacing: spacing) {
                 Key(screen, viewModel, DigitOperation.zero)
                 Key(screen, viewModel, DigitOperation.dot)
-                Key(screen, viewModel, AuxOperation.equal)
+                Key(screen, viewModel, EqualOperation.equal)
             }
         }
     }
