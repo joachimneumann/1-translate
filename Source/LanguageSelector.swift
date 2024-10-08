@@ -66,6 +66,8 @@ struct LanguageSelector: View {
         }
         .onAppear() {
             currentLanguage = viewModel.numberTranslator.currentLanguage
+            viewModel.calculator.decimalSeparator = viewModel.persistent.decimalSeparator
+            viewModel.calculator.separateGroups = viewModel.persistent.separateGroups
         }
         .padding(.top, 20)
         .navigationTitle("Select Language")

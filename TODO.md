@@ -1,4 +1,5 @@
-remember settings
+- voice broken...
+- remember settings
 
 - Thai trennung, 1e5
 - Vietnamese: compact?

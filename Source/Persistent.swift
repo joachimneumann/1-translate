@@ -6,33 +6,15 @@
 //
 
 import SwiftUI
+import SwiftGmp
 
-class Persistent: Separators {
+class Persistent {
     /// I initialize the decimalSeparator with the locale preference, but
-    /// I ignore the value of Locale.current.groupSeparator
     @AppStorage("decimalSeparatorKey", store: .standard)
-    var decimalSeparator: DecimalSeparator = Locale.current.decimalSeparator == "," ? .comma : .dot {
-        didSet {
-            if decimalSeparator == .dot && groupSeparator == .dot {
-                groupSeparator = .comma
-            }
-            if decimalSeparator == .comma && groupSeparator == .comma {
-                groupSeparator = .dot
-            }
-        }
-    }
+    var decimalSeparator: DecimalSeparator = Locale.current.decimalSeparator == "," ? .comma : .dot
     
-    @AppStorage("groupSeparatorKey", store: .standard)
-    var groupSeparator: GroupSeparator = .none {
-        didSet {
-            if decimalSeparator == .dot && groupSeparator == .dot {
-                decimalSeparator = .comma
-            }
-            if decimalSeparator == .comma && groupSeparator == .comma {
-                decimalSeparator = .dot
-            }
-        }
-    }
+    @AppStorage("separateGroupsKey", store: .standard)
+    var separateGroups: Bool = false
     
     @AppStorage("offerReadingAloudKey", store: .standard)
     var offerReadingAloud: Bool = true

@@ -68,7 +68,7 @@ struct TranslateNumbers: View {
             }
             
             PortraitDisplay(
-                lr: viewModel.currentLR,
+                lr: viewModel.currentLRWithSeparators,
                 screen: screen)
             .padding(.bottom, screen.portraitIPhoneDisplayBottomPadding)
             .padding(.horizontal, 0)

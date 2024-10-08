@@ -17,7 +17,7 @@ import SwiftGmp
     var _1Translation: TranslationResult = TranslationResult(displayText: "", overline: nil, spokenText: nil)
     var persistent = Persistent()
 
-    var calculator = Calculator(precision: 40) /// I want to call fast sync functions
+    var calculator = Calculator(precision: 40, maxOutputLength: 15) // 999 trillion
     private let keysThatRequireValidNumber = ["±", "%", "/", "x", "-", "+", "="]
     private static let MAX_DISPLAY_LEN = 10_000 /// too long strings in Text() crash the app
     private let keyColor = KeyColor()
@@ -32,6 +32,7 @@ import SwiftGmp
     var numberTranslator: XNumberTranslator
     private(set) var _voices: Voices!
     public var currentLR: LR = LR("0")
+    public var currentLRWithSeparators: LR = LR("0")
     var voices: Voices {
         return _voices
     }
@@ -40,7 +41,9 @@ import SwiftGmp
     init() {
         numberTranslator = XNumberTranslator()
         self._voices = Voices(numberTranslator: numberTranslator)
-
+        calculator.decimalSeparator = persistent.decimalSeparator
+        calculator.separateGroups = persistent.separateGroups
+        
         for symbol in [
             "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", ",",
             "C", "AC", "±", "%", "/", "x", "-", "+", "="] {
@@ -75,17 +78,17 @@ import SwiftGmp
         
     func cleanSeparators(_ text: String) -> String {
         var ret = text
-        if persistent.groupSeparator != .none {
-            ret = ret.replacingOccurrences(of: persistent.groupSeparator.string, with: "")
+        if persistent.separateGroups {
+            ret = ret.replacingOccurrences(of: String(persistent.decimalSeparator.groupCharacter), with: "")
         }
         if persistent.decimalSeparator != .dot {
-            ret = ret.replacingOccurrences(of: persistent.decimalSeparator.string, with: ".")
+            ret = ret.replacingOccurrences(of: String(persistent.decimalSeparator.character), with: ".")
         }
         return ret
     }
 
     func updateTranslation() {
-        let allInOneLine = cleanSeparators(calculator.lr.string)
+        let allInOneLine = currentLR.string
         _1Translation = numberTranslator.getResult(allInOneLine)
     }
     
@@ -172,6 +175,7 @@ import SwiftGmp
 
     func refreshDisplay(screen: Screen) {
         currentLR = calculator.lr
+        currentLRWithSeparators = calculator.addSeparators(lr: currentLR)
         updateTranslation()
 //        self.showAC = currentDisplay.isZero
     }

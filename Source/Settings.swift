@@ -72,13 +72,14 @@ struct Settings: View {
                 GridRow {
                     Text("Grouping")
                         .padding(.trailing, 5)
-                    Picker("", selection: $viewModel.persistent.groupSeparator) {
-                        ForEach(GroupSeparator.allCases, id: \.self) { value in
-                            Text("\(value.rawValue)")
-                                .tag(value)
-                        }
-                    }
-                    .pickerStyle(.segmented)
+                    Toggle("", isOn: $viewModel.persistent.separateGroups)
+                        .frame(width: 40)
+                        .toggleStyle(
+                            ColoredToggleStyle(onColor: Color(white: 0.6),
+                                               offColor: Color(white: 0.25),
+                                               thumbColor: .white))
+                        .buttonStyle(.plain)
+                        .padding(.trailing, 10)
                 }
                 .padding(.bottom, 5)
             }

@@ -212,7 +212,7 @@ protocol DisplayLengthLimiter {
 //            fractionalPart = ""
 //        }
 //        
-//        if let c = separators.groupSeparator.character {
+//        if let c = separators.XXX.character {
 //            var count = integerPart.count
 //            if groupSize == 42 {
 //                while count >= 4 {

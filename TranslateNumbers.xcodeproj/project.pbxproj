@@ -28,7 +28,6 @@
 		AAB10B9C292A2222004707E9 /* NonScientificKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB10B96292A2222004707E9 /* NonScientificKeyboard.swift */; };
 		AABEFC132972A8780023A3C9 /* KeyColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABEFC122972A8780023A3C9 /* KeyColor.swift */; };
 		AAE426F729597AE3005FE365 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE426F629597AE3005FE365 /* Screen.swift */; };
-		AAEF2FB92B20D54B0012DDDD /* Separators.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEF2FB82B20D54B0012DDDD /* Separators.swift */; };
 		AAF472672B452BD000E7B986 /* Voices.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF472662B452BD000E7B986 /* Voices.swift */; };
 /* End PBXBuildFile section */
 
@@ -73,7 +72,6 @@
 		AABEFC122972A8780023A3C9 /* KeyColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyColor.swift; sourceTree = "<group>"; };
 		AACCD0772B43A89A00D545C5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = "../1-translate-tests/README.md"; sourceTree = "<group>"; };
 		AAE426F629597AE3005FE365 /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
-		AAEF2FB82B20D54B0012DDDD /* Separators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Separators.swift; sourceTree = "<group>"; };
 		AAF472662B452BD000E7B986 /* Voices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voices.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -134,7 +132,6 @@
 				AA08C7EC272F1572001B8575 /* Info.plist */,
 				AA08C7C5272EDA4A001B8575 /* Assets.xcassets */,
 				AA08C7C7272EDA4A001B8575 /* Preview Content */,
-				AAEF2FB82B20D54B0012DDDD /* Separators.swift */,
 				AA899D412B3E914700ADDC16 /* VoiceSelection.swift */,
 				AA659AB72B3FDE73004CF20A /* Persistent.swift */,
 			);
@@ -237,7 +234,6 @@
 				AA0523472B27024800DDAAD4 /* LanguageSelector.swift in Sources */,
 				AA8A91122B1D7B7100CE7185 /* TranslateNumbers.swift in Sources */,
 				AA32853B297248B800D86CB4 /* ViewModel.swift in Sources */,
-				AAEF2FB92B20D54B0012DDDD /* Separators.swift in Sources */,
 				AA370C2D293352960041AE4E /* Extensions.swift in Sources */,
 				AA29F58A293CD608001ADF5A /* PortraitDisplay.swift in Sources */,
 				AA3565B02B32588B009B58D2 /* XNumberTranslator.swift in Sources */,
