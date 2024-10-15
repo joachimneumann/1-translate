@@ -1,6 +1,6 @@
 - voice broken...
 - remember settings
-
+- show pending
 - Thai trennung, 1e5
 - Vietnamese: compact?
 

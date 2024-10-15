@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftGmp
 
 struct KeyColor {
     private struct ThreeColors {
@@ -25,13 +26,13 @@ struct KeyColor {
     }
     
 #if os(macOS)
-//    private let digitColors             = ThreeColors(0.90, 0.80, 0.45)
-//    private let operatorColors          = ThreeColors(0.90, 0.40, 0.70)
-//    private let pendingOperatorColors   = ThreeColors(0.30, 0.90, 0.80)
-//    private let scientificColors        = ThreeColors(0.90, 0.30, 0.32)
-//    private let pendingScientificColors = ThreeColors(0.30, 0.70, 0.60)
-//    private let secondColors            = ThreeColors(0.90, 0.30, 0.12)
-//    private let secondActiveColors      = ThreeColors(0.20, 0.60, 0.60)
+    //    private let digitColors             = ThreeColors(0.90, 0.80, 0.45)
+    //    private let operatorColors          = ThreeColors(0.90, 0.40, 0.70)
+    //    private let pendingOperatorColors   = ThreeColors(0.30, 0.90, 0.80)
+    //    private let scientificColors        = ThreeColors(0.90, 0.30, 0.32)
+    //    private let pendingScientificColors = ThreeColors(0.30, 0.70, 0.60)
+    //    private let secondColors            = ThreeColors(0.90, 0.30, 0.12)
+    //    private let secondActiveColors      = ThreeColors(0.20, 0.60, 0.60)
     private let digitColors             = ThreeColors(1.000, 0.490, 0.690)
     private let operatorColors          = ThreeColors(0.925, 0.396, 0.498)
     private let pendingOperatorColors   = ThreeColors(0.300, 0.900, 0.800)
@@ -48,30 +49,36 @@ struct KeyColor {
     private let secondColors            = ThreeColors(1.00, 0.12, 0.12)
     private let secondActiveColors      = ThreeColors(0.20, 0.60, 0.60)
 #endif
-  
-    private func color(for symbol: String, isPending pending: Bool) -> ThreeColors {
-        if ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ",", "."].contains(symbol) {
+    
+    let disabledColor = Color.red
+    
+    private func threeColors(op: any OpProtocol) -> ThreeColors {
+        switch op {
+        case is InplaceOperation, is TwoOperantOperation, is PercentOperation, is ClearOperation, is EqualOperation:
+            return operatorColors
+        default:
             return digitColors
-        } else if symbol == "2nd" {
-            return secondColors
-        } else if ["C", "AC", "±", "%", "/", "x", "-", "+", "="].contains(symbol) {
-            return pending ? pendingOperatorColors : operatorColors
-        } else {
-            return pending ? pendingScientificColors : scientificColors
         }
     }
+    private func pendingThreeColors(op: any OpProtocol) -> ThreeColors {
+        switch op {
+        case is InplaceOperation, is TwoOperantOperation, is PercentOperation:
+            return pendingOperatorColors
+        default:
+            return threeColors(op: op)
+        }
+    }
+    func backgroundUpColorFor(op: any OpProtocol) -> Color {
+        threeColors(op: op).upColor
+    }
+    func pendingBackgroundUpColorFor(op: any OpProtocol) -> Color {
+        pendingThreeColors(op: op).upColor
+    }
+    func backgroundDownColorFor(op: any OpProtocol) -> Color {
+        threeColors(op: op).downColor
+    }
+    func textColorFor(op: any OpProtocol) -> Color {
+        threeColors(op: op).textColor
+    }
 
-    func textColor(for symbol: String, isPending pending: Bool) -> Color {
-        color(for: symbol, isPending: pending).textColor
-    }
-    func upColor(for symbol: String, isPending pending: Bool) -> Color {
-        color(for: symbol, isPending: pending).upColor
-    }
-    func downColor(for symbol: String, isPending pending: Bool) -> Color {
-        color(for: symbol, isPending: pending).downColor
-    }
-    func secondColor(active: Bool) -> Color {
-        active ? secondActiveColors.upColor : secondColors.upColor
-    }
-    let disabledColor = Color.red
 }

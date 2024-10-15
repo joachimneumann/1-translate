@@ -11,46 +11,35 @@ import SwiftGmp
 struct Key: View {
     let screen: Screen
     let symbol: String
-    let keySize: CGSize
     let xOffset: CGFloat
-    let keyStatusColor: Color
+    let backgroundColor: Color
     let textColor: Color
     let touchDown: (Key) -> ()
     let touchUp: (Key, Screen) -> ()
-    let op: OpProtocol
+    let op: any OpProtocol
     
     init(_ screen: Screen,
          _ viewModel: ViewModel,
-         _ op: OpProtocol) {
+         _ op: any OpProtocol) {
         self.screen = screen
         self.symbol = op.getRawValue()
-        var keyHeight = screen.keySize.height
-        keyHeight *= 1.5
-        if symbol == "0" {
-            self.keySize = CGSize(
-                width: 2.0 * screen.keySize.width + screen.keySpacing,
-                height: keyHeight)
-            xOffset = self.keySize.width * -0.5 + screen.keySize.width * 0.5
-        } else {
-            self.keySize = CGSize(
-                width: screen.keySize.width,
-                height: keyHeight)
-            xOffset = 0.0
-        }
-        self.keyStatusColor = viewModel.keyStatusColor[symbol] ?? .green
-        self.textColor = viewModel.textColor[symbol]           ?? .green
+        xOffset = 0.0
+        self.backgroundColor = viewModel.backgroundColorDict[symbol] ?? .green
+        self.textColor = viewModel.textColorDict[symbol]             ?? .yellow
         self.touchDown = viewModel.touchDown
         self.touchUp   = viewModel.touchUp
         self.op = op
+        viewModel.keyArray.append(self)
     }
     
     var body: some View {
-        //let _ = print("KeyID_"+symbol.replacing("^", with: ""))
-        Label(symbol: symbol, size: keySize.height, color: textColor)
+        // let _ = print("KeyID_"+symbol.replacing("^", with: ""))
+        // let _ = print("Key "+symbol)
+        Label(symbol: symbol, size: screen.keySize.height, color: textColor)
             .offset(x: xOffset)
             .foregroundColor(textColor)
-            .frame(width: keySize.width, height: keySize.height)
-            .background(keyStatusColor)
+            .frame(width: screen.keySize.width, height: screen.keySize.height)
+            .background(backgroundColor)
 #if os(macOS)
             .clipShape(Rectangle())
 #else
@@ -68,7 +57,7 @@ struct Key: View {
 
 struct Key_Previews: PreviewProvider {
     static var previews: some View {
-        let screen = Screen(CGSize(width: 1400, height: 600))
+        let screen = Screen(CGSize(width: 500, height: 600))
         let viewModel = ViewModel()
         VStack {
             HStack {
@@ -77,6 +66,6 @@ struct Key_Previews: PreviewProvider {
             }
             Key(screen, viewModel, ConstantOperation.pi)
         }
-        .foregroundColor(.white)
+        .background(.gray)
     }
 }

@@ -41,10 +41,12 @@ struct NonScientificKeyboard: View {
             }
             HStack(spacing: spacing) {
                 Key(screen, viewModel, DigitOperation.zero)
+                Key(screen, viewModel, DigitOperation.zero)
                 Key(screen, viewModel, DigitOperation.dot)
                 Key(screen, viewModel, EqualOperation.equal)
             }
         }
+        .background(.yellow)
     }
 }
 

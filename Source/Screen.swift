@@ -58,23 +58,24 @@ struct Screen: Equatable, DisplayLengthLimiter {
         
         defaultTextColor = .white
         isPad = UIDevice.current.userInterfaceIdiom == .pad
-        keySpacing = 0.034 * screenSize.width
+        keySpacing = 0.016 * screenSize.width
         horizontalPadding = keySpacing
         displayHorizontalPadding = screenSize.width * 0.035
         
-        portraitIPhoneDisplayBottomPadding = screenSize.height * 0.012
+        portraitIPhoneDisplayBottomPadding = screenSize.height * 0.0//12
         
         calculatorWidth = screenSize.width - 2 * horizontalPadding
         
         keyWidth = isPad ? (calculatorWidth - 9.0 * keySpacing) * 0.1 : (calculatorWidth - 3.0 * keySpacing) * 0.25
-        if screenSize.height < screenSize.width * 1.8 {
-            // on less tall phones, show a smaller keyboard
-            keyHeight = keyWidth * 0.4
-        } else {
-            keyHeight = keyWidth * 0.5
-        }
+        keyHeight = (screenSize.height * 0.565 - 4 * keySpacing) / 5.0
+//        if screenSize.height < screenSize.width * 1.8 {
+//            // on less tall phones, show a smaller keyboard
+//            keyHeight = keyWidth * 0.4
+//        } else {
+//            keyHeight = keyWidth
+//        }
         keyboardHeight = 5 * keyHeight + 4 * keySpacing
-        bottomPadding = isPad ? 0.0 : keyboardHeight * 0.09
+        bottomPadding = isPad ? 0.0 : keyboardHeight * 0.055
 
         keySize = CGSize(width: keyWidth, height: keyHeight)
         
