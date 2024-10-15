@@ -24,6 +24,7 @@ struct Label: View {
         "±": "plus.slash.minus",
         "=": "equal",
         "%": "percent",
+        "back": "delete.backward"
     ]
     
     init(symbol: String, size: CGFloat, color: Color) {
@@ -54,7 +55,7 @@ struct Label: View {
         switch symbol {
         case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9":
             sizeFactor = sizeFactorDigits
-        case "C", "AC":
+        case "back", "AC":
             sizeFactor = sizeFactorCAC
         case "±", "%":
             sizeFactor = sizeFactorSpecialOperator
