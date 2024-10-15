@@ -43,11 +43,12 @@ struct Label: View {
         let sizeFactorComma           = 1.8
         let sizeFactorScientific      = 1.2
 #else
-        let sizeFactorDigits          = 1.5
-        let sizeFactorCAC             = sizeFactorDigits
+        let sizeFactorDigits          = 1.4
+        let sizeFactorAC              = sizeFactorDigits
+        let sizeFactorBack            = 1.5
         let sizeFactorSpecialOperator = 1.1
         let sizeFactorOperator        = 1.1
-        let sizeFactorOperatorX       = 1.0
+        let sizeFactorOperatorX       = 0.95
         let sizeFactorComma           = 1.5
         let sizeFactorScientific      = 1.0
 #endif
@@ -55,8 +56,10 @@ struct Label: View {
         switch symbol {
         case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9":
             sizeFactor = sizeFactorDigits
-        case "back", "AC":
-            sizeFactor = sizeFactorCAC
+        case "AC":
+            sizeFactor = sizeFactorAC
+        case "back":
+            sizeFactor = sizeFactorBack
         case "±", "%":
             sizeFactor = sizeFactorSpecialOperator
         case "*":

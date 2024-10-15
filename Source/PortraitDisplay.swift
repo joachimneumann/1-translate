@@ -22,8 +22,8 @@ struct PortraitDisplay: View {
         if lr.right != nil {
             availableDisplayWidth -= screen.ePadding
         }
-        let text = lr.string
-        let n = CGFloat(text.count)
+//        let text = lr.string
+//        let n = CGFloat(text.count)
 //        let lengthOfNulls = n * screen.digitWidth
 //        var factor: CGFloat = 1.0
 //        let expandLimit = screen.displayWidth - screen.digitWidth * 0.9

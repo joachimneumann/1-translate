@@ -68,6 +68,7 @@ import SwiftGmp
     }
 
     func updateTranslation() {
+        print("updateTranslation")
         let allInOneLine = currentLR.string
         _1Translation = numberTranslator .getResult(allInOneLine)
     }
@@ -133,6 +134,7 @@ import SwiftGmp
     }
     
     func defaultTask(for key: Key, screen: Screen) {
+        print("defaultTask")
         calculator.press(key.op)
         refreshDisplay(screen: screen)
         lastScreen = screen
@@ -147,6 +149,7 @@ import SwiftGmp
     }
 
     func refreshDisplay(screen: Screen) {
+        print("refreshDisplay")
         currentLR = calculator.lr
         currentLRWithSeparators = calculator.addSeparators(lr: currentLR)
         updateTranslation()

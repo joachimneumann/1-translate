@@ -13,7 +13,8 @@ struct Screen: Equatable, DisplayLengthLimiter {
         lhs.keySize == rhs.keySize
     }
     static func appleFont(ofSize size: CGFloat, weight: AppleFont.Weight) -> AppleFont {
-        return AppleFont.monospacedDigitSystemFont(ofSize: size, weight: weight)
+//        return AppleFont.monospacedDigitSystemFont(ofSize: size, weight: weight)
+        return AppleFont.systemFont(ofSize: size, weight: weight)
     }
     
     private let isPad: Bool
@@ -58,16 +59,16 @@ struct Screen: Equatable, DisplayLengthLimiter {
         
         defaultTextColor = .white
         isPad = UIDevice.current.userInterfaceIdiom == .pad
-        keySpacing = 0.016 * screenSize.width
-        horizontalPadding = keySpacing
+        keySpacing = 0.0165 * screenSize.width
+        horizontalPadding = 2.2 * keySpacing
         displayHorizontalPadding = screenSize.width * 0.035
         
-        portraitIPhoneDisplayBottomPadding = screenSize.height * 0.05
+        portraitIPhoneDisplayBottomPadding = screenSize.height * 0.048
         
         calculatorWidth = screenSize.width - 2 * horizontalPadding
         
         keyWidth = isPad ? (calculatorWidth - 9.0 * keySpacing) * 0.1 : (calculatorWidth - 3.0 * keySpacing) * 0.25
-        keyHeight = (screenSize.height * 0.565 - 4 * keySpacing) / 5.0
+        keyHeight = (screenSize.height * 0.568 - 4 * keySpacing) / 5.0
 //        if screenSize.height < screenSize.width * 1.8 {
 //            // on less tall phones, show a smaller keyboard
 //            keyHeight = keyWidth * 0.4
@@ -75,7 +76,7 @@ struct Screen: Equatable, DisplayLengthLimiter {
 //            keyHeight = keyWidth
 //        }
         keyboardHeight = 5 * keyHeight + 4 * keySpacing
-        bottomPadding = isPad ? 0.0 : keyboardHeight * 0.055
+        bottomPadding = isPad ? 0.0 : keyboardHeight * 0.05
 
         keySize = CGSize(width: keyWidth, height: keyHeight)
         
@@ -83,12 +84,12 @@ struct Screen: Equatable, DisplayLengthLimiter {
         iconsWidth   = keyboardHeight * 0.16
         plusIconTrailingPadding = plusIconSize * 0.4
         ePadding = plusIconSize * 0.1
-        uiFontSize = 0.17 * keyboardHeight
+        uiFontSize = 0.169 * keyboardHeight
         infoUiFontSize = 16.0
         appleFont = Self.appleFont(ofSize: uiFontSize, weight: .black)
         infoUiFont = Screen.appleFont(ofSize: infoUiFontSize, weight: .regular)
 
-        kerning = -0.02 * uiFontSize
+        kerning = 0.0//-0.02 * uiFontSize
         
         textHeight     = "0".textHeight(kerning: kerning, appleFont: appleFont)
         infoTextHeight = "0".textHeight(kerning: 0.0, appleFont: infoUiFont)
