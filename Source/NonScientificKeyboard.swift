@@ -46,7 +46,7 @@ struct NonScientificKeyboard: View {
                 Key(screen, viewModel, EqualOperation.equal)
             }
         }
-        .background(.yellow)
+//        .background(.yellow)
     }
 }
 

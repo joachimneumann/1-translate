@@ -25,7 +25,7 @@ struct Key: View {
         self.symbol = op.getRawValue()
         xOffset = 0.0
         self.backgroundColor = viewModel.backgroundColorDict[symbol] ?? .green
-        self.textColor = viewModel.textColorDict[symbol]             ?? .yellow
+        self.textColor = viewModel.textColorDict[symbol]             ?? .purple
         self.touchDown = viewModel.touchDown
         self.touchUp   = viewModel.touchUp
         self.op = op

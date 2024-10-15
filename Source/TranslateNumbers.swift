@@ -77,7 +77,7 @@ struct TranslateNumbers: View {
                 screen: screen,
                 viewModel: viewModel)
         }
-        .background(.green)
+//        .background(.green)
     }
     
     struct LanguageButton: View {

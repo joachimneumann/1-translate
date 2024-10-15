@@ -19,7 +19,7 @@ struct Label: View {
     let sfImageforKey: [String: String] = [
         "+": "plus",
         "-": "minus",
-        "x": "multiply",
+        "*": "multiply",
         "/": "divide",
         "±": "plus.slash.minus",
         "=": "equal",
@@ -44,9 +44,9 @@ struct Label: View {
 #else
         let sizeFactorDigits          = 1.5
         let sizeFactorCAC             = sizeFactorDigits
-        let sizeFactorSpecialOperator = 0.9333
-        let sizeFactorOperator        = 0.8666
-        let sizeFactorOperatorX       = sizeFactorOperator
+        let sizeFactorSpecialOperator = 1.1
+        let sizeFactorOperator        = 1.1
+        let sizeFactorOperatorX       = 1.0
         let sizeFactorComma           = 1.5
         let sizeFactorScientific      = 1.0
 #endif
@@ -58,7 +58,7 @@ struct Label: View {
             sizeFactor = sizeFactorCAC
         case "±", "%":
             sizeFactor = sizeFactorSpecialOperator
-        case "x":
+        case "*":
             sizeFactor = sizeFactorOperatorX
         case _ where sfImageforKey.keys.contains(symbol):
             sizeFactor = sizeFactorOperator
@@ -101,7 +101,7 @@ struct Label: View {
             if let sfImage = sfImageforKey[symbol] {
                 Image(systemName: sfImage)
                     .resizable()
-                    .font(Font.title.weight(.semibold))
+                    .font(Font.title.weight(.regular))
                     .aspectRatio(contentMode: .fit)
                     .frame(width: size * 0.3)
                     .accessibilityIdentifier("KeyID_"+symbol)

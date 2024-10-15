@@ -22,7 +22,7 @@ import SwiftGmp
     var persistent = Persistent()
     var keyArray: [Key] = []
 
-    private let keysThatRequireValidNumber = ["±", "%", "/", "x", "-", "+", "="]
+    private let keysThatRequireValidNumber = ["±", "%", "/", "*", "-", "+", "="]
     private static let MAX_DISPLAY_LEN = 10_000 /// too long strings in Text() crash the app
     private let keyColor = KeyColor()
 
