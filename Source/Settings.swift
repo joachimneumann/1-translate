@@ -350,7 +350,7 @@ struct ControlCenter_Previews: PreviewProvider {
     static var previews: some View {
         Settings(
             viewModel: ViewModel(),
-            font: Font(Screen.appleFont(ofSize: 20)))
+            font: Font(Screen.appleFont(ofSize: 20, weight: .thin)))
         .background(.black)
     }
 }

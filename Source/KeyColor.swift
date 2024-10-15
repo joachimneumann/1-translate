@@ -41,8 +41,8 @@ struct KeyColor {
     private let secondColors            = ThreeColors(0.925, 0.396, 0.498)
     private let secondActiveColors      = ThreeColors(0.925, 0.300, 0.498)
 #else
-    private let digitColors             = ThreeColors(1.00, 0.20, 0.45)
-    private let operatorColors          = ThreeColors(1.00, 0.50, 0.70)
+    private let digitColors             = ThreeColors(1.00, 0.20, 0.40)
+    private let operatorColors          = ThreeColors(1.00, 0.40, 0.60)
     private let pendingOperatorColors   = ThreeColors(0.30, 0.90, 0.80)
     private let scientificColors        = ThreeColors(1.00, 0.12, 0.32)
     private let pendingScientificColors = ThreeColors(0.30, 0.70, 0.60)

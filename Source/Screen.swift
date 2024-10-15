@@ -12,7 +12,7 @@ struct Screen: Equatable, DisplayLengthLimiter {
     static func == (lhs: Screen, rhs: Screen) -> Bool { /// used to detect rotation
         lhs.keySize == rhs.keySize
     }
-    static func appleFont(ofSize size: CGFloat, weight: AppleFont.Weight = .thin) -> AppleFont {
+    static func appleFont(ofSize size: CGFloat, weight: AppleFont.Weight) -> AppleFont {
         return AppleFont.monospacedDigitSystemFont(ofSize: size, weight: weight)
     }
     
@@ -62,7 +62,7 @@ struct Screen: Equatable, DisplayLengthLimiter {
         horizontalPadding = keySpacing
         displayHorizontalPadding = screenSize.width * 0.035
         
-        portraitIPhoneDisplayBottomPadding = screenSize.height * 0.0//12
+        portraitIPhoneDisplayBottomPadding = screenSize.height * 0.05
         
         calculatorWidth = screenSize.width - 2 * horizontalPadding
         
@@ -83,9 +83,9 @@ struct Screen: Equatable, DisplayLengthLimiter {
         iconsWidth   = keyboardHeight * 0.16
         plusIconTrailingPadding = plusIconSize * 0.4
         ePadding = plusIconSize * 0.1
-        uiFontSize = 0.125 * keyboardHeight
+        uiFontSize = 0.17 * keyboardHeight
         infoUiFontSize = 16.0
-        appleFont = Self.appleFont(ofSize: uiFontSize)
+        appleFont = Self.appleFont(ofSize: uiFontSize, weight: .black)
         infoUiFont = Screen.appleFont(ofSize: infoUiFontSize, weight: .regular)
 
         kerning = -0.02 * uiFontSize
