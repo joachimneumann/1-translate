@@ -39,9 +39,9 @@ struct Screen: Equatable, DisplayLengthLimiter {
     var textHeight: CGFloat = 0.0
     var infoTextHeight: CGFloat = 0.0
     var displayWidth: CGFloat = 0.0
-    var digitWidth: CGFloat = 0.0
+    let numberOfDigits: Int
+    var maxDigitWidth: CGFloat = 0.0
     var radWidth: CGFloat = 0.0
-    var eWidth: CGFloat = 0.0
     let defaultTextColor: Color
     private let keyWidth: CGFloat
     private var keyHeight: CGFloat
@@ -61,14 +61,15 @@ struct Screen: Equatable, DisplayLengthLimiter {
         isPad = UIDevice.current.userInterfaceIdiom == .pad
         keySpacing = 0.0165 * screenSize.width
         horizontalPadding = 2.2 * keySpacing
-        displayHorizontalPadding = screenSize.width * 0.035
+        displayHorizontalPadding = 0.0//screenSize.width * 0.035
         
         portraitIPhoneDisplayBottomPadding = screenSize.height * 0.048
         
         calculatorWidth = screenSize.width - 2 * horizontalPadding
         
         keyWidth = isPad ? (calculatorWidth - 9.0 * keySpacing) * 0.1 : (calculatorWidth - 3.0 * keySpacing) * 0.25
-        keyHeight = (screenSize.height * 0.568 - 4 * keySpacing) / 5.0
+        keyHeight = (screenSize.height * 0.568 - 4 * keySpacing) / 5.0 // this simulates the iOS18 calculator
+        keyHeight = (screenSize.height * 0.45 - 4 * keySpacing) / 5.0
 //        if screenSize.height < screenSize.width * 1.8 {
 //            // on less tall phones, show a smaller keyboard
 //            keyHeight = keyWidth * 0.4
@@ -94,8 +95,24 @@ struct Screen: Equatable, DisplayLengthLimiter {
         textHeight     = "0".textHeight(kerning: kerning, appleFont: appleFont)
         infoTextHeight = "0".textHeight(kerning: 0.0, appleFont: infoUiFont)
         radWidth       = "Rad".textWidth(kerning: 0.0, appleFont: infoUiFont)
-        digitWidth     = "0".textWidth(kerning: kerning, appleFont: appleFont)
-
+        maxDigitWidth = 0
+        var temp: CGFloat
+        temp = "0".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
+        temp = "0".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
+        temp = "2".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
+        temp = "3".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
+        temp = "3".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
+        temp = "4".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
+        temp = "5".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
+        temp = "6".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
+        temp = "7".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
+        temp = "8".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
+        temp = "9".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
+        temp = ".".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
+        temp = ",".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
+        temp = "e".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
+        temp = "-".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
+        
         offsetToVerticallyAlignTextWithkeyboard =
         CGFloat(screenSize.height) -
         CGFloat(keyboardHeight) -
@@ -111,6 +128,8 @@ struct Screen: Equatable, DisplayLengthLimiter {
         CGFloat(0.5 * appleFont.capHeight) +
         CGFloat(0.5 * plusIconSize)
         displayWidth = calculatorWidth - 2.0 * displayHorizontalPadding
+        numberOfDigits = Int(floor(displayWidth / maxDigitWidth))
+        let x = 3 * numberOfDigits
     }
 }
 
