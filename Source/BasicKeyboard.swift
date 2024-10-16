@@ -9,21 +9,17 @@ import SwiftUI
 
 struct AKey: Identifiable {
     var id: String { label }
-    let label: String
+    var label: String
     let width: CGFloat
     let height: CGFloat
     let bgColor: Color
     let txtColor: Color
-    var keyDown: (AKey) -> ()
-    var keyUp: (AKey) -> ()
     init(_ label: String) {
         self.label = label
         bgColor = .green
         txtColor = .white
         width = 50
         height = 30
-        keyDown = { _ in } // these will be set in the initializer of the viewModel
-        keyUp = { _ in }
     }
 }
 
@@ -63,5 +59,13 @@ struct BasicKeyboard {
         let decimalKey = AKey(".")
         let equalsKey = AKey("=")
         rows.append(KeyRow([settingsKey, zeroKey, decimalKey, equalsKey]))
+    }
+    
+    mutating func back(_ isBack: Bool) {
+        if isBack {
+            rows[0].keys[0].label = "C"
+        } else {
+            rows[0].keys[0].label = "AC"
+        }
     }
 }

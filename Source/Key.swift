@@ -15,7 +15,7 @@ struct Key: View {
     let backgroundColor: Color
     let textColor: Color
     let touchDown: (Key) -> ()
-    let touchUp: (Key, Screen) -> ()
+    let touchUp: (Key) -> ()
     let op: any OpProtocol
     
     init(_ screen: Screen,
@@ -24,12 +24,11 @@ struct Key: View {
         self.screen = screen
         self.symbol = op.getRawValue()
         xOffset = 0.0
-        self.backgroundColor = viewModel.backgroundColorDict[symbol] ?? .green
-        self.textColor = viewModel.textColorDict[symbol]             ?? .purple
-        self.touchDown = viewModel.touchDown
-        self.touchUp   = viewModel.touchUp
+        self.backgroundColor = .green
+        self.textColor = .purple
+        self.touchDown = { _ in }
+        self.touchUp   = { _ in }
         self.op = op
-        viewModel.keyArray.append(self)
     }
     
     var body: some View {
@@ -50,7 +49,7 @@ struct Key: View {
                     touchDown(self)
                 }
                 .onEnded { _ in
-                    touchUp(self, screen)
+                    touchUp(self)
                 })
     }
 }

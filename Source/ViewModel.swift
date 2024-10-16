@@ -34,30 +34,20 @@ import SwiftGmp
         return _voices
     }
 //    var voices: Voices
-    var XXs: [XX] = []
     init() {
         numberTranslator = XNumberTranslator()
         self._voices = Voices(numberTranslator: numberTranslator)
         calculator.decimalSeparator = persistent.decimalSeparator
         calculator.separateGroups = persistent.separateGroups
 
-        for op in calculator.allOperationsSorted {
-            XXs.append(XX(op: op, bgColor: keyColor.backgroundUpColorFor(op: op), txtColor: keyColor.textColorFor(op: op)))
-        }
         updateTranslation()
-        injectKeyHandlers()
     }
 
-    func injectKeyHandlers() {
-        for rowIndex in basicKeyboard.rows.indices {
-            for keyIndex in basicKeyboard.rows[rowIndex].keys.indices {
-                basicKeyboard.rows[rowIndex].keys[keyIndex].keyDown = self.keyDownX
-                basicKeyboard.rows[rowIndex].keys[keyIndex].keyUp = self.keyUpX
-            }
-        }
-    }
-    
     func keyDownX(_ aKey: AKey) {
+        if aKey.label == "AC" {
+            print("AC!")
+            basicKeyboard.back(true)
+        }
         print("down \(aKey.label)")
     }
     func keyUpX(_ aKey: AKey) {
@@ -86,64 +76,64 @@ import SwiftGmp
     }
     
     private func updateBackgroundColors(exceptFor: Key) {
-        Task(priority: .userInitiated) {
-            for var xx in XXs {
-                if xx.op.getRawValue() != exceptFor.symbol {
-                    let pending = calculator.isPendingOperator[xx.op.getRawValue()] ?? false
-                    let allowed = calculator.isAllowedOperator[xx.op.getRawValue()] ?? true
-                    if !allowed {
-                        xx.bgColor = keyColor.disabledColor
-                    } else {
-                        if pending {
-                            xx.bgColor = keyColor.pendingBackgroundUpColorFor(op: xx.op)
-                        } else {
-                            xx.bgColor = keyColor.backgroundUpColorFor(op: xx.op)
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    func touchDown(for thisKey: inout Key) {
-        // print("touchDown \(thisKey.symbol)")
-        upHasHappended[thisKey.symbol] = false
-        downAnimationFinished[thisKey.symbol] = false
-        withAnimation(.easeIn(duration: downTime)) {
-            thisKey.xx.bgColor = keyColor.backgroundDownColorFor(op: thisKey.op)
-        }
 //        Task(priority: .userInitiated) {
-//            try? await Task.sleep(nanoseconds: UInt64(downTime * 1_000_000_000))
-            // print("down: upHasHappended \(upHasHappended))")
-            downAnimationFinished[thisKey.symbol] = true
-            if upHasHappended[thisKey.symbol] ?? false {
-                withAnimation(.easeIn(duration: upTime)) {
-                    let pending = calculator.isPendingOperator[thisKey.op.getRawValue()] ?? false
-                    if pending {
-                        thisKey.xx.bgColor = keyColor.pendingBackgroundUpColorFor(op: thisKey.op)
-                    } else {
-                        thisKey.xx.bgColor = keyColor.backgroundUpColorFor(op: thisKey.op)
-                    }
-                }
-            }
+//            for var xx in XXs {
+//                if xx.op.getRawValue() != exceptFor.symbol {
+//                    let pending = calculator.isPendingOperator[xx.op.getRawValue()] ?? false
+//                    let allowed = calculator.isAllowedOperator[xx.op.getRawValue()] ?? true
+//                    if !allowed {
+//                        xx.bgColor = keyColor.disabledColor
+//                    } else {
+//                        if pending {
+//                            xx.bgColor = keyColor.pendingBackgroundUpColorFor(op: xx.op)
+//                        } else {
+//                            xx.bgColor = keyColor.backgroundUpColorFor(op: xx.op)
+//                        }
+//                    }
+//                }
+//            }
 //        }
     }
     
+    func touchDown(for thisKey: inout Key) {
+//        // print("touchDown \(thisKey.symbol)")
+//        upHasHappended[thisKey.symbol] = false
+//        downAnimationFinished[thisKey.symbol] = false
+//        withAnimation(.easeIn(duration: downTime)) {
+//            thisKey.xx.bgColor = keyColor.backgroundDownColorFor(op: thisKey.op)
+//        }
+////        Task(priority: .userInitiated) {
+////            try? await Task.sleep(nanoseconds: UInt64(downTime * 1_000_000_000))
+//            // print("down: upHasHappended \(upHasHappended))")
+//            downAnimationFinished[thisKey.symbol] = true
+//            if upHasHappended[thisKey.symbol] ?? false {
+//                withAnimation(.easeIn(duration: upTime)) {
+//                    let pending = calculator.isPendingOperator[thisKey.op.getRawValue()] ?? false
+//                    if pending {
+//                        thisKey.xx.bgColor = keyColor.pendingBackgroundUpColorFor(op: thisKey.op)
+//                    } else {
+//                        thisKey.xx.bgColor = keyColor.backgroundUpColorFor(op: thisKey.op)
+//                    }
+//                }
+//            }
+////        }
+    }
+    
     func touchUp(of key: inout Key, screen: Screen) {
-        defaultTask(for: key, screen: screen)
-        updateBackgroundColors(exceptFor: key)
-        upHasHappended[key.symbol] = true
-        // print("up: downAnimationFinished \(downAnimationFinished[key.symbol]!)")
-        if downAnimationFinished[key.symbol] ?? false {
-            withAnimation(.easeIn(duration: upTime)) {
-                let pending = calculator.isPendingOperator[key.op.getRawValue()] ?? false
-                if pending {
-                    key.xx.bgColor = keyColor.pendingBackgroundUpColorFor(op: key.op)
-                } else {
-                    key.xx.bgColor = keyColor.backgroundUpColorFor(op: key.op)
-                }
-            }
-        }
+//        defaultTask(for: key, screen: screen)
+//        updateBackgroundColors(exceptFor: key)
+//        upHasHappended[key.symbol] = true
+//        // print("up: downAnimationFinished \(downAnimationFinished[key.symbol]!)")
+//        if downAnimationFinished[key.symbol] ?? false {
+//            withAnimation(.easeIn(duration: upTime)) {
+//                let pending = calculator.isPendingOperator[key.op.getRawValue()] ?? false
+//                if pending {
+//                    key.xx.bgColor = keyColor.pendingBackgroundUpColorFor(op: key.op)
+//                } else {
+//                    key.xx.bgColor = keyColor.backgroundUpColorFor(op: key.op)
+//                }
+//            }
+//        }
     }
     
     func defaultTask(for key: Key, screen: Screen) {
