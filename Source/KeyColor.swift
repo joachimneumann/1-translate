@@ -9,19 +9,25 @@ import SwiftUI
 import SwiftGmp
 
 struct KeyColor {
-    private struct ThreeColors {
-        var textColor: Color
-        var upColor: Color
-        var downColor: Color
-        private init(textColor: Color, upColor: Color, downColor: Color) {
+    struct FiveColors {
+        let textColor: Color
+        let upColor: Color
+        let downColor: Color
+        let pendingTextColor: Color
+        let pendingColor: Color
+        private init(textColor: Color, upColor: Color, downColor: Color, pendingTextColor: Color = .white, pendingColor: Color = .green) {
             self.textColor = textColor
             self.upColor = upColor
             self.downColor = downColor
+            self.pendingTextColor = pendingTextColor
+            self.pendingColor = pendingColor
         }
-        init(_ textGrayscale: CGFloat, _ upGrayscale: CGFloat, _ downGrayscale: CGFloat) {
+        init(_ textGrayscale: CGFloat, _ upGrayscale: CGFloat, _ downGrayscale: CGFloat, _ pendingTextGrayscale: CGFloat = 1.0, _ pendingGrayscale: CGFloat = 0.0) {
             self.init(textColor: Color(white: textGrayscale),
                       upColor:   Color(white: upGrayscale),
-                      downColor: Color(white: downGrayscale))
+                      downColor: Color(white: downGrayscale),
+                      pendingTextColor: Color(white: pendingTextGrayscale),
+                      pendingColor: Color(white: pendingGrayscale))
         }
     }
     
@@ -41,43 +47,20 @@ struct KeyColor {
     private let secondColors            = ThreeColors(0.925, 0.396, 0.498)
     private let secondActiveColors      = ThreeColors(0.925, 0.300, 0.498)
 #else
-    private static let digitColors             = ThreeColors(1.00, 0.20, 0.9)//0.40)
-    private static let operatorColors          = ThreeColors(1.00, 0.40, 0.60)
-    private static let pendingOperatorColors   = ThreeColors(0.30, 0.90, 0.80)
-    private static let scientificColors        = ThreeColors(1.00, 0.12, 0.32)
-    private static let pendingScientificColors = ThreeColors(0.30, 0.70, 0.60)
-    private static let secondColors            = ThreeColors(1.00, 0.12, 0.12)
-    private static let secondActiveColors      = ThreeColors(0.20, 0.60, 0.60)
+    private static let digitColors             = FiveColors(1.00, 0.20, 0.40)
+    private static let operatorColors          = FiveColors(1.00, 0.40, 0.60, 0.30, 0.90)
+    private static let scientificColors        = FiveColors(1.00, 0.12, 0.32, 0.30, 0.70)
+    private static let secondColors            = FiveColors(1.00, 0.12, 0.12)
+    private static let secondActiveColors      = FiveColors(0.20, 0.60, 0.60)
 #endif
         
-    private static func threeColors(op: any OpProtocol) -> ThreeColors {
+    static func fiveColors(op: any OpProtocol) -> FiveColors {
         switch op {
         case is InplaceOperation, is TwoOperantOperation, is PercentOperation, is ClearOperation, is EqualOperation:
             return operatorColors
         default:
             return digitColors
         }
-    }
-    
-    private static func pendingThreeColors(op: any OpProtocol) -> ThreeColors {
-        switch op {
-        case is InplaceOperation, is TwoOperantOperation, is PercentOperation:
-            return pendingOperatorColors
-        default:
-            return threeColors(op: op)
-        }
-    }
-    static func backgroundUpColorFor(op: any OpProtocol) -> Color {
-        threeColors(op: op).upColor
-    }
-    static func pendingBackgroundUpColorFor(op: any OpProtocol) -> Color {
-        pendingThreeColors(op: op).upColor
-    }
-    static func backgroundDownColorFor(op: any OpProtocol) -> Color {
-        threeColors(op: op).downColor
-    }
-    static func textColorFor(op: any OpProtocol) -> Color {
-        threeColors(op: op).textColor
     }
 
 }

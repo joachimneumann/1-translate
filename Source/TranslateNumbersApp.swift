@@ -14,7 +14,7 @@ struct TranslateNumbersApp: App {
     var body: some Scene {
         WindowGroup {
             GeometryReader { geo in
-                AnimatedButtonLabel()
+                AnimatedButtonLabel()//fiveColors: KeyColor.fiveColors(op: DigitOperation.one))
 //                BasicKeyboardView(basicKeyboard: BasicKeyboard(calculator: Calculator(precision: 20)))
 //                TranslateNumbers(screen: Screen(geo.size))
             }
@@ -24,64 +24,7 @@ struct TranslateNumbersApp: App {
 
 
 import Foundation
-
-
-//struct AnimatedLabel: View {
-//    @State private var isPressed = false
-//    @State private var labelColor: Color = .gray
-//    let upColor: Color = .gray
-//    let downColor: Color = .white
-//    let upTime: Double = 1.0//0.5  // Seconds
-//    let downTime: Double = 1.0//0.3  // Seconds
-//
-//    var body: some View {
-//        Text("Press Me")
-//            .padding()
-//            .frame(maxWidth: .infinity)
-//            .background(labelColor)
-//            .cornerRadius(10)
-//            .foregroundColor(.red)
-//            .onTapGesture(perform: handlePress) // Optional: Allow tap gesture to animate to downColor
-//            .simultaneousGesture(
-//                DragGesture(minimumDistance: 0)
-//                    .onChanged { _ in
-//                        print("down...")
-//                        if !isPressed {
-//                            animateToDownColor()
-//                        }
-//                    }
-//                    .onEnded { _ in
-//                        print("up...")
-//                        isPressed = false
-//                        animateToUpColor()
-//                    }
-//            )
-//            .animation(.easeInOut, value: labelColor)  // Smooth out state changes
-//    }
-//
-//    private func animateToDownColor() {
-//        print("animateToDownColor")
-//        isPressed = true
-//        withAnimation(.easeIn(duration: downTime)) {
-//            labelColor = downColor
-//        }
-//    }
-//
-//    private func animateToUpColor() {
-//        // Check if the down animation completed
-//        DispatchQueue.main.asyncAfter(deadline: .now() + downTime) {
-////            guard !isPressed else { return }  // Prevents re-triggering if button is held down
-//            withAnimation(.easeIn(duration: upTime)) {
-//                labelColor = upColor
-//            }
-//        }
-//    }
-//
-//    private func handlePress() {
-//        animateToDownColor()  // Optional: Tap also transitions to downColor
-//    }
-//}
-//
+import SwiftGmp
 struct AnimatedButtonLabel: View {
     @State private var bgColor: Color = .gray  // Start with upColor
     @State private var animationState: AnimationState = .idle
@@ -90,14 +33,22 @@ struct AnimatedButtonLabel: View {
     let upColor: Color = .gray
     let downColor: Color = .white
     let textColor: Color = .red
-    let upTime: Double = 1.0  // Seconds
-    let downTime: Double = 1.0  // Seconds
-
+    let downTime: Double = 1.0//0.15
+    let upTime:   Double = 1.0//0.4
+//    let fiveColors: KeyColor.FiveColors
+    
     enum AnimationState {
         case idle
         case animatingDown
         case animatingUp
     }
+    
+//    init(fiveColors: KeyColor.FiveColors) {
+//        self.fiveColors = fiveColors
+////        downColor = fiveColors.downColor
+////        textColor = fiveColors.textColor
+////        upColor = fiveColors.upColor
+//    }
 
     var body: some View {
         Text("Press Me")
@@ -122,51 +73,63 @@ struct AnimatedButtonLabel: View {
     }
 
     private func handlePress() {
-        if animationState == .idle || animationState == .animatingUp {
-            if animationState == .animatingUp {
-                // Interrupt the up animation and start down animation
+            if animationState == .idle || animationState == .animatingUp {
+                if animationState == .animatingUp {
+                    // Interrupt the up animation and start down animation
+                }
+                animationState = .animatingDown
+                withAnimation(.linear(duration: downTime)) {
+                    self.bgColor = self.downColor
+                }
+                // Schedule the completion handler after downTime
+                DispatchQueue.main.asyncAfter(deadline: .now() + downTime) {
+                    self.downAnimationCompleted()
+                }
             }
-            animationState = .animatingDown
-            withAnimation(.linear(duration: downTime)) {
-                self.bgColor = self.downColor
+            // If already animating down, do nothing
+        }
+
+        private func handleRelease() {
+            if animationState == .animatingDown {
+                // The down animation is still running; we'll wait for it to complete
+            } else if animationState == .idle {
+                // The down animation has already completed
+                // Start the up animation immediately
+                startUpAnimation()
             }
-            // Schedule the completion handler after downTime
-            DispatchQueue.main.asyncAfter(deadline: .now() + downTime) {
-                self.downAnimationCompleted()
+            // If animating up, do nothing; shouldn't happen as button is being released
+        }
+
+        private func downAnimationCompleted() {
+            if self.animationState == .animatingDown {
+                if self.isPressed {
+                    // The button is still pressed; remain in downColor
+                    self.animationState = .idle
+                    // No further action required
+                } else {
+                    // The button has been released during the down animation
+                    // Start the up animation
+                    startUpAnimation()
+                }
             }
         }
-        // If already animating down, do nothing
-    }
 
-    private func handleRelease() {
-        // If animating down, we wait until the animation completes
-        // and then start the up animation in the completion handler
-    }
+        private func startUpAnimation() {
+            self.animationState = .animatingUp
+            withAnimation(.linear(duration: upTime)) {
+                self.bgColor = self.upColor
+            }
+            // Schedule the completion handler after upTime
+            DispatchQueue.main.asyncAfter(deadline: .now() + upTime) {
+                self.upAnimationCompleted()
+            }
+        }
 
-    private func downAnimationCompleted() {
-        if self.animationState == .animatingDown {
-            if self.isPressed {
-                // The button is still pressed; remain in downColor
+        private func upAnimationCompleted() {
+            if self.animationState == .animatingUp {
                 self.animationState = .idle
-            } else {
-                // Start the up animation
-                self.animationState = .animatingUp
-                withAnimation(.linear(duration: upTime)) {
-                    self.bgColor = self.upColor
-                }
-                // Schedule the completion handler after upTime
-                DispatchQueue.main.asyncAfter(deadline: .now() + upTime) {
-                    self.upAnimationCompleted()
-                }
+                // If the button is pressed during the up animation,
+                // it would have been handled in handlePress()
             }
         }
-    }
-
-    private func upAnimationCompleted() {
-        if self.animationState == .animatingUp {
-            self.animationState = .idle
-            // If the button is pressed during the up animation,
-            // it would have already been handled in handlePress()
-        }
-    }
 }

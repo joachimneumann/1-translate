@@ -22,10 +22,10 @@ struct BasicKeyboardView: View {
                             .clipShape(Capsule())
                             .simultaneousGesture(DragGesture(minimumDistance: 0)
                                 .onChanged { _ in
-                                    basicKeyboard.keyDownX(key)
+                                    basicKeyboard.keyDown(key)
                                 }
                                 .onEnded { _ in
-                                    basicKeyboard.keyUpX(key)
+                                    basicKeyboard.keyUp(key)
                                 })
                     }
                 }

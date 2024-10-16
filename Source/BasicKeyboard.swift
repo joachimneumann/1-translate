@@ -18,8 +18,8 @@ import SwiftGmp
     init(_ op: any OpProtocol) {
         self.label = op.getRawValue()
         self.op = op
-        bgColor = KeyColor.backgroundUpColorFor(op: op)
-        txtColor = KeyColor.textColorFor(op: op)
+        bgColor = .green//KeyColor.backgroundUpColorFor(op: op)
+        txtColor = .white// KeyColor.textColorFor(op: op)
         width = 50
         height = 30
     }
@@ -95,14 +95,14 @@ class BasicKeyboard {
         upHasHappended[key] = false
         downAnimationFinished[key] = false
         withAnimation(.easeIn(duration: downTime)) {
-            key.bgColor = KeyColor.backgroundDownColorFor(op: key.op)
+            key.bgColor = .green//KeyColor.backgroundDownColorFor(op: key.op)
         }
         Task(priority: .userInitiated) {
             try? await Task.sleep(nanoseconds: UInt64(downTime * 1_000_000_000))
             print("down: upHasHappended \(upHasHappended[key] ?? false)")
 //            if upHasHappended[key] ?? false {
                 withAnimation(.easeIn(duration: upTime)) {
-                    key.bgColor = KeyColor.backgroundUpColorFor(op: key.op)
+                    key.bgColor = .green//KeyColor.backgroundUpColorFor(op: key.op)
                 }
 //            }
             downAnimationFinished[key] = true
@@ -117,7 +117,7 @@ class BasicKeyboard {
         print("keyUp downAnimationFinished \(downAnimationFinished[key] ?? false)")
         if downAnimationFinished[key] ?? false {
             withAnimation(.easeIn(duration: upTime)) {
-                key.bgColor = KeyColor.backgroundUpColorFor(op: key.op)
+                key.bgColor = .green//KeyColor.backgroundUpColorFor(op: key.op)
             }
         }
         print("\(calculator.lr.string)")
