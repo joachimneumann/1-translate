@@ -19,6 +19,7 @@ import SwiftGmp
     var isPending: Bool = false
     var upTime: Double = 0.4
     var op: any OpProtocol
+    var execute: () -> () = { }
     init(_ op: any OpProtocol) {
         self.label = op.getRawValue()
         self.op = op
@@ -55,6 +56,13 @@ class BasicKeyboard {
     private let downTime = 0.15
     private let upTime = 0.4
 
+    func execute(_ key: AKey) {
+        print("execute \(key.op.getRawValue())")
+        calculator.press(key.op)
+        print(calculator.lr.string)
+        back(calculator.displayBufferHasDigits)
+    }
+    
     init(calculator: Calculator = Calculator(precision: 20)) {
         self.calculator = calculator
         let clearKey = AKey(ClearOperation.clear)
@@ -82,6 +90,12 @@ class BasicKeyboard {
         let decimalKey = AKey(DigitOperation.dot)
         let equalsKey = AKey(EqualOperation.equal)
         rows.append(KeyRow([settingsKey, zeroKey, decimalKey, equalsKey]))
+        
+        for r in rows {
+            for k in r.keys {
+                k.execute = { self.execute(k) }
+            }
+        }
     }
     
     func back(_ isBack: Bool) {

@@ -43,6 +43,7 @@ struct AnimatedKey: View {
                     .onEnded { _ in
                         self.isPressed = false
                         self.handleRelease()
+                        key.execute()
                     }
             )
     }
