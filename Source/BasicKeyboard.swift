@@ -12,6 +12,7 @@ import SwiftGmp
     var label: String
     let width: CGFloat
     let height: CGFloat
+    let fiveColors: KeyColor.FiveColors
     var bgColor: Color
     var txtColor: Color
     var op: any OpProtocol
@@ -22,6 +23,7 @@ import SwiftGmp
         txtColor = .white// KeyColor.textColorFor(op: op)
         width = 50
         height = 30
+        fiveColors = KeyColor.fiveColors(op: op)
     }
 
     var id = UUID()

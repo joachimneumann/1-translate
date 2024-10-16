@@ -25,7 +25,7 @@ struct BasicKeyboardView: View {
                                     basicKeyboard.keyDown(key)
                                 }
                                 .onEnded { _ in
-                                    basicKeyboard.keyUp(key)
+                                    basicKeyboard.keyUp (key)
                                 })
                     }
                 }

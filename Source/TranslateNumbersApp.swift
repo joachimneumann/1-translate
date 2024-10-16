@@ -14,7 +14,7 @@ struct TranslateNumbersApp: App {
     var body: some Scene {
         WindowGroup {
             GeometryReader { geo in
-                AnimatedButtonLabel(fiveColors: KeyColor.fiveColors(op: DigitOperation.one))
+                AnimatedButtonLabel(key: AKey(DigitOperation.five))
 //                BasicKeyboardView(basicKeyboard: BasicKeyboard(calculator: Calculator(precision: 20)))
 //                TranslateNumbers(screen: Screen(geo.size))
             }
@@ -26,7 +26,7 @@ struct TranslateNumbersApp: App {
 import Foundation
 import SwiftGmp
 struct AnimatedButtonLabel: View {
-    @State private var bgColor: Color = .red  // Start with upColor
+    @State private var bgColor: Color
     @State private var animationState: AnimationState = .idle
     @State private var isPressed: Bool = false
 
@@ -36,27 +36,28 @@ struct AnimatedButtonLabel: View {
     let downTime: Double
     let upTime:   Double
     let fiveColors: KeyColor.FiveColors
-    
+    let key: AKey
     enum AnimationState {
         case idle
         case animatingDown
         case animatingUp
     }
     
-    init(fiveColors: KeyColor.FiveColors, downTime: Double = 0.15, upTime: Double = 0.4) {
-        self.fiveColors = fiveColors
+    init(key: AKey, downTime: Double = 0.15, upTime: Double = 0.4) {
+        self.fiveColors = key.fiveColors
         bgColor = fiveColors.upColor
         downColor = fiveColors.downColor
         textColor = fiveColors.textColor
         upColor = fiveColors.upColor
         self.downTime = downTime
         self.upTime = upTime
+        self.key = key
     }
 
     var body: some View {
-        Text("Press Me")
+        Text(key.op.getRawValue())
             .padding()
-            .frame(maxWidth: .infinity)
+            .frame(width: key.width, height: key.height)
             .background(bgColor)
             .foregroundColor(textColor)
             .cornerRadius(10)
