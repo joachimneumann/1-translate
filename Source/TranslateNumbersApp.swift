@@ -14,7 +14,7 @@ struct TranslateNumbersApp: App {
     var body: some Scene {
         WindowGroup {
             GeometryReader { geo in
-                AnimatedButtonLabel()//fiveColors: KeyColor.fiveColors(op: DigitOperation.one))
+                AnimatedButtonLabel(fiveColors: KeyColor.fiveColors(op: DigitOperation.one))
 //                BasicKeyboardView(basicKeyboard: BasicKeyboard(calculator: Calculator(precision: 20)))
 //                TranslateNumbers(screen: Screen(geo.size))
             }
@@ -26,16 +26,16 @@ struct TranslateNumbersApp: App {
 import Foundation
 import SwiftGmp
 struct AnimatedButtonLabel: View {
-    @State private var bgColor: Color = .gray  // Start with upColor
+    @State private var bgColor: Color = .red  // Start with upColor
     @State private var animationState: AnimationState = .idle
     @State private var isPressed: Bool = false
 
-    let upColor: Color = .gray
-    let downColor: Color = .white
-    let textColor: Color = .red
-    let downTime: Double = 1.0//0.15
-    let upTime:   Double = 1.0//0.4
-//    let fiveColors: KeyColor.FiveColors
+    let upColor: Color
+    let downColor: Color
+    let textColor: Color
+    let downTime: Double
+    let upTime:   Double
+    let fiveColors: KeyColor.FiveColors
     
     enum AnimationState {
         case idle
@@ -43,12 +43,15 @@ struct AnimatedButtonLabel: View {
         case animatingUp
     }
     
-//    init(fiveColors: KeyColor.FiveColors) {
-//        self.fiveColors = fiveColors
-////        downColor = fiveColors.downColor
-////        textColor = fiveColors.textColor
-////        upColor = fiveColors.upColor
-//    }
+    init(fiveColors: KeyColor.FiveColors, downTime: Double = 0.15, upTime: Double = 0.4) {
+        self.fiveColors = fiveColors
+        bgColor = fiveColors.upColor
+        downColor = fiveColors.downColor
+        textColor = fiveColors.textColor
+        upColor = fiveColors.upColor
+        self.downTime = downTime
+        self.upTime = upTime
+    }
 
     var body: some View {
         Text("Press Me")
