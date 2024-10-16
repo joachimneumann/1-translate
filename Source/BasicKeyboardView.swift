@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftGmp
 
 struct BasicKeyboardView: View {
     var basicKeyboard: BasicKeyboard
@@ -34,6 +35,5 @@ struct BasicKeyboardView: View {
 }
 
 #Preview {
-    let basicKeyboard = BasicKeyboard()
-    BasicKeyboardView(basicKeyboard: basicKeyboard)
+    BasicKeyboardView(basicKeyboard: BasicKeyboard(calculator: Calculator(precision: 20)))
 }

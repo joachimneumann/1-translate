@@ -1,3 +1,28 @@
+//import SwiftUI
+//import NumberTranslator
+//import SwiftGmp
+//
+//@MainActor
+//@Observable class ViewModel {
+//    var calculator: Calculator
+//    private(set) var _voices: Voices!
+//    var numberTranslator: XNumberTranslator
+//    var basicKeyboard: BasicKeyboard!
+//
+//    init() {
+//        print("ViewModel init()")
+//
+//        // Initialize numberTranslator and calculator first
+//        numberTranslator = XNumberTranslator()
+//        calculator = Calculator(precision: 20)
+//
+//        // Initialize dependent properties AFTER the first phase is complete
+//        self.basicKeyboard = BasicKeyboard(calculator: calculator)
+//        self._voices = Voices(numberTranslator: numberTranslator)
+//    }
+//}
+
+
 //
 //  ViewModel.swift
 //  Calculator
@@ -11,12 +36,14 @@ import SwiftGmp
 
 @MainActor
 @Observable class ViewModel {
-    var calculator = Calculator(precision: 40, maxOutputLength: 15) // 999 trillion
-    var numberTranslator: XNumberTranslator
-    var _1Translation: TranslationResult = TranslationResult(displayText: "", overline: nil, spokenText: nil)
-    var basicKeyboard = BasicKeyboard()
+        var calculator: Calculator
+        private(set) var _voices: Voices!
+        var numberTranslator: XNumberTranslator
+        var basicKeyboard: BasicKeyboard!
     var showAC = true
     var persistent = Persistent()
+
+    var _1Translation: TranslationResult = TranslationResult(displayText: "", overline: nil, spokenText: nil)
 
     private let keysThatRequireValidNumber = ["±", "%", "/", "*", "-", "+", "="]
     private static let MAX_DISPLAY_LEN = 10_000 /// too long strings in Text() crash the app
@@ -27,17 +54,24 @@ import SwiftGmp
     
     private let downTime = 0.15
     private let upTime = 0.4
-    private(set) var _voices: Voices!
     public var currentLR: LR = LR("0")
     public var currentLRWithSeparators: LR = LR("0")
+
     var voices: Voices {
         return _voices
     }
-//    var voices: Voices
+
     init() {
         print("ViewModel init()")
+
+        // Initialize numberTranslator and calculator first
         numberTranslator = XNumberTranslator()
-        self._voices = Voices(numberTranslator: numberTranslator)
+        calculator = Calculator(precision: 40, maxOutputLength: 15) // 999 trillion
+
+        // Initialize dependent properties AFTER the first phase is complete
+        basicKeyboard = BasicKeyboard(calculator: calculator)
+        _voices = Voices(numberTranslator: numberTranslator)
+
         calculator.decimalSeparator = persistent.decimalSeparator
         calculator.separateGroups = persistent.separateGroups
 
@@ -47,7 +81,7 @@ import SwiftGmp
     func keyDownX(_ aKey: AKey) {
         if aKey.label == "AC" {
             print("AC!")
-            basicKeyboard.back(true)
+//            basicKeyboard.back(true)
         }
         print("down \(aKey.label)")
     }
