@@ -9,25 +9,33 @@ import SwiftUI
 import SwiftGmp
 
 struct KeyColor {
-    struct FiveColors {
+    struct SixColors {
         let textColor: Color
         let upColor: Color
         let downColor: Color
         let pendingTextColor: Color
-        let pendingColor: Color
-        private init(textColor: Color, upColor: Color, downColor: Color, pendingTextColor: Color = .white, pendingColor: Color = .green) {
+        let pendingDownColor: Color
+        let pendingUpColor: Color
+        private init(textColor: Color, upColor: Color, downColor: Color, pendingTextColor: Color = .white, pendingDownColor: Color = .red, pendingUpColor: Color = .green) {
             self.textColor = textColor
             self.upColor = upColor
             self.downColor = downColor
             self.pendingTextColor = pendingTextColor
-            self.pendingColor = pendingColor
+            self.pendingDownColor = pendingDownColor
+            self.pendingUpColor = pendingUpColor
         }
-        init(_ textGrayscale: CGFloat, _ upGrayscale: CGFloat, _ downGrayscale: CGFloat, _ pendingTextGrayscale: CGFloat = 1.0, _ pendingGrayscale: CGFloat = 0.0) {
+        init(_ textGrayscale: CGFloat,
+             _ upGrayscale: CGFloat,
+             _ downGrayscale: CGFloat,
+             _ pendingTextGrayscale: CGFloat = 1.0,
+             _ pendingDownGrayscale: CGFloat = 0.0,
+             _ pendingUpGrayscale: CGFloat = 0.0) {
             self.init(textColor: Color(white: textGrayscale),
                       upColor:   Color(white: upGrayscale),
                       downColor: Color(white: downGrayscale),
                       pendingTextColor: Color(white: pendingTextGrayscale),
-                      pendingColor: Color(white: pendingGrayscale))
+                      pendingDownColor: .green,
+                      pendingUpColor: .red)
         }
     }
     
@@ -47,14 +55,14 @@ struct KeyColor {
     private let secondColors            = ThreeColors(0.925, 0.396, 0.498)
     private let secondActiveColors      = ThreeColors(0.925, 0.300, 0.498)
 #else
-    private static let digitColors             = FiveColors(1.00, 0.20, 0.40)
-    private static let operatorColors          = FiveColors(1.00, 0.40, 0.60, 0.30, 0.90)
-    private static let scientificColors        = FiveColors(1.00, 0.12, 0.32, 0.30, 0.70)
-    private static let secondColors            = FiveColors(1.00, 0.12, 0.12)
-    private static let secondActiveColors      = FiveColors(0.20, 0.60, 0.60)
+    private static let digitColors             = SixColors(1.00, 0.20, 0.40)
+    private static let operatorColors          = SixColors(1.00, 0.40, 0.60)//, 0.30, 0.90)
+    private static let scientificColors        = SixColors(1.00, 0.12, 0.32)//, 0.30, 0.70)
+    private static let secondColors            = SixColors(1.00, 0.12, 0.12)
+    private static let secondActiveColors      = SixColors(0.20, 0.60, 0.60)
 #endif
         
-    static func fiveColors(op: any OpProtocol) -> FiveColors {
+    static func sixColors(op: any OpProtocol) -> SixColors {
         switch op {
         case is InplaceOperation, is TwoOperantOperation, is PercentOperation, is ClearOperation, is EqualOperation:
             return operatorColors

@@ -12,9 +12,12 @@ import SwiftGmp
     var label: String
     let width: CGFloat
     let height: CGFloat
-    let fiveColors: KeyColor.FiveColors
+    let sixColors: KeyColor.SixColors
     var bgColor: Color
     var txtColor: Color
+    var downTime: Double = 0.15
+    var isPending: Bool = false
+    var upTime: Double = 0.4
     var op: any OpProtocol
     init(_ op: any OpProtocol) {
         self.label = op.getRawValue()
@@ -23,7 +26,7 @@ import SwiftGmp
         txtColor = .white// KeyColor.textColorFor(op: op)
         width = 50
         height = 30
-        fiveColors = KeyColor.fiveColors(op: op)
+        sixColors = KeyColor.sixColors(op: op)
     }
 
     var id = UUID()
