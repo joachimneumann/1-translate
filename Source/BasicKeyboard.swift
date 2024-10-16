@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct AKey: Identifiable {
-    var id: String { label }
+@Observable class AKey: Identifiable {
+    var id = UUID()
     var label: String
     let width: CGFloat
     let height: CGFloat
@@ -23,15 +23,15 @@ struct AKey: Identifiable {
     }
 }
 
-struct KeyRow: Identifiable {
-    var id: String { keys.map { $0.label }.joined(separator: "-") }
+class KeyRow: Identifiable {
+    var id = UUID()
     var keys: [AKey] = []
     init(_ keys: [AKey]) {
         self.keys = keys
     }
 }
 
-struct BasicKeyboard {
+class BasicKeyboard {
     var rows: [KeyRow] = []
     init() {
         let clearKey = AKey("AC")
@@ -61,11 +61,25 @@ struct BasicKeyboard {
         rows.append(KeyRow([settingsKey, zeroKey, decimalKey, equalsKey]))
     }
     
-    mutating func back(_ isBack: Bool) {
+    func back(_ isBack: Bool) {
         if isBack {
+            print("set to C")
             rows[0].keys[0].label = "C"
         } else {
             rows[0].keys[0].label = "AC"
         }
     }
+    
+    func keyDownX(_ aKey: AKey) {
+        print("keyDownX rows[0].keys[0].label = \(rows[0].keys[0].label)")
+        if aKey.label == "AC" {
+            print("AC!")
+            back(true)
+        }
+        print("down \(aKey.label)")
+    }
+    func keyUpX(_ aKey: AKey) {
+        print("up   \(aKey.label)")
+    }
+
 }

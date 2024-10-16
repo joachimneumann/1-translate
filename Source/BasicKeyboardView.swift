@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct BasicKeyboardView: View {
-    var viewModel: ViewModel
+    var basicKeyboard: BasicKeyboard
     var body: some View {
         VStack {
-            ForEach(viewModel.basicKeyboard.rows) { keyRow in
+            ForEach(basicKeyboard.rows) { keyRow in
                 HStack {
                     ForEach(keyRow.keys) { key in
                         Text(key.label)
@@ -21,10 +21,10 @@ struct BasicKeyboardView: View {
                             .clipShape(Capsule())
                             .simultaneousGesture(DragGesture(minimumDistance: 0)
                                 .onChanged { _ in
-                                    viewModel.keyDownX(key)
+                                    basicKeyboard.keyDownX(key)
                                 }
                                 .onEnded { _ in
-                                    viewModel.keyUpX(key)
+                                    basicKeyboard.keyUpX(key)
                                 })
                     }
                 }
@@ -34,6 +34,6 @@ struct BasicKeyboardView: View {
 }
 
 #Preview {
-    let viewModel = ViewModel()
-    BasicKeyboardView(viewModel: viewModel)
+    let basicKeyboard = BasicKeyboard()
+    BasicKeyboardView(basicKeyboard: basicKeyboard)
 }

@@ -129,7 +129,7 @@ struct Screen: Equatable, DisplayLengthLimiter {
         CGFloat(0.5 * plusIconSize)
         displayWidth = calculatorWidth - 2.0 * displayHorizontalPadding
         numberOfDigits = Int(floor(displayWidth / maxDigitWidth))
-        let x = 3 * numberOfDigits
+//        let x = 3 * numberOfDigits
     }
 }
 

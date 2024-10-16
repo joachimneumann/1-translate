@@ -35,6 +35,7 @@ import SwiftGmp
     }
 //    var voices: Voices
     init() {
+        print("ViewModel init()")
         numberTranslator = XNumberTranslator()
         self._voices = Voices(numberTranslator: numberTranslator)
         calculator.decimalSeparator = persistent.decimalSeparator

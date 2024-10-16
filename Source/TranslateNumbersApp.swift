@@ -14,7 +14,7 @@ struct TranslateNumbersApp: App {
     var body: some Scene {
         WindowGroup {
             GeometryReader { geo in
-                BasicKeyboardView(viewModel: ViewModel())
+                BasicKeyboardView(basicKeyboard: BasicKeyboard())
 //                TranslateNumbers(screen: Screen(geo.size))
             }
         }
