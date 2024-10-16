@@ -24,7 +24,7 @@ import SwiftGmp
         self.op = op
         bgColor = .green//KeyColor.backgroundUpColorFor(op: op)
         txtColor = .white// KeyColor.textColorFor(op: op)
-        width = 50
+        width = 70
         height = 30
         sixColors = KeyColor.sixColors(op: op)
     }
