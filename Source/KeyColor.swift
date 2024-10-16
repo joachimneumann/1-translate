@@ -41,18 +41,16 @@ struct KeyColor {
     private let secondColors            = ThreeColors(0.925, 0.396, 0.498)
     private let secondActiveColors      = ThreeColors(0.925, 0.300, 0.498)
 #else
-    private let digitColors             = ThreeColors(1.00, 0.20, 0.40)
-    private let operatorColors          = ThreeColors(1.00, 0.40, 0.60)
-    private let pendingOperatorColors   = ThreeColors(0.30, 0.90, 0.80)
-    private let scientificColors        = ThreeColors(1.00, 0.12, 0.32)
-    private let pendingScientificColors = ThreeColors(0.30, 0.70, 0.60)
-    private let secondColors            = ThreeColors(1.00, 0.12, 0.12)
-    private let secondActiveColors      = ThreeColors(0.20, 0.60, 0.60)
+    private static let digitColors             = ThreeColors(1.00, 0.20, 0.9)//0.40)
+    private static let operatorColors          = ThreeColors(1.00, 0.40, 0.60)
+    private static let pendingOperatorColors   = ThreeColors(0.30, 0.90, 0.80)
+    private static let scientificColors        = ThreeColors(1.00, 0.12, 0.32)
+    private static let pendingScientificColors = ThreeColors(0.30, 0.70, 0.60)
+    private static let secondColors            = ThreeColors(1.00, 0.12, 0.12)
+    private static let secondActiveColors      = ThreeColors(0.20, 0.60, 0.60)
 #endif
-    
-    let disabledColor = Color.red
-    
-    private func threeColors(op: any OpProtocol) -> ThreeColors {
+        
+    private static func threeColors(op: any OpProtocol) -> ThreeColors {
         switch op {
         case is InplaceOperation, is TwoOperantOperation, is PercentOperation, is ClearOperation, is EqualOperation:
             return operatorColors
@@ -60,7 +58,8 @@ struct KeyColor {
             return digitColors
         }
     }
-    private func pendingThreeColors(op: any OpProtocol) -> ThreeColors {
+    
+    private static func pendingThreeColors(op: any OpProtocol) -> ThreeColors {
         switch op {
         case is InplaceOperation, is TwoOperantOperation, is PercentOperation:
             return pendingOperatorColors
@@ -68,16 +67,16 @@ struct KeyColor {
             return threeColors(op: op)
         }
     }
-    func backgroundUpColorFor(op: any OpProtocol) -> Color {
+    static func backgroundUpColorFor(op: any OpProtocol) -> Color {
         threeColors(op: op).upColor
     }
-    func pendingBackgroundUpColorFor(op: any OpProtocol) -> Color {
+    static func pendingBackgroundUpColorFor(op: any OpProtocol) -> Color {
         pendingThreeColors(op: op).upColor
     }
-    func backgroundDownColorFor(op: any OpProtocol) -> Color {
+    static func backgroundDownColorFor(op: any OpProtocol) -> Color {
         threeColors(op: op).downColor
     }
-    func textColorFor(op: any OpProtocol) -> Color {
+    static func textColorFor(op: any OpProtocol) -> Color {
         threeColors(op: op).textColor
     }
 

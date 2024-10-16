@@ -8,21 +8,28 @@
 import SwiftUI
 import SwiftGmp
 
-@Observable class AKey: Identifiable {
-    var id = UUID()
+@Observable class AKey: Identifiable, Hashable {
     var label: String
     let width: CGFloat
     let height: CGFloat
-    let bgColor: Color
-    let txtColor: Color
+    var bgColor: Color
+    var txtColor: Color
     var op: any OpProtocol
-    init(_ label: String, _ op: any OpProtocol) {
-        self.label = label
+    init(_ op: any OpProtocol) {
+        self.label = op.getRawValue()
         self.op = op
-        bgColor = .green
-        txtColor = .white
+        bgColor = KeyColor.backgroundUpColorFor(op: op)
+        txtColor = KeyColor.textColorFor(op: op)
         width = 50
         height = 30
+    }
+
+    var id = UUID()
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    static func == (lhs: AKey, rhs: AKey) -> Bool {
+        lhs.id == rhs.id
     }
 }
 
@@ -34,41 +41,46 @@ struct KeyRow: Identifiable {
     }
 }
 
-struct BasicKeyboard {
+class BasicKeyboard {
     let calculator: Calculator
     var rows: [KeyRow] = []
-    init(calculator: Calculator) {
+    
+    private var upHasHappended: [AKey: Bool] = [:]
+    private var downAnimationFinished: [AKey: Bool] = [:]
+    private let downTime = 0.15
+    private let upTime = 0.4
+
+    init(calculator: Calculator = Calculator(precision: 20)) {
         self.calculator = calculator
-        let clearKey = AKey("AC", ClearOperation.clear)
-        let changeSignKey = AKey("±", InplaceOperation.changeSign)
-        let percentKey = AKey("%", PercentOperation.percent)
-        let divideKey = AKey("÷", TwoOperantOperation.div)
+        let clearKey = AKey(ClearOperation.clear)
+        let changeSignKey = AKey(InplaceOperation.changeSign)
+        let percentKey = AKey(PercentOperation.percent)
+        let divideKey = AKey(TwoOperantOperation.div)
         rows.append(KeyRow([clearKey, changeSignKey, percentKey, divideKey]))
-        let sevenKey = AKey("7", DigitOperation.seven)
-        let eightKey = AKey("8", DigitOperation.eight)
-        let nineKey = AKey("9", DigitOperation.nine)
-        let multiplyKey = AKey("×", TwoOperantOperation.mul)
+        let sevenKey = AKey(DigitOperation.seven)
+        let eightKey = AKey(DigitOperation.eight)
+        let nineKey = AKey(DigitOperation.nine)
+        let multiplyKey = AKey(TwoOperantOperation.mul)
         rows.append(KeyRow([sevenKey, eightKey, nineKey, multiplyKey]))
-        let fourKey = AKey("4", DigitOperation.four)
-        let fiveKey = AKey("5", DigitOperation.five)
-        let sixKey = AKey("6", DigitOperation.six)
-        let subtractKey = AKey("-", TwoOperantOperation.sub)
+        let fourKey = AKey(DigitOperation.four)
+        let fiveKey = AKey(DigitOperation.five)
+        let sixKey = AKey(DigitOperation.six)
+        let subtractKey = AKey(TwoOperantOperation.sub)
         rows.append(KeyRow([fourKey, fiveKey, sixKey, subtractKey]))
-        let oneKey = AKey("1", DigitOperation.one)
-        let twoKey = AKey("2", DigitOperation.two)
-        let threeKey = AKey("3", DigitOperation.three)
-        let addKey = AKey("+", TwoOperantOperation.add)
+        let oneKey = AKey(DigitOperation.one)
+        let twoKey = AKey(DigitOperation.two)
+        let threeKey = AKey(DigitOperation.three)
+        let addKey = AKey(TwoOperantOperation.add)
         rows.append(KeyRow([oneKey, twoKey, threeKey, addKey]))
-        let settingsKey = AKey("S", DigitOperation.zero)
-        let zeroKey = AKey("0", DigitOperation.zero)
-        let decimalKey = AKey(".", DigitOperation.dot)
-        let equalsKey = AKey("=", EqualOperation.equal)
+        let settingsKey = AKey(DigitOperation.zero)
+        let zeroKey = AKey(DigitOperation.zero)
+        let decimalKey = AKey(DigitOperation.dot)
+        let equalsKey = AKey(EqualOperation.equal)
         rows.append(KeyRow([settingsKey, zeroKey, decimalKey, equalsKey]))
     }
     
     func back(_ isBack: Bool) {
         if isBack {
-            print("set to C")
             rows[0].keys[0].label = "C"
             rows[0].keys[0].op = ClearOperation.back
         } else {
@@ -77,14 +89,38 @@ struct BasicKeyboard {
         }
     }
     
-    func keyDownX(_ aKey: AKey) {
-        print("down \(aKey.label)")
-        
+    
+    func keyDown(_ key: AKey) {
+        print("keyDown \(key.op.getRawValue())")
+        upHasHappended[key] = false
+        downAnimationFinished[key] = false
+        withAnimation(.easeIn(duration: downTime)) {
+            key.bgColor = KeyColor.backgroundDownColorFor(op: key.op)
+        }
+        Task(priority: .userInitiated) {
+            try? await Task.sleep(nanoseconds: UInt64(downTime * 1_000_000_000))
+            print("down: upHasHappended \(upHasHappended[key] ?? false)")
+//            if upHasHappended[key] ?? false {
+                withAnimation(.easeIn(duration: upTime)) {
+                    key.bgColor = KeyColor.backgroundUpColorFor(op: key.op)
+                }
+//            }
+            downAnimationFinished[key] = true
+        }
     }
-    func keyUpX(_ aKey: AKey) {
-        calculator.press(aKey.op)
-        back(calculator.displayBufferHasDigits)
-        print("\(calculator.lr.string) up   \(aKey.label)")
+    
+    func keyUp(_ key: AKey) {
+        print("keyUp \(key.op.getRawValue())")
+        calculator.press(key.op)
+        //updateBackgroundColors(exceptFor: key)
+        upHasHappended[key] = true
+        print("keyUp downAnimationFinished \(downAnimationFinished[key] ?? false)")
+        if downAnimationFinished[key] ?? false {
+            withAnimation(.easeIn(duration: upTime)) {
+                key.bgColor = KeyColor.backgroundUpColorFor(op: key.op)
+            }
+        }
+        print("\(calculator.lr.string)")
     }
 
 }
