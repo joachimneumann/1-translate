@@ -16,18 +16,6 @@ struct BasicKeyboardView: View {
                 HStack {
                     ForEach(keyRow.keys) { key in
                         AnimatedKey(key: key)
-//                        Text(key.label)
-//                            .foregroundColor(key.txtColor)
-//                            .frame(width: key.width, height: key.height)
-//                            .background(key.bgColor)
-//                            .clipShape(Capsule())
-//                            .simultaneousGesture(DragGesture(minimumDistance: 0)
-//                                .onChanged { _ in
-//                                    basicKeyboard.keyDown(key)
-//                                }
-//                                .onEnded { _ in
-//                                    basicKeyboard.keyUp (key)
-//                                })
                     }
                 }
             }
