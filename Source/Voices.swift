@@ -1,178 +1,178 @@
+////
+////  Voices.swift
+////  TranslateNumbers
+////
+////  Created by Joachim Neumann on 1/3/24.
+////
 //
-//  Voices.swift
-//  TranslateNumbers
+//import Foundation
+//import AVFoundation
+//import NumberTranslator
 //
-//  Created by Joachim Neumann on 1/3/24.
+//@Observable class Voices {
+//    let numberTranslator: NumberTranslator
+//    struct VoiceDisplayData {
+//        let variant: String?
+//        let name: String
+//        let quality: String?
+//        var selected: Bool
+//        init(variant: String?, name: String, quality: String?, selected: Bool) {
+//            self.variant = variant
+//            self.name = name
+//            self.quality = quality
+//            self.selected = selected
+//        }
+//    }
+//    typealias DisplayDataAndVoice = (displayData: VoiceDisplayData, voice: AVSpeechSynthesisVoice)
+//    typealias DictOfReducedIdentifiers = [String : DisplayDataAndVoice]
+//    typealias SelectedIDAndDict = (selectedId: String?, dict: DictOfReducedIdentifiers)
+//    typealias VoiceDict = [String : SelectedIDAndDict]
+//    static let synthesizer = AVSpeechSynthesizer()
+//    var voiceDict: VoiceDict = [:]
 //
-
-import Foundation
-import AVFoundation
-import NumberTranslator
-
-@Observable class Voices {
-    let numberTranslator: NumberTranslator
-    struct VoiceDisplayData {
-        let variant: String?
-        let name: String
-        let quality: String?
-        var selected: Bool
-        init(variant: String?, name: String, quality: String?, selected: Bool) {
-            self.variant = variant
-            self.name = name
-            self.quality = quality
-            self.selected = selected
-        }
-    }
-    typealias DisplayDataAndVoice = (displayData: VoiceDisplayData, voice: AVSpeechSynthesisVoice)
-    typealias DictOfReducedIdentifiers = [String : DisplayDataAndVoice]
-    typealias SelectedIDAndDict = (selectedId: String?, dict: DictOfReducedIdentifiers)
-    typealias VoiceDict = [String : SelectedIDAndDict]
-    static let synthesizer = AVSpeechSynthesizer()
-    var voiceDict: VoiceDict = [:]
-
-    init(numberTranslator: NumberTranslator) {
-        self.numberTranslator = numberTranslator
-    }
-    
-    func updateSelectedVoice(reducedIdentifier: String, for code: String) {
-        UserDefaults.standard.set(reducedIdentifier, forKey: code.voiceIdentifierKey)
-        refreshVoiceDict()
-    }
-    
-    func refreshVoiceDict() {
-        var uniqueVoiceLanguageCodes: [String] = []
-        for l in NumberTranslator.Language.allCases {
-            if let code = numberTranslator.code(l) {
-                if !uniqueVoiceLanguageCodes.contains(code) {
-                    uniqueVoiceLanguageCodes.append(code)
-                }
-            }
-        }
-
-        let allSystemVoices = AVSpeechSynthesisVoice.speechVoices()
-        
-        /// populate dict
-        for code in uniqueVoiceLanguageCodes {
-            voiceDict[code] = (nil, [:])
-
-            /// presistent selectedId?
-            if let storedVoiceIdentifier = UserDefaults.standard.string(forKey: code.voiceIdentifierKey) {
-                var exists = false
-                for voice in allSystemVoices {
-                    if storedVoiceIdentifier == voice.reducedIdentifier { exists = true }
-                }
-                if exists {
-                    voiceDict[code]!.selectedId = storedVoiceIdentifier
-                }
-            }
-
-            for voice in allSystemVoices {
-                if voice.languageCode == code {
-                    if !voiceDict[code]!.dict.keys.contains(voice.reducedIdentifier) {
-                        if voice.identifier.contains("premium") {
-                            if voiceDict[code]!.selectedId == nil {
-                                voiceDict[code]!.selectedId = voice.reducedIdentifier
-                            }
-                            let displayData = VoiceDisplayData(
-                                variant: voice.variantCode,
-                                name: voice.name.replacingOccurrences(of: " (Premium)", with: ""),
-                                quality: voice.quality.string,
-                                selected: voiceDict[code]!.selectedId != nil && voiceDict[code]!.selectedId == voice.reducedIdentifier)
-                            voiceDict[code]!.dict[voice.reducedIdentifier] = (displayData, voice)
-                        }
-                    }
-                }
-            }
-
-            for voice in allSystemVoices {
-                if voice.languageCode == code {
-                    if !voiceDict[code]!.dict.keys.contains(voice.reducedIdentifier) {
-                        if voice.identifier.contains("enhanced") {
-                            if voiceDict[code]!.selectedId == nil {
-                                voiceDict[code]!.selectedId = voice.reducedIdentifier
-                            }
-                            let displayData = VoiceDisplayData(
-                                variant: voice.variantCode,
-                                name: voice.name.replacingOccurrences(of: " (Enhanced)", with: ""),
-                                quality: voice.quality.string,
-                                selected: voiceDict[code]!.selectedId != nil && voiceDict[code]!.selectedId == voice.reducedIdentifier)
-                            voiceDict[code]!.dict[voice.reducedIdentifier] = (displayData, voice)
-                        }
-                    }
-                }
-            }
-            
-            for voice in allSystemVoices {
-                if voice.languageCode == code {
-                    if !voiceDict[code]!.dict.keys.contains(voice.reducedIdentifier) {
-                        if voice.identifier.contains("compact") {
-                            if voiceDict[code]!.selectedId == nil {
-                                voiceDict[code]!.selectedId = voice.reducedIdentifier
-                            }
-                            let displayData = VoiceDisplayData(
-                                variant: voice.variantCode,
-                                name: voice.name,
-                                quality: voice.quality.string,
-                                selected: voiceDict[code]!.selectedId != nil && voiceDict[code]!.selectedId == voice.reducedIdentifier)
-                            voiceDict[code]!.dict[voice.reducedIdentifier] = (displayData, voice)
-                        }
-                    }
-                }
-            }
-
-            /// no voice found?
-            if voiceDict[code]!.selectedId == nil {
-                voiceDict[code] = nil
-            }
-        }
-    }
-    
-    
-    func readAloud(_ text: String, in language: NumberTranslator.Language) {
-        
-        /// also speak when the phone is in silent mode
-        if AVAudioSession.sharedInstance().category != .playback {
-            do {
-                try AVAudioSession.sharedInstance().setCategory(.playback,mode: .default)
-            } catch _ {
-                return
-                /// } catch let error {
-                /// fatalError("AVAudioSession: could not set category: \(error.localizedDescription)")
-            }
-        }
-
-
-        guard let voiceLanguageCode = numberTranslator.code(language) else { return }
-        guard let (selectedID, dict) = voiceDict[voiceLanguageCode] else { return }
-        guard let selectedID = selectedID else { return }
-        guard let (_, voice) = dict[selectedID] else { return }
-
-        let utterance = AVSpeechUtterance(string: text)
-        utterance.voice = voice
-        Voices.synthesizer.speak(utterance)
-    }
-}
-
-extension String {
-    fileprivate var voiceIdentifierKey: String {
-        self + "_voiceIdentifier"
-    }
-}
-
-
-
-extension AVSpeechSynthesisVoice {
-    fileprivate var languageCode: String {
-        String(self.language.split(separator: "-")[0])
-    }
-    var variantCode: String {
-        String(self.language.split(separator: "-")[1])
-    }
-    fileprivate var reducedIdentifier: String {
-        self.identifier
-            .replacingOccurrences(of: ".premium", with: "")
-            .replacingOccurrences(of: ".enhanced", with: "")
-            .replacingOccurrences(of: ".compact", with: "")
-            .replacingOccurrences(of: ".eloquence", with: "")
-    }
-}
+//    init(numberTranslator: NumberTranslator) {
+//        self.numberTranslator = numberTranslator
+//    }
+//    
+//    func updateSelectedVoice(reducedIdentifier: String, for code: String) {
+//        UserDefaults.standard.set(reducedIdentifier, forKey: code.voiceIdentifierKey)
+//        refreshVoiceDict()
+//    }
+//    
+//    func refreshVoiceDict() {
+//        var uniqueVoiceLanguageCodes: [String] = []
+//        for l in NumberTranslator.Language.allCases {
+//            if let code = numberTranslator.code(l) {
+//                if !uniqueVoiceLanguageCodes.contains(code) {
+//                    uniqueVoiceLanguageCodes.append(code)
+//                }
+//            }
+//        }
+//
+//        let allSystemVoices = AVSpeechSynthesisVoice.speechVoices()
+//        
+//        /// populate dict
+//        for code in uniqueVoiceLanguageCodes {
+//            voiceDict[code] = (nil, [:])
+//
+//            /// presistent selectedId?
+//            if let storedVoiceIdentifier = UserDefaults.standard.string(forKey: code.voiceIdentifierKey) {
+//                var exists = false
+//                for voice in allSystemVoices {
+//                    if storedVoiceIdentifier == voice.reducedIdentifier { exists = true }
+//                }
+//                if exists {
+//                    voiceDict[code]!.selectedId = storedVoiceIdentifier
+//                }
+//            }
+//
+//            for voice in allSystemVoices {
+//                if voice.languageCode == code {
+//                    if !voiceDict[code]!.dict.keys.contains(voice.reducedIdentifier) {
+//                        if voice.identifier.contains("premium") {
+//                            if voiceDict[code]!.selectedId == nil {
+//                                voiceDict[code]!.selectedId = voice.reducedIdentifier
+//                            }
+//                            let displayData = VoiceDisplayData(
+//                                variant: voice.variantCode,
+//                                name: voice.name.replacingOccurrences(of: " (Premium)", with: ""),
+//                                quality: voice.quality.string,
+//                                selected: voiceDict[code]!.selectedId != nil && voiceDict[code]!.selectedId == voice.reducedIdentifier)
+//                            voiceDict[code]!.dict[voice.reducedIdentifier] = (displayData, voice)
+//                        }
+//                    }
+//                }
+//            }
+//
+//            for voice in allSystemVoices {
+//                if voice.languageCode == code {
+//                    if !voiceDict[code]!.dict.keys.contains(voice.reducedIdentifier) {
+//                        if voice.identifier.contains("enhanced") {
+//                            if voiceDict[code]!.selectedId == nil {
+//                                voiceDict[code]!.selectedId = voice.reducedIdentifier
+//                            }
+//                            let displayData = VoiceDisplayData(
+//                                variant: voice.variantCode,
+//                                name: voice.name.replacingOccurrences(of: " (Enhanced)", with: ""),
+//                                quality: voice.quality.string,
+//                                selected: voiceDict[code]!.selectedId != nil && voiceDict[code]!.selectedId == voice.reducedIdentifier)
+//                            voiceDict[code]!.dict[voice.reducedIdentifier] = (displayData, voice)
+//                        }
+//                    }
+//                }
+//            }
+//            
+//            for voice in allSystemVoices {
+//                if voice.languageCode == code {
+//                    if !voiceDict[code]!.dict.keys.contains(voice.reducedIdentifier) {
+//                        if voice.identifier.contains("compact") {
+//                            if voiceDict[code]!.selectedId == nil {
+//                                voiceDict[code]!.selectedId = voice.reducedIdentifier
+//                            }
+//                            let displayData = VoiceDisplayData(
+//                                variant: voice.variantCode,
+//                                name: voice.name,
+//                                quality: voice.quality.string,
+//                                selected: voiceDict[code]!.selectedId != nil && voiceDict[code]!.selectedId == voice.reducedIdentifier)
+//                            voiceDict[code]!.dict[voice.reducedIdentifier] = (displayData, voice)
+//                        }
+//                    }
+//                }
+//            }
+//
+//            /// no voice found?
+//            if voiceDict[code]!.selectedId == nil {
+//                voiceDict[code] = nil
+//            }
+//        }
+//    }
+//    
+//    
+//    func readAloud(_ text: String, in language: NumberTranslator.Language) {
+//        
+//        /// also speak when the phone is in silent mode
+//        if AVAudioSession.sharedInstance().category != .playback {
+//            do {
+//                try AVAudioSession.sharedInstance().setCategory(.playback,mode: .default)
+//            } catch _ {
+//                return
+//                /// } catch let error {
+//                /// fatalError("AVAudioSession: could not set category: \(error.localizedDescription)")
+//            }
+//        }
+//
+//
+//        guard let voiceLanguageCode = numberTranslator.code(language) else { return }
+//        guard let (selectedID, dict) = voiceDict[voiceLanguageCode] else { return }
+//        guard let selectedID = selectedID else { return }
+//        guard let (_, voice) = dict[selectedID] else { return }
+//
+//        let utterance = AVSpeechUtterance(string: text)
+//        utterance.voice = voice
+//        Voices.synthesizer.speak(utterance)
+//    }
+//}
+//
+//extension String {
+//    fileprivate var voiceIdentifierKey: String {
+//        self + "_voiceIdentifier"
+//    }
+//}
+//
+//
+//
+//extension AVSpeechSynthesisVoice {
+//    fileprivate var languageCode: String {
+//        String(self.language.split(separator: "-")[0])
+//    }
+//    var variantCode: String {
+//        String(self.language.split(separator: "-")[1])
+//    }
+//    fileprivate var reducedIdentifier: String {
+//        self.identifier
+//            .replacingOccurrences(of: ".premium", with: "")
+//            .replacingOccurrences(of: ".enhanced", with: "")
+//            .replacingOccurrences(of: ".compact", with: "")
+//            .replacingOccurrences(of: ".eloquence", with: "")
+//    }
+//}

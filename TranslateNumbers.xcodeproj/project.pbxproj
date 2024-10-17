@@ -11,11 +11,10 @@
 		AA08C7C6272EDA4A001B8575 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA08C7C5272EDA4A001B8575 /* Assets.xcassets */; };
 		AA08C7C9272EDA4A001B8575 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA08C7C8272EDA4A001B8575 /* Preview Assets.xcassets */; };
 		AA1934532C96956100FE0848 /* NumberTranslator in Frameworks */ = {isa = PBXBuildFile; productRef = AA1934522C96956100FE0848 /* NumberTranslator */; };
-		AA29F58A293CD608001ADF5A /* PortraitDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29F589293CD608001ADF5A /* PortraitDisplay.swift */; };
+		AA29F58A293CD608001ADF5A /* NumberDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29F589293CD608001ADF5A /* NumberDisplay.swift */; };
 		AA32853B297248B800D86CB4 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA32853A297248B800D86CB4 /* ViewModel.swift */; };
 		AA3565B02B32588B009B58D2 /* XNumberTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3565AF2B32588B009B58D2 /* XNumberTranslator.swift */; };
 		AA370C2D293352960041AE4E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA370C2C293352960041AE4E /* Extensions.swift */; };
-		AA370C31293352D60041AE4E /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA370C30293352D60041AE4E /* Key.swift */; };
 		AA3FB8272920E0E5002ECCEB /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3FB8262920E0E5002ECCEB /* Settings.swift */; };
 		AA659AB82B3FDE73004CF20A /* Persistent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA659AB72B3FDE73004CF20A /* Persistent.swift */; };
 		AA899D422B3E914700ADDC16 /* VoiceSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA899D412B3E914700ADDC16 /* VoiceSelection.swift */; };
@@ -54,13 +53,12 @@
 		AA08C7EC272F1572001B8575 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		AA21B8192CACC10700A1C118 /* SwiftGmp */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftGmp; path = ../SwiftGmp; sourceTree = SOURCE_ROOT; };
 		AA21B81A2CACC5A700A1C118 /* NumberTranslator */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = NumberTranslator; path = ../NumberTranslator; sourceTree = SOURCE_ROOT; };
-		AA29F589293CD608001ADF5A /* PortraitDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortraitDisplay.swift; sourceTree = "<group>"; };
+		AA29F589293CD608001ADF5A /* NumberDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberDisplay.swift; sourceTree = "<group>"; };
 		AA2FABFC272F2348006DE4C8 /* TranslateNumbersApp.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = TranslateNumbersApp.entitlements; sourceTree = "<group>"; };
 		AA2FABFF272F2348006DE4C8 /* TranslateNumbersApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslateNumbersApp.swift; sourceTree = "<group>"; };
 		AA32853A297248B800D86CB4 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		AA3565AF2B32588B009B58D2 /* XNumberTranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XNumberTranslator.swift; sourceTree = "<group>"; };
 		AA370C2C293352960041AE4E /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		AA370C30293352D60041AE4E /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		AA3FB8262920E0E5002ECCEB /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		AA6352B02B296C3B00CABC0C /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		AA659AB72B3FDE73004CF20A /* Persistent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistent.swift; sourceTree = "<group>"; };
@@ -125,8 +123,7 @@
 				AA0523462B27024800DDAAD4 /* LanguageSelector.swift */,
 				AAE426F629597AE3005FE365 /* Screen.swift */,
 				AA8A91132B1D7FD000CE7185 /* TranslatedDisplay.swift */,
-				AA29F589293CD608001ADF5A /* PortraitDisplay.swift */,
-				AA370C30293352D60041AE4E /* Key.swift */,
+				AA29F589293CD608001ADF5A /* NumberDisplay.swift */,
 				AABEFC122972A8780023A3C9 /* KeyColor.swift */,
 				AA370C2C293352960041AE4E /* Extensions.swift */,
 				AA3FB8262920E0E5002ECCEB /* Settings.swift */,
@@ -238,7 +235,7 @@
 				AA9C3F6D2CBF373C00F64EFA /* BasicKeyboardView.swift in Sources */,
 				AA32853B297248B800D86CB4 /* ViewModel.swift in Sources */,
 				AA370C2D293352960041AE4E /* Extensions.swift in Sources */,
-				AA29F58A293CD608001ADF5A /* PortraitDisplay.swift in Sources */,
+				AA29F58A293CD608001ADF5A /* NumberDisplay.swift in Sources */,
 				AA3565B02B32588B009B58D2 /* XNumberTranslator.swift in Sources */,
 				AA8A91142B1D7FD000CE7185 /* TranslatedDisplay.swift in Sources */,
 				AAF472672B452BD000E7B986 /* Voices.swift in Sources */,
@@ -248,7 +245,6 @@
 				AAB10B9A292A2222004707E9 /* Label.swift in Sources */,
 				AAE426F729597AE3005FE365 /* Screen.swift in Sources */,
 				AA899D422B3E914700ADDC16 /* VoiceSelection.swift in Sources */,
-				AA370C31293352D60041AE4E /* Key.swift in Sources */,
 				AA8A91112B1D7B5F00CE7185 /* TranslateNumbersApp.swift in Sources */,
 				AA3FB8272920E0E5002ECCEB /* Settings.swift in Sources */,
 			);

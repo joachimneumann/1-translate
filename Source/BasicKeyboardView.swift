@@ -9,11 +9,12 @@ import SwiftUI
 import SwiftGmp
 
 struct BasicKeyboardView: View {
+    let spacing: CGFloat
     var basicKeyboard: BasicKeyboard
     var body: some View {
-        VStack(spacing: basicKeyboard.spacing) {
+        VStack(spacing: spacing) {
             ForEach(basicKeyboard.rows) { keyRow in
-                HStack(spacing: basicKeyboard.spacing) {
+                HStack(spacing: spacing) {
                     ForEach(keyRow.keys) { key in
                         CalculatorKeyView(key: key)
                     }
@@ -23,9 +24,11 @@ struct BasicKeyboardView: View {
     }
 }
 
-#Preview {
-    BasicKeyboardView(
-        basicKeyboard: BasicKeyboard(calculator: Calculator(precision: 20),
-        spacing: 10,
-        keySize: CGSize(width: 60, height: 60)))
-}
+//#Preview {
+//    var res: String
+//    BasicKeyboardView(
+//        basicKeyboard: BasicKeyboard(calculator: Calculator(precision: 20),
+//        result: $res,
+//        spacing: 10,
+//        keySize: CGSize(width: 60, height: 60)))
+//}

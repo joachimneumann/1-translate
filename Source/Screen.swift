@@ -22,7 +22,7 @@ struct Screen: Equatable {
     var keyboardHeight: CGFloat
     let keySpacing: CGFloat
     let keySize: CGSize
-    var ePadding: CGFloat /// var and not let, because it is set to 0.0 in the tests
+//    var ePadding: CGFloat /// var and not let, because it is set to 0.0 in the tests
     let plusIconSize: CGFloat
     let iconsWidth: CGFloat
     let plusIconTrailingPadding: CGFloat
@@ -84,10 +84,10 @@ struct Screen: Equatable {
         plusIconSize = keyboardHeight * 0.13
         iconsWidth   = keyboardHeight * 0.16
         plusIconTrailingPadding = plusIconSize * 0.4
-        ePadding = plusIconSize * 0.1
+        //ePadding = plusIconSize * 0.1
         uiFontSize = 0.169 * keyboardHeight
         infoUiFontSize = 16.0
-        appleFont = Self.appleFont(ofSize: uiFontSize, weight: .black)
+        appleFont = Self.appleFont(ofSize: uiFontSize, weight: .regular)
         infoUiFont = Screen.appleFont(ofSize: infoUiFontSize, weight: .regular)
 
         kerning = 0.0//-0.02 * uiFontSize

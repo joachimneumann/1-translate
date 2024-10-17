@@ -13,7 +13,7 @@ struct CalculatorKeyView: View {
     @State private var animationState: AnimationState = .idle
     @State private var isPressed: Bool = false
 
-    let key: AKey
+    let key: Key
 
     enum AnimationState {
         case idle
@@ -21,16 +21,16 @@ struct CalculatorKeyView: View {
         case animatingUp
     }
 
-    init(key: AKey) {
+    init(key: Key) {
         self.key = key
         bgColorNonPending = key.sixColors.upColor
         bgColorPending = key.sixColors.pendingUpColor
     
         // print("AKey init \(key.op.getRawValue())")
         //
-        // I use this print statement to check
-        // if all keys are redrawn when a single key
-        // is pressed (which is not want I want, of course)
+        // I use this print statement to check if
+        // all keys are redrawn when a single key
+        // is pressed. I do not want that, of course.
     }
 
     var body: some View {
@@ -50,7 +50,7 @@ struct CalculatorKeyView: View {
                     .onEnded { _ in
                         self.isPressed = false
                         self.handleRelease()
-                        key.execute()
+                        key.up()
                     }
             )
     }
@@ -122,5 +122,5 @@ struct CalculatorKeyView: View {
 import SwiftGmp
 
 #Preview {
-    CalculatorKeyView(key: AKey(InplaceOperation.sqrt3))
+    CalculatorKeyView(key: Key(InplaceOperation.sqrt3))
 }
