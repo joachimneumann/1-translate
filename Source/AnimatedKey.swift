@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct AnimatedKey: View {
-    @State private var bgColor: Color
+    @State private var bgColorNonPending: Color
+    @State private var bgColorPending: Color
     @State private var animationState: AnimationState = .idle
     @State private var isPressed: Bool = false
 
@@ -22,14 +23,15 @@ struct AnimatedKey: View {
 
     init(key: AKey) {
         self.key = key
-        bgColor = key.isPending ? key.sixColors.pendingUpColor : key.sixColors.upColor
+        bgColorNonPending = key.sixColors.upColor
+        bgColorPending = key.sixColors.pendingUpColor
     }
 
     var body: some View {
         Text(key.op.getRawValue())
             .padding()
             .frame(width: key.width, height: key.height)
-            .background(bgColor)
+            .background(key.isPending ? bgColorPending : bgColorNonPending)
             .foregroundColor(key.isPending ? key.sixColors.pendingTextColor : key.sixColors.textColor)
             .cornerRadius(10)
             .gesture(
@@ -55,7 +57,8 @@ struct AnimatedKey: View {
             }
             animationState = .animatingDown
             withAnimation(.linear(duration: key.downTime)) {
-                self.bgColor = key.isPending ? key.sixColors.pendingDownColor : key.sixColors.downColor
+                bgColorNonPending = key.sixColors.downColor
+                bgColorPending = key.sixColors.pendingDownColor
             }
             // Schedule the completion handler after downTime
             DispatchQueue.main.asyncAfter(deadline: .now() + key.downTime) {
@@ -93,7 +96,8 @@ struct AnimatedKey: View {
     private func startUpAnimation() {
         self.animationState = .animatingUp
         withAnimation(.linear(duration: key.upTime)) {
-            self.bgColor = key.isPending ? key.sixColors.pendingUpColor : key.sixColors.upColor
+            bgColorNonPending = key.sixColors.upColor
+            bgColorPending = key.sixColors.pendingUpColor
         }
         // Schedule the completion handler after upTime
         DispatchQueue.main.asyncAfter(deadline: .now() + key.upTime) {

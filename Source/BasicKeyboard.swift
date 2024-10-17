@@ -13,8 +13,6 @@ import SwiftGmp
     let width: CGFloat
     let height: CGFloat
     let sixColors: KeyColor.SixColors
-    var bgColor: Color
-    var txtColor: Color
     var downTime: Double = 0.15
     var isPending: Bool = false
     var upTime: Double = 0.4
@@ -23,8 +21,6 @@ import SwiftGmp
     init(_ op: any OpProtocol) {
         self.label = op.getRawValue()
         self.op = op
-        bgColor = .green//KeyColor.backgroundUpColorFor(op: op)
-        txtColor = .white// KeyColor.textColorFor(op: op)
         width = 70
         height = 30
         sixColors = KeyColor.sixColors(op: op)
@@ -39,7 +35,7 @@ import SwiftGmp
     }
 }
 
-struct KeyRow: Identifiable {
+class KeyRow: Identifiable {
     var id = UUID()
     var keys: [AKey] = []
     init(_ keys: [AKey]) {
@@ -59,6 +55,16 @@ class BasicKeyboard {
     func execute(_ key: AKey) {
         print("execute \(key.op.getRawValue())")
         calculator.press(key.op)
+        for r in rows {
+            for k in r.keys {
+                if calculator.pendingOperators.contains(where: { $0.isEqual(to: k.op) } ) {
+                    k.isPending = true
+                } else {
+                    k.isPending = false
+                }
+
+            }
+        }
         print(calculator.lr.string)
         back(calculator.displayBufferHasDigits)
     }
@@ -93,7 +99,9 @@ class BasicKeyboard {
         
         for r in rows {
             for k in r.keys {
-                k.execute = { self.execute(k) }
+                k.execute = {
+                    self.execute(k)
+                }
             }
         }
     }
@@ -108,38 +116,5 @@ class BasicKeyboard {
         }
     }
     
-    
-    func keyDown(_ key: AKey) {
-        print("keyDown \(key.op.getRawValue())")
-        upHasHappended[key] = false
-        downAnimationFinished[key] = false
-        withAnimation(.easeIn(duration: downTime)) {
-            key.bgColor = .green//KeyColor.backgroundDownColorFor(op: key.op)
-        }
-        Task(priority: .userInitiated) {
-            try? await Task.sleep(nanoseconds: UInt64(downTime * 1_000_000_000))
-            print("down: upHasHappended \(upHasHappended[key] ?? false)")
-//            if upHasHappended[key] ?? false {
-                withAnimation(.easeIn(duration: upTime)) {
-                    key.bgColor = .green//KeyColor.backgroundUpColorFor(op: key.op)
-                }
-//            }
-            downAnimationFinished[key] = true
-        }
-    }
-    
-    func keyUp(_ key: AKey) {
-        print("keyUp \(key.op.getRawValue())")
-        calculator.press(key.op)
-        //updateBackgroundColors(exceptFor: key)
-        upHasHappended[key] = true
-        print("keyUp downAnimationFinished \(downAnimationFinished[key] ?? false)")
-        if downAnimationFinished[key] ?? false {
-            withAnimation(.easeIn(duration: upTime)) {
-                key.bgColor = .green//KeyColor.backgroundUpColorFor(op: key.op)
-            }
-        }
-        print("\(calculator.lr.string)")
-    }
 
 }

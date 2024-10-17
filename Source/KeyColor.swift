@@ -34,8 +34,8 @@ struct KeyColor {
                       upColor:   Color(white: upGrayscale),
                       downColor: Color(white: downGrayscale),
                       pendingTextColor: Color(white: pendingTextGrayscale),
-                      pendingDownColor: .green,
-                      pendingUpColor: .red)
+                      pendingDownColor: Color(white: pendingDownGrayscale),
+                      pendingUpColor: Color(white: pendingUpGrayscale))
         }
     }
     
@@ -56,8 +56,8 @@ struct KeyColor {
     private let secondActiveColors      = ThreeColors(0.925, 0.300, 0.498)
 #else
     private static let digitColors             = SixColors(1.00, 0.20, 0.40)
-    private static let operatorColors          = SixColors(1.00, 0.40, 0.60)//, 0.30, 0.90)
-    private static let scientificColors        = SixColors(1.00, 0.12, 0.32)//, 0.30, 0.70)
+    private static let operatorColors          = SixColors(1.00, 0.40, 0.60, 0.30, 0.90, 0.80)
+    private static let scientificColors        = SixColors(1.00, 0.12, 0.32, 0.30, 0.70, 0.60)
     private static let secondColors            = SixColors(1.00, 0.12, 0.12)
     private static let secondActiveColors      = SixColors(0.20, 0.60, 0.60)
 #endif
