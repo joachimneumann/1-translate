@@ -36,10 +36,9 @@ import SwiftGmp
 
 @MainActor
 @Observable class ViewModel {
-        var calculator: Calculator
-        private(set) var _voices: Voices!
-        var numberTranslator: XNumberTranslator
-        var basicKeyboard: BasicKeyboard!
+    var calculator: Calculator
+    private(set) var _voices: Voices!
+    var numberTranslator: XNumberTranslator
     var showAC = true
     var persistent = Persistent()
 
@@ -69,7 +68,6 @@ import SwiftGmp
         calculator = Calculator(precision: 40, maxOutputLength: 15) // 999 trillion
 
         // Initialize dependent properties AFTER the first phase is complete
-        basicKeyboard = BasicKeyboard(calculator: calculator)
         _voices = Voices(numberTranslator: numberTranslator)
 
         calculator.decimalSeparator = persistent.decimalSeparator

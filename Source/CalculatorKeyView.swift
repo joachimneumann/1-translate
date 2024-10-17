@@ -1,5 +1,5 @@
 //
-//  AnimatedKey.swift
+//  CalculatorKeyView.swift
 //  TranslateNumbers
 //
 //  Created by Joachim Neumann on 16.10.24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AnimatedKey: View {
+struct CalculatorKeyView: View {
     @State private var bgColorNonPending: Color
     @State private var bgColorPending: Color
     @State private var animationState: AnimationState = .idle
@@ -22,16 +22,21 @@ struct AnimatedKey: View {
     }
 
     init(key: AKey) {
-        print("AKey init \(key.op.getRawValue())")
         self.key = key
         bgColorNonPending = key.sixColors.upColor
         bgColorPending = key.sixColors.pendingUpColor
+    
+        // print("AKey init \(key.op.getRawValue())")
+        //
+        // I use this print statement to check
+        // if all keys are redrawn when a single key
+        // is pressed (which is not want I want, of course)
     }
 
     var body: some View {
-        Label(symbol: key.op.getRawValue(), size: key.height, color: key.isPending ? key.sixColors.pendingTextColor : key.sixColors.textColor)
+        Label(symbol: key.op.getRawValue(), size: key.keySize.height, color: key.isPending ? key.sixColors.pendingTextColor : key.sixColors.textColor)
             .padding()
-            .frame(width: key.width, height: key.height)
+            .frame(width: key.keySize.width, height: key.keySize.height)
             .background(key.isPending ? bgColorPending : bgColorNonPending)
             .clipShape(Capsule())
             .gesture(
@@ -117,5 +122,5 @@ struct AnimatedKey: View {
 import SwiftGmp
 
 #Preview {
-    AnimatedKey(key: AKey(InplaceOperation.sqrt3))
+    CalculatorKeyView(key: AKey(InplaceOperation.sqrt3))
 }

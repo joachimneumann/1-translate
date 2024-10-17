@@ -11,11 +11,11 @@ import SwiftGmp
 struct BasicKeyboardView: View {
     var basicKeyboard: BasicKeyboard
     var body: some View {
-        VStack {
+        VStack(spacing: basicKeyboard.spacing) {
             ForEach(basicKeyboard.rows) { keyRow in
-                HStack {
+                HStack(spacing: basicKeyboard.spacing) {
                     ForEach(keyRow.keys) { key in
-                        AnimatedKey(key: key)
+                        CalculatorKeyView(key: key)
                     }
                 }
             }
@@ -24,5 +24,8 @@ struct BasicKeyboardView: View {
 }
 
 #Preview {
-    BasicKeyboardView(basicKeyboard: BasicKeyboard(calculator: Calculator(precision: 20)))
+    BasicKeyboardView(
+        basicKeyboard: BasicKeyboard(calculator: Calculator(precision: 20),
+        spacing: 10,
+        keySize: CGSize(width: 60, height: 60)))
 }

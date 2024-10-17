@@ -9,8 +9,7 @@ import SwiftUI
 import SwiftGmp
 
 @Observable class AKey: Identifiable, Hashable {
-    let width: CGFloat
-    let height: CGFloat
+    var keySize: CGSize = CGSize(width: 10, height: 10)
     let sixColors: KeyColor.SixColors
     var downTime: Double = 0.15
     var isPending: Bool = false
@@ -19,8 +18,6 @@ import SwiftGmp
     var execute: () -> () = { }
     init(_ op: any OpProtocol) {
         self.op = op
-        width = 70
-        height = 50
         sixColors = KeyColor.sixColors(op: op)
     }
 
@@ -43,6 +40,8 @@ class KeyRow: Identifiable {
 
 class BasicKeyboard {
     let calculator: Calculator
+    let spacing: CGFloat
+    let keySize: CGSize
     var rows: [KeyRow] = []
     
     private var upHasHappended: [AKey: Bool] = [:]
@@ -67,8 +66,10 @@ class BasicKeyboard {
         back(calculator.displayBufferHasDigits)
     }
     
-    init(calculator: Calculator = Calculator(precision: 20)) {
+    init(calculator: Calculator = Calculator(precision: 20), spacing: CGFloat, keySize: CGSize) {
         self.calculator = calculator
+        self.spacing = spacing
+        self.keySize = keySize
         let clearKey = AKey(ClearOperation.clear)
         let changeSignKey = AKey(InplaceOperation.changeSign)
         let percentKey = AKey(PercentOperation.percent)
@@ -100,6 +101,7 @@ class BasicKeyboard {
                 k.execute = {
                     self.execute(k)
                 }
+                k.keySize = keySize
             }
         }
     }
