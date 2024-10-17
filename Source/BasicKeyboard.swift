@@ -41,12 +41,10 @@ class KeyRow: Identifiable {
 @Observable class BasicKeyboard {
     var rows: [KeyRow] = []
     let clearKey: Key
-    var keyboardCallback: (Key) -> () = { key in
-        print("not implemented keyboardCallback for key \(key.op.getRawValue())")
-    } { didSet {
+    var callback: (Key) -> () = { _ in } { didSet {
         for r in rows {
             for k in r.keys {
-                k.callback = keyboardCallback
+                k.callback = callback
             }
         }
     }

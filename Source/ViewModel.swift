@@ -37,9 +37,7 @@ class ViewModel: ObservableObject {
         self.screen = screen
         calculator = Calculator(precision: 40, maxOutputLength: 15) // 999 trillion
         basicKeyboard = BasicKeyboard(keySize: screen.keySize)
-        print("setting keyboardCallback")
-        basicKeyboard.keyboardCallback = execute
-        basicKeyboard.keyboardCallback(Key(DigitOperation.nine))
+        basicKeyboard.callback = execute
 //        print("ViewModel init()")
 //
 //        // Initialize numberTranslator and calculator first
