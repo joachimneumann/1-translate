@@ -1,3 +1,5 @@
+Back, long press --> AC
+
 number display and font size 
 - voice broken...
 - remember settings

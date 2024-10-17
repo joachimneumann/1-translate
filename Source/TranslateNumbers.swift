@@ -75,14 +75,10 @@ struct TranslateNumbers: View {
                 text: viewModel.numberDisplayContent,
                 font: Font(viewModel.screen.appleFont),
                 kerning: viewModel.screen.kerning)
-            NumberDisplay(
-                text: viewModel.numberDisplayContent,
-                font: Font(viewModel.screen.appleFont),
-                kerning: viewModel.screen.kerning)
+            .frame(height: viewModel.screen.textHeight)
             .background(.red)
-//            .padding(.bottom, viewModel.screen.portraitIPhoneDisplayBottomPadding)
-//            .padding(.horizontal, 0)
-//            .frame(height: 65)
+            .padding(.bottom, viewModel.screen.portraitIPhoneDisplayBottomPadding)
+            .padding(.horizontal, 0)
             BasicKeyboardView(
                 spacing: viewModel.screen.keySpacing,
                 basicKeyboard: viewModel.basicKeyboard)
