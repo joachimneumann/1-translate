@@ -50,7 +50,7 @@ struct CalculatorKeyView: View {
                     .onEnded { _ in
                         self.isPressed = false
                         self.handleRelease()
-                        key.up()
+                        key.callback(key)
                     }
             )
     }

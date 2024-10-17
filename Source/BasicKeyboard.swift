@@ -15,7 +15,7 @@ import SwiftGmp
     var isPending: Bool = false
     var upTime: Double = 0.4
     var op: any OpProtocol
-    var up: () -> () = { }
+    var callback: (Key) -> () = { _ in }
     init(_ op: any OpProtocol) {
         self.op = op
         sixColors = KeyColor.sixColors(op: op)
@@ -41,7 +41,16 @@ class KeyRow: Identifiable {
 @Observable class BasicKeyboard {
     var rows: [KeyRow] = []
     let clearKey: Key
-    var run: (Key) -> () = { _ in }
+    var keyboardCallback: (Key) -> () = { key in
+        print("not implemented keyboardCallback for key \(key.op.getRawValue())")
+    } { didSet {
+        for r in rows {
+            for k in r.keys {
+                k.callback = keyboardCallback
+            }
+        }
+    }
+    }
 
     private var upHasHappended: [Key: Bool] = [:]
     private var downAnimationFinished: [Key: Bool] = [:]
@@ -81,17 +90,7 @@ class KeyRow: Identifiable {
             }
         }
     }
-    
-    func setRun(_ runFunction: @escaping (Key) -> Void) {
-        for r in rows {
-            for k in r.keys {
-                k.up = {
-                    runFunction(k)
-                }
-            }
-        }
-    }
-    
+
     func setPending(pendingOperators: [any OpProtocol]) {
         for r in rows {
             for k in r.keys {

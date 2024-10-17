@@ -16,7 +16,7 @@ class ViewModel: ObservableObject {
     @Published var numberDisplayContent: String = "0"
 
     func execute(_ key: Key) {
-        //print("execute \(key.op.getRawValue())")
+//        print("execute \(key.op.getRawValue())")
         calculator.press(key.op)
         numberDisplayContent = calculator.lr.string
         basicKeyboard.back(calculator.displayBufferHasDigits)
@@ -25,22 +25,9 @@ class ViewModel: ObservableObject {
     
 //    private(set) var _voices: Voices!
 //    var numberTranslator: XNumberTranslator
-//    var showAC = true
 //    var persistent = Persistent()
 //
 //    var _1Translation: TranslationResult = TranslationResult(displayText: "", overline: nil, spokenText: nil)
-//
-//    private let keysThatRequireValidNumber = ["±", "%", "/", "*", "-", "+", "="]
-//    private static let MAX_DISPLAY_LEN = 10_000 /// too long strings in Text() crash the app
-//    private let keyColor = KeyColor()
-//
-//    private var upHasHappended: [String: Bool] = [:]
-//    private var downAnimationFinished: [String: Bool] = [:]
-//    
-//    private let downTime = 0.15
-//    private let upTime = 0.4
-//    public var currentLR: LR = LR("0")
-//    public var currentLRWithSeparators: LR = LR("0")
 //
 //    var voices: Voices {
 //        return _voices
@@ -50,7 +37,9 @@ class ViewModel: ObservableObject {
         self.screen = screen
         calculator = Calculator(precision: 40, maxOutputLength: 15) // 999 trillion
         basicKeyboard = BasicKeyboard(keySize: screen.keySize)
-        basicKeyboard.setRun(execute)
+        print("setting keyboardCallback")
+        basicKeyboard.keyboardCallback = execute
+        basicKeyboard.keyboardCallback(Key(DigitOperation.nine))
 //        print("ViewModel init()")
 //
 //        // Initialize numberTranslator and calculator first

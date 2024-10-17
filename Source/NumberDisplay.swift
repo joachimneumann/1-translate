@@ -29,6 +29,9 @@ struct NumberDisplay: View {
             .lineLimit(0)
             .foregroundColor(.white)
             .multilineTextAlignment(.trailing)
+            .minimumScaleFactor(0.1)
+            .frame(maxWidth: .infinity, alignment: .trailing)
+            .background(.yellow)
     }
     
     var body: some View {
@@ -36,6 +39,7 @@ struct NumberDisplay: View {
             Spacer(minLength: 0.0)
             mantissa
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 

@@ -69,17 +69,25 @@ struct TranslateNumbers: View {
 //                Spacer(minLength: 0.0)
 //            }
             
+            Spacer(minLength: 10.0)
+            Spacer(minLength: 0.0)
             NumberDisplay(
                 text: viewModel.numberDisplayContent,
                 font: Font(viewModel.screen.appleFont),
                 kerning: viewModel.screen.kerning)
-            .padding(.bottom, viewModel.screen.portraitIPhoneDisplayBottomPadding)
-            .padding(.horizontal, 0)
-            .frame(height: 65)
+            NumberDisplay(
+                text: viewModel.numberDisplayContent,
+                font: Font(viewModel.screen.appleFont),
+                kerning: viewModel.screen.kerning)
+            .background(.red)
+//            .padding(.bottom, viewModel.screen.portraitIPhoneDisplayBottomPadding)
+//            .padding(.horizontal, 0)
+//            .frame(height: 65)
             BasicKeyboardView(
                 spacing: viewModel.screen.keySpacing,
                 basicKeyboard: viewModel.basicKeyboard)
         }
+        .background(.blue)
     }
     
 //    struct LanguageButton: View {
