@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Screen: Equatable, DisplayLengthLimiter {
+struct Screen: Equatable {
 
     static func == (lhs: Screen, rhs: Screen) -> Bool { /// used to detect rotation
         lhs.keySize == rhs.keySize
@@ -68,8 +68,8 @@ struct Screen: Equatable, DisplayLengthLimiter {
         calculatorWidth = screenSize.width - 2 * horizontalPadding
         
         keyWidth = isPad ? (calculatorWidth - 9.0 * keySpacing) * 0.1 : (calculatorWidth - 3.0 * keySpacing) * 0.25
-        keyHeight = (screenSize.height * 0.568 - 4 * keySpacing) / 5.0 // this simulates the iOS18 calculator
-//        keyHeight = (screenSize.height * 0.45 - 4 * keySpacing) / 5.0
+//        keyHeight = (screenSize.height * 0.568 - 4 * keySpacing) / 5.0 // this simulates the iOS18 calculator
+        keyHeight = (screenSize.height * 0.45 - 4 * keySpacing) / 5.0
 //        if screenSize.height < screenSize.width * 1.8 {
 //            // on less tall phones, show a smaller keyboard
 //            keyHeight = keyWidth * 0.4
