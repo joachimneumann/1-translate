@@ -9,7 +9,6 @@ import SwiftUI
 import SwiftGmp
 
 @Observable class AKey: Identifiable, Hashable {
-    var label: String
     let width: CGFloat
     let height: CGFloat
     let sixColors: KeyColor.SixColors
@@ -19,10 +18,9 @@ import SwiftGmp
     var op: any OpProtocol
     var execute: () -> () = { }
     init(_ op: any OpProtocol) {
-        self.label = op.getRawValue()
         self.op = op
         width = 70
-        height = 30
+        height = 50
         sixColors = KeyColor.sixColors(op: op)
     }
 
@@ -53,7 +51,7 @@ class BasicKeyboard {
     private let upTime = 0.4
 
     func execute(_ key: AKey) {
-        print("execute \(key.op.getRawValue())")
+        //print("execute \(key.op.getRawValue())")
         calculator.press(key.op)
         for r in rows {
             for k in r.keys {
@@ -65,7 +63,7 @@ class BasicKeyboard {
 
             }
         }
-        print(calculator.lr.string)
+        //print(calculator.lr.string)
         back(calculator.displayBufferHasDigits)
     }
     
@@ -108,10 +106,8 @@ class BasicKeyboard {
     
     func back(_ isBack: Bool) {
         if isBack {
-            rows[0].keys[0].label = "C"
             rows[0].keys[0].op = ClearOperation.back
         } else {
-            rows[0].keys[0].label = "AC"
             rows[0].keys[0].op = ClearOperation.clear
         }
     }

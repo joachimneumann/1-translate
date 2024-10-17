@@ -22,18 +22,18 @@ struct AnimatedKey: View {
     }
 
     init(key: AKey) {
+        print("AKey init \(key.op.getRawValue())")
         self.key = key
         bgColorNonPending = key.sixColors.upColor
         bgColorPending = key.sixColors.pendingUpColor
     }
 
     var body: some View {
-        Text(key.op.getRawValue())
+        Label(symbol: key.op.getRawValue(), size: key.height, color: key.isPending ? key.sixColors.pendingTextColor : key.sixColors.textColor)
             .padding()
             .frame(width: key.width, height: key.height)
             .background(key.isPending ? bgColorPending : bgColorNonPending)
-            .foregroundColor(key.isPending ? key.sixColors.pendingTextColor : key.sixColors.textColor)
-            .cornerRadius(10)
+            .clipShape(Capsule())
             .gesture(
                 DragGesture(minimumDistance: 0)
                     .onChanged { _ in
@@ -112,4 +112,10 @@ struct AnimatedKey: View {
             // it would have been handled in handlePress()
         }
     }
+}
+
+import SwiftGmp
+
+#Preview {
+    AnimatedKey(key: AKey(InplaceOperation.sqrt3))
 }

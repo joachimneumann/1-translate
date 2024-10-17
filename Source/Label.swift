@@ -28,7 +28,7 @@ struct Label: View {
     ]
     
     init(symbol: String, size: CGFloat, color: Color) {
-        // let _ = print("LABEL for", symbol)
+        //let _ = print("LABEL for", symbol)
         self.symbol = symbol
         self.color = color
         
@@ -79,9 +79,9 @@ struct Label: View {
     var body: some View {
         // let _ = print("Label \(symbol)")
         switch symbol {
-        case "√2":    RootShapeView(rootDigit: "", color: color, size: size, underTheRoot: "2")
-        case "√" :    RootShapeView(rootDigit: "2", color: color, size: size)
-        case "3√":    RootShapeView(rootDigit: "3", color: color, size: size)
+        //case "√2":    RootShapeView(rootDigit: "", color: color, size: size, underTheRoot: "2")
+        case "sqrt" :    RootShapeView(rootDigit: "2", color: color, size: size)
+        case "sqrt3":    RootShapeView(rootDigit: "3", color: color, size: size)
         case "y√":    RootShapeView(rootDigit: "y", color: color, size: size)
         case "log10": Logx(base: "10", size: size)
         case "log2":  Logx(base: "2", size: size)
@@ -105,6 +105,7 @@ struct Label: View {
             if let sfImage = sfImageforKey[symbol] {
                 Image(systemName: sfImage)
                     .resizable()
+                    .foregroundColor(color)
                     .font(Font.title.weight(.regular))
                     .aspectRatio(contentMode: .fit)
                     .frame(width: size * 0.3)
@@ -112,6 +113,7 @@ struct Label: View {
             } else {
                 Text(symbol)
                     .font(.system(size: size * 0.3))
+                    .foregroundColor(color)
                     .accessibilityIdentifier("KeyID_"+symbol)
             }
         }

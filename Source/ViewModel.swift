@@ -78,16 +78,16 @@ import SwiftGmp
         updateTranslation()
     }
 
-    func keyDownX(_ aKey: AKey) {
-        if aKey.label == "AC" {
-            print("AC!")
-//            basicKeyboard.back(true)
-        }
-        print("down \(aKey.label)")
-    }
-    func keyUpX(_ aKey: AKey) {
-        print("up   \(aKey.label)")
-    }
+//    func keyDownX(_ aKey: AKey) {
+//        if aKey.label == "AC" {
+//            print("AC!")
+////            basicKeyboard.back(true)
+//        }
+//        print("down \(aKey.label)")
+//    }
+//    func keyUpX(_ aKey: AKey) {
+//        print("up   \(aKey.label)")
+//    }
 
     var firstFont: Font {
         Font.largeTitle
