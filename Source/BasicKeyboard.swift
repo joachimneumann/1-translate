@@ -12,8 +12,8 @@ import SwiftGmp
     var keySize: CGSize = CGSize(width: 10, height: 10)
     let sixColors: KeyColor.SixColors
     var downTime: Double = 0.15
-    var isPending: Bool = false
     var upTime: Double = 0.4
+    var isPending: Bool = false
     var op: any OpProtocol
     var callback: (Key) -> () = { _ in }
     init(_ op: any OpProtocol) {

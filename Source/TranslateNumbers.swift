@@ -84,7 +84,7 @@ struct TranslateNumbers: View {
                 spacing: viewModel.screen.keySpacing,
                 basicKeyboard: viewModel.basicKeyboard)
         }
-        .background(.blue)
+        //.background(.blue)
     }
     
 //    struct LanguageButton: View {

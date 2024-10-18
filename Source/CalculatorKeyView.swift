@@ -39,26 +39,39 @@ struct CalculatorKeyView: View {
             .frame(width: key.keySize.width, height: key.keySize.height)
             .background(key.isPending ? bgColorPending : bgColorNonPending)
             .clipShape(Capsule())
-            .onLongPressGesture {
+            .onLongPressGesture(minimumDuration: 0.5) {
                 if key.op.isEqual(to: ClearOperation.back) {
                     let ACKey = Key(ClearOperation.clear)
                     key.callback(ACKey)
                 }
+            } onPressingChanged: { inProgress in
+                if inProgress {
+                    print("longpress inProgress=\(inProgress)")
+                    if !self.isPressed {
+                        self.isPressed = true
+                        self.handlePress()
+                    }
+                } else {
+                    print("longpress inProgress=\(inProgress)")
+                    self.isPressed = false
+                    self.handleRelease()
+                    key.callback(key)
+                }
             }
-            .gesture(
-                DragGesture(minimumDistance: 0)
-                    .onChanged { _ in
-                        if !self.isPressed {
-                            self.isPressed = true
-                            self.handlePress()
-                        }
-                    }
-                    .onEnded { _ in
-                        self.isPressed = false
-                        self.handleRelease()
-                        key.callback(key)
-                    }
-            )
+//            .gesture(
+//                DragGesture(minimumDistance: 0)
+//                    .onChanged { _ in
+//                        if !self.isPressed {
+//                            self.isPressed = true
+//                            self.handlePress()
+//                        }
+//                    }
+//                    .onEnded { _ in
+//                        self.isPressed = false
+//                        self.handleRelease()
+//                        key.callback(key)
+//                    }
+//            )
     }
 
     private func handlePress() {
