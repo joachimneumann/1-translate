@@ -41,6 +41,7 @@ struct Screen: Equatable {
     var displayWidth: CGFloat = 0.0
     let numberOfDigits: Int
     var maxDigitWidth: CGFloat = 0.0
+    var eDigitWidth: CGFloat = 0.0
     var radWidth: CGFloat = 0.0
     let defaultTextColor: Color
     private let keyWidth: CGFloat
@@ -98,7 +99,6 @@ struct Screen: Equatable {
         maxDigitWidth = 0
         var temp: CGFloat
         temp = "0".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
-        temp = "0".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
         temp = "2".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
         temp = "3".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
         temp = "3".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
@@ -108,10 +108,7 @@ struct Screen: Equatable {
         temp = "7".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
         temp = "8".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
         temp = "9".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
-        temp = ".".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
-        temp = ",".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
-        temp = "e".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
-        temp = "-".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
+        eDigitWidth = "e".textWidth(kerning: kerning, appleFont: appleFont);
         
         offsetToVerticallyAlignTextWithkeyboard =
         CGFloat(screenSize.height) -

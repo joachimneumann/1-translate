@@ -13,12 +13,19 @@ class ViewModel: ObservableObject {
     let screen: Screen
     var calculator: Calculator
     var basicKeyboard: BasicKeyboard
-    @Published var numberDisplayContent: String = "0"
+    @Published var numberDisplayContent: (Representation, CGFloat) = (Representation(), 100)
 
     func execute(_ key: Key) {
 //        print("execute \(key.op.getRawValue())")
         calculator.press(key.op)
-        numberDisplayContent = calculator.lr.string
+        let tempR = calculator.localisedR
+        let exponentLength: CGFloat
+        if tempR.exponent != nil {
+            exponentLength = screen.eDigitWidth + CGFloat(String(tempR.exponent!).count) * screen.maxDigitWidth
+        } else {
+            exponentLength = 0
+        }
+        numberDisplayContent = (tempR, exponentLength)
         basicKeyboard.back(calculator.displayBufferHasDigits)
         basicKeyboard.setPending(pendingOperators: calculator.pendingOperators)
     }
@@ -36,6 +43,7 @@ class ViewModel: ObservableObject {
     init(screen: Screen) {
         self.screen = screen
         calculator = Calculator(precision: 40, maxOutputLength: 15) // 999 trillion
+        calculator.maxOutputLength = screen.numberOfDigits
         basicKeyboard = BasicKeyboard(keySize: screen.keySize)
         basicKeyboard.callback = execute
 //        print("ViewModel init()")

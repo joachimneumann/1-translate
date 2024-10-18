@@ -39,6 +39,12 @@ struct CalculatorKeyView: View {
             .frame(width: key.keySize.width, height: key.keySize.height)
             .background(key.isPending ? bgColorPending : bgColorNonPending)
             .clipShape(Capsule())
+            .onLongPressGesture {
+                if key.op.isEqual(to: ClearOperation.back) {
+                    let ACKey = Key(ClearOperation.clear)
+                    key.callback(ACKey)
+                }
+            }
             .gesture(
                 DragGesture(minimumDistance: 0)
                     .onChanged { _ in

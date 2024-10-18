@@ -9,42 +9,73 @@ import SwiftUI
 import SwiftGmp
 
 struct NumberDisplay: View {
-    let text: String
+    let R: Representation
+    let exponentLength: CGFloat
     let font: Font
     let kerning: CGFloat
     
-    init(text: String, font: Font, kerning: CGFloat = 0.0) {
-        self.text = text
+    init(R: Representation, exponentLength: CGFloat, font: Font, kerning: CGFloat = 0.0) {
+        self.R = R
+        self.exponentLength = exponentLength
         self.font = font
         self.kerning = kerning
-        //let uiFont = Screen.appleFont(ofSize: screen.uiFontSize, weight: .regular)
+    }
+    
+    @ViewBuilder
+    var errorText: some View {
+        Text(R.error!)
+            .kerning(kerning)
+            .font(font)
+            .lineLimit(0)
+            .foregroundColor(.red)
+            .frame(maxWidth: .infinity, alignment: .trailing)
+//            .background(.yellow)
     }
     
     @ViewBuilder
     var mantissa: some View {
-        let toShow = text
-        Text(toShow)
+        Text(R.mantissa!)
             .kerning(kerning)
             .font(font)
             .lineLimit(0)
             .foregroundColor(.white)
             .multilineTextAlignment(.trailing)
-            .minimumScaleFactor(0.1)
             .frame(maxWidth: .infinity, alignment: .trailing)
-            .background(.yellow)
+//            .background(.yellow)
     }
-    
+
+    @ViewBuilder
+    var exponent: some View {
+        Text("e\(R.exponent!)")
+            .kerning(kerning)
+            .font(font)
+//            .lineLimit(0)
+            .foregroundColor(.white)
+            .frame(maxWidth: exponentLength, alignment: .leading)
+            .padding(.leading, 5)
+//            .background(.green)
+    }
+
     var body: some View {
         HStack(alignment: .bottom, spacing: 0.0) {
             Spacer(minLength: 0.0)
-            mantissa
+            if R.error != nil {
+                errorText
+            } else {
+                if R.mantissa != nil {
+                    mantissa
+                    if R.exponent != nil {
+                        exponent
+                    }
+                }
+            }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
 #Preview {
-    NumberDisplay(text: "55", font: Font(Screen.appleFont(ofSize: 50, weight: .regular)))
+    NumberDisplay(R: Representation(mantissa: "55", exponent: 0, maxOutputLength: 10), exponentLength: 0, font: Font(Screen.appleFont(ofSize: 50, weight: .regular)))
         .frame(height: 300)
         .padding()
         .background(Color.black)
