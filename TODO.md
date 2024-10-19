@@ -1,3 +1,5 @@
+88888888 (e11) --> + already reformatted as SwiftUI, do that later.
+
 Back, long press --> AC
 
 number display and font size 

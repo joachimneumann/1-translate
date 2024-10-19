@@ -75,7 +75,7 @@ class ViewModel: ObservableObject {
                 R = Representation(
                     mantissaExponent: tempMantissaExponent,
                     proportionalFont: screen.proportionalFont,
-                    monoSpacedFont: screen.monoSpacedFont,
+                    monoSpacedFont: screen.proportionalFont, // monospaced not needed, because the digits will not jump around while typeing
                     ePadding: screen.ePadding,
                     width: screen.displayWidth)
             } else {
