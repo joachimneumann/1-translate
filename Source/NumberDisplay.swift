@@ -10,64 +10,52 @@ import SwiftGmp
 
 struct NumberDisplay: View {
     let R: Representation
-    let exponentLength: CGFloat
-    let font: Font
-    let kerning: CGFloat
-    
-    init(R: Representation, exponentLength: CGFloat, font: Font, kerning: CGFloat = 0.0) {
-        self.R = R
-        self.exponentLength = exponentLength
-        self.font = font
-        self.kerning = kerning
-    }
     
     @ViewBuilder
-    var errorText: some View {
-        Text(R.error!)
-            .kerning(kerning)
-            .font(font)
+    func errorView(_ error: Content) -> some View {
+        Text(error.text)
+            .kerning(R.kerning)
+            .font(Font(error.uiFont))
             .lineLimit(0)
             .foregroundColor(.red)
             .frame(maxWidth: .infinity, alignment: .trailing)
-//            .background(.yellow)
+            .background(.yellow)
     }
     
     @ViewBuilder
-    var mantissa: some View {
-        Text(R.mantissa!)
-            .kerning(kerning)
-            .font(font)
-            .lineLimit(0)
+    func mantissaView(_ mantissa: Content) -> some View {
+        Text(mantissa.text)
+            .kerning(R.kerning)
+            .font(Font(mantissa.uiFont))
+            .lineLimit(1)
             .foregroundColor(.white)
             .multilineTextAlignment(.trailing)
             .frame(maxWidth: .infinity, alignment: .trailing)
-//            .background(.yellow)
+            .background(.yellow)
     }
 
     @ViewBuilder
-    var exponent: some View {
-        Text("e\(R.exponent!)")
-            .kerning(kerning)
-            .font(font)
-//            .lineLimit(0)
-            .foregroundColor(.white)
-            .frame(maxWidth: exponentLength, alignment: .leading)
-            .padding(.leading, 5)
-//            .background(.green)
+    func exponentView(_ exponent: Content?) -> some View {
+        if let exponent = exponent {
+            Text(exponent.text)
+                .kerning(R.kerning)
+                .font(Font(exponent.uiFont))
+                .lineLimit(1)
+                .foregroundColor(.white)
+                .frame(alignment: .leading)
+                .padding(.leading, 5)
+                .background(.green)
+        }
     }
 
     var body: some View {
         HStack(alignment: .bottom, spacing: 0.0) {
             Spacer(minLength: 0.0)
-            if R.error != nil {
-                errorText
-            } else {
-                if R.mantissa != nil {
-                    mantissa
-                    if R.exponent != nil {
-                        exponent
-                    }
-                }
+            if let error = R.error {
+                errorView(error)
+            } else if let number = R.number {
+                mantissaView(number.mantissa)
+                exponentView(number.exponent)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -75,7 +63,8 @@ struct NumberDisplay: View {
 }
 
 #Preview {
-    NumberDisplay(R: Representation(mantissa: "55", exponent: 0, maxOutputLength: 10), exponentLength: 0, font: Font(Screen.appleFont(ofSize: 50, weight: .regular)))
+    let screen = Screen(CGSize(width: 500, height: 500))
+    NumberDisplay(R: Representation(error: "Preview", uiFont: screen.proportionalFont))
         .frame(height: 300)
         .padding()
         .background(Color.black)

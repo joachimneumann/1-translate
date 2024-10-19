@@ -12,21 +12,26 @@ struct Screen: Equatable {
     static func == (lhs: Screen, rhs: Screen) -> Bool { /// used to detect rotation
         lhs.keySize == rhs.keySize
     }
-    static func appleFont(ofSize size: CGFloat, weight: AppleFont.Weight) -> AppleFont {
-//        return AppleFont.monospacedDigitSystemFont(ofSize: size, weight: weight)
+
+    static func proportionalFont(ofSize size: CGFloat, weight: AppleFont.Weight) -> AppleFont {
         return AppleFont.systemFont(ofSize: size, weight: weight)
     }
-    
+    static func monoSpacedFont(ofSize size: CGFloat, weight: AppleFont.Weight) -> AppleFont {
+        return AppleFont.monospacedDigitSystemFont(ofSize: size, weight: weight)
+    }
+
     private let isPad: Bool
 
     var keyboardHeight: CGFloat
     let keySpacing: CGFloat
     let keySize: CGSize
-//    var ePadding: CGFloat /// var and not let, because it is set to 0.0 in the tests
+    var ePadding: CGFloat /// var and not let, because it is set to 0.0 in the tests
     let plusIconSize: CGFloat
     let iconsWidth: CGFloat
     let plusIconTrailingPadding: CGFloat
     var uiFontSize: CGFloat
+    let proportionalFont: AppleFont
+    let monoSpacedFont: AppleFont
     let infoUiFont: AppleFont
     let infoUiFontSize: CGFloat
     let displayHorizontalPadding: CGFloat
@@ -39,15 +44,14 @@ struct Screen: Equatable {
     var textHeight: CGFloat = 0.0
     var infoTextHeight: CGFloat = 0.0
     var displayWidth: CGFloat = 0.0
-    let numberOfDigits: Int
     var maxDigitWidth: CGFloat = 0.0
     var eDigitWidth: CGFloat = 0.0
+    var dotDigitWidth: CGFloat = 0.0
     var radWidth: CGFloat = 0.0
     let defaultTextColor: Color
     private let keyWidth: CGFloat
     private var keyHeight: CGFloat
 
-    let appleFont: AppleFont
     private let calculatorWidth: CGFloat
         
     mutating func changeKeyboardSize(smaller: Bool) {
@@ -85,30 +89,33 @@ struct Screen: Equatable {
         plusIconSize = keyboardHeight * 0.13
         iconsWidth   = keyboardHeight * 0.16
         plusIconTrailingPadding = plusIconSize * 0.4
-        //ePadding = plusIconSize * 0.1
+        ePadding = plusIconSize * 0.1
         uiFontSize = 0.169 * keyboardHeight
+        proportionalFont = Screen.proportionalFont(ofSize: uiFontSize, weight: .regular)
+        monoSpacedFont = Screen.monoSpacedFont(ofSize: uiFontSize, weight: .regular)
         infoUiFontSize = 16.0
-        appleFont = Self.appleFont(ofSize: uiFontSize, weight: .regular)
-        infoUiFont = Screen.appleFont(ofSize: infoUiFontSize, weight: .regular)
-
+        infoUiFont = Screen.proportionalFont(ofSize: infoUiFontSize, weight: .regular)
+        
+        
         kerning = 0.0//-0.02 * uiFontSize
         
-        textHeight     = "0".textHeight(kerning: kerning, appleFont: appleFont)
-        infoTextHeight = "0".textHeight(kerning: 0.0, appleFont: infoUiFont)
-        radWidth       = "Rad".textWidth(kerning: 0.0, appleFont: infoUiFont)
+        textHeight     = "0".textHeight(kerning: kerning, proportionalFont)
+        infoTextHeight = "0".textHeight(kerning: 0.0, infoUiFont)
+        radWidth       = "Rad".textWidth(kerning: 0.0, infoUiFont)
         maxDigitWidth = 0
         var temp: CGFloat
-        temp = "0".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
-        temp = "2".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
-        temp = "3".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
-        temp = "3".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
-        temp = "4".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
-        temp = "5".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
-        temp = "6".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
-        temp = "7".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
-        temp = "8".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
-        temp = "9".textWidth(kerning: kerning, appleFont: appleFont); if temp > maxDigitWidth { maxDigitWidth = temp }
-        eDigitWidth = "e".textWidth(kerning: kerning, appleFont: appleFont);
+        temp = "0".textWidth(kerning: kerning, proportionalFont); if temp > maxDigitWidth { maxDigitWidth = temp }
+        temp = "2".textWidth(kerning: kerning, proportionalFont); if temp > maxDigitWidth { maxDigitWidth = temp }
+        temp = "3".textWidth(kerning: kerning, proportionalFont); if temp > maxDigitWidth { maxDigitWidth = temp }
+        temp = "3".textWidth(kerning: kerning, proportionalFont); if temp > maxDigitWidth { maxDigitWidth = temp }
+        temp = "4".textWidth(kerning: kerning, proportionalFont); if temp > maxDigitWidth { maxDigitWidth = temp }
+        temp = "5".textWidth(kerning: kerning, proportionalFont); if temp > maxDigitWidth { maxDigitWidth = temp }
+        temp = "6".textWidth(kerning: kerning, proportionalFont); if temp > maxDigitWidth { maxDigitWidth = temp }
+        temp = "7".textWidth(kerning: kerning, proportionalFont); if temp > maxDigitWidth { maxDigitWidth = temp }
+        temp = "8".textWidth(kerning: kerning, proportionalFont); if temp > maxDigitWidth { maxDigitWidth = temp }
+        temp = "9".textWidth(kerning: kerning, proportionalFont); if temp > maxDigitWidth { maxDigitWidth = temp }
+        eDigitWidth = "e".textWidth(kerning: kerning, proportionalFont);
+        dotDigitWidth = ".".textWidth(kerning: kerning, proportionalFont);
         
         offsetToVerticallyAlignTextWithkeyboard =
         CGFloat(screenSize.height) -
@@ -121,12 +128,10 @@ struct Screen: Equatable {
         CGFloat(keyboardHeight) -
         CGFloat(infoUiFontSize) -
         CGFloat(plusIconSize) +
-        CGFloat(appleFont.descender) -
-        CGFloat(0.5 * appleFont.capHeight) +
+        CGFloat(proportionalFont.descender) -
+        CGFloat(0.5 * proportionalFont.capHeight) +
         CGFloat(0.5 * plusIconSize)
         displayWidth = calculatorWidth - 2.0 * displayHorizontalPadding
-        numberOfDigits = Int(floor(displayWidth / maxDigitWidth))
-//        let x = 3 * numberOfDigits
     }
 }
 
@@ -152,17 +157,17 @@ extension String {
         return self.replacingCharacters(in: range, with: replacement)
     }
     
-    func textWidth(kerning: CGFloat, appleFont: AppleFont) -> CGFloat {
+    func textWidth(kerning: CGFloat, _ font: AppleFont) -> CGFloat {
         var attributes: [NSAttributedString.Key : Any] = [:]
         attributes[.kern] = kerning
-        attributes[.font] = appleFont
+        attributes[.font] = font
         return self.size(withAttributes: attributes).width
     }
     
-    func textHeight(kerning: CGFloat, appleFont: AppleFont) -> CGFloat {
+    func textHeight(kerning: CGFloat, _ font: AppleFont) -> CGFloat {
         var attributes: [NSAttributedString.Key : Any] = [:]
         attributes[.kern] = kerning
-        attributes[.font] = appleFont
+        attributes[.font] = font
         return self.size(withAttributes: attributes).height
     }
 

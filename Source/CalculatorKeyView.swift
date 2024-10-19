@@ -46,32 +46,16 @@ struct CalculatorKeyView: View {
                 }
             } onPressingChanged: { inProgress in
                 if inProgress {
-                    print("longpress inProgress=\(inProgress)")
                     if !self.isPressed {
                         self.isPressed = true
                         self.handlePress()
                     }
                 } else {
-                    print("longpress inProgress=\(inProgress)")
                     self.isPressed = false
                     self.handleRelease()
                     key.callback(key)
                 }
             }
-//            .gesture(
-//                DragGesture(minimumDistance: 0)
-//                    .onChanged { _ in
-//                        if !self.isPressed {
-//                            self.isPressed = true
-//                            self.handlePress()
-//                        }
-//                    }
-//                    .onEnded { _ in
-//                        self.isPressed = false
-//                        self.handleRelease()
-//                        key.callback(key)
-//                    }
-//            )
     }
 
     private func handlePress() {

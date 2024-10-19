@@ -71,11 +71,7 @@ struct TranslateNumbers: View {
             
             Spacer(minLength: 10.0)
             Spacer(minLength: 0.0)
-            NumberDisplay(
-                R: viewModel.numberDisplayContent.0,
-                exponentLength: viewModel.numberDisplayContent.1,
-                font: Font(viewModel.screen.appleFont),
-                kerning: viewModel.screen.kerning)
+            NumberDisplay(R: viewModel.R)
             .frame(height: viewModel.screen.textHeight)
 //            .background(.red)
             .padding(.bottom, viewModel.screen.portraitIPhoneDisplayBottomPadding)

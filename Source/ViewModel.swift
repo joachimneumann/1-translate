@@ -13,19 +13,75 @@ class ViewModel: ObservableObject {
     let screen: Screen
     var calculator: Calculator
     var basicKeyboard: BasicKeyboard
-    @Published var numberDisplayContent: (Representation, CGFloat) = (Representation(), 100)
+    
+    @Published var R: Representation
 
     func execute(_ key: Key) {
-//        print("execute \(key.op.getRawValue())")
         calculator.press(key.op)
-        let tempR = calculator.localisedR
-        let exponentLength: CGFloat
-        if tempR.exponent != nil {
-            exponentLength = screen.eDigitWidth + CGFloat(String(tempR.exponent!).count) * screen.maxDigitWidth
+        
+        /// now, extract the number that shall be displayed using numberDisplayContent
+        ///
+        /// If its a number in the displayBuffer, then show this number,
+        /// but make sure that it can be displayed in the limite dwidth of the display
+        /// This must also take into account if mantissa is showed using grouping.
+        /// The exponent must be shown left-aligned with a constant width and the
+        /// mantissa shall occupy the remaining width
+        ///
+        /// If the number is a SwiftGmp, just show it.
+
+        if calculator.displayBufferHasDigits {
+//            // handle the exponent so that the display does not jump around
+//            // when entering digits, e.g., 888888888888
+            
+            if calculator.displayBuffer.textWidth(kerning: screen.kerning, screen.proportionalFont) < screen.displayWidth {
+                R = Representation(mantissa: calculator.displayBuffer, uiFont: screen.proportionalFont)
+            } else {
+                if let tempMantissaExponent = calculator.mantissaExponent {
+                    R = Representation(
+                        mantissaExponent: tempMantissaExponent,
+                        proportionalFont: screen.proportionalFont,
+                        monoSpacedFont: screen.monoSpacedFont,
+                        ePadding: screen.ePadding,
+                        width: screen.displayWidth)
+                } else {
+                    R = Representation(error: "error", uiFont: screen.proportionalFont)
+                }
+            }
+//            var tempR = calculator.R
+//            
+////            let numberOfDigits: Int
+////            numberOfDigits = Int(floor(displayWidth / maxDigitWidth))
+//
+//            let exponentLength: CGFloat
+//            if tempR.exponent != nil {
+//                exponentLength = screen.eDigitWidth + CGFloat(String(tempR.exponent!).count) * screen.maxDigitWidth
+//            } else {
+//                exponentLength = 0
+//            }
+//            if tempR.mantissa != nil {
+//                let mantissaLength: CGFloat = screen.displayWidth - exponentLength
+//                let numberOfDigitsInMantissa: Int
+//                if calculator.separateGroups {
+//                    numberOfDigitsInMantissa = Int(floor(mantissaLength / (screen.maxDigitWidth + 0.3 * screen.dotDigitWidth)))
+//                } else {
+//                    numberOfDigitsInMantissa = Int(floor(mantissaLength / screen.maxDigitWidth))
+//                }
+//                tempR.mantissa = String(tempR.mantissa!.prefix(numberOfDigitsInMantissa))
+//            }
+//            numberDisplayContent = tempR
         } else {
-            exponentLength = 0
+            // from SwiftGmp, no need for special exponent treatment
+            if let tempMantissaExponent = calculator.mantissaExponent {
+                R = Representation(
+                    mantissaExponent: tempMantissaExponent,
+                    proportionalFont: screen.proportionalFont,
+                    monoSpacedFont: screen.monoSpacedFont,
+                    ePadding: screen.ePadding,
+                    width: screen.displayWidth)
+            } else {
+                R = Representation(error: "error", uiFont: screen.proportionalFont)
+            }
         }
-        numberDisplayContent = (tempR, exponentLength)
         basicKeyboard.back(calculator.displayBufferHasDigits)
         basicKeyboard.setPending(pendingOperators: calculator.pendingOperators)
     }
@@ -42,8 +98,8 @@ class ViewModel: ObservableObject {
 
     init(screen: Screen) {
         self.screen = screen
-        calculator = Calculator(precision: 40, maxOutputLength: 15) // 999 trillion
-        calculator.maxOutputLength = screen.numberOfDigits
+        calculator = Calculator(precision: 40)
+        R = Representation(error: "not initialized", uiFont: screen.proportionalFont)
         basicKeyboard = BasicKeyboard(keySize: screen.keySize)
         basicKeyboard.callback = execute
 //        print("ViewModel init()")
