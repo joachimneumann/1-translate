@@ -136,8 +136,8 @@ struct Representation {
         self.kerning = 0
         self.ePadding = ePadding
         
-        let dummy1 = "1111".textWidth(kerning: 0.0, proportionalFont)
-        let dummy2 = "1111".textWidth(kerning: 0.0, monoSpacedFont)
+        // let dummy1 = "1111".textWidth(kerning: 0.0, proportionalFont)
+        // let dummy2 = "1111".textWidth(kerning: 0.0, monoSpacedFont)
 
         
         var mantissa = mantissaExponent.mantissa
@@ -189,12 +189,10 @@ struct Representation {
             floatString = truncate(floatString, to: width, using: proportionalFont)
             
             // Is the dot and one trailing digit still visible in floatString?
-            if let decimalIndex = floatString.firstIndex(of: ".") {
-                if decimalIndex != floatString.endIndex {
-                    number = Number(
-                        mantissa: Content(floatString, uiFont: proportionalFont))
-                    return
-                }
+            if !floatString.hasSuffix(".") {
+                number = Number(
+                    mantissa: Content(floatString, uiFont: proportionalFont))
+                return
             }
         }
         if exponent < 0 {

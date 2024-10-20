@@ -29,7 +29,7 @@ class ViewModel: ObservableObject {
         ///
         /// If the number is a SwiftGmp, just show it.
 
-        if calculator.displayBufferHasDigits {
+        if calculator.displayBuffer.count > 0 {
 //            // handle the exponent so that the display does not jump around
 //            // when entering digits, e.g., 888888888888
             
@@ -44,7 +44,7 @@ class ViewModel: ObservableObject {
                         ePadding: screen.ePadding,
                         width: screen.displayWidth)
                 } else {
-                    R = Representation(error: "error", uiFont: screen.proportionalFont)
+                    R = Representation(mantissa: "0", uiFont: screen.proportionalFont)
                 }
             }
 //            var tempR = calculator.R
@@ -79,10 +79,10 @@ class ViewModel: ObservableObject {
                     ePadding: screen.ePadding,
                     width: screen.displayWidth)
             } else {
-                R = Representation(error: "error", uiFont: screen.proportionalFont)
+                R = Representation(mantissa: "0", uiFont: screen.proportionalFont)
             }
         }
-        basicKeyboard.back(calculator.displayBufferHasDigits)
+        basicKeyboard.back(calculator.privateDisplayBufferHasDigits)
         basicKeyboard.setPending(pendingOperators: calculator.pendingOperators)
     }
     
@@ -99,7 +99,7 @@ class ViewModel: ObservableObject {
     init(screen: Screen) {
         self.screen = screen
         calculator = Calculator(precision: 40)
-        R = Representation(error: "not initialized", uiFont: screen.proportionalFont)
+        R = Representation(mantissa: "0", uiFont: screen.proportionalFont)
         basicKeyboard = BasicKeyboard(keySize: screen.keySize)
         basicKeyboard.callback = execute
 //        print("ViewModel init()")

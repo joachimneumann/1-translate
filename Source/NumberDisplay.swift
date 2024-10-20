@@ -19,7 +19,7 @@ struct NumberDisplay: View {
             .lineLimit(0)
             .foregroundColor(.red)
             .frame(maxWidth: .infinity, alignment: .trailing)
-            .background(.yellow)
+            //.background(.yellow)
     }
     
     @ViewBuilder
@@ -31,7 +31,7 @@ struct NumberDisplay: View {
             .foregroundColor(.white)
             .multilineTextAlignment(.trailing)
             .frame(maxWidth: .infinity, alignment: .trailing)
-            .background(.yellow)
+            //.background(.yellow)
     }
 
     @ViewBuilder
@@ -44,7 +44,7 @@ struct NumberDisplay: View {
                 .foregroundColor(.white)
                 .frame(alignment: .leading)
                 .padding(.leading, 5)
-                .background(.green)
+                //.background(.green)
         }
     }
 
