@@ -17,16 +17,19 @@ func injectGrouping(numberString: String, decimalSeparator: DecimalSeparator, se
 }
 
 private func nonNegativeInjectGrouping(numberString: String, decimalSeparator: DecimalSeparator, separateGroups: Bool) -> String {
-    let parts = numberString.split(separator: decimalSeparator.character)
-    if parts.count == 2 {
-        return nonNegativeInjectGrouping(
+    var ret: String
+    if numberString.contains(".") {
+        let parts = numberString.split(separator: decimalSeparator.character)
+        ret = nonNegativeInjectGrouping(
             numberString: String(parts[0]),
             decimalSeparator: decimalSeparator,
             separateGroups: separateGroups) +
-            decimalSeparator.rawValue +
-        parts[1]
+            "."
+        if parts.count == 2 {
+            ret += parts[1]
+        }
     } else {
-        var ret: String = numberString
+        ret = numberString
         if separateGroups {
             var count = ret.count
             while count >= 4 {
@@ -34,8 +37,29 @@ private func nonNegativeInjectGrouping(numberString: String, decimalSeparator: D
                 ret.insert(decimalSeparator.groupCharacter, at: ret.index(ret.startIndex, offsetBy: count))
             }
         }
-        return ret
     }
+    return ret
+
+    
+//    let parts = numberString.split(separator: decimalSeparator.character)
+//    if parts.count == 2 {
+//        return nonNegativeInjectGrouping(
+//            numberString: String(parts[0]),
+//            decimalSeparator: decimalSeparator,
+//            separateGroups: separateGroups) +
+//            decimalSeparator.rawValue +
+//        parts[1]
+//    } else {
+//        var ret: String = numberString
+//        if separateGroups {
+//            var count = ret.count
+//            while count >= 4 {
+//                count = count - 3
+//                ret.insert(decimalSeparator.groupCharacter, at: ret.index(ret.startIndex, offsetBy: count))
+//            }
+//        }
+//        return ret
+//    }
 }
 
 public enum DecimalSeparator: String, Codable, CaseIterable {
@@ -130,15 +154,20 @@ struct Representation {
         }
     }
     
-    
-    public init(mantissaExponent: MantissaExponent, proportionalFont: UIFont, monoSpacedFont: UIFont, ePadding: CGFloat, width: CGFloat) {
+    public init(
+        mantissaExponent: MantissaExponent,
+        proportionalFont: UIFont,
+        monoSpacedFont: UIFont,
+        decimalSeparator: DecimalSeparator,
+        separateGroups: Bool,
+        ePadding: CGFloat,
+        width: CGFloat) {
         self.error = nil
         self.kerning = 0
         self.ePadding = ePadding
         
         // let dummy1 = "1111".textWidth(kerning: 0.0, proportionalFont)
         // let dummy2 = "1111".textWidth(kerning: 0.0, monoSpacedFont)
-
         
         var mantissa = mantissaExponent.mantissa
         let exponent = mantissaExponent.exponent
@@ -155,6 +184,10 @@ struct Representation {
             // Pad mantissa with zeros to match the exponent
             var tempMantissa = mantissa
             tempMantissa = tempMantissa.padding(toLength: exponent + 1, withPad: "0", startingAt: 0)
+            tempMantissa = nonNegativeInjectGrouping(
+                numberString: tempMantissa,
+                decimalSeparator: decimalSeparator,
+                separateGroups: separateGroups)
             tempMantissa = isNegativeSign + tempMantissa
             if tempMantissa.textWidth(kerning: kerning, proportionalFont) <= width {
                 // the interger fits in the display
@@ -185,8 +218,21 @@ struct Representation {
             floatString.insert(DecimalSeparator.dot.character, at: decimalIndex)
             floatString = isNegativeSign + floatString
 
+            let parts = floatString.split(separator: ".")
+            let tempMantissa = nonNegativeInjectGrouping(
+                numberString: String(parts[0]),
+                decimalSeparator: decimalSeparator,
+                separateGroups: separateGroups)
+            floatString = tempMantissa + "."
+            if parts.count == 2 {
+                floatString += parts[1]
+            }
+            
             // truncate!
             floatString = truncate(floatString, to: width, using: proportionalFont)
+            
+            // remove tailing zeroes
+            floatString = floatString.removeTrailingZeroes()
             
             // Is the dot and one trailing digit still visible in floatString?
             if !floatString.hasSuffix(".") {
@@ -202,20 +248,24 @@ struct Representation {
             let leadingZeros: String = String(repeating: "0", count: zerosToInsert)
             floatString = isNegativeSign + "0." + leadingZeros + floatString
             floatString = truncate(floatString, to: width, using: proportionalFont)
+            floatString = floatString.removeTrailingZeroes()
 
-            // Are at least three non-zero digits visible?
-            if floatString.count > 3 {
-                if floatString.prefix(3) == "0.0" {
-                    let exceptForLastTwo = floatString.dropLast()
-                    for char in exceptForLastTwo {
-                        if char != "0" && char != "." {
-                            number = Number(
-                                mantissa: Content(floatString, uiFont: proportionalFont))
-                            return
-                        }
-                    }
-                }
-            }
+            number = Number(
+                mantissa: Content(floatString, uiFont: proportionalFont))
+            return
+//            // Are at least three non-zero digits visible?
+//            if floatString.count > 3 {
+//                if floatString.prefix(3) == "0.0" {
+//                    let exceptForLastTwo = floatString.dropLast()
+//                    for char in exceptForLastTwo {
+//                        if char != "0" && char != "." {
+//                            number = Number(
+//                                mantissa: Content(floatString, uiFont: proportionalFont))
+//                            return
+//                        }
+//                    }
+//                }
+//            }
         }
         
         // Scientific
@@ -234,6 +284,8 @@ struct Representation {
             exponent: Content(exponentString, uiFont: proportionalFont))
         return
     }
+}
+
 //        var tempMantissa = mantissa
 //        self.error = nil
 //        if tempMantissa.starts(with: "-") {
@@ -322,8 +374,6 @@ struct Representation {
 //    public var double: Double {
 //        Double(string) ?? Double.nan
 //    }
-
-}
 
 //extension String {
 //    func before(first delimiter: Character) -> String {

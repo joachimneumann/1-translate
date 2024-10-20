@@ -139,10 +139,13 @@ struct Screen: Equatable {
             
             // make sure 100 trillion fits in the display, with group separators
             while "6,666,666,666,666".textWidth(kerning: kerning, proportionalFont) > displayWidth {
-                print(uiFontSize)
+                /// 6 is the widest digit in the proportional font
+                //print(uiFontSize)
                 uiFontSize *= 0.99
                 proportionalFont = Screen.proportionalFont(ofSize: uiFontSize, weight: .regular)
             }
+            uiFontSize /= 0.99
+            proportionalFont = Screen.proportionalFont(ofSize: uiFontSize, weight: .regular)
             monoSpacedFont = Screen.monoSpacedFont(ofSize: uiFontSize, weight: .regular)
         }
     }
@@ -183,6 +186,6 @@ extension String {
         attributes[.font] = font
         return self.size(withAttributes: attributes).height
     }
-
+    
 }
 

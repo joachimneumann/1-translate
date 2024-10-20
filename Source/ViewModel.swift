@@ -13,6 +13,8 @@ class ViewModel: ObservableObject {
     let screen: Screen
     var calculator: Calculator
     var basicKeyboard: BasicKeyboard
+    var decimalSeparator: DecimalSeparator = .dot
+    var separateGrouping = true
     
     @Published var R: Representation
 
@@ -32,15 +34,17 @@ class ViewModel: ObservableObject {
         if calculator.displayBuffer.count > 0 {
 //            // handle the exponent so that the display does not jump around
 //            // when entering digits, e.g., 888888888888
-            
-            if calculator.displayBuffer.textWidth(kerning: screen.kerning, screen.proportionalFont) < screen.displayWidth {
-                R = Representation(mantissa: calculator.displayBuffer, uiFont: screen.proportionalFont)
+            let withSeparators = injectGrouping(numberString: calculator.displayBuffer, decimalSeparator: decimalSeparator, separateGroups: separateGrouping)
+            if withSeparators.textWidth(kerning: screen.kerning, screen.proportionalFont) < screen.displayWidth {
+                R = Representation(mantissa: withSeparators, uiFont: screen.proportionalFont)
             } else {
                 if let tempMantissaExponent = calculator.mantissaExponent {
                     R = Representation(
                         mantissaExponent: tempMantissaExponent,
                         proportionalFont: screen.proportionalFont,
                         monoSpacedFont: screen.monoSpacedFont,
+                        decimalSeparator: decimalSeparator,
+                        separateGroups: separateGrouping,
                         ePadding: screen.ePadding,
                         width: screen.displayWidth)
                 } else {
@@ -75,7 +79,9 @@ class ViewModel: ObservableObject {
                 R = Representation(
                     mantissaExponent: tempMantissaExponent,
                     proportionalFont: screen.proportionalFont,
-                    monoSpacedFont: screen.proportionalFont, // monospaced not needed, because the digits will not jump around while typeing
+                    monoSpacedFont: screen.proportionalFont, // monospaced not needed, because the digits will not jump around while typing
+                    decimalSeparator: decimalSeparator,
+                    separateGroups: separateGrouping,
                     ePadding: screen.ePadding,
                     width: screen.displayWidth)
             } else {
