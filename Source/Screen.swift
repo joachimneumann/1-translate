@@ -30,8 +30,8 @@ struct Screen: Equatable {
     let iconsWidth: CGFloat
     let plusIconTrailingPadding: CGFloat
     var uiFontSize: CGFloat
-    let proportionalFont: AppleFont
-    let monoSpacedFont: AppleFont
+    var proportionalFont: AppleFont
+    var monoSpacedFont: AppleFont
     let infoUiFont: AppleFont
     let infoUiFontSize: CGFloat
     let displayHorizontalPadding: CGFloat
@@ -73,14 +73,13 @@ struct Screen: Equatable {
         calculatorWidth = screenSize.width - 2 * horizontalPadding
         
         keyWidth = isPad ? (calculatorWidth - 9.0 * keySpacing) * 0.1 : (calculatorWidth - 3.0 * keySpacing) * 0.25
-        keyHeight = (screenSize.height * 0.568 - 4 * keySpacing) / 5.0 // this simulates the iOS18 calculator
-//        keyHeight = (screenSize.height * 0.45 - 4 * keySpacing) / 5.0
-//        if screenSize.height < screenSize.width * 1.8 {
-//            // on less tall phones, show a smaller keyboard
-//            keyHeight = keyWidth * 0.4
-//        } else {
-//            keyHeight = keyWidth
-//        }
+
+        let translateNumbersApp = true
+        if translateNumbersApp {
+            keyHeight = (screenSize.height * 0.4 - 4 * keySpacing) / 5.0 // this simulates the iOS18 calculator
+        } else {
+            keyHeight = (screenSize.height * 0.568 - 4 * keySpacing) / 5.0 // this simulates the iOS18 calculator
+        }
         keyboardHeight = 5 * keyHeight + 4 * keySpacing
         bottomPadding = isPad ? 0.0 : keyboardHeight * 0.05
 
@@ -90,6 +89,8 @@ struct Screen: Equatable {
         iconsWidth   = keyboardHeight * 0.16
         plusIconTrailingPadding = plusIconSize * 0.4
         ePadding = plusIconSize * 0.1
+        kerning = 0.0//-0.02 * uiFontSize
+
         uiFontSize = 0.169 * keyboardHeight
         proportionalFont = Screen.proportionalFont(ofSize: uiFontSize, weight: .regular)
         monoSpacedFont = Screen.monoSpacedFont(ofSize: uiFontSize, weight: .regular)
@@ -97,7 +98,6 @@ struct Screen: Equatable {
         infoUiFont = Screen.proportionalFont(ofSize: infoUiFontSize, weight: .regular)
         
         
-        kerning = 0.0//-0.02 * uiFontSize
         
         textHeight     = "0".textHeight(kerning: kerning, proportionalFont)
         infoTextHeight = "0".textHeight(kerning: 0.0, infoUiFont)
@@ -105,8 +105,8 @@ struct Screen: Equatable {
         maxDigitWidth = 0
         var temp: CGFloat
         temp = "0".textWidth(kerning: kerning, proportionalFont); if temp > maxDigitWidth { maxDigitWidth = temp }
+        temp = "1".textWidth(kerning: kerning, proportionalFont); if temp > maxDigitWidth { maxDigitWidth = temp }
         temp = "2".textWidth(kerning: kerning, proportionalFont); if temp > maxDigitWidth { maxDigitWidth = temp }
-        temp = "3".textWidth(kerning: kerning, proportionalFont); if temp > maxDigitWidth { maxDigitWidth = temp }
         temp = "3".textWidth(kerning: kerning, proportionalFont); if temp > maxDigitWidth { maxDigitWidth = temp }
         temp = "4".textWidth(kerning: kerning, proportionalFont); if temp > maxDigitWidth { maxDigitWidth = temp }
         temp = "5".textWidth(kerning: kerning, proportionalFont); if temp > maxDigitWidth { maxDigitWidth = temp }
@@ -132,6 +132,19 @@ struct Screen: Equatable {
         CGFloat(0.5 * proportionalFont.capHeight) +
         CGFloat(0.5 * plusIconSize)
         displayWidth = calculatorWidth - 2.0 * displayHorizontalPadding
+
+        if translateNumbersApp {
+            uiFontSize = 0.169 * keyboardHeight
+            proportionalFont = Screen.proportionalFont(ofSize: uiFontSize, weight: .regular)
+            
+            // make sure 100 trillion fits in the display, with group separators
+            while "6,666,666,666,666".textWidth(kerning: kerning, proportionalFont) > displayWidth {
+                print(uiFontSize)
+                uiFontSize *= 0.99
+                proportionalFont = Screen.proportionalFont(ofSize: uiFontSize, weight: .regular)
+            }
+            monoSpacedFont = Screen.monoSpacedFont(ofSize: uiFontSize, weight: .regular)
+        }
     }
 }
 
