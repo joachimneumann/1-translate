@@ -36,7 +36,7 @@ class ViewModel: ObservableObject {
 //            // when entering digits, e.g., 888888888888
             let withSeparators = injectGrouping(numberString: calculator.displayBuffer, decimalSeparator: decimalSeparator, separateGroups: separateGrouping)
             if withSeparators.textWidth(kerning: screen.kerning, screen.proportionalFont) < screen.displayWidth {
-                R = Representation(mantissa: withSeparators, uiFont: screen.proportionalFont)
+                R = Representation(mantissa: withSeparators, appleFont: screen.proportionalFont)
             } else {
                 if let tempMantissaExponent = calculator.mantissaExponent {
                     R = Representation(
@@ -48,7 +48,7 @@ class ViewModel: ObservableObject {
                         ePadding: screen.ePadding,
                         width: screen.displayWidth)
                 } else {
-                    R = Representation(mantissa: "0", uiFont: screen.proportionalFont)
+                    R = Representation(mantissa: "0", appleFont: screen.proportionalFont)
                 }
             }
 //            var tempR = calculator.R
@@ -85,7 +85,7 @@ class ViewModel: ObservableObject {
                     ePadding: screen.ePadding,
                     width: screen.displayWidth)
             } else {
-                R = Representation(mantissa: "0", uiFont: screen.proportionalFont)
+                R = Representation(mantissa: "0", appleFont: screen.proportionalFont)
             }
         }
         basicKeyboard.back(calculator.privateDisplayBufferHasDigits)
@@ -105,7 +105,7 @@ class ViewModel: ObservableObject {
     init(screen: Screen) {
         self.screen = screen
         calculator = Calculator(precision: 40)
-        R = Representation(mantissa: "0", uiFont: screen.proportionalFont)
+        R = Representation(mantissa: "0", appleFont: screen.proportionalFont)
         basicKeyboard = BasicKeyboard(keySize: screen.keySize)
         basicKeyboard.callback = execute
 //        print("ViewModel init()")

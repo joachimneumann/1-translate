@@ -15,7 +15,7 @@ struct NumberDisplay: View {
     func errorView(_ error: Content) -> some View {
         Text(error.text)
             .kerning(R.kerning)
-            .font(Font(error.uiFont))
+            .font(Font(error.appleFont))
             .lineLimit(0)
             .foregroundColor(.red)
             .frame(maxWidth: .infinity, alignment: .trailing)
@@ -26,7 +26,7 @@ struct NumberDisplay: View {
     func mantissaView(_ mantissa: Content) -> some View {
         Text(mantissa.text)
             .kerning(R.kerning)
-            .font(Font(mantissa.uiFont))
+            .font(Font(mantissa.appleFont))
             .lineLimit(1)
             .foregroundColor(.white)
             .multilineTextAlignment(.trailing)
@@ -39,7 +39,7 @@ struct NumberDisplay: View {
         if let exponent = exponent {
             Text(exponent.text)
                 .kerning(R.kerning)
-                .font(Font(exponent.uiFont))
+                .font(Font(exponent.appleFont))
                 .lineLimit(1)
                 .foregroundColor(.white)
                 .frame(alignment: .leading)
@@ -59,12 +59,13 @@ struct NumberDisplay: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(.yellow)
     }
 }
 
 #Preview {
     let screen = Screen(CGSize(width: 500, height: 500))
-    NumberDisplay(R: Representation(error: "Preview", uiFont: screen.proportionalFont))
+    NumberDisplay(R: Representation(error: "Preview", appleFont: screen.proportionalFont))
         .frame(height: 300)
         .padding()
         .background(Color.black)

@@ -134,17 +134,19 @@ struct Screen: Equatable {
         displayWidth = calculatorWidth - 2.0 * displayHorizontalPadding
 
         if translateNumbersApp {
-            uiFontSize = 0.169 * keyboardHeight
+            uiFontSize = 10*0.169 * keyboardHeight
             proportionalFont = Screen.proportionalFont(ofSize: uiFontSize, weight: .regular)
             
             // make sure 100 trillion fits in the display, with group separators
-            while "6,666,666,666,666".textWidth(kerning: kerning, proportionalFont) > displayWidth {
+//            while "6,666,666,666,666".textWidth(kerning: kerning, proportionalFont) > displayWidth {
+            var w = CGFloat.greatestFiniteMagnitude
+            while w > displayWidth {
                 /// 6 is the widest digit in the proportional font
                 //print(uiFontSize)
                 uiFontSize *= 0.99
                 proportionalFont = Screen.proportionalFont(ofSize: uiFontSize, weight: .regular)
+                w = "666,666,666".textWidth(kerning: kerning, proportionalFont)
             }
-            uiFontSize /= 0.99
             proportionalFont = Screen.proportionalFont(ofSize: uiFontSize, weight: .regular)
             monoSpacedFont = Screen.monoSpacedFont(ofSize: uiFontSize, weight: .regular)
         }
