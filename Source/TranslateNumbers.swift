@@ -10,7 +10,7 @@ let testColors = false
 
 struct TranslateNumbers: View {
     @Environment(\.scenePhase) var scenePhase
-    @StateObject var viewModel: ViewModel
+    var viewModel: ViewModel
     
     @State var scrollViewHasScrolled = false
     @State var scrollViewID = UUID()
@@ -19,7 +19,8 @@ struct TranslateNumbers: View {
     @State private var settingsDetent = PresentationDetent.medium
     
     init(screen: Screen) {
-        self._viewModel = StateObject(wrappedValue: ViewModel(screen: screen))
+//        self._viewModel = StateObject(wrappedValue: ViewModel(screen: screen))
+        self.viewModel = ViewModel(screen: screen)
     }
     
     struct OneLanguage: View {
@@ -71,11 +72,11 @@ struct TranslateNumbers: View {
             
             Spacer(minLength: 10.0)
             Spacer(minLength: 0.0)
-            NumberDisplay(R: viewModel.R)
-            .frame(height: viewModel.screen.textHeight)
-//            .background(.red)
-            .padding(.bottom, viewModel.screen.portraitIPhoneDisplayBottomPadding)
-            .padding(.horizontal, 0)
+            NumberDisplay(display: viewModel.display)
+//            .frame(height: viewModel.screen.textHeight)
+////            .background(.red)
+//            .padding(.bottom, viewModel.screen.portraitIPhoneDisplayBottomPadding)
+//            .padding(.horizontal, 0)
             BasicKeyboardView(
                 spacing: viewModel.screen.keySpacing,
                 basicKeyboard: viewModel.basicKeyboard)

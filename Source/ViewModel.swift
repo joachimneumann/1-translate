@@ -9,15 +9,13 @@ import SwiftUI
 import NumberTranslator
 import SwiftGmp
 
-class ViewModel: ObservableObject {
+class ViewModel {
     let screen: Screen
     var calculator: Calculator
+    var display: Display
     var basicKeyboard: BasicKeyboard
-    var decimalSeparator: DecimalSeparator = .dot
-    var separateGrouping = true
-    
-    @Published var R: Representation
-
+    var separator: Separator
+    let intDisplay: IntDisplay
     func execute(_ key: Key) {
         calculator.press(key.op)
         
@@ -30,27 +28,40 @@ class ViewModel: ObservableObject {
         /// mantissa shall occupy the remaining width
         ///
         /// If the number is a SwiftGmp, just show it.
-
+        
         if calculator.displayBuffer.count > 0 {
+            if display.fits(calculator.displayBuffer) {
+                display.number = Display.Number(calculator.displayBuffer, display.proportionalFont)
+            } else {
+                calculator.evaluateString(calculator.displayBuffer)
+                let raw = calculator.raw
+                display.update(raw: raw, isDisplayBuffer: true)
+            }
+        } else {
+            let raw = calculator.raw
+            display.update(raw: raw, isDisplayBuffer: false)
+        }
+        print(display.number)
+
 //            // handle the exponent so that the display does not jump around
 //            // when entering digits, e.g., 888888888888
-            let withSeparators = injectGrouping(numberString: calculator.displayBuffer, decimalSeparator: decimalSeparator, separateGroups: separateGrouping)
-            if withSeparators.textWidth(kerning: screen.kerning, screen.proportionalFont) < screen.displayWidth {
-                R = Representation(mantissa: withSeparators, appleFont: screen.proportionalFont)
-            } else {
-                if let tempMantissaExponent = calculator.mantissaExponent {
-                    R = Representation(
-                        mantissaExponent: tempMantissaExponent,
-                        proportionalFont: screen.proportionalFont,
-                        monoSpacedFont: screen.monoSpacedFont,
-                        decimalSeparator: decimalSeparator,
-                        separateGroups: separateGrouping,
-                        ePadding: screen.ePadding,
-                        width: screen.displayWidth)
-                } else {
-                    R = Representation(mantissa: "0", appleFont: screen.proportionalFont)
-                }
-            }
+//            let withSeparators = injectGrouping(numberString: calculator.displayBuffer, decimalSeparator: decimalSeparator, separateGroups: separateGrouping)
+//            if withSeparators.textWidth(kerning: screen.kerning, screen.proportionalFont) < screen.displayWidth {
+//                R = Representation(mantissa: withSeparators, appleFont: screen.proportionalFont)
+//            } else {
+//                if let tempMantissaExponent = calculator.mantissaExponent {
+//                    R = Representation(
+//                        mantissaExponent: tempMantissaExponent,
+//                        proportionalFont: screen.proportionalFont,
+//                        monoSpacedFont: screen.monoSpacedFont,
+//                        decimalSeparator: decimalSeparator,
+//                        separateGroups: separateGrouping,
+//                        ePadding: screen.ePadding,
+//                        width: screen.displayWidth)
+//                } else {
+//                    R = Representation(mantissa: "0", appleFont: screen.proportionalFont)
+//                }
+//            }
 //            var tempR = calculator.R
 //            
 ////            let numberOfDigits: Int
@@ -73,21 +84,21 @@ class ViewModel: ObservableObject {
 //                tempR.mantissa = String(tempR.mantissa!.prefix(numberOfDigitsInMantissa))
 //            }
 //            numberDisplayContent = tempR
-        } else {
+//        } else {
             // from SwiftGmp, no need for special exponent treatment
-            if let tempMantissaExponent = calculator.mantissaExponent {
-                R = Representation(
-                    mantissaExponent: tempMantissaExponent,
-                    proportionalFont: screen.proportionalFont,
-                    monoSpacedFont: screen.proportionalFont, // monospaced not needed, because the digits will not jump around while typing
-                    decimalSeparator: decimalSeparator,
-                    separateGroups: separateGrouping,
-                    ePadding: screen.ePadding,
-                    width: screen.displayWidth)
-            } else {
-                R = Representation(mantissa: "0", appleFont: screen.proportionalFont)
-            }
-        }
+//            if let tempMantissaExponent = calculator.mantissaExponent {
+//                R = Representation(
+//                    mantissaExponent: tempMantissaExponent,
+//                    proportionalFont: screen.proportionalFont,
+//                    monoSpacedFont: screen.proportionalFont, // monospaced not needed, because the digits will not jump around while typing
+//                    decimalSeparator: decimalSeparator,
+//                    separateGroups: separateGrouping,
+//                    ePadding: screen.ePadding,
+//                    width: screen.displayWidth)
+//            } else {
+//                R = Representation(mantissa: "0", appleFont: screen.proportionalFont)
+//            }
+//        }
         basicKeyboard.back(calculator.privateDisplayBufferHasDigits)
         basicKeyboard.setPending(pendingOperators: calculator.pendingOperators)
     }
@@ -104,8 +115,10 @@ class ViewModel: ObservableObject {
 
     init(screen: Screen) {
         self.screen = screen
+        separator = Separator(separatorType: Separator.SeparatorType.comma, groups: true)
+        intDisplay = IntDisplay(displayWidth: 10, separator: separator)
         calculator = Calculator(precision: 40)
-        R = Representation(mantissa: "0", appleFont: screen.proportionalFont)
+        display = Display(displayWidth: screen.displayWidth, proportionalFont: screen.proportionalFont, monoSpacedFont: screen.monoSpacedFont)
         basicKeyboard = BasicKeyboard(keySize: screen.keySize)
         basicKeyboard.callback = execute
 //        print("ViewModel init()")
@@ -160,3 +173,51 @@ class ViewModel: ObservableObject {
 //    }
 
 }
+
+
+//
+//extension String {
+//    func textWidth2(kerning: Float, _ font: AppleFont) -> Float {
+//        var attributes: [NSAttributedString.Key : Any] = [:]
+//        attributes[.kern] = kerning
+//        attributes[.font] = font
+//        return self.size(withAttributes: attributes).width
+//    }
+//
+//    func textHeight(kerning: Float, _ font: AppleFont) -> Float {
+//        var attributes: [NSAttributedString.Key : Any] = [:]
+//        attributes[.kern] = kerning
+//        attributes[.font] = font
+//        return self.size(withAttributes: attributes).height
+//    }
+//
+//}
+
+//    mutating public func setFonts(font: AppleFont, displayBufferExponentFont: AppleFont, errorFont: AppleFont) {
+//        self.font = font
+//        self.displayBufferExponentFont = displayBufferExponentFont
+//        self.errorFont = errorFont
+//
+//        maxDigitWidth = 0
+//        minDigitWidth = Float.greatestFiniteMagnitude
+//        var temp: Float
+//        temp = "0".textWidth(kerning: kerning, font); if temp > maxDigitWidth { maxDigitWidth = temp }; if temp < minDigitWidth { minDigitWidth = temp }
+//        temp = "1".textWidth(kerning: kerning, font); if temp > maxDigitWidth { maxDigitWidth = temp }; if temp < minDigitWidth { minDigitWidth = temp }
+//        temp = "2".textWidth(kerning: kerning, font); if temp > maxDigitWidth { maxDigitWidth = temp }; if temp < minDigitWidth { minDigitWidth = temp }
+//        temp = "3".textWidth(kerning: kerning, font); if temp > maxDigitWidth { maxDigitWidth = temp }; if temp < minDigitWidth { minDigitWidth = temp }
+//        temp = "4".textWidth(kerning: kerning, font); if temp > maxDigitWidth { maxDigitWidth = temp }; if temp < minDigitWidth { minDigitWidth = temp }
+//        temp = "5".textWidth(kerning: kerning, font); if temp > maxDigitWidth { maxDigitWidth = temp }; if temp < minDigitWidth { minDigitWidth = temp }
+//        temp = "6".textWidth(kerning: kerning, font); if temp > maxDigitWidth { maxDigitWidth = temp }; if temp < minDigitWidth { minDigitWidth = temp }
+//        temp = "7".textWidth(kerning: kerning, font); if temp > maxDigitWidth { maxDigitWidth = temp }; if temp < minDigitWidth { minDigitWidth = temp }
+//        temp = "8".textWidth(kerning: kerning, font); if temp > maxDigitWidth { maxDigitWidth = temp }; if temp < minDigitWidth { minDigitWidth = temp }
+//        temp = "9".textWidth(kerning: kerning, font); if temp > maxDigitWidth { maxDigitWidth = temp }; if temp < minDigitWidth { minDigitWidth = temp }
+//    }
+
+
+//#if os(macOS)
+//import AppKit
+//public typealias AppleFont = NSFont
+//#elseif os(iOS) || os(tvOS) || os(watchOS)
+//import UIKit
+//public typealias AppleFont = UIFont
+//#endif

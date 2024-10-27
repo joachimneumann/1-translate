@@ -9,13 +9,12 @@ import SwiftUI
 import SwiftGmp
 
 struct NumberDisplay: View {
-    let R: Representation
-    
+    @ObservedObject var display: Display
+
     @ViewBuilder
-    func errorView(_ error: Content) -> some View {
+    func errorView(_ error: Display.Content) -> some View {
         Text(error.text)
-            .kerning(R.kerning)
-            .font(Font(error.appleFont))
+            .font(Font(error.font))
             .lineLimit(0)
             .foregroundColor(.red)
             .frame(maxWidth: .infinity, alignment: .trailing)
@@ -23,10 +22,9 @@ struct NumberDisplay: View {
     }
     
     @ViewBuilder
-    func mantissaView(_ mantissa: Content) -> some View {
+    func mantissaView(_ mantissa: Display.Content) -> some View {
         Text(mantissa.text)
-            .kerning(R.kerning)
-            .font(Font(mantissa.appleFont))
+            .font(Font(mantissa.font))
             .lineLimit(1)
             .foregroundColor(.white)
             .multilineTextAlignment(.trailing)
@@ -35,11 +33,10 @@ struct NumberDisplay: View {
     }
 
     @ViewBuilder
-    func exponentView(_ exponent: Content?) -> some View {
+    func exponentView(_ exponent: Display.Content?) -> some View {
         if let exponent = exponent {
             Text(exponent.text)
-                .kerning(R.kerning)
-                .font(Font(exponent.appleFont))
+                .font(Font(exponent.font))
                 .lineLimit(1)
                 .foregroundColor(.white)
                 .frame(alignment: .leading)
@@ -51,9 +48,9 @@ struct NumberDisplay: View {
     var body: some View {
         HStack(alignment: .bottom, spacing: 0.0) {
             Spacer(minLength: 0.0)
-            if let error = R.error {
+            if let error = display.error {
                 errorView(error)
-            } else if let number = R.number {
+            } else if let number = display.number {
                 mantissaView(number.mantissa)
                 exponentView(number.exponent)
             }
@@ -63,11 +60,11 @@ struct NumberDisplay: View {
     }
 }
 
-#Preview {
-    let screen = Screen(CGSize(width: 500, height: 500))
-    NumberDisplay(R: Representation(error: "Preview", appleFont: screen.proportionalFont))
-        .frame(height: 300)
-        .padding()
-        .background(Color.black)
-        .foregroundColor(.white)
-}
+//#Preview {
+//    let screen = Screen(CGSize(width: 500, height: 500))
+//    NumberDisplay(R: Representation(error: "Preview", appleFont: screen.proportionalFont))
+//        .frame(height: 300)
+//        .padding()
+//        .background(Color.black)
+//        .foregroundColor(.white)
+//}

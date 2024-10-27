@@ -10,8 +10,8 @@ import SwiftGmp
 
 class Persistent {
     /// I initialize the decimalSeparator with the locale preference, but
-    @AppStorage("decimalSeparatorKey", store: .standard)
-    var decimalSeparator: DecimalSeparator = Locale.current.decimalSeparator == "," ? .comma : .dot
+//    @AppStorage("decimalSeparatorKey", store: .standard)
+//    var decimalSeparator: Sepa = Locale.current.decimalSeparator == "," ? .comma : .dot
     
     @AppStorage("separateGroupsKey", store: .standard)
     var separateGroups: Bool = false
