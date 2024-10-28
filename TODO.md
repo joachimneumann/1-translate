@@ -1,4 +1,3 @@
-number display and font size 
 - voice broken...
 - remember settings
 - show pending

@@ -25,7 +25,7 @@ struct Screen: Equatable {
     var keyboardHeight: CGFloat
     let keySpacing: CGFloat
     let keySize: CGSize
-    var ePadding: CGFloat /// var and not let, because it is set to 0.0 in the tests
+    let ePadding: CGFloat
     let plusIconSize: CGFloat
     let iconsWidth: CGFloat
     let plusIconTrailingPadding: CGFloat

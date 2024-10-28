@@ -11,6 +11,18 @@ import SwiftGmp
 struct NumberDisplay: View {
     @ObservedObject var display: Display
 
+    @ViewBuilder
+    func TextView(_ text: String, width: CGFloat?) -> some View {
+        if let width = width {
+            Text(text)
+                .frame(width: width, alignment: .leading)
+        } else {
+            Text(text)
+                .frame(alignment: .trailing)
+        }
+    }
+
+    
     var body: some View {
         HStack(alignment: .bottom, spacing: 0.0) {
             Spacer(minLength: 0.0)
@@ -20,19 +32,17 @@ struct NumberDisplay: View {
                 .foregroundColor(.white)
                 .multilineTextAlignment(.trailing)
                 .frame(maxWidth: .infinity, alignment: .trailing)
-                .background(.green)
-            if let right = display.rightContent {
-                Text(right.text)
-                    .font(right.font)
+//                .background(.green)
+            if let rightContext = display.rightContent {
+                TextView(rightContext.text, width: rightContext.width)
+                    .font(rightContext.font)
                     .lineLimit(1)
                     .foregroundColor(.white)
-                    .multilineTextAlignment(.trailing)
-                    .frame(alignment: .trailing)
-                    .background(.blue)
+                    .padding(.leading, display.ePadding)
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.yellow)
+        .frame(maxWidth: .infinity)//, maxHeight: .infinity)
+//        .background(.yellow)
     }
 }
 

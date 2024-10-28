@@ -13,62 +13,62 @@ class Display: IntDisplay, ObservableObject {
     struct Content: CustomDebugStringConvertible {
         var text: String
         var font: Font
-        init(_ text: String, _ font: Font) {
+        var width: CGFloat?
+        init(_ text: String, font: UIFont, width: CGFloat?) {
             self.text = text
-            self.font = font
+            self.font = Font(font)
+            self.width = width
         }
         var debugDescription: String {
             "\(text)"
         }
-
     }
 
     @Published var leftContent: Content
     @Published var rightContent: Content?
 
     let floatDisplayWidth: CGFloat
-    var narrowestDigit: String
-    var widestDigit: String
+    var narrowestDigitWidth: CGFloat
+    var widestDigitWidth: CGFloat
     let eDigitWidth: CGFloat
     let dotDigitWidth: CGFloat
 
-    var proportionalFont: AppleFont
-    var monoSpacedFont: AppleFont
+    var font: UIFont
+    let ePadding: CGFloat
 
-
-    init(floatDisplayWidth: CGFloat, proportionalFont: AppleFont, monoSpacedFont: AppleFont) {
+    init(floatDisplayWidth: CGFloat, font: AppleFont, ePadding: CGFloat) {
         self.floatDisplayWidth = floatDisplayWidth
-        self.proportionalFont = proportionalFont
-        self.monoSpacedFont = monoSpacedFont
-        self.narrowestDigit = "0"
-        self.widestDigit = "0"
+        self.font = font
+        self.ePadding = ePadding
         
-        var widestDigitWidth: CGFloat = 0.0
-        var narrowestDigitWidth: CGFloat = CGFloat.greatestFiniteMagnitude
+        narrowestDigitWidth = CGFloat.greatestFiniteMagnitude
+        widestDigitWidth = 0.0
         for c in 0..<10 {
             let s = String(c)
             print(s)
-            let l = s.textWidth(kerning: 0.0, proportionalFont);
-            if l > widestDigitWidth { widestDigitWidth = l; widestDigit = s }
-            if l < narrowestDigitWidth { narrowestDigitWidth = l; narrowestDigit = s }
+            let l = s.textWidth(kerning: 0.0, font);
+            if l > widestDigitWidth { widestDigitWidth = l }
+            if l < narrowestDigitWidth { narrowestDigitWidth = l }
         }
-        eDigitWidth = "e".textWidth(kerning: 0.0, proportionalFont);
-        dotDigitWidth = ".".textWidth(kerning: 0.0, proportionalFont);
-        self.leftContent = Content("0", Font(proportionalFont))
+        eDigitWidth = "e".textWidth(kerning: 0.0, font);
+        dotDigitWidth = ".".textWidth(kerning: 0.0, font);
+        self.leftContent = Content("0", font: font, width: nil)
         rightContent = nil
         super.init(displayWidth: 0)
         self.leftContent.text = self.left
     }
     
     override var maxDigits: Int {
-        Int(floatDisplayWidth / narrowestDigit.textWidth(kerning: 0.0, proportionalFont))
+        Int(floatDisplayWidth / narrowestDigitWidth)
     }
     
     override func fits(_ mantissa: String, _ exponent: String? = nil) -> Bool {
         var w: CGFloat
-        w = mantissa.textWidth(kerning: 0.0, proportionalFont)
+        w = mantissa.textWidth(kerning: 0.0, font)
         if let exponent = exponent {
-            w += exponent.textWidth(kerning: 0.0, monoSpacedFont)
+            w += ePadding
+            let width = eDigitWidth + widestDigitWidth * CGFloat(exponent.count - 1)
+            w += width
         }
         return w <= floatDisplayWidth
     }
