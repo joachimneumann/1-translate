@@ -60,6 +60,10 @@ class Display: IntDisplay, ObservableObject {
         self.leftContent.text = self.left
     }
     
+    override var maxDigits: Int {
+        Int(floatDisplayWidth / narrowestDigit.textWidth(kerning: 0.0, proportionalFont))
+    }
+    
     override func fits(_ mantissa: String, _ exponent: String? = nil) -> Bool {
         var w: CGFloat
         w = mantissa.textWidth(kerning: 0.0, proportionalFont)
