@@ -16,9 +16,6 @@ struct Screen: Equatable {
     static func proportionalFont(ofSize size: CGFloat, weight: AppleFont.Weight) -> AppleFont {
         return AppleFont.systemFont(ofSize: size, weight: weight)
     }
-    static func monoSpacedFont(ofSize size: CGFloat, weight: AppleFont.Weight) -> AppleFont {
-        return AppleFont.monospacedDigitSystemFont(ofSize: size, weight: weight)
-    }
 
     private let isPad: Bool
 
@@ -31,7 +28,6 @@ struct Screen: Equatable {
     let plusIconTrailingPadding: CGFloat
     var uiFontSize: CGFloat
     var proportionalFont: AppleFont
-    var monoSpacedFont: AppleFont
     let infoUiFont: AppleFont
     let infoUiFontSize: CGFloat
     let displayHorizontalPadding: CGFloat
@@ -93,7 +89,6 @@ struct Screen: Equatable {
 
         uiFontSize = 0.169 * keyboardHeight
         proportionalFont = Screen.proportionalFont(ofSize: uiFontSize, weight: .regular)
-        monoSpacedFont = Screen.monoSpacedFont(ofSize: uiFontSize, weight: .regular)
         infoUiFontSize = 16.0
         infoUiFont = Screen.proportionalFont(ofSize: infoUiFontSize, weight: .regular)
         
@@ -148,7 +143,6 @@ struct Screen: Equatable {
                 w = "666,666,666".textWidth(kerning: kerning, proportionalFont)
             }
             proportionalFont = Screen.proportionalFont(ofSize: uiFontSize, weight: .regular)
-            monoSpacedFont = Screen.monoSpacedFont(ofSize: uiFontSize, weight: .regular)
         }
     }
 }

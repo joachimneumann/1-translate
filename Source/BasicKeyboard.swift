@@ -76,7 +76,7 @@ class KeyRow: Identifiable {
         let threeKey = Key(DigitOperation.three)
         let addKey = Key(TwoOperantOperation.add)
         rows.append(KeyRow([oneKey, twoKey, threeKey, addKey]))
-        let settingsKey = Key(DigitOperation.zero)
+        let settingsKey = Key(ConfigOperation.language)
         let zeroKey = Key(DigitOperation.zero)
         let decimalKey = Key(DigitOperation.dot)
         let equalsKey = Key(EqualOperation.equal)

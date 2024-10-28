@@ -16,7 +16,10 @@ struct Label: View {
     let size: CGFloat
     let color: Color
     var sizeFactor: CGFloat
-    let sfImageforKey: [String: String] = [
+    let flagForKey: [String: String] = [
+        "language" : "plus.slash.minus"
+    ]
+    let sfImageForKey: [String: String] = [
         "+": "plus",
         "-": "minus",
         "*": "multiply",
@@ -64,7 +67,9 @@ struct Label: View {
             sizeFactor = sizeFactorSpecialOperator
         case "*":
             sizeFactor = sizeFactorOperatorX
-        case _ where sfImageforKey.keys.contains(symbol):
+        case _ where sfImageForKey.keys.contains(symbol):
+            sizeFactor = sizeFactorOperator
+        case _ where flagForKey.keys.contains(symbol):
             sizeFactor = sizeFactorOperator
         case ",", ".":
             sizeFactor = sizeFactorComma
@@ -102,8 +107,16 @@ struct Label: View {
         case "acosh": Pow(base: "cosh", exponent: "-1", size: size)
         case "atanh": Pow(base: "tanh", exponent: "-1", size: size)
         default:
-            if let sfImage = sfImageforKey[symbol] {
+            if let sfImage = sfImageForKey[symbol] {
                 Image(systemName: sfImage)
+                    .resizable()
+                    .foregroundColor(color)
+                    .font(Font.title.weight(.regular))
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: size * 0.3)
+                    .accessibilityIdentifier("KeyID_"+symbol)
+            } else if let flag = flagForKey[symbol] {
+                Image(systemName: flag)
                     .resizable()
                     .foregroundColor(color)
                     .font(Font.title.weight(.regular))

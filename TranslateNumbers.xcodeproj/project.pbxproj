@@ -26,6 +26,7 @@
 		AA9C3F6D2CBF373C00F64EFA /* BasicKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9C3F6C2CBF373600F64EFA /* BasicKeyboardView.swift */; };
 		AA9DCD662CA10E13002EBCE5 /* SwiftGmp in Frameworks */ = {isa = PBXBuildFile; productRef = AA9DCD652CA10E13002EBCE5 /* SwiftGmp */; };
 		AAB10B9A292A2222004707E9 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB10B94292A2222004707E9 /* Label.swift */; };
+		AABBE2C12CD05A6600AE9C87 /* ConfigOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABBE2C02CD05A5B00AE9C87 /* ConfigOperation.swift */; };
 		AABEFC132972A8780023A3C9 /* KeyColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABEFC122972A8780023A3C9 /* KeyColor.swift */; };
 		AAD9A0982CBFF16A00DC51A0 /* CalculatorKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD9A0972CBFF16500DC51A0 /* CalculatorKeyView.swift */; };
 		AAE426F729597AE3005FE365 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE426F629597AE3005FE365 /* Screen.swift */; };
@@ -70,6 +71,7 @@
 		AA9C3F692CBF33C100F64EFA /* BasicKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicKeyboard.swift; sourceTree = "<group>"; };
 		AA9C3F6C2CBF373600F64EFA /* BasicKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicKeyboardView.swift; sourceTree = "<group>"; };
 		AAB10B94292A2222004707E9 /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
+		AABBE2C02CD05A5B00AE9C87 /* ConfigOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigOperation.swift; sourceTree = "<group>"; };
 		AABEFC122972A8780023A3C9 /* KeyColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyColor.swift; sourceTree = "<group>"; };
 		AACCD0772B43A89A00D545C5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = "../1-translate-tests/README.md"; sourceTree = "<group>"; };
 		AAD9A0972CBFF16500DC51A0 /* CalculatorKeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorKeyView.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				AA3565BB2B326DE9009B58D2 /* Languages */,
 				AA2FABFF272F2348006DE4C8 /* TranslateNumbersApp.swift */,
 				AA32853A297248B800D86CB4 /* ViewModel.swift */,
+				AABBE2C02CD05A5B00AE9C87 /* ConfigOperation.swift */,
 				AA17F8932CCE6EB900312BF0 /* Display.swift */,
 				AA9C3F692CBF33C100F64EFA /* BasicKeyboard.swift */,
 				AA9C3F6C2CBF373600F64EFA /* BasicKeyboardView.swift */,
@@ -243,6 +246,7 @@
 				AA3565B02B32588B009B58D2 /* XNumberTranslator.swift in Sources */,
 				AA8A91142B1D7FD000CE7185 /* TranslatedDisplay.swift in Sources */,
 				AAF472672B452BD000E7B986 /* Voices.swift in Sources */,
+				AABBE2C12CD05A6600AE9C87 /* ConfigOperation.swift in Sources */,
 				AABEFC132972A8780023A3C9 /* KeyColor.swift in Sources */,
 				AA9C3F6A2CBF33C800F64EFA /* BasicKeyboard.swift in Sources */,
 				AA659AB82B3FDE73004CF20A /* Persistent.swift in Sources */,

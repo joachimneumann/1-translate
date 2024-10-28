@@ -13,6 +13,8 @@ class ViewModel {
     let screen: Screen
     var calculator: Calculator
     var display: Display
+    var numberTranslator: XNumberTranslator
+    var _1Translation: TranslationResult = TranslationResult(displayText: "", overline: nil, spokenText: nil)
     var basicKeyboard: BasicKeyboard
     var separator: Separator
     let intDisplay: IntDisplay
@@ -46,6 +48,9 @@ class ViewModel {
         }
         basicKeyboard.back(calculator.privateDisplayBufferHasDigits)
         basicKeyboard.setPending(pendingOperators: calculator.pendingOperators)
+        
+        let allInOneLine = display.string
+        _1Translation = numberTranslator .getResult(allInOneLine)
     }
 
     func execute(_ key: Key) {
@@ -54,10 +59,8 @@ class ViewModel {
     }
     
 //    private(set) var _voices: Voices!
-//    var numberTranslator: XNumberTranslator
 //    var persistent = Persistent()
 //
-//    var _1Translation: TranslationResult = TranslationResult(displayText: "", overline: nil, spokenText: nil)
 //
 //    var voices: Voices {
 //        return _voices
@@ -70,15 +73,9 @@ class ViewModel {
         calculator = Calculator(precision: 40)
         display = Display(floatDisplayWidth: screen.displayWidth, font: screen.proportionalFont, ePadding: screen.ePadding)
         basicKeyboard = BasicKeyboard(keySize: screen.keySize)
+        numberTranslator = XNumberTranslator()
         basicKeyboard.callback = execute
         process()
-//        updateTranslation()
     }
 
-
-//    func updateTranslation() {
-//        print("updateTranslation")
-//        let allInOneLine = currentLR.string
-//        _1Translation = numberTranslator .getResult(allInOneLine)
-//    }
 }

@@ -63,20 +63,12 @@ struct TranslateNumbers: View {
 //                OneLanguage(viewModel: viewModel,
 //                            screen: screen,
 //                            translation: viewModel._1Translation)
-//                TranslatedDisplay(translation: viewModel._1Translation,
-//                                  screen: screen)
-//                .font(viewModel.firstFont)
-//                .padding(.horizontal, 0)
-//                Spacer(minLength: 0.0)
-//            }
-            
+            TranslatedDisplay(translation: viewModel._1Translation)
+                .font(viewModel.display.leftContent.font)
+
             Spacer(minLength: 10.0)
             Spacer(minLength: 0.0)
             NumberDisplay(display: viewModel.display)
-//            .frame(height: viewModel.screen.textHeight)
-////            .background(.red)
-//            .padding(.bottom, viewModel.screen.portraitIPhoneDisplayBottomPadding)
-//            .padding(.horizontal, 0)
             BasicKeyboardView(
                 spacing: viewModel.screen.keySpacing,
                 basicKeyboard: viewModel.basicKeyboard)

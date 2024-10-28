@@ -24,12 +24,9 @@ struct Overline: Shape {
 
 struct TranslatedDisplay: View {
     let translation: TranslationResult
-    let screen: Screen
 
-    init(translation: TranslationResult,
-         screen: Screen) {
+    init(translation: TranslationResult) {
         self.translation = translation
-        self.screen = screen
     }
     
     var body: some View {
@@ -60,5 +57,5 @@ struct TranslatedDisplay: View {
 }
 
 #Preview {
-    return TranslatedDisplay(translation: TranslationResult(displayText: "hello", overline: nil, spokenText: nil), screen: Screen(CGSize(width: 100, height: 100)))
+    return TranslatedDisplay(translation: TranslationResult(displayText: "hello", overline: nil, spokenText: nil))
 }

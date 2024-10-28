@@ -45,7 +45,6 @@ class Display: IntDisplay, ObservableObject {
         widestDigitWidth = 0.0
         for c in 0..<10 {
             let s = String(c)
-            print(s)
             let l = s.textWidth(kerning: 0.0, font);
             if l > widestDigitWidth { widestDigitWidth = l }
             if l < narrowestDigitWidth { narrowestDigitWidth = l }
