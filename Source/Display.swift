@@ -26,7 +26,7 @@ class Display: IntDisplay, ObservableObject {
     @Published var leftContent: Content
     @Published var rightContent: Content?
 
-    let displayWidth: CGFloat
+    let floatDisplayWidth: CGFloat
     var narrowestDigit: String
     var widestDigit: String
     let eDigitWidth: CGFloat
@@ -36,8 +36,8 @@ class Display: IntDisplay, ObservableObject {
     var monoSpacedFont: AppleFont
 
 
-    init(displayWidth: CGFloat, proportionalFont: AppleFont, monoSpacedFont: AppleFont) {
-        self.displayWidth = displayWidth
+    init(floatDisplayWidth: CGFloat, proportionalFont: AppleFont, monoSpacedFont: AppleFont) {
+        self.floatDisplayWidth = floatDisplayWidth
         self.proportionalFont = proportionalFont
         self.monoSpacedFont = monoSpacedFont
         self.narrowestDigit = "0"
@@ -60,12 +60,12 @@ class Display: IntDisplay, ObservableObject {
         self.leftContent.text = self.left
     }
     
-    func fits(_ s: String) -> Bool {
-        s.textWidth(kerning: 0.0, proportionalFont) <= displayWidth
-    }
-    
-    func update(raw: Raw, isDisplayBuffer: Bool) {
-        super.update(raw: raw)
-        
+    override func fits(_ mantissa: String, _ exponent: String? = nil) -> Bool {
+        var w: CGFloat
+        w = mantissa.textWidth(kerning: 0.0, proportionalFont)
+        if let exponent = exponent {
+            w += exponent.textWidth(kerning: 0.0, monoSpacedFont)
+        }
+        return w <= floatDisplayWidth
     }
 }

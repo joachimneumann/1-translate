@@ -34,9 +34,9 @@ class ViewModel {
                 display.leftContent = Display.Content(calculator.displayBuffer, Font(screen.proportionalFont))
                 display.rightContent = nil
             } else {
-                calculator.evaluateString(calculator.displayBuffer)
                 let raw = calculator.raw
-                display.update(raw: raw, isDisplayBuffer: true)
+                display.update(raw: raw)
+                display.leftContent = Display.Content(display.left, Font(screen.proportionalFont))
                 if let rightText = display.right {
                     display.rightContent = Display.Content(rightText, Font(screen.monoSpacedFont))
                 } else {
@@ -45,7 +45,7 @@ class ViewModel {
             }
         } else {
             let raw = calculator.raw
-            display.update(raw: raw, isDisplayBuffer: false)
+            display.update(raw: raw)
             display.leftContent = Display.Content(display.left, Font(screen.proportionalFont))
             if let rightText = display.right {
                 display.rightContent = Display.Content(rightText, Font(screen.proportionalFont))
@@ -129,7 +129,7 @@ class ViewModel {
         separator = Separator(separatorType: Separator.SeparatorType.comma, groups: true)
         intDisplay = IntDisplay(displayWidth: 10, separator: separator)
         calculator = Calculator(precision: 40)
-        display = Display(displayWidth: screen.displayWidth, proportionalFont: screen.proportionalFont, monoSpacedFont: screen.monoSpacedFont)
+        display = Display(floatDisplayWidth: screen.displayWidth, proportionalFont: screen.proportionalFont, monoSpacedFont: screen.monoSpacedFont)
         basicKeyboard = BasicKeyboard(keySize: screen.keySize)
         basicKeyboard.callback = execute
 //        print("ViewModel init()")

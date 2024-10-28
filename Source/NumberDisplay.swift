@@ -20,13 +20,15 @@ struct NumberDisplay: View {
                 .foregroundColor(.white)
                 .multilineTextAlignment(.trailing)
                 .frame(maxWidth: .infinity, alignment: .trailing)
+                .background(.green)
             if let right = display.rightContent {
                 Text(right.text)
                     .font(right.font)
                     .lineLimit(1)
                     .foregroundColor(.white)
                     .multilineTextAlignment(.trailing)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .frame(alignment: .trailing)
+                    .background(.blue)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
