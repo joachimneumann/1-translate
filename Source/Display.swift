@@ -9,11 +9,11 @@ import SwiftGmp
 import SwiftUI
 
 class Display: IntDisplay, ObservableObject {
-    
+
     struct Content: CustomDebugStringConvertible {
         var text: String
-        var font: AppleFont
-        init(_ text: String, _ font: AppleFont) {
+        var font: Font
+        init(_ text: String, _ font: Font) {
             self.text = text
             self.font = font
         }
@@ -22,21 +22,9 @@ class Display: IntDisplay, ObservableObject {
         }
 
     }
-    struct Number: CustomDebugStringConvertible {
-        var debugDescription: String {
-            "\(mantissa.debugDescription) \(exponent != nil ? exponent!.debugDescription : "")"
-        }
-        
-        let mantissa: Content
-        let exponent: Content?
-        init(_ mantissaText: String, _ font: AppleFont) {
-            mantissa = Content(mantissaText, font)
-            exponent = nil
-        }
-    }
 
-    let error: Content? = nil
-    @Published var number: Number? = nil
+    @Published var leftContent: Content
+    @Published var rightContent: Content?
 
     let displayWidth: CGFloat
     var narrowestDigit: String
@@ -66,8 +54,10 @@ class Display: IntDisplay, ObservableObject {
         }
         eDigitWidth = "e".textWidth(kerning: 0.0, proportionalFont);
         dotDigitWidth = ".".textWidth(kerning: 0.0, proportionalFont);
-        number = Number("0", proportionalFont)
+        self.leftContent = Content("0", Font(proportionalFont))
+        rightContent = nil
         super.init(displayWidth: 0)
+        self.leftContent.text = self.left
     }
     
     func fits(_ s: String) -> Bool {

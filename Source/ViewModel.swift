@@ -31,17 +31,28 @@ class ViewModel {
         
         if calculator.displayBuffer.count > 0 {
             if display.fits(calculator.displayBuffer) {
-                display.number = Display.Number(calculator.displayBuffer, display.proportionalFont)
+                display.leftContent = Display.Content(calculator.displayBuffer, Font(screen.proportionalFont))
+                display.rightContent = nil
             } else {
                 calculator.evaluateString(calculator.displayBuffer)
                 let raw = calculator.raw
                 display.update(raw: raw, isDisplayBuffer: true)
+                if let rightText = display.right {
+                    display.rightContent = Display.Content(rightText, Font(screen.monoSpacedFont))
+                } else {
+                    display.rightContent = nil
+                }
             }
         } else {
             let raw = calculator.raw
             display.update(raw: raw, isDisplayBuffer: false)
+            display.leftContent = Display.Content(display.left, Font(screen.proportionalFont))
+            if let rightText = display.right {
+                display.rightContent = Display.Content(rightText, Font(screen.proportionalFont))
+            } else {
+                display.rightContent = nil
+            }
         }
-        print(display.number)
 
 //            // handle the exponent so that the display does not jump around
 //            // when entering digits, e.g., 888888888888

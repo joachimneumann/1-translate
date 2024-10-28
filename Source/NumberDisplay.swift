@@ -11,48 +11,22 @@ import SwiftGmp
 struct NumberDisplay: View {
     @ObservedObject var display: Display
 
-    @ViewBuilder
-    func errorView(_ error: Display.Content) -> some View {
-        Text(error.text)
-            .font(Font(error.font))
-            .lineLimit(0)
-            .foregroundColor(.red)
-            .frame(maxWidth: .infinity, alignment: .trailing)
-            //.background(.yellow)
-    }
-    
-    @ViewBuilder
-    func mantissaView(_ mantissa: Display.Content) -> some View {
-        Text(mantissa.text)
-            .font(Font(mantissa.font))
-            .lineLimit(1)
-            .foregroundColor(.white)
-            .multilineTextAlignment(.trailing)
-            .frame(maxWidth: .infinity, alignment: .trailing)
-            //.background(.yellow)
-    }
-
-    @ViewBuilder
-    func exponentView(_ exponent: Display.Content?) -> some View {
-        if let exponent = exponent {
-            Text(exponent.text)
-                .font(Font(exponent.font))
-                .lineLimit(1)
-                .foregroundColor(.white)
-                .frame(alignment: .leading)
-                .padding(.leading, 5)
-                //.background(.green)
-        }
-    }
-
     var body: some View {
         HStack(alignment: .bottom, spacing: 0.0) {
             Spacer(minLength: 0.0)
-            if let error = display.error {
-                errorView(error)
-            } else if let number = display.number {
-                mantissaView(number.mantissa)
-                exponentView(number.exponent)
+            Text(display.leftContent.text)
+                .font(display.leftContent.font)
+                .lineLimit(1)
+                .foregroundColor(.white)
+                .multilineTextAlignment(.trailing)
+                .frame(maxWidth: .infinity, alignment: .trailing)
+            if let right = display.rightContent {
+                Text(right.text)
+                    .font(right.font)
+                    .lineLimit(1)
+                    .foregroundColor(.white)
+                    .multilineTextAlignment(.trailing)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
