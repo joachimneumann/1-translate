@@ -28,6 +28,7 @@
 		AAB10B9A292A2222004707E9 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB10B94292A2222004707E9 /* Label.swift */; };
 		AABBE2C12CD05A6600AE9C87 /* ConfigOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABBE2C02CD05A5B00AE9C87 /* ConfigOperation.swift */; };
 		AABEFC132972A8780023A3C9 /* KeyColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABEFC122972A8780023A3C9 /* KeyColor.swift */; };
+		AAC810DA2CD119E40007807E /* FloatingSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC810D92CD119E00007807E /* FloatingSheet.swift */; };
 		AAD9A0982CBFF16A00DC51A0 /* CalculatorKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD9A0972CBFF16500DC51A0 /* CalculatorKeyView.swift */; };
 		AAE426F729597AE3005FE365 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE426F629597AE3005FE365 /* Screen.swift */; };
 		AAF472672B452BD000E7B986 /* Voices.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF472662B452BD000E7B986 /* Voices.swift */; };
@@ -73,6 +74,7 @@
 		AAB10B94292A2222004707E9 /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		AABBE2C02CD05A5B00AE9C87 /* ConfigOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigOperation.swift; sourceTree = "<group>"; };
 		AABEFC122972A8780023A3C9 /* KeyColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyColor.swift; sourceTree = "<group>"; };
+		AAC810D92CD119E00007807E /* FloatingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingSheet.swift; sourceTree = "<group>"; };
 		AACCD0772B43A89A00D545C5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = "../1-translate-tests/README.md"; sourceTree = "<group>"; };
 		AAD9A0972CBFF16500DC51A0 /* CalculatorKeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorKeyView.swift; sourceTree = "<group>"; };
 		AAE426F629597AE3005FE365 /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 		AA08C7C0272EDA48001B8575 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				AAC810D92CD119E00007807E /* FloatingSheet.swift */,
 				AAD9A0972CBFF16500DC51A0 /* CalculatorKeyView.swift */,
 				AA3565BB2B326DE9009B58D2 /* Languages */,
 				AA2FABFF272F2348006DE4C8 /* TranslateNumbersApp.swift */,
@@ -241,6 +244,7 @@
 				AA17F8942CCE6EC200312BF0 /* Display.swift in Sources */,
 				AA9C3F6D2CBF373C00F64EFA /* BasicKeyboardView.swift in Sources */,
 				AA32853B297248B800D86CB4 /* ViewModel.swift in Sources */,
+				AAC810DA2CD119E40007807E /* FloatingSheet.swift in Sources */,
 				AA370C2D293352960041AE4E /* Extensions.swift in Sources */,
 				AA29F58A293CD608001ADF5A /* NumberDisplay.swift in Sources */,
 				AA3565B02B32588B009B58D2 /* TranslationManager.swift in Sources */,
