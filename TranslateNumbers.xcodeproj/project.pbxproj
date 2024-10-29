@@ -14,7 +14,7 @@
 		AA1934532C96956100FE0848 /* NumberTranslator in Frameworks */ = {isa = PBXBuildFile; productRef = AA1934522C96956100FE0848 /* NumberTranslator */; };
 		AA29F58A293CD608001ADF5A /* NumberDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29F589293CD608001ADF5A /* NumberDisplay.swift */; };
 		AA32853B297248B800D86CB4 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA32853A297248B800D86CB4 /* ViewModel.swift */; };
-		AA3565B02B32588B009B58D2 /* XNumberTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3565AF2B32588B009B58D2 /* XNumberTranslator.swift */; };
+		AA3565B02B32588B009B58D2 /* TranslationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3565AF2B32588B009B58D2 /* TranslationManager.swift */; };
 		AA370C2D293352960041AE4E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA370C2C293352960041AE4E /* Extensions.swift */; };
 		AA3FB8272920E0E5002ECCEB /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3FB8262920E0E5002ECCEB /* Settings.swift */; };
 		AA659AB82B3FDE73004CF20A /* Persistent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA659AB72B3FDE73004CF20A /* Persistent.swift */; };
@@ -60,7 +60,7 @@
 		AA2FABFC272F2348006DE4C8 /* TranslateNumbersApp.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = TranslateNumbersApp.entitlements; sourceTree = "<group>"; };
 		AA2FABFF272F2348006DE4C8 /* TranslateNumbersApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslateNumbersApp.swift; sourceTree = "<group>"; };
 		AA32853A297248B800D86CB4 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
-		AA3565AF2B32588B009B58D2 /* XNumberTranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XNumberTranslator.swift; sourceTree = "<group>"; };
+		AA3565AF2B32588B009B58D2 /* TranslationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationManager.swift; sourceTree = "<group>"; };
 		AA370C2C293352960041AE4E /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AA3FB8262920E0E5002ECCEB /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		AA6352B02B296C3B00CABC0C /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
@@ -155,7 +155,7 @@
 		AA3565BB2B326DE9009B58D2 /* Languages */ = {
 			isa = PBXGroup;
 			children = (
-				AA3565AF2B32588B009B58D2 /* XNumberTranslator.swift */,
+				AA3565AF2B32588B009B58D2 /* TranslationManager.swift */,
 			);
 			path = Languages;
 			sourceTree = "<group>";
@@ -243,7 +243,7 @@
 				AA32853B297248B800D86CB4 /* ViewModel.swift in Sources */,
 				AA370C2D293352960041AE4E /* Extensions.swift in Sources */,
 				AA29F58A293CD608001ADF5A /* NumberDisplay.swift in Sources */,
-				AA3565B02B32588B009B58D2 /* XNumberTranslator.swift in Sources */,
+				AA3565B02B32588B009B58D2 /* TranslationManager.swift in Sources */,
 				AA8A91142B1D7FD000CE7185 /* TranslatedDisplay.swift in Sources */,
 				AAF472672B452BD000E7B986 /* Voices.swift in Sources */,
 				AABBE2C12CD05A6600AE9C87 /* ConfigOperation.swift in Sources */,

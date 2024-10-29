@@ -13,7 +13,7 @@ class ViewModel {
     let screen: Screen
     var calculator: Calculator
     var display: Display
-    var numberTranslator: XNumberTranslator
+    var translationManager: TranslationManager
     var basicKeyboard: BasicKeyboard
     var separator: Separator
     let intDisplay: IntDisplay
@@ -39,7 +39,7 @@ class ViewModel {
         basicKeyboard.setPending(pendingOperators: calculator.pendingOperators)
         
         let allInOneLine = display.string
-        numberTranslator.getResult(allInOneLine)
+        translationManager.translate(allInOneLine)
         //print(numberTranslator.translationResult)
     }
 
@@ -63,7 +63,7 @@ class ViewModel {
         calculator = Calculator(precision: 40)
         display = Display(floatDisplayWidth: screen.displayWidth, font: screen.numberDisplayFont, ePadding: screen.ePadding)
         basicKeyboard = BasicKeyboard(keySize: screen.keySize)
-        numberTranslator = XNumberTranslator()
+        translationManager = TranslationManager()
         basicKeyboard.callback = execute
         process()
     }
