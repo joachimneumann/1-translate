@@ -28,13 +28,11 @@ struct BasicKeyboardView: View {
                                     .overlay(
                                         Capsule().stroke(borderColor, lineWidth: borderwidth)
                                     )
-//                                    .opacity(0.9)
                             } else {
                                 Image(configKeyImageName)
                                     .resizable()
                                     .frame(width: key.keySize.width, height: key.keySize.height)
                                     .clipShape(Capsule())
-//                                    .opacity(0.9)
                             }
                         } else {
                             CalculatorKeyView(key: key)
