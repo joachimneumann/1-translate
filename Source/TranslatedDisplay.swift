@@ -23,29 +23,30 @@ struct Overline: Shape {
 }
 
 struct TranslatedDisplay: View {
-    let translation: TranslationResult
+    @ObservedObject var translationResult: TranslationResult
 
     init(translation: TranslationResult) {
-        self.translation = translation
+        self.translationResult = translation
     }
     
     var body: some View {
+        let _ = print("TranslatedDisplay body")
         GeometryReader { geometry in
             ScrollView(.vertical) {
                 VStack {
                     HStack(alignment: .bottom, spacing: 0.0) {
                         Spacer(minLength: 0.0)
-                        if translation.overline != nil {
-                            Text(translation.overline!)
+                        if translationResult.overline != nil {
+                            Text(translationResult.overline!)
                                 .overline()
                                 .multilineTextAlignment(.trailing)
                         }
-                        Text(translation.displayText)
+                        Text(translationResult.displayText)
                             .multilineTextAlignment(.trailing)
                     }
                     .contextMenu {
                         Button("Copy to Clipboard") {
-                            UIPasteboard.general.string = translation.copyText
+                            UIPasteboard.general.string = translationResult.copyText
                         }
                     }
                 }

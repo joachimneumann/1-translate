@@ -12,11 +12,9 @@ class Display: IntDisplay, ObservableObject {
 
     struct Content: CustomDebugStringConvertible {
         var text: String
-        var font: Font
         var width: CGFloat?
-        init(_ text: String, font: UIFont, width: CGFloat?) {
+        init(_ text: String, width: CGFloat? = nil) {
             self.text = text
-            self.font = Font(font)
             self.width = width
         }
         var debugDescription: String {
@@ -27,18 +25,19 @@ class Display: IntDisplay, ObservableObject {
     @Published var leftContent: Content
     @Published var rightContent: Content?
 
-    let floatDisplayWidth: CGFloat
-    var narrowestDigitWidth: CGFloat
+    private let floatDisplayWidth: CGFloat
+    private var narrowestDigitWidth: CGFloat
     var widestDigitWidth: CGFloat
-    let eDigitWidth: CGFloat
-    let dotDigitWidth: CGFloat
-
-    var font: UIFont
     let ePadding: CGFloat
+    let eDigitWidth: CGFloat
+
+    private var uiFont: UIFont
+    public var font: Font
 
     init(floatDisplayWidth: CGFloat, font: AppleFont, ePadding: CGFloat) {
         self.floatDisplayWidth = floatDisplayWidth
-        self.font = font
+        self.uiFont = font
+        self.font = Font(uiFont)
         self.ePadding = ePadding
         
         narrowestDigitWidth = CGFloat.greatestFiniteMagnitude
@@ -50,8 +49,7 @@ class Display: IntDisplay, ObservableObject {
             if l < narrowestDigitWidth { narrowestDigitWidth = l }
         }
         eDigitWidth = "e".textWidth(kerning: 0.0, font);
-        dotDigitWidth = ".".textWidth(kerning: 0.0, font);
-        self.leftContent = Content("0", font: font, width: nil)
+        self.leftContent = Content("0", width: nil)
         rightContent = nil
         super.init(displayWidth: 0)
         self.leftContent.text = self.left
@@ -63,7 +61,7 @@ class Display: IntDisplay, ObservableObject {
     
     override func fits(_ mantissa: String, _ exponent: String? = nil) -> Bool {
         var w: CGFloat
-        w = mantissa.textWidth(kerning: 0.0, font)
+        w = mantissa.textWidth(kerning: 0.0, uiFont)
         if let exponent = exponent {
             w += ePadding
             let width = eDigitWidth + widestDigitWidth * CGFloat(exponent.count - 1)

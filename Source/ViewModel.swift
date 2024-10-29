@@ -14,7 +14,7 @@ class ViewModel {
     var calculator: Calculator
     var display: Display
     var numberTranslator: XNumberTranslator
-    var _1Translation: TranslationResult = TranslationResult(displayText: "", overline: nil, spokenText: nil)
+    var _1Translation: TranslationResult = TranslationResult()
     var basicKeyboard: BasicKeyboard
     var separator: Separator
     let intDisplay: IntDisplay
@@ -23,15 +23,16 @@ class ViewModel {
     func process() {
         if calculator.displayBuffer.count > 0 {
             if display.fits(calculator.displayBuffer) {
-                display.leftContent = Display.Content(calculator.displayBuffer, font: screen.proportionalFont, width: nil)
+                display.left = calculator.displayBuffer
+                display.leftContent = Display.Content(calculator.displayBuffer)
                 display.rightContent = nil
             } else {
                 let raw = calculator.raw
                 display.update(raw: raw)
-                display.leftContent = Display.Content(display.left, font: screen.proportionalFont, width: nil)
+                display.leftContent = Display.Content(display.left)
                 if let rightText = display.right {
                     let width = display.eDigitWidth + display.widestDigitWidth * CGFloat(rightText.count - 1)
-                    display.rightContent = Display.Content(rightText, font: screen.proportionalFont, width: width)
+                    display.rightContent = Display.Content(rightText, width: width)
                 } else {
                     display.rightContent = nil
                 }
@@ -39,9 +40,9 @@ class ViewModel {
         } else {
             let raw = calculator.raw
             display.update(raw: raw)
-            display.leftContent = Display.Content(display.left, font: screen.proportionalFont, width: nil)
+            display.leftContent = Display.Content(display.left)
             if let rightText = display.right {
-                display.rightContent = Display.Content(rightText, font: screen.proportionalFont, width: nil)
+                display.rightContent = Display.Content(rightText)
             } else {
                 display.rightContent = nil
             }
@@ -50,7 +51,7 @@ class ViewModel {
         basicKeyboard.setPending(pendingOperators: calculator.pendingOperators)
         
         let allInOneLine = display.string
-        _1Translation = numberTranslator .getResult(allInOneLine)
+        _1Translation = numberTranslator.getResult(allInOneLine)
     }
 
     func execute(_ key: Key) {
@@ -71,7 +72,7 @@ class ViewModel {
         separator = Separator(separatorType: Separator.SeparatorType.comma, groups: true)
         intDisplay = IntDisplay(displayWidth: 10, separator: separator)
         calculator = Calculator(precision: 40)
-        display = Display(floatDisplayWidth: screen.displayWidth, font: screen.proportionalFont, ePadding: screen.ePadding)
+        display = Display(floatDisplayWidth: screen.displayWidth, font: screen.numberDisplayFont, ePadding: screen.ePadding)
         basicKeyboard = BasicKeyboard(keySize: screen.keySize)
         numberTranslator = XNumberTranslator()
         basicKeyboard.callback = execute

@@ -8,9 +8,9 @@
 import Foundation
 import NumberTranslator
 
-struct TranslationResult {
-    let displayText: String
-    let overline: String?
+class TranslationResult: ObservableObject {
+    var displayText: String
+    var overline: String?
     var spokenText: String?
     var copyText: String {
         let text = displayText.replacingOccurrences(of: "\u{200A}", with: "")
@@ -18,9 +18,19 @@ struct TranslationResult {
         overline = overline.replacingOccurrences(of: "\u{200A}", with: "")
         return "<overline>" + overline + "</overline>" + text
     }
+    init() {
+        self.displayText = ""
+        self.overline = nil
+        spokenText = nil
+    }
+    init(displayText: String, overline: String?, spokenText: String?) {
+        self.displayText = displayText
+        self.overline = overline
+        self.spokenText = spokenText
+    }
 }
 
-@Observable class XNumberTranslator: NumberTranslator, Identifiable {
+@Observable class XNumberTranslator: NumberTranslator, ObservableObject, Identifiable {
 
     var currentLanguage: NumberTranslator.Language = .english
     
@@ -61,6 +71,7 @@ struct TranslationResult {
                 spokenText = speakingPostProcessing(spokenText!)
             }
         }
+        ObjectWillChangePublisher().send()
         return TranslationResult(
             displayText: displayText,
             overline: overline,

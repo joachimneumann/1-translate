@@ -64,7 +64,7 @@ struct TranslateNumbers: View {
 //                            screen: screen,
 //                            translation: viewModel._1Translation)
             TranslatedDisplay(translation: viewModel._1Translation)
-                .font(viewModel.display.leftContent.font)
+                .font(Font(viewModel.screen.translationFont))
 
             Spacer(minLength: 10.0)
             Spacer(minLength: 0.0)
@@ -101,6 +101,7 @@ struct TranslateNumbers: View {
 //    }
         
     var body: some View {
+        let _ = print("main body")
         NavigationStack {
             portraitView
                 .padding(.bottom, viewModel.screen.bottomPadding)

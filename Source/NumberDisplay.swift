@@ -24,23 +24,20 @@ struct NumberDisplay: View {
 
     
     var body: some View {
+        let _ = print("NumberDisplay body")
         HStack(alignment: .bottom, spacing: 0.0) {
             Spacer(minLength: 0.0)
             Text(display.leftContent.text)
-                .font(display.leftContent.font)
-                .lineLimit(1)
-                .foregroundColor(.white)
-                .multilineTextAlignment(.trailing)
                 .frame(maxWidth: .infinity, alignment: .trailing)
 //                .background(.green)
             if let rightContext = display.rightContent {
                 TextView(rightContext.text, width: rightContext.width)
-                    .font(rightContext.font)
-                    .lineLimit(1)
-                    .foregroundColor(.white)
                     .padding(.leading, display.ePadding)
             }
         }
+        .font(display.font)
+        .lineLimit(1)
+        .foregroundColor(.white)
         .frame(maxWidth: .infinity)//, maxHeight: .infinity)
 //        .background(.yellow)
     }
