@@ -114,13 +114,6 @@ struct TranslateNumbers: View {
 //                            viewModel.voices.refreshVoiceDict(list: viewModel.languages.list)
                         }
                     }
-        NavigationLink(
-            destination: LanguageSelector(viewModel: viewModel),
-                            isActive: viewModel.shouldNavigate,
-                            label: {
-                                EmptyView()
-                            }
-                        )
     }
 }
 

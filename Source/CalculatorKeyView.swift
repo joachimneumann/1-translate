@@ -13,6 +13,9 @@ struct CalculatorKeyView: View {
     @State private var animationState: AnimationState = .idle
     @State private var isPressed: Bool = false
     @State private var imageBrightness: Double = 0.0
+
+    @Binding var navigateToConfigView: Bool
+
     let key: Key
     let borderwidth: CGFloat = 2
 
@@ -22,8 +25,9 @@ struct CalculatorKeyView: View {
         case animatingUp
     }
 
-    init(key: Key) {
+    init(key: Key, navigateToConfigView: Binding<Bool>) {
         self.key = key
+        self._navigateToConfigView = navigateToConfigView
         bgColorNonPending = key.sixColors.upColor
         bgColorPending = key.sixColors.pendingUpColor
     
@@ -59,6 +63,7 @@ struct CalculatorKeyView: View {
                         } else {
                             self.isPressed = false
                             self.handleRelease()
+                            navigateToConfigView = true
                             key.callback(key)
                         }
                     }
@@ -163,5 +168,6 @@ struct CalculatorKeyView: View {
 import SwiftGmp
 
 #Preview {
-    CalculatorKeyView(key: Key(InplaceOperation.sqrt3))
+    @Previewable @State var x: Bool = false
+    CalculatorKeyView(key: Key(InplaceOperation.sqrt3), navigateToConfigView: $x)
 }
