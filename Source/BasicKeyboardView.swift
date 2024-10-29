@@ -25,14 +25,16 @@ struct BasicKeyboardView: View {
                                     .resizable()
                                     .frame(width: key.keySize.width-borderwidth, height: key.keySize.height-borderwidth)
                                     .clipShape(Capsule())
-                                        .overlay(
-                                            Capsule().stroke(borderColor, lineWidth: borderwidth)
-                                        )
+                                    .overlay(
+                                        Capsule().stroke(borderColor, lineWidth: borderwidth)
+                                    )
+//                                    .opacity(0.9)
                             } else {
                                 Image(configKeyImageName)
                                     .resizable()
                                     .frame(width: key.keySize.width, height: key.keySize.height)
                                     .clipShape(Capsule())
+//                                    .opacity(0.9)
                             }
                         } else {
                             CalculatorKeyView(key: key)
@@ -48,7 +50,7 @@ struct BasicKeyboardView: View {
     let basicKeyboard: BasicKeyboard = BasicKeyboard(keySize: CGSize(width: 80.0, height: 50.0))
     VStack {
         Rectangle()
-        BasicKeyboardView(spacing: 10, basicKeyboard: basicKeyboard, configKeyImageName: "Vietnamese", configKeyBorderColor: nil)
+        BasicKeyboardView(spacing: 10, basicKeyboard: basicKeyboard, configKeyImageName: "English", configKeyBorderColor: Color(UIColor.lightGray))
             .background(.black)
             .padding(.bottom, 30)
     }

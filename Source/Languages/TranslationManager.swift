@@ -48,9 +48,9 @@ class TranslationManager: NumberTranslator, Identifiable {
     var borderColor: Color? {
         switch name(currentLanguage) {
         case "Deutsch":
-            return Color.white
+            return Color(UIColor.lightGray)
         case "English":
-            return Color.white
+            return Color(UIColor.lightGray)
         default:
             return nil
         }
