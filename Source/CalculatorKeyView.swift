@@ -12,7 +12,7 @@ struct CalculatorKeyView: View {
     @State private var bgColorPending: Color
     @State private var animationState: AnimationState = .idle
     @State private var isPressed: Bool = false
-
+    @State private var imageBrightness: Double = 0.0
     let key: Key
     let borderwidth: CGFloat = 2
 
@@ -40,10 +40,28 @@ struct CalculatorKeyView: View {
                 Image(imageName)
                     .resizable()
                     .frame(width: key.keySize.width-borderwidth, height: key.keySize.height-borderwidth)
+                    .brightness(imageBrightness)
                     .clipShape(Capsule())
                     .overlay(
                         Capsule().stroke(borderColor, lineWidth: borderwidth)
                     )
+                    .onLongPressGesture(minimumDuration: 0.5) {
+                        if key.op.isEqual(to: ClearOperation.back) {
+                            let ACKey = Key(ClearOperation.clear)
+                            key.callback(ACKey)
+                        }
+                    } onPressingChanged: { inProgress in
+                        if inProgress {
+                            if !self.isPressed {
+                                self.isPressed = true
+                                self.handlePress()
+                            }
+                        } else {
+                            self.isPressed = false
+                            self.handleRelease()
+//                            key.callback(key)
+                        }
+                    }
             } else {
                 Image(imageName)
                     .resizable()
@@ -83,6 +101,7 @@ struct CalculatorKeyView: View {
             }
             animationState = .animatingDown
             withAnimation(.linear(duration: key.downTime)) {
+                imageBrightness = 0.3
                 bgColorNonPending = key.sixColors.downColor
                 bgColorPending = key.sixColors.pendingDownColor
             }
@@ -122,6 +141,7 @@ struct CalculatorKeyView: View {
     private func startUpAnimation() {
         self.animationState = .animatingUp
         withAnimation(.linear(duration: key.upTime)) {
+            imageBrightness = 0.0
             bgColorNonPending = key.sixColors.upColor
             bgColorPending = key.sixColors.pendingUpColor
         }
