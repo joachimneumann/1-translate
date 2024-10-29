@@ -40,7 +40,7 @@ class ViewModel {
         
         let allInOneLine = display.string
         numberTranslator.getResult(allInOneLine)
-        print(numberTranslator.translationResult)
+        //print(numberTranslator.translationResult)
     }
 
     func execute(_ key: Key) {

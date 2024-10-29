@@ -23,15 +23,15 @@ struct Overline: Shape {
 }
 
 struct TranslatedDisplay: View {
+    @State private var moveGradient = true
     @ObservedObject var translationResult: TranslationResult
     
     init(translation: TranslationResult) {
         self.translationResult = translation
     }
-
+    
     
     var body: some View {
-        let _ = print("TranslatedDisplay body")
         HStack(alignment: .bottom, spacing: 0.0) {
             Spacer(minLength: 0.0)
             if translationResult.overline != nil {
@@ -47,11 +47,31 @@ struct TranslatedDisplay: View {
                 UIPasteboard.general.string = translationResult.copyText
             }
         }
-        .minimumScaleFactor(0.1)
+            .minimumScaleFactor(0.1)
+//        let screenWidth: CGFloat = 300.0// Screen.main.bounds.size.width
+//        Rectangle()
+//            .overlay {
+//                LinearGradient(colors: [.white, .orange, .white], startPoint: .trailing, endPoint: .leading)
+//                    .frame(width: 150)
+//                    .offset(x: moveGradient ? -screenWidth/2 : screenWidth/2)
+//            }
+//            .animation(.linear(duration: 2).repeatForever(autoreverses: false), value: moveGradient)
+//            .mask {
+//                Text("Slide to power off")
+//                    .foregroundColor(.white)
+//                    .font(.largeTitle)
+//            }
+//            .onAppear {
+//                self.moveGradient.toggle()
+//            }
+//            .foregroundColor(.white)
     }
+
 }
 
 
 #Preview {
     return TranslatedDisplay(translation: TranslationResult(displayText: "hello", overline: nil, spokenText: nil))
+        .background (.yellow)
+
 }

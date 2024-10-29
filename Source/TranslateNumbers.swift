@@ -63,11 +63,11 @@ struct TranslateNumbers: View {
 //                OneLanguage(viewModel: viewModel,
 //                            screen: screen,
 //                            translation: viewModel._1Translation)
+//            Spacer(minLength: 10.0)
             TranslatedDisplay(translation: viewModel.numberTranslator.translationResult)
                 .font(Font(viewModel.screen.translationFont))
-
-            Spacer(minLength: 10.0)
-            Spacer(minLength: 0.0)
+                //.background(.yellow)
+            Spacer(minLength: 20.0)
             NumberDisplay(display: viewModel.display)
             BasicKeyboardView(
                 spacing: viewModel.screen.keySpacing,
@@ -101,7 +101,6 @@ struct TranslateNumbers: View {
 //    }
         
     var body: some View {
-        let _ = print("main body")
         NavigationStack {
             portraitView
                 .padding(.bottom, viewModel.screen.bottomPadding)

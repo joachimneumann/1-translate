@@ -24,7 +24,6 @@ struct NumberDisplay: View {
 
     
     var body: some View {
-        let _ = print("NumberDisplay body")
         HStack(alignment: .bottom, spacing: 0.0) {
             Spacer(minLength: 0.0)
             Text(display.left)

@@ -153,6 +153,70 @@
 //    }
 //}
 //
+
+// NOTIFICATION (ChatGTP)
+//import SwiftUI
+//import AVFoundation
+//
+//class SpeechManager: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
+//    @Published var isSpeaking = false
+//    private let synthesizer = AVSpeechSynthesizer()
+//
+//    override init() {
+//        super.init()
+//        synthesizer.delegate = self
+//    }
+//
+//    func speak(text: String) {
+//        isSpeaking = true
+//        let utterance = AVSpeechUtterance(string: text)
+//        synthesizer.speak(utterance)
+//    }
+//
+//    // Delegate Methods
+//    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+//        isSpeaking = false
+//    }
+//
+//    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
+//        isSpeaking = false
+//    }
+//}
+//
+//struct ContentView: View {
+//    @StateObject private var speechManager = SpeechManager()
+//    @State private var textToSpeak = "Hello, world!"
+//
+//    var body: some View {
+//        VStack {
+//            TextField("Enter text", text: $textToSpeak)
+//                .textFieldStyle(RoundedBorderTextFieldStyle())
+//                .padding()
+//
+//            Button(action: {
+//                speechManager.speak(text: textToSpeak)
+//            }) {
+//                Text(speechManager.isSpeaking ? "Speaking..." : "Speak")
+//            }
+//            .disabled(speechManager.isSpeaking)
+//            .padding()
+//        }
+//        .padding()
+//    }
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
 //extension String {
 //    fileprivate var voiceIdentifierKey: String {
 //        self + "_voiceIdentifier"

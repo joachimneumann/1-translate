@@ -31,7 +31,6 @@ struct Label: View {
     ]
     
     init(symbol: String, size: CGFloat, color: Color) {
-        //let _ = print("LABEL for", symbol)
         self.symbol = symbol
         self.color = color
         
@@ -82,7 +81,6 @@ struct Label: View {
     }
 
     var body: some View {
-        // let _ = print("Label \(symbol)")
         switch symbol {
         //case "√2":    RootShapeView(rootDigit: "", color: color, size: size, underTheRoot: "2")
         case "sqrt" :    RootShapeView(rootDigit: "2", color: color, size: size)
