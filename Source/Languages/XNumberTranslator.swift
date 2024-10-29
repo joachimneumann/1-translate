@@ -8,9 +8,9 @@
 import Foundation
 import NumberTranslator
 
-class TranslationResult: ObservableObject {
-    var displayText: String
-    var overline: String?
+class TranslationResult: ObservableObject, CustomDebugStringConvertible {
+    @Published var displayText: String
+    @Published var overline: String?
     var spokenText: String?
     var copyText: String {
         let text = displayText.replacingOccurrences(of: "\u{200A}", with: "")
@@ -28,12 +28,15 @@ class TranslationResult: ObservableObject {
         self.overline = overline
         self.spokenText = spokenText
     }
+    var debugDescription: String {
+        "\((overline != nil) ? overline!+" " : "")\(displayText)"
+    }
 }
 
-@Observable class XNumberTranslator: NumberTranslator, ObservableObject, Identifiable {
+@Observable class XNumberTranslator: NumberTranslator, Identifiable {
 
     var currentLanguage: NumberTranslator.Language = .english
-    
+    var translationResult = TranslationResult()
     var hasVoice: Bool = false
     
     func flagName(_ language: NumberTranslator.Language) -> String {
@@ -50,34 +53,29 @@ class TranslationResult: ObservableObject {
 
     var speakingPostProcessing: ((String) -> String)?
 
-    func getResult(_ s: String, to language: NumberTranslator.Language) -> TranslationResult {
-        var displayText = translate(s, to: language)
-        var overline: String? = nil
-        if displayText.contains("OVERLINE") {
-            let parts = displayText.split(separator: "OVERLINE")
+    func getResult(_ s: String, to language: NumberTranslator.Language) {
+        let overlineAndText = translate(s, to: language)
+        if overlineAndText.contains("OVERLINE") {
+            let parts = overlineAndText.split(separator: "OVERLINE")
             if parts.count == 1 {
-                overline = String(parts[0]).trimmingCharacters(in: .whitespacesAndNewlines)
-                displayText = ""
+                translationResult.overline = String(parts[0]).trimmingCharacters(in: .whitespacesAndNewlines)
+                translationResult.displayText = ""
             }
             if parts.count == 2 {
-                overline = String(parts[0]).trimmingCharacters(in: .whitespacesAndNewlines)
-                displayText = " " + String(parts[1]).trimmingCharacters(in: .whitespacesAndNewlines)
+                translationResult.overline = String(parts[0]).trimmingCharacters(in: .whitespacesAndNewlines)
+                translationResult.displayText = " " + String(parts[1]).trimmingCharacters(in: .whitespacesAndNewlines)
             }
+        } else {
+            translationResult.displayText = overlineAndText.trimmingCharacters(in: .whitespacesAndNewlines)
         }
-        var spokenText: String? = nil
         if code(language) != nil && hasVoice {
-            spokenText = displayText.replacingOccurrences(of: "\u{200A}", with: "")
+            translationResult.spokenText = overlineAndText.replacingOccurrences(of: "\u{200A}", with: "")
             if let speakingPostProcessing {
-                spokenText = speakingPostProcessing(spokenText!)
+                translationResult.spokenText = speakingPostProcessing(translationResult.spokenText!)
             }
         }
-        ObjectWillChangePublisher().send()
-        return TranslationResult(
-            displayText: displayText,
-            overline: overline,
-            spokenText: spokenText)
     }
-    func getResult(_ s: String) -> TranslationResult {
+    func getResult(_ s: String) {
         getResult(s, to: currentLanguage)
     }
 }

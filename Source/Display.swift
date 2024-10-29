@@ -10,21 +10,19 @@ import SwiftUI
 
 class Display: IntDisplay, ObservableObject {
 
-    struct Content: CustomDebugStringConvertible {
-        var text: String
-        var width: CGFloat?
-        init(_ text: String, width: CGFloat? = nil) {
-            self.text = text
-            self.width = width
-        }
-        var debugDescription: String {
-            "\(text)"
+    override var left: String {
+        didSet {
+            objectWillChange.send()
         }
     }
 
-    @Published var leftContent: Content
-    @Published var rightContent: Content?
-
+    override var right: String? {
+        didSet {
+            objectWillChange.send()
+        }
+    }
+    @Published var rightWidth: CGFloat?
+    
     private let floatDisplayWidth: CGFloat
     private var narrowestDigitWidth: CGFloat
     var widestDigitWidth: CGFloat
@@ -49,10 +47,7 @@ class Display: IntDisplay, ObservableObject {
             if l < narrowestDigitWidth { narrowestDigitWidth = l }
         }
         eDigitWidth = "e".textWidth(kerning: 0.0, font);
-        self.leftContent = Content("0", width: nil)
-        rightContent = nil
         super.init(displayWidth: 0)
-        self.leftContent.text = self.left
     }
     
     override var maxDigits: Int {

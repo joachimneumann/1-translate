@@ -31,28 +31,23 @@ struct TranslatedDisplay: View {
     
     var body: some View {
         let _ = print("TranslatedDisplay body")
-        GeometryReader { geometry in
-            ScrollView(.vertical) {
-                VStack {
-                    HStack(alignment: .bottom, spacing: 0.0) {
-                        Spacer(minLength: 0.0)
-                        if translationResult.overline != nil {
-                            Text(translationResult.overline!)
-                                .overline()
-                                .multilineTextAlignment(.trailing)
-                        }
-                        Text(translationResult.displayText)
-                            .multilineTextAlignment(.trailing)
-                    }
-                    .contextMenu {
-                        Button("Copy to Clipboard") {
-                            UIPasteboard.general.string = translationResult.copyText
-                        }
-                    }
+        VStack {
+            HStack(alignment: .bottom, spacing: 0.0) {
+                Spacer(minLength: 0.0)
+                if translationResult.overline != nil {
+                    Text(translationResult.overline!)
+                        .overline()
+                        .multilineTextAlignment(.trailing)
                 }
-                .frame(width: geometry.size.width) // Make the scroll view full-width
+                Text(translationResult.displayText)
+                    .multilineTextAlignment(.trailing)
             }
-            .scrollBounceBehavior(.basedOnSize)
+            .contextMenu {
+                Button("Copy to Clipboard") {
+                    UIPasteboard.general.string = translationResult.copyText
+                }
+            }
+            .minimumScaleFactor(0.1)
         }
     }
 }

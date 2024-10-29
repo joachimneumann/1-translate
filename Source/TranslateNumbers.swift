@@ -63,7 +63,7 @@ struct TranslateNumbers: View {
 //                OneLanguage(viewModel: viewModel,
 //                            screen: screen,
 //                            translation: viewModel._1Translation)
-            TranslatedDisplay(translation: viewModel._1Translation)
+            TranslatedDisplay(translation: viewModel.numberTranslator.translationResult)
                 .font(Font(viewModel.screen.translationFont))
 
             Spacer(minLength: 10.0)

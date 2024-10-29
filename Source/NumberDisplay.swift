@@ -27,11 +27,11 @@ struct NumberDisplay: View {
         let _ = print("NumberDisplay body")
         HStack(alignment: .bottom, spacing: 0.0) {
             Spacer(minLength: 0.0)
-            Text(display.leftContent.text)
+            Text(display.left)
                 .frame(maxWidth: .infinity, alignment: .trailing)
 //                .background(.green)
-            if let rightContext = display.rightContent {
-                TextView(rightContext.text, width: rightContext.width)
+            if let right = display.right {
+                TextView(right, width: display.rightWidth)
                     .padding(.leading, display.ePadding)
             }
         }

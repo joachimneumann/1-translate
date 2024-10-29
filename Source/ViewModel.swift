@@ -14,7 +14,6 @@ class ViewModel {
     var calculator: Calculator
     var display: Display
     var numberTranslator: XNumberTranslator
-    var _1Translation: TranslationResult = TranslationResult()
     var basicKeyboard: BasicKeyboard
     var separator: Separator
     let intDisplay: IntDisplay
@@ -24,34 +23,24 @@ class ViewModel {
         if calculator.displayBuffer.count > 0 {
             if display.fits(calculator.displayBuffer) {
                 display.left = calculator.displayBuffer
-                display.leftContent = Display.Content(calculator.displayBuffer)
-                display.rightContent = nil
+                display.right = nil
             } else {
                 let raw = calculator.raw
                 display.update(raw: raw)
-                display.leftContent = Display.Content(display.left)
-                if let rightText = display.right {
-                    let width = display.eDigitWidth + display.widestDigitWidth * CGFloat(rightText.count - 1)
-                    display.rightContent = Display.Content(rightText, width: width)
-                } else {
-                    display.rightContent = nil
+                if let right = display.right {
+                    display.rightWidth = display.eDigitWidth + display.widestDigitWidth * CGFloat(right.count - 1)
                 }
             }
         } else {
             let raw = calculator.raw
             display.update(raw: raw)
-            display.leftContent = Display.Content(display.left)
-            if let rightText = display.right {
-                display.rightContent = Display.Content(rightText)
-            } else {
-                display.rightContent = nil
-            }
         }
         basicKeyboard.back(calculator.privateDisplayBufferHasDigits)
         basicKeyboard.setPending(pendingOperators: calculator.pendingOperators)
         
         let allInOneLine = display.string
-        _1Translation = numberTranslator.getResult(allInOneLine)
+        numberTranslator.getResult(allInOneLine)
+        print(numberTranslator.translationResult)
     }
 
     func execute(_ key: Key) {
