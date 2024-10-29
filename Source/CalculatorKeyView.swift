@@ -14,6 +14,7 @@ struct CalculatorKeyView: View {
     @State private var isPressed: Bool = false
 
     let key: Key
+    let borderwidth: CGFloat = 2
 
     enum AnimationState {
         case idle
@@ -34,28 +35,45 @@ struct CalculatorKeyView: View {
     }
 
     var body: some View {
-        Label(symbol: key.op.getRawValue(), size: key.keySize.height, color: key.isPending ? key.sixColors.pendingTextColor : key.sixColors.textColor)
-            .padding()
-            .frame(width: key.keySize.width, height: key.keySize.height)
-            .background(key.isPending ? bgColorPending : bgColorNonPending)
-            .clipShape(Capsule())
-            .onLongPressGesture(minimumDuration: 0.5) {
-                if key.op.isEqual(to: ClearOperation.back) {
-                    let ACKey = Key(ClearOperation.clear)
-                    key.callback(ACKey)
-                }
-            } onPressingChanged: { inProgress in
-                if inProgress {
-                    if !self.isPressed {
-                        self.isPressed = true
-                        self.handlePress()
-                    }
-                } else {
-                    self.isPressed = false
-                    self.handleRelease()
-                    key.callback(key)
-                }
+        if let imageName = key.imageName {
+            if let borderColor = key.borderColor {
+                Image(imageName)
+                    .resizable()
+                    .frame(width: key.keySize.width-borderwidth, height: key.keySize.height-borderwidth)
+                    .clipShape(Capsule())
+                    .overlay(
+                        Capsule().stroke(borderColor, lineWidth: borderwidth)
+                    )
+            } else {
+                Image(imageName)
+                    .resizable()
+                    .frame(width: key.keySize.width, height: key.keySize.height)
+                    .clipShape(Capsule())
             }
+        } else {
+            Label(symbol: key.op.getRawValue(), size: key.keySize.height, color: key.isPending ? key.sixColors.pendingTextColor : key.sixColors.textColor)
+                .padding()
+                .frame(width: key.keySize.width, height: key.keySize.height)
+                .background(key.isPending ? bgColorPending : bgColorNonPending)
+                .clipShape(Capsule())
+                .onLongPressGesture(minimumDuration: 0.5) {
+                    if key.op.isEqual(to: ClearOperation.back) {
+                        let ACKey = Key(ClearOperation.clear)
+                        key.callback(ACKey)
+                    }
+                } onPressingChanged: { inProgress in
+                    if inProgress {
+                        if !self.isPressed {
+                            self.isPressed = true
+                            self.handlePress()
+                        }
+                    } else {
+                        self.isPressed = false
+                        self.handleRelease()
+                        key.callback(key)
+                    }
+                }
+        }
     }
 
     private func handlePress() {

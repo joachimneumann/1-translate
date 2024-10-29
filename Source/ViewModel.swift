@@ -41,6 +41,8 @@ class ViewModel {
         let allInOneLine = display.string
         translationManager.translate(allInOneLine)
         //print(numberTranslator.translationResult)
+        basicKeyboard.configKey.imageName = translationManager.flagName
+        basicKeyboard.configKey.borderColor = translationManager.borderColor
     }
 
     func execute(_ key: Key) {

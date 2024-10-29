@@ -14,13 +14,15 @@ import SwiftGmp
     var downTime: Double = 0.15
     var upTime: Double = 0.4
     var isPending: Bool = false
+    var borderColor: Color? = nil
+    var imageName: String? = nil
     var op: any OpProtocol
     var callback: (Key) -> () = { _ in }
     init(_ op: any OpProtocol) {
         self.op = op
         sixColors = KeyColor.sixColors(op: op)
     }
-
+    
     var id = UUID()
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
@@ -39,17 +41,19 @@ class KeyRow: Identifiable {
 }
 
 @Observable class BasicKeyboard {
+    var configKey: Key = Key(ConfigOperation.config)
     var rows: [KeyRow] = []
     let clearKey: Key
-    var callback: (Key) -> () = { _ in } { didSet {
-        for r in rows {
-            for k in r.keys {
-                k.callback = callback
+    var callback: (Key) -> () = { _ in } {
+        didSet {
+            for r in rows {
+                for k in r.keys {
+                    k.callback = callback
+                }
             }
         }
     }
-    }
-
+    
     private var upHasHappended: [Key: Bool] = [:]
     private var downAnimationFinished: [Key: Bool] = [:]
     private let downTime = 0.15
@@ -76,19 +80,20 @@ class KeyRow: Identifiable {
         let threeKey = Key(DigitOperation.three)
         let addKey = Key(TwoOperantOperation.add)
         rows.append(KeyRow([oneKey, twoKey, threeKey, addKey]))
-        let configKey = Key(ConfigOperation.config)
+        configKey.imageName = "config"
+        configKey.borderColor = nil
         let zeroKey = Key(DigitOperation.zero)
         let decimalKey = Key(DigitOperation.dot)
         let equalsKey = Key(EqualOperation.equal)
         rows.append(KeyRow([configKey, zeroKey, decimalKey, equalsKey]))
-
+        
         for r in rows {
             for k in r.keys {
                 k.keySize = keySize
             }
         }
     }
-
+    
     func setPending(pendingOperators: [any OpProtocol]) {
         for r in rows {
             for k in r.keys {
@@ -105,5 +110,5 @@ class KeyRow: Identifiable {
         }
     }
     
-
+    
 }

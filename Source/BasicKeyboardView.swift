@@ -13,30 +13,12 @@ struct BasicKeyboardView: View {
     var basicKeyboard: BasicKeyboard
     let configKeyImageName: String
     let configKeyBorderColor: Color?
-    let borderwidth: CGFloat = 2
     var body: some View {
         VStack(spacing: spacing) {
             ForEach(basicKeyboard.rows) { keyRow in
                 HStack(spacing: spacing) {
                     ForEach(keyRow.keys) { key in
-                        if key.op.isEqual(to: ConfigOperation.config) {
-                            if let borderColor = configKeyBorderColor {
-                                Image(configKeyImageName)
-                                    .resizable()
-                                    .frame(width: key.keySize.width-borderwidth, height: key.keySize.height-borderwidth)
-                                    .clipShape(Capsule())
-                                    .overlay(
-                                        Capsule().stroke(borderColor, lineWidth: borderwidth)
-                                    )
-                            } else {
-                                Image(configKeyImageName)
-                                    .resizable()
-                                    .frame(width: key.keySize.width, height: key.keySize.height)
-                                    .clipShape(Capsule())
-                            }
-                        } else {
-                            CalculatorKeyView(key: key)
-                        }
+                        CalculatorKeyView(key: key)
                     }
                 }
             }
