@@ -46,8 +46,12 @@ class ViewModel {
     }
 
     func execute(_ key: Key) {
-        calculator.press(key.op)
-        process()
+        if key.op.isEqual(to: ConfigOperation.config) {
+        
+        } else {
+            calculator.press(key.op)
+            process()
+        }
     }
     
 //    private(set) var _voices: Voices!

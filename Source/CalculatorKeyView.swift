@@ -59,7 +59,7 @@ struct CalculatorKeyView: View {
                         } else {
                             self.isPressed = false
                             self.handleRelease()
-//                            key.callback(key)
+                            key.callback(key)
                         }
                     }
             } else {
