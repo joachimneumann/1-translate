@@ -13,6 +13,7 @@ struct CalculatorKeyView: View {
     @State private var animationState: AnimationState = .idle
     @State private var isPressed: Bool = false
     @State private var imageBrightness: Double = 0.0
+    @State private var insideBounds: Bool = true
 
     @Binding var navigateToConfigView: Bool
 
@@ -75,27 +76,42 @@ struct CalculatorKeyView: View {
             }
         } else {
             Label(symbol: key.op.getRawValue(), size: key.keySize.height, color: key.isPending ? key.sixColors.pendingTextColor : key.sixColors.textColor)
-                .padding()
-                .frame(width: key.keySize.width, height: key.keySize.height)
-                .background(key.isPending ? bgColorPending : bgColorNonPending)
-                .clipShape(Capsule())
-                .onLongPressGesture(minimumDuration: 0.5) {
-                    if key.op.isEqual(to: ClearOperation.back) {
-                        let ACKey = Key(ClearOperation.clear)
-                        key.callback(ACKey)
-                    }
-                } onPressingChanged: { inProgress in
-                    if inProgress {
-                        if !self.isPressed {
-                            self.isPressed = true
-                            self.handlePress()
+                        .padding()
+                        .frame(width: key.keySize.width, height: key.keySize.height)
+                        .background(key.isPending ? bgColorPending : bgColorNonPending)
+                        .clipShape(Capsule())
+                        .gesture(
+                            DragGesture(minimumDistance: 0)
+                                .onChanged { value in
+                                    // Check if the finger is still within the label's bounds
+                                    let rect = CGRect(x: 0, y: 0, width: key.keySize.width, height: key.keySize.height)
+                                    insideBounds = rect.contains(value.location)
+                                }
+                                .onEnded { _ in
+                                    // Call the callback only if the finger was released inside the bounds
+                                    if insideBounds {
+                                        key.callback(key)
+                                    }
+                                    isPressed = false // Reset the press state
+                                }
+                        )
+                        .onLongPressGesture(minimumDuration: 0.5) {
+                            // Handle long press specifically (e.g., for special behavior like Clear/Back)
+                            if key.op.isEqual(to: ClearOperation.back) {
+                                let ACKey = Key(ClearOperation.clear)
+                                key.callback(ACKey)
+                            }
+                        } onPressingChanged: { inProgress in
+            if inProgress {
+                                if !self.isPressed {
+                                    self.isPressed = true
+                                    self.handlePress()
+                                }
+                            } else {
+                                self.isPressed = false
+                                self.handleRelease()
+                            }
                         }
-                    } else {
-                        self.isPressed = false
-                        self.handleRelease()
-                        key.callback(key)
-                    }
-                }
         }
     }
 
