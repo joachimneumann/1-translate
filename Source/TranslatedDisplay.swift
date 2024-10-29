@@ -24,33 +24,33 @@ struct Overline: Shape {
 
 struct TranslatedDisplay: View {
     @ObservedObject var translationResult: TranslationResult
-
+    
     init(translation: TranslationResult) {
         self.translationResult = translation
     }
+
     
     var body: some View {
         let _ = print("TranslatedDisplay body")
-        VStack {
-            HStack(alignment: .bottom, spacing: 0.0) {
-                Spacer(minLength: 0.0)
-                if translationResult.overline != nil {
-                    Text(translationResult.overline!)
-                        .overline()
-                        .multilineTextAlignment(.trailing)
-                }
-                Text(translationResult.displayText)
+        HStack(alignment: .bottom, spacing: 0.0) {
+            Spacer(minLength: 0.0)
+            if translationResult.overline != nil {
+                Text(translationResult.overline!)
+                    .overline()
                     .multilineTextAlignment(.trailing)
             }
-            .contextMenu {
-                Button("Copy to Clipboard") {
-                    UIPasteboard.general.string = translationResult.copyText
-                }
-            }
-            .minimumScaleFactor(0.1)
+            Text(translationResult.displayText)
+                .multilineTextAlignment(.trailing)
         }
+        .contextMenu {
+            Button("Copy to Clipboard") {
+                UIPasteboard.general.string = translationResult.copyText
+            }
+        }
+        .minimumScaleFactor(0.1)
     }
 }
+
 
 #Preview {
     return TranslatedDisplay(translation: TranslationResult(displayText: "hello", overline: nil, spokenText: nil))
