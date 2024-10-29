@@ -71,7 +71,8 @@ struct TranslateNumbers: View {
             NumberDisplay(display: viewModel.display)
             BasicKeyboardView(
                 spacing: viewModel.screen.keySpacing,
-                basicKeyboard: viewModel.basicKeyboard)
+                basicKeyboard: viewModel.basicKeyboard,
+                configKeyImageName: viewModel.translationManager.flagName, configKeyBorderColor: viewModel.translationManager.borderColor)
         }
         //.background(.blue)
     }

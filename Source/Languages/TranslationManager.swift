@@ -7,6 +7,7 @@
 
 import Foundation
 import NumberTranslator
+import SwiftUI
 
 class TranslationResult: ObservableObject, CustomDebugStringConvertible {
     @Published var displayText: String
@@ -43,6 +44,18 @@ class TranslationManager: NumberTranslator, Identifiable {
         englishName(language) ?? name(language)
     }
     var flagName: String { flagName(currentLanguage) }
+
+    var borderColor: Color? {
+        switch name(currentLanguage) {
+        case "Deutsch":
+            return Color.white
+        case "English":
+            return Color.white
+        default:
+            return nil
+        }
+    }
+
     var code: String? { code(currentLanguage) }
     var groupSize: Int { groupSize(currentLanguage) }
 

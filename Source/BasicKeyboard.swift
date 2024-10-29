@@ -76,11 +76,11 @@ class KeyRow: Identifiable {
         let threeKey = Key(DigitOperation.three)
         let addKey = Key(TwoOperantOperation.add)
         rows.append(KeyRow([oneKey, twoKey, threeKey, addKey]))
-        let settingsKey = Key(ConfigOperation.language)
+        let configKey = Key(ConfigOperation.config)
         let zeroKey = Key(DigitOperation.zero)
         let decimalKey = Key(DigitOperation.dot)
         let equalsKey = Key(EqualOperation.equal)
-        rows.append(KeyRow([settingsKey, zeroKey, decimalKey, equalsKey]))
+        rows.append(KeyRow([configKey, zeroKey, decimalKey, equalsKey]))
 
         for r in rows {
             for k in r.keys {

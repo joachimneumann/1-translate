@@ -11,12 +11,32 @@ import SwiftGmp
 struct BasicKeyboardView: View {
     let spacing: CGFloat
     var basicKeyboard: BasicKeyboard
+    let configKeyImageName: String
+    let configKeyBorderColor: Color?
+    let borderwidth: CGFloat = 2
     var body: some View {
         VStack(spacing: spacing) {
             ForEach(basicKeyboard.rows) { keyRow in
                 HStack(spacing: spacing) {
                     ForEach(keyRow.keys) { key in
-                        CalculatorKeyView(key: key)
+                        if key.op.isEqual(to: ConfigOperation.config) {
+                            if let borderColor = configKeyBorderColor {
+                                Image(configKeyImageName)
+                                    .resizable()
+                                    .frame(width: key.keySize.width-borderwidth, height: key.keySize.height-borderwidth)
+                                    .clipShape(Capsule())
+                                        .overlay(
+                                            Capsule().stroke(borderColor, lineWidth: borderwidth)
+                                        )
+                            } else {
+                                Image(configKeyImageName)
+                                    .resizable()
+                                    .frame(width: key.keySize.width, height: key.keySize.height)
+                                    .clipShape(Capsule())
+                            }
+                        } else {
+                            CalculatorKeyView(key: key)
+                        }
                     }
                 }
             }
@@ -24,11 +44,13 @@ struct BasicKeyboardView: View {
     }
 }
 
-//#Preview {
-//    var res: String
-//    BasicKeyboardView(
-//        basicKeyboard: BasicKeyboard(calculator: Calculator(precision: 20),
-//        result: $res,
-//        spacing: 10,
-//        keySize: CGSize(width: 60, height: 60)))
-//}
+#Preview {
+    let basicKeyboard: BasicKeyboard = BasicKeyboard(keySize: CGSize(width: 80.0, height: 50.0))
+    VStack {
+        Rectangle()
+        BasicKeyboardView(spacing: 10, basicKeyboard: basicKeyboard, configKeyImageName: "Vietnamese", configKeyBorderColor: nil)
+            .background(.black)
+            .padding(.bottom, 30)
+    }
+    .background(.black)
+}
