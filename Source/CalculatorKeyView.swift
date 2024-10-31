@@ -33,80 +33,75 @@ struct CalculatorKeyView: View {
         // That is not what we want that, of course.
     }
     
-    var body: some View {
-        if let imageName = key.imageName {
-            if let borderColor = key.borderColor {
-                Image(imageName)
-                    .resizable()
-                    .frame(width: key.keySize.width-borderwidth, height: key.keySize.height-borderwidth)
-                    .brightness(imageBrightness)
-                    .clipShape(Capsule())
-                    .overlay(
-                        Capsule().stroke(borderColor, lineWidth: borderwidth)
-                    )
-                    .gesture(
-                        DragGesture(minimumDistance: 0)
-                            .onChanged { value in
-                                if isPressed {
-                                    let tolerance: CGFloat = 0.3 * key.keySize.height
-                                    let rect = CGRect(
-                                        x: -tolerance,
-                                        y: -tolerance,
-                                        width: key.keySize.width + 2.0 * tolerance,
-                                        height: key.keySize.height + 2.0 * tolerance)
-                                    if !rect.contains(value.location) {
-                                        up()
-                                    }
-                                }
-                            }
-                    )
-            } else {
-                Image(imageName)
-                    .resizable()
-                    .frame(width: key.keySize.width, height: key.keySize.height)
-                    .clipShape(Capsule())
-            }
-        } else {
-            Label(symbol: key.op.getRawValue(), size: key.keySize.height, color: key.isPending ? key.sixColors.pendingTextColor : key.sixColors.textColor)
-                .padding()
-                .frame(width: key.keySize.width, height: key.keySize.height)
-                .background(key.isPending ? bgColorPending : bgColorNonPending)
-                .clipShape(Capsule())
-                .gesture(
-                    DragGesture(minimumDistance: 0)
-                        .onChanged { value in
-                            if isPressed {
-                                let tolerance: CGFloat = 0.3 * key.keySize.height
-                                let rect = CGRect(
-                                    x: -tolerance,
-                                    y: -tolerance,
-                                    width: key.keySize.width + 2.0 * tolerance,
-                                    height: key.keySize.height + 2.0 * tolerance)
-                                if !rect.contains(value.location) {
-                                    up()
-                                }
-                            }
-                        }
-                )
-                .onLongPressGesture(minimumDuration: 0.5) {
-                    if key.op.isEqual(to: ClearOperation.back) {
-                        key.callback(Key(ClearOperation.clear))
-                    } else {
-                        // do nothing additionally on long press
-                    }
-                }
-            onPressingChanged: { inProgress in
-                if inProgress {
-                    self.down()
+    struct ImageOrLabel: View {
+        let key: Key
+        let borderwidth: CGFloat
+        let imageBrightness: Double
+        let bgColor: Color
+        
+        var body: some View {
+            if let imageName = key.imageName {
+                if let borderColor = key.borderColor {
+                    Image(imageName)
+                        .resizable()
+                        .frame(width: key.keySize.width-borderwidth, height: key.keySize.height-borderwidth)
+                        .brightness(imageBrightness)
+                        .clipShape(Capsule())
+                        .overlay(
+                            Capsule().stroke(borderColor, lineWidth: borderwidth)
+                        )
                 } else {
-                    if isPressed {
-                        key.callback(key)
-                        print("callback")
-                    }
-                    self.up()
+                    Image(imageName)
+                        .resizable()
+                        .frame(width: key.keySize.width, height: key.keySize.height)
+                        .clipShape(Capsule())
                 }
+            } else {
+                Label(symbol: key.op.getRawValue(), size: key.keySize.height, color: key.isPending ? key.sixColors.pendingTextColor : key.sixColors.textColor)
+                    .padding()
+                    .frame(width: key.keySize.width, height: key.keySize.height)
+                    .background(bgColor)
+                    .clipShape(Capsule())
             }
         }
+    }
+    
+    var body: some View {
+        ImageOrLabel(key: key, borderwidth: borderwidth, imageBrightness: imageBrightness, bgColor: key.isPending ? bgColorPending : bgColorNonPending)
+            .onLongPressGesture(minimumDuration: 0.5) {
+                if key.op.isEqual(to: ClearOperation.back) {
+                    key.callback(Key(ClearOperation.clear))
+                } else {
+                    // do nothing additionally on long press
+                }
+            }
+        onPressingChanged: { inProgress in
+            if inProgress {
+                self.down()
+            } else {
+                if isPressed {
+                    key.callback(key)
+                    print("callback")
+                }
+                self.up()
+            }
+        }
+        .simultaneousGesture(
+            DragGesture(minimumDistance: 0)
+                .onChanged { value in
+                    if isPressed {
+                        let tolerance: CGFloat = 0.3 * key.keySize.height
+                        let rect = CGRect(
+                            x: -tolerance,
+                            y: -tolerance,
+                            width: key.keySize.width + 2.0 * tolerance,
+                            height: key.keySize.height + 2.0 * tolerance)
+                        if !rect.contains(value.location) {
+                            up()
+                        }
+                    }
+                }
+        )
     }
     
     private func distanceBetween(_ point1: CGPoint, and point2: CGPoint) -> CGFloat {
