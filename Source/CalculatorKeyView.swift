@@ -19,7 +19,7 @@ struct CalculatorKeyView: View {
     
     let key: Key
     let borderwidth: CGFloat = 2
-
+    
     
     init(key: Key, navigateToConfigView: Binding<Bool>) {
         self.key = key
@@ -27,11 +27,11 @@ struct CalculatorKeyView: View {
         bgColorNonPending = key.sixColors.upColor
         bgColorPending = key.sixColors.pendingUpColor
         
-        // print("AKey init \(key.op.getRawValue())")
+        // print("CalculatorKeyView init \(key.op.getRawValue())")
         //
-        // I use this print statement to check if
-        // all keys are redrawn when a single key
-        // is pressed. I do not want that, of course.
+        // Use this print statement to check if any
+        // other key than the pressed key is redrawn.
+        // That is not what we want that, of course.
     }
     
     var body: some View {
@@ -114,8 +114,8 @@ struct CalculatorKeyView: View {
                 }
             }
         }
-//        Text("isPressed \(isPressed)")
-//        Spacer()
+        //        Text("isPressed \(isPressed)")
+        //        Spacer()
     }
     
     private func distanceBetween(_ point1: CGPoint, and point2: CGPoint) -> CGFloat {
@@ -125,7 +125,6 @@ struct CalculatorKeyView: View {
     }
     
     private func down() {
-        //print("down()")
         isPressed = true
         withAnimation(.linear(duration: key.downTime)) {
             imageBrightness = 0.3
@@ -136,13 +135,12 @@ struct CalculatorKeyView: View {
             existingTimer.invalidate()
             //print("Existing downTimer invalidated")
         }
-        downTimer = Timer.scheduledTimer(withTimeInterval: key.downTime*2, repeats: false) { _ in
+        downTimer = Timer.scheduledTimer(withTimeInterval: key.downTime, repeats: false) { _ in
             downTimerFired()
         }
     }
     
     private func up() {
-        //print("up()")
         isPressed = false
         if downTimer != nil { return }
         withAnimation(.linear(duration: key.upTime)) {
