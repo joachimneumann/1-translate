@@ -12,7 +12,6 @@ struct CalculatorKeyView: View {
     @State private var bgColorPending: Color
     @State private var isPressed: Bool = false
     @State private var imageBrightness: Double = 0.0
-    @State private var insideBounds: Bool = true
     @State private var downTimer: Timer? = nil
     
     @Binding var navigateToConfigView: Bool
@@ -75,27 +74,22 @@ struct CalculatorKeyView: View {
             .frame(width: key.keySize.width, height: key.keySize.height)
             .background(key.isPending ? bgColorPending : bgColorNonPending)
             .clipShape(Capsule())
-        //                .gesture(
-        //                    DragGesture(minimumDistance: 0)
-        //                        .onChanged { value in
-        //                            // Check if the finger is still within the label's bounds
-        //                            let rect = CGRect(x: 0, y: 0, width: key.keySize.width, height: key.keySize.height)
-        //                            insideBounds = rect.contains(value.location)
-        //                            //print("onChanged insideBounds = \(insideBounds)")
-        //                            if !insideBounds {
-        //                                self.isPressed = false
-        //                                self.up()
-        //                            }
-        //                        }
-        //                        .onEnded { _ in
-        //                            // Call the callback only if the finger was released inside the bounds
-        //                            print("END insideBounds = \(insideBounds)")
-        ////                            if insideBounds {
-        ////                                key.callback(key)
-        ////                            }
-        ////                            isPressed = false // Reset the press state
-        //                        }
-        //                )
+            .gesture(
+                DragGesture(minimumDistance: 0)
+                    .onChanged { value in
+                        if isPressed {
+                            let tolerance: CGFloat = 0.3 * key.keySize.height
+                            let rect = CGRect(
+                                x: -tolerance,
+                                y: -tolerance,
+                                width: key.keySize.width + 2.0 * tolerance,
+                                height: key.keySize.height + 2.0 * tolerance)
+                            if !rect.contains(value.location) {
+                                up()
+                            }
+                        }
+                    }
+            )
             .onLongPressGesture(minimumDuration: 0.5) {
                 if key.op.isEqual(to: ClearOperation.back) {
                     key.callback(Key(ClearOperation.clear))
@@ -104,18 +98,16 @@ struct CalculatorKeyView: View {
                 }
             }
         onPressingChanged: { inProgress in
-            if insideBounds {
-                if inProgress {
-                    self.down()
-                } else {
-                    self.up()
+            if inProgress {
+                self.down()
+            } else {
+                if isPressed {
                     key.callback(key)
-                    //print("callback")
+                    print("callback")
                 }
+                self.up()
             }
         }
-        //        Text("isPressed \(isPressed)")
-        //        Spacer()
     }
     
     private func distanceBetween(_ point1: CGPoint, and point2: CGPoint) -> CGFloat {
@@ -141,6 +133,11 @@ struct CalculatorKeyView: View {
     }
     
     private func up() {
+        if !isPressed {
+            // this can happen when up() is triggered by the finger moving
+            // away from the key and then the finger us released.
+            return
+        }
         isPressed = false
         if downTimer != nil { return }
         withAnimation(.linear(duration: key.upTime)) {
@@ -170,9 +167,7 @@ import SwiftGmp
     let _ = key.keySize = CGSize(width: 100, height: 100)
     ZStack {
         Rectangle()
-            .foregroundColor(.gray)
-        VStack {
-            CalculatorKeyView(key: key, navigateToConfigView: $x)
-        }
+            .foregroundColor(.black)
+        CalculatorKeyView(key: key, navigateToConfigView: $x)
     }
 }
