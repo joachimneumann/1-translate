@@ -114,8 +114,8 @@ struct CalculatorKeyView: View {
                 }
             }
         }
-        Text("isPressed \(isPressed)")
-        Spacer()
+//        Text("isPressed \(isPressed)")
+//        Spacer()
     }
     
     private func distanceBetween(_ point1: CGPoint, and point2: CGPoint) -> CGFloat {
@@ -168,7 +168,7 @@ import SwiftGmp
 
 #Preview {
     @Previewable @State var x: Bool = false
-    var key = Key(InplaceOperation.sqrt3)
+    let key = Key(InplaceOperation.sqrt3)
     let _ = key.keySize = CGSize(width: 100, height: 100)
     ZStack {
         Rectangle()

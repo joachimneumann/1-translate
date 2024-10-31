@@ -11,8 +11,8 @@ import SwiftGmp
 @Observable class Key: Identifiable, Hashable {
     var keySize: CGSize = CGSize(width: 10, height: 10)
     let sixColors: KeyColor.SixColors
-    var downTime: Double = 0.15
-    var upTime: Double = 0.4
+    var downTime: Double = 0.1
+    var upTime: Double = 0.2
     var isPending: Bool = false
     var borderColor: Color? = nil
     var imageName: String? = nil
