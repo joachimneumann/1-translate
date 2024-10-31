@@ -10,26 +10,16 @@ import SwiftUI
 struct CalculatorKeyView: View {
     @State private var bgColorNonPending: Color
     @State private var bgColorPending: Color
-    @State private var animationState: AnimationState = .idleUp
     @State private var isPressed: Bool = false
     @State private var imageBrightness: Double = 0.0
     @State private var insideBounds: Bool = true
-
+    @State private var downTimer: Timer? = nil
+    
     @Binding var navigateToConfigView: Bool
     
     let key: Key
     let borderwidth: CGFloat = 2
-    
-//    var isPressed: Bool {
-//        animationState != .idleUp
-//    }
-    
-    enum AnimationState {
-        case animatingUp
-        case idleUp
-        case animatingDown
-        case idleDown
-    }
+
     
     init(key: Key, navigateToConfigView: Binding<Bool>) {
         self.key = key
@@ -45,90 +35,87 @@ struct CalculatorKeyView: View {
     }
     
     var body: some View {
-//        if let imageName = key.imageName {
-//            if let borderColor = key.borderColor {
-//                Image(imageName)
-//                    .resizable()
-//                    .frame(width: key.keySize.width-borderwidth, height: key.keySize.height-borderwidth)
-//                    .brightness(imageBrightness)
-//                    .clipShape(Capsule())
-//                    .overlay(
-//                        Capsule().stroke(borderColor, lineWidth: borderwidth)
-//                    )
-//                    .onLongPressGesture(minimumDuration: 0.5) {
-//                        if key.op.isEqual(to: ClearOperation.back) {
-//                            let ACKey = Key(ClearOperation.clear)
-//                            key.callback(ACKey)
-//                        }
-//                    } onPressingChanged: { inProgress in
-//                        if inProgress {
-//                            if !self.isPressed {
-//                                self.isPressed = true
-//                                self.handlePress()
-//                            }
-//                        } else {
-//                            self.isPressed = false
-//                            self.handleRelease()
-//                            navigateToConfigView = true
-//                            key.callback(key)
-//                        }
-//                    }
-//            } else {
-//                Image(imageName)
-//                    .resizable()
-//                    .frame(width: key.keySize.width, height: key.keySize.height)
-//                    .clipShape(Capsule())
-//            }
-//        } else {
-            Label(symbol: key.op.getRawValue(), size: key.keySize.height, color: key.isPending ? key.sixColors.pendingTextColor : key.sixColors.textColor)
-                .padding()
-                .frame(width: key.keySize.width, height: key.keySize.height)
-                .background(key.isPending ? bgColorPending : bgColorNonPending)
-                .clipShape(Capsule())
-//                .gesture(
-//                    DragGesture(minimumDistance: 0)
-//                        .onChanged { value in
-//                            // Check if the finger is still within the label's bounds
-//                            let rect = CGRect(x: 0, y: 0, width: key.keySize.width, height: key.keySize.height)
-//                            insideBounds = rect.contains(value.location)
-//                            //print("onChanged insideBounds = \(insideBounds)")
-//                            if !insideBounds {
-//                                self.isPressed = false
-//                                self.up()
-//                            }
-//                        }
-//                        .onEnded { _ in
-//                            // Call the callback only if the finger was released inside the bounds
-//                            print("END insideBounds = \(insideBounds)")
-////                            if insideBounds {
-////                                key.callback(key)
-////                            }
-////                            isPressed = false // Reset the press state
-//                        }
-//                )
-                .onLongPressGesture(minimumDuration: 0.5) {
-                    if key.op.isEqual(to: ClearOperation.back) {
-                        key.callback(Key(ClearOperation.clear))
-                    } else {
-                        // do nothing additionally on long press
-                    }
-                } onPressingChanged: { inProgress in
-                    if insideBounds {
-                        if inProgress {
-    //                        print("in progress")
-                            if !self.isPressed {
-                                self.isPressed = true
-                                self.down()
-                            }
-                        } else {
-    //                        print("NOT in progress")
-                            self.isPressed = false
-                            self.up()
-                            key.callback(key)
-                        }
-                    }
+        //        if let imageName = key.imageName {
+        //            if let borderColor = key.borderColor {
+        //                Image(imageName)
+        //                    .resizable()
+        //                    .frame(width: key.keySize.width-borderwidth, height: key.keySize.height-borderwidth)
+        //                    .brightness(imageBrightness)
+        //                    .clipShape(Capsule())
+        //                    .overlay(
+        //                        Capsule().stroke(borderColor, lineWidth: borderwidth)
+        //                    )
+        //                    .onLongPressGesture(minimumDuration: 0.5) {
+        //                        if key.op.isEqual(to: ClearOperation.back) {
+        //                            let ACKey = Key(ClearOperation.clear)
+        //                            key.callback(ACKey)
+        //                        }
+        //                    } onPressingChanged: { inProgress in
+        //                        if inProgress {
+        //                            if !self.isPressed {
+        //                                self.isPressed = true
+        //                                self.handlePress()
+        //                            }
+        //                        } else {
+        //                            self.isPressed = false
+        //                            self.handleRelease()
+        //                            navigateToConfigView = true
+        //                            key.callback(key)
+        //                        }
+        //                    }
+        //            } else {
+        //                Image(imageName)
+        //                    .resizable()
+        //                    .frame(width: key.keySize.width, height: key.keySize.height)
+        //                    .clipShape(Capsule())
+        //            }
+        //        } else {
+        Label(symbol: key.op.getRawValue(), size: key.keySize.height, color: key.isPending ? key.sixColors.pendingTextColor : key.sixColors.textColor)
+            .padding()
+            .frame(width: key.keySize.width, height: key.keySize.height)
+            .background(key.isPending ? bgColorPending : bgColorNonPending)
+            .clipShape(Capsule())
+        //                .gesture(
+        //                    DragGesture(minimumDistance: 0)
+        //                        .onChanged { value in
+        //                            // Check if the finger is still within the label's bounds
+        //                            let rect = CGRect(x: 0, y: 0, width: key.keySize.width, height: key.keySize.height)
+        //                            insideBounds = rect.contains(value.location)
+        //                            //print("onChanged insideBounds = \(insideBounds)")
+        //                            if !insideBounds {
+        //                                self.isPressed = false
+        //                                self.up()
+        //                            }
+        //                        }
+        //                        .onEnded { _ in
+        //                            // Call the callback only if the finger was released inside the bounds
+        //                            print("END insideBounds = \(insideBounds)")
+        ////                            if insideBounds {
+        ////                                key.callback(key)
+        ////                            }
+        ////                            isPressed = false // Reset the press state
+        //                        }
+        //                )
+            .onLongPressGesture(minimumDuration: 0.5) {
+                if key.op.isEqual(to: ClearOperation.back) {
+                    key.callback(Key(ClearOperation.clear))
+                } else {
+                    // do nothing additionally on long press
                 }
-//        }
+            }
+        onPressingChanged: { inProgress in
+            if insideBounds {
+                if inProgress {
+                    self.down()
+                } else {
+                    self.up()
+                    key.callback(key)
+                    //print("callback")
+                }
+            }
+        }
+        Text("isPressed \(isPressed)")
+        Spacer()
     }
     
     private func distanceBetween(_ point1: CGPoint, and point2: CGPoint) -> CGFloat {
@@ -138,73 +125,41 @@ struct CalculatorKeyView: View {
     }
     
     private func down() {
-        print("down() animationState \(animationState)")
-        if animationState == .idleUp || animationState == .animatingUp {
-            if animationState == .animatingUp {
-                // Interrupt the up animation and start down animation
-            }
-            animationState = .animatingDown
-            print("down() animationState \(animationState)")
-            withAnimation(.linear(duration: key.downTime)) {
-                imageBrightness = 0.3
-                bgColorNonPending = key.sixColors.downColor
-                bgColorPending = key.sixColors.pendingDownColor
-            }
-            // Schedule the completion handler after downTime
-            DispatchQueue.main.asyncAfter(deadline: .now() + key.downTime) {
-                self.downAnimationCompleted()
-                print("down() animationState \(animationState)")
-            }
+        //print("down()")
+        isPressed = true
+        withAnimation(.linear(duration: key.downTime)) {
+            imageBrightness = 0.3
+            bgColorNonPending = key.sixColors.downColor
+            bgColorPending = key.sixColors.pendingDownColor
         }
-        // If already animating down, do nothing
+        if let existingTimer = downTimer, existingTimer.isValid {
+            existingTimer.invalidate()
+            //print("Existing downTimer invalidated")
+        }
+        downTimer = Timer.scheduledTimer(withTimeInterval: key.downTime*2, repeats: false) { _ in
+            downTimerFired()
+        }
     }
     
     private func up() {
-        print("  up() animationState \(animationState)")
-        if animationState == .animatingDown {
-            // The down animation is still running; we'll wait for it to complete
-        } else if animationState == .idleDown {
-            // The down animation has already completed
-            // Start the up animation immediately
-            startUpAnimation()
-        }
-        // If animating up, do nothing; shouldn't happen as button is being released
-    }
-    
-    private func downAnimationCompleted() {
-        if self.animationState == .animatingDown {
-            if self.isPressed {
-                // The button is still pressed; remain in downColor
-                self.animationState = .idleDown
-                // No further action required
-            } else {
-                // The button has been released during the down animation
-                // Start the up animation
-                startUpAnimation()
-            }
-        }
-    }
-    
-    private func startUpAnimation() {
-        self.animationState = .animatingUp
-        print("startUpAnimation      \(animationState)")
+        //print("up()")
+        isPressed = false
+        if downTimer != nil { return }
         withAnimation(.linear(duration: key.upTime)) {
             imageBrightness = 0.0
             bgColorNonPending = key.sixColors.upColor
             bgColorPending = key.sixColors.pendingUpColor
         }
-        // Schedule the completion handler after upTime
-        DispatchQueue.main.asyncAfter(deadline: .now() + key.upTime) {
-            self.upAnimationCompleted()
-        }
     }
     
-    private func upAnimationCompleted() {
-        if self.animationState == .animatingUp {
-            self.animationState = .idleUp
-            print("upAnimationCompleted  \(animationState)")
-            // If the button is pressed during the up animation,
-            // it would have been handled in handlePress()
+    private func downTimerFired() {
+        downTimer = nil
+        if !isPressed {
+            withAnimation(.linear(duration: key.upTime)) {
+                imageBrightness = 0.0
+                bgColorNonPending = key.sixColors.upColor
+                bgColorPending = key.sixColors.pendingUpColor
+            }
         }
     }
 }
@@ -213,5 +168,13 @@ import SwiftGmp
 
 #Preview {
     @Previewable @State var x: Bool = false
-    CalculatorKeyView(key: Key(InplaceOperation.sqrt3), navigateToConfigView: $x)
+    var key = Key(InplaceOperation.sqrt3)
+    let _ = key.keySize = CGSize(width: 100, height: 100)
+    ZStack {
+        Rectangle()
+            .foregroundColor(.gray)
+        VStack {
+            CalculatorKeyView(key: key, navigateToConfigView: $x)
+        }
+    }
 }
