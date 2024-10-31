@@ -34,78 +34,77 @@ struct CalculatorKeyView: View {
     }
     
     var body: some View {
-        //        if let imageName = key.imageName {
-        //            if let borderColor = key.borderColor {
-        //                Image(imageName)
-        //                    .resizable()
-        //                    .frame(width: key.keySize.width-borderwidth, height: key.keySize.height-borderwidth)
-        //                    .brightness(imageBrightness)
-        //                    .clipShape(Capsule())
-        //                    .overlay(
-        //                        Capsule().stroke(borderColor, lineWidth: borderwidth)
-        //                    )
-        //                    .onLongPressGesture(minimumDuration: 0.5) {
-        //                        if key.op.isEqual(to: ClearOperation.back) {
-        //                            let ACKey = Key(ClearOperation.clear)
-        //                            key.callback(ACKey)
-        //                        }
-        //                    } onPressingChanged: { inProgress in
-        //                        if inProgress {
-        //                            if !self.isPressed {
-        //                                self.isPressed = true
-        //                                self.handlePress()
-        //                            }
-        //                        } else {
-        //                            self.isPressed = false
-        //                            self.handleRelease()
-        //                            navigateToConfigView = true
-        //                            key.callback(key)
-        //                        }
-        //                    }
-        //            } else {
-        //                Image(imageName)
-        //                    .resizable()
-        //                    .frame(width: key.keySize.width, height: key.keySize.height)
-        //                    .clipShape(Capsule())
-        //            }
-        //        } else {
-        Label(symbol: key.op.getRawValue(), size: key.keySize.height, color: key.isPending ? key.sixColors.pendingTextColor : key.sixColors.textColor)
-            .padding()
-            .frame(width: key.keySize.width, height: key.keySize.height)
-            .background(key.isPending ? bgColorPending : bgColorNonPending)
-            .clipShape(Capsule())
-            .gesture(
-                DragGesture(minimumDistance: 0)
-                    .onChanged { value in
-                        if isPressed {
-                            let tolerance: CGFloat = 0.3 * key.keySize.height
-                            let rect = CGRect(
-                                x: -tolerance,
-                                y: -tolerance,
-                                width: key.keySize.width + 2.0 * tolerance,
-                                height: key.keySize.height + 2.0 * tolerance)
-                            if !rect.contains(value.location) {
-                                up()
+        if let imageName = key.imageName {
+            if let borderColor = key.borderColor {
+                Image(imageName)
+                    .resizable()
+                    .frame(width: key.keySize.width-borderwidth, height: key.keySize.height-borderwidth)
+                    .brightness(imageBrightness)
+                    .clipShape(Capsule())
+                    .overlay(
+                        Capsule().stroke(borderColor, lineWidth: borderwidth)
+                    )
+                    .gesture(
+                        DragGesture(minimumDistance: 0)
+                            .onChanged { value in
+                                if isPressed {
+                                    let tolerance: CGFloat = 0.3 * key.keySize.height
+                                    let rect = CGRect(
+                                        x: -tolerance,
+                                        y: -tolerance,
+                                        width: key.keySize.width + 2.0 * tolerance,
+                                        height: key.keySize.height + 2.0 * tolerance)
+                                    if !rect.contains(value.location) {
+                                        up()
+                                    }
+                                }
+                            }
+                    )
+            } else {
+                Image(imageName)
+                    .resizable()
+                    .frame(width: key.keySize.width, height: key.keySize.height)
+                    .clipShape(Capsule())
+            }
+        } else {
+            Label(symbol: key.op.getRawValue(), size: key.keySize.height, color: key.isPending ? key.sixColors.pendingTextColor : key.sixColors.textColor)
+                .padding()
+                .frame(width: key.keySize.width, height: key.keySize.height)
+                .background(key.isPending ? bgColorPending : bgColorNonPending)
+                .clipShape(Capsule())
+                .gesture(
+                    DragGesture(minimumDistance: 0)
+                        .onChanged { value in
+                            if isPressed {
+                                let tolerance: CGFloat = 0.3 * key.keySize.height
+                                let rect = CGRect(
+                                    x: -tolerance,
+                                    y: -tolerance,
+                                    width: key.keySize.width + 2.0 * tolerance,
+                                    height: key.keySize.height + 2.0 * tolerance)
+                                if !rect.contains(value.location) {
+                                    up()
+                                }
                             }
                         }
+                )
+                .onLongPressGesture(minimumDuration: 0.5) {
+                    if key.op.isEqual(to: ClearOperation.back) {
+                        key.callback(Key(ClearOperation.clear))
+                    } else {
+                        // do nothing additionally on long press
                     }
-            )
-            .onLongPressGesture(minimumDuration: 0.5) {
-                if key.op.isEqual(to: ClearOperation.back) {
-                    key.callback(Key(ClearOperation.clear))
+                }
+            onPressingChanged: { inProgress in
+                if inProgress {
+                    self.down()
                 } else {
-                    // do nothing additionally on long press
+                    if isPressed {
+                        key.callback(key)
+                        print("callback")
+                    }
+                    self.up()
                 }
-            }
-        onPressingChanged: { inProgress in
-            if inProgress {
-                self.down()
-            } else {
-                if isPressed {
-                    key.callback(key)
-                    print("callback")
-                }
-                self.up()
             }
         }
     }
