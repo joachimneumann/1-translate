@@ -158,7 +158,9 @@ import SwiftGmp
 
 #Preview {
     @Previewable @State var x: Bool = false
-    let key = Key(InplaceOperation.sqrt3)
+//    let key = Key(InplaceOperation.sqrt3)
+    let key = Key(ConfigOperation.config)
+    let _ = key.imageName = "English"
     let _ = key.keySize = CGSize(width: 100, height: 100)
     ZStack {
         Rectangle()

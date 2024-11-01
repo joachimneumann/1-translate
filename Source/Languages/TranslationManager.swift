@@ -43,7 +43,6 @@ class TranslationManager: NumberTranslator, Identifiable {
     func flagName(_ language: NumberTranslator.Language) -> String {
         englishName(language) ?? name(language)
     }
-    var flagName: String { flagName(currentLanguage) }
 
     var borderColor: Color? {
         switch name(currentLanguage) {
@@ -93,9 +92,15 @@ class TranslationManager: NumberTranslator, Identifiable {
         translateThis(s, to: currentLanguage)
     }
     
-    var languageSelectorRows: Int {
-        Int(ceil(0.25 * Double(NumberTranslator.Language.allCases.count)))
+    var implementedFlagnames: [String] {
+        var ret: [String] = []
+        for language in languageImplementation.keys {
+            ret.append(flagName(language))
+        }
+        return ret
     }
+    
+    
 }
 
 

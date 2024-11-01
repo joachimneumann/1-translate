@@ -74,10 +74,9 @@ struct TranslateNumbers: View {
             //.background(.yellow)
             Spacer(minLength: 20.0)
             NumberDisplay(display: viewModel.display)
-            BasicKeyboardView(
+            SmallKeyboardView(
                 spacing: viewModel.screen.keySpacing,
-                basicKeyboard: viewModel.basicKeyboard,
-                configKeyImageName: viewModel.translationManager.flagName, configKeyBorderColor: viewModel.translationManager.borderColor)
+                basicKeyboard: viewModel.languageSelectorKeyboard)
         }
         //.background(.blue)
     }

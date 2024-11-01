@@ -1,5 +1,5 @@
 //
-//  BasicKeyboardView.swift
+//  NonScientificKeyboardView.swift
 //  TranslateNumbers
 //
 //  Created by Joachim Neumann on 16.10.24.
@@ -8,18 +8,16 @@
 import SwiftUI
 import SwiftGmp
 
-struct BasicKeyboardView: View {
+struct SmallKeyboardView: View {
     @State private var navigateToConfigView = false
-
+    
     let spacing: CGFloat
-    var basicKeyboard: BasicKeyboard
-    let configKeyImageName: String
-    let configKeyBorderColor: Color?
+    var basicKeyboard: SmallKeyboard
     var body: some View {
         VStack(spacing: spacing) {
-            ForEach(basicKeyboard.rows) { keyRow in
+            ForEach(basicKeyboard.keyMatrix, id: \.self) { row in
                 HStack(spacing: spacing) {
-                    ForEach(keyRow.keys) { key in
+                    ForEach(row) { key in
                         CalculatorKeyView(key: key)
                     }
                 }
@@ -29,10 +27,11 @@ struct BasicKeyboardView: View {
 }
 
 #Preview {
-    let basicKeyboard: BasicKeyboard = BasicKeyboard(keySize: CGSize(width: 80.0, height: 50.0))
+    //    let smallKeyboard: SmallKeyboard = TranslatorKeyboard(keySize: CGSize(width: 80.0, height: 50.0))
+    let smallKeyboard: SmallKeyboard = LanguageSelectorKeyboard(keySize: CGSize(width: 80.0, height: 50.0), translationManager: TranslationManager())
     VStack {
         Rectangle()
-        BasicKeyboardView(spacing: 20, basicKeyboard: basicKeyboard, configKeyImageName: "English", configKeyBorderColor: Color(UIColor.lightGray))
+        SmallKeyboardView(spacing: 20, basicKeyboard: smallKeyboard)
             .background(.black)
             .padding(.bottom, 30)
     }

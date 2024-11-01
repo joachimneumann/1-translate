@@ -14,7 +14,8 @@ class ViewModel {
     var calculator: Calculator
     var display: Display
     var translationManager: TranslationManager
-    var basicKeyboard: BasicKeyboard
+    var translatorKeyboard: SmallKeyboard
+    var languageSelectorKeyboard: SmallKeyboard
     var separator: Separator
     let intDisplay: IntDisplay
     
@@ -35,14 +36,14 @@ class ViewModel {
             let raw = calculator.raw
             display.update(raw: raw)
         }
-        basicKeyboard.back(calculator.privateDisplayBufferHasDigits)
-        basicKeyboard.setPending(pendingOperators: calculator.pendingOperators)
-        
+
+        translatorKeyboard.back(calculator.privateDisplayBufferHasDigits)
+        translatorKeyboard.setPending(pendingOperators: calculator.pendingOperators)
+        translatorKeyboard.configKey.imageName = translationManager.flagName(.english)
+        translatorKeyboard.configKey.borderColor = translationManager.borderColor
+
         let allInOneLine = display.string
         translationManager.translate(allInOneLine)
-        //print(numberTranslator.translationResult)
-        basicKeyboard.configKey.imageName = translationManager.flagName
-        basicKeyboard.configKey.borderColor = translationManager.borderColor
     }
 
     func execute(_ key: Key) {
@@ -67,9 +68,10 @@ class ViewModel {
         intDisplay = IntDisplay(displayWidth: 10, separator: separator)
         calculator = Calculator(precision: 40)
         display = Display(floatDisplayWidth: screen.displayWidth, font: screen.numberDisplayFont, ePadding: screen.ePadding)
-        basicKeyboard = BasicKeyboard(keySize: screen.keySize)
+        translatorKeyboard = TranslatorKeyboard(keySize: screen.keySize)
         translationManager = TranslationManager()
-        basicKeyboard.callback = execute
+        languageSelectorKeyboard = LanguageSelectorKeyboard(keySize: screen.keySize, translationManager: translationManager)
+        translatorKeyboard.callback = execute
         process()
     }
 
