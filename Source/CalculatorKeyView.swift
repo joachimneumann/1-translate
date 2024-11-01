@@ -9,16 +9,15 @@ import SwiftUI
 
 struct CalculatorKeyView: View {
     @EnvironmentObject var languageSelectorNavigation: LanguageSelectorNavigation
-
+    
     @State private var bgColorNonPending: Color
     @State private var bgColorPending: Color
     @State private var isPressed: Bool = false
     @State private var imageBrightness: Double = 0.0
     @State private var downTimer: Timer? = nil
-        
-    let key: Key
-    let borderwidth: CGFloat = 2
     
+    let key: Key
+    let borderwidth: CGFloat = 5
     
     init(key: Key) {
         self.key = key
@@ -32,6 +31,19 @@ struct CalculatorKeyView: View {
         // That is not what we want that, of course.
     }
     
+    struct ImageKey: View {
+        let imageName: String
+        let width: CGFloat
+        let height: CGFloat
+        let brightness: Double
+        var body: some View {
+            Image(imageName)
+                .resizable()
+                .frame(width: width, height: height)
+                .brightness(brightness)
+                .clipShape(Capsule())
+        }
+    }
     struct ImageOrLabel: View {
         let key: Key
         let borderwidth: CGFloat
@@ -40,21 +52,16 @@ struct CalculatorKeyView: View {
         
         var body: some View {
             if let imageName = key.imageName {
-                if let borderColor = key.borderColor {
-                    Image(imageName)
-                        .resizable()
-                        .frame(width: key.keySize.width-borderwidth, height: key.keySize.height-borderwidth)
-                        .brightness(imageBrightness)
-                        .clipShape(Capsule())
-                        .overlay(
-                            Capsule().stroke(borderColor, lineWidth: borderwidth)
-                        )
-                } else {
-                    Image(imageName)
-                        .resizable()
-                        .frame(width: key.keySize.width, height: key.keySize.height)
-                        .clipShape(Capsule())
-                }
+                Image(imageName)
+                    .resizable()
+                    .frame(width: key.keySize.width-2*borderwidth, height: key.keySize.height-2*borderwidth)
+                    .clipShape(Capsule())
+                    .padding(0.5*borderwidth)
+                    .overlay(
+                        key.borderColor.map { Capsule().stroke($0, lineWidth: borderwidth) }
+                    )
+                    .brightness(imageBrightness)
+                    .padding(0.5*borderwidth)
             } else {
                 Label(symbol: key.op.getRawValue(), size: key.keySize.height, color: key.isPending ? key.sixColors.pendingTextColor : key.sixColors.textColor)
                     .padding()
@@ -158,7 +165,7 @@ import SwiftGmp
 
 #Preview {
     @Previewable @State var x: Bool = false
-//    let key = Key(InplaceOperation.sqrt3)
+    //    let key = Key(InplaceOperation.sqrt3)
     let key = Key(ConfigOperation.config)
     let _ = key.imageName = "English"
     let _ = key.keySize = CGSize(width: 100, height: 100)

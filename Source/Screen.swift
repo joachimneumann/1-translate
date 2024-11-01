@@ -19,7 +19,8 @@ struct Screen: Equatable {
 
     private let isPad: Bool
 
-    var keyboardHeight: CGFloat
+    var keyboardHeight5Rows: CGFloat
+    var keyboardHeight4Rows: CGFloat
     let keySpacing: CGFloat
     let keySize: CGSize
     let ePadding: CGFloat
@@ -53,7 +54,7 @@ struct Screen: Equatable {
         
     mutating func changeKeyboardSize(smaller: Bool) {
         keyHeight = keyWidth * (smaller ? 0.5 : 0.7)
-        keyboardHeight = 5 * keyHeight + 4 * keySpacing
+        keyboardHeight5Rows = 5 * keyHeight + 4 * keySpacing
     }
 
     init() {
@@ -80,18 +81,19 @@ struct Screen: Equatable {
         } else {
             keyHeight = (screenSize.height * 0.568 - 4 * keySpacing) / 5.0 // this simulates the iOS18 calculator
         }
-        keyboardHeight = 5 * keyHeight + 4 * keySpacing
-        bottomPadding = isPad ? 0.0 : keyboardHeight * 0.05
+        keyboardHeight5Rows = 5 * keyHeight + 4 * keySpacing
+        keyboardHeight4Rows = 4 * keyHeight + 3 * keySpacing
+        bottomPadding = isPad ? 0.0 : keyboardHeight5Rows * 0.05
 
         keySize = CGSize(width: keyWidth, height: keyHeight)
         
-        plusIconSize = keyboardHeight * 0.13
-        iconsWidth   = keyboardHeight * 0.16
+        plusIconSize = keyboardHeight5Rows * 0.13
+        iconsWidth   = keyboardHeight5Rows * 0.16
         plusIconTrailingPadding = plusIconSize * 0.4
         ePadding = plusIconSize * 0.1
         kerning = 0.0//-0.02 * uiFontSize
 
-        uiFontSize = 0.169 * keyboardHeight
+        uiFontSize = 0.169 * keyboardHeight5Rows
         numberDisplayFont = Screen.proportionalFont(ofSize: uiFontSize, weight: .regular)
         translationFont = Screen.proportionalFont(ofSize: uiFontSize, weight: .light)
         infoUiFontSize = 16.0
@@ -119,13 +121,13 @@ struct Screen: Equatable {
         
         offsetToVerticallyAlignTextWithkeyboard =
         CGFloat(screenSize.height) -
-        CGFloat(keyboardHeight) -
+        CGFloat(keyboardHeight5Rows) -
         CGFloat(textHeight) -
         CGFloat(infoUiFontSize)
 
         offsetToVerticallyAlignIconWithText =
         CGFloat(screenSize.height) -
-        CGFloat(keyboardHeight) -
+        CGFloat(keyboardHeight5Rows) -
         CGFloat(infoUiFontSize) -
         CGFloat(plusIconSize) +
         CGFloat(numberDisplayFont.descender) -
@@ -134,7 +136,7 @@ struct Screen: Equatable {
         displayWidth = calculatorWidth - 2.0 * displayHorizontalPadding
 
         if translateNumbersApp {
-            uiFontSize = 10*0.169 * keyboardHeight
+            uiFontSize = 10*0.169 * keyboardHeight5Rows
             numberDisplayFont = Screen.proportionalFont(ofSize: uiFontSize, weight: .regular)
             
             // make sure 100 trillion fits in the display, with group separators

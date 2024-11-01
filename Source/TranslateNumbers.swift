@@ -64,11 +64,6 @@ struct TranslateNumbers: View {
     
     var portraitView: some View {
         VStack(spacing: 0.0) {
-            //            VStack(spacing: 0.0) {
-            //                OneLanguage(viewModel: viewModel,
-            //                            screen: screen,
-            //                            translation: viewModel._1Translation)
-            //            Spacer(minLength: 10.0)
             TranslatedDisplay(translation: viewModel.translationManager.result)
                 .font(Font(viewModel.screen.translationFont))
             //.background(.yellow)
@@ -76,34 +71,11 @@ struct TranslateNumbers: View {
             NumberDisplay(display: viewModel.display)
             SmallKeyboardView(
                 spacing: viewModel.screen.keySpacing,
-                basicKeyboard: viewModel.languageSelectorKeyboard)
+                height: viewModel.screen.keyboardHeight4Rows,
+                smallKeyboard: viewModel.languageSelectorKeyboard)
         }
         //.background(.blue)
     }
-    
-    //    struct LanguageButton: View {
-    //        private let viewModel: ViewModel
-    //        private let screen: Screen
-    //
-    //        init(viewModel: ViewModel, screen: Screen) {
-    //            self.viewModel = viewModel
-    //            self.screen = screen
-    //        }
-    //
-    //        var body: some View {
-    //            NavigationLink {
-    //                LanguageSelector(viewModel: viewModel, screen: screen, currentLanguage: viewModel.numberTranslator.currentLanguage)
-    //            } label: {
-    //                Image(viewModel.numberTranslator.flagName)
-    //                    .resizable()
-    //                    .scaledToFit()
-    //                    .padding(2)
-    //                    .border(.white, width: 2)
-    //            }
-    //            .buttonStyle(DefaultButtonStyle())
-    //            .opacity(0.9)
-    //        }
-    //    }
     
     var body: some View {
         ZStack {
@@ -115,7 +87,7 @@ struct TranslateNumbers: View {
                 VStack {
                     Spacer()
                     LanguageSelectorView(viewModel: viewModel)
-                        .frame(height: viewModel.screen.keyboardHeight)
+                        .frame(height: viewModel.screen.keyboardHeight5Rows)
                         .animation(.smooth(duration: 1.0), value: languageSelectorNavigation.showLanguageSelector)
                         .background(.green)
                 }

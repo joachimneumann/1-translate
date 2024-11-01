@@ -39,7 +39,7 @@ class ViewModel {
 
         translatorKeyboard.back(calculator.privateDisplayBufferHasDigits)
         translatorKeyboard.setPending(pendingOperators: calculator.pendingOperators)
-        translatorKeyboard.configKey.imageName = translationManager.flagName(.english)
+        translatorKeyboard.configKey.imageName = translationManager.flagname(.english)
         translatorKeyboard.configKey.borderColor = translationManager.borderColor
 
         let allInOneLine = display.string
@@ -48,7 +48,7 @@ class ViewModel {
 
     func execute(_ key: Key) {
         if !key.op.isEqual(to: ConfigOperation.config) {
-            //print("executing \(key.op.getRawValue())")
+            print("executing \(key.op.getRawValue())")
             calculator.press(key.op)
             process()
         }

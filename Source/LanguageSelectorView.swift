@@ -23,7 +23,7 @@ struct LanguageSelectorView: View {
                     viewModel.translationManager.currentLanguage = listLanguage
                 } label: {
                     HStack(spacing: 0) {
-                        Image(viewModel.translationManager.flagName(listLanguage))
+                        Image(viewModel.translationManager.flagname(listLanguage))
                             .resizable()
                             .scaledToFit()
                             .padding(.vertical, 1)

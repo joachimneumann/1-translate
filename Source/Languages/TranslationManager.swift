@@ -40,18 +40,19 @@ class TranslationManager: NumberTranslator, Identifiable {
     var result = TranslationResult()
     var hasVoice: Bool = false
     
-    func flagName(_ language: NumberTranslator.Language) -> String {
+    func flagname(_ language: NumberTranslator.Language) -> String {
         englishName(language) ?? name(language)
     }
 
     var borderColor: Color? {
-        switch name(currentLanguage) {
-        case "Deutsch":
-            return Color(UIColor.lightGray)
-        case "English":
+        borderColor(flagname(currentLanguage))
+    }
+    func borderColor(_ flagname : String) -> Color? {
+        switch flagname {
+        case "Deutsch", "English", "Polski", "Finnish":
             return Color(UIColor.lightGray)
         default:
-            return nil
+            return Color(UIColor.lightGray)
         }
     }
 
@@ -96,9 +97,9 @@ class TranslationManager: NumberTranslator, Identifiable {
         var flagnamesWithHue: [(name: String, hue: CGFloat)] = []
         
         for language in languageImplementation.keys {
-            if let uiImage = UIImage(named: flagName(language)),
+            if let uiImage = UIImage(named: flagname(language)),
                let averageHue = uiImage.averageHue {
-                flagnamesWithHue.append((name: flagName(language), hue: averageHue))
+                flagnamesWithHue.append((name: flagname(language), hue: averageHue))
             }
         }
         
