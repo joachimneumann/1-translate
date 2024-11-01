@@ -90,7 +90,5 @@ struct LanguageSelector: View {
 
 
 //#Preview {
-//    GeometryReader { geo in
-//        LanguageSelector(viewModel: ViewModel(), screen: Screen(geo.size), currentLanguage: .english)
-//    }
+//    LanguageSelector(viewModel: ViewModel(), screen: Screen(), currentLanguage: .english)
 //}

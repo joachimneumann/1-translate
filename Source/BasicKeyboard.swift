@@ -59,6 +59,8 @@ class KeyRow: Identifiable {
     private let downTime = 0.15
     private let upTime = 0.4
     
+    init(keySize: CGSize, list of flags) {
+    }
     init(keySize: CGSize) {
         self.clearKey = Key(ClearOperation.clear)
         let changeSignKey = Key(InplaceOperation.changeSign)

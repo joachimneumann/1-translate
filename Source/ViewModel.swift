@@ -46,9 +46,8 @@ class ViewModel {
     }
 
     func execute(_ key: Key) {
-        if key.op.isEqual(to: ConfigOperation.config) {
-        
-        } else {
+        if !key.op.isEqual(to: ConfigOperation.config) {
+            //print("executing \(key.op.getRawValue())")
             calculator.press(key.op)
             process()
         }

@@ -20,21 +20,11 @@ struct BasicKeyboardView: View {
             ForEach(basicKeyboard.rows) { keyRow in
                 HStack(spacing: spacing) {
                     ForEach(keyRow.keys) { key in
-                        CalculatorKeyView(key: key, navigateToConfigView: $navigateToConfigView)
+                        CalculatorKeyView(key: key)
                     }
                 }
             }
         }
-        .background(
-            NavigationLink(
-                destination: LanguageSelector(viewModel: ViewModel(screen: Screen(CGSize(width: 100, height: 100)))), 
-                isActive: $navigateToConfigView,
-                label: {
-                    EmptyView()
-                }
-            )
-            .hidden() // Hide the NavigationLink
-        )
     }
 }
 

@@ -56,6 +56,9 @@ struct Screen: Equatable {
         keyboardHeight = 5 * keyHeight + 4 * keySpacing
     }
 
+    init() {
+        self.init(UIScreen.main.bounds.size)
+    }
     init(_ screenSize: CGSize) {
         //print("Screen INIT", screenSize)
         

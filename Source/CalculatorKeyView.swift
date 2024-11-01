@@ -8,21 +8,20 @@
 import SwiftUI
 
 struct CalculatorKeyView: View {
+    @EnvironmentObject var languageSelectorNavigation: LanguageSelectorNavigation
+
     @State private var bgColorNonPending: Color
     @State private var bgColorPending: Color
     @State private var isPressed: Bool = false
     @State private var imageBrightness: Double = 0.0
     @State private var downTimer: Timer? = nil
-    
-    @Binding var navigateToConfigView: Bool
-    
+        
     let key: Key
     let borderwidth: CGFloat = 2
     
     
-    init(key: Key, navigateToConfigView: Binding<Bool>) {
+    init(key: Key) {
         self.key = key
-        self._navigateToConfigView = navigateToConfigView
         bgColorNonPending = key.sixColors.upColor
         bgColorPending = key.sixColors.pendingUpColor
         
@@ -80,8 +79,10 @@ struct CalculatorKeyView: View {
                 self.down()
             } else {
                 if isPressed {
+                    if key.op.isEqual(to: ConfigOperation.config) {
+                        languageSelectorNavigation.showLanguageSelector.toggle()
+                    }
                     key.callback(key)
-                    print("callback")
                 }
                 self.up()
             }
@@ -162,6 +163,6 @@ import SwiftGmp
     ZStack {
         Rectangle()
             .foregroundColor(.black)
-        CalculatorKeyView(key: key, navigateToConfigView: $x)
+        CalculatorKeyView(key: key)
     }
 }

@@ -43,7 +43,7 @@ struct NumberDisplay: View {
 }
 
 //#Preview {
-//    let screen = Screen(CGSize(width: 500, height: 500))
+//    let screen = Screen()
 //    NumberDisplay(R: Representation(error: "Preview", appleFont: screen.proportionalFont))
 //        .frame(height: 300)
 //        .padding()
