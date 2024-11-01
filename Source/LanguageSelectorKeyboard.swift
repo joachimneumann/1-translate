@@ -15,12 +15,13 @@ class LanguageSelectorKeyboard: SmallKeyboard {
         var columnIndex = 1
         var tempRow: [Key] = []
         for flagname in translationManager.implementedFlagnames {
-            let tempKey = Key(ConfigOperation.config)
+            let tempKey = Key(ConfigOperation.flagname)
             tempKey.imageName = flagname
             tempRow.append(tempKey)
             columnIndex += 1
             if columnIndex == 5 {
                 appendRow(tempRow)
+                tempRow.removeAll()
                 columnIndex = 1
             }
         }

@@ -9,6 +9,7 @@ import SwiftGmp
 
 public enum ConfigOperation: String, OpProtocol, CaseIterable {
     case config = "config"
+    case flagname = "flagname"
 }
 
 extension ConfigOperation {

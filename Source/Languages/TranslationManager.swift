@@ -93,24 +93,39 @@ class TranslationManager: NumberTranslator, Identifiable {
     }
     
     var implementedFlagnames: [String] {
-        var ret: [String] = []
+        var flagnamesWithHue: [(name: String, hue: CGFloat)] = []
+        
         for language in languageImplementation.keys {
-            ret.append(flagName(language))
+            if let uiImage = UIImage(named: flagName(language)),
+               let averageHue = uiImage.averageHue {
+                flagnamesWithHue.append((name: flagName(language), hue: averageHue))
+            }
         }
-        return ret
-    }
-    
-    
-}
+        
+        // Sort by hue value, placing those with hue 0 at the end
+            let sortedFlagNames = flagnamesWithHue
+                .sorted {
+                    if $0.hue == 0 && $1.hue != 0 {
+                        return false
+                    } else if $0.hue != 0 && $1.hue == 0 {
+                        return true
+                    } else {
+                        return $0.hue < $1.hue
+                    }
+                }
+                .map { $0.name }
+            
+            return sortedFlagNames
+    }}
 
 
 extension UIImage {
-    var averageHue: CGFloat {
-        guard let inputImage = CIImage(image: self) else { return 0.0 }
+    var averageHue: CGFloat? {
+        guard let inputImage = CIImage(image: self) else { return nil }
         let extentVector = CIVector(x: inputImage.extent.origin.x, y: inputImage.extent.origin.y, z: inputImage.extent.size.width, w: inputImage.extent.size.height)
 
-        guard let filter = CIFilter(name: "CIAreaAverage", parameters: [kCIInputImageKey: inputImage, kCIInputExtentKey: extentVector]) else { return 0.0 }
-        guard let outputImage = filter.outputImage else { return 0.0 }
+        guard let filter = CIFilter(name: "CIAreaAverage", parameters: [kCIInputImageKey: inputImage, kCIInputExtentKey: extentVector]) else { return nil }
+        guard let outputImage = filter.outputImage else { return nil }
 
         var bitmap = [UInt8](repeating: 0, count: 4)
         let context = CIContext(options: [.workingColorSpace: kCFNull as Any])
@@ -126,6 +141,6 @@ extension UIImage {
         if couldBeConverted {
             return hue
         }
-        return 0.0
+        return nil
     }
 }
