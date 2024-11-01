@@ -57,10 +57,11 @@ struct CalculatorKeyView: View {
                     .frame(width: key.keySize.width-2*borderwidth, height: key.keySize.height-2*borderwidth)
                     .clipShape(Capsule())
                     .padding(0.5*borderwidth)
+                    .brightness(imageBrightness)
                     .overlay(
                         key.borderColor.map { Capsule().stroke($0, lineWidth: borderwidth) }
                     )
-                    .brightness(imageBrightness)
+                    .brightness(0.6*imageBrightness)
                     .padding(0.5*borderwidth)
             } else {
                 Label(symbol: key.op.getRawValue(), size: key.keySize.height, color: key.isPending ? key.sixColors.pendingTextColor : key.sixColors.textColor)
