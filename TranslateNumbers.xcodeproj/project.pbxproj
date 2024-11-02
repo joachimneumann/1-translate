@@ -27,6 +27,7 @@
 		AA8A91112B1D7B5F00CE7185 /* TranslateNumbersApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FABFF272F2348006DE4C8 /* TranslateNumbersApp.swift */; };
 		AA8A91122B1D7B7100CE7185 /* TranslateNumbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA92B4C829273A58005E43F0 /* TranslateNumbers.swift */; };
 		AA8A91142B1D7FD000CE7185 /* TranslatedDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8A91132B1D7FD000CE7185 /* TranslatedDisplay.swift */; };
+		AA8AC41C2CD61205006BD54C /* CalculatorKeyContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC41B2CD61203006BD54C /* CalculatorKeyContent.swift */; };
 		AA9C3F6A2CBF33C800F64EFA /* SmallKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9C3F692CBF33C100F64EFA /* SmallKeyboard.swift */; };
 		AA9C3F6D2CBF373C00F64EFA /* SmallKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9C3F6C2CBF373600F64EFA /* SmallKeyboardView.swift */; };
 		AA9DCD662CA10E13002EBCE5 /* SwiftGmp in Frameworks */ = {isa = PBXBuildFile; productRef = AA9DCD652CA10E13002EBCE5 /* SwiftGmp */; };
@@ -78,6 +79,7 @@
 		AA659AB72B3FDE73004CF20A /* Persistent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistent.swift; sourceTree = "<group>"; };
 		AA899D412B3E914700ADDC16 /* VoiceSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceSelection.swift; sourceTree = "<group>"; };
 		AA8A91132B1D7FD000CE7185 /* TranslatedDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatedDisplay.swift; sourceTree = "<group>"; };
+		AA8AC41B2CD61203006BD54C /* CalculatorKeyContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorKeyContent.swift; sourceTree = "<group>"; };
 		AA92B4C829273A58005E43F0 /* TranslateNumbers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateNumbers.swift; sourceTree = "<group>"; };
 		AA9C3F692CBF33C100F64EFA /* SmallKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallKeyboard.swift; sourceTree = "<group>"; };
 		AA9C3F6C2CBF373600F64EFA /* SmallKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallKeyboardView.swift; sourceTree = "<group>"; };
@@ -130,7 +132,6 @@
 			children = (
 				AA30BC182CD450EC002AA2D5 /* LanguageSelectorView.swift */,
 				AAC810D92CD119E00007807E /* FloatingSheet.swift */,
-				AAD9A0972CBFF16500DC51A0 /* CalculatorKeyView.swift */,
 				AA3565BB2B326DE9009B58D2 /* Languages */,
 				AA2FABFF272F2348006DE4C8 /* TranslateNumbersApp.swift */,
 				AA32853A297248B800D86CB4 /* ViewModel.swift */,
@@ -140,6 +141,8 @@
 				AABEFC122972A8780023A3C9 /* KeyColor.swift */,
 				AA9C3F692CBF33C100F64EFA /* SmallKeyboard.swift */,
 				AA9C3F6C2CBF373600F64EFA /* SmallKeyboardView.swift */,
+				AAD9A0972CBFF16500DC51A0 /* CalculatorKeyView.swift */,
+				AA8AC41B2CD61203006BD54C /* CalculatorKeyContent.swift */,
 				AA30BC1C2CD49AA9002AA2D5 /* TranslatorKeyboard.swift */,
 				AA30BC1E2CD4A2DF002AA2D5 /* LanguageSelectorKeyboard.swift */,
 				AA2EBFB42CD52A03009DC3D8 /* SelectedLanguagekeyboard.swift */,
@@ -256,6 +259,7 @@
 				AAD9A0982CBFF16A00DC51A0 /* CalculatorKeyView.swift in Sources */,
 				AA0523472B27024800DDAAD4 /* LanguageSelector.swift in Sources */,
 				AA8A91122B1D7B7100CE7185 /* TranslateNumbers.swift in Sources */,
+				AA8AC41C2CD61205006BD54C /* CalculatorKeyContent.swift in Sources */,
 				AA17F8942CCE6EC200312BF0 /* Display.swift in Sources */,
 				AA9C3F6D2CBF373C00F64EFA /* SmallKeyboardView.swift in Sources */,
 				AA2EBFB52CD52A0B009DC3D8 /* SelectedLanguagekeyboard.swift in Sources */,

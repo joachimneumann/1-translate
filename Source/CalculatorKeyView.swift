@@ -14,9 +14,8 @@ struct CalculatorKeyView: View {
     @State private var imageBrightness: Double = 0.0
     @State private var downTimer: Timer? = nil
     
-    let key: Key
-    let borderwidth: CGFloat = 5
-    let toleranceRect: CGRect
+    private let key: Key
+    private let toleranceRect: CGRect
     
     init(key: Key) {
         self.key = key
@@ -29,46 +28,11 @@ struct CalculatorKeyView: View {
             y: -tolerance,
             width: key.keySize.width + 2.0 * tolerance,
             height: key.keySize.height + 2.0 * tolerance)
-        
-        //  print("CalculatorKeyView init \(key.op.getRawValue())")
-        /// Use this print statement to check if any
-        /// other key than the pressed key is redrawn.
-        /// That is not what we want that, of course.
-    }
-    
-    struct ImageOrLabel: View {
-        let key: Key
-        let borderwidth: CGFloat
-        let imageBrightness: Double
-        let bgColor: Color
-        
-        var body: some View {
-            if let imageName = key.imageName {
-                //let _ = print("CalculatorKeyView Image \(imageName)")
-                Image(imageName)
-                    .resizable()
-                    .frame(width: key.keySize.width-2*borderwidth, height: key.keySize.height-2*borderwidth)
-                    .clipShape(Capsule())
-                    .padding(0.5*borderwidth)
-                    .brightness(imageBrightness)
-                    .overlay(
-                        key.borderColor.map { Capsule().stroke($0, lineWidth: borderwidth) }
-                    )
-                    .brightness(0.6*imageBrightness)
-                    .padding(0.5*borderwidth)
-            } else {
-                Label(symbol: key.op.getRawValue(), size: key.keySize.height, color: key.isPending ? key.sixColors.pendingTextColor : key.sixColors.textColor)
-                    .padding()
-                    .frame(width: key.keySize.width, height: key.keySize.height)
-                    .background(bgColor)
-                    .clipShape(Capsule())
-            }
-        }
     }
     
     var body: some View {
-        let _ = print("CalculatorKeyView op = \(key.op.getRawValue()) \(key.imageName)")
-        ImageOrLabel(key: key, borderwidth: borderwidth, imageBrightness: imageBrightness, bgColor: key.isPending ? bgColorPending : bgColorNonPending)
+        let _ = print("CalculatorKeyView op = \(key.op.getRawValue()) \(key.imageName ?? "?")")
+        CalculatorKeyContent(key: key, bgColor: key.isPending ? bgColorPending : bgColorNonPending)
             .onLongPressGesture(minimumDuration: 0.5) {
                 if key.op.isEqual(to: ClearOperation.back) {
                     key.callback(Key(ClearOperation.clear))
@@ -146,9 +110,10 @@ import SwiftGmp
 
 #Preview {
     @Previewable @State var x: Bool = false
-    //    let key = Key(InplaceOperation.sqrt3)
-    let key = Key(ConfigOperation.bottomLeft)
-    let _ = key.imageName = "English"
+    let key = Key(TwoOperantOperation.mul)
+//    let key = Key(ConfigOperation.bottomLeft)
+//    let _ = key.imageName = "English"
+//    let _ = key.borderColor = .yellow
     let _ = key.keySize = CGSize(width: 100, height: 100)
     ZStack {
         Rectangle()
