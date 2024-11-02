@@ -97,6 +97,7 @@ struct TranslateNumbers: View {
 //                smallKeyboard: viewModel.selectedLanguageKeyboard)
 
         }
+        .animation(.easeInOut(duration: 0.3), value: showLanguageSelector.wrappedValue)
         //.background(.blue)
     }
     
