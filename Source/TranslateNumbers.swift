@@ -80,8 +80,8 @@ struct TranslateNumbers: View {
                     )
                     HStack {
                         VStack(alignment: .leading){
-                            Text(viewModel.translationManager.name(viewModel.translationManager.currentLanguage))
-                            if let englishName = viewModel.translationManager.englishName(viewModel.translationManager.currentLanguage) {
+                            Text(viewModel.translationManager.name(viewModel.currentLanguage))
+                            if let englishName = viewModel.translationManager.englishName(viewModel.currentLanguage) {
                                 Text("(\(englishName))")
                             }
                         }

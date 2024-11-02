@@ -14,6 +14,7 @@ class ViewModel: ObservableObject {
     var calculator: Calculator
     var display: Display
     var translationManager: TranslationManager
+    @Published var currentLanguage: NumberTranslator.Language = .english
     var translatorKeyboard: SmallKeyboard
     var languageSelectorKeyboard: SmallKeyboard
     var selectedLanguageKeyboard: SmallKeyboard
@@ -41,11 +42,11 @@ class ViewModel: ObservableObject {
 
         translatorKeyboard.back(calculator.privateDisplayBufferHasDigits)
         translatorKeyboard.setPending(pendingOperators: calculator.pendingOperators)
-        translatorKeyboard.bottomLeftKey.imageName = translationManager.flagname(.english)
-        translatorKeyboard.bottomLeftKey.borderColor = translationManager.borderColor
+        translatorKeyboard.bottomLeftKey.imageName = translationManager.flagname(currentLanguage)
+        translatorKeyboard.bottomLeftKey.borderColor = translationManager.borderColor(currentLanguage)
 
         let allInOneLine = display.string
-        translationManager.translate(allInOneLine)
+        translationManager.translateThis(allInOneLine, to: currentLanguage)
     }
 
     func execute(_ key: Key) {
@@ -55,8 +56,9 @@ class ViewModel: ObservableObject {
         } else if key.op.isEqual(to: ConfigOperation.flagname) {
             if let newFlagname = key.imageName {
                 print("FLAG \(key.imageName!)")
-                translationManager.setCurrentLanguage(newFlagname: newFlagname)
-                objectWillChange.send()
+                if let newLanguage = translationManager.language(forFlagname: newFlagname) {
+                    currentLanguage = newLanguage
+                }
             }
         } else {
             print("executing \(key.op.getRawValue())")
@@ -82,7 +84,7 @@ class ViewModel: ObservableObject {
         translatorKeyboard = TranslatorKeyboard(keySize: screen.keySize)
         translationManager = TranslationManager()
         languageSelectorKeyboard = LanguageSelectorKeyboard(keySize: screen.keySize, translationManager: translationManager)
-        selectedLanguageKeyboard = SelectedLanguagekeyboard(keySize: screen.keySize, translationManager: translationManager)
+        selectedLanguageKeyboard = SelectedLanguagekeyboard(keySize: screen.keySize, translationManager: translationManager, currentLanguage: .english)
         translatorKeyboard.callback = execute
         languageSelectorKeyboard.callback = execute
         selectedLanguageKeyboard.callback = execute

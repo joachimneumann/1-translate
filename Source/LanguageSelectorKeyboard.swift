@@ -14,10 +14,10 @@ class LanguageSelectorKeyboard: SmallKeyboard {
         super.init(keySize: keySize)
         var columnIndex = 1
         var tempRow: [Key] = []
-        for flagname in translationManager.implementedFlagnames {
+        for language in translationManager.sortedlanguages {
             let tempKey = Key(ConfigOperation.flagname)
-            tempKey.imageName = flagname
-            tempKey.borderColor = translationManager.borderColor(flagname)
+            tempKey.imageName = translationManager.flagname(language)
+            tempKey.borderColor = translationManager.borderColor(language)
             tempRow.append(tempKey)
             columnIndex += 1
             if columnIndex == 5 {

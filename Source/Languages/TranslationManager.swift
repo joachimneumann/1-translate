@@ -36,44 +36,38 @@ class TranslationResult: ObservableObject, CustomDebugStringConvertible {
 
 class TranslationManager: NumberTranslator, Identifiable {
 
-    var currentLanguage: NumberTranslator.Language = .english
     var result = TranslationResult()
     var hasVoice: Bool = false
 
-    var flagname: String { flagname(currentLanguage) }
     func flagname(_ language: NumberTranslator.Language) -> String {
         englishName(language) ?? name(language)
     }
-    func setCurrentLanguage(newFlagname: String) {
+
+    func language(forFlagname: String) -> Language? {
         for language in NumberTranslator.Language.allCases {
-            if newFlagname == flagname(language) {
-                currentLanguage = language
-                return
+            if forFlagname == flagname(language) {
+                return language
             }
         }
+        return nil
     }
-    var borderColor: Color? { borderColor(flagname) }
-    func borderColor(_ flagname : String) -> Color? {
-        switch flagname {
-        case "Deutsch", "English", "Polski", "Finnish":
+    func borderColor(_ language: NumberTranslator.Language) -> Color {
+        switch language {
+        case .german, .english, .polish, .finnish:
             return Color(UIColor.lightGray)
         default:
             return Color(UIColor.lightGray)
         }
     }
 
-    var code: String? { code(currentLanguage) }
-    var groupSize: Int { groupSize(currentLanguage) }
-
     func nameWithDescription(_ language: NumberTranslator.Language) -> String {
         language.rawValue + (englishName(language) != nil ? "/"+englishName(language)! : "")
     }
-    var nameWithDescription: String { nameWithDescription(currentLanguage) }
 
     var speakingPostProcessing: ((String) -> String)?
 
-    private func translateThis(_ s: String, to language: NumberTranslator.Language) {
-        let overlineAndText = translate(s, to: language)
+    func translateThis(_ s: String, to language: NumberTranslator.Language) {
+        let overlineAndText = super.translate(s, to: language)
         if overlineAndText.contains("OVERLINE") {
             let parts = overlineAndText.split(separator: "OVERLINE")
             if parts.count == 1 {
@@ -94,23 +88,19 @@ class TranslationManager: NumberTranslator, Identifiable {
             }
         }
     }
-    
-    func translate(_ s: String) {
-        translateThis(s, to: currentLanguage)
-    }
-    
-    var implementedFlagnames: [String] {
-        var flagnamesWithHue: [(name: String, hue: CGFloat)] = []
+        
+    var sortedlanguages: [Language] {
+        var languagesWithHue: [(language: Language, hue: CGFloat)] = []
         
         for language in languageImplementation.keys {
             if let uiImage = UIImage(named: flagname(language)),
                let averageHue = uiImage.averageHue {
-                flagnamesWithHue.append((name: flagname(language), hue: averageHue))
+                languagesWithHue.append((language: language, hue: averageHue))
             }
         }
         
         // Sort by hue value, placing those with hue 0 at the end
-            let sortedFlagNames = flagnamesWithHue
+            let sortedLanguages = languagesWithHue
                 .sorted {
                     if $0.hue == 0 && $1.hue != 0 {
                         return false
@@ -120,9 +110,9 @@ class TranslationManager: NumberTranslator, Identifiable {
                         return $0.hue < $1.hue
                     }
                 }
-                .map { $0.name }
+                .map { $0.language }
             
-            return sortedFlagNames
+            return sortedLanguages
     }}
 
 

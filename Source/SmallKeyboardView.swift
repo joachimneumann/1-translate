@@ -40,6 +40,7 @@ struct SmallKeyboardView: View {
     }
     
     var body: some View {
+        let _ = print("SmallKeyboardView body")
         if height != nil {
             ScrollView {
                 AllRows(spacing: spacing, smallKeyboard: smallKeyboard)
