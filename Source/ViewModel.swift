@@ -16,6 +16,7 @@ class ViewModel {
     var translationManager: TranslationManager
     var translatorKeyboard: SmallKeyboard
     var languageSelectorKeyboard: SmallKeyboard
+    var selectedLanguageKeyboard: SmallKeyboard
     var separator: Separator
     let intDisplay: IntDisplay
     
@@ -71,6 +72,7 @@ class ViewModel {
         translatorKeyboard = TranslatorKeyboard(keySize: screen.keySize)
         translationManager = TranslationManager()
         languageSelectorKeyboard = LanguageSelectorKeyboard(keySize: screen.keySize, translationManager: translationManager)
+        selectedLanguageKeyboard = SelectedLanguagekeyboard(keySize: screen.keySize, translationManager: translationManager)
         translatorKeyboard.callback = execute
         process()
     }

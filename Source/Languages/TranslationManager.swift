@@ -39,14 +39,13 @@ class TranslationManager: NumberTranslator, Identifiable {
     var currentLanguage: NumberTranslator.Language = .english
     var result = TranslationResult()
     var hasVoice: Bool = false
-    
+
+    var flagname: String { flagname(currentLanguage) }
     func flagname(_ language: NumberTranslator.Language) -> String {
         englishName(language) ?? name(language)
     }
 
-    var borderColor: Color? {
-        borderColor(flagname(currentLanguage))
-    }
+    var borderColor: Color? { borderColor(flagname) }
     func borderColor(_ flagname : String) -> Color? {
         switch flagname {
         case "Deutsch", "English", "Polski", "Finnish":

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CalculatorKeyView: View {
-    @EnvironmentObject var languageSelectorNavigation: LanguageSelectorNavigation
+    @Environment(\.showLanguageSelector) var showLanguageSelector: Binding<Bool>
     
     @State private var bgColorNonPending: Color
     @State private var bgColorPending: Color
@@ -44,6 +44,7 @@ struct CalculatorKeyView: View {
                 .clipShape(Capsule())
         }
     }
+    
     struct ImageOrLabel: View {
         let key: Key
         let borderwidth: CGFloat
@@ -88,7 +89,7 @@ struct CalculatorKeyView: View {
             } else {
                 if isPressed {
                     if key.op.isEqual(to: ConfigOperation.config) {
-                        languageSelectorNavigation.showLanguageSelector.toggle()
+                        showLanguageSelector.wrappedValue.toggle()
                     }
                     key.callback(key)
                 }

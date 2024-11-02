@@ -12,7 +12,6 @@ import NumberTranslator
 class LanguageSelectorKeyboard: SmallKeyboard {
     init(keySize: CGSize, translationManager: TranslationManager) {
         super.init(keySize: keySize)
-        scrollAfterRow = 4
         var columnIndex = 1
         var tempRow: [Key] = []
         for flagname in translationManager.implementedFlagnames {

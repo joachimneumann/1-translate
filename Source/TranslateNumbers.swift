@@ -8,12 +8,9 @@ import SwiftUI
 
 let testColors = false
 
-class LanguageSelectorNavigation: ObservableObject {
-    @Published var showLanguageSelector: Bool = false
-}
-
 struct TranslateNumbers: View {
     @Environment(\.scenePhase) var scenePhase
+    @Environment(\.showLanguageSelector) var showLanguageSelector: Binding<Bool>
     var viewModel: ViewModel
     
     @State var scrollViewHasScrolled = false
@@ -21,7 +18,6 @@ struct TranslateNumbers: View {
     @State var isZoomed: Bool = false
     @State private var showLanguageSelection = false
     @State private var settingsDetent = PresentationDetent.medium
-    @StateObject var languageSelectorNavigation = LanguageSelectorNavigation()
     
     init(screen: Screen) {
         //        self._viewModel = StateObject(wrappedValue: ViewModel(screen: screen))
@@ -69,10 +65,37 @@ struct TranslateNumbers: View {
             //.background(.yellow)
             Spacer(minLength: 20.0)
             NumberDisplay(display: viewModel.display)
-            SmallKeyboardView(
-                spacing: viewModel.screen.keySpacing,
-                height: viewModel.screen.keyboardHeight4Rows,
-                smallKeyboard: viewModel.languageSelectorKeyboard)
+
+            if showLanguageSelector.wrappedValue {
+                SmallKeyboardView(
+                    spacing: viewModel.screen.keySpacing,
+                    smallKeyboard: viewModel.languageSelectorKeyboard,
+                    height: viewModel.screen.keyboardHeight4Rows
+                )
+                .padding(.bottom, viewModel.screen.keySpacing)
+                .transition(.opacity)
+                
+                SmallKeyboardView(
+                    spacing: viewModel.screen.keySpacing,
+                    smallKeyboard: viewModel.selectedLanguageKeyboard
+                )
+                .transition(.opacity)
+            } else {
+                SmallKeyboardView(
+                    spacing: viewModel.screen.keySpacing,
+                    smallKeyboard: viewModel.translatorKeyboard)
+            }
+//
+//            SmallKeyboardView(
+//                spacing: viewModel.screen.keySpacing,
+//                smallKeyboard: viewModel.languageSelectorKeyboard,
+//                height: viewModel.screen.keyboardHeight4Rows)
+//            .padding(.bottom, viewModel.screen.keySpacing)
+//            
+//            SmallKeyboardView(
+//                spacing: viewModel.screen.keySpacing,
+//                smallKeyboard: viewModel.selectedLanguageKeyboard)
+
         }
         //.background(.blue)
     }
@@ -83,17 +106,7 @@ struct TranslateNumbers: View {
                 .padding(.bottom, viewModel.screen.bottomPadding)
                 .padding(.horizontal, viewModel.screen.horizontalPadding)
                 .preferredColorScheme(.dark)
-            if languageSelectorNavigation.showLanguageSelector {
-                VStack {
-                    Spacer()
-                    LanguageSelectorView(viewModel: viewModel)
-                        .frame(height: viewModel.screen.keyboardHeight5Rows)
-                        .animation(.smooth(duration: 1.0), value: languageSelectorNavigation.showLanguageSelector)
-                        .background(.green)
-                }
-            }
         }
-        .environmentObject(languageSelectorNavigation)
         .accentColor(.white)
 //        .onChange(of: scenePhase) { oldPhase, newPhase in
 //            if newPhase == .active {

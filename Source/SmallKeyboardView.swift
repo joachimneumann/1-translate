@@ -15,7 +15,11 @@ struct AllRows: View {
             ForEach(smallKeyboard.keyMatrix, id: \.self) { row in
                 HStack(spacing: spacing) {
                     ForEach(row) { key in
-                        CalculatorKeyView(key: key)
+                        if key.op.isEqual(to: ConfigOperation.spacer) {
+                            Spacer()
+                        } else {
+                            CalculatorKeyView(key: key)
+                        }
                     }
                 }
             }
@@ -26,10 +30,17 @@ struct SmallKeyboardView: View {
     @State private var navigateToConfigView = false
     
     let spacing: CGFloat
-    let height: CGFloat
     var smallKeyboard: SmallKeyboard
+    let height: CGFloat?
+    
+    init(spacing: CGFloat, smallKeyboard: SmallKeyboard, height: CGFloat? = nil) {
+        self.spacing = spacing
+        self.smallKeyboard = smallKeyboard
+        self.height = height
+    }
+    
     var body: some View {
-        if smallKeyboard.scrollAfterRow != nil {
+        if height != nil {
             ScrollView {
                 AllRows(spacing: spacing, smallKeyboard: smallKeyboard)
             }
@@ -45,7 +56,7 @@ struct SmallKeyboardView: View {
     let smallKeyboard: SmallKeyboard = LanguageSelectorKeyboard(keySize: CGSize(width: 80.0, height: 50.0), translationManager: TranslationManager())
     VStack {
         Rectangle()
-        SmallKeyboardView(spacing: 20, height: 260, smallKeyboard: smallKeyboard)
+        SmallKeyboardView(spacing: 20, smallKeyboard: smallKeyboard)
             .background(.black)
             .padding(.bottom, 30)
     }

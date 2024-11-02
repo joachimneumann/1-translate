@@ -13,6 +13,7 @@
 		AA17F8942CCE6EC200312BF0 /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA17F8932CCE6EB900312BF0 /* Display.swift */; };
 		AA1934532C96956100FE0848 /* NumberTranslator in Frameworks */ = {isa = PBXBuildFile; productRef = AA1934522C96956100FE0848 /* NumberTranslator */; };
 		AA29F58A293CD608001ADF5A /* NumberDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29F589293CD608001ADF5A /* NumberDisplay.swift */; };
+		AA2EBFB52CD52A0B009DC3D8 /* SelectedLanguagekeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2EBFB42CD52A03009DC3D8 /* SelectedLanguagekeyboard.swift */; };
 		AA30BC192CD450EE002AA2D5 /* LanguageSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA30BC182CD450EC002AA2D5 /* LanguageSelectorView.swift */; };
 		AA30BC1B2CD499C8002AA2D5 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA30BC1A2CD499C3002AA2D5 /* Key.swift */; };
 		AA30BC1D2CD49AB3002AA2D5 /* TranslatorKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA30BC1C2CD49AA9002AA2D5 /* TranslatorKeyboard.swift */; };
@@ -62,6 +63,7 @@
 		AA21B8192CACC10700A1C118 /* SwiftGmp */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftGmp; path = ../SwiftGmp; sourceTree = SOURCE_ROOT; };
 		AA21B81A2CACC5A700A1C118 /* NumberTranslator */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = NumberTranslator; path = ../NumberTranslator; sourceTree = SOURCE_ROOT; };
 		AA29F589293CD608001ADF5A /* NumberDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberDisplay.swift; sourceTree = "<group>"; };
+		AA2EBFB42CD52A03009DC3D8 /* SelectedLanguagekeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedLanguagekeyboard.swift; sourceTree = "<group>"; };
 		AA2FABFC272F2348006DE4C8 /* TranslateNumbersApp.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = TranslateNumbersApp.entitlements; sourceTree = "<group>"; };
 		AA2FABFF272F2348006DE4C8 /* TranslateNumbersApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslateNumbersApp.swift; sourceTree = "<group>"; };
 		AA30BC182CD450EC002AA2D5 /* LanguageSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSelectorView.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				AA9C3F6C2CBF373600F64EFA /* SmallKeyboardView.swift */,
 				AA30BC1C2CD49AA9002AA2D5 /* TranslatorKeyboard.swift */,
 				AA30BC1E2CD4A2DF002AA2D5 /* LanguageSelectorKeyboard.swift */,
+				AA2EBFB42CD52A03009DC3D8 /* SelectedLanguagekeyboard.swift */,
 				AAF472662B452BD000E7B986 /* Voices.swift */,
 				AA92B4C829273A58005E43F0 /* TranslateNumbers.swift */,
 				AA0523462B27024800DDAAD4 /* LanguageSelector.swift */,
@@ -255,6 +258,7 @@
 				AA8A91122B1D7B7100CE7185 /* TranslateNumbers.swift in Sources */,
 				AA17F8942CCE6EC200312BF0 /* Display.swift in Sources */,
 				AA9C3F6D2CBF373C00F64EFA /* SmallKeyboardView.swift in Sources */,
+				AA2EBFB52CD52A0B009DC3D8 /* SelectedLanguagekeyboard.swift in Sources */,
 				AA32853B297248B800D86CB4 /* ViewModel.swift in Sources */,
 				AAC810DA2CD119E40007807E /* FloatingSheet.swift in Sources */,
 				AA370C2D293352960041AE4E /* Extensions.swift in Sources */,

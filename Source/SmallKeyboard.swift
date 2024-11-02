@@ -13,7 +13,6 @@ import SwiftGmp
     private let keySize: CGSize
     var configKey: Key = Key(ConfigOperation.config)
     let clearKey: Key
-    var scrollAfterRow: Int?  = nil
     
     private(set) var keyMatrix: [[Key]] = []
     

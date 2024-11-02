@@ -27,7 +27,8 @@ struct Label: View {
         "±": "plus.slash.minus",
         "=": "equal",
         "%": "percent",
-        "back": "delete.backward"
+        "back": "delete.backward",
+        "settings": "gear"
     ]
     
     init(symbol: String, size: CGFloat, color: Color) {
