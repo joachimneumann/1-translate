@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct CalculatorKeyView: View {
-    @Environment(\.showLanguageSelector) var showLanguageSelector: Binding<Bool>
-    
     @State private var bgColorNonPending: Color
     @State private var bgColorPending: Color
     @State private var isPressed: Bool = false
@@ -88,9 +86,6 @@ struct CalculatorKeyView: View {
                 self.down()
             } else {
                 if isPressed {
-                    if key.op.isEqual(to: ConfigOperation.bottomLeftKey) {
-                        showLanguageSelector.wrappedValue.toggle()
-                    }
                     key.callback(key)
                 }
                 self.up()

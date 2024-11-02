@@ -9,7 +9,7 @@ import SwiftUI
 import NumberTranslator
 import SwiftGmp
 
-class ViewModel {
+class ViewModel: ObservableObject {
     let screen: Screen
     var calculator: Calculator
     var display: Display
@@ -19,6 +19,7 @@ class ViewModel {
     var selectedLanguageKeyboard: SmallKeyboard
     var separator: Separator
     let intDisplay: IntDisplay
+    @Published var showLanguageSelector: Bool = false
     
     
     func process() {
@@ -50,8 +51,13 @@ class ViewModel {
     func execute(_ key: Key) {
         if key.op.isEqual(to: ConfigOperation.bottomLeftKey) {
             print("BOTTOM LEFT \(key.op.getRawValue())")
+            showLanguageSelector.toggle()
         } else if key.op.isEqual(to: ConfigOperation.flagname) {
-            print("FLAG \(key.imageName!)")
+            if let newFlagname = key.imageName {
+                print("FLAG \(key.imageName!)")
+                translationManager.setCurrentLanguage(newFlagname: newFlagname)
+                objectWillChange.send()
+            }
         } else {
             print("executing \(key.op.getRawValue())")
             calculator.press(key.op)

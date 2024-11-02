@@ -10,8 +10,7 @@ let testColors = false
 
 struct TranslateNumbers: View {
     @Environment(\.scenePhase) var scenePhase
-    @Environment(\.showLanguageSelector) var showLanguageSelector: Binding<Bool>
-    var viewModel: ViewModel
+    @ObservedObject var viewModel: ViewModel
     
     @State var scrollViewHasScrolled = false
     @State var scrollViewID = UUID()
@@ -66,13 +65,13 @@ struct TranslateNumbers: View {
             Spacer(minLength: 20.0)
             NumberDisplay(display: viewModel.display)
 
-            if showLanguageSelector.wrappedValue {
+            if viewModel.showLanguageSelector {
                 SmallKeyboardView(
                     spacing: viewModel.screen.keySpacing,
                     smallKeyboard: viewModel.languageSelectorKeyboard,
                     height: viewModel.screen.keyboardHeight4Rows
                 )
-                .background(Color(white: 0.3))
+                .background(.orange)
                 .padding(.bottom, viewModel.screen.keySpacing)
                 ZStack {
                     SmallKeyboardView(
@@ -80,10 +79,10 @@ struct TranslateNumbers: View {
                         smallKeyboard: viewModel.selectedLanguageKeyboard
                     )
                     HStack {
-                        VStack{
+                        VStack(alignment: .leading){
                             Text(viewModel.translationManager.name(viewModel.translationManager.currentLanguage))
                             if let englishName = viewModel.translationManager.englishName(viewModel.translationManager.currentLanguage) {
-                                Text(englishName)
+                                Text("(\(englishName))")
                             }
                         }
                             .padding(.leading, viewModel.screen.keySize.width + viewModel.screen.keySpacing)
@@ -97,7 +96,7 @@ struct TranslateNumbers: View {
                     smallKeyboard: viewModel.translatorKeyboard)
             }
         }
-        .animation(.easeInOut(duration: 0.6), value: showLanguageSelector.wrappedValue)
+        .animation(.easeInOut(duration: 0.6), value: viewModel.showLanguageSelector)
         //.background(.blue)
     }
     

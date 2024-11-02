@@ -44,7 +44,14 @@ class TranslationManager: NumberTranslator, Identifiable {
     func flagname(_ language: NumberTranslator.Language) -> String {
         englishName(language) ?? name(language)
     }
-
+    func setCurrentLanguage(newFlagname: String) {
+        for language in NumberTranslator.Language.allCases {
+            if newFlagname == flagname(language) {
+                currentLanguage = language
+                return
+            }
+        }
+    }
     var borderColor: Color? { borderColor(flagname) }
     func borderColor(_ flagname : String) -> Color? {
         switch flagname {
