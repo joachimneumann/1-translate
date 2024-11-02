@@ -48,7 +48,11 @@ class ViewModel {
     }
 
     func execute(_ key: Key) {
-        if !key.op.isEqual(to: ConfigOperation.config) {
+        if key.op.isEqual(to: ConfigOperation.config) {
+            print("CONFIG \(key.op.getRawValue())")
+        } else if key.op.isEqual(to: ConfigOperation.flagname) {
+            print("FLAG \(key.imageName!)")
+        } else {
             print("executing \(key.op.getRawValue())")
             calculator.press(key.op)
             process()
@@ -74,6 +78,8 @@ class ViewModel {
         languageSelectorKeyboard = LanguageSelectorKeyboard(keySize: screen.keySize, translationManager: translationManager)
         selectedLanguageKeyboard = SelectedLanguagekeyboard(keySize: screen.keySize, translationManager: translationManager)
         translatorKeyboard.callback = execute
+        languageSelectorKeyboard.callback = execute
+        selectedLanguageKeyboard.callback = execute
         process()
     }
 
