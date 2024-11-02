@@ -9,7 +9,10 @@ import SwiftUI
 import SwiftGmp
 
 @Observable class Key: Identifiable, Hashable {
-    var keySize: CGSize = CGSize(width: 10, height: 10)
+    var width: CGFloat = 100.0
+    var height: CGFloat = 100.0
+    var upColor: Color = .red
+    var downColor: Color = .blue
     let sixColors: KeyColor.SixColors
     var downTime: Double = 0.15
     var upTime: Double = 0.4

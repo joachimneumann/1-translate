@@ -22,17 +22,21 @@ struct CalculatorKeyView: View {
         bgColorNonPending = key.sixColors.upColor
         bgColorPending = key.sixColors.pendingUpColor
         
-        let tolerance: CGFloat = 0.3 * key.keySize.height
+        let tolerance: CGFloat = 0.3 * key.height
         toleranceRect = CGRect(
             x: -tolerance,
             y: -tolerance,
-            width: key.keySize.width + 2.0 * tolerance,
-            height: key.keySize.height + 2.0 * tolerance)
+            width: key.width + 2.0 * tolerance,
+            height: key.height + 2.0 * tolerance)
     }
     
     var body: some View {
         let _ = print("CalculatorKeyView op = \(key.op.getRawValue()) \(key.imageName ?? "?")")
-        CalculatorKeyContent(key: key, bgColor: key.isPending ? bgColorPending : bgColorNonPending)
+        if let imagename = key.imageName, let borderColor = key.borderColor {
+            CalculatorKeyContent(width: key.width, height: key.height, imageName: imagename, borderColor: borderColor)
+        } else if let imagename = key.imageName, let borderColor = key.borderColor {
+            CalculatorKeyContent(width: key.width, height: key.height, symbol: key.op.getRawValue(), txtColor: key.sixColors.textColor, bgColor: key.sixColors.upColor)
+        }
             .onLongPressGesture(minimumDuration: 0.5) {
                 if key.op.isEqual(to: ClearOperation.back) {
                     key.callback(Key(ClearOperation.clear))
@@ -114,7 +118,6 @@ import SwiftGmp
 //    let key = Key(ConfigOperation.bottomLeft)
 //    let _ = key.imageName = "English"
 //    let _ = key.borderColor = .yellow
-    let _ = key.keySize = CGSize(width: 100, height: 100)
     ZStack {
         Rectangle()
             .foregroundColor(.black)

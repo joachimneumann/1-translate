@@ -9,33 +9,53 @@ import SwiftUI
 import SwiftGmp
 
 struct CalculatorKeyContent: View {
-    
-    private let key: Key
-    private let bgColor: Color
-    
-    init(key: Key, bgColor: Color) {
-        self.key = key
+    private let height: CGFloat
+    private let width: CGFloat
+    private let imageName: String?
+    private let borderColor: Color?
+    private let symbol: String?
+    private let txtColor: Color?
+    private let bgColor: Color?
+    private let borderwidth: CGFloat
+
+    init(width: CGFloat, height: CGFloat, symbol: String, txtColor: Color, bgColor: Color) {
+        self.width = width
+        self.height = height
+        self.symbol = symbol
+        self.txtColor = txtColor
         self.bgColor = bgColor
+        self.imageName = nil
+        self.borderColor = nil
+        self.borderwidth = 0.0
     }
-    
+    init(width: CGFloat, height: CGFloat, imageName: String, borderColor: Color) {
+        self.width = width
+        self.height = height
+        self.symbol = nil
+        self.txtColor = nil
+        self.bgColor = nil
+        self.imageName = imageName
+        self.borderColor = borderColor
+        self.borderwidth = 5.0
+    }
+
     var body: some View {
-        if let imageName = key.imageName {
+        if let imageName = imageName {
             let borderwidth: CGFloat = 5
-            let w = key.borderColor == nil ? 0 : borderwidth
             let _ = print("CalculatorKeyView Image \(imageName)")
             Image(imageName)
                 .resizable()
-                .frame(width: key.keySize.width-2*w, height: key.keySize.height-2*w)
+                .frame(width: width-2*borderwidth, height: height-2*borderwidth)
                 .clipShape(Capsule())
-                .padding(0.5*w)
+                .padding(0.5*borderwidth)
                 .overlay(
-                    key.borderColor.map { Capsule().stroke($0, lineWidth: w) }
+                    borderColor.map { Capsule().stroke($0, lineWidth: borderwidth) }
                 )
-                .padding(0.5*w)
-        } else {
-            Label(symbol: key.op.getRawValue(), size: key.keySize.height, color: key.isPending ? key.sixColors.pendingTextColor : key.sixColors.textColor)
+                .padding(0.5*borderwidth)
+        } else if let symbol = symbol {
+            Label(symbol: symbol, size: height, color: txtColor!)
                 .padding()
-                .frame(width: key.keySize.width, height: key.keySize.height)
+                .frame(width: width, height: height)
                 .background(bgColor)
                 .clipShape(Capsule())
         }
@@ -44,14 +64,16 @@ struct CalculatorKeyContent: View {
 
 #Preview {
     @Previewable @State var x: Bool = false
-        let key = Key(InplaceOperation.sqrt3)
-//    let key = Key(ConfigOperation.bottomLeft)
-    let _ = key.imageName = "English"
-    let _ = key.borderColor = .yellow
-    let _ = key.keySize = CGSize(width: 100, height: 100)
+    let key1 = Key(InplaceOperation.sqrt3)
+    let key2 = Key(ConfigOperation.bottomLeft)
+    let _ = key2.imageName = "English"
+    let _ = key2.borderColor = .yellow
     ZStack {
         Rectangle()
             .foregroundColor(.gray)
-        CalculatorKeyContent(key: key, bgColor: .red)
+        VStack {
+            CalculatorKeyContent(width: 100.0, height: 100.0, symbol: "sqrt3", txtColor: .white, bgColor: .red)
+            CalculatorKeyContent(width: 100.0, height: 100.0, imageName: "Deutsch", borderColor: .green)
+        }
     }
 }

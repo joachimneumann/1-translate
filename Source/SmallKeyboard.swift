@@ -36,7 +36,8 @@ class SmallKeyboard: ObservableObject {
     
     func appendRow(_ keys: [Key]) {
         for k in keys {
-            k.keySize = keySize
+            k.width = keySize.width
+            k.height = keySize.height
         }
         keyMatrix.append(keys)
     }
