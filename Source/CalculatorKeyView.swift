@@ -88,7 +88,7 @@ struct CalculatorKeyView: View {
                 self.down()
             } else {
                 if isPressed {
-                    if key.op.isEqual(to: ConfigOperation.config) {
+                    if key.op.isEqual(to: ConfigOperation.bottomLeftKey) {
                         showLanguageSelector.wrappedValue.toggle()
                     }
                     key.callback(key)
@@ -168,7 +168,7 @@ import SwiftGmp
 #Preview {
     @Previewable @State var x: Bool = false
     //    let key = Key(InplaceOperation.sqrt3)
-    let key = Key(ConfigOperation.config)
+    let key = Key(ConfigOperation.bottomLeftKey)
     let _ = key.imageName = "English"
     let _ = key.keySize = CGSize(width: 100, height: 100)
     ZStack {

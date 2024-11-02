@@ -12,7 +12,7 @@ import NumberTranslator
 class SelectedLanguagekeyboard: SmallKeyboard {
     init(keySize: CGSize, translationManager: TranslationManager) {
         super.init(keySize: keySize)
-        let languageConfigKey = Key(ConfigOperation.config)
+        let languageConfigKey = Key(ConfigOperation.bottomLeftKey)
         languageConfigKey.imageName = translationManager.flagname
         languageConfigKey.borderColor = translationManager.borderColor(translationManager.flagname)
         let settingsKey = Key(ConfigOperation.settings)

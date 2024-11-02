@@ -12,8 +12,8 @@ class TranslatorKeyboard: SmallKeyboard {
     override init(keySize: CGSize) {
         super.init(keySize: keySize)
         
-        configKey.imageName = "English"
-        configKey.borderColor = Color(UIColor.lightGray)
+        bottomLeftKey.imageName = "English"
+        bottomLeftKey.borderColor = Color(UIColor.lightGray)
 
         let changeSignKey = Key(InplaceOperation.changeSign)
         let percentKey = Key(PercentOperation.percent)
@@ -41,6 +41,6 @@ class TranslatorKeyboard: SmallKeyboard {
         let zeroKey = Key(DigitOperation.zero)
         let decimalKey = Key(DigitOperation.dot)
         let equalsKey = Key(EqualOperation.equal)
-        appendRow([configKey, zeroKey, decimalKey, equalsKey])
+        appendRow([bottomLeftKey, zeroKey, decimalKey, equalsKey])
     }
 }

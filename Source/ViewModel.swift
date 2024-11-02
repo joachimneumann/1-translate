@@ -40,16 +40,16 @@ class ViewModel {
 
         translatorKeyboard.back(calculator.privateDisplayBufferHasDigits)
         translatorKeyboard.setPending(pendingOperators: calculator.pendingOperators)
-        translatorKeyboard.configKey.imageName = translationManager.flagname(.english)
-        translatorKeyboard.configKey.borderColor = translationManager.borderColor
+        translatorKeyboard.bottomLeftKey.imageName = translationManager.flagname(.english)
+        translatorKeyboard.bottomLeftKey.borderColor = translationManager.borderColor
 
         let allInOneLine = display.string
         translationManager.translate(allInOneLine)
     }
 
     func execute(_ key: Key) {
-        if key.op.isEqual(to: ConfigOperation.config) {
-            print("CONFIG \(key.op.getRawValue())")
+        if key.op.isEqual(to: ConfigOperation.bottomLeftKey) {
+            print("BOTTOM LEFT \(key.op.getRawValue())")
         } else if key.op.isEqual(to: ConfigOperation.flagname) {
             print("FLAG \(key.imageName!)")
         } else {

@@ -8,7 +8,7 @@
 import SwiftGmp
 
 public enum ConfigOperation: String, OpProtocol, CaseIterable {
-    case config = "config"
+    case bottomLeftKey = "bottomLeftKey"
     case flagname = "flagname"
     case settings = "settings"
     case spacer = "Spacer"

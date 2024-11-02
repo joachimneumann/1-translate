@@ -11,7 +11,7 @@ import SwiftGmp
 
 @Observable class SmallKeyboard {
     private let keySize: CGSize
-    var configKey: Key = Key(ConfigOperation.config)
+    var bottomLeftKey: Key = Key(ConfigOperation.bottomLeftKey)
     let clearKey: Key
     
     private(set) var keyMatrix: [[Key]] = []
@@ -29,8 +29,8 @@ import SwiftGmp
     init(keySize: CGSize) {
         self.keySize = keySize
         self.clearKey = Key(ClearOperation.clear)
-        configKey.imageName = "config"
-        configKey.borderColor = nil
+        bottomLeftKey.imageName = "config"
+        bottomLeftKey.borderColor = nil
 
     }
     
