@@ -72,32 +72,32 @@ struct TranslateNumbers: View {
                     smallKeyboard: viewModel.languageSelectorKeyboard,
                     height: viewModel.screen.keyboardHeight4Rows
                 )
+                .background(Color(white: 0.3))
                 .padding(.bottom, viewModel.screen.keySpacing)
-                .transition(.opacity)
-                
-                SmallKeyboardView(
-                    spacing: viewModel.screen.keySpacing,
-                    smallKeyboard: viewModel.selectedLanguageKeyboard
-                )
+                ZStack {
+                    SmallKeyboardView(
+                        spacing: viewModel.screen.keySpacing,
+                        smallKeyboard: viewModel.selectedLanguageKeyboard
+                    )
+                    HStack {
+                        VStack{
+                            Text(viewModel.translationManager.name(viewModel.translationManager.currentLanguage))
+                            if let englishName = viewModel.translationManager.englishName(viewModel.translationManager.currentLanguage) {
+                                Text(englishName)
+                            }
+                        }
+                            .padding(.leading, viewModel.screen.keySize.width + viewModel.screen.keySpacing)
+                        Spacer()
+                    }
+                }
                 .transition(.opacity)
             } else {
                 SmallKeyboardView(
                     spacing: viewModel.screen.keySpacing,
                     smallKeyboard: viewModel.translatorKeyboard)
             }
-//
-//            SmallKeyboardView(
-//                spacing: viewModel.screen.keySpacing,
-//                smallKeyboard: viewModel.languageSelectorKeyboard,
-//                height: viewModel.screen.keyboardHeight4Rows)
-//            .padding(.bottom, viewModel.screen.keySpacing)
-//            
-//            SmallKeyboardView(
-//                spacing: viewModel.screen.keySpacing,
-//                smallKeyboard: viewModel.selectedLanguageKeyboard)
-
         }
-        .animation(.easeInOut(duration: 0.3), value: showLanguageSelector.wrappedValue)
+        .animation(.easeInOut(duration: 0.6), value: showLanguageSelector.wrappedValue)
         //.background(.blue)
     }
     
@@ -116,6 +116,7 @@ struct TranslateNumbers: View {
 //        }
     }
 }
+
 
 #Preview {
     TranslateNumbers(screen: Screen())

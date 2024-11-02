@@ -67,9 +67,9 @@ struct Label: View {
             sizeFactor = sizeFactorSpecialOperator
         case "*":
             sizeFactor = sizeFactorOperatorX
+        case "settings":
+            sizeFactor = 2.0
         case _ where sfImageForKey.keys.contains(symbol):
-            sizeFactor = sizeFactorOperator
-        case _ where flagForKey.keys.contains(symbol):
             sizeFactor = sizeFactorOperator
         case ",", ".":
             sizeFactor = sizeFactorComma
@@ -110,18 +110,11 @@ struct Label: View {
                 Image(systemName: sfImage)
                     .resizable()
                     .foregroundColor(color)
-                    .font(Font.title.weight(.regular))
+                    //.font(Font.title.weight(.regular))
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: size * 0.3)
+                    .frame(width: size * 0.3, height: size * 0.3)
                     .accessibilityIdentifier("KeyID_"+symbol)
-            } else if let flag = flagForKey[symbol] {
-                Image(systemName: flag)
-                    .resizable()
-                    .foregroundColor(color)
-                    .font(Font.title.weight(.regular))
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: size * 0.3)
-                    .accessibilityIdentifier("KeyID_"+symbol)
+                    //.background(.green)
             } else {
                 Text(symbol)
                     .font(.system(size: size * 0.3))
