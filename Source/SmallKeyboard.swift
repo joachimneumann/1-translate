@@ -9,9 +9,9 @@ import SwiftUI
 import SwiftGmp
 
 
-@Observable class SmallKeyboard {
+class SmallKeyboard: ObservableObject {
     private let keySize: CGSize
-    var bottomLeftKey: Key = Key(ConfigOperation.bottomLeftKey)
+    var bottomLeftKey: Key
     let clearKey: Key
     
     private(set) var keyMatrix: [[Key]] = []
@@ -29,9 +29,9 @@ import SwiftGmp
     init(keySize: CGSize) {
         self.keySize = keySize
         self.clearKey = Key(ClearOperation.clear)
-        bottomLeftKey.imageName = "config"
-        bottomLeftKey.borderColor = nil
-
+        self.bottomLeftKey = Key(ConfigOperation.bottomLeft)
+        self.bottomLeftKey.imageName = "config"
+        self.bottomLeftKey.borderColor = nil
     }
     
     func appendRow(_ keys: [Key]) {

@@ -16,31 +16,24 @@ struct CalculatorKeyView: View {
     
     let key: Key
     let borderwidth: CGFloat = 5
+    let toleranceRect: CGRect
     
     init(key: Key) {
         self.key = key
         bgColorNonPending = key.sixColors.upColor
         bgColorPending = key.sixColors.pendingUpColor
         
-        // print("CalculatorKeyView init \(key.op.getRawValue())")
-        //
-        // Use this print statement to check if any
-        // other key than the pressed key is redrawn.
-        // That is not what we want that, of course.
-    }
-    
-    struct ImageKey: View {
-        let imageName: String
-        let width: CGFloat
-        let height: CGFloat
-        let brightness: Double
-        var body: some View {
-            Image(imageName)
-                .resizable()
-                .frame(width: width, height: height)
-                .brightness(brightness)
-                .clipShape(Capsule())
-        }
+        let tolerance: CGFloat = 0.3 * key.keySize.height
+        toleranceRect = CGRect(
+            x: -tolerance,
+            y: -tolerance,
+            width: key.keySize.width + 2.0 * tolerance,
+            height: key.keySize.height + 2.0 * tolerance)
+        
+        //  print("CalculatorKeyView init \(key.op.getRawValue())")
+        /// Use this print statement to check if any
+        /// other key than the pressed key is redrawn.
+        /// That is not what we want that, of course.
     }
     
     struct ImageOrLabel: View {
@@ -51,6 +44,7 @@ struct CalculatorKeyView: View {
         
         var body: some View {
             if let imageName = key.imageName {
+                //let _ = print("CalculatorKeyView Image \(imageName)")
                 Image(imageName)
                     .resizable()
                     .frame(width: key.keySize.width-2*borderwidth, height: key.keySize.height-2*borderwidth)
@@ -73,12 +67,13 @@ struct CalculatorKeyView: View {
     }
     
     var body: some View {
+        let _ = print("CalculatorKeyView op = \(key.op.getRawValue()) \(key.imageName)")
         ImageOrLabel(key: key, borderwidth: borderwidth, imageBrightness: imageBrightness, bgColor: key.isPending ? bgColorPending : bgColorNonPending)
             .onLongPressGesture(minimumDuration: 0.5) {
                 if key.op.isEqual(to: ClearOperation.back) {
                     key.callback(Key(ClearOperation.clear))
                 } else {
-                    // do nothing additionally on long press
+                    /// do nothing additionally on long press
                 }
             }
         onPressingChanged: { inProgress in
@@ -95,24 +90,14 @@ struct CalculatorKeyView: View {
             DragGesture(minimumDistance: 0)
                 .onChanged { value in
                     if isPressed {
-                        let tolerance: CGFloat = 0.3 * key.keySize.height
-                        let rect = CGRect(
-                            x: -tolerance,
-                            y: -tolerance,
-                            width: key.keySize.width + 2.0 * tolerance,
-                            height: key.keySize.height + 2.0 * tolerance)
-                        if !rect.contains(value.location) {
+                        /// If the finger moves too far away from the key
+                        /// handle that like a finger up event
+                        if !toleranceRect.contains(value.location) {
                             up()
                         }
                     }
                 }
         )
-    }
-    
-    private func distanceBetween(_ point1: CGPoint, and point2: CGPoint) -> CGFloat {
-        let dx = point1.x - point2.x
-        let dy = point1.y - point2.y
-        return sqrt(dx * dx + dy * dy)
     }
     
     private func down() {
@@ -124,7 +109,6 @@ struct CalculatorKeyView: View {
         }
         if let existingTimer = downTimer, existingTimer.isValid {
             existingTimer.invalidate()
-            //print("Existing downTimer invalidated")
         }
         downTimer = Timer.scheduledTimer(withTimeInterval: key.downTime, repeats: false) { _ in
             downTimerFired()
@@ -133,8 +117,8 @@ struct CalculatorKeyView: View {
     
     private func up() {
         if !isPressed {
-            // this can happen when up() is triggered by the finger moving
-            // away from the key and then the finger us released.
+            /// This can happen when up() is triggered by the finger moving
+            /// away from the key and then the finger us released.
             return
         }
         isPressed = false
@@ -163,7 +147,7 @@ import SwiftGmp
 #Preview {
     @Previewable @State var x: Bool = false
     //    let key = Key(InplaceOperation.sqrt3)
-    let key = Key(ConfigOperation.bottomLeftKey)
+    let key = Key(ConfigOperation.bottomLeft)
     let _ = key.imageName = "English"
     let _ = key.keySize = CGSize(width: 100, height: 100)
     ZStack {

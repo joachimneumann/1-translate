@@ -17,7 +17,7 @@ class ViewModel: ObservableObject {
     @Published var currentLanguage: NumberTranslator.Language = .english
     var translatorKeyboard: SmallKeyboard
     var languageSelectorKeyboard: SmallKeyboard
-    var selectedLanguageKeyboard: SmallKeyboard
+    @Published var selectedLanguageKeyboard: SmallKeyboard
     var separator: Separator
     let intDisplay: IntDisplay
     @Published var showLanguageSelector: Bool = false
@@ -50,14 +50,19 @@ class ViewModel: ObservableObject {
     }
 
     func execute(_ key: Key) {
-        if key.op.isEqual(to: ConfigOperation.bottomLeftKey) {
+        if key.op.isEqual(to: ConfigOperation.bottomLeft) {
             print("BOTTOM LEFT \(key.op.getRawValue())")
             showLanguageSelector.toggle()
+
         } else if key.op.isEqual(to: ConfigOperation.flagname) {
             if let newFlagname = key.imageName {
-                print("FLAG \(key.imageName!)")
                 if let newLanguage = translationManager.language(forFlagname: newFlagname) {
                     currentLanguage = newLanguage
+                    selectedLanguageKeyboard.clearKey.op = DigitOperation.five
+                    selectedLanguageKeyboard.bottomLeftKey.imageName = translationManager.flagname(currentLanguage)
+                    selectedLanguageKeyboard.bottomLeftKey.borderColor = translationManager.borderColor(currentLanguage)
+                    print("FLAG im = \(selectedLanguageKeyboard.bottomLeftKey.imageName ?? "?")")
+                    objectWillChange.send()
                 }
             }
         } else {
