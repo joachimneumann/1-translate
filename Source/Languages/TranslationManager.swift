@@ -53,12 +53,6 @@ class TranslationManager: NumberTranslator, Identifiable {
     }
     func borderColor(_ language: NumberTranslator.Language) -> Color {
         Color(UIColor.darkGray)
-//        switch language {
-//        case .german, .english, .polish, .finnish:
-//            return Color(UIColor.darkGray)
-//        default:
-//            return Color(UIColor.darkGray)
-//        }
     }
 
     func nameWithDescription(_ language: NumberTranslator.Language) -> String {
@@ -101,19 +95,19 @@ class TranslationManager: NumberTranslator, Identifiable {
         }
         
         // Sort by hue value, placing those with hue 0 at the end
-            let sortedLanguages = languagesWithHue
-                .sorted {
-                    if $0.hue == 0 && $1.hue != 0 {
-                        return false
-                    } else if $0.hue != 0 && $1.hue == 0 {
-                        return true
-                    } else {
-                        return $0.hue < $1.hue
-                    }
+        let sortedLanguages = languagesWithHue
+            .sorted {
+                if $0.hue == 0 && $1.hue != 0 {
+                    return false
+                } else if $0.hue != 0 && $1.hue == 0 {
+                    return true
+                } else {
+                    return $0.hue < $1.hue
                 }
-                .map { $0.language }
-            
-            return sortedLanguages
+            }
+            .map { $0.language }
+        
+        return sortedLanguages
     }}
 
 

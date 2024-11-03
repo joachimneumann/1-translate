@@ -9,18 +9,18 @@ import SwiftUI
 import NumberTranslator
 import SwiftGmp
 
-class ViewModel: ObservableObject {
+@Observable class ViewModel {
     let screen: Screen
     var calculator: Calculator
     var display: Display
     var translationManager: TranslationManager
-    @Published var currentLanguage: NumberTranslator.Language = .english // TODO: Persistent
+    var currentLanguage: NumberTranslator.Language = .english // TODO: Persistent
     var translatorKeyboard: TranslatorKeyboard
     var languageSelectorKeyboard: LanguageSelectorKeyboard
-    @Published var selectedLanguageKeyboard: SelectedLanguagekeyboard
+    var selectedLanguageKeyboard: SelectedLanguagekeyboard
     var separator: Separator
-    let intDisplay: IntDisplay
-    @Published var showLanguageSelector: Bool = false
+    let monoFontDisplay: MonoFontDisplay
+    var showLanguageSelector: Bool = false
     
     
     func process() {
@@ -89,17 +89,18 @@ class ViewModel: ObservableObject {
 
     init(screen: Screen) {
         self.screen = screen
-        separator = Separator(separatorType: Separator.SeparatorType.comma, groups: true)
-        intDisplay = IntDisplay(displayWidth: 10, separator: separator)
+        let tempSeparator = Separator(separatorType: Separator.SeparatorType.comma, groups: true)
+        let tempTranslationManager = TranslationManager()
+
         calculator = Calculator(precision: 40)
         display = Display(floatDisplayWidth: screen.displayWidth, font: screen.numberDisplayFont, ePadding: screen.ePadding)
-
-        translationManager = TranslationManager()
-
         translatorKeyboard = TranslatorKeyboard(keySize: screen.keySize)
-        languageSelectorKeyboard = LanguageSelectorKeyboard(keySize: screen.keySize, translationManager: translationManager)
+        monoFontDisplay = MonoFontDisplay(displayWidth: 10, separator: tempSeparator)
         selectedLanguageKeyboard = SelectedLanguagekeyboard(keySize: screen.keySize)
+        languageSelectorKeyboard = LanguageSelectorKeyboard(keySize: screen.keySize, translationManager: tempTranslationManager)
 
+        separator = tempSeparator
+        translationManager = tempTranslationManager
 
         translatorKeyboard.callback = execute
         languageSelectorKeyboard.callback = execute

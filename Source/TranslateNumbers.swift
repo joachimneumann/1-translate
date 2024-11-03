@@ -10,7 +10,7 @@ let testColors = false
 
 struct TranslateNumbers: View {
     @Environment(\.scenePhase) var scenePhase
-    @ObservedObject var viewModel: ViewModel
+    var viewModel: ViewModel
     
     @State var scrollViewHasScrolled = false
     @State var scrollViewID = UUID()

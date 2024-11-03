@@ -8,7 +8,7 @@
 import SwiftGmp
 import SwiftUI
 
-class Display: IntDisplay, ObservableObject {
+class Display: MonoFontDisplay, ObservableObject {
 
     override var left: String {
         didSet {
