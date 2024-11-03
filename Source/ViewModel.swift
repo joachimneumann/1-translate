@@ -41,8 +41,7 @@ class ViewModel: ObservableObject {
         }
 
         translatorKeyboard.back(calculator.privateDisplayBufferHasDigits)
-        let allInOneLine = display.string
-        translationManager.translateThis(allInOneLine, to: currentLanguage)
+        translationManager.translateThis(display.string, to: currentLanguage)
     }
 
     func toggleLanguageSelector(key: Key) {
@@ -55,12 +54,26 @@ class ViewModel: ObservableObject {
                 currentLanguage = newLanguage
                 translatorKeyboard.countryKey.flagname = flagKey.flagname
                 selectedLanguageKeyboard.countryKey.flagname = flagKey.flagname
-                process()
                 return
             }
         }
         if let symbolKey = key as? SymbolKey {
             calculator.press(symbolKey.op)
+            for row in translatorKeyboard.keyMatrix {
+                for k in row {
+                    if let symbolKey = k as? SymbolKey {
+                        if calculator.pendingOperators.contains(where: { $0.isEqual(to: symbolKey.op) }) {
+                            symbolKey.setColors(
+                                upColor: KeyColor.sixColors(op: symbolKey.op).pendingUpColor,
+                                downColor: KeyColor.sixColors(op: symbolKey.op).pendingDownColor)
+                        } else {
+                            symbolKey.setColors(
+                                upColor: KeyColor.sixColors(op: symbolKey.op).upColor,
+                                downColor: KeyColor.sixColors(op: symbolKey.op).downColor)
+                        }
+                    }
+                }
+            }
             process()
         }
     }

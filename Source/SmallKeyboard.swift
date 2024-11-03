@@ -34,12 +34,4 @@ class SmallKeyboard: ObservableObject {
         }
         keyMatrix.append(keys)
     }
-    
-    func setPending(pendingOperators: [any OpProtocol]) {
-//        for row in keyMatrix {
-//            for k in row {
-//                k.isPending = pendingOperators.contains(where: { $0.isEqual(to: k.op) })
-//            }
-//        }
-    }    
 }

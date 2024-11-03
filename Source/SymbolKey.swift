@@ -13,8 +13,8 @@ import SwiftGmp
     var op: any OpProtocol
     let txtColor: Color
     var bgColor: Color
-    private let upColor: Color
-    private let downColor: Color
+    var upColor: Color
+    var downColor: Color
     
     init(_ op: any OpProtocol) {
         self.symbol = op.getRawValue()
@@ -22,8 +22,18 @@ import SwiftGmp
         self.txtColor = KeyColor.sixColors(op: op).textColor
         self.upColor = KeyColor.sixColors(op: op).upColor
         self.downColor = KeyColor.sixColors(op: op).downColor
-        self.bgColor = upColor
+        self.bgColor = KeyColor.sixColors(op: op).upColor
         super.init()
+    }
+    
+    func setColors(upColor: Color, downColor: Color) {
+        self.upColor = upColor
+        self.downColor = downColor
+        if isPressed {
+            bgColor = downColor
+        } else {
+            bgColor = upColor
+        }
     }
 
     override func visualDown() {
