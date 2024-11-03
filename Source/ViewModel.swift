@@ -42,7 +42,7 @@ class ViewModel: ObservableObject {
 
         translatorKeyboard.back(calculator.privateDisplayBufferHasDigits)
         translatorKeyboard.setPending(pendingOperators: calculator.pendingOperators)
-        translatorKeyboard.bottomLeftKey.imageName = translationManager.flagname(currentLanguage)
+        translatorKeyboard.bottomLeftKey.flagname = translationManager.flagname(currentLanguage)
         translatorKeyboard.bottomLeftKey.borderColor = translationManager.borderColor(currentLanguage)
 
         let allInOneLine = display.string
@@ -50,24 +50,18 @@ class ViewModel: ObservableObject {
     }
 
     func execute(_ key: Key) {
-        if key.op.isEqual(to: ConfigOperation.bottomLeft) {
-            print("BOTTOM LEFT \(key.op.getRawValue())")
-            showLanguageSelector.toggle()
-
-        } else if key.op.isEqual(to: ConfigOperation.flagname) {
-            if let newFlagname = key.imageName {
-                if let newLanguage = translationManager.language(forFlagname: newFlagname) {
+        if let flagKey = key as? FlagKey {
+            if flagKey.flagname.starts(with: "CONFIG_") {
+                showLanguageSelector.toggle()
+            } else {
+                if let newLanguage = translationManager.language(forFlagname: flagKey.flagname) {
                     currentLanguage = newLanguage
-                    selectedLanguageKeyboard.clearKey.op = DigitOperation.five
-                    selectedLanguageKeyboard.bottomLeftKey.imageName = translationManager.flagname(currentLanguage)
+                    selectedLanguageKeyboard.bottomLeftKey.flagname = translationManager.flagname(currentLanguage)
                     selectedLanguageKeyboard.bottomLeftKey.borderColor = translationManager.borderColor(currentLanguage)
-                    print("FLAG im = \(selectedLanguageKeyboard.bottomLeftKey.imageName ?? "?")")
-                    objectWillChange.send()
                 }
             }
-        } else {
-            print("executing \(key.op.getRawValue())")
-            calculator.press(key.op)
+        } else if let symbolKey = key as? SymbolKey {
+            calculator.press(symbolKey.op)
             process()
         }
     }

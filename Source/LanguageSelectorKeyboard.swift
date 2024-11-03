@@ -15,9 +15,7 @@ class LanguageSelectorKeyboard: SmallKeyboard {
         var columnIndex = 1
         var tempRow: [Key] = []
         for language in translationManager.sortedlanguages {
-            let tempKey = Key(ConfigOperation.flagname)
-            tempKey.imageName = translationManager.flagname(language)
-            tempKey.borderColor = translationManager.borderColor(language)
+            let tempKey = FlagKey(flagname: translationManager.flagname(language), borderColor: translationManager.borderColor(language))
             tempRow.append(tempKey)
             columnIndex += 1
             if columnIndex == 5 {

@@ -11,8 +11,8 @@ import SwiftGmp
 
 class SmallKeyboard: ObservableObject {
     private let keySize: CGSize
-    var bottomLeftKey: Key
-    let clearKey: Key
+    var bottomLeftKey: FlagKey
+    var clearKey: SymbolKey
     
     private(set) var keyMatrix: [[Key]] = []
     
@@ -28,10 +28,8 @@ class SmallKeyboard: ObservableObject {
        
     init(keySize: CGSize) {
         self.keySize = keySize
-        self.clearKey = Key(ClearOperation.clear)
-        self.bottomLeftKey = Key(ConfigOperation.bottomLeft)
-        self.bottomLeftKey.imageName = "config"
-        self.bottomLeftKey.borderColor = nil
+        self.clearKey = SymbolKey(ClearOperation.clear)
+        self.bottomLeftKey = FlagKey(flagname: "config_English")
     }
     
     func appendRow(_ keys: [Key]) {
@@ -43,18 +41,18 @@ class SmallKeyboard: ObservableObject {
     }
     
     func setPending(pendingOperators: [any OpProtocol]) {
-        for row in keyMatrix {
-            for k in row {
-                k.isPending = pendingOperators.contains(where: { $0.isEqual(to: k.op) })
-            }
-        }
+//        for row in keyMatrix {
+//            for k in row {
+//                k.isPending = pendingOperators.contains(where: { $0.isEqual(to: k.op) })
+//            }
+//        }
     }
     
     func back(_ isBack: Bool) {
         if isBack {
-            self.clearKey.op = ClearOperation.back
+            self.clearKey.symbol = ClearOperation.back.getRawValue()
         } else {
-            self.clearKey.op = ClearOperation.clear
+            self.clearKey.symbol = ClearOperation.clear.getRawValue()
         }
     }
     

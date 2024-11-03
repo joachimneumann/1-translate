@@ -12,35 +12,32 @@ class TranslatorKeyboard: SmallKeyboard {
     override init(keySize: CGSize) {
         super.init(keySize: keySize)
         
-        bottomLeftKey.imageName = "English"
-        bottomLeftKey.borderColor = Color(UIColor.lightGray)
-
-        let changeSignKey = Key(InplaceOperation.changeSign)
-        let percentKey = Key(PercentOperation.percent)
-        let divideKey = Key(TwoOperantOperation.div)
+        let changeSignKey = SymbolKey(InplaceOperation.changeSign)
+        let percentKey = SymbolKey(PercentOperation.percent)
+        let divideKey = SymbolKey(TwoOperantOperation.div)
         appendRow([clearKey, changeSignKey, percentKey, divideKey])
         
-        let sevenKey = Key(DigitOperation.seven)
-        let eightKey = Key(DigitOperation.eight)
-        let nineKey = Key(DigitOperation.nine)
-        let multiplyKey = Key(TwoOperantOperation.mul)
+        let sevenKey = SymbolKey(DigitOperation.seven)
+        let eightKey = SymbolKey(DigitOperation.eight)
+        let nineKey = SymbolKey(DigitOperation.nine)
+        let multiplyKey = SymbolKey(TwoOperantOperation.mul)
         appendRow([sevenKey, eightKey, nineKey, multiplyKey])
         
-        let fourKey = Key(DigitOperation.four)
-        let fiveKey = Key(DigitOperation.five)
-        let sixKey = Key(DigitOperation.six)
-        let subtractKey = Key(TwoOperantOperation.sub)
+        let fourKey = SymbolKey(DigitOperation.four)
+        let fiveKey = SymbolKey(DigitOperation.five)
+        let sixKey = SymbolKey(DigitOperation.six)
+        let subtractKey = SymbolKey(TwoOperantOperation.sub)
         appendRow([fourKey, fiveKey, sixKey, subtractKey])
         
-        let oneKey = Key(DigitOperation.one)
-        let twoKey = Key(DigitOperation.two)
-        let threeKey = Key(DigitOperation.three)
-        let addKey = Key(TwoOperantOperation.add)
+        let oneKey = SymbolKey(DigitOperation.one)
+        let twoKey = SymbolKey(DigitOperation.two)
+        let threeKey = SymbolKey(DigitOperation.three)
+        let addKey = SymbolKey(TwoOperantOperation.add)
         appendRow([oneKey, twoKey, threeKey, addKey])
         
-        let zeroKey = Key(DigitOperation.zero)
-        let decimalKey = Key(DigitOperation.dot)
-        let equalsKey = Key(EqualOperation.equal)
+        let zeroKey = SymbolKey(DigitOperation.zero)
+        let decimalKey = SymbolKey(DigitOperation.dot)
+        let equalsKey = SymbolKey(EqualOperation.equal)
         appendRow([bottomLeftKey, zeroKey, decimalKey, equalsKey])
     }
 }

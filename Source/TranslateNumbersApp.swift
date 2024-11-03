@@ -15,17 +15,17 @@ struct TranslateNumbersApp: App {
     var body: some Scene {
         WindowGroup {
             GeometryReader { geo in
-                let symbol = SymbolKey(width: 100.0, height: 100.0, op: InplaceOperation.sqr)
-                let image = ImageKey(width: 100.0, height: 100.0, imageName: "Deutsch", borderColor: .green, borderwidth: 5.0)
-                ZStack {
-                    Rectangle()
-                        .foregroundColor(.gray)
-                    VStack {
-                        BaseKeyView(baseKey: symbol)
-                        BaseKeyView(baseKey: image)
-                    }
-                }
-                //                TranslateNumbers(screen: Screen(geo.size))
+//                let symbol = SymbolKey(InplaceOperation.sqr)
+//                let image = FlagKey(flagname: "Deutsch", borderColor: .green)
+//                ZStack {
+//                    Rectangle()
+//                        .foregroundColor(.gray)
+//                    VStack {
+//                        KeyView(key: symbol)
+//                        KeyView(key: image)
+//                    }
+//                }
+                                TranslateNumbers(screen: Screen(geo.size))
             }
         }
     }

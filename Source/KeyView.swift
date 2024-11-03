@@ -1,5 +1,5 @@
 //
-//  BaseKeyView.swift
+//  KeyView.swift
 //  TranslateNumbers
 //
 //  Created by Joachim Neumann on 03.11.2024.
@@ -8,10 +8,10 @@
 import SwiftUI
 import SwiftGmp
 
-struct BaseKeyView: View {
-    var baseKey: BaseKey
+struct KeyView: View {
+    var key: Key
     var body: some View {
-        baseKey.view()
+        key.view()
             .onLongPressGesture(minimumDuration: 0.5) {
                         //                            if key.op.isEqual(to: ClearOperation.back) {
                         //                                key.callback(Key(ClearOperation.clear))
@@ -21,22 +21,22 @@ struct BaseKeyView: View {
                     }
                 onPressingChanged: { inProgress in
                     if inProgress {
-                        baseKey.down()
+                        key.down()
                     } else {
-                        if baseKey.isPressed {
-//                            baseKey.callback(baseKey)
+                        if key.isPressed {
+                            key.callback(key)
                         }
-                        baseKey.up()
+                        key.up()
                     }
                 }
                 .simultaneousGesture(
                     DragGesture(minimumDistance: 0)
                         .onChanged { value in
-                            if baseKey.isPressed {
+                            if key.isPressed {
                                 /// If the finger moves too far away from the key
                                 /// handle that like a finger up event
-                                if !baseKey.toleranceRect.contains(value.location) {
-                                    baseKey.up()
+                                if !key.toleranceRect.contains(value.location) {
+                                    key.up()
                                 }
                             }
                         }
@@ -44,14 +44,14 @@ struct BaseKeyView: View {
 }
 
 #Preview {
-    let symbol = SymbolKey(width: 100.0, height: 100.0, op: InplaceOperation.sqr)
-    let image = ImageKey(width: 100.0, height: 100.0, imageName: "Deutsch", borderColor: .green, borderwidth: 5.0)
+    let symbol = SymbolKey(InplaceOperation.sqr)
+    let image = FlagKey(flagname: "Deutsch")
     ZStack {
         Rectangle()
             .foregroundColor(.gray)
         VStack {
-            BaseKeyView(baseKey: symbol)
-            BaseKeyView(baseKey: image)
+            KeyView(key: symbol)
+            KeyView(key: image)
         }
     }
 }

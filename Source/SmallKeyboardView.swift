@@ -7,18 +7,20 @@
 
 import SwiftUI
 import SwiftGmp
+
 struct AllRows: View {
     let spacing: CGFloat
-    var smallKeyboard: SmallKeyboard
+    @ObservedObject var smallKeyboard: SmallKeyboard  // Use @ObservedObject for updates
+
     var body: some View {
         VStack(spacing: spacing) {
-            ForEach(smallKeyboard.keyMatrix, id: \.self) { row in
+            ForEach(smallKeyboard.keyMatrix.indices, id: \.self) { rowIndex in
                 HStack(spacing: spacing) {
-                    ForEach(row) { key in
-                        if key.op.isEqual(to: ConfigOperation.spacer) {
+                    ForEach(smallKeyboard.keyMatrix[rowIndex], id: \.id) { key in
+                        if let symbolKey = key as? SymbolKey, symbolKey.op.isEqual(to: ConfigOperation.spacer) {
                             Spacer()
                         } else {
-                            CalculatorKeyView(key: key)
+                            KeyView(key: key)
                         }
                     }
                 }
@@ -26,6 +28,7 @@ struct AllRows: View {
         }
     }
 }
+
 struct SmallKeyboardView: View {
     @State private var navigateToConfigView = false
     

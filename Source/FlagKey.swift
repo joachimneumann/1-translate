@@ -1,5 +1,5 @@
 //
-//  ImageKey.swift
+//  FlagKey.swift
 //  TranslateNumbers
 //
 //  Created by Joachim Neumann on 02.11.2024.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-@Observable class ImageKey: BaseKey {
-    let imageName: String
-    let borderColor: Color
+@Observable class FlagKey: Key {
+    var flagname: String
+    var borderColor: Color
     let borderwidth: CGFloat
     var brightness: Double = 0.0
     
@@ -17,11 +17,16 @@ import SwiftUI
 //        self.im
 //        super.init(width: width, height: height)
 //    }
-    init(width: CGFloat, height: CGFloat, imageName: String, borderColor: Color, borderwidth: CGFloat) {
-        self.imageName = imageName
-        self.borderColor = borderColor
-        self.borderwidth = borderwidth
-        super.init(width: width, height: height)
+    init(flagname: String, borderColor: Color? = nil, borderwidth: CGFloat = 5.0) {
+        self.flagname = flagname
+        if let borderColor = borderColor {
+            self.borderColor = borderColor
+            self.borderwidth = borderwidth
+        } else {
+            self.borderColor = .clear
+            self.borderwidth = 0.0
+        }
+        super.init()
     }
     
     override func visualDown() {
@@ -32,7 +37,7 @@ import SwiftUI
     }
     override func view() -> AnyView {
         return AnyView(
-            Image(imageName)
+            Image(flagname.replacingOccurrences(of: "CONFIG_", with: ""))
                 .resizable()
                 .frame(width: width-2*borderwidth, height: height-2*borderwidth)
                 .clipShape(Capsule())
@@ -50,7 +55,7 @@ import SwiftUI
 
 
 #Preview {
-    @Previewable @State var x: ImageKey = ImageKey(width: 100.0, height: 100.0, imageName: "English", borderColor: .green, borderwidth: 5.0)
+    @Previewable @State var x: FlagKey = FlagKey(flagname: "English", borderColor: .green)
     ZStack {
         Rectangle()
             .foregroundColor(.gray)

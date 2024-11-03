@@ -8,20 +8,22 @@
 import SwiftUI
 import SwiftGmp
 
-@Observable class SymbolKey: BaseKey {
-    let symbol: String
+@Observable class SymbolKey: Key {
+    var symbol: String
+    let op: any OpProtocol
     let txtColor: Color
     var bgColor: Color
     private let upColor: Color
     private let downColor: Color
     
-    init(width: CGFloat, height: CGFloat, op: any OpProtocol) {
+    init(_ op: any OpProtocol) {
         self.symbol = op.getRawValue()
+        self.op = op
         self.txtColor = KeyColor.sixColors(op: op).textColor
         self.upColor = KeyColor.sixColors(op: op).upColor
         self.downColor = KeyColor.sixColors(op: op).downColor
         self.bgColor = upColor
-        super.init(width: width, height: height)
+        super.init()
     }
 
     override func visualDown() {
@@ -43,7 +45,7 @@ import SwiftGmp
 }
 
 #Preview {
-    @Previewable @State var x: SymbolKey = SymbolKey(width: 100.0, height: 100.0, op: InplaceOperation.sqr)
+    @Previewable @State var x: SymbolKey = SymbolKey(InplaceOperation.sqr)
     ZStack {
         Rectangle()
             .foregroundColor(.gray)

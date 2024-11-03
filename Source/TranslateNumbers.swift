@@ -74,7 +74,7 @@ struct TranslateNumbers: View {
                 .background(.orange)
                 .padding(.bottom, viewModel.screen.keySpacing)
                 ZStack {
-                    let _ = print("portraitView selectedLanguageKeyboard \(viewModel.selectedLanguageKeyboard.bottomLeftKey.imageName ?? "?")")
+                    let _ = print("portraitView selectedLanguageKeyboard \(viewModel.selectedLanguageKeyboard.bottomLeftKey.flagname)")
                     SmallKeyboardView(
                         spacing: viewModel.screen.keySpacing,
                         smallKeyboard: viewModel.selectedLanguageKeyboard
