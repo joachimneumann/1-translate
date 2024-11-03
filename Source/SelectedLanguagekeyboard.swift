@@ -10,10 +10,13 @@ import Foundation
 import NumberTranslator
 
 class SelectedLanguagekeyboard: SmallKeyboard {
+    let countryKey: FlagKey
     init(keySize: CGSize, translationManager: TranslationManager, currentLanguage: NumberTranslator.Language) {
-        super.init(keySize: keySize)
-        let languageConfigKey = FlagKey(flagname: "CONFIG_"+translationManager.flagname(currentLanguage))
+        countryKey = FlagKey(flagname: "CONFIG_"+translationManager.flagname(currentLanguage))
+        countryKey.borderColor = .gray
+        countryKey.borderwidth = 5.0
         let settingsKey = SymbolKey(ConfigOperation.settings)
-        appendRow([languageConfigKey, SymbolKey(ConfigOperation.spacer), settingsKey])
+        super.init(keySize: keySize)
+        appendRow([countryKey, SymbolKey(ConfigOperation.spacer), settingsKey])
     }
 }

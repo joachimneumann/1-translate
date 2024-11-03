@@ -10,7 +10,7 @@ import SwiftGmp
 
 @Observable class SymbolKey: Key {
     var symbol: String
-    let op: any OpProtocol
+    var op: any OpProtocol
     let txtColor: Color
     var bgColor: Color
     private let upColor: Color

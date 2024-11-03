@@ -15,9 +15,9 @@ class ViewModel: ObservableObject {
     var display: Display
     var translationManager: TranslationManager
     @Published var currentLanguage: NumberTranslator.Language = .english
-    var translatorKeyboard: SmallKeyboard
+    var translatorKeyboard: TranslatorKeyboard
     var languageSelectorKeyboard: SmallKeyboard
-    @Published var selectedLanguageKeyboard: SmallKeyboard
+    @Published var selectedLanguageKeyboard: SelectedLanguagekeyboard
     var separator: Separator
     let intDisplay: IntDisplay
     @Published var showLanguageSelector: Bool = false
@@ -41,10 +41,6 @@ class ViewModel: ObservableObject {
         }
 
         translatorKeyboard.back(calculator.privateDisplayBufferHasDigits)
-        translatorKeyboard.setPending(pendingOperators: calculator.pendingOperators)
-        translatorKeyboard.bottomLeftKey.flagname = translationManager.flagname(currentLanguage)
-        translatorKeyboard.bottomLeftKey.borderColor = translationManager.borderColor(currentLanguage)
-
         let allInOneLine = display.string
         translationManager.translateThis(allInOneLine, to: currentLanguage)
     }
@@ -53,11 +49,14 @@ class ViewModel: ObservableObject {
         if let flagKey = key as? FlagKey {
             if flagKey.flagname.starts(with: "CONFIG_") {
                 showLanguageSelector.toggle()
+                return
             } else {
                 if let newLanguage = translationManager.language(forFlagname: flagKey.flagname) {
                     currentLanguage = newLanguage
-                    selectedLanguageKeyboard.bottomLeftKey.flagname = translationManager.flagname(currentLanguage)
-                    selectedLanguageKeyboard.bottomLeftKey.borderColor = translationManager.borderColor(currentLanguage)
+                    translatorKeyboard.countryKey.flagname = "CONFIG_"+flagKey.flagname
+                    selectedLanguageKeyboard.countryKey.flagname = "CONFIG_"+flagKey.flagname
+                    process()
+                    return
                 }
             }
         } else if let symbolKey = key as? SymbolKey {

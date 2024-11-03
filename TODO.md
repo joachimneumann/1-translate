@@ -1,3 +1,5 @@
+8888 in roman: strange overline
+
 - voice broken...
 - remember settings
 - show pending

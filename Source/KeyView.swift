@@ -13,12 +13,12 @@ struct KeyView: View {
     var body: some View {
         key.view()
             .onLongPressGesture(minimumDuration: 0.5) {
-                        //                            if key.op.isEqual(to: ClearOperation.back) {
-                        //                                key.callback(Key(ClearOperation.clear))
-                        //                            } else {
-                        //                                /// do nothing additionally on long press
-                        //                            }
+                if let symbolKey = key as? SymbolKey {
+                    if symbolKey.op.isEqual(to: ClearOperation.back) {
+                        symbolKey.callback(SymbolKey(ClearOperation.clear))
                     }
+                }
+            }
                 onPressingChanged: { inProgress in
                     if inProgress {
                         key.down()

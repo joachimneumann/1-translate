@@ -10,7 +10,7 @@ import SwiftUI
 @Observable class FlagKey: Key {
     var flagname: String
     var borderColor: Color
-    let borderwidth: CGFloat
+    var borderwidth: CGFloat
     var brightness: Double = 0.0
     
 //    init(width: CGFloat, height: CGFloat, op: any OpProtocol) {
