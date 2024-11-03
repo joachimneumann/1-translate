@@ -32,40 +32,39 @@ struct CalculatorKeyView: View {
     
     var body: some View {
         let _ = print("CalculatorKeyView op = \(key.op.getRawValue()) \(key.imageName ?? "?")")
-        if let imagename = key.imageName, let borderColor = key.borderColor {
-            CalculatorKeyContent(width: key.width, height: key.height, imageName: imagename, borderColor: borderColor)
-        } else if let imagename = key.imageName, let borderColor = key.borderColor {
-            CalculatorKeyContent(width: key.width, height: key.height, symbol: key.op.getRawValue(), txtColor: key.sixColors.textColor, bgColor: key.sixColors.upColor)
-        }
-            .onLongPressGesture(minimumDuration: 0.5) {
-                if key.op.isEqual(to: ClearOperation.back) {
-                    key.callback(Key(ClearOperation.clear))
-                } else {
-                    /// do nothing additionally on long press
-                }
-            }
-        onPressingChanged: { inProgress in
-            if inProgress {
-                self.down()
-            } else {
-                if isPressed {
-                    key.callback(key)
-                }
-                self.up()
-            }
-        }
-        .simultaneousGesture(
-            DragGesture(minimumDistance: 0)
-                .onChanged { value in
-                    if isPressed {
-                        /// If the finger moves too far away from the key
-                        /// handle that like a finger up event
-                        if !toleranceRect.contains(value.location) {
-                            up()
-                        }
-                    }
-                }
-        )
+//        if let imagename = key.imageName, let borderColor = key.borderColor {
+//            CalculatorKeyContent(width: key.width, height: key.height, imageName: imagename, borderColor: borderColor)
+//        } else if let imagename = key.imageName, let borderColor = key.borderColor {
+//        SymbolKeyView(symbolKey: SymbolKey(width: key.width, height: key.height, symbol: key.op.getRawValue(), txtColor: key.sixColors.textColor, upColor: key.sixColors.upColor, downColor: .red))
+//            .onLongPressGesture(minimumDuration: 0.5) {
+//                if key.op.isEqual(to: ClearOperation.back) {
+//                    key.callback(Key(ClearOperation.clear))
+//                } else {
+//                    /// do nothing additionally on long press
+//                }
+//            }
+//        onPressingChanged: { inProgress in
+//            if inProgress {
+//                self.down()
+//            } else {
+//                if isPressed {
+//                    key.callback(key)
+//                }
+//                self.up()
+//            }
+//        }
+//        .simultaneousGesture(
+//            DragGesture(minimumDistance: 0)
+//                .onChanged { value in
+//                    if isPressed {
+//                        /// If the finger moves too far away from the key
+//                        /// handle that like a finger up event
+//                        if !toleranceRect.contains(value.location) {
+//                            up()
+//                        }
+//                    }
+//                }
+//        )
     }
     
     private func down() {

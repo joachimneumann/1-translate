@@ -83,7 +83,7 @@ struct Label: View {
 
     var body: some View {
         switch symbol {
-        //case "√2":    RootShapeView(rootDigit: "", color: color, size: size, underTheRoot: "2")
+        case "sqr":    RootShapeView(rootDigit: "2", color: color, size: size, underTheRoot: "x")
         case "sqrt" :    RootShapeView(rootDigit: "2", color: color, size: size)
         case "sqrt3":    RootShapeView(rootDigit: "3", color: color, size: size)
         case "y√":    RootShapeView(rootDigit: "y", color: color, size: size)
