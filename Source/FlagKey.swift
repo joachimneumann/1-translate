@@ -37,7 +37,7 @@ import SwiftUI
     }
     override func view() -> AnyView {
         return AnyView(
-            Image(flagname.replacingOccurrences(of: "CONFIG_", with: ""))
+            Image(flagname)
                 .resizable()
                 .frame(width: width-2*borderwidth, height: height-2*borderwidth)
                 .clipShape(Capsule())

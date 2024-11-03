@@ -11,8 +11,8 @@ import NumberTranslator
 
 class SelectedLanguagekeyboard: SmallKeyboard {
     let countryKey: FlagKey
-    init(keySize: CGSize, translationManager: TranslationManager, currentLanguage: NumberTranslator.Language) {
-        countryKey = FlagKey(flagname: "CONFIG_"+translationManager.flagname(currentLanguage))
+    override init(keySize: CGSize) {
+        countryKey = FlagKey(flagname: "")
         countryKey.borderColor = .gray
         countryKey.borderwidth = 5.0
         let settingsKey = SymbolKey(ConfigOperation.settings)

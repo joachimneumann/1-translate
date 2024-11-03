@@ -14,9 +14,9 @@ class ViewModel: ObservableObject {
     var calculator: Calculator
     var display: Display
     var translationManager: TranslationManager
-    @Published var currentLanguage: NumberTranslator.Language = .english
+    @Published var currentLanguage: NumberTranslator.Language = .english // TODO: Persistent
     var translatorKeyboard: TranslatorKeyboard
-    var languageSelectorKeyboard: SmallKeyboard
+    var languageSelectorKeyboard: LanguageSelectorKeyboard
     @Published var selectedLanguageKeyboard: SelectedLanguagekeyboard
     var separator: Separator
     let intDisplay: IntDisplay
@@ -45,21 +45,21 @@ class ViewModel: ObservableObject {
         translationManager.translateThis(allInOneLine, to: currentLanguage)
     }
 
+    func toggleLanguageSelector(key: Key) {
+        showLanguageSelector.toggle()
+    }
+    
     func execute(_ key: Key) {
         if let flagKey = key as? FlagKey {
-            if flagKey.flagname.starts(with: "CONFIG_") {
-                showLanguageSelector.toggle()
+            if let newLanguage = translationManager.language(forFlagname: flagKey.flagname) {
+                currentLanguage = newLanguage
+                translatorKeyboard.countryKey.flagname = flagKey.flagname
+                selectedLanguageKeyboard.countryKey.flagname = flagKey.flagname
+                process()
                 return
-            } else {
-                if let newLanguage = translationManager.language(forFlagname: flagKey.flagname) {
-                    currentLanguage = newLanguage
-                    translatorKeyboard.countryKey.flagname = "CONFIG_"+flagKey.flagname
-                    selectedLanguageKeyboard.countryKey.flagname = "CONFIG_"+flagKey.flagname
-                    process()
-                    return
-                }
             }
-        } else if let symbolKey = key as? SymbolKey {
+        }
+        if let symbolKey = key as? SymbolKey {
             calculator.press(symbolKey.op)
             process()
         }
@@ -79,13 +79,22 @@ class ViewModel: ObservableObject {
         intDisplay = IntDisplay(displayWidth: 10, separator: separator)
         calculator = Calculator(precision: 40)
         display = Display(floatDisplayWidth: screen.displayWidth, font: screen.numberDisplayFont, ePadding: screen.ePadding)
-        translatorKeyboard = TranslatorKeyboard(keySize: screen.keySize)
+
         translationManager = TranslationManager()
+
+        translatorKeyboard = TranslatorKeyboard(keySize: screen.keySize)
         languageSelectorKeyboard = LanguageSelectorKeyboard(keySize: screen.keySize, translationManager: translationManager)
-        selectedLanguageKeyboard = SelectedLanguagekeyboard(keySize: screen.keySize, translationManager: translationManager, currentLanguage: .english)
+        selectedLanguageKeyboard = SelectedLanguagekeyboard(keySize: screen.keySize)
+
+
         translatorKeyboard.callback = execute
         languageSelectorKeyboard.callback = execute
         selectedLanguageKeyboard.callback = execute
+
+        translatorKeyboard.countryKey.callback = toggleLanguageSelector
+        translatorKeyboard.countryKey.flagname = translationManager.flagname(currentLanguage)
+        selectedLanguageKeyboard.countryKey.callback = toggleLanguageSelector
+        selectedLanguageKeyboard.countryKey.flagname = translationManager.flagname(currentLanguage)
         process()
     }
 

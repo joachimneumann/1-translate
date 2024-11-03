@@ -33,7 +33,7 @@ class TranslatorKeyboard: SmallKeyboard {
         let threeKey = SymbolKey(DigitOperation.three)
         let addKey = SymbolKey(TwoOperantOperation.add)
         
-        countryKey = FlagKey(flagname: "CONFIG_English")
+        countryKey = FlagKey(flagname: "")
         countryKey.borderColor = .gray
         countryKey.borderwidth = 5.0
         let zeroKey = SymbolKey(DigitOperation.zero)
