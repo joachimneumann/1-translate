@@ -34,7 +34,7 @@ class TranslatorKeyboard: SmallKeyboard {
         let addKey = SymbolKey(TwoOperantOperation.add)
         
         countryKey = FlagKey(flagname: "")
-        countryKey.borderColor = .gray
+        countryKey.borderColor = Color(UIColor.darkGray)
         countryKey.borderwidth = 5.0
         let zeroKey = SymbolKey(DigitOperation.zero)
         let decimalKey = SymbolKey(DigitOperation.dot)

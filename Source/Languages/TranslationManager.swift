@@ -52,12 +52,13 @@ class TranslationManager: NumberTranslator, Identifiable {
         return nil
     }
     func borderColor(_ language: NumberTranslator.Language) -> Color {
-        switch language {
-        case .german, .english, .polish, .finnish:
-            return Color(UIColor.lightGray)
-        default:
-            return Color(UIColor.lightGray)
-        }
+        Color(UIColor.darkGray)
+//        switch language {
+//        case .german, .english, .polish, .finnish:
+//            return Color(UIColor.darkGray)
+//        default:
+//            return Color(UIColor.darkGray)
+//        }
     }
 
     func nameWithDescription(_ language: NumberTranslator.Language) -> String {

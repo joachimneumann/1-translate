@@ -13,10 +13,6 @@ import SwiftUI
     var borderwidth: CGFloat
     var brightness: Double = 0.0
     
-//    init(width: CGFloat, height: CGFloat, op: any OpProtocol) {
-//        self.im
-//        super.init(width: width, height: height)
-//    }
     init(flagname: String, borderColor: Color? = nil, borderwidth: CGFloat = 5.0) {
         self.flagname = flagname
         if let borderColor = borderColor {

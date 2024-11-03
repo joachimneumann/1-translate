@@ -54,6 +54,7 @@ class ViewModel: ObservableObject {
                 currentLanguage = newLanguage
                 translatorKeyboard.countryKey.flagname = flagKey.flagname
                 selectedLanguageKeyboard.countryKey.flagname = flagKey.flagname
+                translationManager.translateThis(display.string, to: currentLanguage)
                 return
             }
         }
