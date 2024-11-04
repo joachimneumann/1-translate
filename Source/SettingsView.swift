@@ -1,5 +1,5 @@
 //
-//  Settings.swift
+//  SettingsView.swift
 //  Calculator
 //
 //  Created by Joachim Neumann on 11/13/22.
@@ -9,7 +9,7 @@ import SwiftUI
 import NumberTranslator
 import SwiftGmp
 
-struct Settings: View {
+struct SettingsView: View {
     @Environment(\.presentationMode) var presentation /// for dismissing the Settings View
     
     @Bindable var viewModel: ViewModel
@@ -392,7 +392,7 @@ extension View {
         Rectangle()
             .foregroundColor(.gray)
         VStack {
-            Settings(viewModel: ViewModel(), language: .spanish, font: Font(AppleFont.systemFont(ofSize: 20)))
+            SettingsView(viewModel: ViewModel(), language: .spanish, font: Font(AppleFont.systemFont(ofSize: 20)))
         }
     }
 }
