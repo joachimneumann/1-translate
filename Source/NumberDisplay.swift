@@ -42,11 +42,12 @@ struct NumberDisplay: View {
     }
 }
 
-//#Preview {
-//    let screen = Screen()
-//    NumberDisplay(R: Representation(error: "Preview", appleFont: screen.proportionalFont))
-//        .frame(height: 300)
-//        .padding()
-//        .background(Color.black)
-//        .foregroundColor(.white)
-//}
+#Preview {
+    let display = Display(floatDisplayWidth: 100, font: AppleFont.systemFont(ofSize: 40), ePadding: 0.0)
+    let _ = display.left = "3.14"
+    NumberDisplay(display: display)
+        .frame(height: 300)
+        .padding()
+        .background(Color.black)
+        .foregroundColor(.white)
+}

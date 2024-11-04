@@ -7,15 +7,43 @@
 
 import SwiftUI
 import SwiftGmp
+import NumberTranslator
 
 class Persistent {
-    /// I initialize the decimalSeparator with the locale preference, but
-//    @AppStorage("decimalSeparatorKey", store: .standard)
-//    var decimalSeparator: Sepa = Locale.current.decimalSeparator == "," ? .comma : .dot
+    var translationManager = TranslationManager()
+    // Store Separator as a String
+    @AppStorage("separatorString", store: .standard)
+    private var separatorString: String = Separator(
+        separatorType: (Locale.current.decimalSeparator == "," ? .comma : .dot),
+        groups: false
+    ).encoded
+
+    // Computed property to get/set the `Separator` object
+    var separator: Separator {
+        get {
+            Separator.decode(from: separatorString) ?? Separator(
+                separatorType: (Locale.current.decimalSeparator == "," ? .comma : .dot),
+                groups: false
+            )
+        }
+        set {
+            separatorString = newValue.encoded
+        }
+    }
+
+    @AppStorage("currentFlagname", store: .standard)
+    var currentFlagname: String = "English"
     
-    @AppStorage("separateGroupsKey", store: .standard)
-    var separateGroups: Bool = false
-    
+    var currentLanguage: NumberTranslator.Language {
+        get {
+            translationManager.language(forFlagname: currentFlagname) ?? .english
+        }
+        set {
+            currentFlagname = translationManager.flagname(newValue)
+        }
+        
+    }
+
     @AppStorage("offerReadingAloudKey", store: .standard)
     var offerReadingAloud: Bool = true
 }
