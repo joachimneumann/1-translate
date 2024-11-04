@@ -112,8 +112,8 @@ struct TranslateNumbers: View {
                     .preferredColorScheme(.dark)
             }
             .accentColor(.white)
-            .onChange(of: viewModel.navigateToSettings) { shouldNavigate in
-                if shouldNavigate {
+            .onChange(of: viewModel.navigateToSettings) { old, new in
+                if new {
                     navigationPath.append("Settings")
                 }
             }
