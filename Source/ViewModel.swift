@@ -21,7 +21,7 @@ import SwiftGmp
     var selectedLanguageKeyboard: SelectedLanguagekeyboard
     let monoFontDisplay: MonoFontDisplay
     var showLanguageSelector: Bool = false
-    
+    var navigateToSettings: Bool = false
     
     func process() {
         if calculator.displayBuffer.count > 0 {
@@ -62,6 +62,10 @@ import SwiftGmp
         }
             
         if let symbolKey = key as? SymbolKey {
+            if symbolKey.op.isEqual(to: ConfigOperation.settings) {
+                navigateToSettings = true  // Trigger navigation
+                return
+            }
             calculator.press(symbolKey.op)
             for row in translatorKeyboard.keyMatrix {
                 for k in row {

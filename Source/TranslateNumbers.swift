@@ -18,6 +18,8 @@ struct TranslateNumbers: View {
     @State private var showLanguageSelection = false
     @State private var settingsDetent = PresentationDetent.medium
     
+    @State private var navigationPath = NavigationPath()
+
     init(screen: Screen) {
         //        self._viewModel = StateObject(wrappedValue: ViewModel(screen: screen))
         self.viewModel = ViewModel(screen: screen)
@@ -101,13 +103,29 @@ struct TranslateNumbers: View {
     }
     
     var body: some View {
-        ZStack {
-            portraitView
-                .padding(.bottom, viewModel.screen.bottomPadding)
-                .padding(.horizontal, viewModel.screen.horizontalPadding)
-                .preferredColorScheme(.dark)
+        NavigationStack(path: $navigationPath) {
+            
+            ZStack {
+                portraitView
+                    .padding(.bottom, viewModel.screen.bottomPadding)
+                    .padding(.horizontal, viewModel.screen.horizontalPadding)
+                    .preferredColorScheme(.dark)
+            }
+            .accentColor(.white)
+            .onChange(of: viewModel.navigateToSettings) { shouldNavigate in
+                if shouldNavigate {
+                    navigationPath.append("Settings")
+                }
+            }
+            .navigationDestination(for: String.self) { destination in
+                if destination == "Settings" {
+                    SettingsView(viewModel: viewModel, language: viewModel.persistent.currentLanguage, font: Font(viewModel.screen.numberDisplayFont))
+                        .onDisappear {
+                            viewModel.navigateToSettings = false
+                        }
+                }
+            }
         }
-        .accentColor(.white)
 //        .onChange(of: scenePhase) { oldPhase, newPhase in
 //            if newPhase == .active {
 //                //                            viewModel.voices.refreshVoiceDict(list: viewModel.languages.list)
