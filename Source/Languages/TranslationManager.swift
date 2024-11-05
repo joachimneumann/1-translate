@@ -13,22 +13,34 @@ class TranslationResult: ObservableObject, CustomDebugStringConvertible {
     @Published var displayText: String
     @Published var overline: String?
     var spokenText: String?
+    var error: Bool
+    
     var copyText: String {
         let text = displayText.replacingOccurrences(of: "\u{200A}", with: "")
         guard var overline = overline else { return text }
         overline = overline.replacingOccurrences(of: "\u{200A}", with: "")
         return "<overline>" + overline + "</overline>" + text
     }
+    
     init() {
         self.displayText = ""
         self.overline = nil
         spokenText = nil
+        error = false
     }
+    
     init(displayText: String, overline: String?, spokenText: String?) {
-        self.displayText = displayText
+        if displayText.starts(with: "Error: ") {
+            self.displayText = displayText.replacingOccurrences(of: "Error: ", with: "")
+            self.error = true
+        } else {
+            self.displayText = displayText
+            self.error = false
+        }
         self.overline = overline
         self.spokenText = spokenText
     }
+    
     var debugDescription: String {
         "\((overline != nil) ? overline!+" " : "")\(displayText)"
     }
@@ -51,6 +63,7 @@ class TranslationManager: NumberTranslator, Identifiable {
         }
         return nil
     }
+    
     func borderColor(_ language: NumberTranslator.Language) -> Color {
         Color(UIColor.darkGray)
     }
@@ -62,7 +75,13 @@ class TranslationManager: NumberTranslator, Identifiable {
     var speakingPostProcessing: ((String) -> String)?
 
     func translateThis(_ s: String, to language: NumberTranslator.Language) {
-        let overlineAndText = super.translate(s, to: language)
+        var overlineAndText = super.translate(s, to: language)
+        if overlineAndText.starts(with: "Error: ") {
+            overlineAndText = overlineAndText.replacingOccurrences(of: "Error: ", with: "")
+            result.error = true
+        } else {
+            result.error = false
+        }
         if overlineAndText.contains("OVERLINE") {
             let parts = overlineAndText.split(separator: "OVERLINE")
             if parts.count == 1 {

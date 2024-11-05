@@ -11,6 +11,7 @@ import SwiftGmp
 
 @Observable class ViewModel {
     let screen: Screen
+    var persistent = Persistent()
     var calculator: Calculator
     var display: Display
     var currentLanguageName: String
@@ -25,29 +26,77 @@ import SwiftGmp
     
     func process() {
         if calculator.displayBuffer.count > 0 {
-            if display.fits(calculator.displayBuffer) {
-                display.left = calculator.displayBuffer
+            var withGrouping: String = calculator.displayBuffer
+            withGrouping.inject(separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter)
+            if display.fits(withGrouping) {
+                display.left = withGrouping
                 display.right = nil
             } else {
                 let raw = calculator.raw
                 display.update(raw: raw)
-                if let right = display.right {
+                display.left.inject(separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter)
+                if var right = display.right {
+                    right.inject(separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter)
                     display.rightWidth = display.eDigitWidth + display.widestDigitWidth * CGFloat(right.count - 1)
                 }
             }
         } else {
             let raw = calculator.raw
             display.update(raw: raw)
+            display.left.inject(separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter)
         }
-
+        
         translatorKeyboard.back(calculator.privateDisplayBufferHasDigits)
-        translationManager.translateThis(display.string, to: persistent.currentLanguage)
-    }
 
+        var toTranslate = display.string
+        toTranslate.remove(separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter)
+        translationManager.translateThis(toTranslate, to: persistent.currentLanguage)
+    }
+    
     func toggleLanguageSelector(key: Key) {
         showLanguageSelector.toggle()
     }
     
+    func decimalSeparator(for languageCode: String, countryCode: String? = nil) -> String? {
+        var localeIdentifier = languageCode
+        
+        // Append the country code if it's provided and not empty
+        if let countryCode = countryCode, !countryCode.isEmpty {
+            if !localeIdentifier.isEmpty {
+                localeIdentifier += "_"
+            }
+            localeIdentifier += countryCode
+        }
+        
+        // Use Locale.current if both codes are missing
+        let locale: Locale = Locale(identifier: localeIdentifier)
+        
+        let formatter = NumberFormatter()
+        formatter.locale = locale
+        return formatter.decimalSeparator
+    }
+
+        
+    func separatorCharacter(forLanguage language: NumberTranslator.Language) -> Character {
+        if let code = translationManager.code(language) {
+            if let separator = decimalSeparator(for: code) {
+                return Character(separator)
+            }
+        }
+        return "."
+    }
+    func groupingCharacter(forLanguage language: NumberTranslator.Language) -> Character? {
+        if persistent.showGrouping {
+            if separatorCharacter(forLanguage: language) == "." {
+                return ","
+            } else {
+                return "."
+            }
+        } else {
+            return nil
+        }
+    }
+
     func execute(_ key: Key) {
         if let flagKey = key as? FlagKey {
             if let newLanguage = translationManager.language(forFlagname: flagKey.flagname) {
@@ -56,11 +105,15 @@ import SwiftGmp
                 currentLanguageEnglishName = translationManager.englishName(persistent.currentLanguage)
                 translatorKeyboard.countryKey.flagname = flagKey.flagname
                 selectedLanguageKeyboard.countryKey.flagname = flagKey.flagname
+                display.separatorCharacter = separatorCharacter(forLanguage: persistent.currentLanguage)
+                display.groupingCharacter = groupingCharacter(forLanguage: persistent.currentLanguage)
+                translatorKeyboard.setSeparatorSymbol(String(display.separatorCharacter))
                 translationManager.translateThis(display.string, to: persistent.currentLanguage)
+                process()
                 return
             }
         }
-            
+        
         if let symbolKey = key as? SymbolKey {
             if symbolKey.op.isEqual(to: ConfigOperation.settings) {
                 navigateToSettings = true  // Trigger navigation
@@ -86,38 +139,42 @@ import SwiftGmp
         }
     }
     
-//    private(set) var _voices: Voices!
-    var persistent = Persistent()
-//
-//
-//    var voices: Voices {
-//        return _voices
-//    }
-
+    //    private(set) var _voices: Voices!
+    //
+    //
+    //    var voices: Voices {
+    //        return _voices
+    //    }
+    
     init(screen: Screen = Screen()) {
         currentLanguageName = ""
         currentLanguageEnglishName = nil
         self.screen = screen
         let tempTranslationManager = TranslationManager()
-
+        
         calculator = Calculator(precision: 40)
         display = Display(floatDisplayWidth: screen.displayWidth, font: screen.numberDisplayFont, ePadding: screen.ePadding)
-        translatorKeyboard = TranslatorKeyboard(keySize: screen.keySize)
         monoFontDisplay = MonoFontDisplay(displayWidth: 10)
         selectedLanguageKeyboard = SelectedLanguagekeyboard(keySize: screen.keySize)
         languageSelectorKeyboard = LanguageSelectorKeyboard(keySize: screen.keySize, translationManager: tempTranslationManager)
-
+        
         translationManager = tempTranslationManager
-        monoFontDisplay.separator = persistent.separator
+
+        translatorKeyboard = TranslatorKeyboard(keySize: screen.keySize)
+        display.separatorCharacter = separatorCharacter(forLanguage: persistent.currentLanguage)
+        display.groupingCharacter = groupingCharacter(forLanguage: persistent.currentLanguage)
+        translatorKeyboard.setSeparatorSymbol(String(display.separatorCharacter))
+
         translatorKeyboard.callback = execute
         languageSelectorKeyboard.callback = execute
         selectedLanguageKeyboard.callback = execute
-
+        
         translatorKeyboard.countryKey.callback = toggleLanguageSelector
         translatorKeyboard.countryKey.flagname = translationManager.flagname(persistent.currentLanguage)
         selectedLanguageKeyboard.countryKey.callback = toggleLanguageSelector
         selectedLanguageKeyboard.countryKey.flagname = translationManager.flagname(persistent.currentLanguage)
+
         process()
     }
-
+    
 }

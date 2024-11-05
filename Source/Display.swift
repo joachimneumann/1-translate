@@ -9,7 +9,9 @@ import SwiftGmp
 import SwiftUI
 
 class Display: MonoFontDisplay, ObservableObject {
-
+    var groupingCharacter: Character? = nil
+    var separatorCharacter: Character = "."
+    
     override var left: String {
         didSet {
             objectWillChange.send()
@@ -54,10 +56,17 @@ class Display: MonoFontDisplay, ObservableObject {
         Int(floatDisplayWidth / narrowestDigitWidth)
     }
     
-    override func fits(_ mantissa: String, _ exponent: String? = nil) -> Bool {
+    override func fits(_ mantissaParameter: String, _ exponentParameter: String? = nil) -> Bool {
         var w: CGFloat
+        var mantissa = mantissaParameter
+        if let groupingCharacter = groupingCharacter {
+            mantissa.inject(separatorCharacter: separatorCharacter, groupingCharacter: groupingCharacter)
+        }
         w = mantissa.textWidth(kerning: 0.0, uiFont)
-        if let exponent = exponent {
+        if var exponent = exponentParameter {
+            if let groupingCharacter = groupingCharacter {
+                exponent.inject(separatorCharacter: separatorCharacter, groupingCharacter: groupingCharacter)
+            }
             w += ePadding
             let width = eDigitWidth + widestDigitWidth * CGFloat(exponent.count - 1)
             w += width
@@ -65,3 +74,35 @@ class Display: MonoFontDisplay, ObservableObject {
         return w <= floatDisplayWidth
     }
 }
+        
+extension String {
+    public mutating func inject(separatorCharacter: Character, groupingCharacter: Character?) {
+        let parts = self.split(separator: ".")
+        var beforeDecimalPoint: String = String(parts[0])
+        if let c = groupingCharacter {
+            var count = beforeDecimalPoint.count
+            while count >= 4 {
+                count = count - 3
+                beforeDecimalPoint.insert(c, at: beforeDecimalPoint.index(beforeDecimalPoint.startIndex, offsetBy: count))
+            }
+        }
+        if parts.count == 1 {
+            if self.hasSuffix(".") {
+                self.removeLast()
+                self = beforeDecimalPoint + String(separatorCharacter)
+            }
+            return
+        }
+        if parts.count == 2 {
+            self = beforeDecimalPoint + String(separatorCharacter) + String(parts[1])
+        }
+    }
+    public mutating func remove(separatorCharacter: Character, groupingCharacter: Character?) {
+        var ret: String = self
+        if let gr = groupingCharacter {
+            ret = ret.replacingOccurrences(of: String(gr), with: "")
+        }
+        self = ret.replacingOccurrences(of: String(separatorCharacter), with: ".")
+    }
+}
+

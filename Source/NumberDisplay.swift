@@ -36,7 +36,7 @@ struct NumberDisplay: View {
         }
         .font(display.font)
         .lineLimit(1)
-        .foregroundColor(.white)
+        .foregroundColor(display.isError ? .orange : .white)
         .frame(maxWidth: .infinity)//, maxHeight: .infinity)
 //        .background(.yellow)
     }

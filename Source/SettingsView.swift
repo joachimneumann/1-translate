@@ -21,10 +21,10 @@ struct SettingsView: View {
     var body: some View {
         VStack {
             List {
-                DigitsSettings
-//                if language == .english {
-//                    EnglishParameters
-//                }
+//                Grouping
+                if language == .english {
+                    EnglishParameters
+                }
 //                if language == .german {
 //                    GermanParameters
 //                }
@@ -48,49 +48,36 @@ struct SettingsView: View {
         }
     }
     
-    var DigitsSettings: some View {
-        let calculator = Calculator(precision: 100)
-        calculator.evaluateString("120000.5")
-        let raw = calculator.raw
-        let display = Display(floatDisplayWidth: 1000, font: AppleFont.systemFont(ofSize: 40), ePadding: 0.0)
-        display.update(raw: raw)
-        return Section(header: Text("Separators")) {
-            Grid(alignment: .leading, verticalSpacing: 10) {
-                GridRow {
-                    Text(display.left)
-                        .foregroundColor(.yellow)
-                        .font(.largeTitle)
-                        .gridCellColumns(2)
-                        .padding(.bottom, 5)
-                }
-                GridRow {
-                    Text("Decimal Separator")
-                        .padding(.trailing, 5)
-                    Picker("", selection: $viewModel.persistent.separator.separatorType) {
-                        ForEach(Separator.SeparatorType.allCases, id: \.self) { value in
-                            Text("\(value.rawValue)")
-                                .tag(value)
-                        }
-                    }
-                    .pickerStyle(.segmented)
-                }
-                .padding(.bottom, 5)
-                GridRow {
-                    Text("Grouping")
-                        .padding(.trailing, 5)
-                    Toggle("", isOn: $viewModel.persistent.separator.groups)
-                        .frame(width: 40)
-                        .toggleStyle(
-                            ColoredToggleStyle(onColor: Color(white: 0.6),
-                                               offColor: Color(white: 0.25),
-                                               thumbColor: .white))
-                        .buttonStyle(.plain)
-                        .padding(.trailing, 10)
-                }
-                .padding(.bottom, 5)
-            }
-        }
-    }
+//    var Grouping: some View {
+//        let calculator = Calculator(precision: 100)
+//        calculator.evaluateString("120000.5")
+//        let raw = calculator.raw
+//        let display = Display(floatDisplayWidth: 1000, font: AppleFont.systemFont(ofSize: 40), ePadding: 0.0)
+//        calculator.separator = viewModel.separator(forLanguage: language)
+//        display.update(raw: raw, separator: calculator.separator)
+//        return Section(header: Text("Separators")) {
+//            VStack {
+//                Text(display.string)
+//                    .foregroundColor(.yellow)
+//                    .font(.largeTitle)
+//                    .gridCellColumns(2)
+//                    .padding(.bottom, 5)
+//                HStack {
+//                    Text("Grouping")
+//                        .padding(.trailing, 5)
+//                    Toggle("", isOn: $viewModel.persistent.showGrouping)
+//                        .frame(width: 40)
+//                        .toggleStyle(
+//                            ColoredToggleStyle(onColor: Color(white: 0.6),
+//                                               offColor: Color(white: 0.25),
+//                                               thumbColor: .white))
+//                        .buttonStyle(.plain)
+//                        .padding(.trailing, 10)
+//                }
+//                .padding(.bottom, 5)
+//            }
+//        }
+//    }
     
 //    func updateSelectedVoice(reducedIdentifier: String, for code: String) {
 //        viewModel.voices.updateSelectedVoice(reducedIdentifier: reducedIdentifier, for: code)
@@ -129,12 +116,12 @@ struct SettingsView: View {
         let flagName: String
         let name: String
         let example: String
-        let translatedExample: TranslationResult
+        let translatedExample: String
         var content: () -> Content
         init(flagName: String,
              name: String,
              example: String,
-             translatedExample: TranslationResult,
+             translatedExample: String,
              @ViewBuilder content: @escaping () -> Content) {
             self.flagName = flagName
             self.name = name
@@ -153,7 +140,7 @@ struct SettingsView: View {
                     .frame(height: 13)
                     .padding(.trailing, 3)
                 Text(name) }) {
-                    Text(example + ": " + translatedExample.displayText)
+                    Text(example + ": " + translatedExample)
                         .fontWeight(.semibold)
                         .frame(height: 25)
                         .foregroundColor(.yellow)
@@ -162,25 +149,25 @@ struct SettingsView: View {
         }
     }
     
-//    var EnglishParameters: some View {
-//        return LanguageSection(
-//            flagName: viewModel.numberTranslator.flagName(.english),
-//            name: viewModel.numberTranslator.name(.english),
-//            example: "150",
-//            translatedExample: viewModel.numberTranslator.getResult("150", to: .english))
-//            {
-//                Text("\"and\" after hundred")
-//                Spacer()
-//                Toggle("", isOn: $viewModel.numberTranslator.englishUseAndAfterHundred)
-//                    .frame(width: 40)
-//                    .toggleStyle(
-//                        ColoredToggleStyle(onColor: Color(white: 0.6),
-//                                           offColor: Color(white: 0.25),
-//                                           thumbColor: .white))
-//                    .buttonStyle(.plain)
-//                    .padding(.trailing, 10)
-//            }
-//    }
+    var EnglishParameters: some View {
+        return LanguageSection(
+            flagName: viewModel.translationManager.flagname(language),
+            name: viewModel.translationManager.name(language),
+            example: "150",
+            translatedExample: viewModel.translationManager.translate("150", to: .english))
+            {
+                Text("\"and\" after hundred")
+                Spacer()
+                Toggle("", isOn: $viewModel.persistent.englishUseAndAfterHundred)
+                    .frame(width: 40)
+                    .toggleStyle(
+                        ColoredToggleStyle(onColor: Color(white: 0.6),
+                                           offColor: Color(white: 0.25),
+                                           thumbColor: .white))
+                    .buttonStyle(.plain)
+                    .padding(.trailing, 10)
+            }
+    }
 //    
 //    
 //    var GermanParameters: some View {

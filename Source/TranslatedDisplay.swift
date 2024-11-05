@@ -8,7 +8,7 @@ import SwiftUI
 
 extension View {
     func overline() -> some View {
-        overlay(Overline().foregroundColor(.white))
+        overlay(Overline())
     }
 }
 
@@ -25,7 +25,6 @@ struct Overline: Shape {
 struct TranslatedDisplay: View {
     @State private var moveGradient = true
     @ObservedObject var translationResult: TranslationResult
-    
     init(translation: TranslationResult) {
         self.translationResult = translation
     }
@@ -42,6 +41,7 @@ struct TranslatedDisplay: View {
             Text(translationResult.displayText)
                 .multilineTextAlignment(.trailing)
         }
+        .foregroundColor(translationResult.error ? .orange : .white)
         .contextMenu {
             Button("Copy to Clipboard") {
                 UIPasteboard.general.string = translationResult.copyText

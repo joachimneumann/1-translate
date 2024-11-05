@@ -61,11 +61,27 @@ struct TranslateNumbers: View {
     
     var portraitView: some View {
         VStack(spacing: 0.0) {
-            TranslatedDisplay(translation: viewModel.translationManager.result)
-                .font(Font(viewModel.screen.translationFont))
-            //.background(.yellow)
-            Spacer(minLength: 20.0)
-            NumberDisplay(display: viewModel.display)
+            ZStack {
+                VStack(spacing: 0.0) {
+                   TranslatedDisplay(translation: viewModel.translationManager.result)
+                       .font(Font(viewModel.screen.translationFont))
+                   Spacer(minLength: 20.0)
+                   NumberDisplay(display: viewModel.display)
+                }
+                // Add the transparent overlay when the keyboard is visible
+                if viewModel.showLanguageSelector {
+                   Color.clear
+                       .contentShape(Rectangle()) // Ensure the entire area is tappable
+                       .onTapGesture {
+                           viewModel.showLanguageSelector = false
+                       }
+                }
+            }
+//            //let _ = print("TranslateNumbers portraitView")
+//            TranslatedDisplay(translation: viewModel.translationManager.result)
+//                .font(Font(viewModel.screen.translationFont))
+//            Spacer(minLength: 20.0)
+//            NumberDisplay(display: viewModel.display)
 
             if viewModel.showLanguageSelector {
                 SmallKeyboardView(
@@ -75,7 +91,6 @@ struct TranslateNumbers: View {
                 )
                 .padding(.bottom, viewModel.screen.keySpacing)
                 ZStack {
-//                    let _ = print("portraitView selectedLanguageKeyboard \(viewModel.selectedLanguageKeyboard.bottomLeftKey!.flagname)")
                     SmallKeyboardView(
                         spacing: viewModel.screen.keySpacing,
                         smallKeyboard: viewModel.selectedLanguageKeyboard

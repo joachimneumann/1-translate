@@ -8,11 +8,11 @@
 import SwiftGmp
 import SwiftUI
 
-class TranslatorKeyboard: SmallKeyboard {
+@Observable class TranslatorKeyboard: SmallKeyboard {
     let clearKey: SymbolKey
     let countryKey: FlagKey
+    let separatorKey: SymbolKey
     override init(keySize: CGSize) {
-        
         clearKey = SymbolKey(ClearOperation.clear)
         let changeSignKey = SymbolKey(InplaceOperation.changeSign)
         let percentKey = SymbolKey(PercentOperation.percent)
@@ -37,7 +37,7 @@ class TranslatorKeyboard: SmallKeyboard {
         countryKey.borderColor = Color(UIColor.darkGray)
         countryKey.borderwidth = 5.0
         let zeroKey = SymbolKey(DigitOperation.zero)
-        let decimalKey = SymbolKey(DigitOperation.dot)
+        separatorKey = SymbolKey(DigitOperation.dot)
         let equalsKey = SymbolKey(EqualOperation.equal)
 
         super.init(keySize: keySize)
@@ -46,7 +46,11 @@ class TranslatorKeyboard: SmallKeyboard {
         appendRow([sevenKey, eightKey, nineKey, multiplyKey])
         appendRow([fourKey, fiveKey, sixKey, subtractKey])
         appendRow([oneKey, twoKey, threeKey, addKey])
-        appendRow([countryKey, zeroKey, decimalKey, equalsKey])
+        appendRow([countryKey, zeroKey, separatorKey, equalsKey])
+    }
+    
+    func setSeparatorSymbol(_ symbol: String) {
+        separatorKey.symbol = symbol
     }
     
     func back(_ displayBufferHasDigits: Bool) {
