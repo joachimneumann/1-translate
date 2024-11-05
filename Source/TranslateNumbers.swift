@@ -77,12 +77,6 @@ struct TranslateNumbers: View {
                        }
                 }
             }
-//            //let _ = print("TranslateNumbers portraitView")
-//            TranslatedDisplay(translation: viewModel.translationManager.result)
-//                .font(Font(viewModel.screen.translationFont))
-//            Spacer(minLength: 20.0)
-//            NumberDisplay(display: viewModel.display)
-
             if viewModel.showLanguageSelector {
                 SmallKeyboardView(
                     spacing: viewModel.screen.keySpacing,

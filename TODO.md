@@ -2,7 +2,11 @@
 
 Switzerland and Liechtenstein are different, as they use a point as a decimal separator, and an apostrophe (‘) for thousands.
 
+settings
+
 German: soft trennung
+
+voice, voice animation
 
 - voice broken...
 - remember settings
