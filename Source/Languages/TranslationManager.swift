@@ -93,7 +93,7 @@ class TranslationManager: NumberTranslator, Identifiable {
                 result.displayText = " " + String(parts[1]).trimmingCharacters(in: .whitespacesAndNewlines)
             }
         } else {
-            result.displayText = overlineAndText.trimmingCharacters(in: .whitespacesAndNewlines)
+            result.displayText = overlineAndText//.trimmingCharacters(in: .whitespacesAndNewlines)
         }
         if code(language) != nil && hasVoice {
             result.spokenText = overlineAndText.replacingOccurrences(of: "\u{200A}", with: "")
