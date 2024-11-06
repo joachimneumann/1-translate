@@ -6,26 +6,10 @@
 
 import SwiftUI
 
-extension View {
-    func overline() -> some View {
-        overlay(Overline())
-    }
-}
-
-struct Overline: Shape {
-    var edges: [Edge] = [.top]
-    func path(in rect: CGRect) -> Path {
-        edges.map { _ in
-            return Path(.init(x: rect.minX, y: rect.minY+3, width: rect.width, height: 2))
-        }.reduce(into: Path()) { $0.addPath($1) }
-    }
-}
-
 struct TranslatedDisplay: View {
     let uiFont: UIFont
     @State private var moveGradient = true
     @ObservedObject var translationResult: TranslationResult
-    
     
     var body: some View {
         HStack(alignment: .bottom, spacing: 0.0) {
