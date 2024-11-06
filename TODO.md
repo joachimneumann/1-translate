@@ -4,8 +4,6 @@ Switzerland and Liechtenstein are different, as they use a point as a decimal se
 
 settings
 
-German: soft trennung
-
 voice, voice animation
 
 - voice broken...
