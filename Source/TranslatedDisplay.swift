@@ -14,7 +14,6 @@ extension View {
 
 struct Overline: Shape {
     var edges: [Edge] = [.top]
-    
     func path(in rect: CGRect) -> Path {
         edges.map { _ in
             return Path(.init(x: rect.minX, y: rect.minY+3, width: rect.width, height: 2))
@@ -71,7 +70,8 @@ struct TranslatedDisplay: View {
 
 
 #Preview {
-    return TranslatedDisplay(translation: TranslationResult(displayText: "hello", overline: nil, spokenText: nil))
-        .background (.yellow)
+    return TranslatedDisplay(translation: TranslationResult(displayText: "DCCCLXXXVIII", overline: "VIII", spokenText: nil))
+        .padding()
+        .background (.black)
 
 }
