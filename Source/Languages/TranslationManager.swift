@@ -94,6 +94,7 @@ class TranslationManager: NumberTranslator, Identifiable {
             }
         } else {
             result.displayText = overlineAndText//.trimmingCharacters(in: .whitespacesAndNewlines)
+            result.overline = nil
         }
         if code(language) != nil && hasVoice {
             result.spokenText = overlineAndText.replacingOccurrences(of: "\u{200A}", with: "")

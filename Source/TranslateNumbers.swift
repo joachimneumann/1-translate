@@ -63,7 +63,7 @@ struct TranslateNumbers: View {
         VStack(spacing: 0.0) {
             ZStack {
                 VStack(spacing: 0.0) {
-                   TranslatedDisplay(translation: viewModel.translationManager.result)
+                    TranslatedDisplay(uiFont: viewModel.screen.translationFont, translationResult: viewModel.translationManager.result)
                        .font(Font(viewModel.screen.translationFont))
                    Spacer(minLength: 20.0)
                    NumberDisplay(display: viewModel.display)

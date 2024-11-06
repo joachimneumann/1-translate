@@ -22,23 +22,30 @@ struct Overline: Shape {
 }
 
 struct TranslatedDisplay: View {
+    let uiFont: UIFont
     @State private var moveGradient = true
     @ObservedObject var translationResult: TranslationResult
-    init(translation: TranslationResult) {
-        self.translationResult = translation
-    }
     
     
     var body: some View {
         HStack(alignment: .bottom, spacing: 0.0) {
             Spacer(minLength: 0.0)
-            if translationResult.overline != nil {
-                Text(translationResult.overline!)
-                    .overline()
-                    .multilineTextAlignment(.trailing)
+            if translationResult.overline == nil {
+                Text(translationResult.displayText)
+                    .font(Font(uiFont))
+            } else {
+                ZStack {
+                    (Text(translationResult.overline!)
+                        .underline(true, color: .white)
+                     + Text(translationResult.displayText))
+                    .foregroundColor(.black)
+                    .offset(y: -1.0 * uiFont.pointSize)
+                    Text(translationResult.overline!)
+                        .foregroundColor(.white)
+                    + Text(translationResult.displayText)
+                }
+                .font(Font(uiFont))
             }
-            Text(translationResult.displayText)
-                .multilineTextAlignment(.trailing)
         }
         .foregroundColor(translationResult.error ? .orange : .white)
         .contextMenu {
@@ -46,32 +53,34 @@ struct TranslatedDisplay: View {
                 UIPasteboard.general.string = translationResult.copyText
             }
         }
-            .minimumScaleFactor(0.1)
-//        let screenWidth: CGFloat = 300.0// Screen.main.bounds.size.width
-//        Rectangle()
-//            .overlay {
-//                LinearGradient(colors: [.white, .orange, .white], startPoint: .trailing, endPoint: .leading)
-//                    .frame(width: 150)
-//                    .offset(x: moveGradient ? -screenWidth/2 : screenWidth/2)
-//            }
-//            .animation(.linear(duration: 2).repeatForever(autoreverses: false), value: moveGradient)
-//            .mask {
-//                Text("Slide to power off")
-//                    .foregroundColor(.white)
-//                    .font(.largeTitle)
-//            }
-//            .onAppear {
-//                self.moveGradient.toggle()
-//            }
-//            .foregroundColor(.white)
+        .minimumScaleFactor(0.1)
+        //        let screenWidth: CGFloat = 300.0// Screen.main.bounds.size.width
+        //        Rectangle()
+        //            .overlay {
+        //                LinearGradient(colors: [.white, .orange, .white], startPoint: .trailing, endPoint: .leading)
+        //                    .frame(width: 150)
+        //                    .offset(x: moveGradient ? -screenWidth/2 : screenWidth/2)
+        //            }
+        //            .animation(.linear(duration: 2).repeatForever(autoreverses: false), value: moveGradient)
+        //            .mask {
+        //                Text("Slide to power off")
+        //                    .foregroundColor(.white)
+        //                    .font(.largeTitle)
+        //            }
+        //            .onAppear {
+        //                self.moveGradient.toggle()
+        //            }
+        //            .foregroundColor(.white)
     }
-
+    
 }
 
 
 #Preview {
-    return TranslatedDisplay(translation: TranslationResult(displayText: "DCCCLXXXVIII", overline: "VIII", spokenText: nil))
+    let fontsize: CGFloat = 40.0
+    TranslatedDisplay(uiFont: UIFont.systemFont(ofSize: fontsize), translationResult: TranslationResult(displayText: "DCCCdlfgjksdlfkjgdflkjLXXl", overline: "VIldfksdII", spokenText: nil))
         .padding()
+        .padding(.top, fontsize)
         .background (.black)
-
+    
 }
