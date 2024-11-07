@@ -4,6 +4,9 @@ Switzerland and Liechtenstein are different, as they use a point as a decimal se
 
 settings
 
+roman option
+switch use vinculum / overline
+
 voice, voice animation
 
 - voice broken...
