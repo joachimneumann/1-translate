@@ -82,15 +82,15 @@ class TranslationManager: NumberTranslator, Identifiable {
         } else {
             result.error = false
         }
-        if overlineAndText.contains("OVERLINE") {
-            let parts = overlineAndText.split(separator: "OVERLINE")
+        if overlineAndText.contains("_OVERLINE_") {
+            let parts = overlineAndText.split(separator: "_OVERLINE_")
             if parts.count == 1 {
                 result.overline = String(parts[0]).trimmingCharacters(in: .whitespacesAndNewlines)
                 result.displayText = ""
             }
             if parts.count == 2 {
                 result.overline = String(parts[0]).trimmingCharacters(in: .whitespacesAndNewlines)
-                result.displayText = " " + String(parts[1]).trimmingCharacters(in: .whitespacesAndNewlines)
+                result.displayText = String(parts[1]).trimmingCharacters(in: .whitespacesAndNewlines)
             }
         } else {
             result.displayText = overlineAndText//.trimmingCharacters(in: .whitespacesAndNewlines)
