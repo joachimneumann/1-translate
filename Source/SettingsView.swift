@@ -13,8 +13,7 @@ struct SettingsView: View {
     @Environment(\.presentationMode) var presentation /// for dismissing the Settings View
     
     @Bindable var viewModel: ViewModel
-    let language: NumberTranslator.Language
-    
+    let languageEnum: NumberTranslator.LanguageEnum
     let font: Font
     let yellow = Color(red: 242.0/255.0, green: 203.0/255.0, blue: 48.0/255.0)
     
@@ -22,7 +21,7 @@ struct SettingsView: View {
         VStack {
             List {
 //                Grouping
-                if language == .english {
+                if languageEnum == .english {
                     EnglishParameters
                 }
 //                if language == .german {
@@ -135,9 +134,8 @@ struct SettingsView: View {
                 Image(flagName)
                     .resizable()
                     .scaledToFit()
-                    .padding(1)
-                    .border(.white)
-                    .frame(height: 13)
+                    .frame(height: 20)
+                    .clipShape(Capsule())
                     .padding(.trailing, 3)
                 Text(name) }) {
                     Text(example + ": " + translatedExample)
@@ -150,15 +148,17 @@ struct SettingsView: View {
     }
     
     var EnglishParameters: some View {
+        let english = viewModel.translationManager.generalLanguage(forEnum: .english)
         return LanguageSection(
-            flagName: viewModel.translationManager.flagname(language),
-            name: viewModel.translationManager.name(language),
+            flagName: viewModel.translationManager.flagname(languageEnum),
+            name: viewModel.translationManager.name(languageEnum),
             example: "150",
             translatedExample: viewModel.translationManager.translate("150", to: .english))
-            {
+        {
+            HStack {
                 Text("\"and\" after hundred")
                 Spacer()
-                Toggle("", isOn: $viewModel.persistent.englishUseAndAfterHundred)
+                Toggle("", isOn: $viewModel.translationManager.englishUseAndAfterHundred)
                     .frame(width: 40)
                     .toggleStyle(
                         ColoredToggleStyle(onColor: Color(white: 0.6),
@@ -167,6 +167,7 @@ struct SettingsView: View {
                     .buttonStyle(.plain)
                     .padding(.trailing, 10)
             }
+        }
     }
 //    
 //    
@@ -287,10 +288,11 @@ struct SettingsView: View {
             Text("Version: \(appVersion ?? "unknown") (build \(buildNumber ?? "unknown"))")
                 .italic()
                 .padding(.bottom, 3)
-            Text("This is a hobby project by Joachim Neumann. Although I have done some testing, errors may occur. If you have feedback, for example a wrong translations or ideas for improvement, drop me an email or, even better, look at existing tests and file a bug in the Testing Repository:").tint(.white)
-            Link("Write email", destination: URL(string: "mailto:joachim@joachimneumann.com")!).tint(.yellow)
-            Text("[Open Testing Repository](https://github.com/joachimneumann/1-translate-tests)").tint(.yellow)
-            //            }
+            Text("This is a hobby project by Joachim Neumann. Although I have done some testing, errors may occur. If find a wrong translation or have ideas for improvement you can add or correct the test data in the folder Tests/Groundtruth of this git repository:").tint(.white)
+            Text("[Translator Repository](https://github.com/joachimneumann/NumberTranslator)").tint(.gray)
+            Text("[Calculator Repository](https://github.com/joachimneumann/1-translate)").tint(.gray)
+            Text("You can also just drop me an email at").tint(.white)
+            Link("joachim@joachimneumann.com", destination: URL(string: "mailto:joachim@joachimneumann.com")!).tint(.gray)
         }
     }
     
@@ -379,7 +381,7 @@ extension View {
         Rectangle()
             .foregroundColor(.gray)
         VStack {
-            SettingsView(viewModel: ViewModel(), language: .spanish, font: Font(AppleFont.systemFont(ofSize: 20)))
+            SettingsView(viewModel: ViewModel(), languageEnum: .english, font: Font(AppleFont.systemFont(ofSize: 20)))
         }
     }
 }

@@ -51,30 +51,35 @@ class TranslationManager: NumberTranslator, Identifiable {
     var result = TranslationResult()
     var hasVoice: Bool = false
 
-    func flagname(_ language: NumberTranslator.Language) -> String {
+    func flagname(_ language: NumberTranslator.LanguageEnum) -> String {
         englishName(language) ?? name(language)
     }
 
-    func language(forFlagname: String) -> Language? {
-        for language in NumberTranslator.Language.allCases {
+    func languageEnum(forFlagname: String) -> LanguageEnum? {
+        for language in NumberTranslator.LanguageEnum.allCases {
             if forFlagname == flagname(language) {
                 return language
             }
         }
         return nil
     }
+
+    func generalLanguage(forEnum languageEnum: LanguageEnum) -> GeneralLanguage? {
+        languageImplementation[languageEnum]
+    }
+
     
-    func borderColor(_ language: NumberTranslator.Language) -> Color {
+    func borderColor(_ language: NumberTranslator.LanguageEnum) -> Color {
         Color(UIColor.darkGray)
     }
 
-    func nameWithDescription(_ language: NumberTranslator.Language) -> String {
+    func nameWithDescription(_ language: NumberTranslator.LanguageEnum) -> String {
         language.rawValue + (englishName(language) != nil ? "/"+englishName(language)! : "")
     }
 
     var speakingPostProcessing: ((String) -> String)?
 
-    func translateThis(_ s: String, to language: NumberTranslator.Language) {
+    func translateThis(_ s: String, to language: NumberTranslator.LanguageEnum) {
         var overlineAndText = super.translate(s, to: language)
         if overlineAndText.starts(with: "Error: ") {
             overlineAndText = overlineAndText.replacingOccurrences(of: "Error: ", with: "")
@@ -104,8 +109,8 @@ class TranslationManager: NumberTranslator, Identifiable {
         }
     }
         
-    var sortedlanguages: [Language] {
-        var languagesWithHue: [(language: Language, hue: CGFloat)] = []
+    var sortedlanguages: [LanguageEnum] {
+        var languagesWithHue: [(language: LanguageEnum, hue: CGFloat)] = []
         
         for language in languageImplementation.keys {
             if let uiImage = UIImage(named: flagname(language)),

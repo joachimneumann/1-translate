@@ -1,11 +1,8 @@
-8888 in roman: strange overline
-
 Switzerland and Liechtenstein are different, as they use a point as a decimal separator, and an apostrophe (‘) for thousands.
 
 settings
 
-roman option
-switch use vinculum / overline
+roman option switch use vinculum / overline
 
 voice, voice animation
 

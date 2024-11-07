@@ -50,7 +50,7 @@ import SwiftGmp
 
         var toTranslate = display.string
         toTranslate.remove(separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter)
-        translationManager.translateThis(toTranslate, to: persistent.currentLanguage)
+        translationManager.translateThis(toTranslate, to: persistent.currentLanguageEnum)
     }
     
     func toggleLanguageSelector(key: Key) {
@@ -77,7 +77,7 @@ import SwiftGmp
     }
 
         
-    func separatorCharacter(forLanguage language: NumberTranslator.Language) -> Character {
+    func separatorCharacter(forLanguage language: NumberTranslator.LanguageEnum) -> Character {
         if let code = translationManager.code(language) {
             if let separator = decimalSeparator(for: code) {
                 return Character(separator)
@@ -85,7 +85,7 @@ import SwiftGmp
         }
         return "."
     }
-    func groupingCharacter(forLanguage language: NumberTranslator.Language) -> Character? {
+    func groupingCharacter(forLanguage language: NumberTranslator.LanguageEnum) -> Character? {
         if persistent.showGrouping {
             if separatorCharacter(forLanguage: language) == "." {
                 return ","
@@ -99,16 +99,16 @@ import SwiftGmp
 
     func execute(_ key: Key) {
         if let flagKey = key as? FlagKey {
-            if let newLanguage = translationManager.language(forFlagname: flagKey.flagname) {
-                persistent.currentLanguage = newLanguage
-                currentLanguageName = translationManager.name(persistent.currentLanguage)
-                currentLanguageEnglishName = translationManager.englishName(persistent.currentLanguage)
+            if let newLanguage = translationManager.languageEnum(forFlagname: flagKey.flagname) {
+                persistent.currentLanguageEnum = newLanguage
+                currentLanguageName = translationManager.name(persistent.currentLanguageEnum)
+                currentLanguageEnglishName = translationManager.englishName(persistent.currentLanguageEnum)
                 translatorKeyboard.countryKey.flagname = flagKey.flagname
                 selectedLanguageKeyboard.countryKey.flagname = flagKey.flagname
-                display.separatorCharacter = separatorCharacter(forLanguage: persistent.currentLanguage)
-                display.groupingCharacter = groupingCharacter(forLanguage: persistent.currentLanguage)
+                display.separatorCharacter = separatorCharacter(forLanguage: persistent.currentLanguageEnum)
+                display.groupingCharacter = groupingCharacter(forLanguage: persistent.currentLanguageEnum)
                 translatorKeyboard.setSeparatorSymbol(String(display.separatorCharacter))
-                translationManager.translateThis(display.string, to: persistent.currentLanguage)
+                translationManager.translateThis(display.string, to: persistent.currentLanguageEnum)
                 process()
                 return
             }
@@ -161,8 +161,8 @@ import SwiftGmp
         translationManager = tempTranslationManager
 
         translatorKeyboard = TranslatorKeyboard(keySize: screen.keySize)
-        display.separatorCharacter = separatorCharacter(forLanguage: persistent.currentLanguage)
-        display.groupingCharacter = groupingCharacter(forLanguage: persistent.currentLanguage)
+        display.separatorCharacter = separatorCharacter(forLanguage: persistent.currentLanguageEnum)
+        display.groupingCharacter = groupingCharacter(forLanguage: persistent.currentLanguageEnum)
         translatorKeyboard.setSeparatorSymbol(String(display.separatorCharacter))
 
         translatorKeyboard.callback = execute
@@ -170,9 +170,9 @@ import SwiftGmp
         selectedLanguageKeyboard.callback = execute
         
         translatorKeyboard.countryKey.callback = toggleLanguageSelector
-        translatorKeyboard.countryKey.flagname = translationManager.flagname(persistent.currentLanguage)
+        translatorKeyboard.countryKey.flagname = translationManager.flagname(persistent.currentLanguageEnum)
         selectedLanguageKeyboard.countryKey.callback = toggleLanguageSelector
-        selectedLanguageKeyboard.countryKey.flagname = translationManager.flagname(persistent.currentLanguage)
+        selectedLanguageKeyboard.countryKey.flagname = translationManager.flagname(persistent.currentLanguageEnum)
 
         process()
     }

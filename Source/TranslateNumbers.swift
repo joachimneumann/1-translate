@@ -128,7 +128,7 @@ struct TranslateNumbers: View {
             }
             .navigationDestination(for: String.self) { destination in
                 if destination == "Settings" {
-                    SettingsView(viewModel: viewModel, language: viewModel.persistent.currentLanguage, font: Font(viewModel.screen.numberDisplayFont))
+                    SettingsView(viewModel: viewModel, languageEnum: viewModel.persistent.currentLanguageEnum, font: Font(viewModel.screen.numberDisplayFont))
                         .onDisappear {
                             viewModel.navigateToSettings = false
                         }

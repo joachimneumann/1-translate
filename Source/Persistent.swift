@@ -34,9 +34,9 @@ class Persistent {
     @AppStorage("currentFlagname", store: .standard)
     var currentFlagname: String = "English"
     
-    var currentLanguage: NumberTranslator.Language {
+    var currentLanguageEnum: NumberTranslator.LanguageEnum {
         get {
-            translationManager.language(forFlagname: currentFlagname) ?? .english
+            translationManager.languageEnum(forFlagname: currentFlagname) ?? .english
         }
         set {
             currentFlagname = translationManager.flagname(newValue)
@@ -50,7 +50,4 @@ class Persistent {
 
     @AppStorage("offerReadingAloudKey", store: .standard)
     var offerReadingAloud: Bool = true
-
-    @AppStorage("englishUseAndAfterHundred", store: .standard)
-    var englishUseAndAfterHundred: Bool = true
 }
