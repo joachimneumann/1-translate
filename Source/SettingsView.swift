@@ -24,18 +24,18 @@ struct SettingsView: View {
                 if languageEnum == .english {
                     EnglishParameters
                 }
-//                if language == .german {
-//                    GermanParameters
-//                }
+                if languageEnum == .german {
+                    GermanParameters
+                }
 //                if language == .spanish {
 //                    SpanishParameters
 //                }
 //                if language == .babylonian {
 //                    BabylonianParameters
 //                }
-//                if language == .vietnamese {
-//                    VietnameseParameters
-//                }
+                if languageEnum == .vietnamese {
+                    VietnameseParameters
+                }
 //                if viewModel.translationManager.code(language) != nil {
 //                    VoiceSettings(language)
 //                }
@@ -148,7 +148,6 @@ struct SettingsView: View {
     }
     
     var EnglishParameters: some View {
-        let english = viewModel.translationManager.generalLanguage(forEnum: .english)
         return LanguageSection(
             flagName: viewModel.translationManager.flagname(languageEnum),
             name: viewModel.translationManager.name(languageEnum),
@@ -169,29 +168,73 @@ struct SettingsView: View {
             }
         }
     }
-//    
-//    
-//    var GermanParameters: some View {
-//        return LanguageSection(
-//            flagName: viewModel.numberTranslator.flagName(.german),
-//            name: viewModel.numberTranslator.name(.german),
-//            example: "88",
-//            translatedExample: viewModel.numberTranslator.getResult("88", to: .german)) {
-//                HStack {
-//                    Text("Großschreibung")
-//                    Spacer()
-//                    Toggle("", isOn: $viewModel.numberTranslator.germanCapitalisation)
-//                        .frame(width: 40)
-//                        .toggleStyle(
-//                            ColoredToggleStyle(onColor: Color(white: 0.6),
-//                                               offColor: Color(white: 0.25),
-//                                               thumbColor: .white))
-//                        .buttonStyle(.plain)
-//                        .padding(.trailing, 10)
-//                }
-//            }
-//    }
-//    
+    
+    
+    var GermanParameters: some View {
+        return LanguageSection(
+            flagName: viewModel.translationManager.flagname(languageEnum),
+            name: viewModel.translationManager.name(.german),
+            example: "88",
+            translatedExample: viewModel.translationManager.translate("88", to: .german)) {
+                HStack {
+                    Text("Großschreibung")
+                    Spacer()
+                    Toggle("", isOn: $viewModel.translationManager.germanCapitalisation)
+                        .frame(width: 40)
+                        .toggleStyle(
+                            ColoredToggleStyle(onColor: Color(white: 0.6),
+                                               offColor: Color(white: 0.25),
+                                               thumbColor: .white))
+                        .buttonStyle(.plain)
+                        .padding(.trailing, 10)
+                }
+            }
+    }
+    
+        var VietnameseParameters: some View {
+            return LanguageSection(
+                flagName: viewModel.translationManager.flagname(.vietnamese),
+                name: viewModel.translationManager.name(.vietnamese),
+                example: "33303",
+                translatedExample: viewModel.translationManager.translate("33303", to: .vietnamese)) {
+                    Grid(alignment: .leading) {
+                        GridRow {
+                            Text("1000")
+                            Picker("", selection: $viewModel.translationManager.vietnameseThousand) {
+                                ForEach(NumberTranslator.VietnameseThousand.allCases, id: \.self) { value in
+                                    Text("\(value.rawValue)")
+                                        .tag(value)
+                                }
+                            }
+                            .pickerStyle(.segmented)
+                            .padding(.bottom, 5)
+                        }
+                        GridRow {
+                            Text("Linh hoặc lẻ")
+                            Picker("", selection: $viewModel.translationManager.vietnameseSecondLast) {
+                                ForEach(NumberTranslator.VietnameseSecondLast.allCases, id: \.self) { value in
+                                    Text("\(value.rawValue)")
+                                        .tag(value)
+                                }
+                            }
+                            .pickerStyle(.segmented)
+                        }
+                    }
+                    HStack {
+                        Text("Ngắn gọn")
+                        Spacer()
+                        Toggle("", isOn: $viewModel.translationManager.vietnameseCompact)
+                            .frame(width: 40)
+                            .toggleStyle(
+                                ColoredToggleStyle(onColor: Color(white: 0.6),
+                                                   offColor: Color(white: 0.25),
+                                                   thumbColor: .white))
+                            .buttonStyle(.plain)
+                            .padding(.trailing, 10)
+                    }
+                }
+        }
+//
 //    var BabylonianParameters: some View {
 //        return LanguageSection(
 //            flagName: viewModel.numberTranslator.flagName(.babylonian),
@@ -234,49 +277,7 @@ struct SettingsView: View {
 //            }
 //    }
 //    
-//    var VietnameseParameters: some View {
-//        return LanguageSection(
-//            flagName: viewModel.numberTranslator.flagName(.vietnamese),
-//            name: viewModel.numberTranslator.name(.vietnamese),
-//            example: "33303",
-//            translatedExample: viewModel.numberTranslator.getResult("33303", to: .vietnamese)) {
-//                Grid(alignment: .leading) {
-//                    GridRow {
-//                        Text("1000")
-//                        Picker("", selection: $viewModel.numberTranslator.vietnameseThousand) {
-//                            ForEach(NumberTranslator.VietnameseThousand.allCases, id: \.self) { value in
-//                                Text("\(value.rawValue)")
-//                                    .tag(value)
-//                            }
-//                        }
-//                        .pickerStyle(.segmented)
-//                        .padding(.bottom, 5)
-//                    }
-//                    GridRow {
-//                        Text("Linh hoặc lẻ")
-//                        Picker("", selection: $viewModel.numberTranslator.vietnameseSecondLast) {
-//                            ForEach(NumberTranslator.VietnameseSecondLast.allCases, id: \.self) { value in
-//                                Text("\(value.rawValue)")
-//                                    .tag(value)
-//                            }
-//                        }
-//                        .pickerStyle(.segmented)
-//                    }
-//                }
-//                HStack {
-//                    Text("Ngắn gọn")
-//                    Spacer()
-//                    Toggle("", isOn: $viewModel.numberTranslator.vietnameseCompact)
-//                        .frame(width: 40)
-//                        .toggleStyle(
-//                            ColoredToggleStyle(onColor: Color(white: 0.6),
-//                                               offColor: Color(white: 0.25),
-//                                               thumbColor: .white))
-//                        .buttonStyle(.plain)
-//                        .padding(.trailing, 10)
-//                }
-//            }
-//    }
+
     
     
     var HobbyProject: some View {
@@ -290,6 +291,7 @@ struct SettingsView: View {
                 .padding(.bottom, 3)
             Text("This is a hobby project by Joachim Neumann. Although I have done some testing, errors may occur. If find a wrong translation or have ideas for improvement you can add or correct the test data in the folder Tests/Groundtruth of this git repository:").tint(.white)
             Text("[Translator Repository](https://github.com/joachimneumann/NumberTranslator)").tint(.gray)
+            Text("The calculator is also open source and can be found here:").tint(.white)
             Text("[Calculator Repository](https://github.com/joachimneumann/1-translate)").tint(.gray)
             Text("You can also just drop me an email at").tint(.white)
             Link("joachim@joachimneumann.com", destination: URL(string: "mailto:joachim@joachimneumann.com")!).tint(.gray)
@@ -381,7 +383,7 @@ extension View {
         Rectangle()
             .foregroundColor(.gray)
         VStack {
-            SettingsView(viewModel: ViewModel(), languageEnum: .english, font: Font(AppleFont.systemFont(ofSize: 20)))
+            SettingsView(viewModel: ViewModel(), languageEnum: .vietnamese, font: Font(AppleFont.systemFont(ofSize: 20)))
         }
     }
 }

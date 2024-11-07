@@ -41,7 +41,6 @@ class Persistent {
         set {
             currentFlagname = translationManager.flagname(newValue)
         }
-        
     }
 
 
