@@ -14,31 +14,31 @@ struct SettingsView: View {
     
     @Bindable var viewModel: ViewModel
     let languageEnum: NumberTranslator.LanguageEnum
-    let font: Font
+    let exampleFont: Font
     let yellow = Color(red: 242.0/255.0, green: 203.0/255.0, blue: 48.0/255.0)
     
     var body: some View {
         VStack {
             List {
-//                Grouping
+                //                Grouping
                 if languageEnum == .english {
                     EnglishParameters
                 }
                 if languageEnum == .german {
                     GermanParameters
                 }
-//                if language == .spanish {
-//                    SpanishParameters
-//                }
-//                if language == .babylonian {
-//                    BabylonianParameters
-//                }
+                if languageEnum == .spanish {
+                    SpanishParameters
+                }
+                if languageEnum == .babylonian {
+                    BabylonianParameters
+                }
                 if languageEnum == .vietnamese {
                     VietnameseParameters
                 }
-//                if viewModel.translationManager.code(language) != nil {
-//                    VoiceSettings(language)
-//                }
+                //                if viewModel.translationManager.code(language) != nil {
+                //                    VoiceSettings(language)
+                //                }
                 HobbyProject
             }
         }
@@ -47,85 +47,88 @@ struct SettingsView: View {
         }
     }
     
-//    var Grouping: some View {
-//        let calculator = Calculator(precision: 100)
-//        calculator.evaluateString("120000.5")
-//        let raw = calculator.raw
-//        let display = Display(floatDisplayWidth: 1000, font: AppleFont.systemFont(ofSize: 40), ePadding: 0.0)
-//        calculator.separator = viewModel.separator(forLanguage: language)
-//        display.update(raw: raw, separator: calculator.separator)
-//        return Section(header: Text("Separators")) {
-//            VStack {
-//                Text(display.string)
-//                    .foregroundColor(.yellow)
-//                    .font(.largeTitle)
-//                    .gridCellColumns(2)
-//                    .padding(.bottom, 5)
-//                HStack {
-//                    Text("Grouping")
-//                        .padding(.trailing, 5)
-//                    Toggle("", isOn: $viewModel.persistent.showGrouping)
-//                        .frame(width: 40)
-//                        .toggleStyle(
-//                            ColoredToggleStyle(onColor: Color(white: 0.6),
-//                                               offColor: Color(white: 0.25),
-//                                               thumbColor: .white))
-//                        .buttonStyle(.plain)
-//                        .padding(.trailing, 10)
-//                }
-//                .padding(.bottom, 5)
-//            }
-//        }
-//    }
+    //    var Grouping: some View {
+    //        let calculator = Calculator(precision: 100)
+    //        calculator.evaluateString("120000.5")
+    //        let raw = calculator.raw
+    //        let display = Display(floatDisplayWidth: 1000, font: AppleFont.systemFont(ofSize: 40), ePadding: 0.0)
+    //        calculator.separator = viewModel.separator(forLanguage: language)
+    //        display.update(raw: raw, separator: calculator.separator)
+    //        return Section(header: Text("Separators")) {
+    //            VStack {
+    //                Text(display.string)
+    //                    .foregroundColor(.yellow)
+    //                    .font(.largeTitle)
+    //                    .gridCellColumns(2)
+    //                    .padding(.bottom, 5)
+    //                HStack {
+    //                    Text("Grouping")
+    //                        .padding(.trailing, 5)
+    //                    Toggle("", isOn: $viewModel.persistent.showGrouping)
+    //                        .frame(width: 40)
+    //                        .toggleStyle(
+    //                            ColoredToggleStyle(onColor: Color(white: 0.6),
+    //                                               offColor: Color(white: 0.25),
+    //                                               thumbColor: .white))
+    //                        .buttonStyle(.plain)
+    //                        .padding(.trailing, 10)
+    //                }
+    //                .padding(.bottom, 5)
+    //            }
+    //        }
+    //    }
     
-//    func updateSelectedVoice(reducedIdentifier: String, for code: String) {
-//        viewModel.voices.updateSelectedVoice(reducedIdentifier: reducedIdentifier, for: code)
-//    }
+    //    func updateSelectedVoice(reducedIdentifier: String, for code: String) {
+    //        viewModel.voices.updateSelectedVoice(reducedIdentifier: reducedIdentifier, for: code)
+    //    }
     
-//    var VoiceSettings: some View {
-//        let language: NumberTranslator.Language
-//        return Section(header: Text("Read Aloud")) {
-//            VStack(alignment: .leading) {
-//                HStack {
-//                    Text("Offer to read aloud")
-//                    Spacer()
-//                    Toggle("", isOn: $viewModel.persistent.offerReadingAloud)
-//                        .frame(width: 40)
-//                        .toggleStyle(
-//                            ColoredToggleStyle(onColor: Color(white: 0.6),
-//                                               offColor: Color(white: 0.25),
-//                                               thumbColor: .white))
-//                        .buttonStyle(.plain)
-//                        .padding(.trailing, 10)
-//                }
-//                .buttonStyle(BorderlessButtonStyle())
-//            }
-//            VStack(alignment: .leading) {
-//                NavigationLink {
-//                    VoiceSelection(viewModel: viewModel, code: viewModel.numberTranslator.code!, callback: updateSelectedVoice)
-//                } label: {
-//                    Text("Select Voice")
-//                }
-//                .disabled(!viewModel.persistent.offerReadingAloud)
-//            }
-//        }
-//    }
-//    
+    //    var VoiceSettings: some View {
+    //        let language: NumberTranslator.Language
+    //        return Section(header: Text("Read Aloud")) {
+    //            VStack(alignment: .leading) {
+    //                HStack {
+    //                    Text("Offer to read aloud")
+    //                    Spacer()
+    //                    Toggle("", isOn: $viewModel.persistent.offerReadingAloud)
+    //                        .frame(width: 40)
+    //                        .toggleStyle(
+    //                            ColoredToggleStyle(onColor: Color(white: 0.6),
+    //                                               offColor: Color(white: 0.25),
+    //                                               thumbColor: .white))
+    //                        .buttonStyle(.plain)
+    //                        .padding(.trailing, 10)
+    //                }
+    //                .buttonStyle(BorderlessButtonStyle())
+    //            }
+    //            VStack(alignment: .leading) {
+    //                NavigationLink {
+    //                    VoiceSelection(viewModel: viewModel, code: viewModel.numberTranslator.code!, callback: updateSelectedVoice)
+    //                } label: {
+    //                    Text("Select Voice")
+    //                }
+    //                .disabled(!viewModel.persistent.offerReadingAloud)
+    //            }
+    //        }
+    //    }
+    //
     struct LanguageSection <Content: View>: View {
         let flagName: String
         let name: String
         let example: String
         let translatedExample: String
+        let exampleFont: Font
         var content: () -> Content
         init(flagName: String,
              name: String,
              example: String,
              translatedExample: String,
+             exampleFont: Font,
              @ViewBuilder content: @escaping () -> Content) {
             self.flagName = flagName
             self.name = name
             self.example = example
             self.translatedExample = translatedExample
+            self.exampleFont = exampleFont
             self.content = content
         }
         
@@ -141,7 +144,8 @@ struct SettingsView: View {
                     Text(example + ": " + translatedExample)
                         .fontWeight(.semibold)
                         .frame(height: 25)
-                        .foregroundColor(.yellow)
+                        .foregroundColor(.white)
+                        .font(exampleFont)
                     content()
                 }
         }
@@ -152,7 +156,7 @@ struct SettingsView: View {
             flagName: viewModel.translationManager.flagname(languageEnum),
             name: viewModel.translationManager.name(languageEnum),
             example: "150",
-            translatedExample: viewModel.translationManager.translate("150", to: .english))
+            translatedExample: viewModel.translationManager.translate("150", to: .english), exampleFont: exampleFont)
         {
             HStack {
                 Text("\"and\" after hundred")
@@ -175,7 +179,7 @@ struct SettingsView: View {
             flagName: viewModel.translationManager.flagname(languageEnum),
             name: viewModel.translationManager.name(.german),
             example: "88",
-            translatedExample: viewModel.translationManager.translate("88", to: .german)) {
+            translatedExample: viewModel.translationManager.translate("88", to: .german), exampleFont: exampleFont) {
                 HStack {
                     Text("Großschreibung")
                     Spacer()
@@ -191,93 +195,94 @@ struct SettingsView: View {
             }
     }
     
-        var VietnameseParameters: some View {
-            return LanguageSection(
-                flagName: viewModel.translationManager.flagname(.vietnamese),
-                name: viewModel.translationManager.name(.vietnamese),
-                example: "33303",
-                translatedExample: viewModel.translationManager.translate("33303", to: .vietnamese)) {
-                    Grid(alignment: .leading) {
-                        GridRow {
-                            Text("1000")
-                            Picker("", selection: $viewModel.translationManager.vietnameseThousand) {
-                                ForEach(NumberTranslator.VietnameseThousand.allCases, id: \.self) { value in
-                                    Text("\(value.rawValue)")
-                                        .tag(value)
-                                }
+    var VietnameseParameters: some View {
+        return LanguageSection(
+            flagName: viewModel.translationManager.flagname(.vietnamese),
+            name: viewModel.translationManager.name(.vietnamese),
+            example: "33303",
+            translatedExample: viewModel.translationManager.translate("33303", to: .vietnamese),
+            exampleFont: exampleFont) {
+                Grid(alignment: .leading) {
+                    GridRow {
+                        Text("1000")
+                        Picker("", selection: $viewModel.translationManager.vietnameseThousand) {
+                            ForEach(NumberTranslator.VietnameseThousand.allCases, id: \.self) { value in
+                                Text("\(value.rawValue)")
+                                    .tag(value)
                             }
-                            .pickerStyle(.segmented)
-                            .padding(.bottom, 5)
                         }
-                        GridRow {
-                            Text("Linh hoặc lẻ")
-                            Picker("", selection: $viewModel.translationManager.vietnameseSecondLast) {
-                                ForEach(NumberTranslator.VietnameseSecondLast.allCases, id: \.self) { value in
-                                    Text("\(value.rawValue)")
-                                        .tag(value)
-                                }
-                            }
-                            .pickerStyle(.segmented)
-                        }
+                        .pickerStyle(.segmented)
+                        .padding(.bottom, 5)
                     }
-                    HStack {
-                        Text("Ngắn gọn")
-                        Spacer()
-                        Toggle("", isOn: $viewModel.translationManager.vietnameseCompact)
-                            .frame(width: 40)
-                            .toggleStyle(
-                                ColoredToggleStyle(onColor: Color(white: 0.6),
-                                                   offColor: Color(white: 0.25),
-                                                   thumbColor: .white))
-                            .buttonStyle(.plain)
-                            .padding(.trailing, 10)
+                    GridRow {
+                        Text("Linh hoặc lẻ")
+                        Picker("", selection: $viewModel.translationManager.vietnameseSecondLast) {
+                            ForEach(NumberTranslator.VietnameseSecondLast.allCases, id: \.self) { value in
+                                Text("\(value.rawValue)")
+                                    .tag(value)
+                            }
+                        }
+                        .pickerStyle(.segmented)
                     }
                 }
-        }
-//
-//    var BabylonianParameters: some View {
-//        return LanguageSection(
-//            flagName: viewModel.numberTranslator.flagName(.babylonian),
-//            name: viewModel.numberTranslator.name(.babylonian),
-//            example: "3601",
-//            translatedExample: viewModel.numberTranslator.getResult("3601", to: .babylonian)) {
-//                HStack {
-//                    Text("Empty column")
-//                    Spacer()
-//                    Toggle("", isOn: $viewModel.numberTranslator.babylonianAllowEmptyColumn)
-//                        .frame(width: 40)
-//                        .toggleStyle(
-//                            ColoredToggleStyle(onColor: Color(white: 0.6),
-//                                               offColor: Color(white: 0.25),
-//                                               thumbColor: .white))
-//                        .buttonStyle(.plain)
-//                        .padding(.trailing, 10)
-//                }
-//            }
-//    }
-//
-//    
-//    var SpanishParameters: some View {
-//        return LanguageSection(
-//            flagName: viewModel.numberTranslator.flagName(.spanish),
-//            name: viewModel.numberTranslator.name(.spanish),
-//            example: "1.5",
-//            translatedExample: viewModel.numberTranslator.getResult("1.5", to: .spanish)) {
-//                HStack {
-//                    Text("Coma o punto:")
-//                    Spacer()
-//                    Picker("", selection: $viewModel.numberTranslator.spanishPuntoComma) {
-//                        ForEach(NumberTranslator.SpanishPuntoComma.allCases, id: \.self) { value in
-//                            Text("\(value.rawValue)")
-//                                .tag(value)
-//                        }
-//                    }
-//                    .pickerStyle(.segmented)
-//                }
-//            }
-//    }
-//    
-
+                HStack {
+                    Text("Ngắn gọn")
+                    Spacer()
+                    Toggle("", isOn: $viewModel.translationManager.vietnameseCompact)
+                        .frame(width: 40)
+                        .toggleStyle(
+                            ColoredToggleStyle(onColor: Color(white: 0.6),
+                                               offColor: Color(white: 0.25),
+                                               thumbColor: .white))
+                        .buttonStyle(.plain)
+                        .padding(.trailing, 10)
+                }
+            }
+    }
+    
+    var BabylonianParameters: some View {
+        return LanguageSection(
+            flagName: viewModel.translationManager.flagname(.babylonian),
+            name: viewModel.translationManager.name(.babylonian),
+            example: "3601",
+            translatedExample: viewModel.translationManager.translate("3601", to: .babylonian), exampleFont: exampleFont) {
+                HStack {
+                    Text("Empty column")
+                    Spacer()
+                    Toggle("", isOn: $viewModel.translationManager.babylonianAllowEmptyColumn)
+                        .frame(width: 40)
+                        .toggleStyle(
+                            ColoredToggleStyle(onColor: Color(white: 0.6),
+                                               offColor: Color(white: 0.25),
+                                               thumbColor: .white))
+                        .buttonStyle(.plain)
+                        .padding(.trailing, 10)
+                }
+            }
+    }
+    
+    
+    var SpanishParameters: some View {
+        return LanguageSection(
+            flagName: viewModel.translationManager.flagname(.spanish),
+            name: viewModel.translationManager.name(.spanish),
+            example: "1.5",
+            translatedExample: viewModel.translationManager.translate("1.5", to: .spanish), exampleFont: exampleFont) {
+                HStack {
+                    Text("Coma o punto:")
+                    Spacer()
+                    Picker("", selection: $viewModel.translationManager.spanishPuntoComa) {
+                        ForEach(NumberTranslator.SpanishPuntoComa.allCases, id: \.self) { value in
+                            Text("\(value.rawValue)")
+                                .tag(value)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                }
+            }
+    }
+    
+    
     
     
     var HobbyProject: some View {
@@ -383,7 +388,7 @@ extension View {
         Rectangle()
             .foregroundColor(.gray)
         VStack {
-            SettingsView(viewModel: ViewModel(), languageEnum: .vietnamese, font: Font(AppleFont.systemFont(ofSize: 20)))
+            SettingsView(viewModel: ViewModel(), languageEnum: .babylonian, exampleFont: Font(Screen().infoUiFont))
         }
     }
 }

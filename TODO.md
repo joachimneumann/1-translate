@@ -1,6 +1,8 @@
 Switzerland and Liechtenstein are different, as they use a point as a decimal separator, and an apostrophe (‘) for thousands.
 
-settings
+settings: grouping
+settings voice
+settings back button color
 
 roman option switch use vinculum / overline
 
