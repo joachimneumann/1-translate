@@ -81,30 +81,32 @@ class TranslationManager: NumberTranslator, Identifiable {
 
     func translateThis(_ s: String, to language: NumberTranslator.LanguageEnum) {
         var overlineAndText = super.translate(s, to: language)
-        if overlineAndText.starts(with: "Error: ") {
-            overlineAndText = overlineAndText.replacingOccurrences(of: "Error: ", with: "")
-            result.error = true
-        } else {
-            result.error = false
-        }
-        if overlineAndText.contains("_OVERLINE_") {
-            let parts = overlineAndText.split(separator: "_OVERLINE_")
-            if parts.count == 1 {
-                result.overline = String(parts[0]).trimmingCharacters(in: .whitespacesAndNewlines)
-                result.displayText = ""
+        DispatchQueue.main.async {
+            if overlineAndText.starts(with: "Error: ") {
+                overlineAndText = overlineAndText.replacingOccurrences(of: "Error: ", with: "")
+                self.result.error = true
+            } else {
+                self.result.error = false
             }
-            if parts.count == 2 {
-                result.overline = String(parts[0]).trimmingCharacters(in: .whitespacesAndNewlines)
-                result.displayText = String(parts[1]).trimmingCharacters(in: .whitespacesAndNewlines)
+            if overlineAndText.contains("_OVERLINE_") {
+                let parts = overlineAndText.split(separator: "_OVERLINE_")
+                if parts.count == 1 {
+                    self.result.overline = String(parts[0]).trimmingCharacters(in: .whitespacesAndNewlines)
+                    self.result.displayText = ""
+                }
+                if parts.count == 2 {
+                    self.result.overline = String(parts[0]).trimmingCharacters(in: .whitespacesAndNewlines)
+                    self.result.displayText = String(parts[1]).trimmingCharacters(in: .whitespacesAndNewlines)
+                }
+            } else {
+                self.result.displayText = overlineAndText
+                self.result.overline = nil
             }
-        } else {
-            result.displayText = overlineAndText//.trimmingCharacters(in: .whitespacesAndNewlines)
-            result.overline = nil
-        }
-        if code(language) != nil && hasVoice {
-            result.spokenText = overlineAndText.replacingOccurrences(of: "\u{200A}", with: "")
-            if let speakingPostProcessing {
-                result.spokenText = speakingPostProcessing(result.spokenText!)
+            if self.code(language) != nil && self.hasVoice {
+                self.result.spokenText = overlineAndText.replacingOccurrences(of: "\u{200A}", with: "")
+                if let speakingPostProcessing = self.speakingPostProcessing {
+                    self.result.spokenText = speakingPostProcessing(self.result.spokenText!)
+                }
             }
         }
     }

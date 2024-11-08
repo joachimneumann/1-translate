@@ -120,7 +120,6 @@ struct TranslateNumbers: View {
                     .padding(.horizontal, viewModel.screen.horizontalPadding)
                     .preferredColorScheme(.dark)
             }
-            .accentColor(.white)
             .onChange(of: viewModel.navigateToSettings) { old, new in
                 if new {
                     navigationPath.append("Settings")
@@ -128,13 +127,14 @@ struct TranslateNumbers: View {
             }
             .navigationDestination(for: String.self) { destination in
                 if destination == "Settings" {
-                    SettingsView(viewModel: viewModel, languageEnum: viewModel.persistent.currentLanguageEnum, exampleFont: Font(viewModel.screen.infoUiFont))
+                    SettingsView(viewModel: viewModel, languageEnum: viewModel.persistent.currentLanguageEnum, exampleFont: viewModel.screen.infoUiFont)
                         .onDisappear {
                             viewModel.navigateToSettings = false
                         }
                 }
             }
         }
+        .accentColor(.white)
 //        .onChange(of: scenePhase) { oldPhase, newPhase in
 //            if newPhase == .active {
 //                //                            viewModel.voices.refreshVoiceDict(list: viewModel.languages.list)

@@ -11,38 +11,46 @@ import SwiftGmp
 
 struct SettingsView: View {
     @Environment(\.presentationMode) var presentation /// for dismissing the Settings View
-    
     @Bindable var viewModel: ViewModel
     let languageEnum: NumberTranslator.LanguageEnum
-    let exampleFont: Font
-    let yellow = Color(red: 242.0/255.0, green: 203.0/255.0, blue: 48.0/255.0)
-    
+    let exampleFont: UIFont
+    let grayToggleStyle = ColoredToggleStyle(onColor: Color(white: 0.75),
+                                                offColor: Color(white: 0.5),
+                                                thumbColor: .white)
     var body: some View {
         VStack {
             List {
                 //                Grouping
-                if languageEnum == .english {
-                    EnglishParameters
-                }
-                if languageEnum == .german {
-                    GermanParameters
-                }
-                if languageEnum == .spanish {
-                    SpanishParameters
-                }
-                if languageEnum == .babylonian {
+                switch languageEnum {
+                case .babylonian:
                     BabylonianParameters
-                }
-                if languageEnum == .vietnamese {
+                        .listRowBackground(Color(white: 0.25))
+                case .english:
+                    EnglishParameters
+                        .listRowBackground(Color(white: 0.25))
+                case .german:
+                    GermanParameters
+                        .listRowBackground(Color(white: 0.25))
+                case .romanNumerals:
+                    RomanNumeralsParameters
+                        .listRowBackground(Color(white: 0.25))
+                case .spanish:
+                    SpanishParameters
+                        .listRowBackground(Color(white: 0.25))
+                case .vietnamese:
                     VietnameseParameters
+                        .listRowBackground(Color(white: 0.25))
+                default:
+                    EmptyView()
                 }
                 //                if viewModel.translationManager.code(language) != nil {
                 //                    VoiceSettings(language)
                 //                }
                 HobbyProject
+                    .listRowBackground(Color(UIColor.darkGray))
             }
         }
-        .onDisappear() {
+        .onDisappear {
             viewModel.process()
         }
     }
@@ -66,10 +74,7 @@ struct SettingsView: View {
     //                        .padding(.trailing, 5)
     //                    Toggle("", isOn: $viewModel.persistent.showGrouping)
     //                        .frame(width: 40)
-    //                        .toggleStyle(
-    //                            ColoredToggleStyle(onColor: Color(white: 0.6),
-    //                                               offColor: Color(white: 0.25),
-    //                                               thumbColor: .white))
+    //                        .toggleStyle(grayToggleStyle)
     //                        .buttonStyle(.plain)
     //                        .padding(.trailing, 10)
     //                }
@@ -91,10 +96,7 @@ struct SettingsView: View {
     //                    Spacer()
     //                    Toggle("", isOn: $viewModel.persistent.offerReadingAloud)
     //                        .frame(width: 40)
-    //                        .toggleStyle(
-    //                            ColoredToggleStyle(onColor: Color(white: 0.6),
-    //                                               offColor: Color(white: 0.25),
-    //                                               thumbColor: .white))
+    //                        .toggleStyle(grayToggleStyle)
     //                        .buttonStyle(.plain)
     //                        .padding(.trailing, 10)
     //                }
@@ -112,61 +114,62 @@ struct SettingsView: View {
     //    }
     //
     struct LanguageSection <Content: View>: View {
-        let flagName: String
+        let flagname: String
         let name: String
         let example: String
-        let translatedExample: String
-        let exampleFont: Font
+        let translationResult: TranslationResult
+        let uiFont: UIFont
         var content: () -> Content
-        init(flagName: String,
-             name: String,
+        init(languageEnum: NumberTranslator.LanguageEnum,
              example: String,
-             translatedExample: String,
-             exampleFont: Font,
+             translationManager: TranslationManager,
+             uiFont: UIFont,
              @ViewBuilder content: @escaping () -> Content) {
-            self.flagName = flagName
-            self.name = name
+            self.flagname = translationManager.flagname(languageEnum)
+            self.name = translationManager.name(languageEnum)
             self.example = example
-            self.translatedExample = translatedExample
-            self.exampleFont = exampleFont
+            self.uiFont = uiFont
+            translationManager.translateThis(example, to: languageEnum)
+            self.translationResult = translationManager.result
             self.content = content
         }
         
         var body: some View {
             Section(header: HStack {
-                Image(flagName)
+                Image(flagname)
                     .resizable()
                     .scaledToFit()
                     .frame(height: 20)
                     .clipShape(Capsule())
                     .padding(.trailing, 3)
-                Text(name) }) {
-                    Text(example + ": " + translatedExample)
-                        .fontWeight(.semibold)
-                        .frame(height: 25)
-                        .foregroundColor(.white)
-                        .font(exampleFont)
+                Text(name)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.white)
+            }) {
+                    HStack {
+                        Text("\(example) →")
+                        TranslatedDisplay(uiFont: uiFont, translationResult: translationResult)
+                            .fontWeight(.semibold)
+                            .frame(height: 25)
+                            .foregroundColor(.orange)
+                            .foregroundColor(.white)
+                    }
                     content()
                 }
         }
     }
     
     var EnglishParameters: some View {
-        return LanguageSection(
-            flagName: viewModel.translationManager.flagname(languageEnum),
-            name: viewModel.translationManager.name(languageEnum),
-            example: "150",
-            translatedExample: viewModel.translationManager.translate("150", to: .english), exampleFont: exampleFont)
-        {
+        return LanguageSection(languageEnum: .english,
+                               example: "150",
+                               translationManager: viewModel.translationManager,
+                               uiFont: viewModel.screen.infoUiFont) {
             HStack {
                 Text("\"and\" after hundred")
                 Spacer()
                 Toggle("", isOn: $viewModel.translationManager.englishUseAndAfterHundred)
                     .frame(width: 40)
-                    .toggleStyle(
-                        ColoredToggleStyle(onColor: Color(white: 0.6),
-                                           offColor: Color(white: 0.25),
-                                           thumbColor: .white))
+                    .toggleStyle(grayToggleStyle)
                     .buttonStyle(.plain)
                     .padding(.trailing, 10)
             }
@@ -175,20 +178,16 @@ struct SettingsView: View {
     
     
     var GermanParameters: some View {
-        return LanguageSection(
-            flagName: viewModel.translationManager.flagname(languageEnum),
-            name: viewModel.translationManager.name(.german),
-            example: "88",
-            translatedExample: viewModel.translationManager.translate("88", to: .german), exampleFont: exampleFont) {
+        return LanguageSection(languageEnum: .german,
+                               example: "88",
+                               translationManager: viewModel.translationManager,
+                               uiFont: viewModel.screen.infoUiFont) {
                 HStack {
                     Text("Großschreibung")
                     Spacer()
                     Toggle("", isOn: $viewModel.translationManager.germanCapitalisation)
                         .frame(width: 40)
-                        .toggleStyle(
-                            ColoredToggleStyle(onColor: Color(white: 0.6),
-                                               offColor: Color(white: 0.25),
-                                               thumbColor: .white))
+                        .toggleStyle(grayToggleStyle)
                         .buttonStyle(.plain)
                         .padding(.trailing, 10)
                 }
@@ -196,15 +195,14 @@ struct SettingsView: View {
     }
     
     var VietnameseParameters: some View {
-        return LanguageSection(
-            flagName: viewModel.translationManager.flagname(.vietnamese),
-            name: viewModel.translationManager.name(.vietnamese),
-            example: "33303",
-            translatedExample: viewModel.translationManager.translate("33303", to: .vietnamese),
-            exampleFont: exampleFont) {
+        return LanguageSection(languageEnum: .vietnamese,
+                               example: "33303",
+                               translationManager: viewModel.translationManager,
+                               uiFont: viewModel.screen.infoUiFont) {
                 Grid(alignment: .leading) {
                     GridRow {
                         Text("1000")
+                        Spacer(minLength: 0.0)
                         Picker("", selection: $viewModel.translationManager.vietnameseThousand) {
                             ForEach(NumberTranslator.VietnameseThousand.allCases, id: \.self) { value in
                                 Text("\(value.rawValue)")
@@ -213,9 +211,11 @@ struct SettingsView: View {
                         }
                         .pickerStyle(.segmented)
                         .padding(.bottom, 5)
+                        .frame(maxWidth: 150)
                     }
                     GridRow {
                         Text("Linh hoặc lẻ")
+                        Spacer(minLength: 0.0)
                         Picker("", selection: $viewModel.translationManager.vietnameseSecondLast) {
                             ForEach(NumberTranslator.VietnameseSecondLast.allCases, id: \.self) { value in
                                 Text("\(value.rawValue)")
@@ -223,6 +223,7 @@ struct SettingsView: View {
                             }
                         }
                         .pickerStyle(.segmented)
+                        .frame(maxWidth: 150)
                     }
                 }
                 HStack {
@@ -230,10 +231,7 @@ struct SettingsView: View {
                     Spacer()
                     Toggle("", isOn: $viewModel.translationManager.vietnameseCompact)
                         .frame(width: 40)
-                        .toggleStyle(
-                            ColoredToggleStyle(onColor: Color(white: 0.6),
-                                               offColor: Color(white: 0.25),
-                                               thumbColor: .white))
+                        .toggleStyle(grayToggleStyle)
                         .buttonStyle(.plain)
                         .padding(.trailing, 10)
                 }
@@ -241,20 +239,16 @@ struct SettingsView: View {
     }
     
     var BabylonianParameters: some View {
-        return LanguageSection(
-            flagName: viewModel.translationManager.flagname(.babylonian),
-            name: viewModel.translationManager.name(.babylonian),
-            example: "3601",
-            translatedExample: viewModel.translationManager.translate("3601", to: .babylonian), exampleFont: exampleFont) {
+        return LanguageSection(languageEnum: .babylonian,
+                               example: "3601",
+                               translationManager: viewModel.translationManager,
+                               uiFont: viewModel.screen.infoUiFont) {
                 HStack {
-                    Text("Empty column")
+                    Text("Empty column (after 400 BC)")
                     Spacer()
                     Toggle("", isOn: $viewModel.translationManager.babylonianAllowEmptyColumn)
                         .frame(width: 40)
-                        .toggleStyle(
-                            ColoredToggleStyle(onColor: Color(white: 0.6),
-                                               offColor: Color(white: 0.25),
-                                               thumbColor: .white))
+                        .toggleStyle(grayToggleStyle)
                         .buttonStyle(.plain)
                         .padding(.trailing, 10)
                 }
@@ -263,11 +257,10 @@ struct SettingsView: View {
     
     
     var SpanishParameters: some View {
-        return LanguageSection(
-            flagName: viewModel.translationManager.flagname(.spanish),
-            name: viewModel.translationManager.name(.spanish),
-            example: "1.5",
-            translatedExample: viewModel.translationManager.translate("1.5", to: .spanish), exampleFont: exampleFont) {
+        return LanguageSection(languageEnum: .spanish,
+                               example: "1.5",
+                               translationManager: viewModel.translationManager,
+                               uiFont: viewModel.screen.infoUiFont) {
                 HStack {
                     Text("Coma o punto:")
                     Spacer()
@@ -278,10 +271,29 @@ struct SettingsView: View {
                         }
                     }
                     .pickerStyle(.segmented)
+                    .frame(maxWidth: 150)
                 }
             }
     }
+
     
+    
+    var RomanNumeralsParameters: some View {
+        return LanguageSection(languageEnum: .romanNumerals,
+                               example: "10000",
+                               translationManager: viewModel.translationManager,
+                               uiFont: viewModel.screen.infoUiFont) {
+                HStack {
+                    Text("Use vinculum (overline):")
+                    Spacer()
+                    Toggle("", isOn: $viewModel.translationManager.romanNumeralsUseVinculum)
+                        .frame(width: 40)
+                        .toggleStyle(grayToggleStyle)
+                        .buttonStyle(.plain)
+                        .padding(.trailing, 10)
+                }
+            }
+    }
     
     
     
@@ -294,12 +306,12 @@ struct SettingsView: View {
             Text("Version: \(appVersion ?? "unknown") (build \(buildNumber ?? "unknown"))")
                 .italic()
                 .padding(.bottom, 3)
-            Text("This is a hobby project by Joachim Neumann. Although I have done some testing, errors may occur. If find a wrong translation or have ideas for improvement you can add or correct the test data in the folder Tests/Groundtruth of this git repository:").tint(.white)
-            Text("[Translator Repository](https://github.com/joachimneumann/NumberTranslator)").tint(.gray)
-            Text("The calculator is also open source and can be found here:").tint(.white)
-            Text("[Calculator Repository](https://github.com/joachimneumann/1-translate)").tint(.gray)
-            Text("You can also just drop me an email at").tint(.white)
-            Link("joachim@joachimneumann.com", destination: URL(string: "mailto:joachim@joachimneumann.com")!).tint(.gray)
+            Text("This is a hobby project by Joachim Neumann. Although I have done some testing, errors may occur. If find a wrong translation or have ideas for improvement you can add or correct the test data in the folder Tests/Groundtruth of this git repository:")
+            Text("[Translator Repository](https://github.com/joachimneumann/NumberTranslator)").tint(.white).underline()
+            Text("The calculator is also open source and can be found here:")
+            Text("[Calculator Repository](https://github.com/joachimneumann/1-translate)").tint(.white).underline()
+            Text("You can also just drop me an email at")
+            Link("joachim@joachimneumann.com", destination: URL(string: "mailto:joachim@joachimneumann.com")!).tint(.white).underline()
         }
     }
     
@@ -386,9 +398,12 @@ extension View {
 #Preview {
     ZStack {
         Rectangle()
-            .foregroundColor(.gray)
+            .foregroundColor(.yellow)
+            .background(.black)
         VStack {
-            SettingsView(viewModel: ViewModel(), languageEnum: .babylonian, exampleFont: Font(Screen().infoUiFont))
+            SettingsView(viewModel: ViewModel(), languageEnum: .spanish, exampleFont: Screen().infoUiFont)
+                .scrollContentBackground(.hidden)
+                .background(.black)
         }
     }
 }
