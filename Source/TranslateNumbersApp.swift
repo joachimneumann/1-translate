@@ -14,9 +14,11 @@ public typealias AppleFont = UIFont
 struct TranslateNumbersApp: App {
     var body: some Scene {
         WindowGroup {
-//            GeometryReader { geo in
-                TranslateNumbers(screen: Screen())
-//            }
+            NavigationStack {
+                //            GeometryReader { geo in
+                TranslateNumbers(viewModel: ViewModel(screen: Screen()))
+                //            }
+            }
         }
     }
 }

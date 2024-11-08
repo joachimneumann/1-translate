@@ -14,13 +14,17 @@ class Display: MonoFontDisplay, ObservableObject {
     
     override var left: String {
         didSet {
-            objectWillChange.send()
+            DispatchQueue.main.async {
+                self.objectWillChange.send()
+            }
         }
     }
 
     override var right: String? {
         didSet {
-            objectWillChange.send()
+            DispatchQueue.main.async {
+                self.objectWillChange.send()
+            }
         }
     }
     @Published var rightWidth: CGFloat?

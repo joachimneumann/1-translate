@@ -11,7 +11,7 @@ import SwiftGmp
 
 struct SettingsView: View {
     @Environment(\.presentationMode) var presentation /// for dismissing the Settings View
-    @Bindable var viewModel: ViewModel
+    @ObservedObject var viewModel: ViewModel
     let languageEnum: NumberTranslator.LanguageEnum
     let exampleFont: UIFont
     let grayToggleStyle = ColoredToggleStyle(onColor: Color(white: 0.75),
@@ -57,12 +57,11 @@ struct SettingsView: View {
     }
     
     var GeneralSettings: some View {
-        let calculator = Calculator(precision: 100)
-        calculator.evaluateString("120000.5")
-        let raw = calculator.raw
-        let display = Display(floatDisplayWidth: 1000, font: AppleFont.systemFont(ofSize: 40), ePadding: 0.0)
-        display.separatorCharacter = viewModel.separatorCharacter(forLanguage: languageEnum)
-        display.update(raw: raw)
+        viewModel.calculator.evaluateString("120000.5")
+        let raw = viewModel.calculator.raw
+//        calculator.display = Display(floatDisplayWidth: 1000, font: AppleFont.systemFont(ofSize: 40), ePadding: 0.0)
+        viewModel.display.separatorCharacter = viewModel.separatorCharacter(forLanguage: languageEnum)
+        viewModel.display.update(raw: raw)
         return Section(header:
             Text("Settings")
             .fontWeight(.semibold)
@@ -70,7 +69,7 @@ struct SettingsView: View {
                 VStack {
                     HStack {
                         Spacer()
-                        Text(display.string)
+                        Text(viewModel.display.string)
                             .foregroundColor(.yellow)
                             .font(.largeTitle)
                             .gridCellColumns(2)

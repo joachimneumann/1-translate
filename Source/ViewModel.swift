@@ -9,20 +9,20 @@ import SwiftUI
 import NumberTranslator
 import SwiftGmp
 
-@Observable class ViewModel {
-    let screen: Screen
+class ViewModel: ObservableObject {
+    var screen: Screen
     var persistent = Persistent()
     var calculator: Calculator
-    var display: Display
+    @Published var display: Display
     var currentLanguageName: String
     var currentLanguageEnglishName: String?
-    var translationManager: TranslationManager
+    @Published var translationManager: TranslationManager
     var translatorKeyboard: TranslatorKeyboard
     var languageSelectorKeyboard: LanguageSelectorKeyboard
     var selectedLanguageKeyboard: SelectedLanguagekeyboard
     let monoFontDisplay: MonoFontDisplay
-    var showLanguageSelector: Bool = false
-    var navigateToSettings: Bool = false
+    @Published var showLanguageSelector: Bool = false
+    @Published var showSettings: Bool = false
     
     func process() {
         if calculator.displayBuffer.count > 0 {
@@ -51,11 +51,16 @@ import SwiftGmp
         }
         
         translatorKeyboard.back(calculator.privateDisplayBufferHasDigits)
-
+        
         var toTranslate = display.string
         toTranslate.remove(separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter)
         translationManager.translateThis(toTranslate, to: persistent.currentLanguageEnum)
     }
+    
+    func didReturnFromSettings() {
+        
+    }
+    
     
     func toggleLanguageSelector(key: Key) {
         showLanguageSelector.toggle()
@@ -120,7 +125,7 @@ import SwiftGmp
         
         if let symbolKey = key as? SymbolKey {
             if symbolKey.op.isEqual(to: ConfigOperation.settings) {
-                navigateToSettings = true  // Trigger navigation
+                showSettings = true  // Trigger navigation
                 return
             }
             calculator.press(symbolKey.op)
