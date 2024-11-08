@@ -20,7 +20,7 @@ struct TranslatedDisplay: View {
             } else {
                 ZStack {
                     (Text(translationResult.overline!)
-                        .baselineOffset(uiFont.pointSize)
+                        .baselineOffset(1.1*uiFont.pointSize)
                         .underline(true, color: .white)
                      + Text(translationResult.displayText))
                     .foregroundColor(.clear)
@@ -62,8 +62,8 @@ struct TranslatedDisplay: View {
 
 
 #Preview {
-    let fontsize: CGFloat = 60.0
-    TranslatedDisplay(uiFont: UIFont.systemFont(ofSize: fontsize), translationResult: TranslationResult(displayText: "DCCCdlfgjksdlfkjgdflkjLXXl", overline: "VIlggksdII", spokenText: nil))
+    let fontsize: CGFloat = 65.0
+    TranslatedDisplay(uiFont: UIFont.systemFont(ofSize: fontsize), translationResult: TranslationResult(displayText: "", overline: "X", spokenText: nil))
         .padding()
         .padding(.top, fontsize)
         .background (.black)

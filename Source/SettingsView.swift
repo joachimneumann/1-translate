@@ -150,7 +150,7 @@ struct SettingsView: View {
                         Text("\(example) →")
                         TranslatedDisplay(uiFont: uiFont, translationResult: translationResult)
                             .fontWeight(.semibold)
-                            .frame(height: 25)
+                            .frame(height: 40)
                             .foregroundColor(.orange)
                             .foregroundColor(.white)
                     }
@@ -301,8 +301,7 @@ struct SettingsView: View {
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
         
-        return Section(header: Text("About")) {
-            //            VStack(alignment: .leading) {
+        return Section() {
             Text("Version: \(appVersion ?? "unknown") (build \(buildNumber ?? "unknown"))")
                 .italic()
                 .padding(.bottom, 3)
@@ -401,7 +400,7 @@ extension View {
             .foregroundColor(.yellow)
             .background(.black)
         VStack {
-            SettingsView(viewModel: ViewModel(), languageEnum: .spanish, exampleFont: Screen().infoUiFont)
+            SettingsView(viewModel: ViewModel(), languageEnum: .vietnamese, exampleFont: Screen().infoUiFont)
                 .scrollContentBackground(.hidden)
                 .background(.black)
         }
