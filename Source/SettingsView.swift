@@ -20,7 +20,8 @@ struct SettingsView: View {
     var body: some View {
         VStack {
             List {
-                //                Grouping
+                GeneralSettings
+                    .listRowBackground(Color(UIColor.darkGray))
                 switch languageEnum {
                 case .babylonian:
                     BabylonianParameters
@@ -51,11 +52,42 @@ struct SettingsView: View {
             }
         }
         .onDisappear {
-            viewModel.process()
+//            viewModel.process()
         }
     }
     
-    //    var Grouping: some View {
+    var GeneralSettings: some View {
+        let calculator = Calculator(precision: 100)
+        calculator.evaluateString("120000.5")
+        let raw = calculator.raw
+        let display = Display(floatDisplayWidth: 1000, font: AppleFont.systemFont(ofSize: 40), ePadding: 0.0)
+        display.separatorCharacter = viewModel.separatorCharacter(forLanguage: languageEnum)
+        display.update(raw: raw)
+        return Section(header:
+            Text("Settings")
+            .fontWeight(.semibold)
+            .foregroundColor(.white)) {
+                VStack {
+                    HStack {
+                        Spacer()
+                        Text(display.string)
+                            .foregroundColor(.yellow)
+                            .font(.largeTitle)
+                            .gridCellColumns(2)
+                            .padding(.bottom, 5)
+                    }
+                    HStack {
+                        Text("Show Grouping")
+                        Spacer()
+                        Toggle("", isOn: $viewModel.persistent.showGrouping)
+                            .frame(width: 40)
+                            .toggleStyle(grayToggleStyle)
+                            .buttonStyle(.plain)
+                            .padding(.trailing, 10)
+                    }
+                }
+        }
+    }
     //        let calculator = Calculator(precision: 100)
     //        calculator.evaluateString("120000.5")
     //        let raw = calculator.raw

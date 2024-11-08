@@ -27,7 +27,11 @@ import SwiftGmp
     func process() {
         if calculator.displayBuffer.count > 0 {
             var withGrouping: String = calculator.displayBuffer
+            print("withGrouping 1: \(withGrouping)")
+            print("separatorCharacter: \(display.separatorCharacter)")
+            print("groupingCharacter: \(display.groupingCharacter == nil ? "nil" : String(display.groupingCharacter!))")
             withGrouping.inject(separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter)
+            print("withGrouping 2: \(withGrouping)")
             if display.fits(withGrouping) {
                 display.left = withGrouping
                 display.right = nil

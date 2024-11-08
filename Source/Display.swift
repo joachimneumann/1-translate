@@ -91,7 +91,7 @@ extension String {
                 self.removeLast()
                 self = beforeDecimalPoint + String(separatorCharacter)
             }
-            return
+            self = beforeDecimalPoint
         }
         if parts.count == 2 {
             self = beforeDecimalPoint + String(separatorCharacter) + String(parts[1])

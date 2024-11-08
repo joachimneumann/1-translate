@@ -15,49 +15,14 @@ struct TranslateNumbers: View {
     @State var scrollViewHasScrolled = false
     @State var scrollViewID = UUID()
     @State var isZoomed: Bool = false
-    @State private var showLanguageSelection = false
     @State private var settingsDetent = PresentationDetent.medium
     
     @State private var navigationPath = NavigationPath()
 
     init(screen: Screen) {
-        //        self._viewModel = StateObject(wrappedValue: ViewModel(screen: screen))
         self.viewModel = ViewModel(screen: screen)
     }
     
-    struct OneLanguage: View {
-        var viewModel: ViewModel
-        let screen: Screen
-        let translation: TranslationResult
-        
-        var body: some View {
-            HStack(spacing: 30.0) {
-                Spacer()
-                //                if viewModel.persistent.offerReadingAloud {
-                //                    let noVoice = (translation.spokenText == nil)
-                //                    let color =  noVoice ? Color(white: 0.7) : Color(white: 0.95)
-                //                    let symbolName = noVoice ? "speaker.slash.fill" : "speaker.wave.3.fill"
-                //                    let symbolSize: CGFloat = noVoice ? 23.0 : 18.0
-                //                    Button {
-                //                        viewModel.voices.readAloud(translation.spokenText!, in: viewModel.numberTranslator.currentLanguage)
-                //                    } label: {
-                //                        Image(systemName: symbolName)
-                //                            .resizable()
-                //                            .aspectRatio(contentMode: .fit)
-                //                            .foregroundColor(color)
-                //                            .frame(height: symbolSize)
-                //                            .padding(10)
-                //                    }
-                //                    .disabled(noVoice)
-                //                    .padding(.trailing, 10)
-                //                }
-                //                LanguageButton(viewModel: viewModel, screen: screen)
-            }
-            .frame(height: 34.0)
-            .padding(.bottom, 10)
-            .padding(.top, 20)
-        }
-    }
     
     var portraitView: some View {
         VStack(spacing: 0.0) {
@@ -123,6 +88,7 @@ struct TranslateNumbers: View {
             .onChange(of: viewModel.navigateToSettings) { old, new in
                 if new {
                     navigationPath.append("Settings")
+                    print("viewModel.showLanguageSelector \(viewModel.showLanguageSelector)")
                 }
             }
             .navigationDestination(for: String.self) { destination in
@@ -130,6 +96,7 @@ struct TranslateNumbers: View {
                     SettingsView(viewModel: viewModel, languageEnum: viewModel.persistent.currentLanguageEnum, exampleFont: viewModel.screen.infoUiFont)
                         .onDisappear {
                             viewModel.navigateToSettings = false
+                            print("viewModel.showLanguageSelector \(viewModel.showLanguageSelector)")
                         }
                 }
             }
