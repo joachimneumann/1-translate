@@ -64,12 +64,12 @@ class Display: MonoFontDisplay, ObservableObject {
         var w: CGFloat
         var mantissa = mantissaParameter
         if let groupingCharacter = groupingCharacter {
-            mantissa.inject(separatorCharacter: separatorCharacter, groupingCharacter: groupingCharacter)
+            inject(into: &mantissa, separatorCharacter: separatorCharacter, groupingCharacter: groupingCharacter)
         }
         w = mantissa.textWidth(kerning: 0.0, uiFont)
         if var exponent = exponentParameter {
             if let groupingCharacter = groupingCharacter {
-                exponent.inject(separatorCharacter: separatorCharacter, groupingCharacter: groupingCharacter)
+                inject(into: &exponent, separatorCharacter: separatorCharacter, groupingCharacter: groupingCharacter)
             }
             w += ePadding
             let width = eDigitWidth + widestDigitWidth * CGFloat(exponent.count - 1)
@@ -78,29 +78,32 @@ class Display: MonoFontDisplay, ObservableObject {
         return w <= floatDisplayWidth
     }
 }
-        
-extension String {
-    public mutating func inject(separatorCharacter: Character, groupingCharacter: Character?) {
-        let parts = self.split(separator: ".")
-        var beforeDecimalPoint: String = String(parts[0])
-        if let c = groupingCharacter {
-            var count = beforeDecimalPoint.count
-            while count >= 4 {
-                count = count - 3
-                beforeDecimalPoint.insert(c, at: beforeDecimalPoint.index(beforeDecimalPoint.startIndex, offsetBy: count))
-            }
-        }
-        if parts.count == 1 {
-            if self.hasSuffix(".") {
-                self.removeLast()
-                self = beforeDecimalPoint + String(separatorCharacter)
-            }
-            self = beforeDecimalPoint
-        }
-        if parts.count == 2 {
-            self = beforeDecimalPoint + String(separatorCharacter) + String(parts[1])
+
+func inject(into string: inout String, separatorCharacter: Character, groupingCharacter: Character?) {
+    let parts = string.split(separator: ".")
+    var beforeDecimalPoint: String = String(parts[0])
+
+    // Insert grouping character if provided
+    if let c = groupingCharacter {
+        var count = beforeDecimalPoint.count
+        while count > 3 {
+            count -= 3
+            beforeDecimalPoint.insert(c, at: beforeDecimalPoint.index(beforeDecimalPoint.startIndex, offsetBy: count))
         }
     }
+
+    if parts.count == 1 {
+        // No decimal part, reassign self with the grouped integer part
+        string = beforeDecimalPoint
+    } else if parts.count == 2 {
+        // Decimal part exists, reassemble with separator and decimal portion
+        let afterDecimalPoint = String(parts[1])
+        string = beforeDecimalPoint + String(separatorCharacter) + afterDecimalPoint
+    }
+}
+
+extension String {
+    
     public mutating func remove(separatorCharacter: Character, groupingCharacter: Character?) {
         var ret: String = self
         if let gr = groupingCharacter {

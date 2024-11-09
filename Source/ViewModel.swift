@@ -11,10 +11,10 @@ import SwiftGmp
 
 class ViewModel: ObservableObject {
     var screen: Screen
-    var persistent = Persistent()
+    @Published var persistent = Persistent()
     var calculator: Calculator
     @Published var display: Display
-    var currentLanguageName: String
+    @Published var currentLanguageName: String
     var currentLanguageEnglishName: String?
     @Published var translationManager: TranslationManager
     var translatorKeyboard: TranslatorKeyboard
@@ -25,29 +25,27 @@ class ViewModel: ObservableObject {
     @Published var showSettings: Bool = false
     
     func process() {
+        display.separatorCharacter = separatorCharacter(forLanguage: persistent.currentLanguageEnum)
+        display.groupingCharacter = groupingCharacter(forLanguage: persistent.currentLanguageEnum)
         if calculator.displayBuffer.count > 0 {
             var withGrouping: String = calculator.displayBuffer
-            print("withGrouping 1: \(withGrouping)")
-            print("separatorCharacter: \(display.separatorCharacter)")
-            print("groupingCharacter: \(display.groupingCharacter == nil ? "nil" : String(display.groupingCharacter!))")
-            withGrouping.inject(separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter)
-            print("withGrouping 2: \(withGrouping)")
+            inject(into: &withGrouping, separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter)
             if display.fits(withGrouping) {
                 display.left = withGrouping
                 display.right = nil
             } else {
                 let raw = calculator.raw
                 display.update(raw: raw)
-                display.left.inject(separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter)
+                inject(into: &display.left, separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter)
                 if var right = display.right {
-                    right.inject(separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter)
+                    inject(into: &right, separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter)
                     display.rightWidth = display.eDigitWidth + display.widestDigitWidth * CGFloat(right.count - 1)
                 }
             }
         } else {
             let raw = calculator.raw
             display.update(raw: raw)
-            display.left.inject(separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter)
+            inject(into: &display.left, separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter)
         }
         
         translatorKeyboard.back(calculator.privateDisplayBufferHasDigits)
@@ -94,6 +92,7 @@ class ViewModel: ObservableObject {
         }
         return "."
     }
+
     func groupingCharacter(forLanguage language: NumberTranslator.LanguageEnum) -> Character? {
         if persistent.showGrouping {
             if separatorCharacter(forLanguage: language) == "." {

@@ -17,6 +17,32 @@ struct SettingsView: View {
     let grayToggleStyle = ColoredToggleStyle(onColor: Color(white: 0.75),
                                                 offColor: Color(white: 0.5),
                                                 thumbColor: .white)
+    let settingsCalculator: Calculator
+    @ObservedObject var settingsDisplay: Display
+    
+    @State var settingsShowGrouping: Bool
+    @State var groupingExampleString = "12000"
+    
+    func updateGroupingExampleString(grouping: Bool) {
+        groupingExampleString = "12000"
+        let gr: Character?
+        let s = viewModel.separatorCharacter(forLanguage: languageEnum)
+        if s == "." {
+            gr = settingsShowGrouping ? "," : nil
+        } else {
+            gr = settingsShowGrouping ? "." : nil
+        }
+        inject(into: &groupingExampleString, separatorCharacter: s, groupingCharacter: gr)
+    }
+    
+    init(viewModel: ViewModel) {
+        self.viewModel = viewModel
+        self.languageEnum = viewModel.persistent.currentLanguageEnum
+        self.exampleFont = viewModel.screen.numberDisplayFont
+        self.settingsCalculator = Calculator(precision: 20)
+        self.settingsDisplay = Display(floatDisplayWidth: viewModel.screen.displayWidth, font: viewModel.screen.numberDisplayFont, ePadding: 0.0)
+        settingsShowGrouping = viewModel.persistent.showGrouping
+    }
     var body: some View {
         VStack {
             List {
@@ -50,18 +76,17 @@ struct SettingsView: View {
                 HobbyProject
                     .listRowBackground(Color(UIColor.darkGray))
             }
+            .onAppear() {
+                updateGroupingExampleString(grouping: viewModel.persistent.showGrouping)
+            }
         }
         .onDisappear {
-//            viewModel.process()
+            viewModel.persistent.showGrouping = settingsShowGrouping
+            viewModel.process()
         }
     }
     
     var GeneralSettings: some View {
-        viewModel.calculator.evaluateString("120000.5")
-        let raw = viewModel.calculator.raw
-//        calculator.display = Display(floatDisplayWidth: 1000, font: AppleFont.systemFont(ofSize: 40), ePadding: 0.0)
-        viewModel.display.separatorCharacter = viewModel.separatorCharacter(forLanguage: languageEnum)
-        viewModel.display.update(raw: raw)
         return Section(header:
             Text("Settings")
             .fontWeight(.semibold)
@@ -69,7 +94,7 @@ struct SettingsView: View {
                 VStack {
                     HStack {
                         Spacer()
-                        Text(viewModel.display.string)
+                        Text(groupingExampleString)
                             .foregroundColor(.yellow)
                             .font(.largeTitle)
                             .gridCellColumns(2)
@@ -78,7 +103,7 @@ struct SettingsView: View {
                     HStack {
                         Text("Show Grouping")
                         Spacer()
-                        Toggle("", isOn: $viewModel.persistent.showGrouping)
+                        Toggle("", isOn: $settingsShowGrouping)
                             .frame(width: 40)
                             .toggleStyle(grayToggleStyle)
                             .buttonStyle(.plain)
@@ -86,6 +111,9 @@ struct SettingsView: View {
                     }
                 }
         }
+            .onChange(of: settingsShowGrouping) { oldValue, newValue in
+                updateGroupingExampleString(grouping: newValue)
+            }
     }
     //        let calculator = Calculator(precision: 100)
     //        calculator.evaluateString("120000.5")
@@ -166,12 +194,20 @@ struct SettingsView: View {
         }
         
         var body: some View {
+            let borderwidth: CGFloat = 2.0
+            let height: CGFloat = 20.0
+            let width: CGFloat = 30.0
             Section(header: HStack {
                 Image(flagname)
                     .resizable()
-                    .scaledToFit()
-                    .frame(height: 20)
+                    .frame(width: width-2*borderwidth, height: height-2*borderwidth)
                     .clipShape(Capsule())
+                    .padding(0.5*borderwidth)
+                    .overlay(
+                        Capsule()
+                            .stroke(.gray, lineWidth: borderwidth)
+                    )
+                    .padding(0.5*borderwidth)
                     .padding(.trailing, 3)
                 Text(name)
                     .fontWeight(.semibold)
@@ -431,7 +467,7 @@ extension View {
             .foregroundColor(.yellow)
             .background(.black)
         VStack {
-            SettingsView(viewModel: ViewModel(), languageEnum: .vietnamese, exampleFont: Screen().infoUiFont)
+            SettingsView(viewModel: ViewModel())
                 .scrollContentBackground(.hidden)
                 .background(.black)
         }

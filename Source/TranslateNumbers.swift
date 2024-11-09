@@ -81,11 +81,13 @@ struct TranslateNumbers: View {
                 .padding(.horizontal, viewModel.screen.horizontalPadding)
                 .preferredColorScheme(.dark)
                 .navigationDestination(isPresented: $viewModel.showSettings) {
-                    SettingsView(viewModel: viewModel, languageEnum: .vietnamese, exampleFont: viewModel.screen.infoUiFont)
-                                    .onDisappear {
-                                        viewModel.didReturnFromSettings()
-                                    }
+                    if viewModel.showSettings {
+                        SettingsView(viewModel: viewModel)
+                            .onDisappear {
+                                viewModel.didReturnFromSettings()
                             }
+                    }
+                }
 //        }
 //        .onChange(of: viewModel.navigateToSettings) { old, new in
 //            if new {
