@@ -17,6 +17,7 @@ struct TranslatedDisplay: View {
             if translationResult.overline == nil {
                 Text(translationResult.displayText)
                     .font(Font(uiFont))
+                    .multilineTextAlignment(.trailing)
             } else {
                 ZStack {
                     (Text(translationResult.overline!)
@@ -62,8 +63,11 @@ struct TranslatedDisplay: View {
 
 
 #Preview {
-    let fontsize: CGFloat = 65.0
-    TranslatedDisplay(uiFont: UIFont.systemFont(ofSize: fontsize), translationResult: TranslationResult(displayText: "", overline: "X", spokenText: nil))
+    let fontsize: CGFloat = 55.0
+    let viewModel = ViewModel()
+    let _ = viewModel.translationManager.translateThis("5555", to: .polish)
+
+    TranslatedDisplay(uiFont: UIFont.systemFont(ofSize: fontsize), translationResult: viewModel.translationManager.result)
         .padding()
         .padding(.top, fontsize)
         .background (.black)
