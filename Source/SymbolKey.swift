@@ -43,14 +43,18 @@ import SwiftGmp
         bgColor = upColor
     }
     override func view() -> AnyView {
-        return AnyView(
-            Label(symbol: symbol, size: height, color: txtColor)
-                .padding()
-                .frame(width: width, height: height)
-                .background(bgColor)
-                .foregroundColor(txtColor)
-                .clipShape(Capsule())
-        )
+        if symbol == "Spacer" {
+            return AnyView(Spacer())
+        } else {
+            return AnyView(
+                Label(symbol: symbol, size: height, color: txtColor)
+                    .padding()
+                    .frame(width: width, height: height)
+                    .background(bgColor)
+                    .foregroundColor(txtColor)
+                    .clipShape(Capsule())
+            )
+        }
     }
 }
 

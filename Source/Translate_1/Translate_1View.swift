@@ -6,11 +6,9 @@
 
 import SwiftUI
 
-let testColors = false
-
 struct Translate_1View: View {
     @Environment(\.scenePhase) var scenePhase
-    @ObservedObject var viewModel: ViewModel
+    @ObservedObject var viewModel: Translate_1ViewModel
 
     @State var scrollViewHasScrolled = false
     @State var scrollViewID = UUID()
@@ -79,12 +77,9 @@ struct Translate_1View: View {
                 .padding(.bottom, viewModel.screen.bottomPadding)
                 .padding(.horizontal, viewModel.screen.horizontalPadding)
                 .preferredColorScheme(.dark)
-                .navigationDestination(isPresented: $viewModel.showSettings) {
-                    if viewModel.showSettings {
+                .navigationDestination(isPresented: $viewModel.showLanguage_1Settings) {
+                    if viewModel.showLanguage_1Settings {
                         Translate_1SettingsView(viewModel: viewModel)
-                            .onDisappear {
-                                viewModel.didReturnFromSettings()
-                            }
                     }
                 }
 //        }
@@ -116,6 +111,6 @@ struct Translate_1View: View {
 
 #Preview {
     NavigationStack {
-        Translate_1View(viewModel: ViewModel(screen: Screen()))
+        Translate_1View(viewModel: Translate_1ViewModel(screen: Screen()))
     }
 }

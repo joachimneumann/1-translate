@@ -9,11 +9,9 @@ import SwiftGmp
 import SwiftUI
 
 @Observable class Translate_1Keyboard: SmallKeyboard {
-    let clearKey: SymbolKey
     let countryKey: Translate_1FlagKey
     let separatorKey: SymbolKey
     override init(keySize: CGSize) {
-        clearKey = SymbolKey(ClearOperation.clear)
         let changeSignKey = SymbolKey(InplaceOperation.changeSign)
         let percentKey = SymbolKey(PercentOperation.percent)
         let divideKey = SymbolKey(TwoOperantOperation.div)
@@ -53,14 +51,4 @@ import SwiftUI
         separatorKey.symbol = symbol
     }
     
-    func back(_ displayBufferHasDigits: Bool) {
-        if displayBufferHasDigits {
-            clearKey.op = ClearOperation.back
-            clearKey.symbol = ClearOperation.back.getRawValue()
-        } else {
-            clearKey.op = ClearOperation.clear
-            clearKey.symbol = ClearOperation.clear.getRawValue()
-        }
-    }
-
 }

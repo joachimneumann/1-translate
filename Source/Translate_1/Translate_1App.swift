@@ -8,15 +8,13 @@ import Foundation
 import SwiftGmp
 import SwiftUI
 
-public typealias AppleFont = UIFont
-
 @main
 struct Translate_1App: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
                 //            GeometryReader { geo in
-                Translate_1View(viewModel: ViewModel(screen: Screen()))
+                Translate_1View(viewModel: Translate_1ViewModel(screen: Screen()))
                 //            }
             }
         }

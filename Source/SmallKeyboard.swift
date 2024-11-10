@@ -10,6 +10,7 @@ import SwiftGmp
 
 
 class SmallKeyboard: ObservableObject {
+    let clearKey: SymbolKey
     private let keySize: CGSize
     private(set) var keyMatrix: [[Key]] = []
     
@@ -25,6 +26,7 @@ class SmallKeyboard: ObservableObject {
        
     init(keySize: CGSize) {
         self.keySize = keySize
+        clearKey = SymbolKey(ClearOperation.clear)
     }
     
     func appendRow(_ keys: [Key]) {
@@ -34,4 +36,15 @@ class SmallKeyboard: ObservableObject {
         }
         keyMatrix.append(keys)
     }
+    
+    func back(_ displayBufferHasDigits: Bool) {
+        if displayBufferHasDigits {
+            clearKey.op = ClearOperation.back
+            clearKey.symbol = ClearOperation.back.getRawValue()
+        } else {
+            clearKey.op = ClearOperation.clear
+            clearKey.symbol = ClearOperation.clear.getRawValue()
+        }
+    }
+
 }

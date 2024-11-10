@@ -11,7 +11,7 @@ import SwiftGmp
 
 struct Translate_1SettingsView: View {
     @Environment(\.presentationMode) var presentation /// for dismissing the Settings View
-    @ObservedObject var viewModel: ViewModel
+    @ObservedObject var viewModel: Translate_1ViewModel
     let languageEnum: NumberTranslator.LanguageEnum
     let exampleFont: UIFont
     let grayToggleStyle = ColoredToggleStyle(onColor: Color(white: 0.75),
@@ -35,13 +35,13 @@ struct Translate_1SettingsView: View {
         inject(into: &groupingExampleString, separatorCharacter: s, groupingCharacter: gr)
     }
     
-    init(viewModel: ViewModel) {
+    init(viewModel: Translate_1ViewModel) {
         self.viewModel = viewModel
-        self.languageEnum = viewModel.persistent.currentLanguageEnum
+        self.languageEnum = viewModel.translate_1Persistent.currentLanguageEnum
         self.exampleFont = viewModel.screen.numberDisplayFont
         self.settingsCalculator = Calculator(precision: 20)
         self.settingsDisplay = Display(floatDisplayWidth: viewModel.screen.displayWidth, font: viewModel.screen.numberDisplayFont, ePadding: 0.0)
-        settingsShowGrouping = viewModel.persistent.showGrouping
+        settingsShowGrouping = viewModel.translate_1Persistent.showGrouping
     }
     var body: some View {
         VStack {
@@ -77,11 +77,11 @@ struct Translate_1SettingsView: View {
                     .listRowBackground(Color(UIColor.darkGray))
             }
             .onAppear() {
-                updateGroupingExampleString(grouping: viewModel.persistent.showGrouping)
+                updateGroupingExampleString(grouping: viewModel.translate_1Persistent.showGrouping)
             }
         }
         .onDisappear {
-            viewModel.persistent.showGrouping = settingsShowGrouping
+            viewModel.translate_1Persistent.showGrouping = settingsShowGrouping
             viewModel.process()
         }
     }
@@ -467,7 +467,7 @@ extension View {
             .foregroundColor(.yellow)
             .background(.black)
         VStack {
-            Translate_1SettingsView(viewModel: ViewModel())
+            Translate_1SettingsView(viewModel: Translate_1ViewModel())
                 .scrollContentBackground(.hidden)
                 .background(.black)
         }

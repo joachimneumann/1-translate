@@ -45,13 +45,11 @@ struct KeyView: View {
 
 #Preview {
     let symbol = SymbolKey(InplaceOperation.sqr)
-    let image = Translate_1FlagKey(flagname: "Deutsch")
     ZStack {
         Rectangle()
             .foregroundColor(.gray)
         VStack {
             KeyView(key: symbol)
-            KeyView(key: image)
         }
     }
 }

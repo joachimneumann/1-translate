@@ -17,11 +17,7 @@ struct AllRows: View {
             ForEach(smallKeyboard.keyMatrix.indices, id: \.self) { rowIndex in
                 HStack(spacing: spacing) {
                     ForEach(smallKeyboard.keyMatrix[rowIndex], id: \.id) { key in
-                        if let symbolKey = key as? SymbolKey, symbolKey.op.isEqual(to: Translate_1Operation.spacer) {
-                            Spacer()
-                        } else {
-                            KeyView(key: key)
-                        }
+                        KeyView(key: key)
                     }
                 }
             }

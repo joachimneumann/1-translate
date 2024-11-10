@@ -64,7 +64,7 @@ struct Translate_1Display: View {
 
 #Preview {
     let fontsize: CGFloat = 55.0
-    let viewModel = ViewModel()
+    let viewModel = Translate_1ViewModel()
     let _ = viewModel.translate_1Manager.translateThis("5555", to: .polish)
 
     Translate_1Display(uiFont: UIFont.systemFont(ofSize: fontsize), translate_1Result: viewModel.translate_1Manager.result)
