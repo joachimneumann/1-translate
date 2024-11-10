@@ -8,7 +8,7 @@
 import SwiftGmp
 import SwiftUI
 
-@Observable class TranslatorKeyboard: SmallKeyboard {
+@Observable class Translate_1Keyboard: SmallKeyboard {
     let clearKey: SymbolKey
     let countryKey: FlagKey
     let separatorKey: SymbolKey

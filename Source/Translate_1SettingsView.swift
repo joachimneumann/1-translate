@@ -9,7 +9,7 @@ import SwiftUI
 import NumberTranslator
 import SwiftGmp
 
-struct SettingsView: View {
+struct Translate_1SettingsView: View {
     @Environment(\.presentationMode) var presentation /// for dismissing the Settings View
     @ObservedObject var viewModel: ViewModel
     let languageEnum: NumberTranslator.LanguageEnum
@@ -70,7 +70,7 @@ struct SettingsView: View {
                 default:
                     EmptyView()
                 }
-                //                if viewModel.translationManager.code(language) != nil {
+                //                if viewModel.translate_1Manager.code(language) != nil {
                 //                    VoiceSettings(language)
                 //                }
                 HobbyProject
@@ -176,20 +176,20 @@ struct SettingsView: View {
         let flagname: String
         let name: String
         let example: String
-        let translationResult: TranslationResult
+        let translate_1Result: Translate_1Result
         let uiFont: UIFont
         var content: () -> Content
         init(languageEnum: NumberTranslator.LanguageEnum,
              example: String,
-             translationManager: TranslationManager,
+             translate_1Manager: Translate_1Manager,
              uiFont: UIFont,
              @ViewBuilder content: @escaping () -> Content) {
-            self.flagname = translationManager.flagname(languageEnum)
-            self.name = translationManager.name(languageEnum)
+            self.flagname = translate_1Manager.flagname(languageEnum)
+            self.name = translate_1Manager.name(languageEnum)
             self.example = example
             self.uiFont = uiFont
-            translationManager.translateThis(example, to: languageEnum)
-            self.translationResult = translationManager.result
+            translate_1Manager.translateThis(example, to: languageEnum)
+            self.translate_1Result = translate_1Manager.result
             self.content = content
         }
         
@@ -215,7 +215,7 @@ struct SettingsView: View {
             }) {
                     HStack {
                         Text("\(example) →")
-                        TranslatedDisplay(uiFont: uiFont, translationResult: translationResult)
+                        TranslatedDisplay(uiFont: uiFont, translate_1Result: translate_1Result)
                             .fontWeight(.semibold)
                             .frame(height: 40)
                             .foregroundColor(.orange)
@@ -229,12 +229,12 @@ struct SettingsView: View {
     var EnglishParameters: some View {
         return LanguageSection(languageEnum: .english,
                                example: "150",
-                               translationManager: viewModel.translationManager,
+                               translate_1Manager: viewModel.translate_1Manager,
                                uiFont: viewModel.screen.infoUiFont) {
             HStack {
                 Text("\"and\" after hundred")
                 Spacer()
-                Toggle("", isOn: $viewModel.translationManager.englishUseAndAfterHundred)
+                Toggle("", isOn: $viewModel.translate_1Manager.englishUseAndAfterHundred)
                     .frame(width: 40)
                     .toggleStyle(grayToggleStyle)
                     .buttonStyle(.plain)
@@ -247,12 +247,12 @@ struct SettingsView: View {
     var GermanParameters: some View {
         return LanguageSection(languageEnum: .german,
                                example: "88",
-                               translationManager: viewModel.translationManager,
+                               translate_1Manager: viewModel.translate_1Manager,
                                uiFont: viewModel.screen.infoUiFont) {
                 HStack {
                     Text("Großschreibung")
                     Spacer()
-                    Toggle("", isOn: $viewModel.translationManager.germanCapitalisation)
+                    Toggle("", isOn: $viewModel.translate_1Manager.germanCapitalisation)
                         .frame(width: 40)
                         .toggleStyle(grayToggleStyle)
                         .buttonStyle(.plain)
@@ -264,13 +264,13 @@ struct SettingsView: View {
     var VietnameseParameters: some View {
         return LanguageSection(languageEnum: .vietnamese,
                                example: "33303",
-                               translationManager: viewModel.translationManager,
+                               translate_1Manager: viewModel.translate_1Manager,
                                uiFont: viewModel.screen.infoUiFont) {
                 Grid(alignment: .leading) {
                     GridRow {
                         Text("1000")
                         Spacer(minLength: 0.0)
-                        Picker("", selection: $viewModel.translationManager.vietnameseThousand) {
+                        Picker("", selection: $viewModel.translate_1Manager.vietnameseThousand) {
                             ForEach(NumberTranslator.VietnameseThousand.allCases, id: \.self) { value in
                                 Text("\(value.rawValue)")
                                     .tag(value)
@@ -283,7 +283,7 @@ struct SettingsView: View {
                     GridRow {
                         Text("Linh hoặc lẻ")
                         Spacer(minLength: 0.0)
-                        Picker("", selection: $viewModel.translationManager.vietnameseSecondLast) {
+                        Picker("", selection: $viewModel.translate_1Manager.vietnameseSecondLast) {
                             ForEach(NumberTranslator.VietnameseSecondLast.allCases, id: \.self) { value in
                                 Text("\(value.rawValue)")
                                     .tag(value)
@@ -296,7 +296,7 @@ struct SettingsView: View {
                 HStack {
                     Text("Ngắn gọn")
                     Spacer()
-                    Toggle("", isOn: $viewModel.translationManager.vietnameseCompact)
+                    Toggle("", isOn: $viewModel.translate_1Manager.vietnameseCompact)
                         .frame(width: 40)
                         .toggleStyle(grayToggleStyle)
                         .buttonStyle(.plain)
@@ -308,12 +308,12 @@ struct SettingsView: View {
     var BabylonianParameters: some View {
         return LanguageSection(languageEnum: .babylonian,
                                example: "3601",
-                               translationManager: viewModel.translationManager,
+                               translate_1Manager: viewModel.translate_1Manager,
                                uiFont: viewModel.screen.infoUiFont) {
                 HStack {
                     Text("Empty column (after 400 BC)")
                     Spacer()
-                    Toggle("", isOn: $viewModel.translationManager.babylonianAllowEmptyColumn)
+                    Toggle("", isOn: $viewModel.translate_1Manager.babylonianAllowEmptyColumn)
                         .frame(width: 40)
                         .toggleStyle(grayToggleStyle)
                         .buttonStyle(.plain)
@@ -326,12 +326,12 @@ struct SettingsView: View {
     var SpanishParameters: some View {
         return LanguageSection(languageEnum: .spanish,
                                example: "1.5",
-                               translationManager: viewModel.translationManager,
+                               translate_1Manager: viewModel.translate_1Manager,
                                uiFont: viewModel.screen.infoUiFont) {
                 HStack {
                     Text("Coma o punto:")
                     Spacer()
-                    Picker("", selection: $viewModel.translationManager.spanishPuntoComa) {
+                    Picker("", selection: $viewModel.translate_1Manager.spanishPuntoComa) {
                         ForEach(NumberTranslator.SpanishPuntoComa.allCases, id: \.self) { value in
                             Text("\(value.rawValue)")
                                 .tag(value)
@@ -348,12 +348,12 @@ struct SettingsView: View {
     var RomanNumeralsParameters: some View {
         return LanguageSection(languageEnum: .romanNumerals,
                                example: "10000",
-                               translationManager: viewModel.translationManager,
+                               translate_1Manager: viewModel.translate_1Manager,
                                uiFont: viewModel.screen.infoUiFont) {
                 HStack {
                     Text("Use vinculum (overline):")
                     Spacer()
-                    Toggle("", isOn: $viewModel.translationManager.romanNumeralsUseVinculum)
+                    Toggle("", isOn: $viewModel.translate_1Manager.romanNumeralsUseVinculum)
                         .frame(width: 40)
                         .toggleStyle(grayToggleStyle)
                         .buttonStyle(.plain)
@@ -467,7 +467,7 @@ extension View {
             .foregroundColor(.yellow)
             .background(.black)
         VStack {
-            SettingsView(viewModel: ViewModel())
+            Translate_1SettingsView(viewModel: ViewModel())
                 .scrollContentBackground(.hidden)
                 .background(.black)
         }

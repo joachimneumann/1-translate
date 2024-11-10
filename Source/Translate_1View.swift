@@ -8,7 +8,7 @@ import SwiftUI
 
 let testColors = false
 
-struct TranslateNumbers: View {
+struct translate_1View: View {
     @Environment(\.scenePhase) var scenePhase
     @ObservedObject var viewModel: ViewModel
 
@@ -20,7 +20,6 @@ struct TranslateNumbers: View {
 //    init(screen: Screen) {
 //        _viewModel = StateObject(wrappedValue: ViewModel(screen: screen))
 //    }
-    
     
     var portraitView: some View {
         VStack(spacing: 0.0) {
@@ -117,6 +116,6 @@ struct TranslateNumbers: View {
 
 #Preview {
     NavigationStack {
-        TranslateNumbers(viewModel: ViewModel(screen: Screen()))
+        translate_1View(viewModel: ViewModel(screen: Screen()))
     }
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-@Observable class FlagKey: Key {
+@Observable class Translate_1FlagKey: Key {
     var flagname: String
     var borderColor: Color
     var borderwidth: CGFloat
@@ -51,7 +51,7 @@ import SwiftUI
 
 
 #Preview {
-    @Previewable @State var x: FlagKey = FlagKey(flagname: "English", borderColor: .green)
+    @Previewable @State var x: Translate_1FlagKey = Translate_1FlagKey(flagname: "English", borderColor: .green)
     ZStack {
         Rectangle()
             .foregroundColor(.gray)

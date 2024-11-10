@@ -7,12 +7,12 @@
 
 import SwiftGmp
 
-public enum ConfigOperation: String, OpProtocol, CaseIterable {
-    case settings = "settings"
+public enum Translate_1Operation: String, OpProtocol, CaseIterable {
+    case settings = "translate_1Settings"
     case spacer = "Spacer"
 }
 
-extension ConfigOperation {
+extension Translate_1Operation {
     public var operatorPriority: Int { 4 }
     public var numberExpected: Bool { false }
     public var requiresValidNumber: Bool { false }

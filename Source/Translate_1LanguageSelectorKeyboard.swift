@@ -9,7 +9,7 @@ import SwiftGmp
 import Foundation
 import NumberTranslator
 
-class LanguageSelectorKeyboard: SmallKeyboard {
+class Translate_1LanguageSelectorKeyboard: SmallKeyboard {
     init(keySize: CGSize, translationManager: TranslationManager) {
         super.init(keySize: keySize)
         var columnIndex = 1

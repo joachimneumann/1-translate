@@ -46,7 +46,7 @@ class TranslationResult: ObservableObject, CustomDebugStringConvertible {
     }
 }
 
-class TranslationManager: NumberTranslator, Identifiable {
+class Translate_1Manager: NumberTranslator, Identifiable {
 
     var result = TranslationResult()
     var hasVoice: Bool = false

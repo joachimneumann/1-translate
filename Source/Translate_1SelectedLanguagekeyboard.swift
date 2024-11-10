@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftGmp
 import NumberTranslator
 
-class SelectedLanguagekeyboard: SmallKeyboard {
+class Translate_1SelectedLanguagekeyboard: SmallKeyboard {
     let countryKey: FlagKey
     override init(keySize: CGSize) {
         countryKey = FlagKey(flagname: "")
