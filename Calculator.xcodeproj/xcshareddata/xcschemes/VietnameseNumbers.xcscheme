@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AA08C7BD272EDA48001B8575"
-               BuildableName = "TranslateNumbers.app"
-               BlueprintName = "TranslateNumbers"
-               ReferencedContainer = "container:TranslateNumbers.xcodeproj">
+               BuildableName = "Calculator.app"
+               BlueprintName = "Translate_1"
+               ReferencedContainer = "container:Calculator.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "AA8A911A2B1D815C00CE7185"
                BuildableName = "TranslateNumbersTests.xctest"
                BlueprintName = "TranslateNumbersTests"
-               ReferencedContainer = "container:TranslateNumbers.xcodeproj">
+               ReferencedContainer = "container:Calculator.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -46,7 +46,7 @@
                BlueprintIdentifier = "AA050D56296BECD500A55498"
                BuildableName = "VietnameseNumbers_UITests.xctest"
                BlueprintName = "VietnameseNumbers_UITests"
-               ReferencedContainer = "container:TranslateNumbers.xcodeproj">
+               ReferencedContainer = "container:Calculator.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -57,7 +57,7 @@
                BlueprintIdentifier = "AA4720302C785BD5000B700E"
                BuildableName = "NumberTranslatorTests.xctest"
                BlueprintName = "NumberTranslatorTests"
-               ReferencedContainer = "container:TranslateNumbers.xcodeproj">
+               ReferencedContainer = "container:Calculator.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -77,9 +77,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AA08C7BD272EDA48001B8575"
-            BuildableName = "TranslateNumbers.app"
-            BlueprintName = "TranslateNumbers"
-            ReferencedContainer = "container:TranslateNumbers.xcodeproj">
+            BuildableName = "Calculator.app"
+            BlueprintName = "Translate_1"
+            ReferencedContainer = "container:Calculator.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AA08C7BD272EDA48001B8575"
-            BuildableName = "TranslateNumbers.app"
-            BlueprintName = "TranslateNumbers"
-            ReferencedContainer = "container:TranslateNumbers.xcodeproj">
+            BuildableName = "Calculator.app"
+            BlueprintName = "Translate_1"
+            ReferencedContainer = "container:Calculator.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

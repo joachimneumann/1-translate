@@ -37,7 +37,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		AA08C7BE272EDA48001B8575 /* TranslateNumbers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TranslateNumbers.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA08C7BE272EDA48001B8575 /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA08C7EB272F1241001B8575 /* TranslateNumbers.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TranslateNumbers.entitlements; sourceTree = "<group>"; };
 		AA08C7EC272F1572001B8575 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		AA17F8932CCE6EB900312BF0 /* Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Display.swift; sourceTree = "<group>"; };
@@ -92,7 +92,7 @@
 		AA08C7BF272EDA48001B8575 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AA08C7BE272EDA48001B8575 /* TranslateNumbers.app */,
+				AA08C7BE272EDA48001B8575 /* Calculator.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -122,9 +122,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AA08C7BD272EDA48001B8575 /* TranslateNumbers */ = {
+		AA08C7BD272EDA48001B8575 /* Translate_1 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AA08C7E2272EDA4A001B8575 /* Build configuration list for PBXNativeTarget "TranslateNumbers" */;
+			buildConfigurationList = AA08C7E2272EDA4A001B8575 /* Build configuration list for PBXNativeTarget "Translate_1" */;
 			buildPhases = (
 				AA08C7BA272EDA48001B8575 /* Sources */,
 				AA08C7BB272EDA48001B8575 /* Frameworks */,
@@ -138,9 +138,9 @@
 			fileSystemSynchronizedGroups = (
 				AAD0EE012CE041DD008C9610 /* Translate_1 */,
 			);
-			name = TranslateNumbers;
+			name = Translate_1;
 			productName = xx;
-			productReference = AA08C7BE272EDA48001B8575 /* TranslateNumbers.app */;
+			productReference = AA08C7BE272EDA48001B8575 /* Calculator.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -158,7 +158,7 @@
 					};
 				};
 			};
-			buildConfigurationList = AA08C7B9272EDA48001B8575 /* Build configuration list for PBXProject "TranslateNumbers" */;
+			buildConfigurationList = AA08C7B9272EDA48001B8575 /* Build configuration list for PBXProject "Calculator" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -175,7 +175,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AA08C7BD272EDA48001B8575 /* TranslateNumbers */,
+				AA08C7BD272EDA48001B8575 /* Translate_1 */,
 			);
 		};
 /* End PBXProject section */
@@ -369,7 +369,7 @@
 				);
 				MARKETING_VERSION = 1.18;
 				PRODUCT_BUNDLE_IDENTIFIER = com.joachimneumann.TranslateNumbers;
-				PRODUCT_NAME = TranslateNumbers;
+				PRODUCT_NAME = Calculator;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -410,7 +410,7 @@
 				);
 				MARKETING_VERSION = 1.18;
 				PRODUCT_BUNDLE_IDENTIFIER = com.joachimneumann.TranslateNumbers;
-				PRODUCT_NAME = TranslateNumbers;
+				PRODUCT_NAME = Calculator;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -425,7 +425,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AA08C7B9272EDA48001B8575 /* Build configuration list for PBXProject "TranslateNumbers" */ = {
+		AA08C7B9272EDA48001B8575 /* Build configuration list for PBXProject "Calculator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AA08C7E0272EDA4A001B8575 /* Debug */,
@@ -434,7 +434,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AA08C7E2272EDA4A001B8575 /* Build configuration list for PBXNativeTarget "TranslateNumbers" */ = {
+		AA08C7E2272EDA4A001B8575 /* Build configuration list for PBXNativeTarget "Translate_1" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AA08C7E3272EDA4A001B8575 /* Debug */,
