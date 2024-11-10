@@ -122,9 +122,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AA08C7BD272EDA48001B8575 /* Translate_1 */ = {
+		AA08C7BD272EDA48001B8575 /* Translate_1iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AA08C7E2272EDA4A001B8575 /* Build configuration list for PBXNativeTarget "Translate_1" */;
+			buildConfigurationList = AA08C7E2272EDA4A001B8575 /* Build configuration list for PBXNativeTarget "Translate_1iOS" */;
 			buildPhases = (
 				AA08C7BA272EDA48001B8575 /* Sources */,
 				AA08C7BB272EDA48001B8575 /* Frameworks */,
@@ -138,7 +138,7 @@
 			fileSystemSynchronizedGroups = (
 				AAD0EE012CE041DD008C9610 /* Translate_1 */,
 			);
-			name = Translate_1;
+			name = Translate_1iOS;
 			productName = xx;
 			productReference = AA08C7BE272EDA48001B8575 /* Calculator.app */;
 			productType = "com.apple.product-type.application";
@@ -175,7 +175,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AA08C7BD272EDA48001B8575 /* Translate_1 */,
+				AA08C7BD272EDA48001B8575 /* Translate_1iOS */,
 			);
 		};
 /* End PBXProject section */
@@ -434,7 +434,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AA08C7E2272EDA4A001B8575 /* Build configuration list for PBXNativeTarget "Translate_1" */ = {
+		AA08C7E2272EDA4A001B8575 /* Build configuration list for PBXNativeTarget "Translate_1iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AA08C7E3272EDA4A001B8575 /* Debug */,
