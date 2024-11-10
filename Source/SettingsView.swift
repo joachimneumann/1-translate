@@ -1,5 +1,5 @@
 //
-//  Translate_1SettingsView.swift
+//  SettingsView.swift
 //  Calculator
 //
 //  Created by Joachim Neumann on 11/13/22.
@@ -215,7 +215,7 @@ struct Translate_1SettingsView: View {
             }) {
                     HStack {
                         Text("\(example) →")
-                        Translate_1Display(uiFont: uiFont, translate_1Result: translate_1Result)
+                        TranslatedDisplay(uiFont: uiFont, translate_1Result: translate_1Result)
                             .fontWeight(.semibold)
                             .frame(height: 40)
                             .foregroundColor(.orange)

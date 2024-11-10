@@ -1,42 +1,42 @@
 //
-//  TranslatedDisplay.swift
+//  Translate_1Display.swift
 //
 //  Created by Joachim Neumann on 12/4/23.
 //
 
 import SwiftUI
 
-struct TranslatedDisplay: View {
+struct Translate_1Display: View {
     let uiFont: UIFont
     @State private var moveGradient = true
-    @ObservedObject var translationResult: TranslationResult
+    @ObservedObject var translate_1Result: Translate_1Result
     
     var body: some View {
         HStack(alignment: .bottom, spacing: 0.0) {
             Spacer(minLength: 0.0)
-            if translationResult.overline == nil {
-                Text(translationResult.displayText)
+            if translate_1Result.overline == nil {
+                Text(translate_1Result.displayText)
                     .font(Font(uiFont))
                     .multilineTextAlignment(.trailing)
             } else {
                 ZStack {
-                    (Text(translationResult.overline!)
+                    (Text(translate_1Result.overline!)
                         .baselineOffset(1.1*uiFont.pointSize)
                         .underline(true, color: .white)
-                     + Text(translationResult.displayText))
+                     + Text(translate_1Result.displayText))
                     .foregroundColor(.clear)
                     .offset(y: -1.0 * uiFont.pointSize - 0.4*uiFont.pointSize)
-                    Text(translationResult.overline!)
+                    Text(translate_1Result.overline!)
                         .foregroundColor(.white)
-                    + Text(translationResult.displayText)
+                    + Text(translate_1Result.displayText)
                 }
                 .font(Font(uiFont))
             }
         }
-        .foregroundColor(translationResult.error ? .orange : .white)
+        .foregroundColor(translate_1Result.error ? .orange : .white)
         .contextMenu {
             Button("Copy to Clipboard") {
-                UIPasteboard.general.string = translationResult.copyText
+                UIPasteboard.general.string = translate_1Result.copyText
             }
         }
         .minimumScaleFactor(0.1)
@@ -65,9 +65,9 @@ struct TranslatedDisplay: View {
 #Preview {
     let fontsize: CGFloat = 55.0
     let viewModel = ViewModel()
-    let _ = viewModel.translationManager.translateThis("5555", to: .polish)
+    let _ = viewModel.translate_1Manager.translateThis("5555", to: .polish)
 
-    TranslatedDisplay(uiFont: UIFont.systemFont(ofSize: fontsize), translationResult: viewModel.translationManager.result)
+    Translate_1Display(uiFont: UIFont.systemFont(ofSize: fontsize), translate_1Result: viewModel.translate_1Manager.result)
         .padding()
         .padding(.top, fontsize)
         .background (.black)

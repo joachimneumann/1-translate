@@ -1,5 +1,5 @@
 //
-//  TranslatorKeyboard.swift
+//  Translate_1Keyboard.swift
 //  TranslateNumbers
 //
 //  Created by Joachim Neumann on 01.11.2024.
@@ -10,7 +10,7 @@ import SwiftUI
 
 @Observable class Translate_1Keyboard: SmallKeyboard {
     let clearKey: SymbolKey
-    let countryKey: FlagKey
+    let countryKey: Translate_1FlagKey
     let separatorKey: SymbolKey
     override init(keySize: CGSize) {
         clearKey = SymbolKey(ClearOperation.clear)
@@ -33,7 +33,7 @@ import SwiftUI
         let threeKey = SymbolKey(DigitOperation.three)
         let addKey = SymbolKey(TwoOperantOperation.add)
         
-        countryKey = FlagKey(flagname: "")
+        countryKey = Translate_1FlagKey(flagname: "")
         countryKey.borderColor = Color(UIColor.darkGray)
         countryKey.borderwidth = 5.0
         let zeroKey = SymbolKey(DigitOperation.zero)

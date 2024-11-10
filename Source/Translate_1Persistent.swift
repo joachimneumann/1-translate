@@ -1,5 +1,5 @@
 //
-//  Persistent.swift
+//  Translate_1Persistent.swift
 //  TranslateNumbers
 //
 //  Created by Joachim Neumann on 12/30/23.
@@ -9,8 +9,8 @@ import SwiftUI
 import SwiftGmp
 import NumberTranslator
 
-class Persistent {
-    var translationManager = TranslationManager()
+class Translate_1Persistent {
+    var translationManager = Translate_1Manager()
 //    // Store Separator as a String
 //    @AppStorage("separatorString", store: .standard)
 //    private var separatorString: String = Separator(

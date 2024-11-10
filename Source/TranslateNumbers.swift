@@ -1,5 +1,5 @@
 //
-//  Translate_1View.swift
+//  TranslateNumbers.swift
 //
 //  Created by Joachim Neumann on 11/18/22.
 //
@@ -8,7 +8,7 @@ import SwiftUI
 
 let testColors = false
 
-struct Translate_1View: View {
+struct                 translate_1: View {
     @Environment(\.scenePhase) var scenePhase
     @ObservedObject var viewModel: ViewModel
 
@@ -21,11 +21,12 @@ struct Translate_1View: View {
 //        _viewModel = StateObject(wrappedValue: ViewModel(screen: screen))
 //    }
     
-    var Translate_1View: some View {
+    
+    var portraitView: some View {
         VStack(spacing: 0.0) {
             ZStack {
                 VStack(spacing: 0.0) {
-                    Translate_1Display(uiFont: viewModel.screen.translationFont, translate_1Result: viewModel.translate_1Manager.result)
+                    TranslatedDisplay(uiFont: viewModel.screen.translationFont, translationResult: viewModel.translationManager.result)
                         .font(Font(viewModel.screen.translationFont))
                     Spacer(minLength: 20.0)
                     NumberDisplay(display: viewModel.display)
@@ -42,14 +43,14 @@ struct Translate_1View: View {
             if viewModel.showLanguageSelector {
                 SmallKeyboardView(
                     spacing: viewModel.screen.keySpacing,
-                    smallKeyboard: viewModel.translate_1LanguageSelectorKeyboard,
+                    smallKeyboard: viewModel.languageSelectorKeyboard,
                     height: viewModel.screen.keyboardHeight4Rows
                 )
                 .padding(.bottom, viewModel.screen.keySpacing)
                 ZStack {
                     SmallKeyboardView(
                         spacing: viewModel.screen.keySpacing,
-                        smallKeyboard: viewModel.translate_1SelectedLanguagekeyboard
+                        smallKeyboard: viewModel.selectedLanguageKeyboard
                     )
                     HStack {
                         VStack(alignment: .leading){
@@ -66,7 +67,7 @@ struct Translate_1View: View {
             } else {
                 SmallKeyboardView(
                     spacing: viewModel.screen.keySpacing,
-                    smallKeyboard: viewModel.translate_1Keyboard)
+                    smallKeyboard: viewModel.translatorKeyboard)
             }
         }
         .animation(.easeInOut(duration: 0.6), value: viewModel.showLanguageSelector)
@@ -75,13 +76,13 @@ struct Translate_1View: View {
     
     var body: some View {
 //        ZStack {
-        Translate_1View
+            portraitView
                 .padding(.bottom, viewModel.screen.bottomPadding)
                 .padding(.horizontal, viewModel.screen.horizontalPadding)
                 .preferredColorScheme(.dark)
                 .navigationDestination(isPresented: $viewModel.showSettings) {
                     if viewModel.showSettings {
-                        Translate_1SettingsView(viewModel: viewModel)
+                        SettingsView(viewModel: viewModel)
                             .onDisappear {
                                 viewModel.didReturnFromSettings()
                             }
@@ -116,6 +117,6 @@ struct Translate_1View: View {
 
 #Preview {
     NavigationStack {
-        Translate_1View(viewModel: ViewModel(screen: Screen()))
+                        translate_1(viewModel: ViewModel(screen: Screen()))
     }
 }

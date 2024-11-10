@@ -45,7 +45,7 @@ struct KeyView: View {
 
 #Preview {
     let symbol = SymbolKey(InplaceOperation.sqr)
-    let image = FlagKey(flagname: "Deutsch")
+    let image = Translate_1FlagKey(flagname: "Deutsch")
     ZStack {
         Rectangle()
             .foregroundColor(.gray)

@@ -1,5 +1,5 @@
 //
-//  translate_1App.swift
+//  Translate_1App.swift
 //
 //  Created by Joachim Neumann on 20/09/2021.
 //
@@ -11,12 +11,12 @@ import SwiftUI
 public typealias AppleFont = UIFont
 
 @main
-struct translate_1App: App {
+struct Translate_1App: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
                 //            GeometryReader { geo in
-                TranslateNumbers(viewModel: ViewModel(screen: Screen()))
+                Translate_1View(viewModel: ViewModel(screen: Screen()))
                 //            }
             }
         }

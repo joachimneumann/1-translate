@@ -17,7 +17,7 @@ struct AllRows: View {
             ForEach(smallKeyboard.keyMatrix.indices, id: \.self) { rowIndex in
                 HStack(spacing: spacing) {
                     ForEach(smallKeyboard.keyMatrix[rowIndex], id: \.id) { key in
-                        if let symbolKey = key as? SymbolKey, symbolKey.op.isEqual(to: ConfigOperation.spacer) {
+                        if let symbolKey = key as? SymbolKey, symbolKey.op.isEqual(to: Translate_1Operation.spacer) {
                             Spacer()
                         } else {
                             KeyView(key: key)
@@ -56,7 +56,7 @@ struct SmallKeyboardView: View {
 
 #Preview {
 //        let smallKeyboard: SmallKeyboard = TranslatorKeyboard(keySize: CGSize(width: 80.0, height: 50.0))
-    let smallKeyboard: SmallKeyboard = LanguageSelectorKeyboard(keySize: CGSize(width: 80.0, height: 50.0), translationManager: TranslationManager())
+    let smallKeyboard: SmallKeyboard = Translate_1LanguageSelectorKeyboard(keySize: CGSize(width: 80.0, height: 50.0), translate_1Manager: Translate_1Manager())
     VStack {
         Rectangle()
         SmallKeyboardView(spacing: 20, smallKeyboard: smallKeyboard)

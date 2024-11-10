@@ -67,7 +67,7 @@ struct Label: View {
             sizeFactor = sizeFactorSpecialOperator
         case "*":
             sizeFactor = sizeFactorOperatorX
-        case "settings":
+        case "translate_1Settings":
             sizeFactor = 2.0
         case _ where sfImageForKey.keys.contains(symbol):
             sizeFactor = sizeFactorOperator

@@ -75,8 +75,8 @@ struct Screen: Equatable {
         
         keyWidth = isPad ? (calculatorWidth - 9.0 * keySpacing) * 0.1 : (calculatorWidth - 3.0 * keySpacing) * 0.25
 
-        let translateNumbersApp = true
-        if translateNumbersApp {
+        let translate_1 = true
+        if translate_1 {
             keyHeight = (screenSize.height * 0.4 - 4 * keySpacing) / 5.0 // this simulates the iOS18 calculator
         } else {
             keyHeight = (screenSize.height * 0.568 - 4 * keySpacing) / 5.0 // this simulates the iOS18 calculator
@@ -135,7 +135,7 @@ struct Screen: Equatable {
         CGFloat(0.5 * plusIconSize)
         displayWidth = calculatorWidth - 2.0 * displayHorizontalPadding
 
-        if translateNumbersApp {
+        if translate_1 {
             uiFontSize = 10*0.169 * keyboardHeight5Rows
             numberDisplayFont = Screen.proportionalFont(ofSize: uiFontSize, weight: .regular)
             

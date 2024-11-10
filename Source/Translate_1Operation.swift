@@ -8,8 +8,8 @@
 import SwiftGmp
 
 public enum Translate_1Operation: String, OpProtocol, CaseIterable {
-    case settings = "translate_1Settings"
-    case spacer = "Spacer"
+    case settings
+    case spacer
 }
 
 extension Translate_1Operation {
