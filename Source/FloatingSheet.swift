@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct FloatingSheetContentView: View {
     @State private var showSheet = true
     @State private var xxx = false
 

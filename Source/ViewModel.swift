@@ -23,7 +23,12 @@ class ViewModel: ObservableObject {
     let monoFontDisplay: MonoFontDisplay
     @Published var showLanguageSelector: Bool = false
     @Published var showSettings: Bool = false
-    
+
+    private(set) var _voices: Voices!
+    var voices: Voices {
+        return _voices
+    }
+
     func process() {
         display.separatorCharacter = separatorCharacter(forLanguage: persistent.currentLanguageEnum)
         display.groupingCharacter = groupingCharacter(forLanguage: persistent.currentLanguageEnum)
@@ -146,14 +151,7 @@ class ViewModel: ObservableObject {
             process()
         }
     }
-    
-    //    private(set) var _voices: Voices!
-    //
-    //
-    //    var voices: Voices {
-    //        return _voices
-    //    }
-    
+        
     init(screen: Screen = Screen()) {
         currentLanguageName = ""
         currentLanguageEnglishName = nil
