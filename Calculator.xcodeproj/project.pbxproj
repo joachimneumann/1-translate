@@ -35,6 +35,7 @@
 		AAE3F51B2CE17F3700146B91 /* Imagekey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3F50C2CE17F3700146B91 /* Imagekey.swift */; };
 		AAE3F5322CE180A000146B91 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3F5312CE1809900146B91 /* Keyboard.swift */; };
 		AAE3F5332CE180A000146B91 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3F5312CE1809900146B91 /* Keyboard.swift */; };
+		AAE3F5352CE194D400146B91 /* TextKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3F5342CE194D400146B91 /* TextKey.swift */; };
 		AAE426F729597AE3005FE365 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE426F629597AE3005FE365 /* Screen.swift */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +75,7 @@
 		AACCD0772B43A89A00D545C5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = "../1-translate-tests/README.md"; sourceTree = "<group>"; };
 		AAE3F50C2CE17F3700146B91 /* Imagekey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Imagekey.swift; sourceTree = "<group>"; };
 		AAE3F5312CE1809900146B91 /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
+		AAE3F5342CE194D400146B91 /* TextKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextKey.swift; sourceTree = "<group>"; };
 		AAE426F629597AE3005FE365 /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -137,6 +139,7 @@
 				AA8AC4272CD7087E006BD54C /* KeyView.swift */,
 				AA8AC41D2CD62173006BD54C /* SymbolKey.swift */,
 				AAE3F50C2CE17F3700146B91 /* Imagekey.swift */,
+				AAE3F5342CE194D400146B91 /* TextKey.swift */,
 				AA17F8932CCE6EB900312BF0 /* Display.swift */,
 				AABEFC122972A8780023A3C9 /* KeyColor.swift */,
 				AAE3F5312CE1809900146B91 /* Keyboard.swift */,
@@ -272,6 +275,7 @@
 				AA6DBCAD2CE0710300B5E0F1 /* ViewModel.swift in Sources */,
 				AA9C3F6D2CBF373C00F64EFA /* KeyboardView.swift in Sources */,
 				AA370C2D293352960041AE4E /* Extensions.swift in Sources */,
+				AAE3F5352CE194D400146B91 /* TextKey.swift in Sources */,
 				AA8AC4282CD70883006BD54C /* KeyView.swift in Sources */,
 				AA29F58A293CD608001ADF5A /* NumberDisplay.swift in Sources */,
 				AAE3F51B2CE17F3700146B91 /* Imagekey.swift in Sources */,
