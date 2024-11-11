@@ -9,32 +9,41 @@ import SwiftUI
 import SwiftGmp
 
 
-class SmallKeyboard: ObservableObject {
+class SmallKeyboard: Keyboard {
     let clearKey: SymbolKey
-    private let keySize: CGSize
-    private(set) var keyMatrix: [[Key]] = []
+    let separatorKey: SymbolKey
     
-    var callback: (Key) -> () = { _ in } {
-        didSet {
-            for row in keyMatrix {
-                for k in row {
-                    k.callback = callback
-                }
-            }
-        }
-    }
-       
-    init(keySize: CGSize) {
-        self.keySize = keySize
+    init(keySize: CGSize, settingsKey: Key) {
         clearKey = SymbolKey(ClearOperation.clear)
-    }
-    
-    func appendRow(_ keys: [Key]) {
-        for k in keys {
-            k.width = keySize.width
-            k.height = keySize.height
-        }
-        keyMatrix.append(keys)
+        let changeSignKey = SymbolKey(InplaceOperation.changeSign)
+        let percentKey = SymbolKey(PercentOperation.percent)
+        let divideKey = SymbolKey(TwoOperantOperation.div)
+        
+        let sevenKey = SymbolKey(DigitOperation.seven)
+        let eightKey = SymbolKey(DigitOperation.eight)
+        let nineKey = SymbolKey(DigitOperation.nine)
+        let multiplyKey = SymbolKey(TwoOperantOperation.mul)
+        
+        let fourKey = SymbolKey(DigitOperation.four)
+        let fiveKey = SymbolKey(DigitOperation.five)
+        let sixKey = SymbolKey(DigitOperation.six)
+        let subtractKey = SymbolKey(TwoOperantOperation.sub)
+        
+        let oneKey = SymbolKey(DigitOperation.one)
+        let twoKey = SymbolKey(DigitOperation.two)
+        let threeKey = SymbolKey(DigitOperation.three)
+        let addKey = SymbolKey(TwoOperantOperation.add)
+        
+        let zeroKey = SymbolKey(DigitOperation.zero)
+        separatorKey = SymbolKey(DigitOperation.dot)
+        let equalsKey = SymbolKey(EqualOperation.equal)
+        
+        super.init(keySize: keySize)
+        appendRow([clearKey, changeSignKey, percentKey, divideKey])
+        appendRow([sevenKey, eightKey, nineKey, multiplyKey])
+        appendRow([fourKey, fiveKey, sixKey, subtractKey])
+        appendRow([oneKey, twoKey, threeKey, addKey])
+        appendRow([settingsKey, zeroKey, separatorKey, equalsKey])
     }
     
     func back(_ displayBufferHasDigits: Bool) {

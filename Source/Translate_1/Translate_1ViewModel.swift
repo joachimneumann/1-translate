@@ -32,7 +32,6 @@ class Translate_1ViewModel: ViewModel {
 
     override func process() {
         super.process()
-
         var toTranslate = display.string
         toTranslate.remove(separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter)
         translate_1Manager.translateThis(toTranslate, to: translate_1Persistent.currentLanguageEnum)
@@ -80,13 +79,13 @@ class Translate_1ViewModel: ViewModel {
     }
 
     override func execute(_ key: Key) {
-        if let flagKey = key as? Translate_1FlagKey {
-            if let newLanguage = translate_1Manager.languageEnum(forFlagname: flagKey.flagname) {
+        if let flagKey = key as? Imagekey {
+            if let newLanguage = translate_1Manager.languageEnum(forFlagname: flagKey.imageName) {
                 translate_1Persistent.currentLanguageEnum = newLanguage
                 currentLanguageName = translate_1Manager.name(translate_1Persistent.currentLanguageEnum)
                 currentLanguageEnglishName = translate_1Manager.englishName(translate_1Persistent.currentLanguageEnum)
-                translate_1Keyboard.countryKey.flagname = flagKey.flagname
-                translate_1SelectedLanguagekeyboard.countryKey.flagname = flagKey.flagname
+                translate_1Keyboard.countryKey.imageName = flagKey.imageName
+                translate_1SelectedLanguagekeyboard.countryKey.imageName = flagKey.imageName
                 display.separatorCharacter = separatorCharacter(forLanguage: translate_1Persistent.currentLanguageEnum)
                 display.groupingCharacter = groupingCharacter(forLanguage: translate_1Persistent.currentLanguageEnum)
                 translate_1Keyboard.setSeparatorSymbol(String(display.separatorCharacter))
@@ -122,9 +121,9 @@ class Translate_1ViewModel: ViewModel {
         translate_1SelectedLanguagekeyboard.callback = execute
         
         translate_1Keyboard.countryKey.callback = toggleLanguageSelector
-        translate_1Keyboard.countryKey.flagname = translate_1Manager.flagname(translate_1Persistent.currentLanguageEnum)
-        translate_1SelectedLanguagekeyboard.countryKey.callback = toggleLanguageSelector
-        translate_1SelectedLanguagekeyboard.countryKey.flagname = translate_1Manager.flagname(translate_1Persistent.currentLanguageEnum)
+        translate_1Keyboard.countryKey.imageName = translate_1Manager.flagname(translate_1Persistent.currentLanguageEnum)
+        translate_1LanguageSelectorKeyboard.countryKey.callback = toggleLanguageSelector
+        translate_1LanguageSelectorKeyboard.countryKey.imageName = translate_1Manager.flagname(translate_1Persistent.currentLanguageEnum)
 
         process()
     }

@@ -1,5 +1,5 @@
 //
-//  Translate_1FlagKey.swift
+//  Imagekey.swift
 //  TranslateNumbers
 //
 //  Created by Joachim Neumann on 02.11.2024.
@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-@Observable class Translate_1FlagKey: Key {
-    var flagname: String
+@Observable class Imagekey: Key {
+    var imageName: String
     var borderColor: Color
     var borderwidth: CGFloat
     var brightness: Double = 0.0
     
-    init(flagname: String, borderColor: Color? = nil, borderwidth: CGFloat = 5.0) {
-        self.flagname = flagname
+    init(imageName: String, borderColor: Color? = nil, borderwidth: CGFloat = 5.0) {
+        self.imageName = imageName
         if let borderColor = borderColor {
             self.borderColor = borderColor
             self.borderwidth = borderwidth
@@ -33,7 +33,7 @@ import SwiftUI
     }
     override func view() -> AnyView {
         return AnyView(
-            Image(flagname)
+            Image(imageName)
                 .resizable()
                 .frame(width: width-2*borderwidth, height: height-2*borderwidth)
                 .clipShape(Capsule())
@@ -51,7 +51,7 @@ import SwiftUI
 
 
 #Preview {
-    @Previewable @State var x: Translate_1FlagKey = Translate_1FlagKey(flagname: "English", borderColor: .green)
+    @Previewable @State var x: Imagekey = Imagekey(imageName: "English", borderColor: .green)
     ZStack {
         Rectangle()
             .foregroundColor(.gray)

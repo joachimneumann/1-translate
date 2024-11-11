@@ -38,33 +38,33 @@ struct Translate_1View: View {
                 }
             }
             if viewModel.showLanguageSelector {
-                SmallKeyboardView(
+                KeyboardView(
                     spacing: viewModel.screen.keySpacing,
-                    smallKeyboard: viewModel.translate_1LanguageSelectorKeyboard,
+                    keyboard: viewModel.translate_1LanguageSelectorKeyboard,
                     height: viewModel.screen.keyboardHeight4Rows
                 )
                 .padding(.bottom, viewModel.screen.keySpacing)
-                ZStack {
-                    SmallKeyboardView(
-                        spacing: viewModel.screen.keySpacing,
-                        smallKeyboard: viewModel.translate_1SelectedLanguagekeyboard
-                    )
-                    HStack {
-                        VStack(alignment: .leading){
-                            Text(viewModel.currentLanguageName)
-                            if let englishName = viewModel.currentLanguageEnglishName {
-                                Text("(\(englishName))")
-                            }
-                        }
-                        .padding(.leading, viewModel.screen.keySize.width + viewModel.screen.keySpacing)
-                        Spacer()
-                    }
-                }
-                .transition(.opacity)
+//                ZStack {
+//                    KeyboardView(
+//                        spacing: viewModel.screen.keySpacing,
+//                        keyboard: viewModel.translate_1SelectedLanguagekeyboard
+//                    )
+//                    HStack {
+//                        VStack(alignment: .leading){
+//                            Text(viewModel.currentLanguageName)
+//                            if let englishName = viewModel.currentLanguageEnglishName {
+//                                Text("(\(englishName))")
+//                            }
+//                        }
+//                        .padding(.leading, viewModel.screen.keySize.width + viewModel.screen.keySpacing)
+//                        Spacer()
+//                    }
+//                }
+//                .transition(.opacity)
             } else {
-                SmallKeyboardView(
+                KeyboardView(
                     spacing: viewModel.screen.keySpacing,
-                    smallKeyboard: viewModel.translate_1Keyboard)
+                    keyboard: viewModel.translate_1Keyboard)
             }
         }
         .animation(.easeInOut(duration: 0.6), value: viewModel.showLanguageSelector)

@@ -20,7 +20,7 @@ class ViewModel: ObservableObject {
         self.screen = screen
         calculator = Calculator(precision: 40)
         display = Display(floatDisplayWidth: screen.displayWidth, font: screen.numberDisplayFont, ePadding: screen.ePadding)
-        smallKeyboard = SmallKeyboard(keySize: screen.keySize)
+        smallKeyboard = SmallKeyboard(keySize: screen.keySize, settingsKey: Key())
     }
     
     func process() {

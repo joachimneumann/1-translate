@@ -10,13 +10,11 @@ import SwiftGmp
 import NumberTranslator
 
 class Translate_1SelectedLanguagekeyboard: SmallKeyboard {
-    let countryKey: Translate_1FlagKey
-    override init(keySize: CGSize) {
-        countryKey = Translate_1FlagKey(flagname: "")
+    let countryKey: Imagekey
+    init(keySize: CGSize) {
+        countryKey = Imagekey(imageName: "")
         countryKey.borderColor = Color(UIColor.darkGray)
         countryKey.borderwidth = 5.0
-        let settingsKey = SymbolKey(Translate_1Operation.settings)
-        super.init(keySize: keySize)
-        appendRow([countryKey, SymbolKey(Translate_1Operation.spacer), settingsKey])
+        super.init(keySize: keySize, settingsKey: countryKey)
     }
 }
