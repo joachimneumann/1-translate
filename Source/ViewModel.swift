@@ -24,23 +24,23 @@ class ViewModel: ObservableObject {
     func process() {
         if calculator.displayBuffer.count > 0 {
             var withGrouping: String = calculator.displayBuffer
-            inject(into: &withGrouping, separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter)
+            inject(into: &withGrouping, separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter, groupSize: display.groupSize)
             if display.fits(withGrouping) {
                 display.left = withGrouping
                 display.right = nil
             } else {
                 let raw = calculator.raw
                 display.update(raw: raw)
-                inject(into: &display.left, separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter)
+                inject(into: &display.left, separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter, groupSize: display.groupSize)
                 if var right = display.right {
-                    inject(into: &right, separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter)
+                    inject(into: &right, separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter, groupSize: display.groupSize)
                     display.rightWidth = display.eDigitWidth + display.widestDigitWidth * CGFloat(right.count - 1)
                 }
             }
         } else {
             let raw = calculator.raw
             display.update(raw: raw)
-            inject(into: &display.left, separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter)
+            inject(into: &display.left, separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter, groupSize: display.groupSize)
         }
     }
     

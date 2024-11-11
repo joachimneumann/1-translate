@@ -58,6 +58,11 @@ class Translate_1ViewModel: ViewModel {
         return "."
     }
 
+    func groupSize(forLanguage language: NumberTranslator.LanguageEnum) -> Int {
+        translate_1Manager.groupSize(language)
+    }
+
+
     func groupingCharacter(forLanguage language: NumberTranslator.LanguageEnum) -> Character? {
         if persistent.showGrouping {
             if separatorCharacter(forLanguage: language) == "." {
@@ -86,6 +91,7 @@ class Translate_1ViewModel: ViewModel {
                 currentLanguageEnglishName = translate_1Manager.englishName(persistent.currentLanguageEnum)
                 keyboard.countryKey.imageName = flagKey.imageName
                 display.separatorCharacter = separatorCharacter(forLanguage: persistent.currentLanguageEnum)
+                display.groupSize = groupSize(forLanguage: persistent.currentLanguageEnum)
                 display.groupingCharacter = groupingCharacter(forLanguage: persistent.currentLanguageEnum)
                 keyboard.setSeparatorSymbol(String(display.separatorCharacter))
                 translate_1Manager.translateThis(display.string, to: persistent.currentLanguageEnum)
@@ -122,6 +128,7 @@ class Translate_1ViewModel: ViewModel {
         super.init(screen: screen)
 
         display.separatorCharacter = separatorCharacter(forLanguage: persistent.currentLanguageEnum)
+        display.groupSize = groupSize(forLanguage: persistent.currentLanguageEnum)
         display.groupingCharacter = groupingCharacter(forLanguage: persistent.currentLanguageEnum)
         keyboard.setSeparatorSymbol(String(display.separatorCharacter))
 

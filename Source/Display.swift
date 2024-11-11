@@ -10,6 +10,7 @@ import SwiftUI
 
 class Display: MonoFontDisplay, ObservableObject {
     var groupingCharacter: Character? = nil
+    var groupSize: Int
     var separatorCharacter: Character = "."
     
     override var left: String {
@@ -43,6 +44,7 @@ class Display: MonoFontDisplay, ObservableObject {
         self.uiFont = font
         self.font = Font(uiFont)
         self.ePadding = ePadding
+        self.groupSize = 3
         
         narrowestDigitWidth = CGFloat.greatestFiniteMagnitude
         widestDigitWidth = 0.0
@@ -64,12 +66,12 @@ class Display: MonoFontDisplay, ObservableObject {
         var w: CGFloat
         var mantissa = mantissaParameter
         if let groupingCharacter = groupingCharacter {
-            inject(into: &mantissa, separatorCharacter: separatorCharacter, groupingCharacter: groupingCharacter)
+            inject(into: &mantissa, separatorCharacter: separatorCharacter, groupingCharacter: groupingCharacter, groupSize: groupSize)
         }
         w = mantissa.textWidth(kerning: 0.0, uiFont)
         if var exponent = exponentParameter {
             if let groupingCharacter = groupingCharacter {
-                inject(into: &exponent, separatorCharacter: separatorCharacter, groupingCharacter: groupingCharacter)
+                inject(into: &exponent, separatorCharacter: separatorCharacter, groupingCharacter: groupingCharacter, groupSize: groupSize)
             }
             w += ePadding
             let width = eDigitWidth + widestDigitWidth * CGFloat(exponent.count - 1)
@@ -79,16 +81,27 @@ class Display: MonoFontDisplay, ObservableObject {
     }
 }
 
-func inject(into string: inout String, separatorCharacter: Character, groupingCharacter: Character?) {
+func inject(into string: inout String, separatorCharacter: Character, groupingCharacter: Character?, groupSize: Int) {
     let parts = string.split(separator: ".")
     var beforeDecimalPoint: String = String(parts[0])
 
     // Insert grouping character if provided
     if let c = groupingCharacter {
         var count = beforeDecimalPoint.count
-        while count > 3 {
-            count -= 3
-            beforeDecimalPoint.insert(c, at: beforeDecimalPoint.index(beforeDecimalPoint.startIndex, offsetBy: count))
+        if groupSize == 32 {
+            if count > 3 {
+                count -= 3
+                beforeDecimalPoint.insert(c, at: beforeDecimalPoint.index(beforeDecimalPoint.startIndex, offsetBy: count))
+                while count > 2 {
+                    count -= 2
+                    beforeDecimalPoint.insert(c, at: beforeDecimalPoint.index(beforeDecimalPoint.startIndex, offsetBy: count))
+                }
+            }
+        } else {
+            while count > 3 {
+                count -= 3
+                beforeDecimalPoint.insert(c, at: beforeDecimalPoint.index(beforeDecimalPoint.startIndex, offsetBy: count))
+            }
         }
     }
 

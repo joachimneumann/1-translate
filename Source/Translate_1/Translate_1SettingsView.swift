@@ -32,7 +32,7 @@ struct Translate_1SettingsView: View {
         } else {
             gr = settingsShowGrouping ? "." : nil
         }
-        inject(into: &groupingExampleString, separatorCharacter: s, groupingCharacter: gr)
+        inject(into: &groupingExampleString, separatorCharacter: s, groupingCharacter: gr, groupSize: viewModel.groupSize(forLanguage: languageEnum))
     }
     
     init(viewModel: Translate_1ViewModel) {

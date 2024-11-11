@@ -90,7 +90,7 @@ struct KeyboardView: View {
 import NumberTranslator
 #Preview {
     let screen = Screen()
-    let translate_1Manager = Translate_1Manager()
+//    let translate_1Manager = Translate_1Manager()
 
 //    let keyboard = Translate_1SelectLanguage(keySize: screen.keySize, translate_1Manager: Translate_1Manager(), keySpacing: screen.keySpacing)
 //    let _ = keyboard.countryKey.imageName = translate_1Manager.flagname(NumberTranslator.LanguageEnum.german)
