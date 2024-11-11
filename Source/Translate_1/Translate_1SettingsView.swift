@@ -82,6 +82,8 @@ struct Translate_1SettingsView: View {
         }
         .onDisappear {
             viewModel.persistent.showGrouping = settingsShowGrouping
+            viewModel.display.separatorCharacter = viewModel.separatorCharacter(forLanguage: viewModel.persistent.currentLanguageEnum)
+            viewModel.display.groupingCharacter = viewModel.groupingCharacter(forLanguage: viewModel.persistent.currentLanguageEnum)
             viewModel.process()
         }
     }

@@ -24,8 +24,6 @@ class ViewModel: ObservableObject {
     }
     
     func process() {
-        display.separatorCharacter = "."
-        display.groupingCharacter = nil
         if calculator.displayBuffer.count > 0 {
             var withGrouping: String = calculator.displayBuffer
             inject(into: &withGrouping, separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter)

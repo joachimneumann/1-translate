@@ -28,13 +28,6 @@ class Translate_1ViewModel: ViewModel {
         showLanguageSelector.toggle()
     }
     
-
-    override func process() {
-        super.process()
-        var toTranslate = display.string
-        toTranslate.remove(separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter)
-        translate_1Manager.translateThis(toTranslate, to: persistent.currentLanguageEnum)
-    }    
     
     func decimalSeparator(for languageCode: String, countryCode: String? = nil) -> String? {
         var localeIdentifier = languageCode
@@ -77,6 +70,13 @@ class Translate_1ViewModel: ViewModel {
         }
     }
 
+    override func process() {
+        super.process()
+        var toTranslate = display.string
+        toTranslate.remove(separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter)
+        translate_1Manager.translateThis(toTranslate, to: persistent.currentLanguageEnum)
+    }
+
     override func execute(_ key: Key) {
         if let flagKey = key as? Imagekey {
             if let newLanguage = translate_1Manager.languageEnum(forFlagname: flagKey.imageName) {
@@ -95,6 +95,14 @@ class Translate_1ViewModel: ViewModel {
                 return
             }
         }
+        
+        if let languageSettingsKey = key as? SymbolKey {
+            if languageSettingsKey.op.isEqual(to: Translate_1Operation.settings) {
+                showSettings = true
+                return
+            }
+        }
+
         
         super.execute(key)
     }
