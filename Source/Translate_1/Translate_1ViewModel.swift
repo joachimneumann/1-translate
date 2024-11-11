@@ -10,14 +10,14 @@ import NumberTranslator
 import SwiftGmp
 
 class Translate_1ViewModel: ViewModel {
-    @Published var translate_1Persistent = Translate_1Persistent()
+    @Published var persistent = Translate_1Persistent()
     @Published var currentLanguageName: String
     var currentLanguageEnglishName: String?
     @Published var translate_1Manager: Translate_1Manager
-    var translate_1Keyboard: Translate_1Keyboard
-    var translate_1LanguageSelectorKeyboard: Translate_1LanguageSelectorKeyboard
+    var keyboard: Translate_1Keyboard
+    var selectLanguage: Translate_1SelectLanguage
     @Published var showLanguageSelector: Bool = false
-    @Published var showLanguage_1Settings: Bool = false
+    @Published var showSettings: Bool = false
 
     private(set) var _voices: Translate_1Voices!
     var voices: Translate_1Voices {
@@ -33,7 +33,7 @@ class Translate_1ViewModel: ViewModel {
         super.process()
         var toTranslate = display.string
         toTranslate.remove(separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter)
-        translate_1Manager.translateThis(toTranslate, to: translate_1Persistent.currentLanguageEnum)
+        translate_1Manager.translateThis(toTranslate, to: persistent.currentLanguageEnum)
     }    
     
     func decimalSeparator(for languageCode: String, countryCode: String? = nil) -> String? {
@@ -66,7 +66,7 @@ class Translate_1ViewModel: ViewModel {
     }
 
     func groupingCharacter(forLanguage language: NumberTranslator.LanguageEnum) -> Character? {
-        if translate_1Persistent.showGrouping {
+        if persistent.showGrouping {
             if separatorCharacter(forLanguage: language) == "." {
                 return ","
             } else {
@@ -80,17 +80,17 @@ class Translate_1ViewModel: ViewModel {
     override func execute(_ key: Key) {
         if let flagKey = key as? Imagekey {
             if let newLanguage = translate_1Manager.languageEnum(forFlagname: flagKey.imageName) {
-                translate_1Persistent.currentLanguageEnum = newLanguage
-                currentLanguageName = translate_1Manager.name(translate_1Persistent.currentLanguageEnum)
-                currentLanguageEnglishName = translate_1Manager.englishName(translate_1Persistent.currentLanguageEnum)
-                translate_1Keyboard.countryKey.imageName = flagKey.imageName
-                display.separatorCharacter = separatorCharacter(forLanguage: translate_1Persistent.currentLanguageEnum)
-                display.groupingCharacter = groupingCharacter(forLanguage: translate_1Persistent.currentLanguageEnum)
-                translate_1Keyboard.setSeparatorSymbol(String(display.separatorCharacter))
-                translate_1Manager.translateThis(display.string, to: translate_1Persistent.currentLanguageEnum)
-                translate_1LanguageSelectorKeyboard.countryKey.imageName = translate_1Manager.flagname(translate_1Persistent.currentLanguageEnum)
-                translate_1LanguageSelectorKeyboard.countryDescriptionKey.top = translate_1Manager.name(translate_1Persistent.currentLanguageEnum)
-                translate_1LanguageSelectorKeyboard.countryDescriptionKey.bottom = translate_1Manager.englishName(translate_1Persistent.currentLanguageEnum)
+                persistent.currentLanguageEnum = newLanguage
+                currentLanguageName = translate_1Manager.name(persistent.currentLanguageEnum)
+                currentLanguageEnglishName = translate_1Manager.englishName(persistent.currentLanguageEnum)
+                keyboard.countryKey.imageName = flagKey.imageName
+                display.separatorCharacter = separatorCharacter(forLanguage: persistent.currentLanguageEnum)
+                display.groupingCharacter = groupingCharacter(forLanguage: persistent.currentLanguageEnum)
+                keyboard.setSeparatorSymbol(String(display.separatorCharacter))
+                translate_1Manager.translateThis(display.string, to: persistent.currentLanguageEnum)
+                selectLanguage.countryKey.imageName = translate_1Manager.flagname(persistent.currentLanguageEnum)
+                selectLanguage.countryDescriptionKey.top = translate_1Manager.name(persistent.currentLanguageEnum)
+                selectLanguage.countryDescriptionKey.bottom = translate_1Manager.englishName(persistent.currentLanguageEnum)
                 process()
                 return
             }
@@ -104,27 +104,27 @@ class Translate_1ViewModel: ViewModel {
         currentLanguageEnglishName = nil
         let tempTranslate_1Manager = Translate_1Manager()
         
-        translate_1LanguageSelectorKeyboard = Translate_1LanguageSelectorKeyboard(keySize: screen.keySize, translate_1Manager: tempTranslate_1Manager, keySpacing: screen.keySpacing)
+        selectLanguage = Translate_1SelectLanguage(keySize: screen.keySize, translate_1Manager: tempTranslate_1Manager, keySpacing: screen.keySpacing)
         
         translate_1Manager = tempTranslate_1Manager
 
-        translate_1Keyboard = Translate_1Keyboard(keySize: screen.keySize)
+        keyboard = Translate_1Keyboard(keySize: screen.keySize)
 
         super.init(screen: screen)
 
-        display.separatorCharacter = separatorCharacter(forLanguage: translate_1Persistent.currentLanguageEnum)
-        display.groupingCharacter = groupingCharacter(forLanguage: translate_1Persistent.currentLanguageEnum)
-        translate_1Keyboard.setSeparatorSymbol(String(display.separatorCharacter))
+        display.separatorCharacter = separatorCharacter(forLanguage: persistent.currentLanguageEnum)
+        display.groupingCharacter = groupingCharacter(forLanguage: persistent.currentLanguageEnum)
+        keyboard.setSeparatorSymbol(String(display.separatorCharacter))
 
-        translate_1Keyboard.callback = execute
-        translate_1LanguageSelectorKeyboard.callback = execute
+        keyboard.callback = execute
+        selectLanguage.callback = execute
         
-        translate_1Keyboard.countryKey.callback = toggleLanguageSelector
-        translate_1Keyboard.countryKey.imageName = translate_1Manager.flagname(translate_1Persistent.currentLanguageEnum)
-        translate_1LanguageSelectorKeyboard.countryKey.callback = toggleLanguageSelector
-        translate_1LanguageSelectorKeyboard.countryKey.imageName = translate_1Manager.flagname(translate_1Persistent.currentLanguageEnum)
-        translate_1LanguageSelectorKeyboard.countryDescriptionKey.top = translate_1Manager.name(translate_1Persistent.currentLanguageEnum)
-        translate_1LanguageSelectorKeyboard.countryDescriptionKey.bottom = translate_1Manager.englishName(translate_1Persistent.currentLanguageEnum)
+        keyboard.countryKey.callback = toggleLanguageSelector
+        keyboard.countryKey.imageName = translate_1Manager.flagname(persistent.currentLanguageEnum)
+        selectLanguage.countryKey.callback = toggleLanguageSelector
+        selectLanguage.countryKey.imageName = translate_1Manager.flagname(persistent.currentLanguageEnum)
+        selectLanguage.countryDescriptionKey.top = translate_1Manager.name(persistent.currentLanguageEnum)
+        selectLanguage.countryDescriptionKey.bottom = translate_1Manager.englishName(persistent.currentLanguageEnum)
 
         process()
     }

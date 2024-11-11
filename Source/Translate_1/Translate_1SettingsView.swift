@@ -37,11 +37,11 @@ struct Translate_1SettingsView: View {
     
     init(viewModel: Translate_1ViewModel) {
         self.viewModel = viewModel
-        self.languageEnum = viewModel.translate_1Persistent.currentLanguageEnum
+        self.languageEnum = viewModel.persistent.currentLanguageEnum
         self.exampleFont = viewModel.screen.numberDisplayFont
         self.settingsCalculator = Calculator(precision: 20)
         self.settingsDisplay = Display(floatDisplayWidth: viewModel.screen.displayWidth, font: viewModel.screen.numberDisplayFont, ePadding: 0.0)
-        settingsShowGrouping = viewModel.translate_1Persistent.showGrouping
+        settingsShowGrouping = viewModel.persistent.showGrouping
     }
     var body: some View {
         VStack {
@@ -77,11 +77,11 @@ struct Translate_1SettingsView: View {
                     .listRowBackground(Color(UIColor.darkGray))
             }
             .onAppear() {
-                updateGroupingExampleString(grouping: viewModel.translate_1Persistent.showGrouping)
+                updateGroupingExampleString(grouping: viewModel.persistent.showGrouping)
             }
         }
         .onDisappear {
-            viewModel.translate_1Persistent.showGrouping = settingsShowGrouping
+            viewModel.persistent.showGrouping = settingsShowGrouping
             viewModel.process()
         }
     }

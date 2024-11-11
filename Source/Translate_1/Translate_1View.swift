@@ -36,14 +36,14 @@ struct Translate_1View: View {
             if viewModel.showLanguageSelector {
                 KeyboardView(
                     spacing: viewModel.screen.keySpacing,
-                    keyboard: viewModel.translate_1LanguageSelectorKeyboard,
+                    keyboard: viewModel.selectLanguage,
                     height: viewModel.screen.keyboardHeight4Rows
                 )
                 .transition(.opacity)
             } else {
                 KeyboardView(
                     spacing: viewModel.screen.keySpacing,
-                    keyboard: viewModel.translate_1Keyboard)
+                    keyboard: viewModel.keyboard)
             }
         }
         .animation(.easeInOut(duration: 0.6), value: viewModel.showLanguageSelector)
@@ -56,8 +56,8 @@ struct Translate_1View: View {
                 .padding(.bottom, viewModel.screen.bottomPadding)
                 .padding(.horizontal, viewModel.screen.horizontalPadding)
                 .preferredColorScheme(.dark)
-                .navigationDestination(isPresented: $viewModel.showLanguage_1Settings) {
-                    if viewModel.showLanguage_1Settings {
+                .navigationDestination(isPresented: $viewModel.showSettings) {
+                    if viewModel.showSettings {
                         Translate_1SettingsView(viewModel: viewModel)
                     }
                 }

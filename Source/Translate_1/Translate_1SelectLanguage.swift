@@ -1,5 +1,5 @@
 //
-//  LanguageSelectorKeyboard.swift
+//  Translate_1SelectLanguage.swift
 //  TranslateNumbers
 //
 //  Created by Joachim Neumann on 01.11.2024.
@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftGmp
 import NumberTranslator
 
-class Translate_1LanguageSelectorKeyboard: Keyboard {
+class Translate_1SelectLanguage: Keyboard {
     let countryKey: Imagekey
     let countryDescriptionKey: TextKey
     init(keySize: CGSize, translate_1Manager: Translate_1Manager, keySpacing: CGFloat) {

@@ -91,7 +91,7 @@ import NumberTranslator
     let screen = Screen()
     let translate_1Manager = Translate_1Manager()
 
-    let keyboard = Translate_1LanguageSelectorKeyboard(keySize: screen.keySize, translate_1Manager: Translate_1Manager(), keySpacing: screen.keySpacing)
+    let keyboard = Translate_1SelectLanguage(keySize: screen.keySize, translate_1Manager: Translate_1Manager(), keySpacing: screen.keySpacing)
     let _ = keyboard.countryKey.imageName = translate_1Manager.flagname(NumberTranslator.LanguageEnum.german)
     let _ = keyboard.countryDescriptionKey.top = "Deutsch"
     let _ = keyboard.countryDescriptionKey.bottom = "(German)"
