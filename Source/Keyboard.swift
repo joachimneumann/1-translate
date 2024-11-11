@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-class Keyboard: ObservableObject {
+@Observable class Keyboard {
     private let keySize: CGSize
     private(set) var keyMatrix: [[Key]] = []
     

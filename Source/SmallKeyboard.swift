@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftGmp
 
 
-class SmallKeyboard: Keyboard {
+@Observable class SmallKeyboard: Keyboard {
     let clearKey: SymbolKey
     let separatorKey: SymbolKey
     

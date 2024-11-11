@@ -14,13 +14,11 @@ class ViewModel: ObservableObject {
     var screen: Screen
     var calculator: Calculator
     @Published var display: Display
-    let smallKeyboard: SmallKeyboard
     
     init(screen: Screen = Screen()) {
         self.screen = screen
         calculator = Calculator(precision: 40)
         display = Display(floatDisplayWidth: screen.displayWidth, font: screen.numberDisplayFont, ePadding: screen.ePadding)
-        smallKeyboard = SmallKeyboard(keySize: screen.keySize, settingsKey: Key())
     }
     
     func process() {
@@ -44,28 +42,26 @@ class ViewModel: ObservableObject {
             display.update(raw: raw)
             inject(into: &display.left, separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter)
         }
-        
-        smallKeyboard.back(calculator.privateDisplayBufferHasDigits)
     }
     
     func execute(_ key: Key) {
         if let symbolKey = key as? SymbolKey {
             calculator.press(symbolKey.op)
-            for row in smallKeyboard.keyMatrix {
-                for k in row {
-                    if let symbolKey = k as? SymbolKey {
-                        if calculator.pendingOperators.contains(where: { $0.isEqual(to: symbolKey.op) }) {
-                            symbolKey.setColors(
-                                upColor: KeyColor.sixColors(op: symbolKey.op).pendingUpColor,
-                                downColor: KeyColor.sixColors(op: symbolKey.op).pendingDownColor)
-                        } else {
-                            symbolKey.setColors(
-                                upColor: KeyColor.sixColors(op: symbolKey.op).upColor,
-                                downColor: KeyColor.sixColors(op: symbolKey.op).downColor)
-                        }
-                    }
-                }
-            }
+//            for row in smallKeyboard.keyMatrix {
+//                for k in row {
+//                    if let symbolKey = k as? SymbolKey {
+//                        if calculator.pendingOperators.contains(where: { $0.isEqual(to: symbolKey.op) }) {
+//                            symbolKey.setColors(
+//                                upColor: KeyColor.sixColors(op: symbolKey.op).pendingUpColor,
+//                                downColor: KeyColor.sixColors(op: symbolKey.op).pendingDownColor)
+//                        } else {
+//                            symbolKey.setColors(
+//                                upColor: KeyColor.sixColors(op: symbolKey.op).upColor,
+//                                downColor: KeyColor.sixColors(op: symbolKey.op).downColor)
+//                        }
+//                    }
+//                }
+//            }
             process()
         }
     }

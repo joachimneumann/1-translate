@@ -14,7 +14,7 @@ class Translate_1ViewModel: ViewModel {
     @Published var currentLanguageName: String
     var currentLanguageEnglishName: String?
     @Published var translate_1Manager: Translate_1Manager
-    var keyboard: Translate_1Keyboard
+    @Published var keyboard: Translate_1Keyboard
     var selectLanguage: Translate_1SelectLanguage
     @Published var showLanguageSelector: Bool = false
     @Published var showSettings: Bool = false
@@ -75,6 +75,7 @@ class Translate_1ViewModel: ViewModel {
         var toTranslate = display.string
         toTranslate.remove(separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter)
         translate_1Manager.translateThis(toTranslate, to: persistent.currentLanguageEnum)
+        keyboard.back(calculator.privateDisplayBufferHasDigits)
     }
 
     override func execute(_ key: Key) {

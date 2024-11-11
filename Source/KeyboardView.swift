@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AllRows: View {
     let spacing: CGFloat
-    @ObservedObject var keyboard: Keyboard  // Use @ObservedObject for updates
+    var keyboard: Keyboard  // Use @ObservedObject for updates
 
     var body: some View {
         VStack(spacing: spacing) {
@@ -26,7 +26,7 @@ struct AllRows: View {
 
 struct AllRowsExceptLast: View {
     let spacing: CGFloat
-    @ObservedObject var keyboard: Keyboard
+    var keyboard: Keyboard
 
     var body: some View {
         VStack(spacing: spacing) {
@@ -43,7 +43,7 @@ struct AllRowsExceptLast: View {
 
 struct LastRow: View {
     let spacing: CGFloat
-    @ObservedObject var keyboard: Keyboard  // Use @ObservedObject for updates
+    var keyboard: Keyboard  // Use @ObservedObject for updates
 
     var body: some View {
         if let lastRow = keyboard.keyMatrix.last {
@@ -72,6 +72,7 @@ struct KeyboardView: View {
     }
     
     var body: some View {
+        let _ = print("KeyboardView")
         if height != nil {
             VStack(spacing: spacing) {
                 ScrollView {
@@ -91,16 +92,17 @@ import NumberTranslator
     let screen = Screen()
     let translate_1Manager = Translate_1Manager()
 
-    let keyboard = Translate_1SelectLanguage(keySize: screen.keySize, translate_1Manager: Translate_1Manager(), keySpacing: screen.keySpacing)
-    let _ = keyboard.countryKey.imageName = translate_1Manager.flagname(NumberTranslator.LanguageEnum.german)
-    let _ = keyboard.countryDescriptionKey.top = "Deutsch"
-    let _ = keyboard.countryDescriptionKey.bottom = "(German)"
+//    let keyboard = Translate_1SelectLanguage(keySize: screen.keySize, translate_1Manager: Translate_1Manager(), keySpacing: screen.keySpacing)
+//    let _ = keyboard.countryKey.imageName = translate_1Manager.flagname(NumberTranslator.LanguageEnum.german)
+//    let _ = keyboard.countryDescriptionKey.top = "Deutsch"
+//    let _ = keyboard.countryDescriptionKey.bottom = "(German)"
 
-//    let keyboard: SmallKeyboard = Translate_1Keyboard(keySize: keySize)
+    let keyboard: SmallKeyboard = Translate_1Keyboard(keySize: screen.keySize)
 //    let keyboard: SmallKeyboard = Translate_1LanguageSelectorKeyboard(keySize: keySize, translate_1Manager: Translate_1Manager())
 
     VStack {
         Rectangle()
+        let _ = keyboard.back(true)
         KeyboardView(spacing: screen.keySpacing, keyboard: keyboard, height: screen.keyboardHeight4Rows)
             .background(.black)
             .padding(.bottom, 10)
