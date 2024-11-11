@@ -15,10 +15,6 @@ struct Translate_1View: View {
     @State var isZoomed: Bool = false
     @State private var settingsDetent = PresentationDetent.medium
     
-//    init(screen: Screen) {
-//        _viewModel = StateObject(wrappedValue: ViewModel(screen: screen))
-//    }
-    
     var Translate_1View: some View {
         VStack(spacing: 0.0) {
             ZStack {
