@@ -43,24 +43,7 @@ struct Translate_1View: View {
                     keyboard: viewModel.translate_1LanguageSelectorKeyboard,
                     height: viewModel.screen.keyboardHeight4Rows
                 )
-                .padding(.bottom, viewModel.screen.keySpacing)
-//                ZStack {
-//                    KeyboardView(
-//                        spacing: viewModel.screen.keySpacing,
-//                        keyboard: viewModel.translate_1SelectedLanguagekeyboard
-//                    )
-//                    HStack {
-//                        VStack(alignment: .leading){
-//                            Text(viewModel.currentLanguageName)
-//                            if let englishName = viewModel.currentLanguageEnglishName {
-//                                Text("(\(englishName))")
-//                            }
-//                        }
-//                        .padding(.leading, viewModel.screen.keySize.width + viewModel.screen.keySpacing)
-//                        Spacer()
-//                    }
-//                }
-//                .transition(.opacity)
+                .transition(.opacity)
             } else {
                 KeyboardView(
                     spacing: viewModel.screen.keySpacing,

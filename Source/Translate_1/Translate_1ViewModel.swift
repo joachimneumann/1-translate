@@ -16,7 +16,6 @@ class Translate_1ViewModel: ViewModel {
     @Published var translate_1Manager: Translate_1Manager
     var translate_1Keyboard: Translate_1Keyboard
     var translate_1LanguageSelectorKeyboard: Translate_1LanguageSelectorKeyboard
-    var translate_1SelectedLanguagekeyboard: Translate_1SelectedLanguagekeyboard
     @Published var showLanguageSelector: Bool = false
     @Published var showLanguage_1Settings: Bool = false
 
@@ -85,11 +84,13 @@ class Translate_1ViewModel: ViewModel {
                 currentLanguageName = translate_1Manager.name(translate_1Persistent.currentLanguageEnum)
                 currentLanguageEnglishName = translate_1Manager.englishName(translate_1Persistent.currentLanguageEnum)
                 translate_1Keyboard.countryKey.imageName = flagKey.imageName
-                translate_1SelectedLanguagekeyboard.countryKey.imageName = flagKey.imageName
                 display.separatorCharacter = separatorCharacter(forLanguage: translate_1Persistent.currentLanguageEnum)
                 display.groupingCharacter = groupingCharacter(forLanguage: translate_1Persistent.currentLanguageEnum)
                 translate_1Keyboard.setSeparatorSymbol(String(display.separatorCharacter))
                 translate_1Manager.translateThis(display.string, to: translate_1Persistent.currentLanguageEnum)
+                translate_1LanguageSelectorKeyboard.countryKey.imageName = translate_1Manager.flagname(translate_1Persistent.currentLanguageEnum)
+                translate_1LanguageSelectorKeyboard.countryDescriptionKey.top = translate_1Manager.name(translate_1Persistent.currentLanguageEnum)
+                translate_1LanguageSelectorKeyboard.countryDescriptionKey.bottom = translate_1Manager.englishName(translate_1Persistent.currentLanguageEnum)
                 process()
                 return
             }
@@ -103,8 +104,7 @@ class Translate_1ViewModel: ViewModel {
         currentLanguageEnglishName = nil
         let tempTranslate_1Manager = Translate_1Manager()
         
-        translate_1SelectedLanguagekeyboard = Translate_1SelectedLanguagekeyboard(keySize: screen.keySize)
-        translate_1LanguageSelectorKeyboard = Translate_1LanguageSelectorKeyboard(keySize: screen.keySize, translate_1Manager: tempTranslate_1Manager)
+        translate_1LanguageSelectorKeyboard = Translate_1LanguageSelectorKeyboard(keySize: screen.keySize, translate_1Manager: tempTranslate_1Manager, keySpacing: screen.keySpacing)
         
         translate_1Manager = tempTranslate_1Manager
 
@@ -118,12 +118,13 @@ class Translate_1ViewModel: ViewModel {
 
         translate_1Keyboard.callback = execute
         translate_1LanguageSelectorKeyboard.callback = execute
-        translate_1SelectedLanguagekeyboard.callback = execute
         
         translate_1Keyboard.countryKey.callback = toggleLanguageSelector
         translate_1Keyboard.countryKey.imageName = translate_1Manager.flagname(translate_1Persistent.currentLanguageEnum)
         translate_1LanguageSelectorKeyboard.countryKey.callback = toggleLanguageSelector
         translate_1LanguageSelectorKeyboard.countryKey.imageName = translate_1Manager.flagname(translate_1Persistent.currentLanguageEnum)
+        translate_1LanguageSelectorKeyboard.countryDescriptionKey.top = translate_1Manager.name(translate_1Persistent.currentLanguageEnum)
+        translate_1LanguageSelectorKeyboard.countryDescriptionKey.bottom = translate_1Manager.englishName(translate_1Persistent.currentLanguageEnum)
 
         process()
     }

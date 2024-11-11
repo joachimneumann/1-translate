@@ -19,22 +19,25 @@ import SwiftUI
     
     override func view() -> AnyView {
         return AnyView(
-            VStack(spacing: 0.0) {
+            VStack(alignment: .leading, spacing: 0.0) {
                 Text(top)
                 if let bottom = bottom {
                     Text(bottom)
                 }
             }
+            .frame(width: width, alignment: .leading)
         )
     }
 }
 
 
 #Preview {
-    @Previewable @State var x: TextKey = TextKey(top: "English", bottom: "(truely)")
+    @Previewable @State var x: TextKey = TextKey(top: "EnglishEnglishEnglish", bottom: "(truely)")
+    let _ = x.width = 300
     ZStack {
         Rectangle()
             .foregroundColor(.gray)
         x.view()
+            .background(.yellow)
     }
 }

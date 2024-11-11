@@ -11,8 +11,12 @@ import NumberTranslator
 
 class Translate_1LanguageSelectorKeyboard: Keyboard {
     let countryKey: Imagekey
-    init(keySize: CGSize, translate_1Manager: Translate_1Manager) {
+    let countryDescriptionKey: TextKey
+    init(keySize: CGSize, translate_1Manager: Translate_1Manager, keySpacing: CGFloat) {
         countryKey = Imagekey(imageName: "")
+        countryKey.borderColor = Color(UIColor.darkGray)
+        countryKey.borderwidth = 5.0
+        countryDescriptionKey = TextKey(top: "", bottom: nil)
         super.init(keySize: keySize)
         var columnIndex = 1
         var tempRow: [Key] = []
@@ -26,13 +30,13 @@ class Translate_1LanguageSelectorKeyboard: Keyboard {
                 columnIndex = 1
             }
         }
-        let spacerKey = SymbolKey(Translate_1Operation.spacer)
         let settingsKey: SymbolKey = SymbolKey(Translate_1Operation.settings)
         tempRow = []
         tempRow.append(countryKey)
-        tempRow.append(spacerKey)
+        tempRow.append(countryDescriptionKey)
         tempRow.append(settingsKey)
         appendRow(tempRow)
+        countryDescriptionKey.width = keySize.width * 2 + keySpacing
 //        countryKey.borderColor = Color(UIColor.darkGray)
 //        countryKey.borderwidth = 5.0
         

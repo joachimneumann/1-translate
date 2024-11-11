@@ -10,6 +10,7 @@ import SwiftUI
 class Key: Identifiable {
     let id = UUID()  // unique identifier
     var isPressed: Bool = false
+    var width: CGFloat = 100.0
     var height: CGFloat = 100.0 {
         didSet {
             let tolerance: CGFloat = 0.3 * height
@@ -25,7 +26,6 @@ class Key: Identifiable {
     private var downTime: Double = 0.15
     private var upTime: Double = 0.4
 
-    var width: CGFloat = 100.0
     
     func visualDown() { }
     func visualUp()   { }

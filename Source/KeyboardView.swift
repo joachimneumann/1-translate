@@ -26,7 +26,7 @@ struct AllRows: View {
 
 struct AllRowsExceptLast: View {
     let spacing: CGFloat
-    @ObservedObject var keyboard: Keyboard  // Use @ObservedObject for updates
+    @ObservedObject var keyboard: Keyboard
 
     var body: some View {
         VStack(spacing: spacing) {
@@ -47,9 +47,11 @@ struct LastRow: View {
 
     var body: some View {
         if let lastRow = keyboard.keyMatrix.last {
-            HStack(spacing: spacing) {
-                ForEach(lastRow, id: \.id) { key in
-                    KeyView(key: key)
+            VStack(spacing: spacing) {
+                HStack(spacing: spacing) {
+                    ForEach(lastRow, id: \.id) { key in
+                        KeyView(key: key)
+                    }
                 }
             }
         }
@@ -71,14 +73,12 @@ struct KeyboardView: View {
     
     var body: some View {
         if height != nil {
-            VStack(spacing: 0.0) {
+            VStack(spacing: spacing) {
                 ScrollView {
                     AllRowsExceptLast(spacing: spacing, keyboard: keyboard)
                 }
                 .frame(height: height)
                 LastRow(spacing: spacing, keyboard: keyboard)
-                    .padding(.top, spacing)
-                    .padding(.bottom, 0.0)
             }
         } else {
             AllRows(spacing: spacing, keyboard: keyboard)
@@ -86,19 +86,24 @@ struct KeyboardView: View {
     }
 }
 
+import NumberTranslator
 #Preview {
     let screen = Screen()
-//    let height: CGFloat? = nil
-    let keySize: CGSize = CGSize(width: 80.0, height: 50.0)
+    let translate_1Manager = Translate_1Manager()
 
-    //    let keyboard = Translate_1LanguageSelectorKeyboard(keySize: keySize, translate_1Manager: Translate_1Manager(), countryKey: Key())
-    let keyboard: SmallKeyboard = Translate_1Keyboard(keySize: keySize)
+    let keyboard = Translate_1LanguageSelectorKeyboard(keySize: screen.keySize, translate_1Manager: Translate_1Manager(), keySpacing: screen.keySpacing)
+    let _ = keyboard.countryKey.imageName = translate_1Manager.flagname(NumberTranslator.LanguageEnum.german)
+    let _ = keyboard.countryDescriptionKey.top = "Deutsch"
+    let _ = keyboard.countryDescriptionKey.bottom = "(German)"
+
+//    let keyboard: SmallKeyboard = Translate_1Keyboard(keySize: keySize)
 //    let keyboard: SmallKeyboard = Translate_1LanguageSelectorKeyboard(keySize: keySize, translate_1Manager: Translate_1Manager())
+
     VStack {
         Rectangle()
-        KeyboardView(spacing: 20, keyboard: keyboard, height: screen.keyboardHeight4Rows)
+        KeyboardView(spacing: screen.keySpacing, keyboard: keyboard, height: screen.keyboardHeight4Rows)
             .background(.black)
-            .padding(.bottom, 30)
+            .padding(.bottom, 10)
     }
     .background(.black)
 }
