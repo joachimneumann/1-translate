@@ -24,9 +24,7 @@ struct CalculatoriOSView: View {
             VStack(spacing: 0.0) {
                 Spacer(minLength: 20.0)
                 NumberDisplay(display: viewModel.display)
-                SmallKeyboardView(
-                    spacing: viewModel.screen.keySpacing,
-                    smallKeyboard: viewModel.smallKeyboard)
+                KeyboardView(spacing: viewModel.screen.keySpacing, keyboard: viewModel.keyboard)
             }
         }
         .padding(.bottom, viewModel.screen.bottomPadding)

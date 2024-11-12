@@ -72,7 +72,6 @@ struct KeyboardView: View {
     }
     
     var body: some View {
-        let _ = print("KeyboardView")
         if height != nil {
             VStack(spacing: spacing) {
                 ScrollView {
@@ -90,6 +89,17 @@ struct KeyboardView: View {
 import NumberTranslator
 #Preview {
     let screen = Screen()
+    
+    
+#if TRANSLATE_1
+    let keyboard: SmallKeyboard = Translate_1Keyboard(keySize: screen.keySize)
+#endif
+
+#if CALCULATOR_IOS
+    let keyboard: SmallKeyboard = CalculatoriOSKeyboard(keySize: screen.keySize)
+#endif
+
+    
 //    let translate_1Manager = Translate_1Manager()
 
 //    let keyboard = Translate_1SelectLanguage(keySize: screen.keySize, translate_1Manager: Translate_1Manager(), keySpacing: screen.keySpacing)
@@ -97,7 +107,6 @@ import NumberTranslator
 //    let _ = keyboard.countryDescriptionKey.top = "Deutsch"
 //    let _ = keyboard.countryDescriptionKey.bottom = "(German)"
 
-    let keyboard: SmallKeyboard = Translate_1Keyboard(keySize: screen.keySize)
 //    let keyboard: SmallKeyboard = Translate_1LanguageSelectorKeyboard(keySize: keySize, translate_1Manager: Translate_1Manager())
 
     VStack {

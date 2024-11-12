@@ -124,8 +124,8 @@ class Translate_1ViewModel: ViewModel {
         translate_1Manager = tempTranslate_1Manager
 
         keyboard = Translate_1Keyboard(keySize: screen.keySize)
-
         super.init(screen: screen)
+        smallKeyboard = keyboard
 
         display.separatorCharacter = separatorCharacter(forLanguage: persistent.currentLanguageEnum)
         display.groupSize = groupSize(forLanguage: persistent.currentLanguageEnum)

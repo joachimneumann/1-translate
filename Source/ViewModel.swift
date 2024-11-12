@@ -10,9 +10,22 @@ import SwiftGmp
 
 public typealias AppleFont = UIFont
 
+// Define an environment key
+struct SchemeKey: EnvironmentKey {
+    static var defaultValue: String = "Default" // Set a default value
+}
+
+extension EnvironmentValues {
+    var scheme: String {
+        get { self[SchemeKey.self] }
+        set { self[SchemeKey.self] = newValue }
+    }
+}
+
 class ViewModel: ObservableObject {
     var screen: Screen
     var calculator: Calculator
+    var smallKeyboard: SmallKeyboard? = nil
     @Published var display: Display
     
     init(screen: Screen = Screen()) {
@@ -47,21 +60,23 @@ class ViewModel: ObservableObject {
     func execute(_ key: Key) {
         if let symbolKey = key as? SymbolKey {
             calculator.press(symbolKey.op)
-//            for row in smallKeyboard.keyMatrix {
-//                for k in row {
-//                    if let symbolKey = k as? SymbolKey {
-//                        if calculator.pendingOperators.contains(where: { $0.isEqual(to: symbolKey.op) }) {
-//                            symbolKey.setColors(
-//                                upColor: KeyColor.sixColors(op: symbolKey.op).pendingUpColor,
-//                                downColor: KeyColor.sixColors(op: symbolKey.op).pendingDownColor)
-//                        } else {
-//                            symbolKey.setColors(
-//                                upColor: KeyColor.sixColors(op: symbolKey.op).upColor,
-//                                downColor: KeyColor.sixColors(op: symbolKey.op).downColor)
-//                        }
-//                    }
-//                }
-//            }
+            if let smallKeyboard = smallKeyboard {
+                for row in smallKeyboard.keyMatrix {
+                    for k in row {
+                        if let symbolKey = k as? SymbolKey {
+                            if calculator.pendingOperators.contains(where: { $0.isEqual(to: symbolKey.op) }) {
+                                symbolKey.setColors(
+                                    upColor: KeyColor.sixColors(op: symbolKey.op).pendingUpColor,
+                                    downColor: KeyColor.sixColors(op: symbolKey.op).pendingDownColor)
+                            } else {
+                                symbolKey.setColors(
+                                    upColor: KeyColor.sixColors(op: symbolKey.op).upColor,
+                                    downColor: KeyColor.sixColors(op: symbolKey.op).downColor)
+                            }
+                        }
+                    }
+                }
+            }
             process()
         }
     }

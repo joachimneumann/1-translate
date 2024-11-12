@@ -11,7 +11,7 @@ import SwiftUI
 struct CalculatoriOSApp: App {
     var body: some Scene {
         WindowGroup {
-            CalculatoriOSView()
+            CalculatoriOSView(viewModel: CalculatoriOSViewModel(screen: Screen()))
         }
     }
 }
