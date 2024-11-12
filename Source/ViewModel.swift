@@ -61,6 +61,7 @@ class ViewModel: ObservableObject {
         if let symbolKey = key as? SymbolKey {
             calculator.press(symbolKey.op)
             if let smallKeyboard = smallKeyboard {
+                smallKeyboard.back(calculator.privateDisplayBufferHasDigits)
                 for row in smallKeyboard.keyMatrix {
                     for k in row {
                         if let symbolKey = k as? SymbolKey {

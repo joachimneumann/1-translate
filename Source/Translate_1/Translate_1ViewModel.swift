@@ -80,7 +80,6 @@ class Translate_1ViewModel: ViewModel {
         var toTranslate = display.string
         toTranslate.remove(separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter)
         translate_1Manager.translateThis(toTranslate, to: persistent.currentLanguageEnum)
-        keyboard.back(calculator.privateDisplayBufferHasDigits)
     }
 
     override func execute(_ key: Key) {

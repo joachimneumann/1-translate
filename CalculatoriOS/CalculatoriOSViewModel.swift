@@ -12,5 +12,7 @@ class CalculatoriOSViewModel: ViewModel {
     override init(screen: Screen) {
         keyboard = CalculatoriOSKeyboard(keySize: screen.keySize)
         super.init(screen: screen)
+        keyboard.callback = execute
+        smallKeyboard = keyboard
     }
 }
