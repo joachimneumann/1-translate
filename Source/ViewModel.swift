@@ -53,6 +53,10 @@ class ViewModel: ObservableObject {
         } else {
             let raw = calculator.raw
             display.update(raw: raw)
+            if let right = display.right {
+                display.rightWidth = display.eDigitWidth + display.widestDigitWidth * CGFloat(right.count - 1)
+            }
+
             inject(into: &display.left, separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter, groupSize: display.groupSize)
         }
     }

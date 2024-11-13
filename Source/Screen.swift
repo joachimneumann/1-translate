@@ -75,12 +75,16 @@ struct Screen: Equatable {
         
         keyWidth = isPad ? (calculatorWidth - 9.0 * keySpacing) * 0.1 : (calculatorWidth - 3.0 * keySpacing) * 0.25
 
-        let translate_1 = true
-        if translate_1 {
-            keyHeight = (screenSize.height * 0.4 - 4 * keySpacing) / 5.0 // this simulates the iOS18 calculator
-        } else {
-            keyHeight = (screenSize.height * 0.568 - 4 * keySpacing) / 5.0 // this simulates the iOS18 calculator
-        }
+
+#if TRANSLATE_1
+        keyHeight = (screenSize.height * 0.4 - 4 * keySpacing) / 5.0 // this simulates the iOS18 calculator
+        let fontsizeFactor = 0.169
+#endif
+
+#if CALCULATOR_IOS
+        keyHeight = (screenSize.height * 0.51 - 4 * keySpacing) / 5.0 // this simulates the iOS18 calculator
+        let fontsizeFactor = 0.15
+#endif
         keyboardHeight5Rows = 5 * keyHeight + 4 * keySpacing
         keyboardHeight4Rows = 4 * keyHeight + 3 * keySpacing
         bottomPadding = isPad ? 0.0 : keyboardHeight5Rows * 0.05
@@ -93,7 +97,7 @@ struct Screen: Equatable {
         ePadding = plusIconSize * 0.1
         kerning = 0.0//-0.02 * uiFontSize
 
-        uiFontSize = 0.169 * keyboardHeight5Rows
+        uiFontSize = fontsizeFactor * keyboardHeight5Rows
         numberDisplayFont = Screen.proportionalFont(ofSize: uiFontSize, weight: .regular)
         translationFont = Screen.proportionalFont(ofSize: uiFontSize, weight: .light)
         infoUiFontSize = 16.0
@@ -135,22 +139,23 @@ struct Screen: Equatable {
         CGFloat(0.5 * plusIconSize)
         displayWidth = calculatorWidth - 2.0 * displayHorizontalPadding
 
-        if translate_1 {
-            uiFontSize = 10*0.169 * keyboardHeight5Rows
-            numberDisplayFont = Screen.proportionalFont(ofSize: uiFontSize, weight: .regular)
-            
-            // make sure 100 trillion fits in the display, with group separators
+#if TRANSLATE_1
+        uiFontSize = 10*0.169 * keyboardHeight5Rows
+        numberDisplayFont = Screen.proportionalFont(ofSize: uiFontSize, weight: .regular)
+        
+        // make sure 100 trillion fits in the display, with group separators
 //            while "6,666,666,666,666".textWidth(kerning: kerning, proportionalFont) > displayWidth {
-            var w = CGFloat.greatestFiniteMagnitude
-            while w > displayWidth {
-                /// 6 is the widest digit in the proportional font
-                //print(uiFontSize)
-                uiFontSize *= 0.99
-                numberDisplayFont = Screen.proportionalFont(ofSize: uiFontSize, weight: .regular)
-                w = "666,666,666".textWidth(kerning: kerning, numberDisplayFont)
-            }
+        var w = CGFloat.greatestFiniteMagnitude
+        while w > displayWidth {
+            /// 6 is the widest digit in the proportional font
+            //print(uiFontSize)
+            uiFontSize *= 0.99
             numberDisplayFont = Screen.proportionalFont(ofSize: uiFontSize, weight: .regular)
+            w = "666,666,666".textWidth(kerning: kerning, numberDisplayFont)
         }
+        numberDisplayFont = Screen.proportionalFont(ofSize: uiFontSize, weight: .regular)
+#endif
+
     }
 }
 
