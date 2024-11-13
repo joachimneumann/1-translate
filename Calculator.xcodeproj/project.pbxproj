@@ -37,6 +37,12 @@
 		AAE3F5332CE180A000146B91 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3F5312CE1809900146B91 /* Keyboard.swift */; };
 		AAE3F5352CE194D400146B91 /* TextKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3F5342CE194D400146B91 /* TextKey.swift */; };
 		AAE426F729597AE3005FE365 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE426F629597AE3005FE365 /* Screen.swift */; };
+		AAFCC5C12CE4624F009E42FA /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6DBCAC2CE070FD00B5E0F1 /* ViewModel.swift */; };
+		AAFCC5C32CE46278009E42FA /* SwiftGmp in Frameworks */ = {isa = PBXBuildFile; productRef = AAFCC5C22CE46278009E42FA /* SwiftGmp */; };
+		AAFCC5C42CE46289009E42FA /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE426F629597AE3005FE365 /* Screen.swift */; };
+		AAFCC5C52CE46289009E42FA /* SmallKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9C3F692CBF33C100F64EFA /* SmallKeyboard.swift */; };
+		AAFCC5C62CE46289009E42FA /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC4252CD6FEB4006BD54C /* Key.swift */; };
+		AAFCC5C72CE46298009E42FA /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3F5312CE1809900146B91 /* Keyboard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -80,8 +86,20 @@
 		AAE4EB182CE4606700036518 /* CalculatorMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalculatorMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		AAFCC5BF2CE46237009E42FA /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				CalculatoriOSKeyboard.swift,
+				CalculatoriOSView.swift,
+				CalculatoriOSViewModel.swift,
+			);
+			target = AAE4EB172CE4606700036518 /* CalculatorMac */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		AA6DBCB72CE075A900B5E0F1 /* CalculatoriOS */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = CalculatoriOS; sourceTree = "<group>"; };
+		AA6DBCB72CE075A900B5E0F1 /* CalculatoriOS */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (AAFCC5BF2CE46237009E42FA /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = CalculatoriOS; sourceTree = "<group>"; };
 		AAD0EE012CE041DD008C9610 /* Translate_1 */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Translate_1; sourceTree = "<group>"; };
 		AAE4EB192CE4606700036518 /* CalculatorMac */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = CalculatorMac; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -108,6 +126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAFCC5C32CE46278009E42FA /* SwiftGmp in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +255,7 @@
 			);
 			name = CalculatorMac;
 			packageProductDependencies = (
+				AAFCC5C22CE46278009E42FA /* SwiftGmp */,
 			);
 			productName = CalculatorMac;
 			productReference = AAE4EB182CE4606700036518 /* CalculatorMac.app */;
@@ -356,6 +376,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAFCC5C12CE4624F009E42FA /* ViewModel.swift in Sources */,
+				AAFCC5C42CE46289009E42FA /* Screen.swift in Sources */,
+				AAFCC5C52CE46289009E42FA /* SmallKeyboard.swift in Sources */,
+				AAFCC5C72CE46298009E42FA /* Keyboard.swift in Sources */,
+				AAFCC5C62CE46289009E42FA /* Key.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -676,6 +701,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
+				OTHER_SWIFT_FLAGS = "-DCALCULATOR_MAC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.joachimneumann.CalculatorMac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -711,6 +737,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
+				OTHER_SWIFT_FLAGS = "-DCALCULATOR_MAC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.joachimneumann.CalculatorMac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -792,6 +819,10 @@
 		AA9DCD652CA10E13002EBCE5 /* SwiftGmp */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AA9DCD642CA10E13002EBCE5 /* XCRemoteSwiftPackageReference "SwiftGmp" */;
+			productName = SwiftGmp;
+		};
+		AAFCC5C22CE46278009E42FA /* SwiftGmp */ = {
+			isa = XCSwiftPackageProductDependency;
 			productName = SwiftGmp;
 		};
 /* End XCSwiftPackageProductDependency section */

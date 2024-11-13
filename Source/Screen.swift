@@ -81,6 +81,12 @@ struct Screen: Equatable {
         keyHeight = (screenSize.height * 0.51 - 4 * keySpacing) / 5.0 // this simulates the iOS18 calculator
         let fontsizeFactor = 0.15
 #endif
+
+#if CALCULATOR_MAC
+        keyHeight = (screenSize.height * 0.51 - 4 * keySpacing) / 5.0 // this simulates the iOS18 calculator
+        let fontsizeFactor = 0.15
+#endif
+
         keyboardHeight5Rows = 5 * keyHeight + 4 * keySpacing
         keyboardHeight4Rows = 4 * keyHeight + 3 * keySpacing
         bottomPadding = isPad ? 0.0 : keyboardHeight5Rows * 0.05
