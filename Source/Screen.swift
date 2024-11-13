@@ -24,9 +24,6 @@ struct Screen: Equatable {
     let keySpacing: CGFloat
     let keySize: CGSize
     let ePadding: CGFloat
-    let plusIconSize: CGFloat
-    let iconsWidth: CGFloat
-    let plusIconTrailingPadding: CGFloat
     var uiFontSize: CGFloat
     var numberDisplayFont: AppleFont
     var translationFont: AppleFont
@@ -37,7 +34,6 @@ struct Screen: Equatable {
     let horizontalPadding: CGFloat
     let bottomPadding: CGFloat
     var offsetToVerticallyAlignTextWithkeyboard: CGFloat = 0.0
-    var offsetToVerticallyAlignIconWithText: CGFloat = 0.0
     let kerning: CGFloat
     var textHeight: CGFloat = 0.0
     var infoTextHeight: CGFloat = 0.0
@@ -91,10 +87,7 @@ struct Screen: Equatable {
 
         keySize = CGSize(width: keyWidth, height: keyHeight)
         
-        plusIconSize = keyboardHeight5Rows * 0.13
-        iconsWidth   = keyboardHeight5Rows * 0.16
-        plusIconTrailingPadding = plusIconSize * 0.4
-        ePadding = plusIconSize * 0.1
+        ePadding = keyboardHeight5Rows * 0.013
         kerning = 0.0//-0.02 * uiFontSize
 
         uiFontSize = fontsizeFactor * keyboardHeight5Rows
@@ -129,14 +122,6 @@ struct Screen: Equatable {
         CGFloat(textHeight) -
         CGFloat(infoUiFontSize)
 
-        offsetToVerticallyAlignIconWithText =
-        CGFloat(screenSize.height) -
-        CGFloat(keyboardHeight5Rows) -
-        CGFloat(infoUiFontSize) -
-        CGFloat(plusIconSize) +
-        CGFloat(numberDisplayFont.descender) -
-        CGFloat(0.5 * numberDisplayFont.capHeight) +
-        CGFloat(0.5 * plusIconSize)
         displayWidth = calculatorWidth - 2.0 * displayHorizontalPadding
 
 #if TRANSLATE_1
@@ -185,7 +170,8 @@ extension String {
         var attributes: [NSAttributedString.Key : Any] = [:]
         attributes[.kern] = kerning
         attributes[.font] = font
-        return self.size(withAttributes: attributes).width
+        let notCeil = self.size(withAttributes: attributes).width
+        return ceil(notCeil)
     }
     
     func textHeight(kerning: CGFloat, _ font: AppleFont) -> CGFloat {
