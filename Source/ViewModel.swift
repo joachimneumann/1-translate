@@ -8,7 +8,15 @@
 import SwiftUI
 import SwiftGmp
 
+#if CALCULATOR_MAC || TRANSLATE_MAC
+public typealias AppleFont = NSFont
+public typealias AppleColor = NSColor
+public typealias AppleImage = NSImage
+#else
 public typealias AppleFont = UIFont
+public typealias AppleColor = UIColor
+public typealias AppleImage = UINSImage
+#endif
 
 // Define an environment key
 struct SchemeKey: EnvironmentKey {

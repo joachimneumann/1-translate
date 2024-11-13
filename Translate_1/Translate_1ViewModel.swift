@@ -19,11 +19,12 @@ class Translate_1ViewModel: ViewModel {
     @Published var showLanguageSelector: Bool = false
     @Published var showSettings: Bool = false
 
+#if TRANSLATE_1IOS
     private(set) var _voices: Translate_1Voices!
     var voices: Translate_1Voices {
         return _voices
     }
-
+#endif
     func toggleLanguageSelector(key: Key) {
         showLanguageSelector.toggle()
     }

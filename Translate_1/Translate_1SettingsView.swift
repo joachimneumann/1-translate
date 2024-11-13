@@ -13,7 +13,7 @@ struct Translate_1SettingsView: View {
     @Environment(\.presentationMode) var presentation /// for dismissing the Settings View
     @ObservedObject var viewModel: Translate_1ViewModel
     let languageEnum: NumberTranslator.LanguageEnum
-    let exampleFont: UIFont
+    let exampleFont: AppleFont
     let grayToggleStyle = ColoredToggleStyle(onColor: Color(white: 0.75),
                                                 offColor: Color(white: 0.5),
                                                 thumbColor: .white)
@@ -47,7 +47,7 @@ struct Translate_1SettingsView: View {
         VStack {
             List {
                 GeneralSettings
-                    .listRowBackground(Color(UIColor.darkGray))
+                    .listRowBackground(Color(AppleColor.darkGray))
                 switch languageEnum {
                 case .babylonian:
                     BabylonianParameters
@@ -74,7 +74,7 @@ struct Translate_1SettingsView: View {
                 //                    VoiceSettings(language)
                 //                }
                 HobbyProject
-                    .listRowBackground(Color(UIColor.darkGray))
+                    .listRowBackground(Color(AppleColor.darkGray))
             }
             .onAppear() {
                 updateGroupingExampleString(grouping: viewModel.persistent.showGrouping)
@@ -179,12 +179,12 @@ struct Translate_1SettingsView: View {
         let name: String
         let example: String
         let translate_1Result: Translate_1Result
-        let uiFont: UIFont
+        let uiFont: AppleFont
         var content: () -> Content
         init(languageEnum: NumberTranslator.LanguageEnum,
              example: String,
              translate_1Manager: Translate_1Manager,
-             uiFont: UIFont,
+             uiFont: AppleFont,
              @ViewBuilder content: @escaping () -> Content) {
             self.flagname = translate_1Manager.flagname(languageEnum)
             self.name = translate_1Manager.name(languageEnum)
@@ -445,6 +445,7 @@ struct TransparentButtonStyle: ButtonStyle {
     }
 }
 
+#if TRANSLATE_IOS
 struct RoundedCorner: Shape {
     var radius: CGFloat = .infinity
     var corners: UIRectCorner = .allCorners
@@ -462,6 +463,7 @@ extension View {
             .overlay(roundedRect.stroke(content, lineWidth: width))
     }
 }
+#endif
 
 #Preview {
     ZStack {

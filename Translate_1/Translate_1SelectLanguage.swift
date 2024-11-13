@@ -14,7 +14,7 @@ class Translate_1SelectLanguage: Keyboard {
     let countryDescriptionKey: TextKey
     init(keySize: CGSize, translate_1Manager: Translate_1Manager, keySpacing: CGFloat) {
         countryKey = Imagekey(imageName: "")
-        countryKey.borderColor = Color(UIColor.darkGray)
+        countryKey.borderColor = Color(AppleColor.darkGray)
         countryKey.borderwidth = 5.0
         countryDescriptionKey = TextKey(top: "", bottom: nil)
         super.init(keySize: keySize)

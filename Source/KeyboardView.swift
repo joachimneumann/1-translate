@@ -93,11 +93,9 @@ import NumberTranslator
     let screen = Screen()
     
     
-#if TRANSLATE_1
+#if TRANSLATE_1 || TRANSLATE_MAC
     let keyboard: SmallKeyboard = Translate_1Keyboard(keySize: screen.keySize)
-#endif
-
-#if CALCULATOR_IOS
+#else
     let keyboard: SmallKeyboard = CalculatoriOSKeyboard(keySize: screen.keySize)
 #endif
 

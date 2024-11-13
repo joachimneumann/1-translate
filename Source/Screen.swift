@@ -54,14 +54,23 @@ struct Screen: Equatable {
     }
 
     init() {
+#if CALCULATOR_MAC || TRANSLATE_MAC
+        self.init(CGSize(width: 576, height: 350))
+#else
         self.init(UIScreen.main.bounds.size)
+#endif
     }
     init(_ screenSize: CGSize) {
         //print("Screen INIT", screenSize)
         
         defaultTextColor = .white
+#if CALCULATOR_MAC || TRANSLATE_MAC
+        isPad = false
+        keySpacing = 1.0
+#else
         isPad = UIDevice.current.userInterfaceIdiom == .pad
         keySpacing = 0.0165 * screenSize.width
+#endif
         horizontalPadding = 2.2 * keySpacing
         displayHorizontalPadding = 0.0//screenSize.width * 0.035
         
@@ -75,21 +84,21 @@ struct Screen: Equatable {
 #if TRANSLATE_1
         keyHeight = (screenSize.height * 0.4 - 4 * keySpacing) / 5.0 // this simulates the iOS18 calculator
         let fontsizeFactor = 0.169
-#endif
-
-#if CALCULATOR_IOS
+#elseif CALCULATOR_IOS
         keyHeight = (screenSize.height * 0.51 - 4 * keySpacing) / 5.0 // this simulates the iOS18 calculator
         let fontsizeFactor = 0.15
-#endif
-
-#if CALCULATOR_MAC
+#else // CALCULATOR_MAC
         keyHeight = (screenSize.height * 0.51 - 4 * keySpacing) / 5.0 // this simulates the iOS18 calculator
         let fontsizeFactor = 0.15
 #endif
 
         keyboardHeight5Rows = 5 * keyHeight + 4 * keySpacing
         keyboardHeight4Rows = 4 * keyHeight + 3 * keySpacing
+#if CALCULATOR_IOS
         bottomPadding = isPad ? 0.0 : keyboardHeight5Rows * 0.05
+#else
+        bottomPadding = keyboardHeight5Rows * 0.05
+#endif
 
         keySize = CGSize(width: keyWidth, height: keyHeight)
         

@@ -31,6 +31,23 @@
 		AA9C3F6D2CBF373C00F64EFA /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9C3F6C2CBF373600F64EFA /* KeyboardView.swift */; };
 		AA9DCD662CA10E13002EBCE5 /* SwiftGmp in Frameworks */ = {isa = PBXBuildFile; productRef = AA9DCD652CA10E13002EBCE5 /* SwiftGmp */; };
 		AAB10B9A292A2222004707E9 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB10B94292A2222004707E9 /* Label.swift */; };
+		AAB5EA392CE4962100D76292 /* SwiftGmp in Frameworks */ = {isa = PBXBuildFile; productRef = AAB5EA382CE4962100D76292 /* SwiftGmp */; };
+		AAB5EA3B2CE4963100D76292 /* NumberTranslator in Frameworks */ = {isa = PBXBuildFile; productRef = AAB5EA3A2CE4963100D76292 /* NumberTranslator */; };
+		AAB5EA3C2CE4967400D76292 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9C3F6C2CBF373600F64EFA /* KeyboardView.swift */; };
+		AAB5EA3D2CE4967400D76292 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3F5312CE1809900146B91 /* Keyboard.swift */; };
+		AAB5EA3E2CE4967400D76292 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC4252CD6FEB4006BD54C /* Key.swift */; };
+		AAB5EA3F2CE4967400D76292 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6DBCAC2CE070FD00B5E0F1 /* ViewModel.swift */; };
+		AAB5EA402CE4967400D76292 /* SmallKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9C3F692CBF33C100F64EFA /* SmallKeyboard.swift */; };
+		AAB5EA412CE4967400D76292 /* Imagekey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3F50C2CE17F3700146B91 /* Imagekey.swift */; };
+		AAB5EA422CE4967400D76292 /* KeyColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABEFC122972A8780023A3C9 /* KeyColor.swift */; };
+		AAB5EA432CE4967400D76292 /* NumberDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29F589293CD608001ADF5A /* NumberDisplay.swift */; };
+		AAB5EA442CE4967400D76292 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA370C2C293352960041AE4E /* Extensions.swift */; };
+		AAB5EA452CE4967400D76292 /* SymbolKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC41D2CD62173006BD54C /* SymbolKey.swift */; };
+		AAB5EA462CE4967400D76292 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB10B94292A2222004707E9 /* Label.swift */; };
+		AAB5EA472CE4967400D76292 /* TextKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3F5342CE194D400146B91 /* TextKey.swift */; };
+		AAB5EA482CE4967400D76292 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE426F629597AE3005FE365 /* Screen.swift */; };
+		AAB5EA492CE4967400D76292 /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA17F8932CCE6EB900312BF0 /* Display.swift */; };
+		AAB5EA4A2CE4967400D76292 /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC4272CD7087E006BD54C /* KeyView.swift */; };
 		AABEFC132972A8780023A3C9 /* KeyColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABEFC122972A8780023A3C9 /* KeyColor.swift */; };
 		AAE3F51B2CE17F3700146B91 /* Imagekey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3F50C2CE17F3700146B91 /* Imagekey.swift */; };
 		AAE3F5322CE180A000146B91 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3F5312CE1809900146B91 /* Keyboard.swift */; };
@@ -43,6 +60,13 @@
 		AAFCC5C52CE46289009E42FA /* SmallKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9C3F692CBF33C100F64EFA /* SmallKeyboard.swift */; };
 		AAFCC5C62CE46289009E42FA /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC4252CD6FEB4006BD54C /* Key.swift */; };
 		AAFCC5C72CE46298009E42FA /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3F5312CE1809900146B91 /* Keyboard.swift */; };
+		AAFCC5C92CE46529009E42FA /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA17F8932CCE6EB900312BF0 /* Display.swift */; };
+		AAFCC5CA2CE46553009E42FA /* SymbolKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC41D2CD62173006BD54C /* SymbolKey.swift */; };
+		AAFCC5CB2CE46563009E42FA /* KeyColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABEFC122972A8780023A3C9 /* KeyColor.swift */; };
+		AAFCC5CC2CE465D1009E42FA /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9C3F6C2CBF373600F64EFA /* KeyboardView.swift */; };
+		AAFCC5CD2CE465D1009E42FA /* NumberDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29F589293CD608001ADF5A /* NumberDisplay.swift */; };
+		AAFCC5CE2CE465DC009E42FA /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC4272CD7087E006BD54C /* KeyView.swift */; };
+		AAFCC5D02CE46671009E42FA /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB10B94292A2222004707E9 /* Label.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -77,6 +101,7 @@
 		AA9C3F692CBF33C100F64EFA /* SmallKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallKeyboard.swift; sourceTree = "<group>"; };
 		AA9C3F6C2CBF373600F64EFA /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		AAB10B94292A2222004707E9 /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
+		AAB5EA192CE4945F00D76292 /* TranslateMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TranslateMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AABEFC122972A8780023A3C9 /* KeyColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyColor.swift; sourceTree = "<group>"; };
 		AACCD0772B43A89A00D545C5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = "../1-translate-tests/README.md"; sourceTree = "<group>"; };
 		AAE3F50C2CE17F3700146B91 /* Imagekey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Imagekey.swift; sourceTree = "<group>"; };
@@ -87,10 +112,28 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		AAB5EA372CE495B100D76292 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Translate_1Assets.xcassets,
+				Translate_1Display.swift,
+				Translate_1FloatingSheet.swift,
+				Translate_1Keyboard.swift,
+				Translate_1Manager.swift,
+				Translate_1Operation.swift,
+				Translate_1Persistent.swift,
+				Translate_1Result.swift,
+				Translate_1SelectLanguage.swift,
+				Translate_1SettingsView.swift,
+				Translate_1ViewModel.swift,
+			);
+			target = AAB5EA182CE4945F00D76292 /* TranslateMac */;
+		};
 		AAFCC5BF2CE46237009E42FA /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				CalculatoriOSKeyboard.swift,
+				CalculatoriOSOperation.swift,
 				CalculatoriOSView.swift,
 				CalculatoriOSViewModel.swift,
 			);
@@ -100,7 +143,8 @@
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		AA6DBCB72CE075A900B5E0F1 /* CalculatoriOS */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (AAFCC5BF2CE46237009E42FA /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = CalculatoriOS; sourceTree = "<group>"; };
-		AAD0EE012CE041DD008C9610 /* Translate_1 */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Translate_1; sourceTree = "<group>"; };
+		AAB5EA1A2CE4945F00D76292 /* TranslateMac */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = TranslateMac; sourceTree = "<group>"; };
+		AAD0EE012CE041DD008C9610 /* Translate_1 */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (AAB5EA372CE495B100D76292 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Translate_1; sourceTree = "<group>"; };
 		AAE4EB192CE4606700036518 /* CalculatorMac */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = CalculatorMac; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -119,6 +163,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA6DBCCC2CE0774800B5E0F1 /* SwiftGmp in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AAB5EA162CE4945F00D76292 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AAB5EA392CE4962100D76292 /* SwiftGmp in Frameworks */,
+				AAB5EA3B2CE4963100D76292 /* NumberTranslator in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,8 +195,10 @@
 				AA6352B02B296C3B00CABC0C /* TODO.md */,
 				AA08C7EB272F1241001B8575 /* TranslateNumbers.entitlements */,
 				AA08C7C0272EDA48001B8575 /* Source */,
+				AAD0EE012CE041DD008C9610 /* Translate_1 */,
 				AA6DBCB72CE075A900B5E0F1 /* CalculatoriOS */,
 				AAE4EB192CE4606700036518 /* CalculatorMac */,
+				AAB5EA1A2CE4945F00D76292 /* TranslateMac */,
 				AA6DBCCA2CE0774800B5E0F1 /* Frameworks */,
 				AA08C7BF272EDA48001B8575 /* Products */,
 			);
@@ -155,6 +210,7 @@
 				AA08C7BE272EDA48001B8575 /* Calculator.app */,
 				AA6DBCB62CE075A800B5E0F1 /* CalculatoriOS.app */,
 				AAE4EB182CE4606700036518 /* CalculatorMac.app */,
+				AAB5EA192CE4945F00D76292 /* TranslateMac.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -162,7 +218,6 @@
 		AA08C7C0272EDA48001B8575 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				AAD0EE012CE041DD008C9610 /* Translate_1 */,
 				AAE426F629597AE3005FE365 /* Screen.swift */,
 				AA6DBCAC2CE070FD00B5E0F1 /* ViewModel.swift */,
 				AA8AC4252CD6FEB4006BD54C /* Key.swift */,
@@ -238,6 +293,30 @@
 			productReference = AA6DBCB62CE075A800B5E0F1 /* CalculatoriOS.app */;
 			productType = "com.apple.product-type.application";
 		};
+		AAB5EA182CE4945F00D76292 /* TranslateMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AAB5EA272CE4946000D76292 /* Build configuration list for PBXNativeTarget "TranslateMac" */;
+			buildPhases = (
+				AAB5EA152CE4945F00D76292 /* Sources */,
+				AAB5EA162CE4945F00D76292 /* Frameworks */,
+				AAB5EA172CE4945F00D76292 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				AAB5EA1A2CE4945F00D76292 /* TranslateMac */,
+			);
+			name = TranslateMac;
+			packageProductDependencies = (
+				AAB5EA382CE4962100D76292 /* SwiftGmp */,
+				AAB5EA3A2CE4963100D76292 /* NumberTranslator */,
+			);
+			productName = TranslateMac;
+			productReference = AAB5EA192CE4945F00D76292 /* TranslateMac.app */;
+			productType = "com.apple.product-type.application";
+		};
 		AAE4EB172CE4606700036518 /* CalculatorMac */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AAE4EB242CE4606800036518 /* Build configuration list for PBXNativeTarget "CalculatorMac" */;
@@ -277,6 +356,9 @@
 					AA6DBCB52CE075A800B5E0F1 = {
 						CreatedOnToolsVersion = 16.0;
 					};
+					AAB5EA182CE4945F00D76292 = {
+						CreatedOnToolsVersion = 16.0;
+					};
 					AAE4EB172CE4606700036518 = {
 						CreatedOnToolsVersion = 16.0;
 					};
@@ -302,6 +384,7 @@
 				AA08C7BD272EDA48001B8575 /* Translate_1iOS */,
 				AA6DBCB52CE075A800B5E0F1 /* CalculatoriOS */,
 				AAE4EB172CE4606700036518 /* CalculatorMac */,
+				AAB5EA182CE4945F00D76292 /* TranslateMac */,
 			);
 		};
 /* End PBXProject section */
@@ -315,6 +398,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		AA6DBCB42CE075A800B5E0F1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AAB5EA172CE4945F00D76292 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -372,15 +462,44 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AAB5EA152CE4945F00D76292 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AAB5EA3C2CE4967400D76292 /* KeyboardView.swift in Sources */,
+				AAB5EA3D2CE4967400D76292 /* Keyboard.swift in Sources */,
+				AAB5EA3E2CE4967400D76292 /* Key.swift in Sources */,
+				AAB5EA3F2CE4967400D76292 /* ViewModel.swift in Sources */,
+				AAB5EA402CE4967400D76292 /* SmallKeyboard.swift in Sources */,
+				AAB5EA412CE4967400D76292 /* Imagekey.swift in Sources */,
+				AAB5EA422CE4967400D76292 /* KeyColor.swift in Sources */,
+				AAB5EA432CE4967400D76292 /* NumberDisplay.swift in Sources */,
+				AAB5EA442CE4967400D76292 /* Extensions.swift in Sources */,
+				AAB5EA452CE4967400D76292 /* SymbolKey.swift in Sources */,
+				AAB5EA462CE4967400D76292 /* Label.swift in Sources */,
+				AAB5EA472CE4967400D76292 /* TextKey.swift in Sources */,
+				AAB5EA482CE4967400D76292 /* Screen.swift in Sources */,
+				AAB5EA492CE4967400D76292 /* Display.swift in Sources */,
+				AAB5EA4A2CE4967400D76292 /* KeyView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AAE4EB142CE4606700036518 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				AAFCC5C12CE4624F009E42FA /* ViewModel.swift in Sources */,
+				AAFCC5CB2CE46563009E42FA /* KeyColor.swift in Sources */,
+				AAFCC5CA2CE46553009E42FA /* SymbolKey.swift in Sources */,
 				AAFCC5C42CE46289009E42FA /* Screen.swift in Sources */,
 				AAFCC5C52CE46289009E42FA /* SmallKeyboard.swift in Sources */,
 				AAFCC5C72CE46298009E42FA /* Keyboard.swift in Sources */,
+				AAFCC5C92CE46529009E42FA /* Display.swift in Sources */,
 				AAFCC5C62CE46289009E42FA /* Key.swift in Sources */,
+				AAFCC5CC2CE465D1009E42FA /* KeyboardView.swift in Sources */,
+				AAFCC5CD2CE465D1009E42FA /* NumberDisplay.swift in Sources */,
+				AAFCC5CE2CE465DC009E42FA /* KeyView.swift in Sources */,
+				AAFCC5D02CE46671009E42FA /* Label.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -675,6 +794,73 @@
 			};
 			name = Release;
 		};
+		AAB5EA252CE4946000D76292 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = TranslateMac/TranslateMac.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 8A4DL788W9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				OTHER_SWIFT_FLAGS = "-DTRANSLATE_MAC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.joachimneumann.TranslateMac;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		AAB5EA262CE4946000D76292 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = TranslateMac/TranslateMac.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 8A4DL788W9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				OTHER_SWIFT_FLAGS = "-DTRANSLATE_MAC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.joachimneumann.TranslateMac;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		AAE4EB252CE4606800036518 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -776,6 +962,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		AAB5EA272CE4946000D76292 /* Build configuration list for PBXNativeTarget "TranslateMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AAB5EA252CE4946000D76292 /* Debug */,
+				AAB5EA262CE4946000D76292 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		AAE4EB242CE4606800036518 /* Build configuration list for PBXNativeTarget "CalculatorMac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -820,6 +1015,14 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AA9DCD642CA10E13002EBCE5 /* XCRemoteSwiftPackageReference "SwiftGmp" */;
 			productName = SwiftGmp;
+		};
+		AAB5EA382CE4962100D76292 /* SwiftGmp */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SwiftGmp;
+		};
+		AAB5EA3A2CE4963100D76292 /* NumberTranslator */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NumberTranslator;
 		};
 		AAFCC5C22CE46278009E42FA /* SwiftGmp */ = {
 			isa = XCSwiftPackageProductDependency;

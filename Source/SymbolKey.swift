@@ -52,7 +52,11 @@ import SwiftGmp
                     .frame(width: width, height: height)
                     .background(bgColor)
                     .foregroundColor(txtColor)
+#if CALCULATOR_MAC
+                    .clipShape(Rectangle())
+#else
                     .clipShape(Capsule())
+#endif
             )
         }
     }

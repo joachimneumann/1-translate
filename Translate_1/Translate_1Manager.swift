@@ -33,7 +33,7 @@ class Translate_1Manager: NumberTranslator, Identifiable {
 
     
     func borderColor(_ language: NumberTranslator.LanguageEnum) -> Color {
-        Color(UIColor.darkGray)
+        Color(AppleColor.darkGray)
     }
 
     func nameWithDescription(_ language: NumberTranslator.LanguageEnum) -> String {
@@ -78,7 +78,7 @@ class Translate_1Manager: NumberTranslator, Identifiable {
         var languagesWithHue: [(language: LanguageEnum, hue: CGFloat)] = []
         
         for language in languageImplementation.keys {
-            if let uiImage = UIImage(named: flagname(language)),
+            if let uiImage = AppleImage(named: flagname(language)),
                let averageHue = uiImage.averageHue {
                 languagesWithHue.append((language: language, hue: averageHue))
             }
@@ -100,29 +100,41 @@ class Translate_1Manager: NumberTranslator, Identifiable {
         return sortedLanguages
     }}
 
+import CoreImage
 
-extension UIImage {
+extension AppleImage {
     var averageHue: CGFloat? {
-        guard let inputImage = CIImage(image: self) else { return nil }
+        let inputImage: CIImage
+        
+        #if canImport(UIKit)
+        guard let uiImage = self as? UIImage, let ciImage = CIImage(image: uiImage) else { return nil }
+        inputImage = ciImage
+        #elseif canImport(AppKit)
+        guard let imageData = self.tiffRepresentation, let ciImage = CIImage(data: imageData) else { return nil }
+        inputImage = ciImage
+        #endif
+        
         let extentVector = CIVector(x: inputImage.extent.origin.x, y: inputImage.extent.origin.y, z: inputImage.extent.size.width, w: inputImage.extent.size.height)
-
+        
         guard let filter = CIFilter(name: "CIAreaAverage", parameters: [kCIInputImageKey: inputImage, kCIInputExtentKey: extentVector]) else { return nil }
         guard let outputImage = filter.outputImage else { return nil }
-
+        
         var bitmap = [UInt8](repeating: 0, count: 4)
         let context = CIContext(options: [.workingColorSpace: kCFNull as Any])
         context.render(outputImage, toBitmap: &bitmap, rowBytes: 4, bounds: CGRect(x: 0, y: 0, width: 1, height: 1), format: .RGBA8, colorSpace: nil)
-
-        let average = UIColor(red: CGFloat(bitmap[0]) / 255, green: CGFloat(bitmap[1]) / 255, blue: CGFloat(bitmap[2]) / 255, alpha: CGFloat(bitmap[3]) / 255)
-
-        var hue        : CGFloat = 0
-        var saturation : CGFloat = 0
-        var brightness : CGFloat = 0
-        var alpha      : CGFloat = 0
-        let couldBeConverted = average.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
-        if couldBeConverted {
-            return hue
-        }
-        return nil
+        
+        #if canImport(UIKit)
+        let averageColor = UIColor(red: CGFloat(bitmap[0]) / 255, green: CGFloat(bitmap[1]) / 255, blue: CGFloat(bitmap[2]) / 255, alpha: CGFloat(bitmap[3]) / 255)
+        #elseif canImport(AppKit)
+        let averageColor = NSColor(red: CGFloat(bitmap[0]) / 255, green: CGFloat(bitmap[1]) / 255, blue: CGFloat(bitmap[2]) / 255, alpha: CGFloat(bitmap[3]) / 255)
+        #endif
+        
+        var hue: CGFloat = 0
+        var saturation: CGFloat = 0
+        var brightness: CGFloat = 0
+        var alpha: CGFloat = 0
+        
+        averageColor.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
+        return hue
     }
 }

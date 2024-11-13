@@ -12,7 +12,7 @@ import SwiftUI
     let countryKey: Imagekey
     init(keySize: CGSize) {
         countryKey = Imagekey(imageName: "")
-        countryKey.borderColor = Color(UIColor.darkGray)
+        countryKey.borderColor = Color(AppleColor.darkGray)
         countryKey.borderwidth = 5.0
         super.init(keySize: keySize, settingsKey: countryKey)
     }

@@ -39,7 +39,8 @@ struct Label: View {
         /// in MacOS, the key shape is a rectangle, which allows for larger labels.
         /// However, I don't want to emphesize the digits as much as on iOS
         let sizeFactorDigits          = 1.5
-        let sizeFactorCAC             = 1.4
+        let sizeFactorAC              = 1.4
+        let sizeFactorBack            = 1.5
         let sizeFactorSpecialOperator = 1.12
         let sizeFactorOperator        = 1.04
         let sizeFactorOperatorX       = sizeFactorOperator * 0.86

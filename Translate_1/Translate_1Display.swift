@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct Translate_1Display: View {
-    let uiFont: UIFont
+    let uiFont: AppleFont
     @State private var moveGradient = true
     @ObservedObject var translate_1Result: Translate_1Result
     
@@ -34,11 +34,11 @@ struct Translate_1Display: View {
             }
         }
         .foregroundColor(translate_1Result.error ? .orange : .white)
-        .contextMenu {
-            Button("Copy to Clipboard") {
-                UIPasteboard.general.string = translate_1Result.copyText
-            }
-        }
+//        .contextMenu {
+//            Button("Copy to Clipboard") {
+//                UIPasteboard.general.string = translate_1Result.copyText
+//            }
+//        }
         .minimumScaleFactor(0.1)
         //        let screenWidth: CGFloat = 300.0// Screen.main.bounds.size.width
         //        Rectangle()
@@ -67,7 +67,7 @@ struct Translate_1Display: View {
     let viewModel = Translate_1ViewModel()
     let _ = viewModel.translate_1Manager.translateThis("5555", to: .polish)
 
-    Translate_1Display(uiFont: UIFont.systemFont(ofSize: fontsize), translate_1Result: viewModel.translate_1Manager.result)
+    Translate_1Display(uiFont: AppleFont.systemFont(ofSize: fontsize), translate_1Result: viewModel.translate_1Manager.result)
         .padding()
         .padding(.top, fontsize)
         .background (.black)

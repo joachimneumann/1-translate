@@ -36,7 +36,7 @@ class Display: MonoFontDisplay, ObservableObject {
     let ePadding: CGFloat
     let eDigitWidth: CGFloat
 
-    private var uiFont: UIFont
+    private var uiFont: AppleFont
     public var font: Font
 
     init(floatDisplayWidth: CGFloat, font: AppleFont, ePadding: CGFloat) {
