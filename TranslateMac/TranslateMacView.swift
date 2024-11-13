@@ -18,7 +18,7 @@ struct TranslateMacView: View {
     
     var Translate_1View: some View {
         VStack(spacing: 0.0) {
-            ZStack {
+            HStack {
                 VStack(spacing: 0.0) {
                     Translate_1Display(uiFont: viewModel.screen.translationFont, translate_1Result: viewModel.translate_1Manager.result)
                         .font(Font(viewModel.screen.translationFont))

@@ -67,18 +67,20 @@ struct Screen: Equatable {
 #if CALCULATOR_MAC || TRANSLATE_MAC
         isPad = false
         keySpacing = 1.0
+        horizontalPadding = 2.2 * keySpacing
+        displayHorizontalPadding = 0.0//screenSize.width * 0.035
+        portraitIPhoneDisplayBottomPadding = 0.0//screenSize.height * 0.048
+        calculatorWidth = 270
+        keyWidth = (calculatorWidth - 3.0 * keySpacing) * 0.25
 #else
         isPad = UIDevice.current.userInterfaceIdiom == .pad
         keySpacing = 0.0165 * screenSize.width
-#endif
         horizontalPadding = 2.2 * keySpacing
         displayHorizontalPadding = 0.0//screenSize.width * 0.035
-        
         portraitIPhoneDisplayBottomPadding = 0.0//screenSize.height * 0.048
-        
         calculatorWidth = screenSize.width - 2 * horizontalPadding
-        
         keyWidth = isPad ? (calculatorWidth - 9.0 * keySpacing) * 0.1 : (calculatorWidth - 3.0 * keySpacing) * 0.25
+#endif
 
 
 #if TRANSLATE_1
@@ -88,7 +90,7 @@ struct Screen: Equatable {
         keyHeight = (screenSize.height * 0.51 - 4 * keySpacing) / 5.0 // this simulates the iOS18 calculator
         let fontsizeFactor = 0.15
 #else // CALCULATOR_MAC
-        keyHeight = (screenSize.height * 0.51 - 4 * keySpacing) / 5.0 // this simulates the iOS18 calculator
+        keyHeight = 45
         let fontsizeFactor = 0.15
 #endif
 
