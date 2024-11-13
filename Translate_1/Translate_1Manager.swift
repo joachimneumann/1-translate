@@ -107,7 +107,7 @@ extension AppleImage {
         let inputImage: CIImage
         
         #if canImport(UIKit)
-        guard let uiImage = self as? UIImage, let ciImage = CIImage(image: uiImage) else { return nil }
+        guard let ciImage = CIImage(image: self) else { return nil }
         inputImage = ciImage
         #elseif canImport(AppKit)
         guard let imageData = self.tiffRepresentation, let ciImage = CIImage(data: imageData) else { return nil }

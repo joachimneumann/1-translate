@@ -36,13 +36,24 @@ import SwiftUI
             Image(imageName)
                 .resizable()
                 .frame(width: width-2*borderwidth, height: height-2*borderwidth)
+#if TRANSLATE_MAC
+                .clipShape(Rectangle())
+#else
                 .clipShape(Capsule())
+#endif
                 .padding(0.5*borderwidth)
                 .brightness(brightness)
+#if TRANSLATE_MAC
+                .overlay(
+                    Rectangle()
+                    .stroke(borderColor, lineWidth: borderwidth)
+                )
+#else
                 .overlay(
                     Capsule()
-                        .stroke(borderColor, lineWidth: borderwidth)
+                    .stroke(borderColor, lineWidth: borderwidth)
                 )
+#endif
                 .brightness(brightness)
                 .padding(0.5*borderwidth)
         )

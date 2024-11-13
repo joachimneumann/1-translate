@@ -15,7 +15,7 @@ public typealias AppleImage = NSImage
 #else
 public typealias AppleFont = UIFont
 public typealias AppleColor = UIColor
-public typealias AppleImage = UINSImage
+public typealias AppleImage = UIImage
 #endif
 
 // Define an environment key
