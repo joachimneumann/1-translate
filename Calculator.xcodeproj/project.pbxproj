@@ -77,11 +77,13 @@
 		AAE3F5312CE1809900146B91 /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 		AAE3F5342CE194D400146B91 /* TextKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextKey.swift; sourceTree = "<group>"; };
 		AAE426F629597AE3005FE365 /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
+		AAE4EB182CE4606700036518 /* CalculatorMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalculatorMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		AA6DBCB72CE075A900B5E0F1 /* CalculatoriOS */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = CalculatoriOS; sourceTree = "<group>"; };
 		AAD0EE012CE041DD008C9610 /* Translate_1 */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Translate_1; sourceTree = "<group>"; };
+		AAE4EB192CE4606700036518 /* CalculatorMac */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = CalculatorMac; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AAE4EB152CE4606700036518 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -115,6 +124,7 @@
 				AA08C7EB272F1241001B8575 /* TranslateNumbers.entitlements */,
 				AA08C7C0272EDA48001B8575 /* Source */,
 				AA6DBCB72CE075A900B5E0F1 /* CalculatoriOS */,
+				AAE4EB192CE4606700036518 /* CalculatorMac */,
 				AA6DBCCA2CE0774800B5E0F1 /* Frameworks */,
 				AA08C7BF272EDA48001B8575 /* Products */,
 			);
@@ -125,6 +135,7 @@
 			children = (
 				AA08C7BE272EDA48001B8575 /* Calculator.app */,
 				AA6DBCB62CE075A800B5E0F1 /* CalculatoriOS.app */,
+				AAE4EB182CE4606700036518 /* CalculatorMac.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -208,6 +219,28 @@
 			productReference = AA6DBCB62CE075A800B5E0F1 /* CalculatoriOS.app */;
 			productType = "com.apple.product-type.application";
 		};
+		AAE4EB172CE4606700036518 /* CalculatorMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AAE4EB242CE4606800036518 /* Build configuration list for PBXNativeTarget "CalculatorMac" */;
+			buildPhases = (
+				AAE4EB142CE4606700036518 /* Sources */,
+				AAE4EB152CE4606700036518 /* Frameworks */,
+				AAE4EB162CE4606700036518 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				AAE4EB192CE4606700036518 /* CalculatorMac */,
+			);
+			name = CalculatorMac;
+			packageProductDependencies = (
+			);
+			productName = CalculatorMac;
+			productReference = AAE4EB182CE4606700036518 /* CalculatorMac.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -222,6 +255,9 @@
 						CreatedOnToolsVersion = 13.1;
 					};
 					AA6DBCB52CE075A800B5E0F1 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+					AAE4EB172CE4606700036518 = {
 						CreatedOnToolsVersion = 16.0;
 					};
 				};
@@ -245,6 +281,7 @@
 			targets = (
 				AA08C7BD272EDA48001B8575 /* Translate_1iOS */,
 				AA6DBCB52CE075A800B5E0F1 /* CalculatoriOS */,
+				AAE4EB172CE4606700036518 /* CalculatorMac */,
 			);
 		};
 /* End PBXProject section */
@@ -258,6 +295,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		AA6DBCB42CE075A800B5E0F1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AAE4EB162CE4606700036518 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -305,6 +349,13 @@
 				AA6DBCCF2CE077C700B5E0F1 /* SymbolKey.swift in Sources */,
 				AA6DBCD02CE077C700B5E0F1 /* Key.swift in Sources */,
 				AA6DBCD12CE077E900B5E0F1 /* Label.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AAE4EB142CE4606700036518 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,6 +601,10 @@
 				OTHER_SWIFT_FLAGS = "-DCALCULATOR_IOS";
 				PRODUCT_BUNDLE_IDENTIFIER = com.joachimneumann.CalculatoriOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -585,9 +640,82 @@
 				OTHER_SWIFT_FLAGS = "-DCALCULATOR_IOS";
 				PRODUCT_BUNDLE_IDENTIFIER = com.joachimneumann.CalculatoriOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		AAE4EB252CE4606800036518 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = CalculatorMac/CalculatorMac.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 8A4DL788W9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Better Calc";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.joachimneumann.CalculatorMac;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		AAE4EB262CE4606800036518 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = CalculatorMac/CalculatorMac.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 8A4DL788W9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Better Calc";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.joachimneumann.CalculatorMac;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -617,6 +745,15 @@
 			buildConfigurations = (
 				AA6DBCC22CE075AA00B5E0F1 /* Debug */,
 				AA6DBCC32CE075AA00B5E0F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AAE4EB242CE4606800036518 /* Build configuration list for PBXNativeTarget "CalculatorMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AAE4EB252CE4606800036518 /* Debug */,
+				AAE4EB262CE4606800036518 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

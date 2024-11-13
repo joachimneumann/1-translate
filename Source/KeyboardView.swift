@@ -86,7 +86,9 @@ struct KeyboardView: View {
     }
 }
 
+#if TRANSLATE_1
 import NumberTranslator
+#endif
 #Preview {
     let screen = Screen()
     
