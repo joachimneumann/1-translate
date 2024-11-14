@@ -12,16 +12,20 @@ import NumberTranslator
 class Translate_1SelectLanguage: Keyboard {
     let countryKey: Imagekey
     let countryDescriptionKey: TextKey
-    init(keySize: CGSize, translate_1Manager: Translate_1Manager, keySpacing: CGFloat) {
-        countryKey = Imagekey(imageName: "")
-        countryKey.borderColor = Color(AppleColor.darkGray)
-        countryKey.borderwidth = 5.0
+    init(keySize: CGSize, translate_1Manager: Translate_1Manager, keySpacing: CGFloat, borderColor: Color, borderWidth: CGFloat) {
+        countryKey = Imagekey(
+            imageName: "",
+            borderColor: borderColor,
+            borderwidth: borderWidth)
         countryDescriptionKey = TextKey(top: "", bottom: nil)
         super.init(keySize: keySize)
         var columnIndex = 1
         var tempRow: [Key] = []
         for language in translate_1Manager.sortedlanguages {
-            let tempKey = Imagekey(imageName: translate_1Manager.flagname(language), borderColor: translate_1Manager.borderColor(language))
+            let tempKey = Imagekey(
+                imageName: translate_1Manager.flagname(language),
+                borderColor: translate_1Manager.borderColor(language),
+                borderwidth: borderWidth)
             tempRow.append(tempKey)
             columnIndex += 1
             if columnIndex == 5 {
@@ -30,16 +34,19 @@ class Translate_1SelectLanguage: Keyboard {
                 columnIndex = 1
             }
         }
-        let settingsKey: SymbolKey = SymbolKey(Translate_1Operation.settings)
         tempRow = []
         tempRow.append(countryKey)
+#if TRANSLATE_1
         tempRow.append(countryDescriptionKey)
-        tempRow.append(settingsKey)
+        tempRow.append(SymbolKey(Translate_1Operation.settings))
+#else
+        tempRow.append(countryDescriptionKey)
+#endif
         appendRow(tempRow)
+#if TRANSLATE_1
         countryDescriptionKey.width = keySize.width * 2 + keySpacing
-//        countryKey.borderColor = Color(UIColor.darkGray)
-//        countryKey.borderwidth = 5.0
-        
-//        super.init(keySize: keySize, settingsKey: countryKey)
+#else
+        countryDescriptionKey.width = keySize.width * 3 + 2 * keySpacing
+#endif
     }
 }

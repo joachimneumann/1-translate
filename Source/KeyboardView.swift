@@ -94,7 +94,15 @@ import NumberTranslator
     
     
 #if TRANSLATE_1 || TRANSLATE_MAC
-    let keyboard: SmallKeyboard = Translate_1Keyboard(keySize: screen.keySize)
+//    let keyboard: SmallKeyboard = Translate_1Keyboard(keySize: screen.keySize, borderwidth: screen.imageBorderWidth)
+    var keyboard: Translate_1SelectLanguage = Translate_1SelectLanguage(
+        keySize: screen.keySize,
+        translate_1Manager: Translate_1Manager(),
+        keySpacing: 10,
+        borderColor: .green,
+        borderWidth: 3)
+    let _ = keyboard.countryKey.imageName = "Deutsch"
+    let _ = keyboard.countryDescriptionKey.top = "Deutsch"
 #else
     let keyboard: SmallKeyboard = CalculatoriOSKeyboard(keySize: screen.keySize)
 #endif
@@ -111,7 +119,7 @@ import NumberTranslator
 
     VStack {
         Rectangle()
-        let _ = keyboard.back(true)
+//        let _ = keyboard.back(true)
         KeyboardView(spacing: screen.keySpacing, keyboard: keyboard, height: screen.keyboardHeight4Rows)
             .background(.black)
             .padding(.bottom, 10)

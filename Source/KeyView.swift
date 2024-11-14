@@ -44,12 +44,16 @@ struct KeyView: View {
 }
 
 #Preview {
-    let symbol = SymbolKey(InplaceOperation.sqr)
+    let symbol1 = SymbolKey(InplaceOperation.sqr)
+    let symbol3 = SymbolKey(Translate_1Operation.spacer)
+    let symbol2 = SymbolKey(DigitOperation.five)
     ZStack {
         Rectangle()
             .foregroundColor(.gray)
-        VStack {
-            KeyView(key: symbol)
+        HStack {
+            KeyView(key: symbol1)
+            KeyView(key: symbol2)
+            KeyView(key: symbol3)
         }
     }
 }

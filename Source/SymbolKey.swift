@@ -43,30 +43,31 @@ import SwiftGmp
         bgColor = upColor
     }
     override func view() -> AnyView {
-        if symbol == "Spacer" {
-            return AnyView(Spacer())
+        if symbol == "KeyboardSpacer" {
+            return AnyView(Spacer(minLength: 0.0))
         } else {
             return AnyView(
                 Label(symbol: symbol, size: height, color: txtColor)
-                    .padding()
                     .frame(width: width, height: height)
                     .background(bgColor)
                     .foregroundColor(txtColor)
-#if CALCULATOR_MAC || TRANSLATE_MAC
-                    .clipShape(Rectangle())
-#else
                     .clipShape(Capsule())
-#endif
             )
         }
     }
 }
 
 #Preview {
-    @Previewable @State var x: SymbolKey = SymbolKey(InplaceOperation.sqr)
+    @Previewable @State var x1: SymbolKey = SymbolKey(InplaceOperation.sqr)
+    @Previewable @State var x2: SymbolKey = SymbolKey(Translate_1Operation.spacer)
+    @Previewable @State var x3: SymbolKey = SymbolKey(InplaceOperation.sqr)
     ZStack {
         Rectangle()
             .foregroundColor(.gray)
-        x.view()
+        HStack {
+            x1.view()
+            x2.view()
+            x3.view()
+        }
     }
 }

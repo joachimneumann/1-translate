@@ -23,6 +23,7 @@ struct Screen: Equatable {
     var keyboardHeight4Rows: CGFloat
     let keySpacing: CGFloat
     let keySize: CGSize
+    let imageBorderWidth: CGFloat
     let ePadding: CGFloat
     var uiFontSize: CGFloat
     var numberDisplayFont: AppleFont
@@ -30,7 +31,6 @@ struct Screen: Equatable {
     let infoUiFont: AppleFont
     let infoUiFontSize: CGFloat
     let displayHorizontalPadding: CGFloat
-    let portraitIPhoneDisplayBottomPadding: CGFloat
     let horizontalPadding: CGFloat
     let bottomPadding: CGFloat
     var offsetToVerticallyAlignTextWithkeyboard: CGFloat = 0.0
@@ -66,31 +66,21 @@ struct Screen: Equatable {
         defaultTextColor = .white
 #if CALCULATOR_MAC || TRANSLATE_MAC
         isPad = false
-        keySpacing = 1.0
+        keySpacing = 6.0
         horizontalPadding = 2.2 * keySpacing
-        displayHorizontalPadding = 0.0//screenSize.width * 0.035
-        portraitIPhoneDisplayBottomPadding = 0.0//screenSize.height * 0.048
-        calculatorWidth = 270
+        displayHorizontalPadding = 20
+        calculatorWidth = 176
         keyWidth = (calculatorWidth - 3.0 * keySpacing) * 0.25
+        keyHeight = keyWidth
+        let fontsizeFactor = 0.15
 #else
         isPad = UIDevice.current.userInterfaceIdiom == .pad
         keySpacing = 0.0165 * screenSize.width
         horizontalPadding = 2.2 * keySpacing
         displayHorizontalPadding = 0.0//screenSize.width * 0.035
-        portraitIPhoneDisplayBottomPadding = 0.0//screenSize.height * 0.048
         calculatorWidth = screenSize.width - 2 * horizontalPadding
         keyWidth = isPad ? (calculatorWidth - 9.0 * keySpacing) * 0.1 : (calculatorWidth - 3.0 * keySpacing) * 0.25
-#endif
-
-
-#if TRANSLATE_1
-        keyHeight = (screenSize.height * 0.4 - 4 * keySpacing) / 5.0 // this simulates the iOS18 calculator
-        let fontsizeFactor = 0.169
-#elseif CALCULATOR_IOS
         keyHeight = (screenSize.height * 0.51 - 4 * keySpacing) / 5.0 // this simulates the iOS18 calculator
-        let fontsizeFactor = 0.15
-#else // CALCULATOR_MAC
-        keyHeight = 45
         let fontsizeFactor = 0.15
 #endif
 
@@ -98,9 +88,12 @@ struct Screen: Equatable {
         keyboardHeight4Rows = 4 * keyHeight + 3 * keySpacing
 #if CALCULATOR_IOS
         bottomPadding = isPad ? 0.0 : keyboardHeight5Rows * 0.05
+        imageBorderWidth = 5.0
 #else
         bottomPadding = keyboardHeight5Rows * 0.05
+        imageBorderWidth = 3.0
 #endif
+        
 
         keySize = CGSize(width: keyWidth, height: keyHeight)
         

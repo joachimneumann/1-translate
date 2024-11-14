@@ -9,7 +9,7 @@ import SwiftGmp
 
 public enum Translate_1Operation: String, OpProtocol, CaseIterable {
     case settings
-    case spacer = "Spacer"
+    case spacer = "KeyboardSpacer"
 }
 
 extension Translate_1Operation {

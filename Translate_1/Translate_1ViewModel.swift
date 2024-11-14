@@ -119,11 +119,16 @@ class Translate_1ViewModel: ViewModel {
         currentLanguageEnglishName = nil
         let tempTranslate_1Manager = Translate_1Manager()
         
-        selectLanguage = Translate_1SelectLanguage(keySize: screen.keySize, translate_1Manager: tempTranslate_1Manager, keySpacing: screen.keySpacing)
+        selectLanguage = Translate_1SelectLanguage(
+            keySize: screen.keySize,
+            translate_1Manager: tempTranslate_1Manager,
+            keySpacing: screen.keySpacing,
+            borderColor: Color(AppleColor.lightGray),
+            borderWidth: screen.imageBorderWidth)
         
         translate_1Manager = tempTranslate_1Manager
 
-        keyboard = Translate_1Keyboard(keySize: screen.keySize)
+        keyboard = Translate_1Keyboard(keySize: screen.keySize, borderwidth: screen.imageBorderWidth)
         super.init(screen: screen)
         smallKeyboard = keyboard
 

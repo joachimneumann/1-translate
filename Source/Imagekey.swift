@@ -13,11 +13,11 @@ import SwiftUI
     var borderwidth: CGFloat
     var brightness: Double = 0.0
     
-    init(imageName: String, borderColor: Color? = nil, borderwidth: CGFloat = 5.0) {
+    init(imageName: String, borderColor: Color?, borderwidth: CGFloat) {
         self.imageName = imageName
         if let borderColor = borderColor {
             self.borderColor = borderColor
-            self.borderwidth = borderwidth
+            self.borderwidth = 3.0//borderwidth
         } else {
             self.borderColor = .clear
             self.borderwidth = 0.0
@@ -35,25 +35,15 @@ import SwiftUI
         return AnyView(
             Image(imageName)
                 .resizable()
+                .scaledToFill()
                 .frame(width: width-2*borderwidth, height: height-2*borderwidth)
-#if TRANSLATE_MAC
-                .clipShape(Rectangle())
-#else
                 .clipShape(Capsule())
-#endif
                 .padding(0.5*borderwidth)
                 .brightness(brightness)
-#if TRANSLATE_MAC
-                .overlay(
-                    Rectangle()
-                    .stroke(borderColor, lineWidth: borderwidth)
-                )
-#else
                 .overlay(
                     Capsule()
                     .stroke(borderColor, lineWidth: borderwidth)
                 )
-#endif
                 .brightness(brightness)
                 .padding(0.5*borderwidth)
         )
@@ -62,7 +52,7 @@ import SwiftUI
 
 
 #Preview {
-    @Previewable @State var x: Imagekey = Imagekey(imageName: "English", borderColor: .green)
+    @Previewable @State var x: Imagekey = Imagekey(imageName: "Vietnamese", borderColor: .green, borderwidth: 3)
     ZStack {
         Rectangle()
             .foregroundColor(.gray)
