@@ -1,14 +1,14 @@
 //
-//  Translate_1View.swift
+//  TranslateiOSView.swift
 //
 //  Created by Joachim Neumann on 11/18/22.
 //
 
 import SwiftUI
 
-struct Translate_1View: View {
+struct TranslateiOSView: View {
     @Environment(\.scenePhase) var scenePhase
-    @ObservedObject var viewModel: Translate_1ViewModel
+    @ObservedObject var viewModel: TranslateViewModel
 
     @State var scrollViewHasScrolled = false
     @State var scrollViewID = UUID()
@@ -19,7 +19,7 @@ struct Translate_1View: View {
         VStack(spacing: 0.0) {
             ZStack {
                 VStack(spacing: 0.0) {
-                    Translate_1Display(uiFont: viewModel.screen.translationFont, translate_1Result: viewModel.translate_1Manager.result)
+                    TranslateDisplay(uiFont: viewModel.screen.translationFont, translate_1Result: viewModel.translate_1Manager.result)
                         .font(Font(viewModel.screen.translationFont))
                     Spacer(minLength: 20.0)
                     NumberDisplay(display: viewModel.display)
@@ -58,7 +58,7 @@ struct Translate_1View: View {
                 .preferredColorScheme(.dark)
                 .navigationDestination(isPresented: $viewModel.showSettings) {
                     if viewModel.showSettings {
-                        Translate_1SettingsView(viewModel: viewModel)
+                        TranslateiOSSettingsView(viewModel: viewModel)
                     }
                 }
 //        }
@@ -90,6 +90,6 @@ struct Translate_1View: View {
 
 #Preview {
     NavigationStack {
-        Translate_1View(viewModel: Translate_1ViewModel(screen: Screen()))
+        TranslateiOSView(viewModel: TranslateViewModel(screen: Screen()))
     }
 }

@@ -1,5 +1,5 @@
 //
-//  Translate_1ViewModel.swift
+//  TranslateViewModel.swift
 //  Calculator
 //
 //  Created by Joachim Neumann on 1/14/23.
@@ -9,13 +9,13 @@ import SwiftUI
 import NumberTranslator
 import SwiftGmp
 
-class Translate_1ViewModel: ViewModel {
-    @Published var persistent = Translate_1Persistent()
+class TranslateViewModel: ViewModel {
+    @Published var persistent = TranslatePersistent()
     @Published var currentLanguageName: String
     var currentLanguageEnglishName: String?
-    @Published var translate_1Manager: Translate_1Manager
-    @Published var keyboard: Translate_1Keyboard
-    var selectLanguage: Translate_1SelectLanguage
+    @Published var translate_1Manager: TranslateManager
+    @Published var keyboard: TranslateKeyboard
+    var selectLanguage: TranslateSelectLanguage
     @Published var showLanguageSelector: Bool = false
     @Published var showSettings: Bool = false
 
@@ -104,7 +104,7 @@ class Translate_1ViewModel: ViewModel {
         }
         
         if let languageSettingsKey = key as? SymbolKey {
-            if languageSettingsKey.op.isEqual(to: Translate_1Operation.settings) {
+            if languageSettingsKey.op.isEqual(to: TranslateOperation.settings) {
                 showSettings = true
                 return
             }
@@ -117,16 +117,16 @@ class Translate_1ViewModel: ViewModel {
     override init(screen: Screen = Screen()) {
         currentLanguageName = ""
         currentLanguageEnglishName = nil
-        let tempTranslate_1Manager = Translate_1Manager()
+        let tempTranslate_1Manager = TranslateManager()
         
-        selectLanguage = Translate_1SelectLanguage(
+        selectLanguage = TranslateSelectLanguage(
             translate_1Manager: tempTranslate_1Manager,
             keySpacing: screen.keySpacing,
             borderColor: Color(AppleColor.darkGray))
 
         translate_1Manager = tempTranslate_1Manager
 
-        keyboard = Translate_1Keyboard()
+        keyboard = TranslateKeyboard()
         super.init(screen: screen)
         smallKeyboard = keyboard
 

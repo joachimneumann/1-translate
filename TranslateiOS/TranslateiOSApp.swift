@@ -1,5 +1,5 @@
 //
-//  Translate_1App.swift
+//  TranslateiOSApp.swift
 //
 //  Created by Joachim Neumann on 20/09/2021.
 //
@@ -9,12 +9,12 @@ import SwiftGmp
 import SwiftUI
 
 @main
-struct Translate_1App: App {
+struct TranslateiOSApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
                 //            GeometryReader { geo in
-                Translate_1View(viewModel: Translate_1ViewModel(screen: Screen()))
+                TranslateiOSView(viewModel: TranslateViewModel(screen: Screen()))
                 //            }
             }
         }

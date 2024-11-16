@@ -1,5 +1,5 @@
 //
-//  Translate_1Result.swift
+//  TranslateManager.swift
 //  TranslateNumbers
 //
 //  Created by Joachim Neumann on 12/20/23.
@@ -9,9 +9,9 @@ import Foundation
 import NumberTranslator
 import SwiftUI
 
-class Translate_1Manager: NumberTranslator, Identifiable {
+class TranslateManager: NumberTranslator, Identifiable {
 
-    var result = Translate_1Result()
+    var result = TranslateResult()
     var hasVoice: Bool = false
 
     func flagname(_ language: NumberTranslator.LanguageEnum) -> String {

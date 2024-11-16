@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TranslateMacView: View {
     @Environment(\.scenePhase) var scenePhase
-    @ObservedObject var viewModel: Translate_1ViewModel
+    @ObservedObject var viewModel: TranslateViewModel
     
     @State var scrollViewHasScrolled = false
     @State var scrollViewID = UUID()
@@ -37,7 +37,7 @@ struct TranslateMacView: View {
                 }
                 ZStack{
                     VStack(spacing: 0.0) {
-                        Translate_1Display(uiFont: viewModel.screen.translationFont, translate_1Result: viewModel.translate_1Manager.result)
+                        TranslateDisplay(uiFont: viewModel.screen.translationFont, translate_1Result: viewModel.translate_1Manager.result)
                             .font(Font(viewModel.screen.translationFont))
                             .background(Color(AppleColor.darkGray))
                         Spacer(minLength: 0.0)
@@ -80,7 +80,7 @@ struct TranslateMacView: View {
     let screen = Screen(CGSize(width: width, height: height))
     
     NavigationStack {
-        TranslateMacView(viewModel: Translate_1ViewModel(screen: screen))
+        TranslateMacView(viewModel: TranslateViewModel(screen: screen))
             .frame(width: width, height: height)
     }
 }

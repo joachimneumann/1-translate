@@ -1,5 +1,5 @@
 //
-//  Translate_1Keyboard.swift
+//  TranslateKeyboard.swift
 //  TranslateNumbers
 //
 //  Created by Joachim Neumann on 01.11.2024.
@@ -8,7 +8,7 @@
 import SwiftGmp
 import SwiftUI
 
-@Observable class Translate_1Keyboard: SmallKeyboard {
+@Observable class TranslateKeyboard: SmallKeyboard {
     let countryKey: Imagekey
     init() {
         countryKey = Imagekey(

@@ -1,15 +1,15 @@
 //
-//  Translate_1Display.swift
+//  TranslateDisplay.swift
 //
 //  Created by Joachim Neumann on 12/4/23.
 //
 
 import SwiftUI
 
-struct Translate_1Display: View {
+struct TranslateDisplay: View {
     let uiFont: AppleFont
     @State private var moveGradient = true
-    @ObservedObject var translate_1Result: Translate_1Result
+    @ObservedObject var translate_1Result: TranslateResult
     
     var body: some View {
         HStack(alignment: .bottom, spacing: 0.0) {
@@ -64,10 +64,10 @@ struct Translate_1Display: View {
 
 #Preview {
     let fontsize: CGFloat = 55.0
-    let viewModel = Translate_1ViewModel()
+    let viewModel = TranslateViewModel()
     let _ = viewModel.translate_1Manager.translateThis("5555", to: .polish)
 
-    Translate_1Display(uiFont: AppleFont.systemFont(ofSize: fontsize), translate_1Result: viewModel.translate_1Manager.result)
+    TranslateDisplay(uiFont: AppleFont.systemFont(ofSize: fontsize), translate_1Result: viewModel.translate_1Manager.result)
         .padding()
         .padding(.top, fontsize)
         .background (.black)

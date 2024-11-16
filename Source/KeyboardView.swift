@@ -44,8 +44,8 @@ import NumberTranslator
     
     
 #if TRANSLATE_1 || TRANSLATE_MAC
-    let keyboard: Translate_1SelectLanguage = Translate_1SelectLanguage(
-        translate_1Manager: Translate_1Manager(),
+    let keyboard: TranslateSelectLanguage = TranslateSelectLanguage(
+        translate_1Manager: TranslateManager(),
         keySpacing: 10,
         borderColor: .green)
     let _ = keyboard.countryKey.imageName = "Deutsch"

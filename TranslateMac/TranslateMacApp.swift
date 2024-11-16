@@ -18,7 +18,7 @@ struct TranslateMacApp: App {
         let screen = Screen(CGSize(width: width, height: height))
         WindowGroup {
             NavigationStack {
-                TranslateMacView(viewModel: Translate_1ViewModel(screen: screen))
+                TranslateMacView(viewModel: TranslateViewModel(screen: screen))
                     .frame(width: width, height: height)
             }
         }

@@ -1,5 +1,5 @@
 //
-//  ConfigOperation.swift
+//  TranslateOperation.swift
 //  TranslateNumbers
 //
 //  Created by Joachim Neumann on 29.10.2024.
@@ -7,12 +7,12 @@
 
 import SwiftGmp
 
-public enum Translate_1Operation: String, OpProtocol, CaseIterable {
+public enum TranslateOperation: String, OpProtocol, CaseIterable {
     case settings
     case spacer = "KeyboardSpacer"
 }
 
-extension Translate_1Operation {
+extension TranslateOperation {
     public var operatorPriority: Int { 4 }
     public var numberExpected: Bool { false }
     public var requiresValidNumber: Bool { false }

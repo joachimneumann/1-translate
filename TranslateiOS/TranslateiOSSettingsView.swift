@@ -1,5 +1,5 @@
 //
-//  Translate_1SettingsView.swift
+//  TranslateiOSSettingsView.swift
 //  Calculator
 //
 //  Created by Joachim Neumann on 11/13/22.
@@ -9,9 +9,9 @@ import SwiftUI
 import NumberTranslator
 import SwiftGmp
 
-struct Translate_1SettingsView: View {
+struct TranslateiOSSettingsView: View {
     @Environment(\.presentationMode) var presentation /// for dismissing the Settings View
-    @ObservedObject var viewModel: Translate_1ViewModel
+    @ObservedObject var viewModel: TranslateViewModel
     let languageEnum: NumberTranslator.LanguageEnum
     let exampleFont: AppleFont
     let grayToggleStyle = ColoredToggleStyle(onColor: Color(white: 0.75),
@@ -35,7 +35,7 @@ struct Translate_1SettingsView: View {
         inject(into: &groupingExampleString, separatorCharacter: s, groupingCharacter: gr, groupSize: viewModel.groupSize(forLanguage: languageEnum))
     }
     
-    init(viewModel: Translate_1ViewModel) {
+    init(viewModel: TranslateViewModel) {
         self.viewModel = viewModel
         self.languageEnum = viewModel.persistent.currentLanguageEnum
         self.exampleFont = viewModel.screen.numberDisplayFont
@@ -178,12 +178,12 @@ struct Translate_1SettingsView: View {
         let flagname: String
         let name: String
         let example: String
-        let translate_1Result: Translate_1Result
+        let translate_1Result: TranslateResult
         let uiFont: AppleFont
         var content: () -> Content
         init(languageEnum: NumberTranslator.LanguageEnum,
              example: String,
-             translate_1Manager: Translate_1Manager,
+             translate_1Manager: TranslateManager,
              uiFont: AppleFont,
              @ViewBuilder content: @escaping () -> Content) {
             self.flagname = translate_1Manager.flagname(languageEnum)
@@ -217,7 +217,7 @@ struct Translate_1SettingsView: View {
             }) {
                     HStack {
                         Text("\(example) →")
-                        Translate_1Display(uiFont: uiFont, translate_1Result: translate_1Result)
+                        TranslateDisplay(uiFont: uiFont, translate_1Result: translate_1Result)
                             .fontWeight(.semibold)
                             .frame(height: 40)
                             .foregroundColor(.orange)
@@ -471,7 +471,7 @@ extension View {
             .foregroundColor(.yellow)
             .background(.black)
         VStack {
-            Translate_1SettingsView(viewModel: Translate_1ViewModel())
+            TranslateiOSSettingsView(viewModel: TranslateViewModel())
                 .scrollContentBackground(.hidden)
                 .background(.black)
         }

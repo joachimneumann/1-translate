@@ -1,5 +1,5 @@
 //
-//  Translate_1Voices.swift
+//  TranslateiOSVoices.swift
 //  TranslateNumbers
 //
 //  Created by Joachim Neumann on 1/3/24.
@@ -9,7 +9,7 @@ import Foundation
 import AVFoundation
 import NumberTranslator
 
-@Observable class Translate_1Voices {
+@Observable class TranslateiOSVoices {
     let numberTranslator: NumberTranslator
     struct VoiceDisplayData {
         let variant: String?
@@ -149,7 +149,7 @@ import NumberTranslator
 
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = voice
-        Translate_1Voices.synthesizer.speak(utterance)
+        TranslateiOSVoices.synthesizer.speak(utterance)
     }
 }
 

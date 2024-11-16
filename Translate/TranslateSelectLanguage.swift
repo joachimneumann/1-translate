@@ -1,5 +1,5 @@
 //
-//  Translate_1SelectLanguage.swift
+//  TranslateSelectLanguage.swift
 //  TranslateNumbers
 //
 //  Created by Joachim Neumann on 01.11.2024.
@@ -9,10 +9,10 @@ import SwiftUI
 import SwiftGmp
 import NumberTranslator
 
-class Translate_1SelectLanguage: Keyboard {
+class TranslateSelectLanguage: Keyboard {
     let countryKey: Imagekey
     let countryDescriptionKey: TextKey
-    init(translate_1Manager: Translate_1Manager, keySpacing: CGFloat, borderColor: Color) {
+    init(translate_1Manager: TranslateManager, keySpacing: CGFloat, borderColor: Color) {
         countryKey = Imagekey(
             imageName: "",
             borderColor: borderColor)
@@ -36,7 +36,7 @@ class Translate_1SelectLanguage: Keyboard {
         tempRow.append(countryKey)
 #if TRANSLATE_1
         tempRow.append(countryDescriptionKey)
-        tempRow.append(SymbolKey(Translate_1Operation.settings))
+        tempRow.append(SymbolKey(TranslateOperation.settings))
 #else
         tempRow.append(countryDescriptionKey)
 #endif

@@ -1,5 +1,5 @@
 //
-//  Translate_1Result.swift
+//  TranslateResult.swift
 //  TranslateNumbers
 //
 //  Created by Joachim Neumann on 10.11.2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class Translate_1Result: ObservableObject, CustomDebugStringConvertible {
+class TranslateResult: ObservableObject, CustomDebugStringConvertible {
     @Published var displayText: String
     @Published var overline: String?
     var spokenText: String?
