@@ -10,18 +10,6 @@ import SwiftUI
 class Key: Identifiable {
     let id = UUID()  // unique identifier
     var isPressed: Bool = false
-    var width: CGFloat = 100.0
-    var height: CGFloat = 100.0 {
-        didSet {
-            let tolerance: CGFloat = 0.3 * height
-            toleranceRect = CGRect(
-                x: -tolerance,
-                y: -tolerance,
-                width: width + 2.0 * tolerance,
-                height: height + 2.0 * tolerance)
-        }
-    }
-    var toleranceRect: CGRect = CGRectZero
     private var downTimer: Timer? = nil
     private var downTime: Double = 0.15
     private var upTime: Double = 0.4

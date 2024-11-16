@@ -12,24 +12,22 @@ import NumberTranslator
 class Translate_1SelectLanguage: Keyboard {
     let countryKey: Imagekey
     let countryDescriptionKey: TextKey
-    init(keySize: CGSize, translate_1Manager: Translate_1Manager, keySpacing: CGFloat, borderColor: Color, borderWidth: CGFloat) {
+    init(translate_1Manager: Translate_1Manager, keySpacing: CGFloat, borderColor: Color) {
         countryKey = Imagekey(
             imageName: "",
-            borderColor: borderColor,
-            borderwidth: borderWidth)
+            borderColor: borderColor)
         countryDescriptionKey = TextKey(top: "", bottom: nil)
-        super.init(keySize: keySize)
+        super.init()
         var columnIndex = 1
         var tempRow: [Key] = []
         for language in translate_1Manager.sortedlanguages {
             let tempKey = Imagekey(
                 imageName: translate_1Manager.flagname(language),
-                borderColor: translate_1Manager.borderColor(language),
-                borderwidth: borderWidth)
+                borderColor: translate_1Manager.borderColor(language))
             tempRow.append(tempKey)
             columnIndex += 1
             if columnIndex == 5 {
-                appendRow(tempRow)
+                keyMatrix.append(tempRow)
                 tempRow.removeAll()
                 columnIndex = 1
             }
@@ -42,11 +40,6 @@ class Translate_1SelectLanguage: Keyboard {
 #else
         tempRow.append(countryDescriptionKey)
 #endif
-        appendRow(tempRow)
-#if TRANSLATE_1
-        countryDescriptionKey.width = keySize.width * 2 + keySpacing
-#else
-        countryDescriptionKey.width = keySize.width * 3 + 2 * keySpacing
-#endif
+        keyMatrix.append(tempRow)
     }
 }

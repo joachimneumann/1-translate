@@ -13,7 +13,7 @@ import SwiftGmp
     let clearKey: SymbolKey
     let separatorKey: SymbolKey
     
-    init(keySize: CGSize, settingsKey: Key) {
+    init(settingsKey: Key) {
         clearKey = SymbolKey(ClearOperation.clear)
         let changeSignKey = SymbolKey(InplaceOperation.changeSign)
         let percentKey = SymbolKey(PercentOperation.percent)
@@ -38,12 +38,12 @@ import SwiftGmp
         separatorKey = SymbolKey(DigitOperation.dot)
         let equalsKey = SymbolKey(EqualOperation.equal)
         
-        super.init(keySize: keySize)
-        appendRow([clearKey, changeSignKey, percentKey, divideKey])
-        appendRow([sevenKey, eightKey, nineKey, multiplyKey])
-        appendRow([fourKey, fiveKey, sixKey, subtractKey])
-        appendRow([oneKey, twoKey, threeKey, addKey])
-        appendRow([settingsKey, zeroKey, separatorKey, equalsKey])
+        super.init()
+        keyMatrix.append([clearKey, changeSignKey, percentKey, divideKey])
+        keyMatrix.append([sevenKey, eightKey, nineKey, multiplyKey])
+        keyMatrix.append([fourKey, fiveKey, sixKey, subtractKey])
+        keyMatrix.append([oneKey, twoKey, threeKey, addKey])
+        keyMatrix.append([settingsKey, zeroKey, separatorKey, equalsKey])
     }
     
     func back(_ displayBufferHasDigits: Bool) {

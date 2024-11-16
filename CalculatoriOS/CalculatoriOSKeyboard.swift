@@ -10,9 +10,9 @@ import SwiftUI
 
 @Observable class CalculatoriOSKeyboard: SmallKeyboard {
     let settingskey: SymbolKey
-    init(keySize: CGSize) {
+    init() {
         settingskey = SymbolKey(CalculatoriOSOperation.settings)
-        super.init(keySize: keySize, settingsKey: settingskey)
+        super.init(settingsKey: settingskey)
     }
     
     func setSeparatorSymbol(_ symbol: String) {

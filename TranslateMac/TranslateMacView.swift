@@ -18,28 +18,28 @@ struct TranslateMacView: View {
     
     var Translate_1View: some View {
         VStack(spacing: 0.0) {
-            HStack {
+            HStack(spacing: 0.0) {
                 VStack(spacing: 0.0) {
                     Spacer(minLength: 20.0)
                     NumberDisplay(display: viewModel.display)
                     if viewModel.showLanguageSelector {
-                        KeyboardView(
+                        ScrollingKeyboardView(
                             spacing: viewModel.screen.keySpacing,
-                            keyboard: viewModel.selectLanguage,
-                            height: viewModel.screen.keyboardHeight4Rows
-                        )
+                            keyboard: viewModel.selectLanguage)
+                        .frame(width: viewModel.screen.calculatorWidth, height: viewModel.screen.keyboardHeight5Rows)
                         .transition(.opacity)
                     } else {
                         KeyboardView(
                             spacing: viewModel.screen.keySpacing,
                             keyboard: viewModel.keyboard)
+                        .frame(width: viewModel.screen.calculatorWidth, height: viewModel.screen.keyboardHeight5Rows)
                     }
                 }
                 ZStack{
                     VStack(spacing: 0.0) {
                         Translate_1Display(uiFont: viewModel.screen.translationFont, translate_1Result: viewModel.translate_1Manager.result)
                             .font(Font(viewModel.screen.translationFont))
-                        //                            .background(.yellow)
+                            .background(Color(AppleColor.darkGray))
                         Spacer(minLength: 0.0)
                     }
                     if viewModel.showLanguageSelector {
@@ -75,8 +75,8 @@ struct TranslateMacView: View {
 
 
 #Preview {
-    let width: CGFloat = 350.0
-    let height: CGFloat = 322.0
+    let width: CGFloat = 550
+    let height: CGFloat = 400
     let screen = Screen(CGSize(width: width, height: height))
     
     NavigationStack {

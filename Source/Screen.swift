@@ -9,10 +9,6 @@ import SwiftUI
 
 struct Screen: Equatable {
 
-    static func == (lhs: Screen, rhs: Screen) -> Bool { /// used to detect rotation
-        lhs.keySize == rhs.keySize
-    }
-
     static func proportionalFont(ofSize size: CGFloat, weight: AppleFont.Weight) -> AppleFont {
         return AppleFont.systemFont(ofSize: size, weight: weight)
     }
@@ -22,8 +18,6 @@ struct Screen: Equatable {
     var keyboardHeight5Rows: CGFloat
     var keyboardHeight4Rows: CGFloat
     let keySpacing: CGFloat
-    let keySize: CGSize
-    let imageBorderWidth: CGFloat
     let ePadding: CGFloat
     var uiFontSize: CGFloat
     var numberDisplayFont: AppleFont
@@ -44,14 +38,14 @@ struct Screen: Equatable {
     var radWidth: CGFloat = 0.0
     let defaultTextColor: Color
     private let keyWidth: CGFloat
-    private var keyHeight: CGFloat
+    private let keyHeight: CGFloat
 
-    private let calculatorWidth: CGFloat
+    var calculatorWidth: CGFloat
         
-    mutating func changeKeyboardSize(smaller: Bool) {
-        keyHeight = keyWidth * (smaller ? 0.5 : 0.7)
-        keyboardHeight5Rows = 5 * keyHeight + 4 * keySpacing
-    }
+//    mutating func changeKeyboardSize(smaller: Bool) {
+//        keyHeight = keyWidth * (smaller ? 0.5 : 0.7)
+//        keyboardHeight5Rows = 5 * keyHeight + 4 * keySpacing
+//    }
 
     init() {
 #if CALCULATOR_MAC || TRANSLATE_MAC
@@ -64,12 +58,14 @@ struct Screen: Equatable {
         //print("Screen INIT", screenSize)
         
         defaultTextColor = .white
+        
+        
 #if CALCULATOR_MAC || TRANSLATE_MAC
         isPad = false
         keySpacing = 6.0
         horizontalPadding = 2.2 * keySpacing
         displayHorizontalPadding = 20
-        calculatorWidth = 176
+        calculatorWidth = 250//176
         keyWidth = (calculatorWidth - 3.0 * keySpacing) * 0.25
         keyHeight = keyWidth
         let fontsizeFactor = 0.15
@@ -88,14 +84,9 @@ struct Screen: Equatable {
         keyboardHeight4Rows = 4 * keyHeight + 3 * keySpacing
 #if CALCULATOR_IOS
         bottomPadding = isPad ? 0.0 : keyboardHeight5Rows * 0.05
-        imageBorderWidth = 5.0
 #else
         bottomPadding = keyboardHeight5Rows * 0.05
-        imageBorderWidth = 3.0
 #endif
-        
-
-        keySize = CGSize(width: keyWidth, height: keyHeight)
         
         ePadding = keyboardHeight5Rows * 0.013
         kerning = 0.0//-0.02 * uiFontSize

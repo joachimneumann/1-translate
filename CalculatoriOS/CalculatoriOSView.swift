@@ -20,6 +20,7 @@ struct CalculatoriOSView: View {
     //    }
     
     var body: some View {
+//        Text("XX")
         VStack(spacing: 0.0) {
             VStack(spacing: 0.0) {
                 Spacer(minLength: 20.0)
@@ -30,14 +31,14 @@ struct CalculatoriOSView: View {
         .padding(.bottom, viewModel.screen.bottomPadding)
         .padding(.horizontal, viewModel.screen.horizontalPadding)
         .preferredColorScheme(.dark)
-        //                .navigationDestination(isPresented: $viewModel.showSettings) {
-        //                    if viewModel.showSettings {
-        //                        Translate_1SettingsView(viewModel: viewModel)
-        //                            .onDisappear {
-        //                                viewModel.didReturnFromSettings()
-        //                            }
-        //                    }
-        //                }
+//                        .navigationDestination(isPresented: $viewModel.showSettings) {
+//                            if viewModel.showSettings {
+//                                Translate_1SettingsView(viewModel: viewModel)
+//                                    .onDisappear {
+//                                        viewModel.didReturnFromSettings()
+//                                    }
+//                            }
+//                        }
     }
 }
 

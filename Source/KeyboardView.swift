@@ -7,56 +7,6 @@
 
 import SwiftUI
 
-struct AllRows: View {
-    let spacing: CGFloat
-    var keyboard: Keyboard  // Use @ObservedObject for updates
-
-    var body: some View {
-        VStack(spacing: spacing) {
-            ForEach(keyboard.keyMatrix.indices, id: \.self) { rowIndex in
-                HStack(spacing: spacing) {
-                    ForEach(keyboard.keyMatrix[rowIndex], id: \.id) { key in
-                        KeyView(key: key)
-                    }
-                }
-            }
-        }
-    }
-}
-
-struct AllRowsExceptLast: View {
-    let spacing: CGFloat
-    var keyboard: Keyboard
-
-    var body: some View {
-        VStack(spacing: spacing) {
-            ForEach(keyboard.keyMatrix.dropLast().indices, id: \.self) { rowIndex in
-                HStack(spacing: spacing) {
-                    ForEach(keyboard.keyMatrix[rowIndex], id: \.id) { key in
-                        KeyView(key: key)
-                    }
-                }
-            }
-        }
-    }
-}
-
-struct LastRow: View {
-    let spacing: CGFloat
-    var keyboard: Keyboard  // Use @ObservedObject for updates
-
-    var body: some View {
-        if let lastRow = keyboard.keyMatrix.last {
-            VStack(spacing: spacing) {
-                HStack(spacing: spacing) {
-                    ForEach(lastRow, id: \.id) { key in
-                        KeyView(key: key)
-                    }
-                }
-            }
-        }
-    }
-}
 
 struct KeyboardView: View {
     @State private var navigateToConfigView = false
@@ -72,16 +22,14 @@ struct KeyboardView: View {
     }
     
     var body: some View {
-        if height != nil {
-            VStack(spacing: spacing) {
-                ScrollView {
-                    AllRowsExceptLast(spacing: spacing, keyboard: keyboard)
+        VStack(spacing: spacing) {
+            ForEach(keyboard.keyMatrix.indices, id: \.self) { rowIndex in
+                HStack(spacing: spacing) {
+                    ForEach(keyboard.keyMatrix[rowIndex], id: \.id) { key in
+                        KeyView(key: key)
+                    }
                 }
-                .frame(height: height)
-                LastRow(spacing: spacing, keyboard: keyboard)
             }
-        } else {
-            AllRows(spacing: spacing, keyboard: keyboard)
         }
     }
 }
@@ -89,22 +37,22 @@ struct KeyboardView: View {
 #if TRANSLATE_1
 import NumberTranslator
 #endif
+
+
 #Preview {
     let screen = Screen()
     
     
 #if TRANSLATE_1 || TRANSLATE_MAC
-//    let keyboard: SmallKeyboard = Translate_1Keyboard(keySize: screen.keySize, borderwidth: screen.imageBorderWidth)
-    var keyboard: Translate_1SelectLanguage = Translate_1SelectLanguage(
-        keySize: screen.keySize,
+    let keyboard: Translate_1SelectLanguage = Translate_1SelectLanguage(
         translate_1Manager: Translate_1Manager(),
         keySpacing: 10,
-        borderColor: .green,
-        borderWidth: 3)
+        borderColor: .green)
     let _ = keyboard.countryKey.imageName = "Deutsch"
     let _ = keyboard.countryDescriptionKey.top = "Deutsch"
+//    let keyboard: SmallKeyboard = Translate_1Keyboard()
 #else
-    let keyboard: SmallKeyboard = CalculatoriOSKeyboard(keySize: screen.keySize)
+    let keyboard: SmallKeyboard = CalculatoriOSKeyboard()
 #endif
 
     
@@ -121,8 +69,8 @@ import NumberTranslator
         Rectangle()
 //        let _ = keyboard.back(true)
         KeyboardView(spacing: screen.keySpacing, keyboard: keyboard, height: screen.keyboardHeight4Rows)
-            .background(.black)
+            .background(.yellow)
             .padding(.bottom, 10)
     }
-    .background(.black)
+    .background(.gray)
 }

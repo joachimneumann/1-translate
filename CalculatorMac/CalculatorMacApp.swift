@@ -8,10 +8,21 @@
 import SwiftUI
 
 @main
-struct CalculatorMacApp: App {
+struct TranslateMacApp: App {
+    
+    let width: CGFloat = 350.0
+    let height: CGFloat = 322.0
+    
+
     var body: some Scene {
+        let screen = Screen(CGSize(width: width, height: height))
         WindowGroup {
-            CalculatoriOSView(viewModel: CalculatoriOSViewModel(screen: Screen()))
+            NavigationStack {
+                CalculatoriOSView(viewModel: CalculatoriOSViewModel(screen: screen))
+                    .frame(width: width, height: height)
+            }
         }
+        .windowStyle(HiddenTitleBarWindowStyle())
+        .windowResizability(.contentSize)
     }
 }

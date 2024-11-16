@@ -10,7 +10,7 @@ import SwiftUI
 class CalculatoriOSViewModel: ViewModel {
     @Published var keyboard: CalculatoriOSKeyboard
     override init(screen: Screen) {
-        keyboard = CalculatoriOSKeyboard(keySize: screen.keySize)
+        keyboard = CalculatoriOSKeyboard()
         super.init(screen: screen)
         keyboard.callback = execute
         smallKeyboard = keyboard

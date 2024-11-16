@@ -20,13 +20,15 @@ import SwiftUI
     override func view() -> AnyView {
         return AnyView(
             VStack(alignment: .leading, spacing: 0.0) {
-                Text(top)
-                if let bottom = bottom {
-                    Text(bottom)
-                }
+                Spacer(minLength: 0.0)
+                let text = top + ((bottom != nil) ? "\n\(bottom!)" : "")
+                Text(text)
+                    .font(.title)
+                    .minimumScaleFactor(0.5)
+                    .lineSpacing(1.5) // Set line spacing
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                Spacer(minLength: 0.0)
             }
-            .frame(width: width, alignment: .leading)
-            //.background(.orange)
         )
     }
 }
@@ -34,11 +36,11 @@ import SwiftUI
 
 #Preview {
     @Previewable @State var x: TextKey = TextKey(top: "EnglishEnglishEnglish", bottom: "(truely)")
-    let _ = x.width = 300
     ZStack {
         Rectangle()
             .foregroundColor(.gray)
         x.view()
             .background(.yellow)
     }
+    .frame(width: 400, height: 200)
 }

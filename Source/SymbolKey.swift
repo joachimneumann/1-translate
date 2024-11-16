@@ -42,32 +42,38 @@ import SwiftGmp
     override func visualUp() {
         bgColor = upColor
     }
+    
     override func view() -> AnyView {
         if symbol == "KeyboardSpacer" {
             return AnyView(Spacer(minLength: 0.0))
         } else {
             return AnyView(
-                Label(symbol: symbol, size: height, color: txtColor)
-                    .frame(width: width, height: height)
-                    .background(bgColor)
-                    .foregroundColor(txtColor)
-                    .clipShape(Capsule())
+                GeometryReader { geometry in
+                    if geometry.notZero {
+                        Label(symbol: self.symbol, size: min(geometry.size.width, geometry.size.height), color: self.txtColor)
+                            .frame(width: geometry.size.width, height: geometry.size.height)
+                            .background(self.bgColor)
+                            .foregroundColor(self.txtColor)
+                            .clipShape(Capsule())
+                    }
+                }
             )
         }
     }
 }
 
 #Preview {
-    @Previewable @State var x1: SymbolKey = SymbolKey(InplaceOperation.sqr)
-    @Previewable @State var x2: SymbolKey = SymbolKey(Translate_1Operation.spacer)
-    @Previewable @State var x3: SymbolKey = SymbolKey(InplaceOperation.sqr)
+    let x1: SymbolKey = SymbolKey(InplaceOperation.sqrt)
+    let x2: SymbolKey = SymbolKey(InplaceOperation.acos)
+    let x3: SymbolKey = SymbolKey(InplaceOperation.sqr)
     ZStack {
         Rectangle()
             .foregroundColor(.gray)
-        HStack {
+        HStack(spacing: 10.0){
             x1.view()
             x2.view()
             x3.view()
         }
+        .padding()
     }
 }

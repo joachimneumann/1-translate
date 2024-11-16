@@ -9,8 +9,7 @@ import SwiftUI
 
 
 @Observable class Keyboard {
-    private let keySize: CGSize
-    private(set) var keyMatrix: [[Key]] = []
+    var keyMatrix: [[Key]] = []
     
     var callback: (Key) -> () = { _ in } {
         didSet {
@@ -20,17 +19,5 @@ import SwiftUI
                 }
             }
         }
-    }
-    
-    init(keySize: CGSize) {
-        self.keySize = keySize
-    }
-    
-    func appendRow(_ keys: [Key]) {
-        for k in keys {
-            k.width = keySize.width
-            k.height = keySize.height
-        }
-        keyMatrix.append(keys)
-    }
+    }    
 }
