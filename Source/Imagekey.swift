@@ -19,6 +19,7 @@ import SwiftUI
         } else {
             self.borderColor = .clear
         }
+        
         super.init()
     }
     
@@ -29,12 +30,20 @@ import SwiftUI
         brightness = 0.0
     }
     
+    private func imageExists(named name: String) -> Bool {
+        return AppleImage(named: name) != nil
+    }
+    
     override func view() -> AnyView {
         return AnyView(
             GeometryReader { geometry in
                 if geometry.notZero {
-                    let borderwidth = geometry.size.height * 0.08
-                    Image(self.imageName)
+                    let name: String =
+                        (geometry.size.width < geometry.size.height * 1.1) &&
+                        (AppleImage(named: self.imageName+"Sqr") != nil) ?
+                        self.imageName+"Sqr" : self.imageName
+                    let borderwidth = geometry.size.height * 0.04
+                    Image(name)
                         .resizable()
                         .scaledToFill()
                         .frame(width: geometry.size.width-2*borderwidth, height: geometry.size.height-2*borderwidth)
@@ -55,11 +64,11 @@ import SwiftUI
 
 
 #Preview {
-    @Previewable @State var x: Imagekey = Imagekey(imageName: "Vietnamese", borderColor: .gray)
+    @Previewable @State var x: Imagekey = Imagekey(imageName: "Esperanto", borderColor: .gray)
     ZStack {
         Rectangle()
             .foregroundColor(.black)
         x.view()
-            .frame(width: 100, height: 60)
+            .frame(width: 60, height: 60)
     }
 }

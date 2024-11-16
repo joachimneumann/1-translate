@@ -122,8 +122,8 @@ class Translate_1ViewModel: ViewModel {
         selectLanguage = Translate_1SelectLanguage(
             translate_1Manager: tempTranslate_1Manager,
             keySpacing: screen.keySpacing,
-            borderColor: Color(AppleColor.lightGray))
-        
+            borderColor: Color(AppleColor.darkGray))
+
         translate_1Manager = tempTranslate_1Manager
 
         keyboard = Translate_1Keyboard()
