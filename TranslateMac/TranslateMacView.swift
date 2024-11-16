@@ -50,25 +50,16 @@ struct TranslateMacView: View {
                             }
                     }
                 }
-                //                .background(.green)
-                // Add the transparent overlay when the keyboard is visible
             }
         }
         .animation(.easeInOut(duration: 0.6), value: viewModel.showLanguageSelector)
-        //.background(.blue)
     }
     
     var body: some View {
-        //        ZStack {
         Translate_1View
             .padding(.bottom, viewModel.screen.bottomPadding)
             .padding(.horizontal, viewModel.screen.horizontalPadding)
             .preferredColorScheme(.dark)
-            .navigationDestination(isPresented: $viewModel.showSettings) {
-                if viewModel.showSettings {
-                    Translate_1SettingsView(viewModel: viewModel)
-                }
-            }
     }
 }
 

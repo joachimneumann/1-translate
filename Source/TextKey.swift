@@ -27,6 +27,7 @@ import SwiftUI
                     .minimumScaleFactor(0.5)
                     .lineSpacing(1.5) // Set line spacing
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.leading, 5)
                 Spacer(minLength: 0.0)
             }
         )

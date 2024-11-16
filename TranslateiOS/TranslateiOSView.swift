@@ -34,11 +34,9 @@ struct TranslateiOSView: View {
                 }
             }
             if viewModel.showLanguageSelector {
-                KeyboardView(
+                ScrollingKeyboardView(
                     spacing: viewModel.screen.keySpacing,
-                    keyboard: viewModel.selectLanguage,
-                    height: viewModel.screen.keyboardHeight4Rows
-                )
+                    keyboard: viewModel.selectLanguage)
                 .transition(.opacity)
             } else {
                 KeyboardView(

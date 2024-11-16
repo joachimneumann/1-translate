@@ -118,14 +118,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		AA8544CA2CE8D52200CE1996 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				TranslateiOSFloatingSheet.swift,
-				TranslateiOSSettingsView.swift,
-			);
-			target = AAB5EA182CE4945F00D76292 /* TranslateMac */;
-		};
 		AAB5EA372CE495B100D76292 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -155,7 +147,7 @@
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		AA6DBCB72CE075A900B5E0F1 /* CalculatoriOS */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (AAFCC5BF2CE46237009E42FA /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = CalculatoriOS; sourceTree = "<group>"; };
-		AA8544C82CE8D4AF00CE1996 /* TranslateiOS */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (AA8544CA2CE8D52200CE1996 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = TranslateiOS; sourceTree = "<group>"; };
+		AA8544C82CE8D4AF00CE1996 /* TranslateiOS */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = TranslateiOS; sourceTree = "<group>"; };
 		AAB5EA1A2CE4945F00D76292 /* TranslateMac */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = TranslateMac; sourceTree = "<group>"; };
 		AAD0EE012CE041DD008C9610 /* Translate */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (AAB5EA372CE495B100D76292 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Translate; sourceTree = "<group>"; };
 		AAE4EB192CE4606700036518 /* CalculatorMac */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = CalculatorMac; sourceTree = "<group>"; };
@@ -208,11 +200,11 @@
 				AA6352B02B296C3B00CABC0C /* TODO.md */,
 				AA08C7EB272F1241001B8575 /* TranslateNumbers.entitlements */,
 				AA08C7C0272EDA48001B8575 /* Source */,
-				AA8544C82CE8D4AF00CE1996 /* TranslateiOS */,
 				AAD0EE012CE041DD008C9610 /* Translate */,
+				AA8544C82CE8D4AF00CE1996 /* TranslateiOS */,
+				AAB5EA1A2CE4945F00D76292 /* TranslateMac */,
 				AA6DBCB72CE075A900B5E0F1 /* CalculatoriOS */,
 				AAE4EB192CE4606700036518 /* CalculatorMac */,
-				AAB5EA1A2CE4945F00D76292 /* TranslateMac */,
 				AA6DBCCA2CE0774800B5E0F1 /* Frameworks */,
 				AA08C7BF272EDA48001B8575 /* Products */,
 			);

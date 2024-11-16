@@ -97,12 +97,17 @@ struct ScrollingKeyboardView: View {
                     let _ = print("keyHeight \(keyHeight)")
                     let _ = print("scrollingKeysheight \(scrollingKeysheight)")
                     VStack(spacing: spacing) {
-                        ScrollView {
+                        ScrollView(.vertical, showsIndicators: true) {
                             AllRowsExceptLast(spacing: spacing, keyboard: keyboard)
-                                .frame(height: scrollingKeysheight)
+                                .frame(width: geometry.size.width, height: scrollingKeysheight)
                         }
+
                         LastRow(spacing: spacing, keyboard: keyboard)
                             .frame(height: keyHeight)
+#if TRANSSLATE_MAC
+                            .offset(x: -7.5)
+#endif
+//                            .background(.green)
                     }
                 }
             } else {
@@ -125,7 +130,7 @@ import NumberTranslator
     let keyboard: TranslateSelectLanguage = TranslateSelectLanguage(
         translate_1Manager: TranslateManager(),
         keySpacing: 10,
-        borderColor: .green)
+        borderColor: Color(AppleColor.darkGray))
     let _ = keyboard.countryKey.imageName = "Deutsch"
     let _ = keyboard.countryDescriptionKey.top = "Deutsch"
 //    let keyboard: SmallKeyboard = Translate_1Keyboard()
