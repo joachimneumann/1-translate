@@ -42,7 +42,7 @@ import SwiftUI
                         (geometry.size.width < geometry.size.height * 1.1) &&
                         (AppleImage(named: self.imageName+"Sqr") != nil) ?
                         self.imageName+"Sqr" : self.imageName
-                    let borderwidth = geometry.size.height * 0.04
+                    let borderwidth = ceil(geometry.size.height * 0.04)
                     Image(name)
                         .resizable()
                         .scaledToFill()
@@ -67,8 +67,8 @@ import SwiftUI
     @Previewable @State var x: Imagekey = Imagekey(imageName: "Esperanto", borderColor: .gray)
     ZStack {
         Rectangle()
-            .foregroundColor(.black)
+            .foregroundColor(.yellow)
         x.view()
-            .frame(width: 60, height: 60)
+            .frame(width: 260, height: 260)
     }
 }
