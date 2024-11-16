@@ -125,7 +125,7 @@ struct Screen: Equatable {
 
         displayWidth = calculatorWidth - 2.0 * displayHorizontalPadding
 
-#if TRANSLATE_1
+#if TRANSLATE_IOS
         uiFontSize = 10*0.169 * keyboardHeight5Rows
         numberDisplayFont = Screen.proportionalFont(ofSize: uiFontSize, weight: .regular)
         

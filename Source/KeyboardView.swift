@@ -34,7 +34,7 @@ struct KeyboardView: View {
     }
 }
 
-#if TRANSLATE_1
+#if TRANSLATE_IOS
 import NumberTranslator
 #endif
 
@@ -43,7 +43,7 @@ import NumberTranslator
     let screen = Screen()
     
     
-#if TRANSLATE_1 || TRANSLATE_MAC
+#if TRANSLATE_IOS || TRANSLATE_MAC
     let keyboard: TranslateSelectLanguage = TranslateSelectLanguage(
         translate_1Manager: TranslateManager(),
         keySpacing: 10,

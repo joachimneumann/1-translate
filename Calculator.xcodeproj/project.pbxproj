@@ -99,7 +99,7 @@
 		AA370C2C293352960041AE4E /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AA6352B02B296C3B00CABC0C /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		AA6DBCAC2CE070FD00B5E0F1 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
-		AA6DBCB62CE075A800B5E0F1 /* CalculatoriOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalculatoriOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA6DBCB62CE075A800B5E0F1 /* Calculator_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA8544C12CE8124800CE1996 /* ScrollingKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingKeyboardView.swift; sourceTree = "<group>"; };
 		AA8AC41D2CD62173006BD54C /* SymbolKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolKey.swift; sourceTree = "<group>"; };
 		AA8AC4252CD6FEB4006BD54C /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
@@ -107,14 +107,14 @@
 		AA9C3F692CBF33C100F64EFA /* SmallKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallKeyboard.swift; sourceTree = "<group>"; };
 		AA9C3F6C2CBF373600F64EFA /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		AAB10B94292A2222004707E9 /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
-		AAB5EA192CE4945F00D76292 /* TranslateMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TranslateMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAB5EA192CE4945F00D76292 /* Translate_Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Translate_Mac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AABEFC122972A8780023A3C9 /* KeyColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyColor.swift; sourceTree = "<group>"; };
 		AACCD0772B43A89A00D545C5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = "../1-translate-tests/README.md"; sourceTree = "<group>"; };
 		AAE3F50C2CE17F3700146B91 /* Imagekey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Imagekey.swift; sourceTree = "<group>"; };
 		AAE3F5312CE1809900146B91 /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 		AAE3F5342CE194D400146B91 /* TextKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextKey.swift; sourceTree = "<group>"; };
 		AAE426F629597AE3005FE365 /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
-		AAE4EB182CE4606700036518 /* CalculatorMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalculatorMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAE4EB182CE4606700036518 /* Calculator_Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator_Mac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -131,7 +131,7 @@
 				TranslateSelectLanguage.swift,
 				TranslateViewModel.swift,
 			);
-			target = AAB5EA182CE4945F00D76292 /* TranslateMac */;
+			target = AAB5EA182CE4945F00D76292 /* Translate_Mac */;
 		};
 		AAFCC5BF2CE46237009E42FA /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -141,7 +141,7 @@
 				CalculatoriOSView.swift,
 				CalculatoriOSViewModel.swift,
 			);
-			target = AAE4EB172CE4606700036518 /* CalculatorMac */;
+			target = AAE4EB172CE4606700036518 /* Calculator_Mac */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -214,9 +214,9 @@
 			isa = PBXGroup;
 			children = (
 				AA08C7BE272EDA48001B8575 /* Calculator.app */,
-				AA6DBCB62CE075A800B5E0F1 /* CalculatoriOS.app */,
-				AAE4EB182CE4606700036518 /* CalculatorMac.app */,
-				AAB5EA192CE4945F00D76292 /* TranslateMac.app */,
+				AA6DBCB62CE075A800B5E0F1 /* Calculator_iOS.app */,
+				AAE4EB182CE4606700036518 /* Calculator_Mac.app */,
+				AAB5EA192CE4945F00D76292 /* Translate_Mac.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -256,9 +256,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AA08C7BD272EDA48001B8575 /* Translate_1iOS */ = {
+		AA08C7BD272EDA48001B8575 /* Translate_iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AA08C7E2272EDA4A001B8575 /* Build configuration list for PBXNativeTarget "Translate_1iOS" */;
+			buildConfigurationList = AA08C7E2272EDA4A001B8575 /* Build configuration list for PBXNativeTarget "Translate_iOS" */;
 			buildPhases = (
 				AA08C7BA272EDA48001B8575 /* Sources */,
 				AA08C7BB272EDA48001B8575 /* Frameworks */,
@@ -273,14 +273,14 @@
 				AA8544C82CE8D4AF00CE1996 /* TranslateiOS */,
 				AAD0EE012CE041DD008C9610 /* Translate */,
 			);
-			name = Translate_1iOS;
+			name = Translate_iOS;
 			productName = xx;
 			productReference = AA08C7BE272EDA48001B8575 /* Calculator.app */;
 			productType = "com.apple.product-type.application";
 		};
-		AA6DBCB52CE075A800B5E0F1 /* CalculatoriOS */ = {
+		AA6DBCB52CE075A800B5E0F1 /* Calculator_iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AA6DBCC12CE075AA00B5E0F1 /* Build configuration list for PBXNativeTarget "CalculatoriOS" */;
+			buildConfigurationList = AA6DBCC12CE075AA00B5E0F1 /* Build configuration list for PBXNativeTarget "Calculator_iOS" */;
 			buildPhases = (
 				AA6DBCB22CE075A800B5E0F1 /* Sources */,
 				AA6DBCB32CE075A800B5E0F1 /* Frameworks */,
@@ -293,17 +293,17 @@
 			fileSystemSynchronizedGroups = (
 				AA6DBCB72CE075A900B5E0F1 /* CalculatoriOS */,
 			);
-			name = CalculatoriOS;
+			name = Calculator_iOS;
 			packageProductDependencies = (
 				AA6DBCCB2CE0774800B5E0F1 /* SwiftGmp */,
 			);
 			productName = CalculatoriOS;
-			productReference = AA6DBCB62CE075A800B5E0F1 /* CalculatoriOS.app */;
+			productReference = AA6DBCB62CE075A800B5E0F1 /* Calculator_iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		AAB5EA182CE4945F00D76292 /* TranslateMac */ = {
+		AAB5EA182CE4945F00D76292 /* Translate_Mac */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AAB5EA272CE4946000D76292 /* Build configuration list for PBXNativeTarget "TranslateMac" */;
+			buildConfigurationList = AAB5EA272CE4946000D76292 /* Build configuration list for PBXNativeTarget "Translate_Mac" */;
 			buildPhases = (
 				AAB5EA152CE4945F00D76292 /* Sources */,
 				AAB5EA162CE4945F00D76292 /* Frameworks */,
@@ -316,18 +316,18 @@
 			fileSystemSynchronizedGroups = (
 				AAB5EA1A2CE4945F00D76292 /* TranslateMac */,
 			);
-			name = TranslateMac;
+			name = Translate_Mac;
 			packageProductDependencies = (
 				AAB5EA382CE4962100D76292 /* SwiftGmp */,
 				AAB5EA3A2CE4963100D76292 /* NumberTranslator */,
 			);
 			productName = TranslateMac;
-			productReference = AAB5EA192CE4945F00D76292 /* TranslateMac.app */;
+			productReference = AAB5EA192CE4945F00D76292 /* Translate_Mac.app */;
 			productType = "com.apple.product-type.application";
 		};
-		AAE4EB172CE4606700036518 /* CalculatorMac */ = {
+		AAE4EB172CE4606700036518 /* Calculator_Mac */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AAE4EB242CE4606800036518 /* Build configuration list for PBXNativeTarget "CalculatorMac" */;
+			buildConfigurationList = AAE4EB242CE4606800036518 /* Build configuration list for PBXNativeTarget "Calculator_Mac" */;
 			buildPhases = (
 				AAE4EB142CE4606700036518 /* Sources */,
 				AAE4EB152CE4606700036518 /* Frameworks */,
@@ -340,12 +340,12 @@
 			fileSystemSynchronizedGroups = (
 				AAE4EB192CE4606700036518 /* CalculatorMac */,
 			);
-			name = CalculatorMac;
+			name = Calculator_Mac;
 			packageProductDependencies = (
 				AAFCC5C22CE46278009E42FA /* SwiftGmp */,
 			);
 			productName = CalculatorMac;
-			productReference = AAE4EB182CE4606700036518 /* CalculatorMac.app */;
+			productReference = AAE4EB182CE4606700036518 /* Calculator_Mac.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -389,10 +389,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AA08C7BD272EDA48001B8575 /* Translate_1iOS */,
-				AA6DBCB52CE075A800B5E0F1 /* CalculatoriOS */,
-				AAE4EB172CE4606700036518 /* CalculatorMac */,
-				AAB5EA182CE4945F00D76292 /* TranslateMac */,
+				AA6DBCB52CE075A800B5E0F1 /* Calculator_iOS */,
+				AAE4EB172CE4606700036518 /* Calculator_Mac */,
+				AA08C7BD272EDA48001B8575 /* Translate_iOS */,
+				AAB5EA182CE4945F00D76292 /* Translate_Mac */,
 			);
 		};
 /* End PBXProject section */
@@ -674,7 +674,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.18;
-				OTHER_SWIFT_FLAGS = "-DTRANSLATE_1";
+				OTHER_SWIFT_FLAGS = "-DTRANSLATE_IOS";
 				PRODUCT_BUNDLE_IDENTIFIER = com.joachimneumann.TranslateNumbers;
 				PRODUCT_NAME = Calculator;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -716,7 +716,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.18;
-				OTHER_SWIFT_FLAGS = "-DTRANSLATE_1";
+				OTHER_SWIFT_FLAGS = "-DTRANSLATE_IOS";
 				PRODUCT_BUNDLE_IDENTIFIER = com.joachimneumann.TranslateNumbers;
 				PRODUCT_NAME = Calculator;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -961,7 +961,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AA08C7E2272EDA4A001B8575 /* Build configuration list for PBXNativeTarget "Translate_1iOS" */ = {
+		AA08C7E2272EDA4A001B8575 /* Build configuration list for PBXNativeTarget "Translate_iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AA08C7E3272EDA4A001B8575 /* Debug */,
@@ -970,7 +970,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AA6DBCC12CE075AA00B5E0F1 /* Build configuration list for PBXNativeTarget "CalculatoriOS" */ = {
+		AA6DBCC12CE075AA00B5E0F1 /* Build configuration list for PBXNativeTarget "Calculator_iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AA6DBCC22CE075AA00B5E0F1 /* Debug */,
@@ -979,7 +979,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AAB5EA272CE4946000D76292 /* Build configuration list for PBXNativeTarget "TranslateMac" */ = {
+		AAB5EA272CE4946000D76292 /* Build configuration list for PBXNativeTarget "Translate_Mac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AAB5EA252CE4946000D76292 /* Debug */,
@@ -988,7 +988,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AAE4EB242CE4606800036518 /* Build configuration list for PBXNativeTarget "CalculatorMac" */ = {
+		AAE4EB242CE4606800036518 /* Build configuration list for PBXNativeTarget "Calculator_Mac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AAE4EB252CE4606800036518 /* Debug */,

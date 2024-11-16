@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AAB5EA182CE4945F00D76292"
-               BuildableName = "TranslateMac.app"
-               BlueprintName = "TranslateMac"
+               BuildableName = "Translate_Mac.app"
+               BlueprintName = "Translate_Mac"
                ReferencedContainer = "container:Calculator.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,8 +45,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AAB5EA182CE4945F00D76292"
-            BuildableName = "TranslateMac.app"
-            BlueprintName = "TranslateMac"
+            BuildableName = "Translate_Mac.app"
+            BlueprintName = "Translate_Mac"
             ReferencedContainer = "container:Calculator.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AAB5EA182CE4945F00D76292"
-            BuildableName = "TranslateMac.app"
-            BlueprintName = "TranslateMac"
+            BuildableName = "Translate_Mac.app"
+            BlueprintName = "Translate_Mac"
             ReferencedContainer = "container:Calculator.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

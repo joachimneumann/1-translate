@@ -34,7 +34,7 @@ class TranslateSelectLanguage: Keyboard {
         }
         tempRow = []
         tempRow.append(countryKey)
-#if TRANSLATE_1
+#if TRANSLATE_IOS
         tempRow.append(countryDescriptionKey)
         tempRow.append(SymbolKey(TranslateOperation.settings))
 #else

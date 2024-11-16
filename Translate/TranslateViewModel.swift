@@ -19,9 +19,9 @@ class TranslateViewModel: ViewModel {
     @Published var showLanguageSelector: Bool = false
     @Published var showSettings: Bool = false
 
-#if TRANSLATE_1IOS
-    private(set) var _voices: Translate_1Voices!
-    var voices: Translate_1Voices {
+#if TRANSLATE_IOS
+    private(set) var _voices: TranslateiOSVoices!
+    var voices: TranslateiOSVoices {
         return _voices
     }
 #endif
