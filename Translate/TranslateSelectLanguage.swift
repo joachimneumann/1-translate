@@ -32,6 +32,9 @@ class TranslateSelectLanguage: Keyboard {
                 columnIndex = 1
             }
         }
+        if tempRow.count > 0 {
+            keyMatrix.append(tempRow)
+        }
         tempRow = []
         tempRow.append(countryKey)
 #if TRANSLATE_IOS

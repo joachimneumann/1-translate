@@ -29,11 +29,18 @@ struct AllRowsExceptLast: View {
     var keyboard: Keyboard
 
     var body: some View {
-        VStack(spacing: spacing) {
-            ForEach(keyboard.keyMatrix.dropLast().indices, id: \.self) { rowIndex in
-                HStack(spacing: spacing) {
-                    ForEach(keyboard.keyMatrix[rowIndex], id: \.id) { key in
-                        KeyView(key: key)
+        GeometryReader { geometry in
+            VStack(spacing: spacing) {
+                if geometry.notZero {
+                    let keyWidth = 0.25 * (geometry.size.width - 3 * spacing)
+                    ForEach(keyboard.keyMatrix.dropLast().indices, id: \.self) { rowIndex in
+                        HStack(spacing: spacing) {
+                            ForEach(keyboard.keyMatrix[rowIndex], id: \.id) { key in
+                                KeyView(key: key)
+                                    .frame(width: keyWidth)
+                            }
+                            Spacer(minLength: 0.0)
+                        }
                     }
                 }
             }
@@ -59,8 +66,9 @@ struct LastRow: View {
                                 } else if let key = key as? Imagekey {
                                     KeyView(key: key)
                                         .frame(width: keyWidth)
-                                } else {
+                                } else { // TextView
                                     KeyView(key: key)
+                                        //.background(.green)
                                 }
                             }
                         }
@@ -88,26 +96,36 @@ struct ScrollingKeyboardView: View {
         GeometryReader { geometry in
             if scrolling {
                 if geometry.notZero {
-                    let keyboardheight = geometry.size.height
-                    let keyHeight = 0.2 * (keyboardheight - 4 * spacing)
+                    let fiveRows = geometry.size.height
+                    let keyHeight = 0.2 * (fiveRows - 4 * spacing)
+                    let fourRows = 4 * keyHeight + 3 * spacing
                     let scrollingKeysheight: CGFloat =
                     CGFloat(keyboard.keyMatrix.count - 1) * keyHeight +
                     CGFloat(keyboard.keyMatrix.count - 2) * spacing
-                    let _ = print("keyboardheight \(keyboardheight)")
-                    let _ = print("keyHeight \(keyHeight)")
-                    let _ = print("scrollingKeysheight \(scrollingKeysheight)")
-                    VStack(spacing: spacing) {
-                        ScrollView(.vertical, showsIndicators: true) {
-                            AllRowsExceptLast(spacing: spacing, keyboard: keyboard)
-                                .frame(width: geometry.size.width, height: scrollingKeysheight)
+                    ZStack {
+                        VStack(alignment: .leading, spacing: spacing) {
+                            ScrollView(.vertical, showsIndicators: true) {
+                                AllRowsExceptLast(spacing: spacing, keyboard: keyboard)
+                                    .frame(width: geometry.size.width, height: scrollingKeysheight)
+                            }
+                            .frame(height: fourRows)
+                            Spacer()
                         }
-
-                        LastRow(spacing: spacing, keyboard: keyboard)
-                            .frame(height: keyHeight)
-#if TRANSSLATE_MAC
-                            .offset(x: -7.5)
-#endif
-//                            .background(.green)
+                        VStack(alignment: .leading, spacing: 0.0) {
+                            Spacer()
+                            HStack {
+                                VStack(alignment: .leading, spacing: 0.0) {
+                                    Spacer()
+                                    HStack(spacing: 0.0) {
+                                        LastRow(spacing: spacing, keyboard: keyboard)
+                                        Spacer(minLength: 0.0)
+                                    }
+                                    .frame(width: geometry.size.width, height: keyHeight)
+                                }
+                                Spacer(minLength: 0.0)
+                            }
+                        }
+                        .frame(height: fiveRows)
                     }
                 }
             } else {
@@ -154,7 +172,7 @@ import NumberTranslator
         Rectangle()
 //        let _ = keyboard.back(true)
         ScrollingKeyboardView(spacing: screen.keySpacing, keyboard: keyboard)
-            .background(.yellow)
+//            .background(.yellow)
             .frame(width: screen.calculatorWidth, height: screen.keyboardHeight5Rows)
     }
     .background(.gray)
