@@ -121,68 +121,41 @@ extension AppleImage {
         inputImage = ciImage
         #endif
         
-        let extentVector = CIVector(x: inputImage.extent.origin.x, y: inputImage.extent.origin.y, z: inputImage.extent.size.width, w: inputImage.extent.size.height)
+        let context = CIContext()
         
-        guard let filter = CIFilter(name: "CIAreaAverage", parameters: [kCIInputImageKey: inputImage, kCIInputExtentKey: extentVector]) else { return nil }
-        guard let outputImage = filter.outputImage else { return nil }
+        // Define the extent (area) of the image to average
+        let extent = ciImage.extent
         
-        var bitmap = [UInt8](repeating: 0, count: 4)
-        let context = CIContext(options: [.workingColorSpace: kCFNull as Any])
+        // Create and configure the CIAreaAverage filter
+        guard let areaAverageFilter = CIFilter(name: "CIAreaAverage") else {
+            print("Failed to create CIAreaAverage filter.")
+            return nil
+        }
+        areaAverageFilter.setValue(ciImage, forKey: kCIInputImageKey)
+        areaAverageFilter.setValue(CIVector(x: extent.origin.x, y: extent.origin.y, z: extent.width, w: extent.height), forKey: "inputExtent")
+        
+        // Get the output image (1x1 pixel)
+        guard let outputImage = areaAverageFilter.outputImage else {
+            print("Failed to get output image from CIAreaAverage filter.")
+            return nil
+        }
+        
+        // Render the output image to extract the color data
+        var bitmap = [UInt8](repeating: 0, count: 4) // RGBA format
         context.render(outputImage, toBitmap: &bitmap, rowBytes: 4, bounds: CGRect(x: 0, y: 0, width: 1, height: 1), format: .RGBA8, colorSpace: nil)
         
-        #if canImport(UIKit)
-        let averageColor = UIColor(red: CGFloat(bitmap[0]) / 255, green: CGFloat(bitmap[1]) / 255, blue: CGFloat(bitmap[2]) / 255, alpha: CGFloat(bitmap[3]) / 255)
-        #elseif canImport(AppKit)
-        let averageColor = NSColor(red: CGFloat(bitmap[0]) / 255, green: CGFloat(bitmap[1]) / 255, blue: CGFloat(bitmap[2]) / 255, alpha: CGFloat(bitmap[3]) / 255)
-        #endif
+        // Extract RGBA components
+        let red = CGFloat(bitmap[0]) / 255.0
+        let green = CGFloat(bitmap[1]) / 255.0
+        let blue = CGFloat(bitmap[2]) / 255.0
         
+        // Convert RGBA to HSB
         var hue: CGFloat = 0
         var saturation: CGFloat = 0
         var brightness: CGFloat = 0
-        var alpha: CGFloat = 0
+        AppleColor(red: red, green: green, blue: blue, alpha: 1.0).getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: nil)
         
-        averageColor.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
-        if let h = averageHueValue(of: inputImage) {
-            return h == 1.0 ? 0.001 : h
-        }
-        return 0.0//hue
+        return hue == 1.0 ? 0.001 : hue // move Danish and Polish to the front of the queue
     }
 }
 
-func averageHueValue(of ciImage: CIImage) -> CGFloat? {
-    let context = CIContext()
-    
-    // Define the extent (area) of the image to average
-    let extent = ciImage.extent
-    
-    // Create and configure the CIAreaAverage filter
-    guard let areaAverageFilter = CIFilter(name: "CIAreaAverage") else {
-        print("Failed to create CIAreaAverage filter.")
-        return nil
-    }
-    areaAverageFilter.setValue(ciImage, forKey: kCIInputImageKey)
-    areaAverageFilter.setValue(CIVector(x: extent.origin.x, y: extent.origin.y, z: extent.width, w: extent.height), forKey: "inputExtent")
-    
-    // Get the output image (1x1 pixel)
-    guard let outputImage = areaAverageFilter.outputImage else {
-        print("Failed to get output image from CIAreaAverage filter.")
-        return nil
-    }
-    
-    // Render the output image to extract the color data
-    var bitmap = [UInt8](repeating: 0, count: 4) // RGBA format
-    context.render(outputImage, toBitmap: &bitmap, rowBytes: 4, bounds: CGRect(x: 0, y: 0, width: 1, height: 1), format: .RGBA8, colorSpace: nil)
-    
-    // Extract RGBA components
-    let red = CGFloat(bitmap[0]) / 255.0
-    let green = CGFloat(bitmap[1]) / 255.0
-    let blue = CGFloat(bitmap[2]) / 255.0
-    
-    // Convert RGBA to HSB
-    var hue: CGFloat = 0
-    var saturation: CGFloat = 0
-    var brightness: CGFloat = 0
-    AppleColor(red: red, green: green, blue: blue, alpha: 1.0).getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: nil)
-    
-    return hue // Returns the average hue value (0.0 to 1.0)
-}
