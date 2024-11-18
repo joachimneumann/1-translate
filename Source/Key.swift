@@ -17,8 +17,8 @@ class Key: Identifiable, VisualUpDownDelegate {
     let id = UUID()  // unique identifier
     var isPressed: Bool = false
     private var downTimer: Timer? = nil
-    private var downTime: Double = 0.15
-    private var upTime: Double = 0.4
+    private var downTime: Double = 1.15
+    private var upTime: Double = 1.4
 
     
     func visualDown() { visualUpDownDelegate?.visualDown() }
@@ -30,25 +30,25 @@ class Key: Identifiable, VisualUpDownDelegate {
     
     var callback: (Key) -> () = { _ in }
 
-    func down() {
-        isPressed = true
-        withAnimation(.linear(duration: downTime)) {
-            visualDown()
-        }
-        if let existingTimer = downTimer, existingTimer.isValid {
-            existingTimer.invalidate()
-        }
-        downTimer = Timer.scheduledTimer(withTimeInterval: downTime, repeats: false) { _ in
-            self.downTimerFired()
+    func down(_ location: CGPoint) {
+        print("down() isPressed \(isPressed)")
+        if !isPressed {
+            isPressed = true
+            withAnimation(.linear(duration: downTime)) {
+                visualDown()
+            }
+            if let existingTimer = downTimer, existingTimer.isValid {
+                existingTimer.invalidate()
+            }
+            downTimer = Timer.scheduledTimer(withTimeInterval: downTime, repeats: false) { _ in
+                self.downTimerFired()
+            }
         }
     }
 
     func up() {
-        if !isPressed {
-            /// This can happen when up() is triggered by the finger moving
-            /// away from the key and then the finger us released.
-            return
-        }
+        print("up() isPressed \(isPressed) downTimer != nil \(downTimer != nil)")
+        callback(self)
         isPressed = false
         if downTimer != nil { return }
         withAnimation(.linear(duration: upTime)) {
@@ -57,8 +57,10 @@ class Key: Identifiable, VisualUpDownDelegate {
     }
 
     private func downTimerFired() {
+        print("downTimerFired() isPressed \(isPressed)")
         downTimer = nil
         if !isPressed {
+            print("downTimerFired() --> up...")
             withAnimation(.linear(duration: upTime)) {
                 visualUp()
             }
