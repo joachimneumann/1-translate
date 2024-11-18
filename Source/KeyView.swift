@@ -12,27 +12,27 @@ struct KeyView: View {
     var key: Key
     
     var body: some View {
-            GeometryReader { geometry in
-                if geometry.notZero {
-                    key.view()
-                        .gesture(
-                            DragGesture(minimumDistance: 0)
-                                .onChanged { value in
-                                    let _ = print("drag")
-                                    key.down(value.location, in: geometry.size)
-                                }
-                                .onEnded { value in
-                                    key.up()
-                                })
-                        .simultaneousGesture(
-                            LongPressGesture(minimumDuration: 0.7)
-                                .onEnded { value in
-                                    key.longPress()
-                                }
-                            )
-                }
+        GeometryReader { geometry in
+            if geometry.notZero {
+                key.view()
+                    .gesture(
+                        DragGesture(minimumDistance: 0)
+                            .onChanged { value in
+                                let _ = print("drag")
+                                key.down(value.location, in: geometry.size)
+                            }
+                            .onEnded { value in
+                                key.up()
+                            })
+                    .simultaneousGesture(
+                        LongPressGesture(minimumDuration: 0.7)
+                            .onEnded { value in
+                                key.longPress()
+                            }
+                    )
             }
         }
+    }
 }
 
 #Preview {
