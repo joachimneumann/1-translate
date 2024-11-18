@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftGmp
 
 protocol VisualUpDownDelegate {
     func visualUp()
@@ -29,6 +30,14 @@ class Key: Identifiable, VisualUpDownDelegate {
     }
     
     var callback: (Key) -> () = { _ in }
+
+    func longPress() {
+        if let symbolKey = self as? SymbolKey {
+            if symbolKey.op.isEqual(to: ClearOperation.back) {
+                symbolKey.callback(SymbolKey(ClearOperation.clear))
+            }
+        }
+    }
 
     func down(_ location: CGPoint, in size: CGSize) {
         print("down() \(id) isPressed \(isPressed)")
