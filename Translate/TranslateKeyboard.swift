@@ -11,9 +11,7 @@ import SwiftUI
 @Observable class TranslateKeyboard: SmallKeyboard {
     let countryKey: Imagekey
     init() {
-        countryKey = Imagekey(
-            imageName: "",
-            borderColor: Color(AppleColor.darkGray))
+        countryKey = Imagekey("")
         super.init(settingsKey: countryKey)
     }
     

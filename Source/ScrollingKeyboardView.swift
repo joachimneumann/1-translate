@@ -149,7 +149,7 @@ import NumberTranslator
         translate_1Manager: TranslateManager(),
         keySpacing: 10,
         borderColor: Color(AppleColor.darkGray))
-    let _ = keyboard.countryKey.imageName = "Deutsch"
+    let _ = keyboard.countryKey.model.name = "Deutsch"
     let _ = keyboard.countryDescriptionKey.top = "Deutsch"
 //    let keyboard: SmallKeyboard = Translate_1Keyboard()
 #else
@@ -167,13 +167,11 @@ import NumberTranslator
 //    let keyboard: SmallKeyboard = Translate_1LanguageSelectorKeyboard(keySize: keySize, translate_1Manager: Translate_1Manager())
 
     VStack(spacing: 0.0) {
-        let _ = print("keyboardHeight5Rows \(screen.keyboardHeight5Rows)")
-        let _ = print("spacing \(screen.keySpacing)")
         Rectangle()
 //        let _ = keyboard.back(true)
         ScrollingKeyboardView(spacing: screen.keySpacing, keyboard: keyboard)
 //            .background(.yellow)
-            .frame(width: screen.calculatorWidth, height: screen.keyboardHeight5Rows)
+            .frame(width: screen.keyboardWidth, height: screen.keyboardHeight)
     }
     .background(.gray)
 }

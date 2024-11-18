@@ -78,7 +78,7 @@ class TranslateManager: NumberTranslator, Identifiable {
         var languagesWithHue: [(language: LanguageEnum, hue: CGFloat)] = []
         
         for language in languageImplementation.keys {
-            print(flagname(language))
+            //print(flagname(language))
             if !flagname(language).contains("Chinese") { // add chinese later to keep them together
                 if let uiImage = AppleImage(named: flagname(language)), let averageHue = uiImage.averageHue {
                     //                print("\(averageHue) \(flagname(language))")

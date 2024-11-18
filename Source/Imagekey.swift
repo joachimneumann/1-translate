@@ -7,68 +7,77 @@
 
 import SwiftUI
 
-@Observable class Imagekey: Key {
-    var imageName: String
-    var borderColor: Color
-    var brightness: Double = 0.0
+struct ImageKeyView: View {
+    var model: ImageKeyViewModel
     
-    init(imageName: String, borderColor: Color?) {
-        self.imageName = imageName
-        if let borderColor = borderColor {
-            self.borderColor = borderColor
-        } else {
-            self.borderColor = .clear
+    var body: some View {
+        Image(nsImage: self.model.image)
+            .resizable()
+            .scaledToFill()
+            .frame(width: self.model.reducedWidth, height: self.model.reducedheight)
+            .clipShape(Capsule())
+            .padding(self.model.padding)
+            .brightness(self.model.brightness)
+            .overlay(
+                Capsule()
+                    .stroke(self.model.borderColor, lineWidth: self.model.borderWidth)
+            )
+            .brightness(self.model.brightness)
+            .padding(self.model.padding)
+    }
+}
+
+struct ImageKey: View {
+    var model: ImageKeyViewModel
+    init(_ name: String) {
+        self.model = ImageKeyViewModel(name: name)
+    }
+    var body: some View {
+        GeometryReader { geometry in
+            if geometry.size != .zero {
+                ImageKeyView(model: self.model)
+                .onAppear {
+                    model.size = geometry.size
+                }
+                .onChange(of: geometry.size) { oldValue, newValue in
+                    model.size = newValue
+                }
+            }
         }
-        
+    }
+}
+
+@Observable class Imagekey: Key {
+    let model: ImageKeyViewModel
+    
+    init(_ name: String) {
+        self.model = ImageKeyViewModel(name: name)
         super.init()
     }
     
     override func visualDown() {
-        brightness = 0.3
+        model.brightness = 0.3
     }
     override func visualUp() {
-        brightness = 0.0
-    }
-    
-    private func imageExists(named name: String) -> Bool {
-        return AppleImage(named: name) != nil
+        model.brightness = 0.0
     }
     
     override func view() -> AnyView {
-        return AnyView(
-            GeometryReader { geometry in
-                if geometry.notZero {
-                    let name: String =
-                        (geometry.size.width < geometry.size.height * 1.1) &&
-                        (AppleImage(named: self.imageName+"Sqr") != nil) ?
-                        self.imageName+"Sqr" : self.imageName
-                    let borderwidth = ceil(geometry.size.height * 0.04)
-                    Image(name)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: geometry.size.width-2*borderwidth, height: geometry.size.height-2*borderwidth)
-                        .clipShape(Capsule())
-                        .padding(0.5*borderwidth)
-                        .brightness(self.brightness)
-                        .overlay(
-                            Capsule()
-                                .stroke(self.borderColor, lineWidth: borderwidth)
-                        )
-                        .brightness(self.brightness)
-                        .padding(0.5*borderwidth)
-                }
-            }
+        AnyView(
+            ImageKey("English")
         )
     }
 }
 
 
 #Preview {
-    @Previewable @State var x: Imagekey = Imagekey(imageName: "Esperanto", borderColor: .gray)
     ZStack {
         Rectangle()
-            .foregroundColor(.yellow)
-        x.view()
-            .frame(width: 260, height: 260)
+            .foregroundColor(.gray)
+        HStack(spacing: 0.0) {
+            ImageKey("English")
+            ImageKey("Esperanto")
+            ImageKey("Deutsch")
+        }
     }
 }

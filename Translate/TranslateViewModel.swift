@@ -85,17 +85,17 @@ class TranslateViewModel: ViewModel {
 
     override func execute(_ key: Key) {
         if let flagKey = key as? Imagekey {
-            if let newLanguage = translate_1Manager.languageEnum(forFlagname: flagKey.imageName) {
+            if let newLanguage = translate_1Manager.languageEnum(forFlagname: flagKey.model.name) {
                 persistent.currentLanguageEnum = newLanguage
                 currentLanguageName = translate_1Manager.name(persistent.currentLanguageEnum)
                 currentLanguageEnglishName = translate_1Manager.englishName(persistent.currentLanguageEnum)
-                keyboard.countryKey.imageName = flagKey.imageName
+                keyboard.countryKey.model.name = flagKey.model.name
                 display.separatorCharacter = separatorCharacter(forLanguage: persistent.currentLanguageEnum)
                 display.groupSize = groupSize(forLanguage: persistent.currentLanguageEnum)
                 display.groupingCharacter = groupingCharacter(forLanguage: persistent.currentLanguageEnum)
                 keyboard.setSeparatorSymbol(String(display.separatorCharacter))
                 translate_1Manager.translateThis(display.string, to: persistent.currentLanguageEnum)
-                selectLanguage.countryKey.imageName = translate_1Manager.flagname(persistent.currentLanguageEnum)
+                selectLanguage.countryKey.model.name = translate_1Manager.flagname(persistent.currentLanguageEnum)
                 selectLanguage.countryDescriptionKey.top = translate_1Manager.name(persistent.currentLanguageEnum)
                 selectLanguage.countryDescriptionKey.bottom = translate_1Manager.englishName(persistent.currentLanguageEnum)
                 process()
@@ -139,9 +139,9 @@ class TranslateViewModel: ViewModel {
         selectLanguage.callback = execute
         
         keyboard.countryKey.callback = toggleLanguageSelector
-        keyboard.countryKey.imageName = translate_1Manager.flagname(persistent.currentLanguageEnum)
+        keyboard.countryKey.model.name = translate_1Manager.flagname(persistent.currentLanguageEnum)
         selectLanguage.countryKey.callback = toggleLanguageSelector
-        selectLanguage.countryKey.imageName = translate_1Manager.flagname(persistent.currentLanguageEnum)
+        selectLanguage.countryKey.model.name = translate_1Manager.flagname(persistent.currentLanguageEnum)
         selectLanguage.countryDescriptionKey.top = translate_1Manager.name(persistent.currentLanguageEnum)
         selectLanguage.countryDescriptionKey.bottom = translate_1Manager.englishName(persistent.currentLanguageEnum)
 

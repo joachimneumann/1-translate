@@ -13,17 +13,13 @@ class TranslateSelectLanguage: Keyboard {
     let countryKey: Imagekey
     let countryDescriptionKey: TextKey
     init(translate_1Manager: TranslateManager, keySpacing: CGFloat, borderColor: Color) {
-        countryKey = Imagekey(
-            imageName: "",
-            borderColor: borderColor)
+        countryKey = Imagekey("")
         countryDescriptionKey = TextKey(top: "", bottom: nil)
         super.init()
         var columnIndex = 1
         var tempRow: [Key] = []
         for language in translate_1Manager.sortedlanguages {
-            let tempKey = Imagekey(
-                imageName: translate_1Manager.flagname(language),
-                borderColor: translate_1Manager.borderColor(language))
+            let tempKey = Imagekey(translate_1Manager.flagname(language))
             tempRow.append(tempKey)
             columnIndex += 1
             if columnIndex == 5 {

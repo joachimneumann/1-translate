@@ -13,10 +13,10 @@ struct Screen: Equatable {
         return AppleFont.systemFont(ofSize: size, weight: weight)
     }
 
-    private let isPad: Bool
+    private let isPad: Bool = false
 
-    var keyboardHeight5Rows: CGFloat
-    var keyboardHeight4Rows: CGFloat
+    var keyboardWidth: CGFloat
+    var keyboardHeight: CGFloat
     let keySpacing: CGFloat
     let ePadding: CGFloat
     var uiFontSize: CGFloat
@@ -40,7 +40,6 @@ struct Screen: Equatable {
     private let keyWidth: CGFloat
     private let keyHeight: CGFloat
 
-    var calculatorWidth: CGFloat
         
 //    mutating func changeKeyboardSize(smaller: Bool) {
 //        keyHeight = keyWidth * (smaller ? 0.5 : 0.7)
@@ -61,13 +60,13 @@ struct Screen: Equatable {
         
         
 #if CALCULATOR_MAC || TRANSLATE_MAC
-        isPad = false
-        keySpacing = 6.0
-        horizontalPadding = 2.2 * keySpacing
-        displayHorizontalPadding = 20
-        calculatorWidth = 250//176
-        keyWidth = (calculatorWidth - 3.0 * keySpacing) * 0.25
-        keyHeight = keyWidth
+        keyboardHeight = 0.8 * screenSize.height
+        keySpacing = 0.01 * keyboardHeight
+        keyHeight = 0.2 * (keyboardHeight - 4 * keySpacing)
+        keyWidth = keyHeight
+        keyboardWidth = 4 * keyWidth + 3 * keySpacing
+        horizontalPadding = 0.0//2.2 * keySpacing
+        displayHorizontalPadding = 0
         let fontsizeFactor = 0.15
 #else
         isPad = UIDevice.current.userInterfaceIdiom == .pad
@@ -78,20 +77,19 @@ struct Screen: Equatable {
         keyWidth = isPad ? (calculatorWidth - 9.0 * keySpacing) * 0.1 : (calculatorWidth - 3.0 * keySpacing) * 0.25
         keyHeight = (screenSize.height * 0.51 - 4 * keySpacing) / 5.0 // this simulates the iOS18 calculator
         let fontsizeFactor = 0.15
+        keyboardHeight5Rows = 5 * keyHeight + 4 * keySpacing
 #endif
 
-        keyboardHeight5Rows = 5 * keyHeight + 4 * keySpacing
-        keyboardHeight4Rows = 4 * keyHeight + 3 * keySpacing
 #if CALCULATOR_IOS
         bottomPadding = isPad ? 0.0 : keyboardHeight5Rows * 0.05
 #else
-        bottomPadding = keyboardHeight5Rows * 0.05
+        bottomPadding = keyboardHeight * 0.05
 #endif
         
-        ePadding = keyboardHeight5Rows * 0.013
+        ePadding = keyboardHeight * 0.013
         kerning = 0.0//-0.02 * uiFontSize
 
-        uiFontSize = fontsizeFactor * keyboardHeight5Rows
+        uiFontSize = fontsizeFactor * keyboardHeight
         numberDisplayFont = Screen.proportionalFont(ofSize: uiFontSize, weight: .regular)
         translationFont = Screen.proportionalFont(ofSize: uiFontSize, weight: .light)
         infoUiFontSize = 16.0
@@ -119,11 +117,11 @@ struct Screen: Equatable {
         
         offsetToVerticallyAlignTextWithkeyboard =
         CGFloat(screenSize.height) -
-        CGFloat(keyboardHeight5Rows) -
+        CGFloat(keyboardHeight) -
         CGFloat(textHeight) -
         CGFloat(infoUiFontSize)
 
-        displayWidth = calculatorWidth - 2.0 * displayHorizontalPadding
+        displayWidth = keyboardWidth - 2.0 * displayHorizontalPadding
 
 #if TRANSLATE_IOS
         uiFontSize = 10*0.169 * keyboardHeight5Rows

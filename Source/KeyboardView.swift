@@ -48,7 +48,7 @@ import NumberTranslator
         translate_1Manager: TranslateManager(),
         keySpacing: 10,
         borderColor: .green)
-    let _ = keyboard.countryKey.imageName = "Deutsch"
+    let _ = keyboard.countryKey.model.name = "Deutsch"
     let _ = keyboard.countryDescriptionKey.top = "Deutsch"
 //    let keyboard: SmallKeyboard = Translate_1Keyboard()
 #else
@@ -68,7 +68,7 @@ import NumberTranslator
     VStack {
         Rectangle()
 //        let _ = keyboard.back(true)
-        KeyboardView(spacing: screen.keySpacing, keyboard: keyboard, height: screen.keyboardHeight4Rows)
+        KeyboardView(spacing: screen.keySpacing, keyboard: keyboard, height: screen.keyboardHeight)
             .background(.yellow)
             .padding(.bottom, 10)
     }

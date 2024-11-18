@@ -11,7 +11,7 @@ import SwiftUI
 struct TranslateMacApp: App {
     
     let width: CGFloat = 550
-    let height: CGFloat = 400
+    let height: CGFloat = 250
     
 
     var body: some Scene {
