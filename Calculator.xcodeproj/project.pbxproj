@@ -15,10 +15,6 @@
 		AA37F6C32CEAB0A50015CE6C /* ImageKeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA37F6C12CEAB09D0015CE6C /* ImageKeyViewModel.swift */; };
 		AA37F6C42CEAB0A50015CE6C /* ImageKeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA37F6C12CEAB09D0015CE6C /* ImageKeyViewModel.swift */; };
 		AA37F6C52CEAB0A50015CE6C /* ImageKeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA37F6C12CEAB09D0015CE6C /* ImageKeyViewModel.swift */; };
-		AA37F6C72CEAE10B0015CE6C /* Geo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA37F6C62CEAE1080015CE6C /* Geo.swift */; };
-		AA37F6C82CEAE10B0015CE6C /* Geo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA37F6C62CEAE1080015CE6C /* Geo.swift */; };
-		AA37F6C92CEAE10B0015CE6C /* Geo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA37F6C62CEAE1080015CE6C /* Geo.swift */; };
-		AA37F6CA2CEAE10B0015CE6C /* Geo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA37F6C62CEAE1080015CE6C /* Geo.swift */; };
 		AA6DBCAD2CE0710300B5E0F1 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6DBCAC2CE070FD00B5E0F1 /* ViewModel.swift */; };
 		AA6DBCC82CE0768D00B5E0F1 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6DBCAC2CE070FD00B5E0F1 /* ViewModel.swift */; };
 		AA6DBCC92CE0769200B5E0F1 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE426F629597AE3005FE365 /* Screen.swift */; };
@@ -106,7 +102,6 @@
 		AA2FABFC272F2348006DE4C8 /* TranslateNumbersApp.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = TranslateNumbersApp.entitlements; sourceTree = "<group>"; };
 		AA370C2C293352960041AE4E /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AA37F6C12CEAB09D0015CE6C /* ImageKeyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageKeyViewModel.swift; sourceTree = "<group>"; };
-		AA37F6C62CEAE1080015CE6C /* Geo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geo.swift; sourceTree = "<group>"; };
 		AA6352B02B296C3B00CABC0C /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		AA6DBCAC2CE070FD00B5E0F1 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		AA6DBCB62CE075A800B5E0F1 /* Calculator_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -234,7 +229,6 @@
 		AA08C7C0272EDA48001B8575 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				AA37F6C62CEAE1080015CE6C /* Geo.swift */,
 				AAE426F629597AE3005FE365 /* Screen.swift */,
 				AA6DBCAC2CE070FD00B5E0F1 /* ViewModel.swift */,
 				AA8AC4252CD6FEB4006BD54C /* Key.swift */,
@@ -461,7 +455,6 @@
 				AAB10B9A292A2222004707E9 /* Label.swift in Sources */,
 				AAE426F729597AE3005FE365 /* Screen.swift in Sources */,
 				AAE3F5322CE180A000146B91 /* Keyboard.swift in Sources */,
-				AA37F6CA2CEAE10B0015CE6C /* Geo.swift in Sources */,
 				AA8AC4262CD6FEB7006BD54C /* Key.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -484,7 +477,6 @@
 				AA6DBCD02CE077C700B5E0F1 /* Key.swift in Sources */,
 				AA6DBCD12CE077E900B5E0F1 /* Label.swift in Sources */,
 				AA8544C32CE8124800CE1996 /* ScrollingKeyboardView.swift in Sources */,
-				AA37F6C82CEAE10B0015CE6C /* Geo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -509,7 +501,6 @@
 				AAB5EA492CE4967400D76292 /* Display.swift in Sources */,
 				AA37F6C52CEAB0A50015CE6C /* ImageKeyViewModel.swift in Sources */,
 				AAB5EA4A2CE4967400D76292 /* KeyView.swift in Sources */,
-				AA37F6C72CEAE10B0015CE6C /* Geo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,7 +510,6 @@
 			files = (
 				AAFCC5C12CE4624F009E42FA /* ViewModel.swift in Sources */,
 				AA37F6C32CEAB0A50015CE6C /* ImageKeyViewModel.swift in Sources */,
-				AA37F6C92CEAE10B0015CE6C /* Geo.swift in Sources */,
 				AAFCC5CB2CE46563009E42FA /* KeyColor.swift in Sources */,
 				AAFCC5CA2CE46553009E42FA /* SymbolKey.swift in Sources */,
 				AAFCC5C42CE46289009E42FA /* Screen.swift in Sources */,

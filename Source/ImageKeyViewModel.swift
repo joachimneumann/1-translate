@@ -6,18 +6,29 @@
 //
 
 import SwiftUI
-@Observable class ImageKeyViewModel: ObservableObject, SizeAwareModel {
+@Observable class ImageKeyViewModel: ObservableObject, VisualUpDownDelegate {
+    
     var size: CGSize = CGSize.zero
     var brightness: Double = 0.0
     var name: String
     let borderColor: Color
-    let square: Bool
+    let isCircle: Bool
     
-    init(name: String, borderColor: Color = Color(AppleColor.darkGray), square: Bool = false) {
+    init(name: String, borderColor: Color, isCircle: Bool) {
         self.name = name
         self.borderColor = borderColor
-        self.square = square
+        self.isCircle = isCircle
     }
+    
+    func visualUp() {
+        brightness = 0.0
+    }
+    
+    func visualDown() {
+        brightness = 0.3
+
+    }
+
     var image: AppleImage {
         if size.width < size.height * 1.1 &&
             AppleImage(named: name+"Sqr") != nil {
@@ -27,14 +38,14 @@ import SwiftUI
         }
     }
     var reducedWidth: CGFloat {
-        if square {
+        if isCircle {
             return min(size.width, size.height)  - 2 * borderWidth
         } else {
             return size.width - 2 * borderWidth
         }
     }
     var reducedheight: CGFloat {
-        if square {
+        if isCircle {
             return min(size.width, size.height)  - 2 * borderWidth
         } else {
             return size.height - 2 * borderWidth

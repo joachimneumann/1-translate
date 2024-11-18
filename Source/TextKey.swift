@@ -18,19 +18,17 @@ import SwiftUI
     }
     
     override func view() -> AnyView {
-        return AnyView(
-            VStack(alignment: .leading, spacing: 0.0) {
-                Spacer(minLength: 0.0)
-                let text = top + ((bottom != nil) ? "\n\(bottom!)" : "")
-                Text(text)
-                    .font(.title3)
-                    .minimumScaleFactor(0.5)
-                    .lineSpacing(1.5) // Set line spacing
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.leading, 5)
-                Spacer(minLength: 0.0)
-            }
-        )
+        return AnyView(VStack(alignment: .leading, spacing: 0.0) {
+            Spacer(minLength: 0.0)
+            let text = top + ((bottom != nil) ? "\n\(bottom!)" : "")
+            Text(text)
+                .font(.title3)
+                .minimumScaleFactor(0.5)
+                .lineSpacing(1.5) // Set line spacing
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.leading, 5)
+            Spacer(minLength: 0.0)
+        })
     }
 }
 

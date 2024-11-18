@@ -27,10 +27,14 @@ struct ImageKeyView: View {
     }
 }
 
-struct ImageKey: View {
+struct ImageKeyGeo: View {
     var model: ImageKeyViewModel
+    
+    init(_ model: ImageKeyViewModel) {
+        self.model = model
+    }
     init(_ name: String) {
-        self.model = ImageKeyViewModel(name: name)
+        self.model = ImageKeyViewModel(name: name, borderColor: .gray, isCircle: true)
     }
     var body: some View {
         GeometryReader { geometry in
@@ -50,22 +54,14 @@ struct ImageKey: View {
 @Observable class Imagekey: Key {
     let model: ImageKeyViewModel
     
-    init(_ name: String) {
-        self.model = ImageKeyViewModel(name: name)
+    init(_ name: String, borderColor: Color = Color(AppleColor.darkGray), isCircle: Bool = false) {
+        self.model = ImageKeyViewModel(name: name, borderColor: borderColor, isCircle: isCircle)
         super.init()
+        self.visualUpDownDelegate = model
     }
-    
-    override func visualDown() {
-        model.brightness = 0.3
-    }
-    override func visualUp() {
-        model.brightness = 0.0
-    }
-    
+        
     override func view() -> AnyView {
-        AnyView(
-            ImageKey("English")
-        )
+        AnyView(ImageKeyGeo(model))
     }
 }
 
@@ -75,9 +71,10 @@ struct ImageKey: View {
         Rectangle()
             .foregroundColor(.gray)
         HStack(spacing: 0.0) {
-            ImageKey("English")
-            ImageKey("Esperanto")
-            ImageKey("Deutsch")
+            Imagekey("English").view()
+            Imagekey("Esperanto").view()
+            Imagekey("Deutsch").view()
+            ImageKeyGeo("Español")
         }
     }
 }

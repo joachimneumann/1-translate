@@ -7,7 +7,13 @@
 
 import SwiftUI
 
-class Key: Identifiable {
+protocol VisualUpDownDelegate {
+    func visualUp()
+    func visualDown()
+}
+
+class Key: Identifiable, VisualUpDownDelegate {
+    var visualUpDownDelegate: VisualUpDownDelegate? = nil
     let id = UUID()  // unique identifier
     var isPressed: Bool = false
     private var downTimer: Timer? = nil
@@ -15,9 +21,13 @@ class Key: Identifiable {
     private var upTime: Double = 0.4
 
     
-    func visualDown() { }
-    func visualUp()   { }
-    func view() -> AnyView { AnyView(EmptyView()) }
+    func visualDown() { visualUpDownDelegate?.visualDown() }
+    func visualUp()   { visualUpDownDelegate?.visualUp() }
+    
+    open func view() -> AnyView {
+        AnyView(EmptyView())
+    }
+    
     var callback: (Key) -> () = { _ in }
 
     func down() {

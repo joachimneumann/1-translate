@@ -69,7 +69,7 @@ import SwiftGmp
     ZStack {
         Rectangle()
             .foregroundColor(.gray)
-        HStack(spacing: 10.0){
+        HStack(spacing: 0.0) {
             x1.view()
             x2.view()
             x3.view()
