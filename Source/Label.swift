@@ -7,10 +7,6 @@
 
 import SwiftUI
 
-func ~=<T: Equatable>(pattern: [T], value: T) -> Bool {
-    return pattern.contains(value)
-}
-
 struct Label: View {
     let symbol: String
     let size: CGFloat
@@ -36,8 +32,6 @@ struct Label: View {
         self.color = color
         
 #if os(macOS)
-        /// in MacOS, the key shape is a rectangle, which allows for larger labels.
-        /// However, I don't want to emphesize the digits as much as on iOS
         let sizeFactorDigits          = 1.5
         let sizeFactorAC              = 1.4
         let sizeFactorBack            = 1.5
@@ -84,9 +78,9 @@ struct Label: View {
 
     var body: some View {
         switch symbol {
-        case "sqr":    RootShapeView(rootDigit: "2", color: color, size: size, underTheRoot: "x")
-        case "sqrt" :    RootShapeView(rootDigit: "2", color: color, size: size)
-        case "sqrt3":    RootShapeView(rootDigit: "3", color: color, size: size)
+        case "sqr":   RootShapeView(rootDigit: "2", color: color, size: size, underTheRoot: "x")
+        case "sqrt" : RootShapeView(rootDigit: "2", color: color, size: size)
+        case "sqrt3": RootShapeView(rootDigit: "3", color: color, size: size)
         case "y√":    RootShapeView(rootDigit: "y", color: color, size: size)
         case "log10": Logx(base: "10", size: size)
         case "log2":  Logx(base: "2", size: size)
