@@ -11,7 +11,7 @@ struct ImageKeyView: View {
     var model: ImageKeyViewModel
     
     var body: some View {
-        Image(nsImage: self.model.image)
+        self.model.image
             .resizable()
             .scaledToFill()
             .frame(width: self.model.reducedWidth, height: self.model.reducedheight)

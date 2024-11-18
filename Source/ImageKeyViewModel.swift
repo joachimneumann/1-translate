@@ -29,13 +29,22 @@ import SwiftUI
 
     }
 
-    var image: AppleImage {
+    var image: Image {
+#if TRANSLATE_MAC
         if size.width < size.height * 1.1 &&
             AppleImage(named: name+"Sqr") != nil {
-            return AppleImage(named: name+"Sqr")!
+            return Image(nsImage: AppleImage(named: name+"Sqr")!)
         } else {
-            return AppleImage(named: name)!
+            return Image(nsImage: AppleImage(named: name)!)
         }
+#else
+        if size.width < size.height * 1.1 &&
+            AppleImage(named: name+"Sqr") != nil {
+            return Image(uiImage: AppleImage(named: name+"Sqr")!)
+        } else {
+            return Image(uiImage: AppleImage(named: name)!)
+        }
+#endif
     }
     var reducedWidth: CGFloat {
         if isCircle {

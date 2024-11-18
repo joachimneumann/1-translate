@@ -69,15 +69,14 @@ struct Screen: Equatable {
         displayHorizontalPadding = 0
         let fontsizeFactor = 0.15
 #else
-        isPad = UIDevice.current.userInterfaceIdiom == .pad
         keySpacing = 0.0165 * screenSize.width
         horizontalPadding = 2.2 * keySpacing
         displayHorizontalPadding = 0.0//screenSize.width * 0.035
-        calculatorWidth = screenSize.width - 2 * horizontalPadding
-        keyWidth = isPad ? (calculatorWidth - 9.0 * keySpacing) * 0.1 : (calculatorWidth - 3.0 * keySpacing) * 0.25
+        keyboardWidth = screenSize.width - 2 * horizontalPadding
+        keyWidth = isPad ? (keyboardWidth - 9.0 * keySpacing) * 0.1 : (keyboardWidth - 3.0 * keySpacing) * 0.25
         keyHeight = (screenSize.height * 0.51 - 4 * keySpacing) / 5.0 // this simulates the iOS18 calculator
         let fontsizeFactor = 0.15
-        keyboardHeight5Rows = 5 * keyHeight + 4 * keySpacing
+        keyboardHeight = 5 * keyHeight + 4 * keySpacing
 #endif
 
 #if CALCULATOR_IOS
@@ -124,7 +123,7 @@ struct Screen: Equatable {
         displayWidth = keyboardWidth - 2.0 * displayHorizontalPadding
 
 #if TRANSLATE_IOS
-        uiFontSize = 10*0.169 * keyboardHeight5Rows
+        uiFontSize = 10*0.169 * keyboardHeight
         numberDisplayFont = Screen.proportionalFont(ofSize: uiFontSize, weight: .regular)
         
         // make sure 100 trillion fits in the display, with group separators
