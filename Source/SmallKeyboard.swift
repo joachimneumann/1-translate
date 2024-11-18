@@ -16,7 +16,7 @@ import SwiftGmp
     init(settingsKey: Key) {
         clearKey = SymbolKey(ClearOperation.clear)
         let changeSignKey = SymbolKey(InplaceOperation.changeSign)
-        let percentKey = SymbolKey(PercentOperation.percent)
+        let percentKey = SymbolKey(InplaceOperation.sqrt3)
         let divideKey = SymbolKey(TwoOperantOperation.div)
         
         let sevenKey = SymbolKey(DigitOperation.seven)

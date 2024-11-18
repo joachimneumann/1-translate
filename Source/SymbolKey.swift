@@ -50,7 +50,7 @@ import SwiftGmp
             return AnyView(
                 GeometryReader { geometry in
                     if geometry.notZero {
-                        Label(symbol: self.symbol, size: min(geometry.size.width, geometry.size.height), color: self.txtColor)
+                        Label(model: SymbolKeyViewModel(op: self.op, size: min(geometry.size.width, geometry.size.height), color: self.txtColor))
                             .frame(width: geometry.size.width, height: geometry.size.height)
                             .background(self.bgColor)
                             .foregroundColor(self.txtColor)
