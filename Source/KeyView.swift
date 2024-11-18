@@ -25,7 +25,7 @@ struct KeyView: View {
                         .gesture(
                             DragGesture(minimumDistance: 0)
                                 .onChanged { value in
-                                    key.down(value.location)
+                                    key.down(value.location, in: geometry.size)
                                 }
                                 .onEnded { value in
                                     key.up()

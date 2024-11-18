@@ -25,7 +25,7 @@ import SwiftUI
     }
     
     func visualDown() {
-        brightness = 0.3
+        brightness = 0.2
 
     }
 
