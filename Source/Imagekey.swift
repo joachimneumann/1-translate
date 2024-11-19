@@ -12,7 +12,6 @@ struct ImageKeyView: View {
     
     var body: some View {
         Button {
-            print("Edit button was tapped")
         } label: {
             Image(model.name)
                 .resizable()
