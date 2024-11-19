@@ -10,7 +10,7 @@ import SwiftGmp
 
 @Observable class SymbolKeyViewModel: ObservableObject, VisualUpDownDelegate {
     
-    private var labelSize: CGFloat
+    private var size: CGFloat
     private let op: any OpProtocol
     private let symbol: String
     private let color: Color
@@ -62,7 +62,7 @@ import SwiftGmp
         default:
             sizeFactor = sizeFactorScientific
         }
-        self.labelSize = size * sizeFactor
+        self.size = size * sizeFactor
     }
     
     func visualUp() {
@@ -83,60 +83,60 @@ import SwiftGmp
         "settings": "gear"
     ]
     
-    func label() -> some View {
+    var label: some View {
         switch symbol {
-        case "sqrt" : AnyView(rootShapeView(rootDigit: "2", color: color, size: labelSize))
-        case "sqrt3": AnyView(rootShapeView(rootDigit: "3", color: color, size: labelSize))
-        case "y√":    AnyView(rootShapeView(rootDigit: "y", color: color, size: labelSize))
-        case "log10": AnyView(logx(base: "10", size: labelSize))
-        case "log2":  AnyView(logx(base: "2", size: labelSize))
-        case "logy":  AnyView(logx(base: "y", size: labelSize))
-        case "One_x": AnyView(one_x(color: color, size: labelSize))
-        case "sqr":   AnyView(pow(base:  "x",   exponent: "2",  size: labelSize))
-        case "x^3":   AnyView(pow(base:  "x",   exponent: "3",  size: labelSize))
-        case "x^y":   AnyView(pow(base:  "x",   exponent: "y",  size: labelSize))
-        case "e^x":   AnyView(pow(base:  "e",   exponent: "x",  size: labelSize))
-        case "y^x":   AnyView(pow(base:  "y",   exponent: "x",  size: labelSize))
-        case "2^x":   AnyView(pow(base:  "2",   exponent: "x",  size: labelSize))
-        case "10^x":  AnyView(pow(base: "10",   exponent: "x",  size: labelSize))
-        case "2nd":   AnyView(pow(base: "2",    exponent: "nd", size: labelSize))
-        case "asin":  AnyView(pow(base: "sin",  exponent: "-1", size: labelSize))
-        case "acos":  AnyView(pow(base: "cos",  exponent: "-1", size: labelSize))
-        case "atan":  AnyView(pow(base: "tan",  exponent: "-1", size: labelSize))
-        case "asinh": AnyView(pow(base: "sinh", exponent: "-1", size: labelSize))
-        case "acosh": AnyView(pow(base: "cosh", exponent: "-1", size: labelSize))
-        case "atanh": AnyView(pow(base: "tanh", exponent: "-1", size: labelSize))
+        case "sqrt" : AnyView(rootShapeView(rootDigit: "2"))
+        case "sqrt3": AnyView(rootShapeView(rootDigit: "3"))
+        case "y√":    AnyView(rootShapeView(rootDigit: "y"))
+        case "log10": AnyView(logx(base: "10"))
+        case "log2":  AnyView(logx(base: "2"))
+        case "logy":  AnyView(logx(base: "y"))
+        case "One_x": AnyView(one_x)
+        case "sqr":   AnyView(pow(base:  "x",   exponent: "2"))
+        case "x^3":   AnyView(pow(base:  "x",   exponent: "3"))
+        case "x^y":   AnyView(pow(base:  "x",   exponent: "y"))
+        case "e^x":   AnyView(pow(base:  "e",   exponent: "x"))
+        case "y^x":   AnyView(pow(base:  "y",   exponent: "x"))
+        case "2^x":   AnyView(pow(base:  "2",   exponent: "x"))
+        case "10^x":  AnyView(pow(base: "10",   exponent: "x"))
+        case "2nd":   AnyView(pow(base: "2",    exponent: "nd"))
+        case "asin":  AnyView(pow(base: "sin",  exponent: "-1"))
+        case "acos":  AnyView(pow(base: "cos",  exponent: "-1"))
+        case "atan":  AnyView(pow(base: "tan",  exponent: "-1"))
+        case "asinh": AnyView(pow(base: "sinh", exponent: "-1"))
+        case "acosh": AnyView(pow(base: "cosh", exponent: "-1"))
+        case "atanh": AnyView(pow(base: "tanh", exponent: "-1"))
         default:
-            AnyView(textLabel())
+            AnyView(textLabel)
         }
     }
     
-    private func textLabel() -> some View {
+    private var textLabel: some View {
         if let sfImage = sfImageForKey[symbol] {
             return AnyView(Image(systemName: sfImage)
                 .resizable()
                 .foregroundColor(color)
                 //.font(Font.title.weight(.regular))
                 .aspectRatio(contentMode: .fit)
-                .frame(width: labelSize * 0.3, height: labelSize * 0.3))
+                .frame(width: size * 0.3, height: size * 0.3))
                 //.background(.green)
         } else {
             return AnyView(Text(symbol)
-                .font(.system(size: labelSize * 0.3))
+                .font(.system(size: size * 0.3))
                 .foregroundColor(color))
         }
     }
     
     
-    private func slashShape(color: Color, size: CGFloat) -> some View {
-        let lineWidth = size * 0.17
+    private func slashShape(slashSize: CGFloat) -> some View {
+        let lineWidth = slashSize * 0.17
         return Path { path in
             ///print("SlashShape \(height)")
             let steepness: CGFloat = 1.3
-            let startX: CGFloat = 0.5 * size - 0.5 * size
-            let startY: CGFloat = 0.5 * size + 0.5 * size * steepness
-            let upX: CGFloat = startX + size
-            let upY: CGFloat = startY - size * steepness
+            let startX: CGFloat = 0.5 * slashSize - 0.5 * slashSize
+            let startY: CGFloat = 0.5 * slashSize + 0.5 * slashSize * steepness
+            let upX: CGFloat = startX + slashSize
+            let upY: CGFloat = startY - slashSize * steepness
             
             path.move(to: CGPoint(x: startX, y: startY))
             path.addLine(to: CGPoint(x: upX,   y: upY))
@@ -145,10 +145,10 @@ import SwiftGmp
         .aspectRatio(contentMode: .fit)
     }
     
-    private func one_x(color: Color, size: CGFloat) -> some View {
+    private var one_x: some View {
         let slashSize = size * 0.16
         let fontSize = slashSize * 1.5
-        return slashShape(color: color, size: slashSize)
+        return slashShape(slashSize: slashSize)
             .frame(width: slashSize, height: slashSize)
             .overlay() {
                 Text("1")
@@ -163,7 +163,7 @@ import SwiftGmp
     }
 
     
-    private func pow(base: String, exponent: String, size: CGFloat) -> some View {
+    private func pow(base: String, exponent: String) -> some View {
         ZStack {
             VStack(spacing:0.0) {
                 Spacer(minLength: 0.0)
@@ -182,7 +182,7 @@ import SwiftGmp
     }
     
     
-    private func logx(base: String, size: CGFloat) -> some View {
+    private func logx(base: String) -> some View {
         ZStack {
             VStack(spacing:0.0) {
                 Spacer(minLength: 0.0)
@@ -200,19 +200,19 @@ import SwiftGmp
         }
     }
     
-    private func root(color: Color, size: CGFloat) -> some View {
-        let lineWidth = size * 0.03
+    private func root(rootSize: CGFloat) -> some View {
+        let lineWidth = rootSize * 0.03
         return Path { path in
             // print("Root")
             let steepness: CGFloat = 2.8
             let f: CGFloat = 0.6
-            let startX: CGFloat = 0.5 * size - 0.17 * size
-            let startY: CGFloat = 0.5 * size + 0.07 * size
-            let downX: CGFloat = startX + f * 0.08 * size
-            let downY: CGFloat = startY + f * 0.08 * size * steepness
-            let upX: CGFloat = downX + f * 0.2 * size
-            let upY: CGFloat = downY - f * 0.2 * size * steepness
-            let endX: CGFloat = upX + f * 0.35 * size
+            let startX: CGFloat = 0.5 * rootSize - 0.17 * rootSize
+            let startY: CGFloat = 0.5 * rootSize + 0.07 * rootSize
+            let downX: CGFloat = startX + f * 0.08 * rootSize
+            let downY: CGFloat = startY + f * 0.08 * rootSize * steepness
+            let upX: CGFloat = downX + f * 0.2 * rootSize
+            let upY: CGFloat = downY - f * 0.2 * rootSize * steepness
+            let endX: CGFloat = upX + f * 0.35 * rootSize
             let endY: CGFloat = upY
             
             path.move(to: CGPoint(x: startX, y: startY))
@@ -224,11 +224,11 @@ import SwiftGmp
         .aspectRatio(contentMode: .fit)
     }
     
-    private func rootShapeView(rootDigit: String, color: Color, size: CGFloat, underTheRoot: String = "x") -> some View {
+    private func rootShapeView(rootDigit: String, underTheRoot: String = "x") -> some View {
         let rootSize = size * 0.8
         let fontSize = rootSize * 0.2
         let xFontSize = rootSize * 0.3
-        return root(color: color, size: rootSize)
+        return root(rootSize: rootSize)
             .frame(width: rootSize, height: rootSize)
         .overlay() {
             Text(rootDigit)

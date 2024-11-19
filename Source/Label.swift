@@ -15,7 +15,7 @@ struct Label: View {
     }
 
     var body: some View {
-        model.label()
+        model.label
     }
     
 
