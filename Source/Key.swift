@@ -40,7 +40,6 @@ class Key: Identifiable, VisualUpDownDelegate {
     }
 
     func down(_ location: CGPoint, in size: CGSize) {
-        print("down() \(id) isPressed \(isPressed)")
         let tolerance: CGFloat = 0.3 * size.width
         let touchRect = CGRect(
             x: -tolerance,
@@ -72,7 +71,6 @@ class Key: Identifiable, VisualUpDownDelegate {
     }
 
     func up() {
-        print("up() isPressed \(isPressed) downTimer != nil \(downTimer != nil)")
         if isPressed {
             callback(self)
             isPressed = false
@@ -84,10 +82,8 @@ class Key: Identifiable, VisualUpDownDelegate {
     }
 
     private func downTimerFired() {
-//        print("downTimerFired() isPressed \(isPressed)")
         downTimer = nil
         if !isPressed {
-//            print("downTimerFired() --> up...")
             withAnimation(.linear(duration: upTime)) {
                 visualUp()
             }
