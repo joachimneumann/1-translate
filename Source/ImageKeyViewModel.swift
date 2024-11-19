@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-@Observable class ImageKeyViewModel: ObservableObject, VisualUpDownDelegate {
+@Observable class ImageKeyViewModel: ObservableObject {
     
     var size: CGSize = CGSize.zero
     var brightness: Double = 0.0
@@ -20,15 +20,6 @@ import SwiftUI
         self.isCircle = isCircle
     }
     
-    func visualUp() {
-        brightness = 0.0
-    }
-    
-    func visualDown() {
-        brightness = 0.2
-
-    }
-
     var image: Image {
 #if TRANSLATE_MAC
         if size.width < size.height * 1.1 &&

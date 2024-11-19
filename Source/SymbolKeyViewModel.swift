@@ -8,12 +8,12 @@
 import SwiftUI
 import SwiftGmp
 
-@Observable class SymbolKeyViewModel: ObservableObject, VisualUpDownDelegate {
+@Observable class SymbolKeyViewModel: ObservableObject {
     
     private var size: CGFloat
     var op: any OpProtocol
     var symbol: String
-    private let textColor: Color
+    private var textColor: Color
     var upColor: Color
     var downColor: Color
 
@@ -26,7 +26,8 @@ import SwiftGmp
         self.size = 0.0
     }
     
-    func setColors(upColor: Color, downColor: Color) {
+    func setColors(textColor: Color, upColor: Color, downColor: Color) {
+        self.textColor = textColor
         self.upColor = upColor
         self.downColor = downColor
     }

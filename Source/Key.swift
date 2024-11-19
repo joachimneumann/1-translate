@@ -8,13 +8,7 @@
 import SwiftUI
 import SwiftGmp
 
-protocol VisualUpDownDelegate {
-    func visualUp()
-    func visualDown()
-}
-
-class Key: Identifiable, VisualUpDownDelegate {
-    var visualUpDownDelegate: VisualUpDownDelegate? = nil
+class Key: Identifiable {
     let id = UUID()  // unique identifier
     var isPressed: Bool = false
     private var downTimer: Timer? = nil
@@ -22,8 +16,8 @@ class Key: Identifiable, VisualUpDownDelegate {
     private var upTime: Double = 0.4
 
     
-    func visualDown() { visualUpDownDelegate?.visualDown() }
-    func visualUp()   { visualUpDownDelegate?.visualUp() }
+    func visualDown() {  }
+    func visualUp()   {  }
     
     open func view() -> AnyView {
         AnyView(EmptyView())

@@ -57,12 +57,20 @@ struct ImageKeyGeo: View {
     init(_ name: String, borderColor: Color = Color(AppleColor.darkGray), isCircle: Bool = false) {
         self.model = ImageKeyViewModel(name: name, borderColor: borderColor, isCircle: isCircle)
         super.init()
-        self.visualUpDownDelegate = model
     }
         
     override func view() -> AnyView {
         AnyView(ImageKeyGeo(model))
     }
+    
+    override func visualUp() {
+        model.brightness = 0.0
+    }
+    
+    override func visualDown() {
+        model.brightness = 0.2
+    }
+
 }
 
 

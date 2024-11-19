@@ -14,28 +14,28 @@ struct KeyColor {
         let upColor: Color
         let downColor: Color
         let pendingTextColor: Color
-        let pendingDownColor: Color
         let pendingUpColor: Color
-        private init(textColor: Color, upColor: Color, downColor: Color, pendingTextColor: Color = .white, pendingDownColor: Color = .red, pendingUpColor: Color = .green) {
+        let pendingDownColor: Color
+        private init(textColor: Color, upColor: Color, downColor: Color, pendingTextColor: Color = .white, pendingUpColor: Color = .green, pendingDownColor: Color = .red) {
             self.textColor = textColor
             self.upColor = upColor
             self.downColor = downColor
             self.pendingTextColor = pendingTextColor
-            self.pendingDownColor = pendingDownColor
             self.pendingUpColor = pendingUpColor
+            self.pendingDownColor = pendingDownColor
         }
         init(_ textGrayscale: CGFloat,
              _ upGrayscale: CGFloat,
              _ downGrayscale: CGFloat,
              _ pendingTextGrayscale: CGFloat = 1.0,
-             _ pendingDownGrayscale: CGFloat = 0.0,
-             _ pendingUpGrayscale: CGFloat = 0.0) {
+             _ pendingUpGrayscale: CGFloat = 0.0,
+             _ pendingDownGrayscale: CGFloat = 0.0) {
             self.init(textColor: Color(white: textGrayscale),
                       upColor:   Color(white: upGrayscale),
                       downColor: Color(white: downGrayscale),
                       pendingTextColor: Color(white: pendingTextGrayscale),
-                      pendingDownColor: Color(white: pendingDownGrayscale),
-                      pendingUpColor: Color(white: pendingUpGrayscale))
+                      pendingUpColor: Color(white: pendingUpGrayscale),
+                      pendingDownColor: Color(white: pendingDownGrayscale))
         }
     }
     
@@ -48,10 +48,8 @@ struct KeyColor {
     //    private let secondColors            = ThreeColors(0.90, 0.30, 0.12)
     //    private let secondActiveColors      = ThreeColors(0.20, 0.60, 0.60)
     private static let digitColors             = SixColors(1.000, 0.500, 0.700)
-    private static let operatorColors          = SixColors(0.925, 0.400, 0.700)
-    private static let pendingOperatorColors   = SixColors(0.300, 0.900, 0.800)
-    private static let scientificColors        = SixColors(0.925, 0.396, 0.498)
-    private static let pendingScientificColors = SixColors(0.300, 0.700, 0.600)
+    private static let operatorColors          = SixColors(0.925, 0.400, 0.700, 0.000, 0.700, 0.800)
+    private static let scientificColors        = SixColors(0.925, 0.396, 0.498, 0.000, 0.700, 0.800)
     private static let secondColors            = SixColors(0.925, 0.396, 0.498)
     private static let secondActiveColors      = SixColors(0.925, 0.300, 0.498)
 #else

@@ -18,8 +18,8 @@ import SwiftGmp
         super.init()
     }
     
-    func setColors(upColor: Color, downColor: Color) {
-        model.setColors(upColor: upColor, downColor: downColor)
+    func setColors(textColor: Color, upColor: Color, downColor: Color) {
+        model.setColors(textColor: textColor, upColor: upColor, downColor: downColor)
         bgColor = model.bgColor(isPressed: isPressed)
     }
 

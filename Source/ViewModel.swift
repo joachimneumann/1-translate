@@ -79,10 +79,12 @@ class ViewModel: ObservableObject {
                         if let symbolKey = k as? SymbolKey {
                             if calculator.pendingOperators.contains(where: { $0.isEqual(to: symbolKey.model.op) }) {
                                 symbolKey.setColors(
+                                    textColor: KeyColor.sixColors(op: symbolKey.model.op).pendingTextColor,
                                     upColor: KeyColor.sixColors(op: symbolKey.model.op).pendingUpColor,
                                     downColor: KeyColor.sixColors(op: symbolKey.model.op).pendingDownColor)
                             } else {
                                 symbolKey.setColors(
+                                    textColor: KeyColor.sixColors(op: symbolKey.model.op).textColor,
                                     upColor: KeyColor.sixColors(op: symbolKey.model.op).upColor,
                                     downColor: KeyColor.sixColors(op: symbolKey.model.op).downColor)
                             }
