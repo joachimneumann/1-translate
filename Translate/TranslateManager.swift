@@ -81,7 +81,7 @@ class TranslateManager: NumberTranslator, Identifiable {
             //print(flagname(language))
             if !flagname(language).contains("Chinese") { // add chinese later to keep them together
                 if let uiImage = AppleImage(named: flagname(language)), let averageHue = uiImage.averageHue {
-                    //                print("\(averageHue) \(flagname(language))")
+                    //print("\(averageHue) \(flagname(language))")
                     languagesWithHue.append((language: language, hue: averageHue))
                 }
             }
@@ -154,8 +154,9 @@ extension AppleImage {
         var saturation: CGFloat = 0
         var brightness: CGFloat = 0
         AppleColor(red: red, green: green, blue: blue, alpha: 1.0).getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: nil)
-        
-        return hue == 1.0 ? 0.001 : hue // move Danish and Polish to the front of the queue
+        // move Danish and Polish to the front of the queue
+        hue += 0.01 * saturation
+        return hue
     }
 }
 
