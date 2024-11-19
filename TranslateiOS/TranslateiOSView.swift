@@ -9,11 +9,16 @@ import SwiftUI
 struct TranslateiOSView: View {
     @Environment(\.scenePhase) var scenePhase
     @ObservedObject var viewModel: TranslateViewModel
-
+    let scrollingModel: ScrollingKeyboardViewModel
     @State var scrollViewHasScrolled = false
     @State var scrollViewID = UUID()
     @State var isZoomed: Bool = false
     @State private var settingsDetent = PresentationDetent.medium
+    
+    init(viewModel: TranslateViewModel) {
+        self.viewModel = viewModel
+        scrollingModel = ScrollingKeyboardViewModel(spacing: viewModel.screen.keySpacing, keyboard: viewModel.selectLanguage)
+    }
     
     var Translate_1View: some View {
         VStack(spacing: 0.0) {
@@ -34,9 +39,7 @@ struct TranslateiOSView: View {
                 }
             }
             if viewModel.showLanguageSelector {
-                ScrollingKeyboardView(
-                    spacing: viewModel.screen.keySpacing,
-                    keyboard: viewModel.selectLanguage)
+                ScrollingKeyboardView(model: scrollingModel)
                 .transition(.opacity)
             } else {
                 KeyboardView(

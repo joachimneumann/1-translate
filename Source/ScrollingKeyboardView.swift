@@ -51,6 +51,7 @@ struct AllRowsExceptLast: View {
 struct LastRow: View {
     let spacing: CGFloat
     var keyboard: Keyboard  // Use @ObservedObject for updates
+    let bg: Color
 
     var body: some View {
         if let lastRow = keyboard.keyMatrix.last {
@@ -76,13 +77,12 @@ struct LastRow: View {
                     .background(
                         LinearGradient(
                             gradient: Gradient(colors: [
-                                Color.black.opacity(0.8), // Fully transparent
-                                Color.black.opacity(1)  // Semi-transparent white
+                                bg.opacity(0.8), // Fully transparent
+                                bg.opacity(1.0)  // Semi-transparent white
                             ]),
                             startPoint: .top,
-                            endPoint: .bottom
+                            endPoint: .center
                         )
-//                        .frame(height: keyWidth)
                     )
                 }
             }
@@ -91,36 +91,26 @@ struct LastRow: View {
 }
 
 struct ScrollingKeyboardView: View {
+    @State private var model: ScrollingKeyboardViewModel
     @State private var navigateToConfigView = false
     
-    let spacing: CGFloat
-    var keyboard: Keyboard
-    let scrolling: Bool
     
-    init(spacing: CGFloat, keyboard: Keyboard) {
-        self.spacing = spacing
-        self.keyboard = keyboard
-        scrolling = keyboard.keyMatrix.count > 4
+    init(model: ScrollingKeyboardViewModel) {
+        self.model = model
     }
     
     var body: some View {
         GeometryReader { geometry in
-            if scrolling {
+            if model.scrolling {
                 if geometry.notZero {
-                    let fiveRows = geometry.size.height
-                    let keyHeight = 0.2 * (fiveRows - 4 * spacing)
-                    let fourRows = 4 * keyHeight + 3 * spacing
-                    let scrollingKeysheight: CGFloat =
-                    CGFloat(keyboard.keyMatrix.count - 1) * keyHeight +
-                    CGFloat(keyboard.keyMatrix.count - 2) * spacing
                     ZStack {
-                        VStack(alignment: .leading, spacing: spacing) {
+                        VStack(alignment: .leading, spacing: model.spacing) {
                             ScrollView(.vertical, showsIndicators: true) {
-                                AllRowsExceptLast(spacing: spacing, keyboard: keyboard)
-                                    .frame(width: geometry.size.width, height: scrollingKeysheight)
-                                    .padding(.bottom, spacing + keyHeight)
+                                AllRowsExceptLast(spacing: model.spacing, keyboard: model.keyboard)
+                                    .frame(width: geometry.size.width, height: model.scrollingKeysheight)
+                                    .padding(.bottom, model.spacing + model.keyHeight)
                             }
-                            .frame(height: fourRows + spacing + 0.7 * keyHeight)
+                            .frame(height: model.fourRows + model.spacing + 0.7 * model.keyHeight)
                             Spacer()
                         }
                         VStack(alignment: .leading, spacing: 0.0) {
@@ -129,19 +119,22 @@ struct ScrollingKeyboardView: View {
                                 VStack(alignment: .leading, spacing: 0.0) {
                                     Spacer()
                                     HStack(spacing: 0.0) {
-                                        LastRow(spacing: spacing, keyboard: keyboard)
+                                        LastRow(spacing: model.spacing, keyboard: model.keyboard, bg: model.backgroundColor)
                                         Spacer(minLength: 0.0)
                                     }
-                                    .frame(width: geometry.size.width, height: keyHeight)
+                                    .frame(width: geometry.size.width, height: model.keyHeight)
                                 }
                                 Spacer(minLength: 0.0)
                             }
                         }
-                        .frame(height: fiveRows)
+                        .frame(height: model.fiveRows)
+                    }
+                    .onAppear {
+                        self.model.newHeight(geometry.size.height)
                     }
                 }
             } else {
-                AllRows(spacing: spacing, keyboard: keyboard)
+                AllRows(spacing: model.spacing, keyboard: model.keyboard)
             }
         }
     }
@@ -153,8 +146,6 @@ import NumberTranslator
 
 
 #Preview {
-    let screen = Screen()
-    
     
 #if TRANSLATE_IOS || TRANSLATE_MAC
     let keyboard: TranslateSelectLanguage = TranslateSelectLanguage(
@@ -167,6 +158,7 @@ import NumberTranslator
 #else
     let keyboard: SmallKeyboard = CalculatoriOSKeyboard()
 #endif
+    let model = ScrollingKeyboardViewModel(spacing: 10.0, keyboard: keyboard)
 
     
 //    let translate_1Manager = Translate_1Manager()
@@ -180,10 +172,8 @@ import NumberTranslator
 
     VStack(spacing: 0.0) {
         Rectangle()
-//        let _ = keyboard.back(true)
-        ScrollingKeyboardView(spacing: screen.keySpacing, keyboard: keyboard)
-//            .background(.yellow)
+        ScrollingKeyboardView(model: model)
             .frame(width: 300, height: 300)
     }
-    .background(.black)
+    .background(model.backgroundColor)
 }

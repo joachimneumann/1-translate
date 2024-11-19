@@ -13,7 +13,7 @@ struct ImageKeyView: View {
     var body: some View {
         Button {
         } label: {
-            Image(model.name)
+            Image(model.flagName)
                 .resizable()
                 .scaledToFill()
                 .frame(width: self.model.reducedWidth, height: self.model.reducedheight)
@@ -25,20 +25,15 @@ struct ImageKeyView: View {
                 )
                 .padding(self.model.padding)
         }
-        
-//        self.model.image
-//            .resizable()
-//            .scaledToFill()
-//            .frame(width: self.model.reducedWidth, height: self.model.reducedheight)
-//            .clipShape(Capsule())
-//            .padding(self.model.padding)
-//            .brightness(self.model.brightness)
-//            .overlay(
-//                Capsule()
-//                    .stroke(self.model.borderColor, lineWidth: self.model.borderWidth)
-//            )
-//            .brightness(self.model.brightness)
-//            .padding(self.model.padding)
+        .buttonStyle(BlackButtonStyle(bg: model.backgroundColor))
+    }
+}
+
+struct BlackButtonStyle: ButtonStyle {
+    let bg: Color
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .background(bg)
     }
 }
 

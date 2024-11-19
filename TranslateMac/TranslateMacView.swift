@@ -12,21 +12,24 @@ struct TranslateMacView: View {
     @ObservedObject var viewModel: TranslateViewModel
     
     let model: TranslateMacViewModel = TranslateMacViewModel()
+    let scrollingModel: ScrollingKeyboardViewModel
     @State var scrollViewHasScrolled = false
     @State var scrollViewID = UUID()
     @State var isZoomed: Bool = false
     @State private var settingsDetent = PresentationDetent.medium
 
+    init(viewModel: TranslateViewModel) {
+        self.viewModel = viewModel
+        scrollingModel = ScrollingKeyboardViewModel(spacing: viewModel.screen.keySpacing, keyboard: viewModel.selectLanguage)
+    }
     func LeftSide() -> some View {
             VStack(spacing: 0.0) {
                 Spacer(minLength: 0.0)
                 NumberDisplay(display: viewModel.display)
                     .frame(width: model.keyboardWidth, height: model.displayHeight)
-                    .background(.yellow)
+                    //.background(.yellow)
                 if viewModel.showLanguageSelector {
-                    ScrollingKeyboardView(
-                        spacing: model.keySpacing,
-                        keyboard: viewModel.selectLanguage)
+                    ScrollingKeyboardView(model: scrollingModel)
                     .frame(width: model.keyboardWidth, height: model.keyboardHeight)
                     .transition(.opacity)
                 } else {

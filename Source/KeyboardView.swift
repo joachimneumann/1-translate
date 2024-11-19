@@ -69,8 +69,7 @@ import NumberTranslator
         Rectangle()
 //        let _ = keyboard.back(true)
         KeyboardView(spacing: screen.keySpacing, keyboard: keyboard, height: screen.keyboardHeight)
-            .background(.yellow)
             .padding(.bottom, 10)
     }
-    .background(.gray)
+    .background(.black)
 }

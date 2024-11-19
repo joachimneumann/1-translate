@@ -14,13 +14,18 @@ import SwiftUI
     let borderColor: Color
     let isCircle: Bool
     
+#if TRANSLATE_MAC
+    let backgroundColor = Color(red: 52/255, green: 54.0 / 255.0, blue: 56.0 / 255.0, opacity: 1.0)
+#else
+    let backgroundColor = Color.black
+#endif
     init(name: String, borderColor: Color, isCircle: Bool) {
         self._name = name
         self.borderColor = borderColor
         self.isCircle = isCircle
     }
     
-    var name: String {
+    var flagName: String {
         if size.width < size.height * 1.1 {
             if AppleImage(named: _name+"Sqr") != nil {
                 return _name+"Sqr"

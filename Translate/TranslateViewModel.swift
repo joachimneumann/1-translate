@@ -85,11 +85,11 @@ class TranslateViewModel: ViewModel {
 
     override func execute(_ key: Key) {
         if let flagKey = key as? Imagekey {
-            if let newLanguage = translate_1Manager.languageEnum(forFlagname: flagKey.model.name) {
+            if let newLanguage = translate_1Manager.languageEnum(forFlagname: flagKey.model._name) {
                 persistent.currentLanguageEnum = newLanguage
                 currentLanguageName = translate_1Manager.name(persistent.currentLanguageEnum)
                 currentLanguageEnglishName = translate_1Manager.englishName(persistent.currentLanguageEnum)
-                keyboard.countryKey.model._name = flagKey.model.name
+                keyboard.countryKey.model._name = flagKey.model._name
                 display.separatorCharacter = separatorCharacter(forLanguage: persistent.currentLanguageEnum)
                 display.groupSize = groupSize(forLanguage: persistent.currentLanguageEnum)
                 display.groupingCharacter = groupingCharacter(forLanguage: persistent.currentLanguageEnum)
