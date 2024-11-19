@@ -10,34 +10,35 @@ import SwiftUI
     
     var size: CGSize = CGSize.zero
     var brightness: Double = 0.0
-    var name: String
+    var _name: String
     let borderColor: Color
     let isCircle: Bool
     
     init(name: String, borderColor: Color, isCircle: Bool) {
-        self.name = name
+        self._name = name
         self.borderColor = borderColor
         self.isCircle = isCircle
     }
     
-    var image: Image {
-        var appleImage: AppleImage = AppleImage(named: "English")!
-        let appleImageRect: AppleImage? = AppleImage(named: name)
-        let appleImageSqr: AppleImage? = AppleImage(named: name+"Sqr")
-        if let appleImageRect = appleImageRect {
-            appleImage = appleImageRect
-        }
+    var name: String {
         if size.width < size.height * 1.1 {
-            if let appleImageSqr = appleImageSqr {
-                appleImage = appleImageSqr
+            if AppleImage(named: _name+"Sqr") != nil {
+                return _name+"Sqr"
             }
         }
-#if TRANSLATE_MAC
-        return Image(nsImage: appleImage)
-#else
-        return Image(uiImage: appleImage)
-#endif
+        if AppleImage(named: _name) != nil {
+            return _name
+        }
+        return "English"
     }
+    
+//    var image: Image {
+//#if TRANSLATE_MAC
+//        Image(nsImage: AppleImage(named: name)!)
+//#else
+//        Image(uiImage: AppleImage(named: name)!)
+//#endif
+//    }
     var reducedWidth: CGFloat {
         if isCircle {
             return min(size.width, size.height)  - 2 * borderWidth

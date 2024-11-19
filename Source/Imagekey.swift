@@ -11,19 +11,35 @@ struct ImageKeyView: View {
     var model: ImageKeyViewModel
     
     var body: some View {
-        self.model.image
-            .resizable()
-            .scaledToFill()
-            .frame(width: self.model.reducedWidth, height: self.model.reducedheight)
-            .clipShape(Capsule())
-            .padding(self.model.padding)
-            .brightness(self.model.brightness)
-            .overlay(
-                Capsule()
-                    .stroke(self.model.borderColor, lineWidth: self.model.borderWidth)
-            )
-            .brightness(self.model.brightness)
-            .padding(self.model.padding)
+        Button {
+            print("Edit button was tapped")
+        } label: {
+            Image(model.name)
+                .resizable()
+                .scaledToFill()
+                .frame(width: self.model.reducedWidth, height: self.model.reducedheight)
+                .clipShape(Capsule())
+                .padding(self.model.padding)
+                .overlay(
+                    Capsule()
+                        .stroke(self.model.borderColor, lineWidth: self.model.borderWidth)
+                )
+                .padding(self.model.padding)
+        }
+        
+//        self.model.image
+//            .resizable()
+//            .scaledToFill()
+//            .frame(width: self.model.reducedWidth, height: self.model.reducedheight)
+//            .clipShape(Capsule())
+//            .padding(self.model.padding)
+//            .brightness(self.model.brightness)
+//            .overlay(
+//                Capsule()
+//                    .stroke(self.model.borderColor, lineWidth: self.model.borderWidth)
+//            )
+//            .brightness(self.model.brightness)
+//            .padding(self.model.padding)
     }
 }
 
@@ -84,5 +100,6 @@ struct ImageKeyGeo: View {
             Imagekey("Deutsch").view()
             ImageKeyGeo("Español")
         }
+        .frame(height: 200)
     }
 }
