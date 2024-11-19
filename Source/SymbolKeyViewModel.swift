@@ -13,12 +13,12 @@ import SwiftGmp
     private var size: CGFloat
     var op: any OpProtocol
     var symbol: String
-    private let color: Color
+    private let txtColor: Color
 
-    init(op: any OpProtocol, size: CGFloat, color: Color) {
+    init(op: any OpProtocol, size: CGFloat, txtColor: Color) {
         self.op = op
         self.symbol = op.getRawValue()
-        self.color = color
+        self.txtColor = txtColor
         self.size = 0.0
     }
     
@@ -120,7 +120,7 @@ import SwiftGmp
         if let sfImage = sfImageForKey[symbol] {
             return AnyView(Image(systemName: sfImage)
                 .resizable()
-                .foregroundColor(color)
+                .foregroundColor(txtColor)
                 //.font(Font.title.weight(.regular))
                 .aspectRatio(contentMode: .fit)
                 .frame(width: size * 0.3, height: size * 0.3))
@@ -128,7 +128,7 @@ import SwiftGmp
         } else {
             return AnyView(Text(symbol)
                 .font(.system(size: size * 0.3))
-                .foregroundColor(color))
+                .foregroundColor(txtColor))
         }
     }
     
@@ -146,7 +146,7 @@ import SwiftGmp
             path.move(to: CGPoint(x: startX, y: startY))
             path.addLine(to: CGPoint(x: upX,   y: upY))
         }
-        .stroke(color, style: StrokeStyle(lineWidth: lineWidth, lineCap: CGLineCap.round))
+        .stroke(txtColor, style: StrokeStyle(lineWidth: lineWidth, lineCap: CGLineCap.round))
         .aspectRatio(contentMode: .fit)
     }
     
@@ -225,7 +225,7 @@ import SwiftGmp
             path.addLine(to: CGPoint(x: upX,   y: upY))
             path.addLine(to: CGPoint(x: endX,  y: endY))
         }
-        .stroke(color, style: StrokeStyle(lineWidth: lineWidth, lineCap: CGLineCap.round, lineJoin: CGLineJoin.round))
+        .stroke(txtColor, style: StrokeStyle(lineWidth: lineWidth, lineCap: CGLineCap.round, lineJoin: CGLineJoin.round))
         .aspectRatio(contentMode: .fit)
     }
     
@@ -238,14 +238,14 @@ import SwiftGmp
         .overlay() {
             Text(rootDigit)
                 .font(.system(size: fontSize, weight: .semibold))
-                .foregroundColor(color)
+                .foregroundColor(txtColor)
                 .padding(.leading, rootSize * -0.23)
                 .padding(.top, rootSize * -0.14)
         }
         .overlay() {
             Text(underTheRoot)
                 .font(.system(size: xFontSize, weight: .semibold))
-                .foregroundColor(color)
+                .foregroundColor(txtColor)
                 .padding(.leading, rootSize * 0.2)
                 .padding(.top, rootSize * 0.1)
         }

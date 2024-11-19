@@ -10,14 +10,12 @@ import SwiftGmp
 
 @Observable class SymbolKey: Key {
     var model: SymbolKeyViewModel
-    let txtColor: Color
     var bgColor: Color
     var upColor: Color
     var downColor: Color
     
     init(_ op: any OpProtocol) {
-        self.model = SymbolKeyViewModel(op: op, size: 0.0, color: KeyColor.sixColors(op: op).textColor)
-        self.txtColor = KeyColor.sixColors(op: op).textColor
+        self.model = SymbolKeyViewModel(op: op, size: 0.0, txtColor: KeyColor.sixColors(op: op).textColor)
         self.upColor = KeyColor.sixColors(op: op).upColor
         self.downColor = KeyColor.sixColors(op: op).downColor
         self.bgColor = KeyColor.sixColors(op: op).upColor
@@ -51,7 +49,6 @@ import SwiftGmp
                         self.model.label
                             .frame(width: geometry.size.width, height: geometry.size.height)
                             .background(self.bgColor)
-                            .foregroundColor(self.txtColor)
                             .clipShape(Capsule())
                             .onAppear {
                                 self.model.newSize(
