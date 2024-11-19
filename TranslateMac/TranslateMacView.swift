@@ -11,52 +11,39 @@ struct TranslateMacView: View {
     @Environment(\.scenePhase) var scenePhase
     @ObservedObject var viewModel: TranslateViewModel
     
+    let model: TranslateMacViewModel = TranslateMacViewModel()
     @State var scrollViewHasScrolled = false
     @State var scrollViewID = UUID()
     @State var isZoomed: Bool = false
     @State private var settingsDetent = PresentationDetent.medium
 
-    func LeftSide(
-        keyboardWidth: CGFloat,
-        keyboardHeight: CGFloat,
-        keySpacing: CGFloat,
-        displayHeight: CGFloat) -> some View {
+    func LeftSide() -> some View {
             VStack(spacing: 0.0) {
                 Spacer(minLength: 0.0)
                 NumberDisplay(display: viewModel.display)
-                    .frame(width: keyboardWidth, height: displayHeight)
+                    .frame(width: model.keyboardWidth, height: model.displayHeight)
                     .background(.yellow)
                 if viewModel.showLanguageSelector {
                     ScrollingKeyboardView(
-                        spacing: keySpacing,
+                        spacing: model.keySpacing,
                         keyboard: viewModel.selectLanguage)
-                    .frame(width: keyboardWidth, height: keyboardHeight)
+                    .frame(width: model.keyboardWidth, height: model.keyboardHeight)
                     .transition(.opacity)
                 } else {
                     KeyboardView(
-                        spacing: keySpacing,
+                        spacing: model.keySpacing,
                         keyboard: viewModel.keyboard)
-                    .frame(width: keyboardWidth, height: keyboardHeight)
+                    .frame(width: model.keyboardWidth, height: model.keyboardHeight)
                 }
             }
         }
 
-    var Translate_1View: some View {
+    var body: some View {
         GeometryReader { geometry in
             if geometry.notZero {
-                let keyboardHeight = 0.8 * geometry.size.height
-                let displayHeight = geometry.size.height - keyboardHeight
-                let keySpacing = 0.025 * keyboardHeight
-                let keyDiameter = 0.2 * (keyboardHeight - 4 * keySpacing)
-                let keyboardWidth = 4 * keyDiameter + 3 * keySpacing
                 VStack(spacing: 0.0) {
 //                    HStack(spacing: 0.0) {
-                    LeftSide(
-                        keyboardWidth: keyboardWidth,
-                        keyboardHeight: keyboardHeight,
-                        keySpacing: keySpacing,
-                        displayHeight: displayHeight
-                    )
+                    LeftSide()
                         
 //                        ZStack{
 //                            VStack(spacing: 0.0) {
@@ -75,19 +62,17 @@ struct TranslateMacView: View {
 //                        }
 //                    }
                 }
+                .onAppear() {
+                    model.setHeight(geometry.size.height)
+                }
                 .animation(.easeInOut(duration: 0.6), value: viewModel.showLanguageSelector)
             }
         }
         .padding(.bottom, 5)
         .padding(.leading, 5)
+        .preferredColorScheme(.dark)
     }
     
-    var body: some View {
-        Translate_1View
-//            .padding(.bottom, viewModel.screen.bottomPadding)
-//            .padding(.horizontal, viewModel.screen.horizontalPadding)
-            .preferredColorScheme(.dark)
-    }
 }
 
 

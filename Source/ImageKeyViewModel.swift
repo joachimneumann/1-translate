@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-@Observable class ImageKeyViewModel: ObservableObject {
+@Observable class ImageKeyViewModel {
     
     var size: CGSize = CGSize.zero
     var brightness: Double = 0.0

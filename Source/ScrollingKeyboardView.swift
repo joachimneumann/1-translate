@@ -102,6 +102,8 @@ struct ScrollingKeyboardView: View {
                     let scrollingKeysheight: CGFloat =
                     CGFloat(keyboard.keyMatrix.count - 1) * keyHeight +
                     CGFloat(keyboard.keyMatrix.count - 2) * spacing
+                    let _ = print("keyboard.keyMatrix.count \(keyboard.keyMatrix.count)")
+                    let _ = print("scrollingKeysheight \(scrollingKeysheight)")
                     ZStack {
                         VStack(alignment: .leading, spacing: spacing) {
                             ScrollView(.vertical, showsIndicators: true) {
