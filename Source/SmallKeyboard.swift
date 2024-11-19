@@ -48,11 +48,11 @@ import SwiftGmp
     
     func back(_ displayBufferHasDigits: Bool) {
         if displayBufferHasDigits {
-            clearKey.op = ClearOperation.back
-            clearKey.symbol = ClearOperation.back.getRawValue()
+            clearKey.model.op = ClearOperation.back
+            clearKey.model.symbol = ClearOperation.back.getRawValue()
         } else {
-            clearKey.op = ClearOperation.clear
-            clearKey.symbol = ClearOperation.clear.getRawValue()
+            clearKey.model.op = ClearOperation.clear
+            clearKey.model.symbol = ClearOperation.clear.getRawValue()
         }
     }
 

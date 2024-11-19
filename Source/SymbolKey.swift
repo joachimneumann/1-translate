@@ -9,16 +9,14 @@ import SwiftUI
 import SwiftGmp
 
 @Observable class SymbolKey: Key {
-    var symbol: String
-    var op: any OpProtocol
+    var model: SymbolKeyViewModel
     let txtColor: Color
     var bgColor: Color
     var upColor: Color
     var downColor: Color
     
     init(_ op: any OpProtocol) {
-        self.symbol = op.getRawValue()
-        self.op = op
+        self.model = SymbolKeyViewModel(op: op, size: 0.0, color: KeyColor.sixColors(op: op).textColor)
         self.txtColor = KeyColor.sixColors(op: op).textColor
         self.upColor = KeyColor.sixColors(op: op).upColor
         self.downColor = KeyColor.sixColors(op: op).downColor
@@ -44,17 +42,22 @@ import SwiftGmp
     }
     
     override func view() -> AnyView {
-        if symbol == "KeyboardSpacer" {
+        if model.symbol == "KeyboardSpacer" {
             return AnyView(Spacer(minLength: 0.0))
         } else {
             return AnyView(
                 GeometryReader { geometry in
                     if geometry.notZero {
-                        Label(model: SymbolKeyViewModel(op: self.op, size: min(geometry.size.width, geometry.size.height), color: self.txtColor))
+                        self.model.label
                             .frame(width: geometry.size.width, height: geometry.size.height)
                             .background(self.bgColor)
                             .foregroundColor(self.txtColor)
                             .clipShape(Capsule())
+                            .onAppear {
+                                self.model.newSize(
+                                    min(geometry.size.width,
+                                        geometry.size.height))
+                            }
                     }
                 }
             )

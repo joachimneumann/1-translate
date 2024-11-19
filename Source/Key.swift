@@ -33,7 +33,7 @@ class Key: Identifiable, VisualUpDownDelegate {
 
     func longPress() {
         if let symbolKey = self as? SymbolKey {
-            if symbolKey.op.isEqual(to: ClearOperation.back) {
+            if symbolKey.model.op.isEqual(to: ClearOperation.back) {
                 symbolKey.callback(SymbolKey(ClearOperation.clear))
             }
         }

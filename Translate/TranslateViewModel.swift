@@ -104,7 +104,7 @@ class TranslateViewModel: ViewModel {
         }
         
         if let languageSettingsKey = key as? SymbolKey {
-            if languageSettingsKey.op.isEqual(to: TranslateOperation.settings) {
+            if languageSettingsKey.model.op.isEqual(to: TranslateOperation.settings) {
                 showSettings = true
                 return
             }

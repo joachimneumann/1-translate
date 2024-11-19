@@ -27,7 +27,6 @@
 		AA6DBCCE2CE077B300B5E0F1 /* SmallKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9C3F692CBF33C100F64EFA /* SmallKeyboard.swift */; };
 		AA6DBCCF2CE077C700B5E0F1 /* SymbolKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC41D2CD62173006BD54C /* SymbolKey.swift */; };
 		AA6DBCD02CE077C700B5E0F1 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC4252CD6FEB4006BD54C /* Key.swift */; };
-		AA6DBCD12CE077E900B5E0F1 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB10B94292A2222004707E9 /* Label.swift */; };
 		AA6DBCD22CE077F100B5E0F1 /* NumberDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29F589293CD608001ADF5A /* NumberDisplay.swift */; };
 		AA6DBCD32CE0780B00B5E0F1 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9C3F6C2CBF373600F64EFA /* KeyboardView.swift */; };
 		AA6DBCD42CE0781400B5E0F1 /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC4272CD7087E006BD54C /* KeyView.swift */; };
@@ -43,7 +42,6 @@
 		AA9C3F6D2CBF373C00F64EFA /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9C3F6C2CBF373600F64EFA /* KeyboardView.swift */; };
 		AA9DB3B52CE77E0500B40CAA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA370C2C293352960041AE4E /* Extensions.swift */; };
 		AA9DCD662CA10E13002EBCE5 /* SwiftGmp in Frameworks */ = {isa = PBXBuildFile; productRef = AA9DCD652CA10E13002EBCE5 /* SwiftGmp */; };
-		AAB10B9A292A2222004707E9 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB10B94292A2222004707E9 /* Label.swift */; };
 		AAB5EA392CE4962100D76292 /* SwiftGmp in Frameworks */ = {isa = PBXBuildFile; productRef = AAB5EA382CE4962100D76292 /* SwiftGmp */; };
 		AAB5EA3B2CE4963100D76292 /* NumberTranslator in Frameworks */ = {isa = PBXBuildFile; productRef = AAB5EA3A2CE4963100D76292 /* NumberTranslator */; };
 		AAB5EA3C2CE4967400D76292 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9C3F6C2CBF373600F64EFA /* KeyboardView.swift */; };
@@ -56,7 +54,6 @@
 		AAB5EA432CE4967400D76292 /* NumberDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29F589293CD608001ADF5A /* NumberDisplay.swift */; };
 		AAB5EA442CE4967400D76292 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA370C2C293352960041AE4E /* Extensions.swift */; };
 		AAB5EA452CE4967400D76292 /* SymbolKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC41D2CD62173006BD54C /* SymbolKey.swift */; };
-		AAB5EA462CE4967400D76292 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB10B94292A2222004707E9 /* Label.swift */; };
 		AAB5EA472CE4967400D76292 /* TextKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3F5342CE194D400146B91 /* TextKey.swift */; };
 		AAB5EA482CE4967400D76292 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE426F629597AE3005FE365 /* Screen.swift */; };
 		AAB5EA492CE4967400D76292 /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA17F8932CCE6EB900312BF0 /* Display.swift */; };
@@ -79,7 +76,6 @@
 		AAFCC5CC2CE465D1009E42FA /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9C3F6C2CBF373600F64EFA /* KeyboardView.swift */; };
 		AAFCC5CD2CE465D1009E42FA /* NumberDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29F589293CD608001ADF5A /* NumberDisplay.swift */; };
 		AAFCC5CE2CE465DC009E42FA /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC4272CD7087E006BD54C /* KeyView.swift */; };
-		AAFCC5D02CE46671009E42FA /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB10B94292A2222004707E9 /* Label.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -116,7 +112,6 @@
 		AA8AC4272CD7087E006BD54C /* KeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyView.swift; sourceTree = "<group>"; };
 		AA9C3F692CBF33C100F64EFA /* SmallKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallKeyboard.swift; sourceTree = "<group>"; };
 		AA9C3F6C2CBF373600F64EFA /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
-		AAB10B94292A2222004707E9 /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		AAB5EA192CE4945F00D76292 /* Translate_Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Translate_Mac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AABEFC122972A8780023A3C9 /* KeyColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyColor.swift; sourceTree = "<group>"; };
 		AACCD0772B43A89A00D545C5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = "../1-translate-tests/README.md"; sourceTree = "<group>"; };
@@ -251,7 +246,6 @@
 				AA8544C12CE8124800CE1996 /* ScrollingKeyboardView.swift */,
 				AA29F589293CD608001ADF5A /* NumberDisplay.swift */,
 				AA370C2C293352960041AE4E /* Extensions.swift */,
-				AAB10B94292A2222004707E9 /* Label.swift */,
 				AA2FABFC272F2348006DE4C8 /* TranslateNumbersApp.entitlements */,
 				AA08C7EC272F1572001B8575 /* Info.plist */,
 			);
@@ -459,7 +453,6 @@
 				AA8AC41E2CD62174006BD54C /* SymbolKey.swift in Sources */,
 				AABEFC132972A8780023A3C9 /* KeyColor.swift in Sources */,
 				AA9C3F6A2CBF33C800F64EFA /* SmallKeyboard.swift in Sources */,
-				AAB10B9A292A2222004707E9 /* Label.swift in Sources */,
 				AAE426F729597AE3005FE365 /* Screen.swift in Sources */,
 				AAE3F5322CE180A000146B91 /* Keyboard.swift in Sources */,
 				AA8AC4262CD6FEB7006BD54C /* Key.swift in Sources */,
@@ -483,7 +476,6 @@
 				AA37F6C42CEAB0A50015CE6C /* ImageKeyViewModel.swift in Sources */,
 				AA6DBCCF2CE077C700B5E0F1 /* SymbolKey.swift in Sources */,
 				AA6DBCD02CE077C700B5E0F1 /* Key.swift in Sources */,
-				AA6DBCD12CE077E900B5E0F1 /* Label.swift in Sources */,
 				AA8544C32CE8124800CE1996 /* ScrollingKeyboardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -503,7 +495,6 @@
 				AAB5EA442CE4967400D76292 /* Extensions.swift in Sources */,
 				AA8544C52CE8124800CE1996 /* ScrollingKeyboardView.swift in Sources */,
 				AAB5EA452CE4967400D76292 /* SymbolKey.swift in Sources */,
-				AAB5EA462CE4967400D76292 /* Label.swift in Sources */,
 				AA5D3D762CEB9A6000CC8237 /* SymbolKeyViewModel.swift in Sources */,
 				AAB5EA472CE4967400D76292 /* TextKey.swift in Sources */,
 				AAB5EA482CE4967400D76292 /* Screen.swift in Sources */,
@@ -532,7 +523,6 @@
 				AAFCC5CC2CE465D1009E42FA /* KeyboardView.swift in Sources */,
 				AAFCC5CD2CE465D1009E42FA /* NumberDisplay.swift in Sources */,
 				AAFCC5CE2CE465DC009E42FA /* KeyView.swift in Sources */,
-				AAFCC5D02CE46671009E42FA /* Label.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

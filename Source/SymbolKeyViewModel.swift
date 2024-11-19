@@ -11,14 +11,18 @@ import SwiftGmp
 @Observable class SymbolKeyViewModel: ObservableObject, VisualUpDownDelegate {
     
     private var size: CGFloat
-    private let op: any OpProtocol
-    private let symbol: String
+    var op: any OpProtocol
+    var symbol: String
     private let color: Color
 
     init(op: any OpProtocol, size: CGFloat, color: Color) {
         self.op = op
         self.symbol = op.getRawValue()
         self.color = color
+        self.size = 0.0
+    }
+    
+    func newSize(_ size: CGFloat) {
 #if os(macOS)
         let sizeFactorDigits          = 1.5
         let sizeFactorAC              = 1.4
@@ -64,6 +68,7 @@ import SwiftGmp
         }
         self.size = size * sizeFactor
     }
+
     
     func visualUp() {
     }

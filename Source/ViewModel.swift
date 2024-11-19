@@ -71,20 +71,20 @@ class ViewModel: ObservableObject {
     
     func execute(_ key: Key) {
         if let symbolKey = key as? SymbolKey {
-            calculator.press(symbolKey.op)
+            calculator.press(symbolKey.model.op)
             if let smallKeyboard = smallKeyboard {
                 smallKeyboard.back(calculator.privateDisplayBufferHasDigits)
                 for row in smallKeyboard.keyMatrix {
                     for k in row {
                         if let symbolKey = k as? SymbolKey {
-                            if calculator.pendingOperators.contains(where: { $0.isEqual(to: symbolKey.op) }) {
+                            if calculator.pendingOperators.contains(where: { $0.isEqual(to: symbolKey.model.op) }) {
                                 symbolKey.setColors(
-                                    upColor: KeyColor.sixColors(op: symbolKey.op).pendingUpColor,
-                                    downColor: KeyColor.sixColors(op: symbolKey.op).pendingDownColor)
+                                    upColor: KeyColor.sixColors(op: symbolKey.model.op).pendingUpColor,
+                                    downColor: KeyColor.sixColors(op: symbolKey.model.op).pendingDownColor)
                             } else {
                                 symbolKey.setColors(
-                                    upColor: KeyColor.sixColors(op: symbolKey.op).upColor,
-                                    downColor: KeyColor.sixColors(op: symbolKey.op).downColor)
+                                    upColor: KeyColor.sixColors(op: symbolKey.model.op).upColor,
+                                    downColor: KeyColor.sixColors(op: symbolKey.model.op).downColor)
                             }
                         }
                     }
