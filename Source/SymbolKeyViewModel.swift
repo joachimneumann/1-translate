@@ -13,15 +13,32 @@ import SwiftGmp
     private var size: CGFloat
     var op: any OpProtocol
     var symbol: String
-    private let txtColor: Color
+    private let textColor: Color
+    var upColor: Color
+    var downColor: Color
 
-    init(op: any OpProtocol, size: CGFloat, txtColor: Color) {
+    init(op: any OpProtocol) {
         self.op = op
         self.symbol = op.getRawValue()
-        self.txtColor = txtColor
+        self.textColor = KeyColor.sixColors(op: op).textColor
+        self.upColor = KeyColor.sixColors(op: op).upColor
+        self.downColor = KeyColor.sixColors(op: op).downColor
         self.size = 0.0
     }
     
+    func setColors(upColor: Color, downColor: Color) {
+        self.upColor = upColor
+        self.downColor = downColor
+    }
+    
+    func bgColor(isPressed: Bool) -> Color {
+        if isPressed {
+            return downColor
+        } else {
+            return upColor
+        }
+    }
+
     func newSize(_ size: CGFloat) {
 #if os(macOS)
         let sizeFactorDigits          = 1.5
@@ -120,7 +137,7 @@ import SwiftGmp
         if let sfImage = sfImageForKey[symbol] {
             return AnyView(Image(systemName: sfImage)
                 .resizable()
-                .foregroundColor(txtColor)
+                .foregroundColor(textColor)
                 //.font(Font.title.weight(.regular))
                 .aspectRatio(contentMode: .fit)
                 .frame(width: size * 0.3, height: size * 0.3))
@@ -128,7 +145,7 @@ import SwiftGmp
         } else {
             return AnyView(Text(symbol)
                 .font(.system(size: size * 0.3))
-                .foregroundColor(txtColor))
+                .foregroundColor(textColor))
         }
     }
     
@@ -146,7 +163,7 @@ import SwiftGmp
             path.move(to: CGPoint(x: startX, y: startY))
             path.addLine(to: CGPoint(x: upX,   y: upY))
         }
-        .stroke(txtColor, style: StrokeStyle(lineWidth: lineWidth, lineCap: CGLineCap.round))
+        .stroke(textColor, style: StrokeStyle(lineWidth: lineWidth, lineCap: CGLineCap.round))
         .aspectRatio(contentMode: .fit)
     }
     
@@ -225,7 +242,7 @@ import SwiftGmp
             path.addLine(to: CGPoint(x: upX,   y: upY))
             path.addLine(to: CGPoint(x: endX,  y: endY))
         }
-        .stroke(txtColor, style: StrokeStyle(lineWidth: lineWidth, lineCap: CGLineCap.round, lineJoin: CGLineJoin.round))
+        .stroke(textColor, style: StrokeStyle(lineWidth: lineWidth, lineCap: CGLineCap.round, lineJoin: CGLineJoin.round))
         .aspectRatio(contentMode: .fit)
     }
     
@@ -238,14 +255,14 @@ import SwiftGmp
         .overlay() {
             Text(rootDigit)
                 .font(.system(size: fontSize, weight: .semibold))
-                .foregroundColor(txtColor)
+                .foregroundColor(textColor)
                 .padding(.leading, rootSize * -0.23)
                 .padding(.top, rootSize * -0.14)
         }
         .overlay() {
             Text(underTheRoot)
                 .font(.system(size: xFontSize, weight: .semibold))
-                .foregroundColor(txtColor)
+                .foregroundColor(textColor)
                 .padding(.leading, rootSize * 0.2)
                 .padding(.top, rootSize * 0.1)
         }

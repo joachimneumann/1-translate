@@ -11,32 +11,23 @@ import SwiftGmp
 @Observable class SymbolKey: Key {
     var model: SymbolKeyViewModel
     var bgColor: Color
-    var upColor: Color
-    var downColor: Color
     
     init(_ op: any OpProtocol) {
-        self.model = SymbolKeyViewModel(op: op, size: 0.0, txtColor: KeyColor.sixColors(op: op).textColor)
-        self.upColor = KeyColor.sixColors(op: op).upColor
-        self.downColor = KeyColor.sixColors(op: op).downColor
+        self.model = SymbolKeyViewModel(op: op)
         self.bgColor = KeyColor.sixColors(op: op).upColor
         super.init()
     }
     
     func setColors(upColor: Color, downColor: Color) {
-        self.upColor = upColor
-        self.downColor = downColor
-        if isPressed {
-            bgColor = downColor
-        } else {
-            bgColor = upColor
-        }
+        model.setColors(upColor: upColor, downColor: downColor)
+        bgColor = model.bgColor(isPressed: isPressed)
     }
 
     override func visualDown() {
-        bgColor = downColor
+        bgColor = model.bgColor(isPressed: isPressed)
     }
     override func visualUp() {
-        bgColor = upColor
+        bgColor = model.bgColor(isPressed: isPressed)
     }
     
     override func view() -> AnyView {
