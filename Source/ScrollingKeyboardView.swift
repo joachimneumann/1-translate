@@ -171,7 +171,7 @@ import NumberTranslator
 //        let _ = keyboard.back(true)
         ScrollingKeyboardView(spacing: screen.keySpacing, keyboard: keyboard)
 //            .background(.yellow)
-            .frame(width: screen.keyboardWidth, height: screen.keyboardHeight)
+            .frame(width: 300, height: 300)
     }
     .background(.gray)
 }

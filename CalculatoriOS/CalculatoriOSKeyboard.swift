@@ -16,7 +16,7 @@ import SwiftUI
     }
     
     func setSeparatorSymbol(_ symbol: String) {
-        separatorKey.symbol = symbol
+        separatorKey.model.symbol = symbol
     }
     
 }

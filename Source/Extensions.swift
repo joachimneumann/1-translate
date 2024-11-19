@@ -57,6 +57,7 @@ extension GeometryProxy {
         self.size.width > 0 && self.size.height > 0
     }
 }
+
 extension Double {
     var asTime: String {
         if self < 1.0e-6 {

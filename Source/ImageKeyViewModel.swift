@@ -21,20 +21,21 @@ import SwiftUI
     }
     
     var image: Image {
+        var appleImage: AppleImage = AppleImage(named: "English")!
+        let appleImageRect: AppleImage? = AppleImage(named: name)
+        let appleImageSqr: AppleImage? = AppleImage(named: name+"Sqr")
+        if let appleImageRect = appleImageRect {
+            appleImage = appleImageRect
+        }
+        if size.width < size.height * 1.1 {
+            if let appleImageSqr = appleImageSqr {
+                appleImage = appleImageSqr
+            }
+        }
 #if TRANSLATE_MAC
-        if size.width < size.height * 1.1 &&
-            AppleImage(named: name+"Sqr") != nil {
-            return Image(nsImage: AppleImage(named: name+"Sqr")!)
-        } else {
-            return Image(nsImage: AppleImage(named: name)!)
-        }
+        return Image(nsImage: appleImage)
 #else
-        if size.width < size.height * 1.1 &&
-            AppleImage(named: name+"Sqr") != nil {
-            return Image(uiImage: AppleImage(named: name+"Sqr")!)
-        } else {
-            return Image(uiImage: AppleImage(named: name)!)
-        }
+        return Image(uiImage: appleImage)
 #endif
     }
     var reducedWidth: CGFloat {

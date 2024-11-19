@@ -44,13 +44,13 @@ import NumberTranslator
     
     
 #if TRANSLATE_IOS || TRANSLATE_MAC
-    let keyboard: TranslateSelectLanguage = TranslateSelectLanguage(
-        translate_1Manager: TranslateManager(),
-        keySpacing: 10,
-        borderColor: .green)
-    let _ = keyboard.countryKey.model.name = "Deutsch"
-    let _ = keyboard.countryDescriptionKey.top = "Deutsch"
-//    let keyboard: SmallKeyboard = Translate_1Keyboard()
+//    let keyboard: TranslateSelectLanguage = TranslateSelectLanguage(
+//        translate_1Manager: TranslateManager(),
+//        keySpacing: 10,
+//        borderColor: .green)
+//    let _ = keyboard.countryKey.model.name = "Deutsch"
+//    let _ = keyboard.countryDescriptionKey.top = "Deutsch"
+    let keyboard: SmallKeyboard = TranslateKeyboard()
 #else
     let keyboard: SmallKeyboard = CalculatoriOSKeyboard()
 #endif
