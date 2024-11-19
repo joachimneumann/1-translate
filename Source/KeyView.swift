@@ -15,7 +15,7 @@ struct KeyView: View {
         GeometryReader { geometry in
             if geometry.notZero {
                 key.view()
-                    .gesture(
+                    .simultaneousGesture(
                         DragGesture(minimumDistance: 0)
                             .onChanged { value in
                                 key.down(value.location, in: geometry.size)
