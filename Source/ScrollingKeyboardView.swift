@@ -73,6 +73,17 @@ struct LastRow: View {
                             }
                         }
                     }
+                    .background(
+                        LinearGradient(
+                            gradient: Gradient(colors: [
+                                Color.black.opacity(0.8), // Fully transparent
+                                Color.black.opacity(1)  // Semi-transparent white
+                            ]),
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+//                        .frame(height: keyWidth)
+                    )
                 }
             }
         }
@@ -109,8 +120,9 @@ struct ScrollingKeyboardView: View {
                             ScrollView(.vertical, showsIndicators: true) {
                                 AllRowsExceptLast(spacing: spacing, keyboard: keyboard)
                                     .frame(width: geometry.size.width, height: scrollingKeysheight)
+                                    .padding(.bottom, spacing + keyHeight)
                             }
-                            .frame(height: fourRows)
+                            .frame(height: fourRows + spacing + 0.7 * keyHeight)
                             Spacer()
                         }
                         VStack(alignment: .leading, spacing: 0.0) {
@@ -175,5 +187,5 @@ import NumberTranslator
 //            .background(.yellow)
             .frame(width: 300, height: 300)
     }
-    .background(.gray)
+    .background(.black)
 }
