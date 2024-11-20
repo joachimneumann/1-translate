@@ -7,7 +7,6 @@
 
 import SwiftUI
 @Observable class ImageKeyViewModel {
-    
     var size: CGSize = CGSize.zero
     var brightness: Double = 0.0
     var _name: String

@@ -9,17 +9,19 @@ import SwiftUI
 import SwiftGmp
 import NumberTranslator
 
+
 class TranslateSelectLanguage: Keyboard {
-    let countryKey: Imagekey
+    let countryKey: FlagKey
     let countryDescriptionKey: TextKey
     init(translate_1Manager: TranslateManager, keySpacing: CGFloat, borderColor: Color) {
-        countryKey = Imagekey("")
+        countryKey = FlagKey("")
         countryDescriptionKey = TextKey(top: "", bottom: nil)
         super.init()
         var columnIndex = 1
         var tempRow: [Key] = []
         for language in translate_1Manager.sortedlanguages {
-            let tempKey = Imagekey(translate_1Manager.flagname(language))
+            let tempKey = FlagKey(translate_1Manager.flagname(language))
+            tempKey.selectLanguage = EmptySelectLanguageProtocol()
             tempRow.append(tempKey)
             columnIndex += 1
             if columnIndex == 5 {
@@ -40,5 +42,18 @@ class TranslateSelectLanguage: Keyboard {
         tempRow.append(countryDescriptionKey)
 #endif
         keyMatrix.append(tempRow)
+    }
+    
+    func setSelectLanguage(_ selectLanguage: SelectLanguageProtocol) {
+        countryKey.selectLanguage = selectLanguage
+        countryKey.isToggleButton = true
+
+        for row in keyMatrix {
+            for key in row {
+                if let flagKey = key as? FlagKey {
+                    flagKey.selectLanguage = selectLanguage
+                }
+            }
+        }
     }
 }

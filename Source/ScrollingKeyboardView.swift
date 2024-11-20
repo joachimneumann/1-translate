@@ -152,7 +152,7 @@ import NumberTranslator
         translate_1Manager: TranslateManager(),
         keySpacing: 10,
         borderColor: Color(AppleColor.darkGray))
-    let _ = keyboard.countryKey.model._name = "Deutsch"
+    let _ = keyboard.countryKey.setName("Deutsch")
     let _ = keyboard.countryDescriptionKey.top = "Deutsch"
 //    let keyboard: SmallKeyboard = Translate_1Keyboard()
 #else

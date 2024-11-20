@@ -34,6 +34,7 @@ import SwiftGmp
         let threeKey = SymbolKey(DigitOperation.three)
         let addKey = SymbolKey(TwoOperantOperation.add)
         
+        // settingsKey is parameter of init()
         let zeroKey = SymbolKey(DigitOperation.zero)
         separatorKey = SymbolKey(DigitOperation.dot)
         let equalsKey = SymbolKey(EqualOperation.equal)

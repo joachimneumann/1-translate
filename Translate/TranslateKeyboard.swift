@@ -9,9 +9,9 @@ import SwiftGmp
 import SwiftUI
 
 @Observable class TranslateKeyboard: SmallKeyboard {
-    let countryKey: Imagekey
+    let countryKey: FlagKey
     init() {
-        countryKey = Imagekey("")
+        countryKey = FlagKey("English")
         super.init(settingsKey: countryKey)
     }
     

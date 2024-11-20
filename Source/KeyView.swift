@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SwiftGmp
 
 struct KeyView: View {
     var key: Key
@@ -14,26 +13,31 @@ struct KeyView: View {
     var body: some View {
         GeometryReader { geometry in
             if geometry.notZero {
-                key.view()
-                    .simultaneousGesture(
-                        DragGesture(minimumDistance: 0)
-                            .onChanged { value in
-                                key.down(value.location, in: geometry.size)
-                            }
-                            .onEnded { value in
-                                key.up()
-                            })
-                    .simultaneousGesture(
-                        LongPressGesture(minimumDuration: 0.7)
-                            .onEnded { value in
-                                key.longPress()
-                            }
-                    )
+                if let imageKey = key as? Imagekey {
+                    imageKey.view()
+                } else {
+                    key.view()
+                        .simultaneousGesture(
+                            DragGesture(minimumDistance: 0)
+                                .onChanged { value in
+                                    key.down(value.location, in: geometry.size)
+                                }
+                                .onEnded { value in
+                                    key.up()
+                                })
+                        .simultaneousGesture(
+                            LongPressGesture(minimumDuration: 0.7)
+                                .onEnded { value in
+                                    key.longPress()
+                                }
+                        )
+                }
             }
         }
     }
 }
 
+import SwiftGmp
 #Preview {
     let symbol1 = SymbolKey(InplaceOperation.sqr)
     let symbol3 = SymbolKey(DigitOperation.one)

@@ -30,6 +30,7 @@ extension EnvironmentValues {
     }
 }
 
+
 class ViewModel: ObservableObject {
     var screen: Screen
     var calculator: Calculator

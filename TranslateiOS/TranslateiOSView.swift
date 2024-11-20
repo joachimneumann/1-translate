@@ -17,7 +17,7 @@ struct TranslateiOSView: View {
     
     init(viewModel: TranslateViewModel) {
         self.viewModel = viewModel
-        scrollingModel = ScrollingKeyboardViewModel(spacing: viewModel.screen.keySpacing, keyboard: viewModel.selectLanguage)
+        scrollingModel = ScrollingKeyboardViewModel(spacing: viewModel.screen.keySpacing, keyboard: viewModel.translateSelectLanguage)
     }
     
     var Translate_1View: some View {

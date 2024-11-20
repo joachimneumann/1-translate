@@ -12,6 +12,8 @@ struct ImageKeyView: View {
     
     var body: some View {
         Button {
+            //viewmodel.toggleSelectLanguage
+            print("XX")
         } label: {
             Image(model.flagName)
                 .resizable()
@@ -25,7 +27,7 @@ struct ImageKeyView: View {
                 )
                 .padding(self.model.padding)
         }
-        .buttonStyle(BlackButtonStyle(bg: model.backgroundColor))
+//        .buttonStyle(BlackButtonStyle(bg: model.backgroundColor))
     }
 }
 
@@ -33,31 +35,7 @@ struct BlackButtonStyle: ButtonStyle {
     let bg: Color
     func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
-            .background(bg)
-    }
-}
-
-struct ImageKeyGeo: View {
-    var model: ImageKeyViewModel
-    
-    init(_ model: ImageKeyViewModel) {
-        self.model = model
-    }
-    init(_ name: String) {
-        self.model = ImageKeyViewModel(name: name, borderColor: .gray, isCircle: true)
-    }
-    var body: some View {
-        GeometryReader { geometry in
-            if geometry.size != .zero {
-                ImageKeyView(model: self.model)
-                .onAppear {
-                    model.size = geometry.size
-                }
-                .onChange(of: geometry.size) { oldValue, newValue in
-                    model.size = newValue
-                }
-            }
-        }
+            .background(.blue)
     }
 }
 
@@ -70,19 +48,20 @@ struct ImageKeyGeo: View {
     }
         
     override func view() -> AnyView {
-        AnyView(ImageKeyGeo(model))
-    }
-    
-    override func visualUp() {
-        model.brightness = 0.0
-    }
-    
-    override func visualDown() {
-        model.brightness = 0.2
+        AnyView(GeometryReader { geometry in
+            if geometry.size != .zero {
+                ImageKeyView(model: self.model)
+                .onAppear {
+                    self.model.size = geometry.size
+                }
+                .onChange(of: geometry.size) { oldValue, newValue in
+                    self.model.size = newValue
+                }
+            }
+        })
     }
 
 }
-
 
 #Preview {
     ZStack {
@@ -92,7 +71,7 @@ struct ImageKeyGeo: View {
             Imagekey("English").view()
             Imagekey("Esperanto").view()
             Imagekey("Deutsch").view()
-            ImageKeyGeo("Español")
+            Imagekey("Español").view()
         }
         .frame(height: 200)
     }
