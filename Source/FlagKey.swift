@@ -96,11 +96,37 @@ class EmptySelectLanguageProtocol: SelectLanguageProtocol {
                             .stroke(self.borderColor, lineWidth: self.borderWidth)
                     )
                     .padding(self.padding)
+                    .buttonStyle(BlackButtonStyle(bg: self.backgroundColor))
             }
             .onAppear() {
                 self.size = geometry.size
             }
         })
     }
+}
 
+
+struct FlagView: View {
+    var flagKey: FlagKey
+    
+    var body: some View {
+        flagKey.view()
+    }
+}
+
+#Preview {
+
+
+
+    ZStack {
+        Rectangle()
+            .foregroundColor(.gray)
+        HStack(spacing: 0.0) {
+            FlagView(flagKey: FlagKey("Deutsch"))
+            FlagView(flagKey: FlagKey("Dansk"))
+            FlagView(flagKey: FlagKey("Babylonian"))
+            FlagView(flagKey: FlagKey("Español"))
+        }
+        .frame(height: 100)
+    }
 }

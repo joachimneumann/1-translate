@@ -64,7 +64,7 @@ struct LastRow: View {
                                 if let key = key as? SymbolKey {
                                     KeyView(key: key)
                                         .frame(width: keyWidth)
-                                } else if let key = key as? Imagekey {
+                                } else if let key = key as? FlagKey {
                                     KeyView(key: key)
                                         .frame(width: keyWidth)
                                 } else { // TextView

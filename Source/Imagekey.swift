@@ -35,7 +35,7 @@ struct BlackButtonStyle: ButtonStyle {
     let bg: Color
     func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
-            .background(.blue)
+            .background(.red)
     }
 }
 
