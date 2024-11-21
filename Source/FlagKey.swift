@@ -75,8 +75,10 @@ class EmptySelectLanguageProtocol: SelectLanguageProtocol {
         0.5 * borderWidth
     }
     
+
     override func view() -> AnyView {
         AnyView(GeometryReader { geometry in
+//            CustomPressableButton(selectLanguage: self.selectLanguage)
             Button {
                 if self.isToggleButton {
                     self.selectLanguage.toggleLanguageSelector()
@@ -104,6 +106,41 @@ class EmptySelectLanguageProtocol: SelectLanguageProtocol {
     }
 }
 
+struct CustomPressableButton: View {
+    var selectLanguage: SelectLanguageProtocol
+
+    @GestureState private var isPressed = false
+    @State private var isDragging = false
+
+    var body: some View {
+        Text("Press Me")
+            .padding()
+            .background(isPressed ? Color.blue : Color.gray)
+            .cornerRadius(8)
+            .scaleEffect(isPressed ? 0.95 : 1.0) // Optional scale effect
+            .animation(.easeInOut, value: isPressed)
+            .simultaneousGesture(
+                DragGesture(minimumDistance: 0)
+                    .onChanged { value in
+                        // Detect if the drag is turning into a scroll gesture
+                        if abs(value.translation.height) > 10 {
+                            isDragging = true
+                        }
+                    }
+                    .updating($isPressed) { _, isPressed, _ in
+                        if !isDragging {
+                            isPressed = true
+                        }
+                    }
+                    .onEnded { value in
+                        if !isDragging {
+                            self.selectLanguage.toggleLanguageSelector()
+                        }
+                        isDragging = false // Reset drag state
+                    }
+            )
+    }
+}
 
 struct FlagView: View {
     var flagKey: FlagKey

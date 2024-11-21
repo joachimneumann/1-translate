@@ -62,7 +62,7 @@ struct KeyColor {
         
     static func sixColors(op: any OpProtocol) -> SixColors {
         switch op {
-        case is InplaceOperation, is TwoOperantOperation, is PercentOperation, is ClearOperation, is EqualOperation:
+        case is TranslateOperation, is InplaceOperation, is TwoOperantOperation, is PercentOperation, is ClearOperation, is EqualOperation:
             return operatorColors
         default:
             return digitColors

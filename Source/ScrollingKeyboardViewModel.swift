@@ -35,7 +35,7 @@ import SwiftUI
         scrollingKeysheight =
             CGFloat(keyboard.keyMatrix.count - 1) * keyHeight +
             CGFloat(keyboard.keyMatrix.count - 2) * spacing
-        keyWidth = 8.25 * (size.width - 3 * spacing)
+        keyWidth = 0.25 * (size.width - 3 * spacing)
     }
 
 }

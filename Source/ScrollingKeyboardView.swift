@@ -58,7 +58,7 @@ struct LastRow: View {
                 ForEach(lastRow, id: \.id) { key in
                     if let key = key as? TextKey {
                         KeyView(key: key)
-                    } else { // TextView
+                    } else {
                         KeyView(key: key)
                             .frame(width: keyWidth)
                     }
@@ -99,7 +99,7 @@ struct ScrollingKeyboardView: View {
                         .frame(height: model.fourRows)
                         LastRow(
                             spacing: model.spacing,
-                            keyWidth: 60,
+                            keyWidth: model.keyWidth,
                             keyboard: model.keyboard,
                             bg: model.backgroundColor)
                         .frame(width: geometry.size.width, height: model.keyHeight)
