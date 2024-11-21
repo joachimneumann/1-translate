@@ -32,14 +32,11 @@ struct AllRowsExceptLast: View {
         GeometryReader { geometry in
             VStack(spacing: spacing) {
                 if geometry.notZero {
-                    let keyWidth = 0.25 * (geometry.size.width - 3 * spacing)
                     ForEach(keyboard.keyMatrix.dropLast().indices, id: \.self) { rowIndex in
                         HStack(spacing: spacing) {
                             ForEach(keyboard.keyMatrix[rowIndex], id: \.id) { key in
                                 KeyView(key: key)
-                                //                                    .frame(width: keyWidth)
                             }
-                            Spacer(minLength: 0.0)
                         }
                     }
                 }
@@ -50,42 +47,33 @@ struct AllRowsExceptLast: View {
 
 struct LastRow: View {
     let spacing: CGFloat
+    let keyWidth: CGFloat
     var keyboard: Keyboard  // Use @ObservedObject for updates
     let bg: Color
     
     var body: some View {
         if let lastRow = keyboard.keyMatrix.last {
-            GeometryReader { geometry in
-                if geometry.notZero {
-                    //                    let keyWidth = 0.25 * (geometry.size.width - 3 * spacing)
-                    VStack(spacing: spacing) {
-                        HStack(spacing: spacing) {
-                            ForEach(lastRow, id: \.id) { key in
-                                if let key = key as? SymbolKey {
-                                    KeyView(key: key)
-                                    //                                        .frame(width: keyWidth)
-                                } else if let key = key as? FlagKey {
-                                    KeyView(key: key)
-                                    //                                        .frame(width: keyWidth)
-                                } else { // TextView
-                                    KeyView(key: key)
-                                    //.background(.green)
-                                }
-                            }
-                        }
+            //                    let keyWidth = 0.25 * (geometry.size.width - 3 * spacing)
+            HStack(spacing: spacing) {
+                ForEach(lastRow, id: \.id) { key in
+                    if let key = key as? TextKey {
+                        KeyView(key: key)
+                    } else { // TextView
+                        KeyView(key: key)
+                            .frame(width: keyWidth)
                     }
-                    .background(
-                        LinearGradient(
-                            gradient: Gradient(colors: [
-                                bg.opacity(0.8), // Fully transparent
-                                bg.opacity(1.0)  // Semi-transparent white
-                            ]),
-                            startPoint: .top,
-                            endPoint: .center
-                        )
-                    )
                 }
             }
+            .background(
+                LinearGradient(
+                    gradient: Gradient(colors: [
+                        bg.opacity(0.8), // Fully transparent
+                        bg.opacity(1.0)  // Semi-transparent white
+                    ]),
+                    startPoint: .top,
+                    endPoint: .center
+                )
+            )
         }
     }
 }
@@ -107,18 +95,18 @@ struct ScrollingKeyboardView: View {
                         ScrollView(.vertical, showsIndicators: true) {
                             AllRowsExceptLast(spacing: model.spacing, keyboard: model.keyboard)
                                 .frame(width: geometry.size.width, height: model.scrollingKeysheight)
-                            //                                    .padding(.bottom, model.spacing + model.keyHeight)
                         }
                         .frame(height: model.fourRows)
-                        HStack {
-                            LastRow(spacing: model.spacing, keyboard: model.keyboard, bg: model.backgroundColor)
-                            Spacer(minLength: 0.0)
-                        }
+                        LastRow(
+                            spacing: model.spacing,
+                            keyWidth: 60,
+                            keyboard: model.keyboard,
+                            bg: model.backgroundColor)
                         .frame(width: geometry.size.width, height: model.keyHeight)
                     }
                 }
                 .onAppear {
-                    self.model.newHeight(geometry.size.height)
+                    self.model.newSize(geometry.size)
                 }
             }
         }

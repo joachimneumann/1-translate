@@ -16,6 +16,7 @@ import SwiftUI
     
     var fiveRows: CGFloat = 0.0
     var keyHeight: CGFloat = 0.0
+    var keyWidth: CGFloat = 0.0
     var fourRows: CGFloat = 0.0
     var scrollingKeysheight: CGFloat = 0.0
 
@@ -27,13 +28,14 @@ import SwiftUI
         self.keyboard = keyboard
     }
     
-    func newHeight(_ height: CGFloat) {
-        fiveRows = height
+    func newSize(_ size: CGSize) {
+        fiveRows = size.height
         keyHeight = 0.2 * (fiveRows - 4 * spacing)
         fourRows = 4 * keyHeight + 3 * spacing
         scrollingKeysheight =
             CGFloat(keyboard.keyMatrix.count - 1) * keyHeight +
             CGFloat(keyboard.keyMatrix.count - 2) * spacing
+        keyWidth = 8.25 * (size.width - 3 * spacing)
     }
 
 }
