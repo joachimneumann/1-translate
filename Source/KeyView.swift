@@ -13,8 +13,8 @@ struct KeyView: View {
     var body: some View {
         GeometryReader { geometry in
             if geometry.notZero {
-                if let imageKey = key as? Imagekey {
-                    imageKey.view()
+                if let flagKey = key as? FlagKey {
+                    flagKey.view()
                 } else {
                     key.view()
                         .simultaneousGesture(

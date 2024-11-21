@@ -96,8 +96,8 @@ class EmptySelectLanguageProtocol: SelectLanguageProtocol {
                             .stroke(self.borderColor, lineWidth: self.borderWidth)
                     )
                     .padding(self.padding)
-                    .buttonStyle(BlackButtonStyle(bg: self.backgroundColor))
             }
+            .buttonStyle(.plain) // Ensures transparent background
             .onAppear() {
                 self.size = geometry.size
             }

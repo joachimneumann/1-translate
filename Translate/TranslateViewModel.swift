@@ -117,8 +117,8 @@ class TranslateViewModel: ViewModel, SelectLanguageProtocol {
     }
 
     override func execute(_ key: Key) {
-        if let flagKey = key as? Imagekey {
-            if let language = translate_1Manager.languageEnum(forFlagname: flagKey.model._name) {
+        if let flagKey = key as? FlagKey {
+            if let language = translate_1Manager.languageEnum(forFlagname: flagKey.name) {
                 setLanguage(language: language)
             }
         }
