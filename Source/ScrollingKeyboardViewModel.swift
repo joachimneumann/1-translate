@@ -21,12 +21,10 @@ import SwiftUI
 
     let spacing: CGFloat
     let keyboard: Keyboard
-    let scrolling: Bool
 
     init(spacing: CGFloat, keyboard: Keyboard) {
         self.spacing = spacing
         self.keyboard = keyboard
-        scrolling = keyboard.keyMatrix.count > 4
     }
     
     func newHeight(_ height: CGFloat) {

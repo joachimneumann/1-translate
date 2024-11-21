@@ -78,7 +78,7 @@ class EmptySelectLanguageProtocol: SelectLanguageProtocol {
     override func view() -> AnyView {
         AnyView(GeometryReader { geometry in
             Button {
-                print("flag \(self.name) pressed. isToggleButton=\(self.isToggleButton)")
+                print("1")
                 if self.isToggleButton {
                     self.selectLanguage.toggleLanguageSelector()
                 } else {
@@ -121,7 +121,7 @@ struct FlagView: View {
     ZStack {
         Rectangle()
             .foregroundColor(.gray)
-        HStack(spacing: 0.0) {
+        HStack {
             FlagView(flagKey: FlagKey("Deutsch"))
             FlagView(flagKey: FlagKey("Dansk"))
             FlagView(flagKey: FlagKey("Babylonian"))

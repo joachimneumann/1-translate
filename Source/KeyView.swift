@@ -39,16 +39,16 @@ struct KeyView: View {
 
 import SwiftGmp
 #Preview {
-    let symbol1 = SymbolKey(InplaceOperation.sqr)
-    let symbol3 = SymbolKey(DigitOperation.one)
-    let symbol2 = SymbolKey(DigitOperation.five)
+    let key1 = SymbolKey(InplaceOperation.sqr)
+    let key2 = FlagKey("English")
+    let key3 = SymbolKey(DigitOperation.one)
     ZStack {
         Rectangle()
             .foregroundColor(.gray)
         HStack(spacing: 10) {
-            KeyView(key: symbol1)
-            KeyView(key: symbol2)
-            KeyView(key: symbol3)
+            KeyView(key: key1)
+            KeyView(key: key2)
+            KeyView(key: key3)
         }
         .frame(width: 320, height: 100)
     }

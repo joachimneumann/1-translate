@@ -37,7 +37,7 @@ struct AllRowsExceptLast: View {
                         HStack(spacing: spacing) {
                             ForEach(keyboard.keyMatrix[rowIndex], id: \.id) { key in
                                 KeyView(key: key)
-                                    .frame(width: keyWidth)
+//                                    .frame(width: keyWidth)
                             }
                             Spacer(minLength: 0.0)
                         }
@@ -57,16 +57,16 @@ struct LastRow: View {
         if let lastRow = keyboard.keyMatrix.last {
             GeometryReader { geometry in
                 if geometry.notZero {
-                    let keyWidth = 0.25 * (geometry.size.width - 3 * spacing)
+//                    let keyWidth = 0.25 * (geometry.size.width - 3 * spacing)
                     VStack(spacing: spacing) {
                         HStack(spacing: spacing) {
                             ForEach(lastRow, id: \.id) { key in
                                 if let key = key as? SymbolKey {
                                     KeyView(key: key)
-                                        .frame(width: keyWidth)
+//                                        .frame(width: keyWidth)
                                 } else if let key = key as? FlagKey {
                                     KeyView(key: key)
-                                        .frame(width: keyWidth)
+//                                        .frame(width: keyWidth)
                                 } else { // TextView
                                     KeyView(key: key)
                                         //.background(.green)
@@ -101,40 +101,36 @@ struct ScrollingKeyboardView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            if model.scrolling {
-                if geometry.notZero {
-                    ZStack {
-                        VStack(alignment: .leading, spacing: model.spacing) {
-                            ScrollView(.vertical, showsIndicators: true) {
-                                AllRowsExceptLast(spacing: model.spacing, keyboard: model.keyboard)
-                                    .frame(width: geometry.size.width, height: model.scrollingKeysheight)
-                                    .padding(.bottom, model.spacing + model.keyHeight)
-                            }
-                            .frame(height: model.fourRows + model.spacing + 0.7 * model.keyHeight)
-                            Spacer()
+            if geometry.notZero {
+                ZStack {
+                    VStack(alignment: .leading, spacing: model.spacing) {
+                        ScrollView(.vertical, showsIndicators: true) {
+                            AllRowsExceptLast(spacing: model.spacing, keyboard: model.keyboard)
+                                .frame(width: geometry.size.width, height: model.scrollingKeysheight)
+//                                    .padding(.bottom, model.spacing + model.keyHeight)
                         }
-                        VStack(alignment: .leading, spacing: 0.0) {
-                            Spacer()
-                            HStack {
-                                VStack(alignment: .leading, spacing: 0.0) {
-                                    Spacer()
-                                    HStack(spacing: 0.0) {
-                                        LastRow(spacing: model.spacing, keyboard: model.keyboard, bg: model.backgroundColor)
-                                        Spacer(minLength: 0.0)
-                                    }
-                                    .frame(width: geometry.size.width, height: model.keyHeight)
+//                            .frame(height: model.fourRows + model.spacing + 0.7 * model.keyHeight)
+//                            Spacer()
+                    }
+                    VStack(alignment: .leading, spacing: 0.0) {
+                        Spacer()
+                        HStack {
+                            VStack(alignment: .leading, spacing: 0.0) {
+                                Spacer()
+                                HStack(spacing: 0.0) {
+                                    LastRow(spacing: model.spacing, keyboard: model.keyboard, bg: model.backgroundColor)
+                                    Spacer(minLength: 0.0)
                                 }
-                                Spacer(minLength: 0.0)
+                                .frame(width: geometry.size.width, height: model.keyHeight)
                             }
+                            Spacer(minLength: 0.0)
                         }
-                        .frame(height: model.fiveRows)
                     }
-                    .onAppear {
-                        self.model.newHeight(geometry.size.height)
-                    }
+//                        .frame(height: model.fiveRows)
                 }
-            } else {
-                AllRows(spacing: model.spacing, keyboard: model.keyboard)
+                .onAppear {
+                    self.model.newHeight(geometry.size.height)
+                }
             }
         }
     }
