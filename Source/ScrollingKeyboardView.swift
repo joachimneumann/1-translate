@@ -10,7 +10,7 @@ import SwiftUI
 struct AllRows: View {
     let spacing: CGFloat
     var keyboard: Keyboard  // Use @ObservedObject for updates
-
+    
     var body: some View {
         VStack(spacing: spacing) {
             ForEach(keyboard.keyMatrix.indices, id: \.self) { rowIndex in
@@ -27,7 +27,7 @@ struct AllRows: View {
 struct AllRowsExceptLast: View {
     let spacing: CGFloat
     var keyboard: Keyboard
-
+    
     var body: some View {
         GeometryReader { geometry in
             VStack(spacing: spacing) {
@@ -37,7 +37,7 @@ struct AllRowsExceptLast: View {
                         HStack(spacing: spacing) {
                             ForEach(keyboard.keyMatrix[rowIndex], id: \.id) { key in
                                 KeyView(key: key)
-//                                    .frame(width: keyWidth)
+                                //                                    .frame(width: keyWidth)
                             }
                             Spacer(minLength: 0.0)
                         }
@@ -52,24 +52,24 @@ struct LastRow: View {
     let spacing: CGFloat
     var keyboard: Keyboard  // Use @ObservedObject for updates
     let bg: Color
-
+    
     var body: some View {
         if let lastRow = keyboard.keyMatrix.last {
             GeometryReader { geometry in
                 if geometry.notZero {
-//                    let keyWidth = 0.25 * (geometry.size.width - 3 * spacing)
+                    //                    let keyWidth = 0.25 * (geometry.size.width - 3 * spacing)
                     VStack(spacing: spacing) {
                         HStack(spacing: spacing) {
                             ForEach(lastRow, id: \.id) { key in
                                 if let key = key as? SymbolKey {
                                     KeyView(key: key)
-//                                        .frame(width: keyWidth)
+                                    //                                        .frame(width: keyWidth)
                                 } else if let key = key as? FlagKey {
                                     KeyView(key: key)
-//                                        .frame(width: keyWidth)
+                                    //                                        .frame(width: keyWidth)
                                 } else { // TextView
                                     KeyView(key: key)
-                                        //.background(.green)
+                                    //.background(.green)
                                 }
                             }
                         }
@@ -107,26 +107,15 @@ struct ScrollingKeyboardView: View {
                         ScrollView(.vertical, showsIndicators: true) {
                             AllRowsExceptLast(spacing: model.spacing, keyboard: model.keyboard)
                                 .frame(width: geometry.size.width, height: model.scrollingKeysheight)
-//                                    .padding(.bottom, model.spacing + model.keyHeight)
+                            //                                    .padding(.bottom, model.spacing + model.keyHeight)
                         }
-//                            .frame(height: model.fourRows + model.spacing + 0.7 * model.keyHeight)
-//                            Spacer()
-                    }
-                    VStack(alignment: .leading, spacing: 0.0) {
-                        Spacer()
+                        .frame(height: model.fourRows)
                         HStack {
-                            VStack(alignment: .leading, spacing: 0.0) {
-                                Spacer()
-                                HStack(spacing: 0.0) {
-                                    LastRow(spacing: model.spacing, keyboard: model.keyboard, bg: model.backgroundColor)
-                                    Spacer(minLength: 0.0)
-                                }
-                                .frame(width: geometry.size.width, height: model.keyHeight)
-                            }
+                            LastRow(spacing: model.spacing, keyboard: model.keyboard, bg: model.backgroundColor)
                             Spacer(minLength: 0.0)
                         }
+                        .frame(width: geometry.size.width, height: model.keyHeight)
                     }
-//                        .frame(height: model.fiveRows)
                 }
                 .onAppear {
                     self.model.newHeight(geometry.size.height)
@@ -150,22 +139,22 @@ import NumberTranslator
         borderColor: Color(AppleColor.darkGray))
     let _ = keyboard.countryKey.setName("Deutsch")
     let _ = keyboard.countryDescriptionKey.top = "Deutsch"
-//    let keyboard: SmallKeyboard = Translate_1Keyboard()
+    //    let keyboard: SmallKeyboard = Translate_1Keyboard()
 #else
     let keyboard: SmallKeyboard = CalculatoriOSKeyboard()
 #endif
     let model = ScrollingKeyboardViewModel(spacing: 10.0, keyboard: keyboard)
-
     
-//    let translate_1Manager = Translate_1Manager()
-
-//    let keyboard = Translate_1SelectLanguage(keySize: screen.keySize, translate_1Manager: Translate_1Manager(), keySpacing: screen.keySpacing)
-//    let _ = keyboard.countryKey.imageName = translate_1Manager.flagname(NumberTranslator.LanguageEnum.german)
-//    let _ = keyboard.countryDescriptionKey.top = "Deutsch"
-//    let _ = keyboard.countryDescriptionKey.bottom = "(German)"
-
-//    let keyboard: SmallKeyboard = Translate_1LanguageSelectorKeyboard(keySize: keySize, translate_1Manager: Translate_1Manager())
-
+    
+    //    let translate_1Manager = Translate_1Manager()
+    
+    //    let keyboard = Translate_1SelectLanguage(keySize: screen.keySize, translate_1Manager: Translate_1Manager(), keySpacing: screen.keySpacing)
+    //    let _ = keyboard.countryKey.imageName = translate_1Manager.flagname(NumberTranslator.LanguageEnum.german)
+    //    let _ = keyboard.countryDescriptionKey.top = "Deutsch"
+    //    let _ = keyboard.countryDescriptionKey.bottom = "(German)"
+    
+    //    let keyboard: SmallKeyboard = Translate_1LanguageSelectorKeyboard(keySize: keySize, translate_1Manager: Translate_1Manager())
+    
     VStack(spacing: 0.0) {
         Rectangle()
         ScrollingKeyboardView(model: model)

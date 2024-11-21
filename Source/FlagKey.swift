@@ -78,7 +78,6 @@ class EmptySelectLanguageProtocol: SelectLanguageProtocol {
     override func view() -> AnyView {
         AnyView(GeometryReader { geometry in
             Button {
-                print("1")
                 if self.isToggleButton {
                     self.selectLanguage.toggleLanguageSelector()
                 } else {
