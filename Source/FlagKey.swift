@@ -68,7 +68,7 @@ class EmptySelectLanguageProtocol: SelectLanguageProtocol {
     var reducedWidth: CGFloat {
         size.width - 2 * borderWidth
     }
-    var reducedheight: CGFloat {
+    var reducedHeight: CGFloat {
         size.height - 2 * borderWidth
     }
     var padding: CGFloat {
@@ -78,69 +78,80 @@ class EmptySelectLanguageProtocol: SelectLanguageProtocol {
 
     override func view() -> AnyView {
         AnyView(GeometryReader { geometry in
-//            CustomPressableButton(selectLanguage: self.selectLanguage)
-            Button {
-                if self.isToggleButton {
-                    self.selectLanguage.toggleLanguageSelector()
-                } else {
-                    self.selectLanguage.setLanguage(self.name)
-                }
-            } label: {
-                self.image
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: self.reducedWidth, height: self.reducedheight)
-                    .clipShape(Capsule())
-                    .padding(self.padding)
-                    .overlay(
-                        Capsule()
-                            .stroke(self.borderColor, lineWidth: self.borderWidth)
-                    )
-                    .padding(self.padding)
-            }
-            .buttonStyle(.plain) // Ensures transparent background
+            CustomPressableButton(
+                selectLanguage: self.selectLanguage,
+                image: self.image,
+                size: CGSize(width: self.reducedWidth, height: self.reducedHeight),
+                padding: self.padding,
+                borderColor: self.borderColor,
+                borderWidth: self.borderWidth,
+                isToggleButton: self.isToggleButton,
+                name: self.name)
             .onAppear() {
                 self.size = geometry.size
             }
         })
     }
-}
+    
+    struct CustomPressableButton: View {
+        var selectLanguage: SelectLanguageProtocol
+        let image: Image
+        let size: CGSize
+        let padding: CGFloat
+        let borderColor: Color
+        let borderWidth: CGFloat
+        let isToggleButton: Bool
+        let name: String
 
-struct CustomPressableButton: View {
-    var selectLanguage: SelectLanguageProtocol
+        @GestureState private var isPressed = false
+        @State private var isDragging = false
 
-    @GestureState private var isPressed = false
-    @State private var isDragging = false
+        var body: some View {
+            image
+                .resizable()
+                .scaledToFill()
+                .frame(width: size.width , height: size.height)
+                .clipShape(Capsule())
+                .padding(padding)
+                .brightness(isPressed ? 0.2 : 0.0)
+                .overlay(
+                    Capsule()
+                        .stroke(borderColor, lineWidth: borderWidth)
+                )
+                .padding(padding)
 
-    var body: some View {
-        Text("Press Me")
-            .padding()
-            .background(isPressed ? Color.blue : Color.gray)
-            .cornerRadius(8)
-            .scaleEffect(isPressed ? 0.95 : 1.0) // Optional scale effect
-            .animation(.easeInOut, value: isPressed)
-            .simultaneousGesture(
-                DragGesture(minimumDistance: 0)
-                    .onChanged { value in
-                        // Detect if the drag is turning into a scroll gesture
-                        if abs(value.translation.height) > 10 {
-                            isDragging = true
+//                .background(isPressed ? Color.blue : Color.gray)
+                .scaleEffect(isPressed ? 0.95 : 1.0) // Optional scale effect
+                .animation(.easeInOut, value: isPressed)
+                .simultaneousGesture(
+                    DragGesture(minimumDistance: 0)
+                        .onChanged { value in
+                            // Detect if the drag is turning into a scroll gesture
+                            if abs(value.translation.height) > 10 {
+                                isDragging = true
+                            }
                         }
-                    }
-                    .updating($isPressed) { _, isPressed, _ in
-                        if !isDragging {
-                            isPressed = true
+                        .updating($isPressed) { _, isPressed, _ in
+                            if !isDragging {
+                                isPressed = true
+                            }
                         }
-                    }
-                    .onEnded { value in
-                        if !isDragging {
-                            self.selectLanguage.toggleLanguageSelector()
+                        .onEnded { value in
+                            if !isDragging {
+                                if isToggleButton {
+                                    selectLanguage.toggleLanguageSelector()
+                                } else {
+                                    selectLanguage.setLanguage(name)
+                                }
+                            }
+                            isDragging = false // Reset drag state
                         }
-                        isDragging = false // Reset drag state
-                    }
-            )
+                )
+        }
     }
+    
 }
+
 
 struct FlagView: View {
     var flagKey: FlagKey
