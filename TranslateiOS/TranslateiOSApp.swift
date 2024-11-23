@@ -13,7 +13,7 @@ struct TranslateiOSApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                //            GeometryReader { geo in
+                //            GeometryReader { geometry in
                 TranslateiOSView(viewModel: TranslateViewModel(screen: Screen()))
                 //            }
             }

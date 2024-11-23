@@ -42,9 +42,7 @@ import SwiftGmp
                             .background(self.bgColor)
                             .clipShape(Capsule())
                             .onAppear {
-                                self.model.newSize(
-                                    min(geometry.size.width,
-                                        geometry.size.height))
+                                self.model.newSize(geometry.size)
                             }
                             .scaleEffect(self.isPressed ? 0.97 : 1.0)
                     }

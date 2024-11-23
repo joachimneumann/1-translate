@@ -10,7 +10,7 @@ import SwiftGmp
 
 @Observable class SymbolKeyViewModel: ObservableObject {
     
-    private var size: CGFloat
+    private var diameter: CGFloat
     var op: any OpProtocol
     var symbol: String
     private var textColor: Color
@@ -23,7 +23,7 @@ import SwiftGmp
         self.textColor = KeyColor.sixColors(op: op).textColor
         self.upColor = KeyColor.sixColors(op: op).upColor
         self.downColor = KeyColor.sixColors(op: op).downColor
-        self.size = 0.0
+        self.diameter = 0.0
     }
     
     func setColors(textColor: Color, upColor: Color, downColor: Color) {
@@ -40,51 +40,51 @@ import SwiftGmp
         }
     }
 
-    func newSize(_ size: CGFloat) {
+    func newSize(_ sizeParameter: CGSize) {
 #if os(macOS)
-        let sizeFactorDigits          = 1.5
-        let sizeFactorAC              = 1.4
-        let sizeFactorBack            = 1.5
-        let sizeFactorSpecialOperator = 1.12
-        let sizeFactorOperator        = 1.04
-        let sizeFactorOperatorX       = sizeFactorOperator * 0.86
-        let sizeFactorComma           = 1.8
-        let sizeFactorScientific      = 1.2
+        let factorDigits          = 1.5
+        let factorAC              = 1.4
+        let factorBack            = 1.5
+        let factorSpecialOperator = 1.12
+        let factorOperator        = 1.04
+        let factorOperatorX       = factorOperator * 0.86
+        let factorComma           = 1.8
+        let factorScientific      = 1.2
 #else
-        let sizeFactorDigits          = 1.4
-        let sizeFactorAC              = sizeFactorDigits
-        let sizeFactorBack            = 1.5
-        let sizeFactorSpecialOperator = 1.1
-        let sizeFactorOperator        = 1.1
-        let sizeFactorOperatorX       = 0.95
-        let sizeFactorComma           = 1.5
-        let sizeFactorScientific      = 1.0
+        let factorDigits          = 1.4
+        let factorAC              = factorDigits
+        let factorBack            = 1.5
+        let factorSpecialOperator = 1.1
+        let factorOperator        = 1.1
+        let factorOperatorX       = 0.95
+        let factorComma           = 1.5
+        let factorScientific      = 1.0
 #endif
         
-        var sizeFactor: CGFloat
+        var factor: CGFloat
         switch symbol {
         case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9":
-            sizeFactor = sizeFactorDigits
+            factor = factorDigits
         case "AC":
-            sizeFactor = sizeFactorAC
+            factor = factorAC
         case "back":
-            sizeFactor = sizeFactorBack
+            factor = factorBack
         case "±", "%":
-            sizeFactor = sizeFactorSpecialOperator
+            factor = factorSpecialOperator
         case "*":
-            sizeFactor = sizeFactorOperatorX
+            factor = factorOperatorX
         case "settings":
-            sizeFactor = 2.0
+            factor = 2.0
         case _ where sfImageForKey.keys.contains(symbol):
-            sizeFactor = sizeFactorOperator
+            factor = factorOperator
         case ",", ".":
-            sizeFactor = sizeFactorComma
+            factor = factorComma
         case "One_x":
-            sizeFactor = 0.9
+            factor = 0.9
         default:
-            sizeFactor = sizeFactorScientific
+            factor = factorScientific
         }
-        self.size = size * sizeFactor
+        self.diameter = min(sizeParameter.width, sizeParameter.height) * factor
     }
 
     
@@ -141,11 +141,11 @@ import SwiftGmp
                 .foregroundColor(textColor)
                 //.font(Font.title.weight(.regular))
                 .aspectRatio(contentMode: .fit)
-                .frame(width: size * 0.3, height: size * 0.3))
+                .frame(width: diameter * 0.3, height: diameter * 0.3))
                 //.background(.green)
         } else {
             return AnyView(Text(symbol)
-                .font(.system(size: size * 0.3))
+                .font(.system(size: diameter * 0.3))
                 .foregroundColor(textColor))
         }
     }
@@ -169,7 +169,7 @@ import SwiftGmp
     }
     
     private var one_x: some View {
-        let slashSize = size * 0.16
+        let slashSize = diameter * 0.16
         let fontSize = slashSize * 1.5
         return slashShape(slashSize: slashSize)
             .frame(width: slashSize, height: slashSize)
@@ -193,10 +193,10 @@ import SwiftGmp
                 HStack(spacing: 0.0) {
                     Spacer(minLength: 0.0)
                     Text(base)
-                        .font(.system(size: size * 0.3))
+                        .font(.system(size: diameter * 0.3))
                     Text(exponent)
-                        .font(.system(size: size * 0.18))
-                        .offset(x: 0.0, y: -0.08 * size)
+                        .font(.system(size: diameter * 0.18))
+                        .offset(x: 0.0, y: -0.08 * diameter)
                     Spacer(minLength: 0.0)
                 }
                 Spacer(minLength: 0.0)
@@ -212,10 +212,10 @@ import SwiftGmp
                 HStack(spacing:0.0) {
                     Spacer(minLength: 0.0)
                     Text("log")
-                        .font(.system(size: size * 0.3))
+                        .font(.system(size: diameter * 0.3))
                     Text(base)
-                        .font(.system(size: size * 0.18))
-                        .offset(x: 0.0, y: 0.13 * size)
+                        .font(.system(size: diameter * 0.18))
+                        .offset(x: 0.0, y: 0.13 * diameter)
                     Spacer(minLength: 0.0)
                 }
                 Spacer(minLength: 0.0)
@@ -248,7 +248,7 @@ import SwiftGmp
     }
     
     private func rootShapeView(rootDigit: String, underTheRoot: String = "x") -> some View {
-        let rootSize = size * 0.8
+        let rootSize = diameter * 0.8
         let fontSize = rootSize * 0.2
         let xFontSize = rootSize * 0.3
         return root(rootSize: rootSize)

@@ -53,7 +53,6 @@ struct LastRow: View {
     
     var body: some View {
         if let lastRow = keyboard.keyMatrix.last {
-            //                    let keyWidth = 0.25 * (geometry.size.width - 3 * spacing)
             HStack(spacing: spacing) {
                 ForEach(lastRow, id: \.id) { key in
                     if let key = key as? TextKey {
@@ -94,7 +93,7 @@ struct ScrollingKeyboardView: View {
                     VStack(alignment: .leading, spacing: 0.0) {
                         ScrollView(.vertical, showsIndicators: true) {
                             AllRowsExceptLast(spacing: model.spacing, keyboard: model.keyboard)
-                                .frame(width: geometry.size.width, height: model.scrollingContentHeight)
+                                .frame(height: model.scrollingContentHeight)
                         }
                         .frame(height: model.fourRows + model.spacing)
                         LastRow(
@@ -102,7 +101,7 @@ struct ScrollingKeyboardView: View {
                             keyWidth: model.keyWidth,
                             keyboard: model.keyboard,
                             bg: model.backgroundColor)
-                        .frame(width: geometry.size.width, height: model.keyHeight)
+                        .frame(height: model.keyHeight)
                     }
                 }
                 .onAppear {
