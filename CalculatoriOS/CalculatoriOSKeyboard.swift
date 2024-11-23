@@ -11,6 +11,7 @@ import SwiftUI
 @Observable class CalculatoriOSKeyboard: SmallKeyboard {
     let settingskey: SymbolKey
     init() {
+        print("6")
         settingskey = SymbolKey(CalculatoriOSOperation.settings)
         super.init(settingsKey: settingskey)
     }

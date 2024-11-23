@@ -13,15 +13,16 @@ import NumberTranslator
 class LanguageSelectionKeyboard: Keyboard {
     let countryKey: FlagKey
     let countryDescriptionKey: TextKey
-    init(translate_1Manager: TranslateManager, keySpacing: CGFloat, borderColor: Color) {
-        countryKey = FlagKey("")
+    init(translateViewModel: TranslateViewModel, keySpacing: CGFloat, borderColor: Color) {
+        print("4")
+        countryKey = FlagKey(persistent: translateViewModel.persistent)
+//        countryKey.isToggleButton = true
         countryDescriptionKey = TextKey(top: "", bottom: nil)
         super.init()
         var columnIndex = 1
         var tempRow: [Key] = []
-        for language in translate_1Manager.sortedlanguages {
-            let tempKey = FlagKey(translate_1Manager.flagname(language))
-            tempKey.selectLanguage = EmptySelectLanguageProtocol()
+        for language in translateViewModel.translate_1Manager.sortedlanguages {
+            let tempKey = FlagKey(persistent: translateViewModel.persistent, languageEnum: language)
             tempRow.append(tempKey)
             columnIndex += 1
             if columnIndex == 5 {
@@ -44,16 +45,4 @@ class LanguageSelectionKeyboard: Keyboard {
         keyMatrix.append(tempRow)
     }
     
-    func setSelectLanguage(_ selectLanguage: SelectLanguageProtocol) {
-        countryKey.selectLanguage = selectLanguage
-        countryKey.isToggleButton = true
-
-        for row in keyMatrix {
-            for key in row {
-                if let flagKey = key as? FlagKey {
-                    flagKey.selectLanguage = selectLanguage
-                }
-            }
-        }
-    }
 }

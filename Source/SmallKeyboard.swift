@@ -57,4 +57,7 @@ import SwiftGmp
         }
     }
 
+    func setSeparatorSymbol(_ symbol: String) {
+        separatorKey.model.symbol = symbol
+    }
 }

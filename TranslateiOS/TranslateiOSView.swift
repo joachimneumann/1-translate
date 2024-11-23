@@ -17,10 +17,10 @@ struct TranslateiOSView: View {
     
     init(viewModel: TranslateViewModel) {
         self.viewModel = viewModel
-        scrollingModel = ScrollingKeyboardViewModel(spacing: viewModel.screen.keySpacing, keyboard: viewModel.translateSelectLanguage)
+        scrollingModel = ScrollingKeyboardViewModel(spacing: viewModel.screen.keySpacing, keyboard: viewModel.languageSelectionKeyboard!)
     }
     
-    var Translate_1View: some View {
+    var TranslateiOSView: some View {
         VStack(spacing: 0.0) {
             ZStack {
                 VStack(spacing: 0.0) {
@@ -44,7 +44,7 @@ struct TranslateiOSView: View {
             } else {
                 KeyboardView(
                     spacing: viewModel.screen.keySpacing,
-                    keyboard: viewModel.keyboard)
+                    keyboard: viewModel.smallKeyboard!)
             }
         }
         .animation(.easeInOut(duration: 0.6), value: viewModel.showLanguageSelector)
@@ -54,7 +54,7 @@ struct TranslateiOSView: View {
     
     var body: some View {
 //        ZStack {
-        Translate_1View
+        TranslateiOSView
                 .padding(.bottom, viewModel.screen.bottomPadding)
                 .padding(.horizontal, viewModel.screen.horizontalPadding)
                 .preferredColorScheme(.dark)

@@ -9,41 +9,26 @@ import SwiftUI
 import SwiftGmp
 import NumberTranslator
 
+                                
 class TranslatePersistent {
     var translationManager = TranslateManager()
-//    // Store Separator as a String
-//    @AppStorage("separatorString", store: .standard)
-//    private var separatorString: String = Separator(
-//        separatorType: (Locale.current.decimalSeparator == "," ? .comma : .dot),
-//        groups: false
-//    ).encoded
-//
-//    // Computed property to get/set the `Separator` object
-//    var separator: Separator {
-//        get {
-//            Separator.decode(from: separatorString) ?? Separator(
-//                separatorType: (Locale.current.decimalSeparator == "," ? .comma : .dot),
-//                groups: false
-//            )
-//        }
-//        set {
-//            separatorString = newValue.encoded
-//        }
-//    }
-
-    @AppStorage("currentFlagname", store: .standard)
-    var currentFlagname: String = "English"
+    
+    @AppStorage("currentLanguageString", store: .standard)
+    var currentLanguageString: String = "English"
     
     var currentLanguageEnum: NumberTranslator.LanguageEnum {
         get {
-            translationManager.languageEnum(forFlagname: currentFlagname) ?? .english
+            return translationManager.languageEnum(for: currentLanguageString) ?? .english
         }
         set {
-            currentFlagname = translationManager.flagname(newValue)
+            currentLanguageString = translationManager.name(newValue)
         }
     }
 
-
+    func flagName(_ language: NumberTranslator.LanguageEnum) -> String {
+        translationManager.flagName(language)
+    }
+    
     @AppStorage("showGrouping", store: .standard)
     var showGrouping: Bool = true
 

@@ -186,7 +186,7 @@ struct TranslateiOSSettingsView: View {
              translate_1Manager: TranslateManager,
              uiFont: AppleFont,
              @ViewBuilder content: @escaping () -> Content) {
-            self.flagname = translate_1Manager.flagname(languageEnum)
+            self.flagname = translate_1Manager.flagName(languageEnum)
             self.name = translate_1Manager.name(languageEnum)
             self.example = example
             self.uiFont = uiFont

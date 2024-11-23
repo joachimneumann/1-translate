@@ -9,26 +9,14 @@ import SwiftUI
 import NumberTranslator
 import SwiftGmp
 
-
-protocol SelectLanguageProtocol {
-    func toggleLanguageSelector()
-    func setLanguage(_ language: String)
-}
-
-//extension SelectLanguageProtocol {
-//    func toggleLanguageSelector() { print("toggle default implementation") }
-//    func setLanguage(_ language: String) { print("setLanguage default implementation") }
-//}
-
-class TranslateViewModel: ViewModel, SelectLanguageProtocol {
+class TranslateViewModel: ViewModel {
+    
     @Published var persistent = TranslatePersistent()
-    @Published var currentLanguageName: String
-    var currentLanguageEnglishName: String?
-    @Published var translate_1Manager: TranslateManager
-    @Published var keyboard: TranslateKeyboard
-    var translateSelectLanguage: LanguageSelectionKeyboard
+    var translate_1Manager: TranslateManager
+//    var keyboard: TranslateKeyboard? = nil
+    var languageSelectionKeyboard: LanguageSelectionKeyboard? = nil
     @Published var showLanguageSelector: Bool = false
-    @Published var showSettings: Bool = false
+    var showSettings: Bool = false
 
 #if TRANSLATE_IOS
     private(set) var _voices: TranslateiOSVoices!
@@ -90,39 +78,24 @@ class TranslateViewModel: ViewModel, SelectLanguageProtocol {
         translate_1Manager.translateThis(toTranslate, to: persistent.currentLanguageEnum)
     }
 
-    func toggleLanguageSelector() {
+    func toggle() {
         showLanguageSelector.toggle()
     }
 
-    func setLanguage(_ language: String) {
-        if let languageEnum = translate_1Manager.languageEnum(forFlagname: language) {
-            setLanguage(language: languageEnum)
-        }
-    }
-
-    func setLanguage(language: NumberTranslator.LanguageEnum) {
+    func set(_ language: NumberTranslator.LanguageEnum) {
         persistent.currentLanguageEnum = language
-        currentLanguageName = translate_1Manager.name(persistent.currentLanguageEnum)
-        currentLanguageEnglishName = translate_1Manager.englishName(persistent.currentLanguageEnum)
-//        keyboard.countryKey.setName("language")
-        display.separatorCharacter = separatorCharacter(forLanguage: persistent.currentLanguageEnum)
-        display.groupSize = groupSize(forLanguage: persistent.currentLanguageEnum)
-        display.groupingCharacter = groupingCharacter(forLanguage: persistent.currentLanguageEnum)
-        keyboard.setSeparatorSymbol(String(display.separatorCharacter))
-        translate_1Manager.translateThis(display.string, to: persistent.currentLanguageEnum)
-        translateSelectLanguage.countryKey.setName(translate_1Manager.flagname(persistent.currentLanguageEnum))
-        translateSelectLanguage.countryDescriptionKey.top = translate_1Manager.name(persistent.currentLanguageEnum)
-        translateSelectLanguage.countryDescriptionKey.bottom = translate_1Manager.englishName(persistent.currentLanguageEnum)
+        display.separatorCharacter = separatorCharacter(forLanguage: language)
+        display.groupSize = groupSize(forLanguage: language)
+        display.groupingCharacter = groupingCharacter(forLanguage: language)
+        smallKeyboard!.setSeparatorSymbol(String(display.separatorCharacter))
+        translate_1Manager.translateThis(display.string, to: language)
+//        languageSelectionKeyboard!.countryKey.set(language)
+        languageSelectionKeyboard!.countryDescriptionKey.top = translate_1Manager.name(language)
+        languageSelectionKeyboard!.countryDescriptionKey.bottom = translate_1Manager.englishName(language)
         process()
     }
 
     override func execute(_ key: Key) {
-        if let flagKey = key as? FlagKey {
-            if let language = translate_1Manager.languageEnum(forFlagname: flagKey.name) {
-                setLanguage(language: language)
-            }
-        }
-        
         if let languageSettingsKey = key as? SymbolKey {
             if languageSettingsKey.model.op.isEqual(to: TranslateOperation.settings) {
                 showSettings = true
@@ -135,36 +108,32 @@ class TranslateViewModel: ViewModel, SelectLanguageProtocol {
     }
         
     override init(screen: Screen = Screen()) {
-        currentLanguageName = ""
-        currentLanguageEnglishName = nil
         let tempTranslate_1Manager = TranslateManager()
         
-        translateSelectLanguage = LanguageSelectionKeyboard(
-            translate_1Manager: tempTranslate_1Manager,
-            keySpacing: screen.keySpacing,
-            borderColor: Color(AppleColor.darkGray))
         translate_1Manager = tempTranslate_1Manager
 
-        keyboard = TranslateKeyboard()
-        
+        // todo: fix this
         super.init(screen: screen)
-        smallKeyboard = keyboard
-
-        display.separatorCharacter = separatorCharacter(forLanguage: persistent.currentLanguageEnum)
-        display.groupSize = groupSize(forLanguage: persistent.currentLanguageEnum)
-        display.groupingCharacter = groupingCharacter(forLanguage: persistent.currentLanguageEnum)
-        keyboard.setSeparatorSymbol(String(display.separatorCharacter))
-
-        keyboard.callback = execute
-        keyboard.countryKey.selectLanguage = self
-        keyboard.countryKey.isToggleButton = true
-        translateSelectLanguage.callback = execute
+        smallKeyboard = TranslateKeyboard(persistent: self.persistent)
         
-        keyboard.countryKey.setName(translate_1Manager.flagname(persistent.currentLanguageEnum))
-        translateSelectLanguage.setSelectLanguage(self)
-        translateSelectLanguage.countryKey.setName(translate_1Manager.flagname(persistent.currentLanguageEnum))
-        translateSelectLanguage.countryDescriptionKey.top = translate_1Manager.name(persistent.currentLanguageEnum)
-        translateSelectLanguage.countryDescriptionKey.bottom = translate_1Manager.englishName(persistent.currentLanguageEnum)
+        languageSelectionKeyboard = LanguageSelectionKeyboard(
+            translateViewModel: self,
+            keySpacing: screen.keySpacing,
+            borderColor: Color(AppleColor.darkGray))
+
+        let current = persistent.currentLanguageEnum
+        display.separatorCharacter = separatorCharacter(forLanguage: current)
+        display.groupSize = groupSize(forLanguage: current)
+        display.groupingCharacter = groupingCharacter(forLanguage: current)
+        smallKeyboard!.setSeparatorSymbol(String(display.separatorCharacter))
+
+        smallKeyboard!.callback = execute
+//        keyboard.countryKey.set(current)
+//        keyboard.countryKey.isToggleButton = true
+        languageSelectionKeyboard!.callback = execute
+//        languageSelectionKeyboard!.countryKey.set(current)
+        languageSelectionKeyboard!.countryDescriptionKey.top = translate_1Manager.name(current)
+        languageSelectionKeyboard!.countryDescriptionKey.bottom = translate_1Manager.englishName(current)
 
         process()
     }

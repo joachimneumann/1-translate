@@ -83,6 +83,7 @@ struct ScrollingKeyboardView: View {
     
     
     init(model: ScrollingKeyboardViewModel) {
+        print("2")
         self.model = model
     }
     
@@ -121,11 +122,11 @@ import NumberTranslator
     
 #if TRANSLATE_IOS || TRANSLATE_MAC
     let keyboard: LanguageSelectionKeyboard = LanguageSelectionKeyboard(
-        translate_1Manager: TranslateManager(),
+        translateViewModel: TranslateViewModel(),
         keySpacing: 10,
         borderColor: Color(AppleColor.darkGray))
-    let _ = keyboard.countryKey.setName("Deutsch")
-    let _ = keyboard.countryDescriptionKey.top = "Deutsch"
+//    let _ = keyboard.countryKey.set(.german)
+//    let _ = keyboard.countryDescriptionKey.top = "Deutsch"
     //    let keyboard: SmallKeyboard = Translate_1Keyboard()
 #else
     let keyboard: SmallKeyboard = CalculatoriOSKeyboard()

@@ -10,12 +10,14 @@ import SwiftUI
 
 @Observable class TranslateKeyboard: SmallKeyboard {
     let countryKey: FlagKey
-    init() {
-        countryKey = FlagKey("English")
+    init(persistent: TranslatePersistent) {
+        print("5")
+        countryKey = FlagKey(persistent: persistent, languageEnum: persistent.currentLanguageEnum)
         super.init(settingsKey: countryKey)
     }
-    
-    func setSeparatorSymbol(_ symbol: String) {
-        separatorKey.model.symbol = symbol
-    }
+}
+
+#Preview {
+    KeyboardView(spacing: 5.0, keyboard: TranslateKeyboard(persistent: TranslatePersistent()))
+        .frame(height: 300)
 }

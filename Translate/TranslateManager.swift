@@ -14,13 +14,13 @@ class TranslateManager: NumberTranslator, Identifiable {
     var result = TranslateResult()
     var hasVoice: Bool = false
 
-    func flagname(_ language: NumberTranslator.LanguageEnum) -> String {
+    func flagName(_ language: NumberTranslator.LanguageEnum) -> String {
         englishName(language) ?? name(language)
     }
 
-    func languageEnum(forFlagname: String) -> LanguageEnum? {
+    func languageEnum(for languageString: String) -> LanguageEnum? {
         for language in NumberTranslator.LanguageEnum.allCases {
-            if forFlagname == flagname(language) {
+            if languageString == name(language) {
                 return language
             }
         }
@@ -79,8 +79,8 @@ class TranslateManager: NumberTranslator, Identifiable {
         
         for language in languageImplementation.keys {
             //print(flagname(language))
-            if !flagname(language).contains("Chinese") { // add chinese later to keep them together
-                if let uiImage = AppleImage(named: flagname(language)), let averageHue = uiImage.averageHue {
+            if !flagName(language).contains("Chinese") { // add chinese later to keep them together
+                if let uiImage = AppleImage(named: flagName(language)), let averageHue = uiImage.averageHue {
                     //print("\(averageHue) \(flagname(language))")
                     languagesWithHue.append((language: language, hue: averageHue))
                 }
