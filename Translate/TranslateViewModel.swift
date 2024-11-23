@@ -26,7 +26,7 @@ class TranslateViewModel: ViewModel, SelectLanguageProtocol {
     var currentLanguageEnglishName: String?
     @Published var translate_1Manager: TranslateManager
     @Published var keyboard: TranslateKeyboard
-    var translateSelectLanguage: TranslateSelectLanguage
+    var translateSelectLanguage: LanguageSelectionKeyboard
     @Published var showLanguageSelector: Bool = false
     @Published var showSettings: Bool = false
 
@@ -139,7 +139,7 @@ class TranslateViewModel: ViewModel, SelectLanguageProtocol {
         currentLanguageEnglishName = nil
         let tempTranslate_1Manager = TranslateManager()
         
-        translateSelectLanguage = TranslateSelectLanguage(
+        translateSelectLanguage = LanguageSelectionKeyboard(
             translate_1Manager: tempTranslate_1Manager,
             keySpacing: screen.keySpacing,
             borderColor: Color(AppleColor.darkGray))

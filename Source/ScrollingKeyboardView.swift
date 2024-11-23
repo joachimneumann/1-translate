@@ -120,7 +120,7 @@ import NumberTranslator
 #Preview {
     
 #if TRANSLATE_IOS || TRANSLATE_MAC
-    let keyboard: TranslateSelectLanguage = TranslateSelectLanguage(
+    let keyboard: LanguageSelectionKeyboard = LanguageSelectionKeyboard(
         translate_1Manager: TranslateManager(),
         keySpacing: 10,
         borderColor: Color(AppleColor.darkGray))
