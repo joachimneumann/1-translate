@@ -64,16 +64,16 @@ struct LastRow: View {
                     }
                 }
             }
-            .background(
-                LinearGradient(
-                    gradient: Gradient(colors: [
-                        bg.opacity(0.8), // Fully transparent
-                        bg.opacity(1.0)  // Semi-transparent white
-                    ]),
-                    startPoint: .top,
-                    endPoint: .center
-                )
-            )
+//            .background(
+//                LinearGradient(
+//                    gradient: Gradient(colors: [
+//                        bg.opacity(0.5), // Fully transparent
+//                        bg.opacity(1.0)  // Semi-transparent white
+//                    ]),
+//                    startPoint: .top,
+//                    endPoint: .center
+//                )
+//            )
         }
     }
 }
@@ -91,12 +91,12 @@ struct ScrollingKeyboardView: View {
         GeometryReader { geometry in
             if geometry.notZero {
                 ZStack {
-                    VStack(alignment: .leading, spacing: model.spacing) {
+                    VStack(alignment: .leading, spacing: 0.0) {
                         ScrollView(.vertical, showsIndicators: true) {
                             AllRowsExceptLast(spacing: model.spacing, keyboard: model.keyboard)
-                                .frame(width: geometry.size.width, height: model.scrollingKeysheight)
+                                .frame(width: geometry.size.width, height: model.scrollingContentHeight)
                         }
-                        .frame(height: model.fourRows)
+                        .frame(height: model.fourRows + model.spacing)
                         LastRow(
                             spacing: model.spacing,
                             keyWidth: model.keyWidth,

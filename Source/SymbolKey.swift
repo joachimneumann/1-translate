@@ -38,7 +38,7 @@ import SwiftGmp
                 GeometryReader { geometry in
                     if geometry.notZero {
                         self.model.label
-                            .frame(width: geometry.size.width, height: geometry.size.height)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
                             .background(self.bgColor)
                             .clipShape(Capsule())
                             .onAppear {
@@ -46,6 +46,7 @@ import SwiftGmp
                                     min(geometry.size.width,
                                         geometry.size.height))
                             }
+                            .scaleEffect(self.isPressed ? 0.97 : 1.0)
                     }
                 }
             )

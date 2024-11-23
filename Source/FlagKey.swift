@@ -22,7 +22,6 @@ class EmptySelectLanguageProtocol: SelectLanguageProtocol {
     
     private var _name: String = ""
     var selectLanguage: SelectLanguageProtocol
-    var size: CGSize = CGSize.zero
     var isToggleButton: Bool
     let borderColor: Color = Color(AppleColor.darkGray)
 #if TRANSLATE_MAC
@@ -47,48 +46,36 @@ class EmptySelectLanguageProtocol: SelectLanguageProtocol {
         self._name = name
         self.objectWillChange.send()
     }
-    var flagName: String {
-        if size.width < size.height * 1.1 {
-            if AppleImage(named: _name+"Sqr") != nil {
-                return _name+"Sqr"
-            }
-        }
-        if AppleImage(named: _name) != nil {
-            return _name
-        }
-        return "English"
-    }
+    var image: Image = Image("English")
     
-    var image: Image {
-        Image(flagName)
-    }
-    var borderWidth: CGFloat {
-        ceil(min(size.width, size.height) * 0.04)
-    }
-    var reducedWidth: CGFloat {
-        size.width - 2 * borderWidth
-    }
-    var reducedHeight: CGFloat {
-        size.height - 2 * borderWidth
-    }
+    var borderWidth: CGFloat = 0.0
     var padding: CGFloat {
         0.5 * borderWidth
     }
-    
 
     override func view() -> AnyView {
-        AnyView(GeometryReader { geometry in
+        return AnyView(GeometryReader { geometry in
             CustomPressableButton(
                 selectLanguage: self.selectLanguage,
                 image: self.image,
-                size: CGSize(width: self.reducedWidth, height: self.reducedHeight),
                 padding: self.padding,
                 borderColor: self.borderColor,
                 borderWidth: self.borderWidth,
                 isToggleButton: self.isToggleButton,
                 name: self.name)
             .onAppear() {
-                self.size = geometry.size
+                self.borderWidth = ceil(min(geometry.size.width, geometry.size.height) * 0.04)
+                if geometry.size.width < geometry.size.height * 1.1 {
+                    if AppleImage(named: self._name+"Sqr") != nil {
+                        self.image = Image(self._name+"Sqr")
+                   }
+                } else {
+                    if AppleImage(named: self._name) != nil {
+                        self.image = Image(self._name)
+                    } else {
+                        self.image = Image("English")
+                    }
+                }
             }
         })
     }
@@ -96,7 +83,6 @@ class EmptySelectLanguageProtocol: SelectLanguageProtocol {
     struct CustomPressableButton: View {
         var selectLanguage: SelectLanguageProtocol
         let image: Image
-        let size: CGSize
         let padding: CGFloat
         let borderColor: Color
         let borderWidth: CGFloat
@@ -109,8 +95,7 @@ class EmptySelectLanguageProtocol: SelectLanguageProtocol {
         var body: some View {
             image
                 .resizable()
-                .scaledToFill()
-                .frame(width: size.width , height: size.height)
+                .frame(maxWidth: .infinity)
                 .clipShape(Capsule())
                 .padding(padding)
                 .brightness(isPressed ? 0.2 : 0.0)
@@ -119,8 +104,6 @@ class EmptySelectLanguageProtocol: SelectLanguageProtocol {
                         .stroke(borderColor, lineWidth: borderWidth)
                 )
                 .padding(padding)
-
-//                .background(isPressed ? Color.blue : Color.gray)
                 .scaleEffect(isPressed ? 0.95 : 1.0) // Optional scale effect
                 .animation(.easeInOut, value: isPressed)
                 .simultaneousGesture(
@@ -168,7 +151,7 @@ struct FlagView: View {
     ZStack {
         Rectangle()
             .foregroundColor(.gray)
-        HStack {
+        HStack(spacing: 0.0) {
             FlagView(flagKey: FlagKey("Deutsch"))
             FlagView(flagKey: FlagKey("Dansk"))
             FlagView(flagKey: FlagKey("Babylonian"))

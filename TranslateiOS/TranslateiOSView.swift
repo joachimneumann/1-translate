@@ -48,7 +48,8 @@ struct TranslateiOSView: View {
             }
         }
         .animation(.easeInOut(duration: 0.6), value: viewModel.showLanguageSelector)
-        //.background(.blue)
+        .background(.blue)
+        .padding(.bottom, 10)
     }
     
     var body: some View {
