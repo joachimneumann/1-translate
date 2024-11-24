@@ -9,9 +9,9 @@ import Foundation
 import NumberTranslator
 import SwiftUI
 
-class TranslateManager: NumberTranslator, Identifiable {
+class TranslationManager: NumberTranslator, Identifiable {
 
-    var result = TranslateResult()
+    var result = TranslationResult()
     var hasVoice: Bool = false
 
     func flagName(_ language: NumberTranslator.LanguageEnum) -> String {

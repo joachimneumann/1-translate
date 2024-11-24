@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class TranslateResult: ObservableObject, CustomDebugStringConvertible {
+class TranslationResult: ObservableObject, CustomDebugStringConvertible {
     @Published var displayText: String
     @Published var overline: String?
     var spokenText: String?

@@ -23,7 +23,7 @@ struct TranslateiOSView: View {
         VStack(spacing: 0.0) {
             ZStack {
                 VStack(spacing: 0.0) {
-                    TranslateDisplay(uiFont: viewModel.screen.translationFont, translate_1Result: viewModel.translate_1Manager.result)
+                    TranslateDisplay(uiFont: viewModel.screen.translationFont, translationResult: viewModel.translationManager.result)
                         .font(Font(viewModel.screen.translationFont))
                     Spacer(minLength: 20.0)
                     NumberDisplay(display: viewModel.display)

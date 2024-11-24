@@ -11,7 +11,7 @@ import NumberTranslator
 
                                 
 class TranslatePersistent {
-    var translationManager = TranslateManager()
+    var translationManager = TranslationManager()
     
     @AppStorage("currentLanguageString", store: .standard)
     var currentLanguageString: String = "English"

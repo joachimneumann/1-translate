@@ -12,7 +12,7 @@ import SwiftGmp
 class TranslateViewModel: ViewModel {
     
     @Published var persistent = TranslatePersistent()
-    var translate_1Manager: TranslateManager
+    var translationManager: TranslationManager
 //    var keyboard: TranslateKeyboard? = nil
     @Published var languageSelectionKeyboard: LanguageSelectionKeyboard? = nil
     @Published var showLanguageSelector: Bool = false
@@ -46,7 +46,7 @@ class TranslateViewModel: ViewModel {
 
         
     func separatorCharacter(forLanguage language: NumberTranslator.LanguageEnum) -> Character {
-        if let code = translate_1Manager.code(language) {
+        if let code = translationManager.code(language) {
             if let separator = decimalSeparator(for: code) {
                 return Character(separator)
             }
@@ -55,7 +55,7 @@ class TranslateViewModel: ViewModel {
     }
 
     func groupSize(forLanguage language: NumberTranslator.LanguageEnum) -> Int {
-        translate_1Manager.groupSize(language)
+        translationManager.groupSize(language)
     }
 
 
@@ -75,7 +75,7 @@ class TranslateViewModel: ViewModel {
         super.process()
         var toTranslate = display.string
         toTranslate.remove(separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter)
-        translate_1Manager.translateThis(toTranslate, to: persistent.currentLanguageEnum)
+        translationManager.translateThis(toTranslate, to: persistent.currentLanguageEnum)
     }
 
     func toggle() {
@@ -91,10 +91,10 @@ class TranslateViewModel: ViewModel {
         if let k = smallKeyboard! as? TranslateKeyboard {
             k.countryKey.newLanguageEnum(language)
         }
-        translate_1Manager.translateThis(display.string, to: language)
+        translationManager.translateThis(display.string, to: language)
         languageSelectionKeyboard!.countryKey.newLanguageEnum(language)
-        languageSelectionKeyboard!.countryDescriptionKey.top = translate_1Manager.name(language)
-        languageSelectionKeyboard!.countryDescriptionKey.bottom = translate_1Manager.englishName(language)
+        languageSelectionKeyboard!.countryDescriptionKey.top = translationManager.name(language)
+        languageSelectionKeyboard!.countryDescriptionKey.bottom = translationManager.englishName(language)
         process()
     }
 
@@ -111,9 +111,9 @@ class TranslateViewModel: ViewModel {
     }
         
     override init(screen: Screen = Screen()) {
-        let tempTranslate_1Manager = TranslateManager()
+        let tempTranslationManager = TranslationManager()
         
-        translate_1Manager = tempTranslate_1Manager
+        translationManager = tempTranslationManager
 
         // todo: fix this
         super.init(screen: screen)
@@ -135,8 +135,8 @@ class TranslateViewModel: ViewModel {
 //        keyboard.countryKey.isToggleButton = true
         languageSelectionKeyboard!.callback = execute
 //        languageSelectionKeyboard!.countryKey.set(current)
-        languageSelectionKeyboard!.countryDescriptionKey.top = translate_1Manager.name(current)
-        languageSelectionKeyboard!.countryDescriptionKey.bottom = translate_1Manager.englishName(current)
+        languageSelectionKeyboard!.countryDescriptionKey.top = translationManager.name(current)
+        languageSelectionKeyboard!.countryDescriptionKey.bottom = translationManager.englishName(current)
 
         process()
     }

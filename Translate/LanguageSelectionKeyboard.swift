@@ -22,7 +22,7 @@ class LanguageSelectionKeyboard: Keyboard {
         super.init()
         var columnIndex = 1
         var tempRow: [Key] = []
-        for language in translateViewModel.translate_1Manager.sortedlanguages {
+        for language in translateViewModel.translationManager.sortedlanguages {
             let tempKey = FlagKey(
                 persistent: translateViewModel.persistent,
                 languageEnum: language,

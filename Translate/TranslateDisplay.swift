@@ -9,7 +9,7 @@ import SwiftUI
 struct TranslateDisplay: View {
     let uiFont: AppleFont
     @State private var moveGradient = true
-    @ObservedObject var translationResult: TranslateResult
+    @ObservedObject var translationResult: TranslationResult
     
     var body: some View {
         HStack(spacing: 0.0) {
@@ -65,9 +65,9 @@ struct TranslateDisplay: View {
 #Preview {
     let fontsize: CGFloat = 55.0
     let viewModel = TranslateViewModel()
-    let _ = viewModel.translate_1Manager.translateThis("555555", to: .romanNumerals)
+    let _ = viewModel.translationManager.translateThis("555555", to: .romanNumerals)
 
-    TranslateDisplay(uiFont: AppleFont.systemFont(ofSize: fontsize), translationResult: viewModel.translate_1Manager.result)
+    TranslateDisplay(uiFont: AppleFont.systemFont(ofSize: fontsize), translationResult: viewModel.translationManager.result)
         .padding()
         .padding(.top, fontsize)
         .background (.black)

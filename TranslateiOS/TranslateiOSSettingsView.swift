@@ -178,20 +178,20 @@ struct TranslateiOSSettingsView: View {
         let flagname: String
         let name: String
         let example: String
-        let translate_1Result: TranslateResult
+        let translationResult: TranslationResult
         let uiFont: AppleFont
         var content: () -> Content
         init(languageEnum: NumberTranslator.LanguageEnum,
              example: String,
-             translate_1Manager: TranslateManager,
+             translationManager: TranslationManager,
              uiFont: AppleFont,
              @ViewBuilder content: @escaping () -> Content) {
-            self.flagname = translate_1Manager.flagName(languageEnum)
-            self.name = translate_1Manager.name(languageEnum)
+            self.flagname = translationManager.flagName(languageEnum)
+            self.name = translationManager.name(languageEnum)
             self.example = example
             self.uiFont = uiFont
-            translate_1Manager.translateThis(example, to: languageEnum)
-            self.translate_1Result = translate_1Manager.result
+            translationManager.translateThis(example, to: languageEnum)
+            self.translationResult = translationManager.result
             self.content = content
         }
         
@@ -217,7 +217,7 @@ struct TranslateiOSSettingsView: View {
             }) {
                     HStack {
                         Text("\(example) →")
-                        TranslateDisplay(uiFont: uiFont, translate_1Result: translate_1Result)
+                        TranslateDisplay(uiFont: uiFont, translationResult: translationResult)
                             .fontWeight(.semibold)
                             .frame(height: 40)
                             .foregroundColor(.orange)
@@ -231,12 +231,12 @@ struct TranslateiOSSettingsView: View {
     var EnglishParameters: some View {
         return LanguageSection(languageEnum: .english,
                                example: "150",
-                               translate_1Manager: viewModel.translate_1Manager,
+                               translationManager: viewModel.translationManager,
                                uiFont: viewModel.screen.infoUiFont) {
             HStack {
                 Text("\"and\" after hundred")
                 Spacer()
-                Toggle("", isOn: $viewModel.translate_1Manager.englishUseAndAfterHundred)
+                Toggle("", isOn: $viewModel.translationManager.englishUseAndAfterHundred)
                     .frame(width: 40)
                     .toggleStyle(grayToggleStyle)
                     .buttonStyle(.plain)
@@ -249,12 +249,12 @@ struct TranslateiOSSettingsView: View {
     var GermanParameters: some View {
         return LanguageSection(languageEnum: .german,
                                example: "88",
-                               translate_1Manager: viewModel.translate_1Manager,
+                               translationManager: viewModel.translationManager,
                                uiFont: viewModel.screen.infoUiFont) {
                 HStack {
                     Text("Großschreibung")
                     Spacer()
-                    Toggle("", isOn: $viewModel.translate_1Manager.germanCapitalisation)
+                    Toggle("", isOn: $viewModel.translationManager.germanCapitalisation)
                         .frame(width: 40)
                         .toggleStyle(grayToggleStyle)
                         .buttonStyle(.plain)
@@ -266,13 +266,13 @@ struct TranslateiOSSettingsView: View {
     var VietnameseParameters: some View {
         return LanguageSection(languageEnum: .vietnamese,
                                example: "33303",
-                               translate_1Manager: viewModel.translate_1Manager,
+                               translationManager: viewModel.translationManager,
                                uiFont: viewModel.screen.infoUiFont) {
                 Grid(alignment: .leading) {
                     GridRow {
                         Text("1000")
                         Spacer(minLength: 0.0)
-                        Picker("", selection: $viewModel.translate_1Manager.vietnameseThousand) {
+                        Picker("", selection: $viewModel.translationManager.vietnameseThousand) {
                             ForEach(NumberTranslator.VietnameseThousand.allCases, id: \.self) { value in
                                 Text("\(value.rawValue)")
                                     .tag(value)
@@ -285,7 +285,7 @@ struct TranslateiOSSettingsView: View {
                     GridRow {
                         Text("Linh hoặc lẻ")
                         Spacer(minLength: 0.0)
-                        Picker("", selection: $viewModel.translate_1Manager.vietnameseSecondLast) {
+                        Picker("", selection: $viewModel.translationManager.vietnameseSecondLast) {
                             ForEach(NumberTranslator.VietnameseSecondLast.allCases, id: \.self) { value in
                                 Text("\(value.rawValue)")
                                     .tag(value)
@@ -298,7 +298,7 @@ struct TranslateiOSSettingsView: View {
                 HStack {
                     Text("Ngắn gọn")
                     Spacer()
-                    Toggle("", isOn: $viewModel.translate_1Manager.vietnameseCompact)
+                    Toggle("", isOn: $viewModel.translationManager.vietnameseCompact)
                         .frame(width: 40)
                         .toggleStyle(grayToggleStyle)
                         .buttonStyle(.plain)
@@ -310,12 +310,12 @@ struct TranslateiOSSettingsView: View {
     var BabylonianParameters: some View {
         return LanguageSection(languageEnum: .babylonian,
                                example: "3601",
-                               translate_1Manager: viewModel.translate_1Manager,
+                               translationManager: viewModel.translationManager,
                                uiFont: viewModel.screen.infoUiFont) {
                 HStack {
                     Text("Empty column (after 400 BC)")
                     Spacer()
-                    Toggle("", isOn: $viewModel.translate_1Manager.babylonianAllowEmptyColumn)
+                    Toggle("", isOn: $viewModel.translationManager.babylonianAllowEmptyColumn)
                         .frame(width: 40)
                         .toggleStyle(grayToggleStyle)
                         .buttonStyle(.plain)
@@ -328,12 +328,12 @@ struct TranslateiOSSettingsView: View {
     var SpanishParameters: some View {
         return LanguageSection(languageEnum: .spanish,
                                example: "1.5",
-                               translate_1Manager: viewModel.translate_1Manager,
+                               translationManager: viewModel.translationManager,
                                uiFont: viewModel.screen.infoUiFont) {
                 HStack {
                     Text("Coma o punto:")
                     Spacer()
-                    Picker("", selection: $viewModel.translate_1Manager.spanishPuntoComa) {
+                    Picker("", selection: $viewModel.translationManager.spanishPuntoComa) {
                         ForEach(NumberTranslator.SpanishPuntoComa.allCases, id: \.self) { value in
                             Text("\(value.rawValue)")
                                 .tag(value)
@@ -350,12 +350,12 @@ struct TranslateiOSSettingsView: View {
     var RomanNumeralsParameters: some View {
         return LanguageSection(languageEnum: .romanNumerals,
                                example: "10000",
-                               translate_1Manager: viewModel.translate_1Manager,
+                               translationManager: viewModel.translationManager,
                                uiFont: viewModel.screen.infoUiFont) {
                 HStack {
                     Text("Use vinculum (overline):")
                     Spacer()
-                    Toggle("", isOn: $viewModel.translate_1Manager.romanNumeralsUseVinculum)
+                    Toggle("", isOn: $viewModel.translationManager.romanNumeralsUseVinculum)
                         .frame(width: 40)
                         .toggleStyle(grayToggleStyle)
                         .buttonStyle(.plain)
