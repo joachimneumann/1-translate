@@ -14,7 +14,7 @@ class TranslateViewModel: ViewModel {
     @Published var persistent = TranslatePersistent()
     var translate_1Manager: TranslateManager
 //    var keyboard: TranslateKeyboard? = nil
-    var languageSelectionKeyboard: LanguageSelectionKeyboard? = nil
+    @Published var languageSelectionKeyboard: LanguageSelectionKeyboard? = nil
     @Published var showLanguageSelector: Bool = false
     var showSettings: Bool = false
 
@@ -82,14 +82,17 @@ class TranslateViewModel: ViewModel {
         showLanguageSelector.toggle()
     }
 
-    func set(_ language: NumberTranslator.LanguageEnum) {
+    func setLanguage(_ language: NumberTranslator.LanguageEnum) {
         persistent.currentLanguageEnum = language
         display.separatorCharacter = separatorCharacter(forLanguage: language)
         display.groupSize = groupSize(forLanguage: language)
         display.groupingCharacter = groupingCharacter(forLanguage: language)
         smallKeyboard!.setSeparatorSymbol(String(display.separatorCharacter))
+        if let k = smallKeyboard! as? TranslateKeyboard {
+            k.countryKey.model.newLanguageEnum(language)
+        }
         translate_1Manager.translateThis(display.string, to: language)
-//        languageSelectionKeyboard!.countryKey.set(language)
+        languageSelectionKeyboard!.countryKey.model.newLanguageEnum(language)
         languageSelectionKeyboard!.countryDescriptionKey.top = translate_1Manager.name(language)
         languageSelectionKeyboard!.countryDescriptionKey.bottom = translate_1Manager.englishName(language)
         process()
@@ -114,7 +117,7 @@ class TranslateViewModel: ViewModel {
 
         // todo: fix this
         super.init(screen: screen)
-        smallKeyboard = TranslateKeyboard(persistent: self.persistent)
+        smallKeyboard = TranslateKeyboard(persistent: self.persistent, toggle: toggle)
         
         languageSelectionKeyboard = LanguageSelectionKeyboard(
             translateViewModel: self,

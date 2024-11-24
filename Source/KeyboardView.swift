@@ -16,7 +16,6 @@ struct KeyboardView: View {
     let height: CGFloat?
     
     init(spacing: CGFloat, keyboard: Keyboard, height: CGFloat? = nil) {
-        print("1")
         self.spacing = spacing
         self.keyboard = keyboard
         self.height = height
@@ -51,7 +50,7 @@ import NumberTranslator
 //        borderColor: .green)
 //    let _ = keyboard.countryKey.model.name = "Deutsch"
 //    let _ = keyboard.countryDescriptionKey.top = "Deutsch"
-    let keyboard: SmallKeyboard = TranslateKeyboard(persistent: TranslatePersistent())
+    let keyboard: SmallKeyboard = TranslateKeyboard(persistent: TranslatePersistent(), toggle: nil)
 #else
     let keyboard: SmallKeyboard = CalculatoriOSKeyboard()
 #endif

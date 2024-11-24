@@ -50,6 +50,7 @@ struct FlagView: View {
                         }
                 )
                 .onAppear() {
+                    //print("onAppear geometry.size \(geometry.size)")
                     model.newSize(geometry.size)
                 }
         }

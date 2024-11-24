@@ -14,15 +14,20 @@ class LanguageSelectionKeyboard: Keyboard {
     let countryKey: FlagKey
     let countryDescriptionKey: TextKey
     init(translateViewModel: TranslateViewModel, keySpacing: CGFloat, borderColor: Color) {
-        print("4")
-        countryKey = FlagKey(persistent: translateViewModel.persistent)
+        countryKey = FlagKey(
+            persistent: translateViewModel.persistent,
+            toggle: translateViewModel.toggle)
 //        countryKey.isToggleButton = true
         countryDescriptionKey = TextKey(top: "", bottom: nil)
         super.init()
         var columnIndex = 1
         var tempRow: [Key] = []
         for language in translateViewModel.translate_1Manager.sortedlanguages {
-            let tempKey = FlagKey(persistent: translateViewModel.persistent, languageEnum: language)
+            let tempKey = FlagKey(
+                persistent: translateViewModel.persistent,
+                languageEnum: language,
+                toggle: nil,
+                setLanguage: translateViewModel.setLanguage)
             tempRow.append(tempKey)
             columnIndex += 1
             if columnIndex == 5 {

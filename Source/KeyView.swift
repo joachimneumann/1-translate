@@ -26,7 +26,7 @@ struct KeyView: View {
                                     key.up()
                                 })
                         .simultaneousGesture(
-                            LongPressGesture(minimumDuration: 0.7)
+                            LongPressGesture(minimumDuration: 0.5)
                                 .onEnded { value in
                                     key.longPress()
                                 }
@@ -40,14 +40,14 @@ struct KeyView: View {
 import SwiftGmp
 #Preview {
     let key1 = SymbolKey(InplaceOperation.sqr)
-//    let key2 = FlagKey(.english, persistent: TranslatePersistent())
+    let key2 = FlagKey(persistent: TranslatePersistent(), languageEnum: .english)
     let key3 = SymbolKey(DigitOperation.one)
     ZStack {
         Rectangle()
             .foregroundColor(.gray)
         HStack(spacing: 10) {
             KeyView(key: key1)
-//            KeyView(key: key2)
+            KeyView(key: key2)
             KeyView(key: key3)
         }
         .frame(width: 320, height: 100)

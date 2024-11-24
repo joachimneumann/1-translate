@@ -10,11 +10,12 @@ import SwiftUI
 
 @main
 struct TranslateiOSApp: App {
+    let viewModel = TranslateViewModel(screen: Screen())
     var body: some Scene {
         WindowGroup {
             NavigationStack {
                 //            GeometryReader { geometry in
-                TranslateiOSView(viewModel: TranslateViewModel(screen: Screen()))
+                TranslateiOSView(viewModel: viewModel)
                 //            }
             }
         }

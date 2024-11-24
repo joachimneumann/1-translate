@@ -83,7 +83,6 @@ struct ScrollingKeyboardView: View {
     
     
     init(model: ScrollingKeyboardViewModel) {
-        print("2")
         self.model = model
     }
     
@@ -112,6 +111,7 @@ struct ScrollingKeyboardView: View {
         }
     }
 }
+
 
 #if TRANSLATE_IOS
 import NumberTranslator

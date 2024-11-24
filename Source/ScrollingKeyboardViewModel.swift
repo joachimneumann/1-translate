@@ -24,7 +24,6 @@ import SwiftUI
     let keyboard: Keyboard
 
     init(spacing: CGFloat, keyboard: Keyboard) {
-        print("3")
         self.spacing = spacing
         self.keyboard = keyboard
     }
