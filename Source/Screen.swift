@@ -59,6 +59,7 @@ struct Screen: Equatable {
         defaultTextColor = .white
         
         
+        let uiFontFactor = 0.15
 #if CALCULATOR_MAC || TRANSLATE_MAC
         keyboardHeight = 0.8 * screenSize.height
         keySpacing = 0.01 * keyboardHeight
@@ -67,7 +68,7 @@ struct Screen: Equatable {
         keyboardWidth = 4 * keyWidth + 3 * keySpacing
         horizontalPadding = 0.0//2.2 * keySpacing
         displayHorizontalPadding = 0
-        let fontsizeFactor = 0.15
+        let translationFontFactor = 0.5
 #else
         keySpacing = 0.0165 * screenSize.width
         horizontalPadding = 2.2 * keySpacing
@@ -75,7 +76,7 @@ struct Screen: Equatable {
         keyboardWidth = screenSize.width - 2 * horizontalPadding
         keyWidth = isPad ? (keyboardWidth - 9.0 * keySpacing) * 0.1 : (keyboardWidth - 3.0 * keySpacing) * 0.25
         keyHeight = (screenSize.height * 0.51 - 4 * keySpacing) / 5.0 // this simulates the iOS18 calculator
-        let fontsizeFactor = 0.15
+        let translationFontFactor = 1.0
         keyboardHeight = 5 * keyHeight + 4 * keySpacing
 #endif
 
@@ -88,9 +89,9 @@ struct Screen: Equatable {
         ePadding = keyboardHeight * 0.013
         kerning = 0.0//-0.02 * uiFontSize
 
-        uiFontSize = fontsizeFactor * keyboardHeight
+        uiFontSize = uiFontFactor * keyboardHeight
         numberDisplayFont = Screen.proportionalFont(ofSize: uiFontSize, weight: .regular)
-        translationFont = Screen.proportionalFont(ofSize: uiFontSize, weight: .light)
+        translationFont = Screen.proportionalFont(ofSize: translationFontFactor * uiFontSize, weight: .light)
         infoUiFontSize = 16.0
         infoUiFont = Screen.proportionalFont(ofSize: infoUiFontSize, weight: .regular)
         

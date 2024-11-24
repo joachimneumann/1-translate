@@ -9,31 +9,31 @@ import SwiftUI
 struct TranslateDisplay: View {
     let uiFont: AppleFont
     @State private var moveGradient = true
-    @ObservedObject var translate_1Result: TranslateResult
+    @ObservedObject var translationResult: TranslateResult
     
     var body: some View {
         HStack(alignment: .bottom, spacing: 0.0) {
             Spacer(minLength: 0.0)
-            if translate_1Result.overline == nil {
-                Text(translate_1Result.displayText)
+            if translationResult.overline == nil {
+                Text(translationResult.displayText)
                     .font(Font(uiFont))
-                    .multilineTextAlignment(.trailing)
+//                    .multilineTextAlignment(.trailing)
             } else {
                 ZStack {
-                    (Text(translate_1Result.overline!)
+                    (Text(translationResult.overline!)
                         .baselineOffset(1.1*uiFont.pointSize)
                         .underline(true, color: .white)
-                     + Text(translate_1Result.displayText))
+                     + Text(translationResult.displayText))
                     .foregroundColor(.clear)
                     .offset(y: -1.0 * uiFont.pointSize - 0.4*uiFont.pointSize)
-                    Text(translate_1Result.overline!)
+                    Text(translationResult.overline!)
                         .foregroundColor(.white)
-                    + Text(translate_1Result.displayText)
+                    + Text(translationResult.displayText)
                 }
                 .font(Font(uiFont))
             }
         }
-        .foregroundColor(translate_1Result.error ? .orange : .white)
+        .foregroundColor(translationResult.error ? .orange : .white)
 //        .contextMenu {
 //            Button("Copy to Clipboard") {
 //                UIPasteboard.general.string = translate_1Result.copyText
@@ -67,7 +67,7 @@ struct TranslateDisplay: View {
     let viewModel = TranslateViewModel()
     let _ = viewModel.translate_1Manager.translateThis("5555", to: .polish)
 
-    TranslateDisplay(uiFont: AppleFont.systemFont(ofSize: fontsize), translate_1Result: viewModel.translate_1Manager.result)
+    TranslateDisplay(uiFont: AppleFont.systemFont(ofSize: fontsize), translationResult: viewModel.translate_1Manager.result)
         .padding()
         .padding(.top, fontsize)
         .background (.black)
