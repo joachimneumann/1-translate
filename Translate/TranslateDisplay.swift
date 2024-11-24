@@ -12,12 +12,11 @@ struct TranslateDisplay: View {
     @ObservedObject var translationResult: TranslateResult
     
     var body: some View {
-        HStack(alignment: .bottom, spacing: 0.0) {
-            Spacer(minLength: 0.0)
+        HStack(spacing: 0.0) {
             if translationResult.overline == nil {
                 Text(translationResult.displayText)
                     .font(Font(uiFont))
-//                    .multilineTextAlignment(.trailing)
+                    .multilineTextAlignment(.leading)
             } else {
                 ZStack {
                     (Text(translationResult.overline!)
@@ -32,6 +31,7 @@ struct TranslateDisplay: View {
                 }
                 .font(Font(uiFont))
             }
+            Spacer(minLength: 0.0)
         }
         .foregroundColor(translationResult.error ? .orange : .white)
 //        .contextMenu {
@@ -65,7 +65,7 @@ struct TranslateDisplay: View {
 #Preview {
     let fontsize: CGFloat = 55.0
     let viewModel = TranslateViewModel()
-    let _ = viewModel.translate_1Manager.translateThis("5555", to: .polish)
+    let _ = viewModel.translate_1Manager.translateThis("555555", to: .romanNumerals)
 
     TranslateDisplay(uiFont: AppleFont.systemFont(ofSize: fontsize), translationResult: viewModel.translate_1Manager.result)
         .padding()

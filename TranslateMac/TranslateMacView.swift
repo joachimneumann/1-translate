@@ -27,7 +27,6 @@ struct TranslateMacView: View {
             Spacer(minLength: 0.0)
             NumberDisplay(display: viewModel.display)
                 .frame(width: model.keyboardWidth, height: model.displayHeight)
-            //.background(.yellow)
             if viewModel.showLanguageSelector {
                 ScrollingKeyboardView(model: scrollingModel)
                     .frame(width: model.keyboardWidth, height: model.keyboardHeight)
@@ -42,8 +41,10 @@ struct TranslateMacView: View {
     }
     
     func RightSide(uiFont: AppleFont, translationResult: TranslateResult) -> some View {
+        VStack {
             TranslateDisplay(uiFont: uiFont, translationResult: translationResult)
-                            .padding(10)
+            Spacer()
+        }
     }
     var body: some View {
         GeometryReader { geometry in

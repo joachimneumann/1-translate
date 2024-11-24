@@ -23,7 +23,7 @@ import SwiftUI
         keyboardWidth = 4 * keyDiameter + 3 * keySpacing
         translationViewWidth = size.width - 16 - keyboardWidth - 40
         print("translationViewWidth \(translationViewWidth)")
-        translationViewHeight = keyboardHeight
+        translationViewHeight = keyboardHeight - 10
         if isScrollView {
             keyboardWidth += 16 // for the scrollview indicator
         }
