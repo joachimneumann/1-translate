@@ -75,13 +75,19 @@ class TranslateManager: NumberTranslator, Identifiable {
     }
         
     var sortedlanguages: [LanguageEnum] {
+        /// The sorting should order the flags by their average color hue value.
+        /// However:
+        ///  - I want to keep the three chinese flags next to each other
+        ///  - I want to place the gray flags Babylonian and Hierographs at the end.
+        ///  - I want to assure that pure red flags like Polish and Danish are at the start with hue 0, not 1
+        
         var languagesWithHue: [(language: LanguageEnum, hue: CGFloat)] = []
         
         for language in languageImplementation.keys {
             //print(flagname(language))
             if !flagName(language).contains("Chinese") { // add chinese later to keep them together
                 if let uiImage = AppleImage(named: flagName(language)), let averageHue = uiImage.averageHue {
-                    //print("\(averageHue) \(flagname(language))")
+                    print("\(averageHue) \(flagName(language))")
                     languagesWithHue.append((language: language, hue: averageHue))
                 }
             }
@@ -154,8 +160,13 @@ extension AppleImage {
         var saturation: CGFloat = 0
         var brightness: CGFloat = 0
         AppleColor(red: red, green: green, blue: blue, alpha: 1.0).getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: nil)
-        // move Danish and Polish to the front of the queue
+        
+        /// In NSColor.getHue, pure red returns 1.0, which is equivialent to 0.0, but we tant 0.0
+        if hue == 1.0 { hue = 0.0 }
+
+        /// move Danish and Polish to the front of the queue
         hue += 0.01 * saturation
+        
         return hue
     }
 }
