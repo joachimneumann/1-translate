@@ -89,10 +89,10 @@ class TranslateViewModel: ViewModel {
         display.groupingCharacter = groupingCharacter(forLanguage: language)
         smallKeyboard!.setSeparatorSymbol(String(display.separatorCharacter))
         if let k = smallKeyboard! as? TranslateKeyboard {
-            k.countryKey.model.newLanguageEnum(language)
+            k.countryKey.newLanguageEnum(language)
         }
         translate_1Manager.translateThis(display.string, to: language)
-        languageSelectionKeyboard!.countryKey.model.newLanguageEnum(language)
+        languageSelectionKeyboard!.countryKey.newLanguageEnum(language)
         languageSelectionKeyboard!.countryDescriptionKey.top = translate_1Manager.name(language)
         languageSelectionKeyboard!.countryDescriptionKey.bottom = translate_1Manager.englishName(language)
         process()

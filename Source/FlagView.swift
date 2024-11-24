@@ -9,16 +9,18 @@
 import SwiftUI
 
 struct FlagView: View {
-    let model: FlagViewModel
+    let model: FlagKey
 
     @GestureState private var isPressed = false
     @State private var isDragging = false
-
+    
     var body: some View {
+        //let _ = print("flagView init")
         GeometryReader { geometry in
             model.image
                 .resizable()
-                .frame(maxWidth: .infinity)
+                .scaledToFill()
+                .frame(width: geometry.size.width - 2 * model.borderWidth, height: geometry.size.height - 2 * model.borderWidth)
                 .clipShape(Capsule())
                 .padding(model.padding)
                 .brightness(isPressed ? 0.2 : 0.0)
@@ -58,18 +60,19 @@ struct FlagView: View {
 }
 
 #Preview {
-    let flagViewModel1 = FlagViewModel(persistent: TranslatePersistent())
-    let flagViewModel2 = FlagViewModel(persistent: TranslatePersistent(), languageEnum: .german)
+    let flagKey1 = FlagKey(persistent: TranslatePersistent())
+    let flagKey2 = FlagKey( persistent: TranslatePersistent(), languageEnum: .romanNumerals)
 
     ZStack {
         Rectangle()
             .foregroundColor(.gray)
         HStack(spacing: 0.0) {
-            FlagView(model: flagViewModel1)
-            FlagView(model: flagViewModel2)
-            FlagView(model: flagViewModel1)
-            FlagView(model: flagViewModel2)
+            FlagView(model: flagKey1)
+            FlagView(model: flagKey2)
+            FlagView(model: flagKey1)
+            FlagView(model: flagKey2)
         }
-        .frame(height: 100)
+        .frame(height: 200)
+        .background(.black)
     }
 }

@@ -50,10 +50,6 @@
 		AA9F5BBA2CF1CC2900570570 /* FlagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9F5BB82CF1CC2600570570 /* FlagView.swift */; };
 		AA9F5BBB2CF1CC2900570570 /* FlagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9F5BB82CF1CC2600570570 /* FlagView.swift */; };
 		AA9F5BBC2CF1CC2900570570 /* FlagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9F5BB82CF1CC2600570570 /* FlagView.swift */; };
-		AA9F5BBE2CF1D22800570570 /* FlagViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9F5BBD2CF1D22600570570 /* FlagViewModel.swift */; };
-		AA9F5BBF2CF1D22800570570 /* FlagViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9F5BBD2CF1D22600570570 /* FlagViewModel.swift */; };
-		AA9F5BC02CF1D22800570570 /* FlagViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9F5BBD2CF1D22600570570 /* FlagViewModel.swift */; };
-		AA9F5BC12CF1D22800570570 /* FlagViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9F5BBD2CF1D22600570570 /* FlagViewModel.swift */; };
 		AAB5EA392CE4962100D76292 /* SwiftGmp in Frameworks */ = {isa = PBXBuildFile; productRef = AAB5EA382CE4962100D76292 /* SwiftGmp */; };
 		AAB5EA3B2CE4963100D76292 /* NumberTranslator in Frameworks */ = {isa = PBXBuildFile; productRef = AAB5EA3A2CE4963100D76292 /* NumberTranslator */; };
 		AAB5EA3C2CE4967400D76292 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9C3F6C2CBF373600F64EFA /* KeyboardView.swift */; };
@@ -124,7 +120,6 @@
 		AA9C3F692CBF33C100F64EFA /* SmallKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallKeyboard.swift; sourceTree = "<group>"; };
 		AA9C3F6C2CBF373600F64EFA /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		AA9F5BB82CF1CC2600570570 /* FlagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagView.swift; sourceTree = "<group>"; };
-		AA9F5BBD2CF1D22600570570 /* FlagViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagViewModel.swift; sourceTree = "<group>"; };
 		AAB5EA192CE4945F00D76292 /* Translate_Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Translate_Mac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AABEFC122972A8780023A3C9 /* KeyColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyColor.swift; sourceTree = "<group>"; };
 		AACCD0772B43A89A00D545C5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = "../1-translate-tests/README.md"; sourceTree = "<group>"; };
@@ -241,8 +236,6 @@
 		AA08C7C0272EDA48001B8575 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				AA9F5BBD2CF1D22600570570 /* FlagViewModel.swift */,
-				AA9F5BB82CF1CC2600570570 /* FlagView.swift */,
 				AAE426F629597AE3005FE365 /* Screen.swift */,
 				AA6DBCAC2CE070FD00B5E0F1 /* ViewModel.swift */,
 				AA8AC4252CD6FEB4006BD54C /* Key.swift */,
@@ -250,6 +243,7 @@
 				AA8AC41D2CD62173006BD54C /* SymbolKey.swift */,
 				AA5D3D722CEB9A5900CC8237 /* SymbolKeyViewModel.swift */,
 				AA61B4B62CEDF7CD009A916E /* FlagKey.swift */,
+				AA9F5BB82CF1CC2600570570 /* FlagView.swift */,
 				AAE3F5342CE194D400146B91 /* TextKey.swift */,
 				AA17F8932CCE6EB900312BF0 /* Display.swift */,
 				AABEFC122972A8780023A3C9 /* KeyColor.swift */,
@@ -468,7 +462,6 @@
 				AABEFC132972A8780023A3C9 /* KeyColor.swift in Sources */,
 				AA73271C2CEC2DE500A5E36C /* Extensions.swift in Sources */,
 				AA9C3F6A2CBF33C800F64EFA /* SmallKeyboard.swift in Sources */,
-				AA9F5BBF2CF1D22800570570 /* FlagViewModel.swift in Sources */,
 				AAE426F729597AE3005FE365 /* Screen.swift in Sources */,
 				AAE3F5322CE180A000146B91 /* Keyboard.swift in Sources */,
 				AA8AC4262CD6FEB7006BD54C /* Key.swift in Sources */,
@@ -489,7 +482,6 @@
 				AA6DBCD42CE0781400B5E0F1 /* KeyView.swift in Sources */,
 				AA6DBCC82CE0768D00B5E0F1 /* ViewModel.swift in Sources */,
 				AA61B4B72CEDF7D5009A916E /* FlagKey.swift in Sources */,
-				AA9F5BC12CF1D22800570570 /* FlagViewModel.swift in Sources */,
 				AA6DBCCD2CE0778F00B5E0F1 /* Display.swift in Sources */,
 				AA6DBCCE2CE077B300B5E0F1 /* SmallKeyboard.swift in Sources */,
 				AA6DBCCF2CE077C700B5E0F1 /* SymbolKey.swift in Sources */,
@@ -503,7 +495,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA9F5BC02CF1D22800570570 /* FlagViewModel.swift in Sources */,
 				AAB5EA3C2CE4967400D76292 /* KeyboardView.swift in Sources */,
 				AAB5EA3D2CE4967400D76292 /* Keyboard.swift in Sources */,
 				AAB5EA3E2CE4967400D76292 /* Key.swift in Sources */,
@@ -535,7 +526,6 @@
 				AAFCC5CA2CE46553009E42FA /* SymbolKey.swift in Sources */,
 				AAFCC5C42CE46289009E42FA /* Screen.swift in Sources */,
 				AAFCC5C52CE46289009E42FA /* SmallKeyboard.swift in Sources */,
-				AA9F5BBE2CF1D22800570570 /* FlagViewModel.swift in Sources */,
 				AA8544C42CE8124800CE1996 /* ScrollingKeyboardView.swift in Sources */,
 				AAFCC5C72CE46298009E42FA /* Keyboard.swift in Sources */,
 				AAFCC5C92CE46529009E42FA /* Display.swift in Sources */,
