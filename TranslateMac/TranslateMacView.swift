@@ -13,7 +13,6 @@ struct TranslateMacView: View {
     
     let model: TranslateMacViewModel = TranslateMacViewModel()
     let scrollingModel: ScrollingKeyboardViewModel
-    @State var scrollViewHasScrolled = false
     @State var scrollViewID = UUID()
     @State var isZoomed: Bool = false
     @State private var settingsDetent = PresentationDetent.medium
@@ -65,8 +64,11 @@ struct TranslateMacView: View {
 //                        }
 //                    }
                 }
+                .onChange(of: viewModel.showLanguageSelector) {
+                    model.setHeight(geometry.size.height, isScrollView: viewModel.showLanguageSelector)
+                }
                 .onAppear() {
-                    model.setHeight(geometry.size.height)
+                    model.setHeight(geometry.size.height, isScrollView: viewModel.showLanguageSelector)
                 }
                 .animation(.easeInOut(duration: 0.6), value: viewModel.showLanguageSelector)
             }

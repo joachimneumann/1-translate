@@ -13,11 +13,14 @@ import SwiftUI
     var keyDiameter: CGFloat = 0.0
     var keyboardWidth: CGFloat = 0.0
 
-    func setHeight(_ height: CGFloat) {
+    func setHeight(_ height: CGFloat, isScrollView: Bool) {
         keyboardHeight = 0.8 * height
         displayHeight = height - keyboardHeight
         keySpacing = 0.025 * keyboardHeight
         keyDiameter = 0.2 * (keyboardHeight - 4 * keySpacing)
         keyboardWidth = 4 * keyDiameter + 3 * keySpacing
+        if isScrollView {
+            keyboardWidth += 16 // for the scrollview indicator
+        }
     }
 }

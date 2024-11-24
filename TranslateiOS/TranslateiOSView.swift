@@ -10,7 +10,6 @@ struct TranslateiOSView: View {
     @Environment(\.scenePhase) var scenePhase
     @ObservedObject var viewModel: TranslateViewModel
     let scrollingModel: ScrollingKeyboardViewModel
-    @State var scrollViewHasScrolled = false
     @State var scrollViewID = UUID()
     @State var isZoomed: Bool = false
     @State private var settingsDetent = PresentationDetent.medium
