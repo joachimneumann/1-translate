@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import NeumorphismUI
 
 struct TranslateMacView: View {
     @Environment(\.scenePhase) var scenePhase
