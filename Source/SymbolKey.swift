@@ -25,9 +25,11 @@ import SwiftGmp
 
     override func visualDown() {
         bgColor = model.bgColor(isPressed: isPressed)
+        scale = 0.97
     }
     override func visualUp() {
         bgColor = model.bgColor(isPressed: isPressed)
+        scale = 1.0
     }
     
     override func view() -> AnyView {
@@ -44,7 +46,6 @@ import SwiftGmp
                             .onAppear {
                                 self.model.newSize(geometry.size)
                             }
-                            .scaleEffect(self.isPressed ? 0.97 : 1.0)
                     }
                 }
             )
@@ -61,9 +62,13 @@ import SwiftGmp
             .foregroundColor(.gray)
         HStack(spacing: 0.0) {
             x1.view()
+                .padding()
             x2.view()
+                .padding()
             x3.view()
+                .padding()
         }
         .padding()
     }
+    .frame(height: 200)
 }

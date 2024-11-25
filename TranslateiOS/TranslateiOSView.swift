@@ -24,6 +24,7 @@ struct TranslateiOSView: View {
         VStack(spacing: 0.0) {
             ZStack {
                 VStack(spacing: 0.0) {
+                    Spacer(minLength: 20.0)
                     TranslateDisplay(uiFont: viewModel.screen.translationFont, translationResult: viewModel.translationManager.result)
                         .font(Font(viewModel.screen.translationFont))
                     Spacer(minLength: 20.0)

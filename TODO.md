@@ -1,3 +1,5 @@
+Mac: 66666666 -> ...
+
 settings voice
 settings back to normal: set to zero ??
 

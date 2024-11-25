@@ -74,7 +74,7 @@ import SwiftUI
             isSquare = false
         }
         newLanguageEnum(languageEnum)
-        borderWidth = ceil(min(rect.width, rect.height) * 0.04)
+        borderWidth = ceil(min(rect.width, rect.height) * 0.05)
         padding = 0.5 * borderWidth
     }
     

@@ -51,7 +51,7 @@ struct TranslateDisplay: View {
 
 
 #Preview {
-    let fontsize: CGFloat = 55.0
+//    let fontsize: CGFloat = 55.0
     let viewModel = TranslateViewModel()
     let _ = viewModel.translationManager.translateThis("555555", to: .romanNumerals)
     let screen = Screen()

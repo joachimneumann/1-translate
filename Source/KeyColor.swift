@@ -53,11 +53,16 @@ struct KeyColor {
     private static let secondColors            = SixColors(0.925, 0.396, 0.498)
     private static let secondActiveColors      = SixColors(0.925, 0.300, 0.498)
 #else
-    private static let digitColors             = SixColors(1.00, 0.20, 0.40)
-    private static let operatorColors          = SixColors(1.00, 0.40, 0.60, 0.30, 0.90, 0.80)
-    private static let scientificColors        = SixColors(1.00, 0.12, 0.32, 0.30, 0.70, 0.60)
-    private static let secondColors            = SixColors(1.00, 0.12, 0.12)
-    private static let secondActiveColors      = SixColors(0.20, 0.60, 0.60)
+    private static let digitColors             = SixColors(1.000, 0.500, 0.700)
+    private static let operatorColors          = SixColors(0.925, 0.400, 0.700, 0.000, 0.700, 0.800)
+    private static let scientificColors        = SixColors(0.925, 0.396, 0.498, 0.000, 0.700, 0.800)
+    private static let secondColors            = SixColors(0.925, 0.396, 0.498)
+    private static let secondActiveColors      = SixColors(0.925, 0.300, 0.498)
+//    private static let digitColors             = SixColors(1.00, 0.20, 0.40)
+//    private static let operatorColors          = SixColors(1.00, 0.40, 0.60, 0.30, 0.90, 0.80)
+//    private static let scientificColors        = SixColors(1.00, 0.12, 0.32, 0.30, 0.70, 0.60)
+//    private static let secondColors            = SixColors(1.00, 0.12, 0.12)
+//    private static let secondActiveColors      = SixColors(0.20, 0.60, 0.60)
 #endif
         
     static func sixColors(op: any OpProtocol) -> SixColors {
