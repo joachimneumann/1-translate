@@ -21,7 +21,7 @@ import SwiftUI
         keySpacing = 0.025 * keyboardHeight
         keyDiameter = 0.2 * (keyboardHeight - 4 * keySpacing)
         keyboardWidth = 4 * keyDiameter + 3 * keySpacing
-        translationViewWidth = size.width - 16 - keyboardWidth - 40
+        translationViewWidth = size.width - 16 - keyboardWidth
         print("translationViewWidth \(translationViewWidth)")
         translationViewHeight = keyboardHeight - 10
         if isScrollView {

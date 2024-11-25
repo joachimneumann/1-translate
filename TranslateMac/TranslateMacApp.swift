@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct TranslateMacApp: App {
     
-    let width: CGFloat = 450
+    let width: CGFloat = 500
     let height: CGFloat = 350
     
 

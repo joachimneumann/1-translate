@@ -76,7 +76,7 @@ struct Screen: Equatable {
         keyboardWidth = screenSize.width - 2 * horizontalPadding
         keyWidth = isPad ? (keyboardWidth - 9.0 * keySpacing) * 0.1 : (keyboardWidth - 3.0 * keySpacing) * 0.25
         keyHeight = (screenSize.height * 0.51 - 4 * keySpacing) / 5.0 // this simulates the iOS18 calculator
-        let translationFontFactor = 1.0
+        let translationFontFactor = 0.5
         keyboardHeight = 5 * keyHeight + 4 * keySpacing
 #endif
 

@@ -14,6 +14,8 @@
 		AA234BB52CECD56C00D65F87 /* ScrollingKeyboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA234BB22CECD56900D65F87 /* ScrollingKeyboardViewModel.swift */; };
 		AA234BB62CECD56C00D65F87 /* ScrollingKeyboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA234BB22CECD56900D65F87 /* ScrollingKeyboardViewModel.swift */; };
 		AA29F58A293CD608001ADF5A /* NumberDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29F589293CD608001ADF5A /* NumberDisplay.swift */; };
+		AA56F81A2CF40572005A3DAE /* Neumorphic in Frameworks */ = {isa = PBXBuildFile; productRef = AA56F8192CF40572005A3DAE /* Neumorphic */; };
+		AA56F81C2CF41F38005A3DAE /* Neumorphic in Frameworks */ = {isa = PBXBuildFile; productRef = AA56F81B2CF41F38005A3DAE /* Neumorphic */; };
 		AA5D3D732CEB9A6000CC8237 /* SymbolKeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5D3D722CEB9A5900CC8237 /* SymbolKeyViewModel.swift */; };
 		AA5D3D742CEB9A6000CC8237 /* SymbolKeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5D3D722CEB9A5900CC8237 /* SymbolKeyViewModel.swift */; };
 		AA5D3D752CEB9A6000CC8237 /* SymbolKeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5D3D722CEB9A5900CC8237 /* SymbolKeyViewModel.swift */; };
@@ -170,6 +172,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA56F81A2CF40572005A3DAE /* Neumorphic in Frameworks */,
 				AA1934532C96956100FE0848 /* NumberTranslator in Frameworks */,
 				AA9DCD662CA10E13002EBCE5 /* SwiftGmp in Frameworks */,
 			);
@@ -189,6 +192,7 @@
 			files = (
 				AAB5EA392CE4962100D76292 /* SwiftGmp in Frameworks */,
 				AAB5EA3B2CE4963100D76292 /* NumberTranslator in Frameworks */,
+				AA56F81C2CF41F38005A3DAE /* Neumorphic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,6 +338,7 @@
 			packageProductDependencies = (
 				AAB5EA382CE4962100D76292 /* SwiftGmp */,
 				AAB5EA3A2CE4963100D76292 /* NumberTranslator */,
+				AA56F81B2CF41F38005A3DAE /* Neumorphic */,
 			);
 			productName = TranslateMac;
 			productReference = AAB5EA192CE4945F00D76292 /* Translate_Mac.app */;
@@ -398,6 +403,7 @@
 			packageReferences = (
 				AA1934512C96956100FE0848 /* XCRemoteSwiftPackageReference "NumberTranslator" */,
 				AA9DCD642CA10E13002EBCE5 /* XCRemoteSwiftPackageReference "SwiftGmp" */,
+				AA56F8182CF40561005A3DAE /* XCRemoteSwiftPackageReference "neumorphic" */,
 			);
 			productRefGroup = AA08C7BF272EDA48001B8575 /* Products */;
 			projectDirPath = "";
@@ -1036,6 +1042,14 @@
 				kind = branch;
 			};
 		};
+		AA56F8182CF40561005A3DAE /* XCRemoteSwiftPackageReference "neumorphic" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/costachung/neumorphic/";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		AA9DCD642CA10E13002EBCE5 /* XCRemoteSwiftPackageReference "SwiftGmp" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/joachimneumann/SwiftGmp";
@@ -1051,6 +1065,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AA1934512C96956100FE0848 /* XCRemoteSwiftPackageReference "NumberTranslator" */;
 			productName = NumberTranslator;
+		};
+		AA56F8192CF40572005A3DAE /* Neumorphic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA56F8182CF40561005A3DAE /* XCRemoteSwiftPackageReference "neumorphic" */;
+			productName = Neumorphic;
+		};
+		AA56F81B2CF41F38005A3DAE /* Neumorphic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA56F8182CF40561005A3DAE /* XCRemoteSwiftPackageReference "neumorphic" */;
+			productName = Neumorphic;
 		};
 		AA6DBCCB2CE0774800B5E0F1 /* SwiftGmp */ = {
 			isa = XCSwiftPackageProductDependency;

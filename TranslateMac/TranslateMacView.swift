@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NeumorphismUI
 
 struct TranslateMacView: View {
     @Environment(\.scenePhase) var scenePhase
@@ -40,12 +41,6 @@ struct TranslateMacView: View {
         }
     }
     
-    func RightSide(uiFont: AppleFont, translationResult: TranslateResult) -> some View {
-        VStack {
-            TranslateDisplay(uiFont: uiFont, translationResult: translationResult)
-            Spacer()
-        }
-    }
     var body: some View {
         GeometryReader { geometry in
             if geometry.notZero {
@@ -57,15 +52,14 @@ struct TranslateMacView: View {
                             Spacer(minLength: 0.0)
                         }
                     }
-                    VStack(spacing: 0.0) {
+                    HStack(spacing: 0.0) {
                         Spacer(minLength: 0.0)
-                        HStack(spacing: 0.0) {
-                            Spacer(minLength: 0.0)
-                            RightSide(uiFont: viewModel.screen.translationFont, translationResult: viewModel.translate_1Manager.result)
-                                .frame(width: model.translationViewWidth, height: model.translationViewHeight)
-                        }
+                        TranslateDisplay(uiFont: viewModel.screen.translationFont, translationResult: viewModel.translationManager.result)
+                            .padding(.top, 15)
+                            .padding(.leading, 20)
+                            .padding(.trailing, 20)
+                            .frame(width: model.translationViewWidth)
                     }
-                    .padding(10)
                 }
                 .onChange(of: viewModel.showLanguageSelector) {
                     model.setSize(geometry.size, isScrollView: viewModel.showLanguageSelector)
@@ -76,8 +70,8 @@ struct TranslateMacView: View {
                 .animation(.easeInOut(duration: 0.6), value: viewModel.showLanguageSelector)
             }
         }
-        .padding(.bottom, 5)
-        .padding(.leading, 5)
+        .padding(.bottom, 10)
+        .padding(.leading, 10)
         .preferredColorScheme(.dark)
     }
     
