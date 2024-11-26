@@ -32,13 +32,11 @@ extension EnvironmentValues {
 
 
 class ViewModel: ObservableObject {
-    var screen: Screen
     var calculator: Calculator
     var smallKeyboard: SmallKeyboard? = nil
     @Published var display: Display
     
     init(screen: Screen = Screen()) {
-        self.screen = screen
         calculator = Calculator(precision: 40)
         display = Display(floatDisplayWidth: screen.displayWidth, font: screen.numberDisplayFont, ePadding: screen.ePadding)
     }

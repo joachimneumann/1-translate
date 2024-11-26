@@ -19,7 +19,7 @@ struct TranslateMacView: View {
     
     init(viewModel: TranslateViewModel) {
         self.viewModel = viewModel
-        scrollingModel = ScrollingKeyboardViewModel(spacing: viewModel.screen.keySpacing, keyboard: viewModel.languageSelectionKeyboard!)
+        scrollingModel = ScrollingKeyboardViewModel(spacing: 10, keyboard: viewModel.languageSelectionKeyboard!)
     }
     
     func LeftSide() -> some View {
@@ -53,7 +53,7 @@ struct TranslateMacView: View {
                     }
                     HStack(spacing: 0.0) {
                         Spacer(minLength: 0.0)
-                        TranslateDisplay(uiFont: viewModel.screen.translationFont, translationResult: viewModel.translationManager.result)
+                        TranslateDisplay(uiFont: AppleFont.systemFont(ofSize: 20)/* viewModel.screen.translationFont*/, translationResult: viewModel.translationManager.result)
                             .padding(.top, 15)
                             .padding(.leading, 20)
                             .padding(.trailing, 20)

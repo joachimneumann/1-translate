@@ -121,8 +121,7 @@ import NumberTranslator
     
 #if TRANSLATE_IOS || TRANSLATE_MAC
     let keyboard: LanguageSelectionKeyboard = LanguageSelectionKeyboard(
-        translateViewModel: TranslateViewModel(),
-        keySpacing: 10)
+        translateViewModel: TranslateViewModel())
 //    let _ = keyboard.countryKey.set(.german)
 //    let _ = keyboard.countryDescriptionKey.top = "Deutsch"
     //    let keyboard: SmallKeyboard = Translate_1Keyboard()
@@ -134,7 +133,7 @@ import NumberTranslator
     
     //    let translate_1Manager = Translate_1Manager()
     
-    //    let keyboard = Translate_1SelectLanguage(keySize: screen.keySize, translate_1Manager: Translate_1Manager(), keySpacing: screen.keySpacing)
+    //    let keyboard = Translate_1SelectLanguage(keySize: 10, translate_1Manager: Translate_1Manager(), keySpacing: 10)
     //    let _ = keyboard.countryKey.imageName = translate_1Manager.flagname(NumberTranslator.LanguageEnum.german)
     //    let _ = keyboard.countryDescriptionKey.top = "Deutsch"
     //    let _ = keyboard.countryDescriptionKey.bottom = "(German)"
@@ -144,7 +143,7 @@ import NumberTranslator
     VStack(spacing: 0.0) {
         Rectangle()
         ScrollingKeyboardView(model: model)
-            .frame(width: 300, height: 300)
+//            .frame(width: 300, height: 300)
     }
     .background(model.backgroundColor)
 }

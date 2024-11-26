@@ -16,7 +16,7 @@ struct Screen: Equatable {
     private let isPad: Bool = false
 
     var keyboardWidth: CGFloat
-    var keyboardHeight: CGFloat
+    private var keyboardHeight: CGFloat
     let keySpacing: CGFloat
     let ePadding: CGFloat
     var uiFontSize: CGFloat

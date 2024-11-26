@@ -40,7 +40,6 @@ import NumberTranslator
 
 
 #Preview {
-    let screen = Screen()
     
     
 #if TRANSLATE_IOS || TRANSLATE_MAC
@@ -68,7 +67,7 @@ import NumberTranslator
     VStack {
         Rectangle()
 //        let _ = keyboard.back(true)
-        KeyboardView(spacing: screen.keySpacing, keyboard: keyboard, height: screen.keyboardHeight)
+        KeyboardView(spacing: 10, keyboard: keyboard, height: 300)
             .padding(.bottom, 10)
     }
     .background(.black)

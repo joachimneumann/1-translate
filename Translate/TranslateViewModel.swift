@@ -120,8 +120,7 @@ class TranslateViewModel: ViewModel {
         smallKeyboard = TranslateKeyboard(persistent: self.persistent, toggle: toggle)
         
         languageSelectionKeyboard = LanguageSelectionKeyboard(
-            translateViewModel: self,
-            keySpacing: screen.keySpacing)
+            translateViewModel: self)
 
         let current = persistent.currentLanguageEnum
         display.separatorCharacter = separatorCharacter(forLanguage: current)
