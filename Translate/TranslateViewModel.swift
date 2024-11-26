@@ -121,8 +121,7 @@ class TranslateViewModel: ViewModel {
         
         languageSelectionKeyboard = LanguageSelectionKeyboard(
             translateViewModel: self,
-            keySpacing: screen.keySpacing,
-            borderColor: Color(AppleColor.darkGray))
+            keySpacing: screen.keySpacing)
 
         let current = persistent.currentLanguageEnum
         display.separatorCharacter = separatorCharacter(forLanguage: current)

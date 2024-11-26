@@ -13,7 +13,7 @@ import NumberTranslator
 class LanguageSelectionKeyboard: Keyboard {
     let countryKey: FlagKey
     let countryDescriptionKey: TextKey
-    init(translateViewModel: TranslateViewModel, keySpacing: CGFloat, borderColor: Color) {
+    init(translateViewModel: TranslateViewModel, keySpacing: CGFloat) {
         countryKey = FlagKey(
             persistent: translateViewModel.persistent,
             toggle: translateViewModel.toggle)

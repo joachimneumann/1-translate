@@ -11,9 +11,6 @@ import SwiftUI
     let persistent: TranslatePersistent
     private var languageEnum: NumberTranslator.LanguageEnum
     var image: Image
-    var borderWidth: CGFloat = 0.0
-    var padding: CGFloat = 0.0
-    let borderColor: Color = Color(AppleColor.darkGray)
     var isSquare: Bool = false
     private var toggle: (() -> Void)?
     private var setLanguage: ((NumberTranslator.LanguageEnum) -> Void)?
@@ -74,8 +71,6 @@ import SwiftUI
             isSquare = false
         }
         newLanguageEnum(languageEnum)
-        borderWidth = ceil(min(rect.width, rect.height) * 0.05)
-        padding = 0.5 * borderWidth
     }
     
     override func view() -> AnyView {

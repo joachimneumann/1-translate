@@ -39,6 +39,7 @@ struct AllRowsExceptLast: View {
                             }
                         }
                     }
+                    Spacer(minLength: spacing)
                 }
             }
         }
@@ -121,8 +122,7 @@ import NumberTranslator
 #if TRANSLATE_IOS || TRANSLATE_MAC
     let keyboard: LanguageSelectionKeyboard = LanguageSelectionKeyboard(
         translateViewModel: TranslateViewModel(),
-        keySpacing: 10,
-        borderColor: Color(AppleColor.darkGray))
+        keySpacing: 10)
 //    let _ = keyboard.countryKey.set(.german)
 //    let _ = keyboard.countryDescriptionKey.top = "Deutsch"
     //    let keyboard: SmallKeyboard = Translate_1Keyboard()

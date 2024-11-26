@@ -20,16 +20,10 @@ struct FlagView: View {
             model.image
                 .resizable()
                 .scaledToFill()
-                .frame(width: geometry.size.width - 2 * model.borderWidth, height: geometry.size.height - 2 * model.borderWidth)
+                .frame(width: geometry.size.width, height: geometry.size.height)
                 .clipShape(Capsule())
-                .padding(model.padding)
                 .brightness(isPressed ? 0.2 : 0.0)
-                .overlay(
-                    Capsule()
-                        .stroke(model.borderColor, lineWidth: model.borderWidth)
-                )
-                .padding(model.padding)
-                .scaleEffect(isPressed ? 0.95 : 1.0) // Optional scale effect
+                .scaleEffect(isPressed ? 0.95 : 1.0)
                 .animation(.easeInOut, value: isPressed)
                 .simultaneousGesture(
                     DragGesture(minimumDistance: 0)

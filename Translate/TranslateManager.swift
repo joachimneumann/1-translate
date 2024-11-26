@@ -31,11 +31,6 @@ class TranslationManager: NumberTranslator, Identifiable {
         languageImplementation[languageEnum]
     }
 
-    
-    func borderColor(_ language: NumberTranslator.LanguageEnum) -> Color {
-        Color(AppleColor.darkGray)
-    }
-
     func nameWithDescription(_ language: NumberTranslator.LanguageEnum) -> String {
         language.rawValue + (englishName(language) != nil ? "/"+englishName(language)! : "")
     }
