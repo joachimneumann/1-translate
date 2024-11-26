@@ -1,5 +1,6 @@
 Mac: 66666666 -> ...
-
+Settings: Neumorphic
+Mac Settings
 settings voice
 settings back to normal: set to zero ??
 

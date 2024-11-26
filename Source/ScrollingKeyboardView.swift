@@ -49,7 +49,6 @@ struct LastRow: View {
     let spacing: CGFloat
     let keyWidth: CGFloat
     var keyboard: Keyboard  // Use @ObservedObject for updates
-    let bg: Color
     
     var body: some View {
         if let lastRow = keyboard.keyMatrix.last {
@@ -99,8 +98,7 @@ struct ScrollingKeyboardView: View {
                         LastRow(
                             spacing: model.spacing,
                             keyWidth: model.keyWidth,
-                            keyboard: model.keyboard,
-                            bg: model.backgroundColor)
+                            keyboard: model.keyboard)
                         .frame(height: model.keyHeight)
                     }
                 }
