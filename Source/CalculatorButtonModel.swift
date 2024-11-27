@@ -8,6 +8,26 @@
 import SwiftUI
 import NumberTranslator
 
+struct NeumorphicModifier: ViewModifier {
+    var pressed: Bool
+
+    func body(content: Content) -> some View {
+        if pressed {
+            content
+                .softInnerShadow(Circle())
+        } else {
+            content
+                .softOuterShadow()
+        }
+    }
+}
+
+extension View {
+    func neumorphic(pressed: Bool) -> some View {
+        self.modifier(NeumorphicModifier(pressed: pressed))
+    }
+}
+
 class CalculatorButtonModel {
     let translationManager = TranslationManager()
     var image: Image? = nil
@@ -24,47 +44,28 @@ class CalculatorButtonModel {
         }
         self.diameter = diameter
     }
+    
     var view: some View {
-        let offset: CGFloat = diameter / 80.0 * 6.0
-        let blurRadius: CGFloat = 0.5 * offset
-        let borderWidth: CGFloat = 2 * offset
-//        .frame(width: diameter - 2 * model.borderWidth, height: diameter - 2 * model.borderWidth)
-//        .frame(width: geometry.size.width, height: geometry.size.height)
-//        .clipShape(Capsule())
-//        .padding(model.padding)
-//        .brightness(isPressed ? 0.2 : 0.0)
-//        .overlay(
-//            Capsule()
-//                .stroke(model.borderColor, lineWidth: model.borderWidth)
-//        )
-//        .padding(model.padding)
-
-        let _ = print(diameter)
         if let image = image {
+            let offset: CGFloat = diameter / 80.0 * 6.0
+            let blurRadius: CGFloat = 0.5 * offset
+            let borderWidth: CGFloat = 2 * offset
             return AnyView(
                 ZStack {
-                    if pressed {
-                        Color.Neumorphic.main
-                            .frame(width: diameter, height: diameter)
-                            .clipShape(Circle())
-                            .softInnerShadow(Circle())
-                    } else {
-                        Color.Neumorphic.main
-                            .frame(width: diameter, height: diameter)
-                            .clipShape(Circle())
-                            .shadow(color: Color.Neumorphic.darkShadow, radius: blurRadius, x: offset, y: offset)
-                            .shadow(color: Color.Neumorphic.lightShadow, radius: blurRadius, x: -offset, y: -offset)
-                    }
+                    Color.Neumorphic.main
+                        .frame(width: diameter, height: diameter)
+                        .clipShape(Circle())
+                        .neumorphic(pressed: pressed)
                     image
                         .resizable()
                         .scaledToFill()
                         .clipShape(Circle())
                         .frame(width: diameter - 2 * borderWidth, height: diameter - 2 * borderWidth)
                 }
-//                    .softInnerShadow(Circle())
             )
+        } else {
+            return AnyView(EmptyView())
         }
-        return AnyView(EmptyView())
     }
 }
 
