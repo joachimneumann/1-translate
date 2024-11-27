@@ -59,9 +59,10 @@ struct TranslateDisplay: View {
         Color.Neumorphic.main
         TranslateDisplay(uiFont: screen.translationFont, translationResult: viewModel.translationManager.result)
             .frame(height: 300)
+            .padding(30)
     }
     .preferredColorScheme(.dark)
-    
+
         
 }
 
