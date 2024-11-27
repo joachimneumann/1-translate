@@ -10,7 +10,19 @@ import SwiftUI
 struct CalculatorButton: View {
     let model: CalculatorButtonModel
     var body: some View {
-        model.view
+        ZStack {
+            Color.Neumorphic.main
+                .frame(width: model.diameter, height: model.diameter)
+                .clipShape(Circle())
+                .neumorphic(pressed: model.visualPressed)
+            if let flag = model.flag {
+                flag
+            }
+            if let symbol = model.symbol {
+                symbol
+            }
+        }
+        .applyCalculatorPressGestures(key: model, diameter: model.diameter)
     }
 }
 

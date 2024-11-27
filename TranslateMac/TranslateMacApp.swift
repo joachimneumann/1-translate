@@ -18,7 +18,7 @@ struct TranslateMacApp: App {
 //        let screen = Screen(CGSize(width: width, height: height))
         WindowGroup {
             Demo(diameter: 60)
-                .preferredColorScheme(.light)
+                .preferredColorScheme(.dark)
 //            NavigationStack {
 //                TranslateMacView(viewModel: TranslateViewModel(screen: screen))
 //                    .frame(width: width, height: height)

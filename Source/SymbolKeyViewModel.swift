@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftGmp
 
-@Observable class SymbolKeyViewModel: ObservableObject {
+@Observable class SymbolKeyViewModel {
     
     private var diameter: CGFloat
     var op: any OpProtocol
@@ -85,13 +85,6 @@ import SwiftGmp
             factor = factorScientific
         }
         self.diameter = min(sizeParameter.width, sizeParameter.height) * factor
-    }
-
-    
-    func visualUp() {
-    }
-    
-    func visualDown() {
     }
     
     private let sfImageForKey: [String: String] = [

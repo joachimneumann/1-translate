@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
+import SwiftGmp
 import NumberTranslator
 
 struct NeumorphicModifier: ViewModifier {
     var pressed: Bool
-
+    
     func body(content: Content) -> some View {
         if pressed {
             content
@@ -30,42 +31,53 @@ extension View {
 
 @Observable class CalculatorButtonModel: Key {
     let translationManager = TranslationManager()
-    var image: Image? = nil
+    private var flagImage: Image? = nil
+    var symbolKeyViewModel: SymbolKeyViewModel? = nil
     let diameter: CGFloat
     
     init(languageEnum: NumberTranslator.LanguageEnum, diameter: CGFloat) {
         if AppleImage(named: translationManager.flagName(languageEnum) + "Sqr") != nil {
-            image = Image(translationManager.flagName(languageEnum) + "Sqr")
+            flagImage = Image(translationManager.flagName(languageEnum) + "Sqr")
         } else if AppleImage(named: translationManager.flagName(languageEnum)) != nil {
-            image = Image(translationManager.flagName(languageEnum))
+            flagImage = Image(translationManager.flagName(languageEnum))
         } else {
-            image = Image("English")
+            flagImage = Image("English")
         }
         self.diameter = diameter
     }
     
-    var view: some View {
-        if let image = image {
+    init(op: any OpProtocol, diameter: CGFloat) {
+        self.diameter = diameter
+        self.symbolKeyViewModel = SymbolKeyViewModel(op: op)
+        super.init()
+        self.symbolKeyViewModel!.newSize(CGSize(width: diameter, height: diameter))
+    }
+    
+    var symbol: AnyView? {
+        if let symbolKeyViewModel = symbolKeyViewModel {
+            return AnyView(
+                symbolKeyViewModel.label
+                    .scaleEffect(visualPressed ? 0.98 : 1.0)
+                    .brightness(visualPressed ? -0.1 : 0.0)
+            )
+        }
+        return nil
+    }
+    
+    var flag: AnyView? {
+        if let flag = flagImage {
             let borderWidth: CGFloat = diameter * 0.125
             return AnyView(
-                ZStack {
-                    Color.Neumorphic.main
-                        .frame(width: diameter, height: diameter)
-                        .clipShape(Circle())
-                        .neumorphic(pressed: visualPressed)
-                    image
-                        .resizable()
-                        .scaledToFill()
-                        .brightness(visualPressed ? -0.1 : 0.0)
-                        .clipShape(Circle())
-                        .frame(width: diameter - 2 * borderWidth, height: diameter - 2 * borderWidth)
-                        .scaleEffect(visualPressed ? 0.98 : 1.0)
-                }
-                    .applyCalculatorPressGestures(key: self, diameter: diameter)
+                flag
+                    .resizable()
+                    .scaledToFill()
+                    .brightness(visualPressed ? -0.1 : 0.0)
+                    .clipShape(Circle())
+                    .frame(width: diameter - 2 * borderWidth, height: diameter - 2 * borderWidth)
+                    .scaleEffect(visualPressed ? 0.98 : 1.0)
             )
-        } else {
-            return AnyView(EmptyView())
         }
+        return nil
     }
 }
 
@@ -78,7 +90,7 @@ struct Demo: View {
             VStack {
                 HStack(spacing: diameter) {
                     CalculatorButton(model: CalculatorButtonModel(languageEnum: .vietnamese, diameter: diameter))
-                    CalculatorButton(model: CalculatorButtonModel(languageEnum: .german, diameter: diameter))
+                    CalculatorButton(model: CalculatorButtonModel(op: InplaceOperation.sqrt, diameter: diameter))
                 }
                 .frame(width: 200, height: 100)
             }
