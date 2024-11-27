@@ -15,10 +15,8 @@ struct KeyView: View {
             if geometry.notZero {
                 if let flagKey = key as? FlagKey {
                     flagKey.view()
-                        .scaleEffect(key.scale)
                 } else {
                     key.view()
-                        .scaleEffect(key.scale)
                         .simultaneousGesture(
                             DragGesture(minimumDistance: 0)
                                 .onChanged { value in

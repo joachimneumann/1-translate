@@ -14,7 +14,6 @@ import SwiftGmp
     private var downTimer: Timer? = nil
     private var downTime: Double = 0.15
     private var upTime: Double = 0.4
-    var scale: CGFloat = 1.0
     var visualPressed: Bool = false
 
     func visualDown() { visualPressed = true }
@@ -34,6 +33,9 @@ import SwiftGmp
         }
     }
 
+    func down(_ location: CGPoint, in diameter: CGFloat) {
+        down(location, in: CGSize(width: diameter, height: diameter))
+    }
     func down(_ location: CGPoint, in size: CGSize) {
         let tolerance: CGFloat = 0.3 * size.width
         let touchRect = CGRect(

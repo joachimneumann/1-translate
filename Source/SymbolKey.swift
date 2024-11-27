@@ -25,11 +25,11 @@ import SwiftGmp
 
     override func visualDown() {
 //        bgColor = model.bgColor(isPressed: isPressed)
-        scale = 0.97
+//        scale = 0.97
     }
     override func visualUp() {
 //        bgColor = model.bgColor(isPressed: isPressed)
-        scale = 1.0
+//        scale = 1.0
     }
     
     override func view() -> AnyView {

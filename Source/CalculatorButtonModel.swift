@@ -32,6 +32,7 @@ extension View {
     let translationManager = TranslationManager()
     var image: Image? = nil
     let diameter: CGFloat
+    
     init(languageEnum: NumberTranslator.LanguageEnum, diameter: CGFloat) {
         if AppleImage(named: translationManager.flagName(languageEnum) + "Sqr") != nil {
             image = Image(translationManager.flagName(languageEnum) + "Sqr")
@@ -60,7 +61,7 @@ extension View {
                         .frame(width: diameter - 2 * borderWidth, height: diameter - 2 * borderWidth)
                         .scaleEffect(visualPressed ? 0.98 : 1.0)
                 }
-                    .applyCalculatorPressGestures(key: self, size: CGSize(width: diameter, height: diameter))
+                    .applyCalculatorPressGestures(key: self, diameter: diameter)
             )
         } else {
             return AnyView(EmptyView())

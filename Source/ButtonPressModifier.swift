@@ -9,14 +9,14 @@ import SwiftUI
 
 struct ButtonPressModifier: ViewModifier {
     let key: Key
-    let size: CGSize
+    let diameter: CGFloat
 
     func body(content: Content) -> some View {
         content
             .simultaneousGesture(
                 DragGesture(minimumDistance: 0)
                     .onChanged { value in
-                        key.down(value.location, in: size)
+                        key.down(value.location, in: diameter)
                     }
                     .onEnded { _ in
                         key.up()
@@ -32,7 +32,7 @@ struct ButtonPressModifier: ViewModifier {
 }
 
 extension View {
-    func applyCalculatorPressGestures(key: Key, size: CGSize) -> some View {
-        self.modifier(ButtonPressModifier(key: key, size: size))
+    func applyCalculatorPressGestures(key: Key, diameter: CGFloat) -> some View {
+        self.modifier(ButtonPressModifier(key: key, diameter: diameter))
     }
 }
