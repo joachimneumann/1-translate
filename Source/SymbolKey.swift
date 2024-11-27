@@ -20,15 +20,15 @@ import SwiftGmp
     
     func setColors(textColor: Color, upColor: Color, downColor: Color) {
         model.setColors(textColor: textColor, upColor: upColor, downColor: downColor)
-        bgColor = model.bgColor(isPressed: isPressed)
+//        bgColor = model.bgColor(isPressed: isPressed)
     }
 
     override func visualDown() {
-        bgColor = model.bgColor(isPressed: isPressed)
+//        bgColor = model.bgColor(isPressed: isPressed)
         scale = 0.97
     }
     override func visualUp() {
-        bgColor = model.bgColor(isPressed: isPressed)
+//        bgColor = model.bgColor(isPressed: isPressed)
         scale = 1.0
     }
     

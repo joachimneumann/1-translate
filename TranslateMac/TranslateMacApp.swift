@@ -15,12 +15,14 @@ struct TranslateMacApp: App {
     
 
     var body: some Scene {
-        let screen = Screen(CGSize(width: width, height: height))
+//        let screen = Screen(CGSize(width: width, height: height))
         WindowGroup {
-            NavigationStack {
-                TranslateMacView(viewModel: TranslateViewModel(screen: screen))
-                    .frame(width: width, height: height)
-            }
+            Demo(diameter: 60)
+                .preferredColorScheme(.light)
+//            NavigationStack {
+//                TranslateMacView(viewModel: TranslateViewModel(screen: screen))
+//                    .frame(width: width, height: height)
+//            }
         }
         .windowStyle(HiddenTitleBarWindowStyle())
         .windowResizability(.contentSize)

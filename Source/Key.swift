@@ -10,14 +10,15 @@ import SwiftGmp
 
 @Observable class Key: Identifiable {
     let id = UUID()  // unique identifier
-    var isPressed: Bool = false
+    private var isPressed: Bool = false
     private var downTimer: Timer? = nil
     private var downTime: Double = 0.15
     private var upTime: Double = 0.4
     var scale: CGFloat = 1.0
-    
-    func visualDown() {  }
-    func visualUp()   {  }
+    var visualPressed: Bool = false
+
+    func visualDown() { visualPressed = true }
+    func visualUp()   { visualPressed = false }
     
     open func view() -> AnyView {
         AnyView(EmptyView())
