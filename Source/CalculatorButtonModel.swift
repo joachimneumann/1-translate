@@ -15,7 +15,7 @@ struct NeumorphicModifier: ViewModifier {
     func body(content: Content) -> some View {
         if pressed {
             content
-                .softInnerShadow(Circle())
+//                .softInnerShadow(Circle())
         } else {
             content
                 .softOuterShadow()

@@ -17,7 +17,7 @@ struct TranslateiOSView: View {
     
     init(viewModel: TranslateViewModel) {
         self.viewModel = viewModel
-        scrollingModel = ScrollingKeyboardViewModel(spacing: viewModel.screen.keySpacing, keyboard: viewModel.languageSelectionKeyboard!)
+        scrollingModel = ScrollingKeyboardViewModel(spacing: 10, keyboard: viewModel.languageSelectionKeyboard!)
     }
     
     var TranslateiOSView: some View {
@@ -25,8 +25,8 @@ struct TranslateiOSView: View {
             ZStack {
                 VStack(spacing: 0.0) {
                     Spacer(minLength: 20.0)
-                    TranslateDisplay(uiFont: viewModel.screen.translationFont, translationResult: viewModel.translationManager.result)
-                        .font(Font(viewModel.screen.translationFont))
+//                    TranslateDisplay(uiFont: viewModel.screen.translationFont, translationResult: viewModel.translationManager.result)
+//                        .font(Font(viewModel.screen.translationFont))
                     Spacer(minLength: 20.0)
                     NumberDisplay(display: viewModel.display)
                 }
@@ -44,7 +44,7 @@ struct TranslateiOSView: View {
                 .transition(.opacity)
             } else {
                 KeyboardView(
-                    spacing: viewModel.screen.keySpacing,
+                    spacing: 10,
                     keyboard: viewModel.smallKeyboard!)
             }
         }
@@ -56,14 +56,14 @@ struct TranslateiOSView: View {
     var body: some View {
 //        ZStack {
         TranslateiOSView
-                .padding(.bottom, viewModel.screen.bottomPadding)
-                .padding(.horizontal, viewModel.screen.horizontalPadding)
+//                .padding(.bottom, viewModel.screen.bottomPadding)
+//                .padding(.horizontal, viewModel.screen.horizontalPadding)
                 .preferredColorScheme(.dark)
-                .navigationDestination(isPresented: $viewModel.showSettings) {
-                    if viewModel.showSettings {
-                        TranslateiOSSettingsView(viewModel: viewModel)
-                    }
-                }
+//                .navigationDestination(isPresented: $viewModel.showSettings) {
+//                    if viewModel.showSettings {
+//                        TranslateiOSSettingsView(viewModel: viewModel)
+//                    }
+//                }
                 .background(Color.Neumorphic.main)
 //        }
 //        .onChange(of: viewModel.navigateToSettings) { old, new in

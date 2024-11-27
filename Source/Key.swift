@@ -13,7 +13,7 @@ import SwiftGmp
     private var isPressed: Bool = false
     private var downTimer: Timer? = nil
     private var downTime: Double = 0.15
-    private var upTime: Double = 0.4
+    private var upTime: Double = 1.4
     var visualPressed: Bool = false
 
     func visualDown() { visualPressed = true }
