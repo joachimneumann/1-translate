@@ -23,14 +23,14 @@ import SwiftGmp
 //        bgColor = model.bgColor(isPressed: isPressed)
     }
 
-    override func visualDown() {
+//    override func visualDown1() {
 //        bgColor = model.bgColor(isPressed: isPressed)
 //        scale = 0.97
-    }
-    override func visualUp() {
+//    }
+//    override func visualUp() {
 //        bgColor = model.bgColor(isPressed: isPressed)
 //        scale = 1.0
-    }
+//    }
     
     override func view() -> AnyView {
         if model.symbol == "KeyboardSpacer" {

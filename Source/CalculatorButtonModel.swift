@@ -10,21 +10,24 @@ import SwiftGmp
 import NumberTranslator
 
 struct NeumorphicModifier: ViewModifier {
-    var pressed: Bool
+    var pressed: VisualPressedState
     
     func body(content: Content) -> some View {
-        if pressed {
-            content
-//                .softInnerShadow(Circle())
-        } else {
+        switch pressed {
+        case .up:
             content
                 .softOuterShadow()
+        case .center:
+            content
+        case .down:
+            content
+                .softInnerShadow(Circle())
         }
     }
 }
 
 extension View {
-    func neumorphic(pressed: Bool) -> some View {
+    func neumorphic(pressed: VisualPressedState) -> some View {
         self.modifier(NeumorphicModifier(pressed: pressed))
     }
 }
@@ -57,8 +60,8 @@ extension View {
         if let symbolKeyViewModel = symbolKeyViewModel {
             return AnyView(
                 symbolKeyViewModel.label
-                    .scaleEffect(visualPressed ? 0.98 : 1.0)
-                    .brightness(visualPressed ? -0.1 : 0.0)
+                    .scaleEffect(visualPressed == .down ? 0.98 : 1.0)
+                    .brightness(visualPressed == .down ? -0.1 : 0.0)
             )
         }
         return nil
@@ -71,10 +74,10 @@ extension View {
                 flag
                     .resizable()
                     .scaledToFill()
-                    .brightness(visualPressed ? -0.1 : 0.0)
+                    .brightness(visualPressed == .down ? -0.1 : 0.0)
                     .clipShape(Circle())
                     .frame(width: diameter - 2 * borderWidth, height: diameter - 2 * borderWidth)
-                    .scaleEffect(visualPressed ? 0.98 : 1.0)
+                    .scaleEffect(visualPressed == .down ? 0.98 : 1.0)
             )
         }
         return nil
