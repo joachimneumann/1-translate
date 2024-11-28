@@ -18,8 +18,8 @@ enum VisualPressedState {
     let id = UUID()  // unique identifier
     private var isPressed: Bool = false
     private var downTimer: Timer? = nil
-    private var downTime: Double = 1.15
-    private var upTime: Double = 1.4
+    private var downTime: Double = 0.15
+    private var upTime: Double = 0.4
     var visualPressed: VisualPressedState = .up
 
     func visualDown1() { visualPressed = .center }

@@ -95,7 +95,7 @@ struct Demo: View {
                     CalculatorButton(model: CalculatorButtonModel(languageEnum: .vietnamese, diameter: diameter))
                     CalculatorButton(model: CalculatorButtonModel(op: InplaceOperation.sqrt, diameter: diameter))
                 }
-                .frame(width: 200, height: 100)
+                .frame(width: 200, height: 60)
             }
             .background(Color.Neumorphic.main)
         }
@@ -103,11 +103,11 @@ struct Demo: View {
 }
 
 #Preview("Dark") {
-    Demo(diameter: 60)
+    Demo(diameter: 80)
         .preferredColorScheme(.dark)
 }
 
 #Preview("Light") {
-    Demo(diameter: 60)
+    Demo(diameter: 80)
         .preferredColorScheme(.light)
 }

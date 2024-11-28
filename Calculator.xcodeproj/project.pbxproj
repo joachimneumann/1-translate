@@ -10,8 +10,6 @@
 		AA17F8942CCE6EC200312BF0 /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA17F8932CCE6EB900312BF0 /* Display.swift */; };
 		AA1934532C96956100FE0848 /* NumberTranslator in Frameworks */ = {isa = PBXBuildFile; productRef = AA1934522C96956100FE0848 /* NumberTranslator */; };
 		AA29F58A293CD608001ADF5A /* NumberDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29F589293CD608001ADF5A /* NumberDisplay.swift */; };
-		AA56F81A2CF40572005A3DAE /* Neumorphic in Frameworks */ = {isa = PBXBuildFile; productRef = AA56F8192CF40572005A3DAE /* Neumorphic */; };
-		AA56F81C2CF41F38005A3DAE /* Neumorphic in Frameworks */ = {isa = PBXBuildFile; productRef = AA56F81B2CF41F38005A3DAE /* Neumorphic */; };
 		AA5796652CF6930200D3A02B /* ButtonPressModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5796642CF692EE00D3A02B /* ButtonPressModifier.swift */; };
 		AA5796662CF6930200D3A02B /* ButtonPressModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5796642CF692EE00D3A02B /* ButtonPressModifier.swift */; };
 		AA5796672CF6930200D3A02B /* ButtonPressModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5796642CF692EE00D3A02B /* ButtonPressModifier.swift */; };
@@ -45,6 +43,8 @@
 		AA6DBCD42CE0781400B5E0F1 /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC4272CD7087E006BD54C /* KeyView.swift */; };
 		AA6DBCD52CE0782B00B5E0F1 /* KeyColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABEFC122972A8780023A3C9 /* KeyColor.swift */; };
 		AA73271C2CEC2DE500A5E36C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA370C2C293352960041AE4E /* Extensions.swift */; };
+		AA8A6B7B2CF8C76700759D93 /* Neumorphic in Frameworks */ = {isa = PBXBuildFile; productRef = AA8A6B7A2CF8C76700759D93 /* Neumorphic */; };
+		AA8A6B7D2CF8C76D00759D93 /* Neumorphic in Frameworks */ = {isa = PBXBuildFile; productRef = AA8A6B7C2CF8C76D00759D93 /* Neumorphic */; };
 		AA8AC41E2CD62174006BD54C /* SymbolKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC41D2CD62173006BD54C /* SymbolKey.swift */; };
 		AA8AC4262CD6FEB7006BD54C /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC4252CD6FEB4006BD54C /* Key.swift */; };
 		AA8AC4282CD70883006BD54C /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC4272CD7087E006BD54C /* KeyView.swift */; };
@@ -121,6 +121,7 @@
 		AA6352B02B296C3B00CABC0C /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		AA6DBCAC2CE070FD00B5E0F1 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		AA6DBCB62CE075A800B5E0F1 /* Calculator_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA8A6B792CF8C74E00759D93 /* neumorphic-master */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "neumorphic-master"; sourceTree = "<group>"; };
 		AA8AC41D2CD62173006BD54C /* SymbolKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolKey.swift; sourceTree = "<group>"; };
 		AA8AC4252CD6FEB4006BD54C /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		AA8AC4272CD7087E006BD54C /* KeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyView.swift; sourceTree = "<group>"; };
@@ -195,9 +196,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA56F81A2CF40572005A3DAE /* Neumorphic in Frameworks */,
 				AA1934532C96956100FE0848 /* NumberTranslator in Frameworks */,
 				AA9DCD662CA10E13002EBCE5 /* SwiftGmp in Frameworks */,
+				AA8A6B7B2CF8C76700759D93 /* Neumorphic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,7 +216,7 @@
 			files = (
 				AAB5EA392CE4962100D76292 /* SwiftGmp in Frameworks */,
 				AAB5EA3B2CE4963100D76292 /* NumberTranslator in Frameworks */,
-				AA56F81C2CF41F38005A3DAE /* Neumorphic in Frameworks */,
+				AA8A6B7D2CF8C76D00759D93 /* Neumorphic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,6 +236,7 @@
 			children = (
 				AA21B81A2CACC5A700A1C118 /* NumberTranslator */,
 				AA21B8192CACC10700A1C118 /* SwiftGmp */,
+				AA8A6B792CF8C74E00759D93 /* neumorphic-master */,
 				AACCD0772B43A89A00D545C5 /* README.md */,
 				AA6352B02B296C3B00CABC0C /* TODO.md */,
 				AA08C7EB272F1241001B8575 /* TranslateNumbers.entitlements */,
@@ -362,7 +364,7 @@
 			packageProductDependencies = (
 				AAB5EA382CE4962100D76292 /* SwiftGmp */,
 				AAB5EA3A2CE4963100D76292 /* NumberTranslator */,
-				AA56F81B2CF41F38005A3DAE /* Neumorphic */,
+				AA8A6B7C2CF8C76D00759D93 /* Neumorphic */,
 			);
 			productName = TranslateMac;
 			productReference = AAB5EA192CE4945F00D76292 /* Translate_Mac.app */;
@@ -427,7 +429,6 @@
 			packageReferences = (
 				AA1934512C96956100FE0848 /* XCRemoteSwiftPackageReference "NumberTranslator" */,
 				AA9DCD642CA10E13002EBCE5 /* XCRemoteSwiftPackageReference "SwiftGmp" */,
-				AA56F8182CF40561005A3DAE /* XCRemoteSwiftPackageReference "neumorphic" */,
 			);
 			productRefGroup = AA08C7BF272EDA48001B8575 /* Products */;
 			projectDirPath = "";
@@ -1070,14 +1071,6 @@
 				kind = branch;
 			};
 		};
-		AA56F8182CF40561005A3DAE /* XCRemoteSwiftPackageReference "neumorphic" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/costachung/neumorphic/";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		AA9DCD642CA10E13002EBCE5 /* XCRemoteSwiftPackageReference "SwiftGmp" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/joachimneumann/SwiftGmp";
@@ -1094,19 +1087,17 @@
 			package = AA1934512C96956100FE0848 /* XCRemoteSwiftPackageReference "NumberTranslator" */;
 			productName = NumberTranslator;
 		};
-		AA56F8192CF40572005A3DAE /* Neumorphic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AA56F8182CF40561005A3DAE /* XCRemoteSwiftPackageReference "neumorphic" */;
-			productName = Neumorphic;
-		};
-		AA56F81B2CF41F38005A3DAE /* Neumorphic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AA56F8182CF40561005A3DAE /* XCRemoteSwiftPackageReference "neumorphic" */;
-			productName = Neumorphic;
-		};
 		AA6DBCCB2CE0774800B5E0F1 /* SwiftGmp */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SwiftGmp;
+		};
+		AA8A6B7A2CF8C76700759D93 /* Neumorphic */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Neumorphic;
+		};
+		AA8A6B7C2CF8C76D00759D93 /* Neumorphic */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Neumorphic;
 		};
 		AA9DCD652CA10E13002EBCE5 /* SwiftGmp */ = {
 			isa = XCSwiftPackageProductDependency;
