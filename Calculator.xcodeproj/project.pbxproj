@@ -10,8 +10,6 @@
 		AA17F8942CCE6EC200312BF0 /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA17F8932CCE6EB900312BF0 /* Display.swift */; };
 		AA1934532C96956100FE0848 /* NumberTranslator in Frameworks */ = {isa = PBXBuildFile; productRef = AA1934522C96956100FE0848 /* NumberTranslator */; };
 		AA29F58A293CD608001ADF5A /* NumberDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29F589293CD608001ADF5A /* NumberDisplay.swift */; };
-		AA56F81A2CF40572005A3DAE /* Neumorphic in Frameworks */ = {isa = PBXBuildFile; productRef = AA56F8192CF40572005A3DAE /* Neumorphic */; };
-		AA56F81C2CF41F38005A3DAE /* Neumorphic in Frameworks */ = {isa = PBXBuildFile; productRef = AA56F81B2CF41F38005A3DAE /* Neumorphic */; };
 		AA5796652CF6930200D3A02B /* ButtonPressModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5796642CF692EE00D3A02B /* ButtonPressModifier.swift */; };
 		AA5796662CF6930200D3A02B /* ButtonPressModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5796642CF692EE00D3A02B /* ButtonPressModifier.swift */; };
 		AA5796672CF6930200D3A02B /* ButtonPressModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5796642CF692EE00D3A02B /* ButtonPressModifier.swift */; };
@@ -50,6 +48,14 @@
 		AA8AC4282CD70883006BD54C /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC4272CD7087E006BD54C /* KeyView.swift */; };
 		AA9C3F6A2CBF33C800F64EFA /* SmallKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9C3F692CBF33C100F64EFA /* SmallKeyboard.swift */; };
 		AA9C3F6D2CBF373C00F64EFA /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9C3F6C2CBF373600F64EFA /* KeyboardView.swift */; };
+		AA9D3FDE2CF802D1007B15C9 /* N.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9D3FDD2CF802CF007B15C9 /* N.swift */; };
+		AA9D3FDF2CF802D1007B15C9 /* N.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9D3FDD2CF802CF007B15C9 /* N.swift */; };
+		AA9D3FE02CF802D1007B15C9 /* N.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9D3FDD2CF802CF007B15C9 /* N.swift */; };
+		AA9D3FE12CF802D1007B15C9 /* N.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9D3FDD2CF802CF007B15C9 /* N.swift */; };
+		AA9D3FE32CF80E8D007B15C9 /* NeumorphicColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9D3FE22CF80E7C007B15C9 /* NeumorphicColors.swift */; };
+		AA9D3FE42CF80E8D007B15C9 /* NeumorphicColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9D3FE22CF80E7C007B15C9 /* NeumorphicColors.swift */; };
+		AA9D3FE52CF80E8D007B15C9 /* NeumorphicColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9D3FE22CF80E7C007B15C9 /* NeumorphicColors.swift */; };
+		AA9D3FE62CF80E8D007B15C9 /* NeumorphicColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9D3FE22CF80E7C007B15C9 /* NeumorphicColors.swift */; };
 		AA9DB3B52CE77E0500B40CAA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA370C2C293352960041AE4E /* Extensions.swift */; };
 		AA9DCD662CA10E13002EBCE5 /* SwiftGmp in Frameworks */ = {isa = PBXBuildFile; productRef = AA9DCD652CA10E13002EBCE5 /* SwiftGmp */; };
 		AA9F5BB92CF1CC2900570570 /* FlagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9F5BB82CF1CC2600570570 /* FlagView.swift */; };
@@ -126,6 +132,8 @@
 		AA8AC4272CD7087E006BD54C /* KeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyView.swift; sourceTree = "<group>"; };
 		AA9C3F692CBF33C100F64EFA /* SmallKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallKeyboard.swift; sourceTree = "<group>"; };
 		AA9C3F6C2CBF373600F64EFA /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
+		AA9D3FDD2CF802CF007B15C9 /* N.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = N.swift; sourceTree = "<group>"; };
+		AA9D3FE22CF80E7C007B15C9 /* NeumorphicColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeumorphicColors.swift; sourceTree = "<group>"; };
 		AA9F5BB82CF1CC2600570570 /* FlagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagView.swift; sourceTree = "<group>"; };
 		AAB5EA192CE4945F00D76292 /* Translate_Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Translate_Mac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AABEFC122972A8780023A3C9 /* KeyColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyColor.swift; sourceTree = "<group>"; };
@@ -195,7 +203,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA56F81A2CF40572005A3DAE /* Neumorphic in Frameworks */,
 				AA1934532C96956100FE0848 /* NumberTranslator in Frameworks */,
 				AA9DCD662CA10E13002EBCE5 /* SwiftGmp in Frameworks */,
 			);
@@ -215,7 +222,6 @@
 			files = (
 				AAB5EA392CE4962100D76292 /* SwiftGmp in Frameworks */,
 				AAB5EA3B2CE4963100D76292 /* NumberTranslator in Frameworks */,
-				AA56F81C2CF41F38005A3DAE /* Neumorphic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +269,8 @@
 		AA08C7C0272EDA48001B8575 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				AA9D3FE22CF80E7C007B15C9 /* NeumorphicColors.swift */,
+				AA9D3FDD2CF802CF007B15C9 /* N.swift */,
 				AA57966E2CF6946D00D3A02B /* CalculatorButtonModel.swift */,
 				AA5796692CF6941100D3A02B /* CalculatorButton.swift */,
 				AA5796642CF692EE00D3A02B /* ButtonPressModifier.swift */,
@@ -362,7 +370,6 @@
 			packageProductDependencies = (
 				AAB5EA382CE4962100D76292 /* SwiftGmp */,
 				AAB5EA3A2CE4963100D76292 /* NumberTranslator */,
-				AA56F81B2CF41F38005A3DAE /* Neumorphic */,
 			);
 			productName = TranslateMac;
 			productReference = AAB5EA192CE4945F00D76292 /* Translate_Mac.app */;
@@ -427,7 +434,6 @@
 			packageReferences = (
 				AA1934512C96956100FE0848 /* XCRemoteSwiftPackageReference "NumberTranslator" */,
 				AA9DCD642CA10E13002EBCE5 /* XCRemoteSwiftPackageReference "SwiftGmp" */,
-				AA56F8182CF40561005A3DAE /* XCRemoteSwiftPackageReference "neumorphic" */,
 			);
 			productRefGroup = AA08C7BF272EDA48001B8575 /* Products */;
 			projectDirPath = "";
@@ -482,10 +488,12 @@
 				AA6DBCAD2CE0710300B5E0F1 /* ViewModel.swift in Sources */,
 				AA61B4B82CEDF7D5009A916E /* FlagKey.swift in Sources */,
 				AA9C3F6D2CBF373C00F64EFA /* KeyboardView.swift in Sources */,
+				AA9D3FE42CF80E8D007B15C9 /* NeumorphicColors.swift in Sources */,
 				AA5D3D732CEB9A6000CC8237 /* SymbolKeyViewModel.swift in Sources */,
 				AAE3F5352CE194D400146B91 /* TextKey.swift in Sources */,
 				AA9F5BB92CF1CC2900570570 /* FlagView.swift in Sources */,
 				AA8AC4282CD70883006BD54C /* KeyView.swift in Sources */,
+				AA9D3FE12CF802D1007B15C9 /* N.swift in Sources */,
 				AA29F58A293CD608001ADF5A /* NumberDisplay.swift in Sources */,
 				AA8AC41E2CD62174006BD54C /* SymbolKey.swift in Sources */,
 				AA5796672CF6930200D3A02B /* ButtonPressModifier.swift in Sources */,
@@ -508,6 +516,7 @@
 				AA57966D2CF6942B00D3A02B /* CalculatorButton.swift in Sources */,
 				AA6DBCD32CE0780B00B5E0F1 /* KeyboardView.swift in Sources */,
 				AA6DBCD52CE0782B00B5E0F1 /* KeyColor.swift in Sources */,
+				AA9D3FE62CF80E8D007B15C9 /* NeumorphicColors.swift in Sources */,
 				AA5D3D742CEB9A6000CC8237 /* SymbolKeyViewModel.swift in Sources */,
 				AAE3F5332CE180A000146B91 /* Keyboard.swift in Sources */,
 				AA6DBCD42CE0781400B5E0F1 /* KeyView.swift in Sources */,
@@ -520,6 +529,7 @@
 				AA6DBCD02CE077C700B5E0F1 /* Key.swift in Sources */,
 				AA5796702CF6946F00D3A02B /* CalculatorButtonModel.swift in Sources */,
 				AA9F5BBB2CF1CC2900570570 /* FlagView.swift in Sources */,
+				AA9D3FE02CF802D1007B15C9 /* N.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,6 +537,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA9D3FDF2CF802D1007B15C9 /* N.swift in Sources */,
 				AAB5EA3C2CE4967400D76292 /* KeyboardView.swift in Sources */,
 				AAB5EA3D2CE4967400D76292 /* Keyboard.swift in Sources */,
 				AAB5EA3E2CE4967400D76292 /* Key.swift in Sources */,
@@ -534,6 +545,7 @@
 				AAB5EA402CE4967400D76292 /* SmallKeyboard.swift in Sources */,
 				AAB5EA422CE4967400D76292 /* KeyColor.swift in Sources */,
 				AA57966C2CF6942B00D3A02B /* CalculatorButton.swift in Sources */,
+				AA9D3FE52CF80E8D007B15C9 /* NeumorphicColors.swift in Sources */,
 				AA9F5BBC2CF1CC2900570570 /* FlagView.swift in Sources */,
 				AAB5EA432CE4967400D76292 /* NumberDisplay.swift in Sources */,
 				AAB5EA442CE4967400D76292 /* Extensions.swift in Sources */,
@@ -553,6 +565,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA9D3FDE2CF802D1007B15C9 /* N.swift in Sources */,
 				AAFCC5C12CE4624F009E42FA /* ViewModel.swift in Sources */,
 				AA5796712CF6946F00D3A02B /* CalculatorButtonModel.swift in Sources */,
 				AAFCC5CB2CE46563009E42FA /* KeyColor.swift in Sources */,
@@ -565,6 +578,7 @@
 				AA9DB3B52CE77E0500B40CAA /* Extensions.swift in Sources */,
 				AA9F5BBA2CF1CC2900570570 /* FlagView.swift in Sources */,
 				AA61B4BA2CEDF7D5009A916E /* FlagKey.swift in Sources */,
+				AA9D3FE32CF80E8D007B15C9 /* NeumorphicColors.swift in Sources */,
 				AAFCC5C62CE46289009E42FA /* Key.swift in Sources */,
 				AAFCC5CC2CE465D1009E42FA /* KeyboardView.swift in Sources */,
 				AAFCC5CD2CE465D1009E42FA /* NumberDisplay.swift in Sources */,
@@ -1070,14 +1084,6 @@
 				kind = branch;
 			};
 		};
-		AA56F8182CF40561005A3DAE /* XCRemoteSwiftPackageReference "neumorphic" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/costachung/neumorphic/";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		AA9DCD642CA10E13002EBCE5 /* XCRemoteSwiftPackageReference "SwiftGmp" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/joachimneumann/SwiftGmp";
@@ -1093,16 +1099,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AA1934512C96956100FE0848 /* XCRemoteSwiftPackageReference "NumberTranslator" */;
 			productName = NumberTranslator;
-		};
-		AA56F8192CF40572005A3DAE /* Neumorphic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AA56F8182CF40561005A3DAE /* XCRemoteSwiftPackageReference "neumorphic" */;
-			productName = Neumorphic;
-		};
-		AA56F81B2CF41F38005A3DAE /* Neumorphic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AA56F8182CF40561005A3DAE /* XCRemoteSwiftPackageReference "neumorphic" */;
-			productName = Neumorphic;
 		};
 		AA6DBCCB2CE0774800B5E0F1 /* SwiftGmp */ = {
 			isa = XCSwiftPackageProductDependency;

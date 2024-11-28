@@ -5,7 +5,6 @@
 //
 
 import SwiftUI
-import Neumorphic
 
 struct TranslateiOSView: View {
     @Environment(\.scenePhase) var scenePhase
@@ -64,7 +63,7 @@ struct TranslateiOSView: View {
 //                        TranslateiOSSettingsView(viewModel: viewModel)
 //                    }
 //                }
-                .background(Color.Neumorphic.main)
+                .background(Color.NeumorphicColors.main)
 //        }
 //        .onChange(of: viewModel.navigateToSettings) { old, new in
 //            if new {

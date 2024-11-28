@@ -11,7 +11,7 @@ struct CalculatorButton: View {
     let model: CalculatorButtonModel
     var body: some View {
         ZStack {
-            Color.Neumorphic.main
+            Color.NeumorphicColors.main
                 .frame(width: model.diameter, height: model.diameter)
                 .clipShape(Circle())
                 .neumorphic(pressed: model.visualPressed)

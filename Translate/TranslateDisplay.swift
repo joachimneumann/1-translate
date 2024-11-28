@@ -5,7 +5,6 @@
 //
 
 import SwiftUI
-import Neumorphic
 
 struct TranslateDisplay: View {
     let uiFont: AppleFont
@@ -14,7 +13,7 @@ struct TranslateDisplay: View {
     
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 20).fill(Color.Neumorphic.main).softOuterShadow()
+            RoundedRectangle(cornerRadius: 20).fill(Color.NeumorphicColors.main).outerShadow()
             VStack(spacing: 0.0) {
                 HStack(spacing: 0.0) {
                     if translationResult.overline == nil {
@@ -56,7 +55,7 @@ struct TranslateDisplay: View {
     let _ = viewModel.translationManager.translateThis("555555", to: .romanNumerals)
     let screen = Screen()
     ZStack {
-        Color.Neumorphic.main
+        Color.NeumorphicColors.main
         TranslateDisplay(uiFont: screen.translationFont, translationResult: viewModel.translationManager.result)
             .frame(height: 300)
             .padding(30)

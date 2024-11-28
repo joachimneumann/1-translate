@@ -16,12 +16,12 @@ struct NeumorphicModifier: ViewModifier {
         switch pressed {
         case .up:
             content
-                .softOuterShadow()
+                .outerShadow()
         case .center:
             content
         case .down:
             content
-                .softInnerShadow(Circle())
+//                .innerShadow(Circle())
         }
     }
 }
@@ -89,7 +89,7 @@ struct Demo: View {
     var body: some View {
         ZStack {
             Rectangle()
-                .foregroundColor(Color.Neumorphic.main)
+                .foregroundColor(Color.NeumorphicColors.main)
             VStack {
                 HStack(spacing: diameter) {
                     CalculatorButton(model: CalculatorButtonModel(languageEnum: .vietnamese, diameter: diameter))
@@ -97,7 +97,7 @@ struct Demo: View {
                 }
                 .frame(width: 200, height: 100)
             }
-            .background(Color.Neumorphic.main)
+            .background(Color.NeumorphicColors.main)
         }
     }
 }
