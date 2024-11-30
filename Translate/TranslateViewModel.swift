@@ -110,13 +110,13 @@ class TranslateViewModel: ViewModel {
         super.execute(key)
     }
         
-    override init(screen: Screen = Screen()) {
+    override init() {
         let tempTranslationManager = TranslationManager()
         
         translationManager = tempTranslationManager
 
         // todo: fix this
-        super.init(screen: screen)
+        super.init()
         smallKeyboard = TranslateKeyboard(persistent: self.persistent, toggle: toggle)
         
         languageSelectionKeyboard = LanguageSelectionKeyboard(

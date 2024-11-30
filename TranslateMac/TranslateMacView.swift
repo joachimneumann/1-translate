@@ -12,13 +12,13 @@ struct TranslateMacView: View {
     @ObservedObject var viewModel: TranslateViewModel
     
     let model: TranslateMacViewModel = TranslateMacViewModel()
-    let scrollingModel: ScrollingKeyboardViewModel
+    var scrollingModel: ScrollingKeyboardViewModel
     @State var scrollViewID = UUID()
     @State var isZoomed: Bool = false
     @State private var settingsDetent = PresentationDetent.medium
     
-    init(viewModel: TranslateViewModel) {
-        self.viewModel = viewModel
+    init() {
+        self.viewModel = TranslateViewModel()
         scrollingModel = ScrollingKeyboardViewModel(spacing: 10, keyboard: viewModel.languageSelectionKeyboard!)
     }
     
@@ -84,7 +84,7 @@ struct TranslateMacView: View {
     let screen = Screen(CGSize(width: width, height: height))
     
     NavigationStack {
-        TranslateMacView(viewModel: TranslateViewModel(screen: screen))
+        TranslateMacView()
             .frame(width: width, height: height)
     }
 }

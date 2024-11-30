@@ -36,9 +36,9 @@ class ViewModel: ObservableObject {
     var smallKeyboard: SmallKeyboard? = nil
     @Published var display: Display
     
-    init(screen: Screen = Screen()) {
+    init() {
         calculator = Calculator(precision: 40)
-        display = Display(floatDisplayWidth: screen.displayWidth, font: screen.numberDisplayFont, ePadding: screen.ePadding)
+        display = Display(floatDisplayWidth: 200, font: AppleFont.systemFont(ofSize: 20, weight: .regular), ePadding: 10)
     }
     
     func process() {

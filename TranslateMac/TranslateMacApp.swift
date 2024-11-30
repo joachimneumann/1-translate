@@ -20,8 +20,8 @@ struct TranslateMacApp: App {
             Demo(diameter: 60)
                 .preferredColorScheme(.dark)
 //            NavigationStack {
-//                TranslateMacView(viewModel: TranslateViewModel(screen: screen))
-//                    .frame(width: width, height: height)
+                TranslateMacView(viewModel: TranslateViewModel())
+                    .frame(width: width, height: height)
 //            }
         }
         .windowStyle(HiddenTitleBarWindowStyle())
