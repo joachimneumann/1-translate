@@ -8,24 +8,16 @@
 import SwiftUI
 import SwiftGmp
 
-enum VisualPressedState {
-    case up
-    case center
-    case down
-}
-
 @Observable class Key: Identifiable {
     let id = UUID()  // unique identifier
     private var isPressed: Bool = false
     private var downTimer: Timer? = nil
     private var downTime: Double = 0.15
-    private var upTime: Double = 0.4
-    var visualPressed: VisualPressedState = .up
+    private var upTime  : Double = 0.4
+    var visualPressed: Bool = false
 
-    func visualDown1() { visualPressed = .center }
-    func visualDown2() { visualPressed = .down }
-    func visualUp1()   { visualPressed = .center }
-    func visualUp2()   { visualPressed = .up }
+    func visualDown() { visualPressed = true }
+    func visualUp()   { visualPressed = false }
 
     open func view() -> AnyView {
         AnyView(EmptyView())
@@ -34,6 +26,7 @@ enum VisualPressedState {
     var callback: (Key) -> () = { _ in }
 
     func longPress() {
+        print("key longPress isPressed \(isPressed)")
         if let symbolKey = self as? SymbolKey {
             if symbolKey.model.op.isEqual(to: ClearOperation.back) {
                 symbolKey.callback(SymbolKey(ClearOperation.clear))
@@ -45,6 +38,7 @@ enum VisualPressedState {
         down(location, in: CGSize(width: diameter, height: diameter))
     }
     func down(_ location: CGPoint, in size: CGSize) {
+        print("key down isPressed \(isPressed)")
         let tolerance: CGFloat = 0.3 * size.width
         let touchRect = CGRect(
             x: -tolerance,
@@ -54,13 +48,11 @@ enum VisualPressedState {
             /// If the finger moves too far away from the key
             /// handle that like a finger up event
         if touchRect.contains(location) {
+            print("key down inside isPressed \(isPressed)")
             if !isPressed {
                 isPressed = true
-                withAnimation(.linear(duration: downTime * 0.5)) {
-                    visualDown1()
-                }
-                withAnimation(.linear(duration: downTime * 0.5).delay(downTime * 0.5)) {
-                    visualDown2()
+                withAnimation(.linear(duration: downTime)) {
+                    visualDown()
                 }
                 if let existingTimer = downTimer, existingTimer.isValid {
                     existingTimer.invalidate()
@@ -70,27 +62,23 @@ enum VisualPressedState {
                 }
             }
         } else {
+            print("key down outside isPressed \(isPressed)")
             isPressed = false
             downTimer = nil
-            withAnimation(.linear(duration: upTime * 0.5)) {
-                visualUp1()
-            }
-            withAnimation(.linear(duration: upTime * 0.5).delay(upTime * 0.5)) {
-                visualUp2()
+            withAnimation(.linear(duration: upTime)) {
+                visualUp()
             }
         }
     }
 
     func up() {
+        print("key up isPressed \(isPressed)")
         if isPressed {
             callback(self)
             isPressed = false
             if downTimer != nil { return }
-            withAnimation(.linear(duration: upTime * 0.5)) {
-                visualUp1()
-            }
-            withAnimation(.linear(duration: upTime * 0.5).delay(upTime * 0.5)) {
-                visualUp2()
+            withAnimation(.linear(duration: upTime)) {
+                visualUp()
             }
         }
     }
@@ -98,11 +86,8 @@ enum VisualPressedState {
     private func downTimerFired() {
         downTimer = nil
         if !isPressed {
-            withAnimation(.linear(duration: upTime * 0.5)) {
-                visualUp1()
-            }
-            withAnimation(.linear(duration: upTime * 0.5).delay(upTime * 0.5)) {
-                visualUp2()
+            withAnimation(.linear(duration: upTime)) {
+                visualUp()
             }
         }
     }

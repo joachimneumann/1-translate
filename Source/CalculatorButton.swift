@@ -14,7 +14,7 @@ struct CalculatorButton: View {
             Color.Neumorphic.main
                 .frame(width: model.diameter, height: model.diameter)
                 .clipShape(Circle())
-                .neumorphic(pressed: model.visualPressed)
+                .neumorphic(model.visualPressed)
             if let flag = model.flag {
                 flag
             }

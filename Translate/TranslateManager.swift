@@ -82,7 +82,7 @@ class TranslationManager: NumberTranslator, Identifiable {
             //print(flagname(language))
             if !flagName(language).contains("Chinese") { // add chinese later to keep them together
                 if let uiImage = AppleImage(named: flagName(language)), let averageHue = uiImage.averageHue {
-                    print("\(averageHue) \(flagName(language))")
+                    // print("\(averageHue) \(flagName(language))")
                     languagesWithHue.append((language: language, hue: averageHue))
                 }
             }
