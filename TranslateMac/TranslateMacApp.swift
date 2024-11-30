@@ -20,7 +20,7 @@ struct TranslateMacApp: App {
             Demo(diameter: 60)
                 .preferredColorScheme(.dark)
 //            NavigationStack {
-                TranslateMacView(viewModel: TranslateViewModel())
+                TranslateMacView()
                     .frame(width: width, height: height)
 //            }
         }

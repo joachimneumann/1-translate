@@ -23,9 +23,9 @@ import SwiftUI
     let spacing: CGFloat
     let keyboard: Keyboard
 
-    init(spacing: CGFloat, keyboard: Keyboard) {
+    init(spacing: CGFloat, keyboard: Keyboard?) {
         self.spacing = spacing
-        self.keyboard = keyboard
+        self.keyboard = keyboard!
     }
     
     func newSize(_ size: CGSize) {

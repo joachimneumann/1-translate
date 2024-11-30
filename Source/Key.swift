@@ -8,16 +8,25 @@
 import SwiftUI
 import SwiftGmp
 
+enum VisualPressedState {
+    case up
+    case center
+    case down
+}
+
+
 @Observable class Key: Identifiable {
     let id = UUID()  // unique identifier
     private var isPressed: Bool = false
     private var downTimer: Timer? = nil
     private var downTime: Double = 0.15
     private var upTime  : Double = 0.4
-    var visualPressed: Bool = false
+    var visualPressed: VisualPressedState = .up
 
-    func visualDown() { visualPressed = true }
-    func visualUp()   { visualPressed = false }
+    func visualDown1() { visualPressed = .center }
+    func visualDown2() { visualPressed = .down }
+    func visualUp1()   { visualPressed = .center }
+    func visualUp2()   { visualPressed = .up }
 
     open func view() -> AnyView {
         AnyView(EmptyView())
@@ -51,8 +60,14 @@ import SwiftGmp
             //print("key down inside isPressed \(isPressed)")
             if !isPressed {
                 isPressed = true
-                withAnimation(.linear(duration: downTime)) {
-                    visualDown()
+//                withAnimation(.linear(duration: downTime)) {
+//                    visualDown()
+//                }
+                withAnimation(.linear(duration: downTime * 0.5)) {
+                    visualDown1()
+                }
+                withAnimation(.linear(duration: downTime * 0.5).delay(downTime * 0.5)) {
+                    visualDown2()
                 }
                 if let existingTimer = downTimer, existingTimer.isValid {
                     existingTimer.invalidate()
@@ -65,8 +80,14 @@ import SwiftGmp
             //print("key down outside isPressed \(isPressed)")
             isPressed = false
             downTimer = nil
-            withAnimation(.linear(duration: upTime)) {
-                visualUp()
+//            withAnimation(.linear(duration: upTime)) {
+//                visualUp()
+//            }
+            withAnimation(.linear(duration: upTime * 0.5)) {
+                visualUp1()
+            }
+            withAnimation(.linear(duration: upTime * 0.5).delay(upTime * 0.5)) {
+                visualUp2()
             }
         }
     }
@@ -77,8 +98,14 @@ import SwiftGmp
             callback(self)
             isPressed = false
             if downTimer != nil { return }
-            withAnimation(.linear(duration: upTime)) {
-                visualUp()
+//            withAnimation(.linear(duration: upTime)) {
+//                visualUp()
+//            }
+            withAnimation(.linear(duration: upTime * 0.5)) {
+                visualUp1()
+            }
+            withAnimation(.linear(duration: upTime * 0.5).delay(upTime * 0.5)) {
+                visualUp2()
             }
         }
     }
@@ -86,8 +113,14 @@ import SwiftGmp
     private func downTimerFired() {
         downTimer = nil
         if !isPressed {
-            withAnimation(.linear(duration: upTime)) {
-                visualUp()
+            //            withAnimation(.linear(duration: upTime)) {
+            //                visualUp()
+            //            }
+            withAnimation(.linear(duration: upTime * 0.5)) {
+                visualUp1()
+            }
+            withAnimation(.linear(duration: upTime * 0.5).delay(upTime * 0.5)) {
+                visualUp2()
             }
         }
     }

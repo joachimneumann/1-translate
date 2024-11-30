@@ -19,7 +19,7 @@ struct TranslateMacView: View {
     
     init() {
         self.viewModel = TranslateViewModel()
-        scrollingModel = ScrollingKeyboardViewModel(spacing: 10, keyboard: viewModel.languageSelectionKeyboard!)
+        scrollingModel = ScrollingKeyboardViewModel(spacing: 10, keyboard: nil)//viewModel.languageSelectionKeyboard!)
     }
     
     func LeftSide() -> some View {

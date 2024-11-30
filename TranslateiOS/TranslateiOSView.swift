@@ -94,6 +94,6 @@ struct TranslateiOSView: View {
 
 #Preview {
     NavigationStack {
-        TranslateiOSView(viewModel: TranslateViewModel(screen: Screen()))
+        TranslateiOSView(viewModel: TranslateViewModel())
     }
 }
