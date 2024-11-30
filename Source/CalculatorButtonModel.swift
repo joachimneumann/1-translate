@@ -19,13 +19,14 @@ struct NeumorphicModifier: ViewModifier {
                 .softOuterShadow()
         case .center:
             content
+                .softOuterShadow(
+                    darkShadow:  Color.clear,
+                    lightShadow: Color.clear,
+                    offset: 12, radius: 0)
+                .softInnerShadow(Circle(), darkShadow: Color.clear, lightShadow: Color.clear)
         case .down:
             content
-                .softInnerShadow(Circle())
-//                .softOuterShadow(
-//                    darkShadow:  Color.Neumorphic.darkShadow,
-//                    lightShadow: Color.Neumorphic.lightShadow,
-//                    offset: 12, radius: 6)
+                .softInnerShadow(Circle(), darkShadow: Color.Neumorphic.darkShadow, lightShadow: Color.Neumorphic.lightShadow)
         }
     }
 }
@@ -57,16 +58,32 @@ extension View {
         self.diameter = diameter
         self.symbolKeyViewModel = SymbolKeyViewModel(op: op)
         super.init()
-        self.symbolKeyViewModel!.setColors(textColor: Color.Neumorphic.secondary, upColor: .red, downColor: .red)
+        self.symbolKeyViewModel!.setColors(textColor: Color.Neumorphic.text, upColor: .red, downColor: .red)
         self.symbolKeyViewModel!.newSize(CGSize(width: diameter, height: diameter))
     }
     
+    var scale: CGFloat {
+        switch visualPressed {
+        case .up: 1.0
+        case .center: 0.997
+        case .down: 0.989
+        }
+    }
+
+    var brightness: CGFloat {
+        switch visualPressed {
+        case .up: 0.0
+        case .center: -0.02
+        case .down: -0.06
+        }
+    }
+
     var symbol: AnyView? {
         if let symbolKeyViewModel = symbolKeyViewModel {
             return AnyView(
                 symbolKeyViewModel.label
-                    .scaleEffect(visualPressed == .down ? 0.98 : 1.0)
-                    .brightness(visualPressed == .down ? -0.15 : 0.0)
+                    .scaleEffect(scale)
+                    .brightness(brightness)
             )
         }
         return nil
@@ -74,15 +91,15 @@ extension View {
     
     var flag: AnyView? {
         if let flag = flagImage {
-            let borderWidth: CGFloat = diameter * 0.125
+            let borderWidth: CGFloat = diameter * 0.1//25
             return AnyView(
                 flag
                     .resizable()
                     .scaledToFill()
-                    .brightness(visualPressed == .down ? -0.15 : 0.0)
+                    .brightness(brightness)
                     .clipShape(Circle())
                     .frame(width: diameter - 2 * borderWidth, height: diameter - 2 * borderWidth)
-                    .scaleEffect(visualPressed == .down ? 0.98 : 1.0)
+                    .scaleEffect(scale)
             )
         }
         return nil
