@@ -75,53 +75,12 @@ public struct SoftDynamicButtonStyle<S: Shape> : ButtonStyle {
                             .opacity(1)
                             shape.fill(mainColor)
                         }
-                        
-                        
-                        
                     }
                 )
         }
     }
     
 }
-
-@available(*, deprecated, message: "Use SoftDynamicButtonStyle instead")
-public struct SoftButtonStyle<S: Shape> : ButtonStyle {
-
-    var shape: S
-    var mainColor : Color
-    var textColor : Color
-    var darkShadowColor : Color
-    var lightShadowColor : Color
-    
-    public init(_ shape: S, mainColor : Color, textColor : Color, darkShadowColor: Color, lightShadowColor: Color) {
-        self.shape = shape
-        self.mainColor = mainColor
-        self.textColor = textColor
-        self.darkShadowColor = darkShadowColor
-        self.lightShadowColor = lightShadowColor
-    }
-    
-    public func makeBody(configuration: Self.Configuration) -> some View {
-        ZStack {
-                shape.fill(mainColor)
-                    .softInnerShadow(shape, darkShadow: darkShadowColor, lightShadow: lightShadowColor, spread: 0.15, radius: 3)
-                    .opacity(configuration.isPressed ? 1 : 0)
-            
-                shape.fill(mainColor)
-                    .softOuterShadow(darkShadow: darkShadowColor, lightShadow: lightShadowColor, offset: 6, radius: 3)
-                    .opacity(configuration.isPressed ? 0 : 1)
-
-            configuration.label
-                .foregroundColor(textColor)
-                .frame(minWidth: 0, maxWidth: .infinity)
-                .padding()
-                .scaleEffect(configuration.isPressed ? 0.97 : 1)
-        }
-    }
-    
-}
-
 
 extension Button {
 

@@ -26,7 +26,7 @@ import SwiftGmp
     var callback: (Key) -> () = { _ in }
 
     func longPress() {
-        print("key longPress isPressed \(isPressed)")
+        //print("key longPress isPressed \(isPressed)")
         if let symbolKey = self as? SymbolKey {
             if symbolKey.model.op.isEqual(to: ClearOperation.back) {
                 symbolKey.callback(SymbolKey(ClearOperation.clear))
@@ -38,7 +38,7 @@ import SwiftGmp
         down(location, in: CGSize(width: diameter, height: diameter))
     }
     func down(_ location: CGPoint, in size: CGSize) {
-        print("key down isPressed \(isPressed)")
+        //print("key down isPressed \(isPressed)")
         let tolerance: CGFloat = 0.3 * size.width
         let touchRect = CGRect(
             x: -tolerance,
@@ -48,7 +48,7 @@ import SwiftGmp
             /// If the finger moves too far away from the key
             /// handle that like a finger up event
         if touchRect.contains(location) {
-            print("key down inside isPressed \(isPressed)")
+            //print("key down inside isPressed \(isPressed)")
             if !isPressed {
                 isPressed = true
                 withAnimation(.linear(duration: downTime)) {
@@ -62,7 +62,7 @@ import SwiftGmp
                 }
             }
         } else {
-            print("key down outside isPressed \(isPressed)")
+            //print("key down outside isPressed \(isPressed)")
             isPressed = false
             downTimer = nil
             withAnimation(.linear(duration: upTime)) {
@@ -72,7 +72,7 @@ import SwiftGmp
     }
 
     func up() {
-        print("key up isPressed \(isPressed)")
+        //print("key up isPressed \(isPressed)")
         if isPressed {
             callback(self)
             isPressed = false

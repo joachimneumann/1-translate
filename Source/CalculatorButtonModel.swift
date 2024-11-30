@@ -53,6 +53,7 @@ extension View {
         self.diameter = diameter
         self.symbolKeyViewModel = SymbolKeyViewModel(op: op)
         super.init()
+        self.symbolKeyViewModel!.setColors(textColor: Color.Neumorphic.secondary, upColor: .red, downColor: .red)
         self.symbolKeyViewModel!.newSize(CGSize(width: diameter, height: diameter))
     }
     

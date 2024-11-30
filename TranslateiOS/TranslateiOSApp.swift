@@ -15,7 +15,7 @@ struct TranslateiOSApp: App {
         WindowGroup {
             NavigationStack {
                 Demo(diameter: 80)
-                    .preferredColorScheme(.dark)
+                    .preferredColorScheme(.light)
                 //            GeometryReader { geometry in
 //                TranslateiOSView(viewModel: viewModel)
                 //            }
