@@ -1,5 +1,5 @@
 //
-//  CalculatorButtonModel.swift
+//  CalculatorKey.swift
 //  Calculator
 //
 //  Created by Joachim Neumann on 27.11.2024.
@@ -37,44 +37,56 @@ extension View {
     }
 }
 
-@Observable class CalculatorButtonModel: Key {
-    let translationManager = TranslationManager()
+@Observable class CalculatorKey: Key {
     private var flagImage: Image? = nil
     var symbolKeyViewModel: SymbolKeyViewModel? = nil
-    let diameter: CGFloat
+    private(set) var diameter: CGFloat = 0.0
     
-    init(languageEnum: NumberTranslator.LanguageEnum, diameter: CGFloat) {
-        if AppleImage(named: translationManager.flagName(languageEnum) + "Sqr") != nil {
-            flagImage = Image(translationManager.flagName(languageEnum) + "Sqr")
-        } else if AppleImage(named: translationManager.flagName(languageEnum)) != nil {
-            flagImage = Image(translationManager.flagName(languageEnum))
-        } else {
-            flagImage = Image("English")
-        }
-        self.diameter = diameter
+    init(flagName: String) {
+        flagImage = Image(flagName)
     }
     
-    init(op: any OpProtocol, diameter: CGFloat) {
-        self.diameter = diameter
+    init(op: any OpProtocol) {
         self.symbolKeyViewModel = SymbolKeyViewModel(op: op)
         super.init()
         self.symbolKeyViewModel!.setColors(textColor: Color.Neumorphic.text, upColor: .red, downColor: .red)
         self.symbolKeyViewModel!.newSize(CGSize(width: diameter, height: diameter))
     }
     
-    var scale: CGFloat {
+    func setDiameter(_ new: CGFloat) {
+        diameter = new
+        self.symbolKeyViewModel?.newSize(CGSize(width: diameter, height: diameter))
+    }
+    
+    var flagScale: CGFloat {
         switch visualPressed {
         case .up: 1.0
         case .center: 0.997
         case .down: 0.989
         }
     }
+    
+    var symbolScale: CGFloat {
+        switch visualPressed {
+        case .up: 1.0
+        case .center: 0.995
+        case .down: 0.98
+        }
+    }
 
-    var brightness: CGFloat {
+    var flagBrightness: CGFloat {
         switch visualPressed {
         case .up: 0.0
         case .center: -0.02
         case .down: -0.06
+        }
+    }
+    
+    var symbolBrightness: CGFloat {
+        switch visualPressed {
+        case .up: 0.0
+        case .center: -0.04
+        case .down: -0.2
         }
     }
 
@@ -82,8 +94,8 @@ extension View {
         if let symbolKeyViewModel = symbolKeyViewModel {
             return AnyView(
                 symbolKeyViewModel.label
-                    .scaleEffect(scale)
-                    .brightness(brightness)
+                    .scaleEffect(symbolScale)
+                    .brightness(symbolBrightness)
             )
         }
         return nil
@@ -96,10 +108,10 @@ extension View {
                 flag
                     .resizable()
                     .scaledToFill()
-                    .brightness(brightness)
+                    .brightness(flagBrightness)
                     .clipShape(Circle())
                     .frame(width: diameter - 2 * borderWidth, height: diameter - 2 * borderWidth)
-                    .scaleEffect(scale)
+                    .scaleEffect(flagScale)
             )
         }
         return nil
@@ -107,29 +119,46 @@ extension View {
 }
 
 struct Demo: View {
-    let diameter: CGFloat
+    let flagName: String
+    let m1: CalculatorKey
+    let m2: CalculatorKey
+    init() {
+        let translationManager = TranslationManager()
+        if AppleImage(named: translationManager.flagName(.english) + "Sqr") != nil {
+            flagName = translationManager.flagName(.english) + "Sqr"
+        } else {
+            flagName = translationManager.flagName(.english)
+        }
+        m1 = CalculatorKey(flagName: flagName)
+        m2 = CalculatorKey(op: InplaceOperation.sqrt)
+    }
+    
     var body: some View {
         ZStack {
             Rectangle()
                 .foregroundColor(Color.Neumorphic.main)
             VStack {
-                HStack(spacing: diameter) {
-                    CalculatorButton(model: CalculatorButtonModel(languageEnum: .vietnamese, diameter: diameter))
-                    CalculatorButton(model: CalculatorButtonModel(op: InplaceOperation.sqrt, diameter: diameter))
+                HStack(spacing: m1.diameter / 2) {
+                    CalculatorKeyView(model: m1)
+                    CalculatorKeyView(model: m2)
                 }
                 .frame(width: 200, height: 60)
             }
             .background(Color.Neumorphic.main)
         }
+        .onAppear() {
+            m1.setDiameter(60)
+            m2.setDiameter(80)
+        }
     }
 }
 
 #Preview("Dark") {
-    Demo(diameter: 80)
+    Demo()
         .preferredColorScheme(.dark)
 }
 
 #Preview("Light") {
-    Demo(diameter: 80)
+    Demo()
         .preferredColorScheme(.light)
 }

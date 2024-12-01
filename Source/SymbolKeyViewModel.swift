@@ -84,7 +84,7 @@ import SwiftGmp
         default:
             factor = factorScientific
         }
-        self.diameter = min(sizeParameter.width, sizeParameter.height) * factor
+        self.diameter = min(sizeParameter.width, sizeParameter.height) * factor * 1.1
     }
     
     private let sfImageForKey: [String: String] = [

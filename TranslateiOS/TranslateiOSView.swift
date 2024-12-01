@@ -43,9 +43,8 @@ struct TranslateiOSView: View {
                 ScrollingKeyboardView(model: scrollingModel)
                 .transition(.opacity)
             } else {
-                KeyboardView(
-                    spacing: 10,
-                    keyboard: viewModel.smallKeyboard!)
+                CalculatorKeyboardView(keyboard: CalculatorKeyboardStandard())
+                    .frame(width: 300, height: 300)
             }
         }
         .animation(.easeInOut(duration: 0.6), value: viewModel.showLanguageSelector)

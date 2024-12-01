@@ -19,8 +19,8 @@ enum VisualPressedState {
     let id = UUID()  // unique identifier
     private var isPressed: Bool = false
     private var downTimer: Timer? = nil
-    private var downTime: Double = 0.15*1.5
-    private var upTime  : Double = 0.4*1.5
+    private var downTime: Double = 0.2//0.15*1.5
+    private var upTime  : Double = 0.2//0.4*1.5
     var visualPressed: VisualPressedState = .up
 
     func visualDown1() { visualPressed = .center }
@@ -33,6 +33,7 @@ enum VisualPressedState {
     }
     
     var callback: (Key) -> () = { _ in }
+    var calculatorCallback: (CalculatorKey) -> () = { _ in }
 
     let animation1Factor: Double = 0.25
     let animation2Factor: Double = 1.0 - 0.25
@@ -72,7 +73,7 @@ enum VisualPressedState {
                 if let existingTimer = downTimer, existingTimer.isValid {
                     existingTimer.invalidate()
                 }
-                downTimer = Timer.scheduledTimer(withTimeInterval: downTime, repeats: false) { _ in
+                downTimer = Timer.scheduledTimer(withTimeInterval: 1.4*downTime, repeats: false) { _ in
                     self.downTimerFired()
                 }
             }

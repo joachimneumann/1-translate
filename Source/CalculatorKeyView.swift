@@ -1,5 +1,5 @@
 //
-//  CalculatorButton.swift
+//  CalculatorKeyView.swift
 //  Calculator
 //
 //  Created by Joachim Neumann on 27.11.2024.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct CalculatorButton: View {
-    let model: CalculatorButtonModel
+struct CalculatorKeyView: View {
+    let model: CalculatorKey
     var body: some View {
         ZStack {
             Color.Neumorphic.main
@@ -27,12 +27,12 @@ struct CalculatorButton: View {
 }
 
 #Preview("Dark") {
-    Demo(diameter: 80)
+    Demo()
         .preferredColorScheme(.dark)
 }
 
 #Preview("Light") {
-    Demo(diameter: 80)
+    Demo()
         .preferredColorScheme(.light)
 }
 

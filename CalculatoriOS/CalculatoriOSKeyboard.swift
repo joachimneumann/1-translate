@@ -11,13 +11,12 @@ import SwiftUI
 @Observable class CalculatoriOSKeyboard: SmallKeyboard {
     let settingskey: SymbolKey
     init() {
-        print("6")
         settingskey = SymbolKey(CalculatoriOSOperation.settings)
         super.init(settingsKey: settingskey)
     }
     
-    func setSeparatorSymbol(_ symbol: String) {
-        separatorKey.model.symbol = symbol
-    }
+//    func setSeparatorSymbol(_ symbol: String) {
+//        separatorKey.model.symbol = symbol
+//    }
     
 }
