@@ -36,8 +36,7 @@ struct CalculatorKeyboardView: View {
     }
 }
 
-#Preview {
-    
+#Preview("Dark") {
     let keyboard: CalculatorKeyboard = CalculatorKeyboardStandard()
     
     ZStack {
@@ -57,4 +56,28 @@ struct CalculatorKeyboardView: View {
         }
     }
     .background(Color.Neumorphic.main)
+    .preferredColorScheme(.dark)
+}
+
+#Preview("Light") {
+    let keyboard: CalculatorKeyboard = CalculatorKeyboardStandard()
+    
+    ZStack {
+        Rectangle()
+            .foregroundColor(Color.Neumorphic.main)
+        VStack {
+            Spacer()
+            HStack {
+                Spacer()
+                CalculatorKeyboardView(keyboard: keyboard)
+                    .frame(width: 300, height: 450)
+                    .padding(.top, 10)
+                    .padding(.bottom, 50)
+                Spacer()
+            }
+            Spacer(minLength: 100)
+        }
+    }
+    .background(Color.Neumorphic.main)
+    .preferredColorScheme(.light)
 }

@@ -57,7 +57,7 @@ struct TranslateiOSView: View {
         TranslateiOSView
 //                .padding(.bottom, viewModel.screen.bottomPadding)
 //                .padding(.horizontal, viewModel.screen.horizontalPadding)
-                .preferredColorScheme(.dark)
+//                .preferredColorScheme(.dark)
 //                .navigationDestination(isPresented: $viewModel.showSettings) {
 //                    if viewModel.showSettings {
 //                        TranslateiOSSettingsView(viewModel: viewModel)

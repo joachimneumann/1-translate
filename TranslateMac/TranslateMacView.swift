@@ -71,7 +71,6 @@ struct TranslateMacView: View {
         }
         .padding(.bottom, 10)
         .padding(.leading, 10)
-        .preferredColorScheme(.dark)
     }
     
 }

@@ -29,7 +29,6 @@ struct CalculatoriOSView: View {
         }
         .padding(.bottom, viewModel.screen.bottomPadding)
         .padding(.horizontal, viewModel.screen.horizontalPadding)
-        .preferredColorScheme(.dark)
 //                        .navigationDestination(isPresented: $viewModel.showSettings) {
 //                            if viewModel.showSettings {
 //                                Translate_1SettingsView(viewModel: viewModel)
