@@ -27,27 +27,15 @@ import SwiftUI
     }
     
     func setSize(_ size: CGSize) {
-        keySpacing = min(size.height, size.width) / rowCount * 0.4
+        let keySpacingProportion = 0.4
 
-        print("keySpacing \(keySpacing)")
-        print("size.width = \(size.width)")
-        print("columnCount = \(columnCount)")
-        print("rowCount = \(rowCount)")
-        let keyDiameterWidth = (size.width - (columnCount) * keySpacing) / columnCount
-        print("keyDiameterWidth = \(keyDiameterWidth)")
-        let keyDiameterHeight = (size.height - (rowCount) * keySpacing) / rowCount
-        print("keyDiameterHeight = \(keyDiameterHeight)")
-        let height = (keyDiameter + keySpacing) * rowCount
-        let width = (keyDiameter + keySpacing) * columnCount
-        print("CalculatorKeyboard width = \(width)")
-        print("CalculatorKeyboard height = \(height)")
-        print("CalculatorKeyboard diameter = \(keyDiameter)")
+        let keyDiameterHorizontal = size.width / columnCount / (1.0 + keySpacingProportion)
+        let keyDiameterVertical = size.height / rowCount / (1.0 + keySpacingProportion)
+        keyDiameter = min(keyDiameterVertical, keyDiameterHorizontal)
+        keySpacing = keyDiameter * keySpacingProportion
 
-        if keyDiameterWidth < keyDiameterHeight {
-            keyDiameter = keyDiameterWidth
-        } else {
-            keyDiameter = keyDiameterHeight
-        }
+        //let height = (keyDiameter + keySpacing) * rowCount
+        //let width = (keyDiameter + keySpacing) * columnCount
 
         for row in keyMatrix {
             for k in row {
