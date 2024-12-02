@@ -62,18 +62,18 @@ enum VisualPressedState {
             /// If the finger moves too far away from the key
             /// handle that like a finger up event
         if touchRect.contains(location) {
-            print("key down inside isPressed \(isPressed)")
+            //print("key down inside isPressed \(isPressed)")
             if !isPressed {
                 isPressed = true
                 withAnimation(.spring(duration: downTime * animation1Factor)) {
-                    print("visualDown1")
+                    //print("visualDown1")
                     visualDown1()
                 }
                 if let timer = secondAnimationTimer, timer.isValid {
                     timer.invalidate()
                 }
                 secondAnimationTimer = Timer.scheduledTimer(withTimeInterval: downTime * animation1Factor, repeats: false) { _ in
-                    print("visualDown2")
+                    //print("visualDown2")
                     withAnimation(.spring(duration: self.downTime * self.animation2Factor)) {
                         self.visualDown2()
                     }
@@ -86,7 +86,7 @@ enum VisualPressedState {
                 }
             }
         } else {
-            print("key down outside isPressed \(isPressed)")
+            //print("key down outside isPressed \(isPressed)")
             isPressed = false
             downTimer = nil
             secondAnimationTimer = nil

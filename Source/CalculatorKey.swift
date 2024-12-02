@@ -10,30 +10,31 @@ import SwiftGmp
 import NumberTranslator
 
 struct NeumorphicModifier: ViewModifier {
+    let diameter: CGFloat
     var pressed: VisualPressedState
     
     func body(content: Content) -> some View {
         switch pressed {
         case .up:
             content
-                .softOuterShadow()
+                .softOuterShadow(offset: 0.075 * diameter, radius: 0.0375 * diameter)
         case .center:
             content
                 .softOuterShadow(
                     darkShadow:  Color.clear,
                     lightShadow: Color.clear,
-                    offset: 12, radius: 0)
-                .softInnerShadow(Circle(), darkShadow: Color.clear, lightShadow: Color.clear)
+                    offset: 0.075 * diameter, radius: 0)
+                .softInnerShadow(Circle(), darkShadow: Color.clear, lightShadow: Color.clear, radius: 0.125 * diameter)
         case .down:
             content
-                .softInnerShadow(Circle(), darkShadow: Color.Neumorphic.darkShadow, lightShadow: Color.Neumorphic.lightShadow)
+                .softInnerShadow(Circle(), darkShadow: Color.Neumorphic.darkShadow, lightShadow: Color.Neumorphic.lightShadow, radius: 0.125 * diameter)
         }
     }
 }
 
 extension View {
-    func neumorphic(_ pressed: VisualPressedState) -> some View {
-        self.modifier(NeumorphicModifier(pressed: pressed))
+    func neumorphic(diameter: CGFloat, _ pressed: VisualPressedState) -> some View {
+        self.modifier(NeumorphicModifier(diameter: diameter, pressed: pressed))
     }
 }
 
@@ -142,12 +143,12 @@ struct Demo: View {
                     CalculatorKeyView(model: m1)
                     CalculatorKeyView(model: m2)
                 }
-                .frame(width: 200, height: 60)
+                .frame(width: 200)
             }
             .background(Color.Neumorphic.main)
         }
         .onAppear() {
-            m1.setDiameter(60)
+            m1.setDiameter(80)
             m2.setDiameter(80)
         }
     }

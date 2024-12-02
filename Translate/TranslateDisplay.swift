@@ -14,7 +14,7 @@ struct TranslateDisplay: View {
     
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 20).fill(Color.Neumorphic.main).softOuterShadow()
+            RoundedRectangle(cornerRadius: 20).fill(Color.Neumorphic.main).softOuterShadow(offset: 6, radius: 3)
             VStack(spacing: 0.0) {
                 HStack(spacing: 0.0) {
                     if translationResult.overline == nil {

@@ -90,7 +90,7 @@ public struct SoftSwitchToggleStyle : ToggleStyle {
             ZStack {
                 Capsule()
                     .fill(mainColor)
-                    .softOuterShadow()
+                    .softOuterShadow(offset: 6, radius: 3)
                     .frame(width: 75, height: 45)
                 
                 Capsule()

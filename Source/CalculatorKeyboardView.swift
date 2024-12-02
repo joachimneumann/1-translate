@@ -50,6 +50,7 @@ struct CalculatorKeyboardView: View {
                     .frame(width: 300, height: 450)
                     .padding(.top, 10)
                     .padding(.bottom, 50)
+                    .background(.yellow)
                 Spacer()
             }
             Spacer(minLength: 100)
