@@ -14,42 +14,53 @@ struct TranslateiOSView: View {
     @State var scrollViewID = UUID()
     @State var isZoomed: Bool = false
     @State private var settingsDetent = PresentationDetent.medium
-    
+    let calculatorKeyboardStandard = CalculatorKeyboardStandard()
     init(viewModel: TranslateViewModel) {
         self.viewModel = viewModel
         scrollingModel = ScrollingKeyboardViewModel(spacing: 10, keyboard: viewModel.languageSelectionKeyboard!)
     }
     
     var TranslateiOSView: some View {
-        VStack(spacing: 0.0) {
-            ZStack {
-                VStack(spacing: 0.0) {
-                    Spacer(minLength: 20.0)
-//                    TranslateDisplay(uiFont: viewModel.screen.translationFont, translationResult: viewModel.translationManager.result)
-//                        .font(Font(viewModel.screen.translationFont))
-                    Spacer(minLength: 20.0)
-                    NumberDisplay(display: viewModel.display)
+        GeometryReader { geo in
+            if !geo.size.equalTo(.zero) {
+                VStack(spacing: 100.0) {
+                    Spacer(minLength: 0.0)
+//                    ZStack {
+//                        VStack(spacing: 0.0) {
+//                            Spacer(minLength: 20.0)
+//                            //                    TranslateDisplay(uiFont: viewModel.screen.translationFont, translationResult: viewModel.translationManager.result)
+//                            //                        .font(Font(viewModel.screen.translationFont))
+//                            Spacer(minLength: 20.0)
+//                            NumberDisplay(display: viewModel.display)
+//                        }
+//                        // Add the transparent overlay when the keyboard is visible
+//                        if viewModel.showLanguageSelector {
+//                            Color.clear
+//                                .contentShape(Rectangle()) // Ensure the entire area is tappable
+//                                .onTapGesture {
+//                                    viewModel.showLanguageSelector = false
+//                                }
+//                        }
+//                    }
+                    if viewModel.showLanguageSelector {
+                        ScrollingKeyboardView(model: scrollingModel)
+                            .transition(.opacity)
+                    } else {
+                        CalculatorKeyboardView(keyboard: calculatorKeyboardStandard)
+                            .onAppear() {
+                                let calculatorSize = CGSize(width: geo.size.width * 0.9, height: geo.size.height * 0.8)
+                                print("calculatorSize \(calculatorSize)")
+                                calculatorKeyboardStandard.setSize(calculatorSize)
+                            }
+                            .background(.yellow)
+                    }
                 }
-                // Add the transparent overlay when the keyboard is visible
-                if viewModel.showLanguageSelector {
-                    Color.clear
-                        .contentShape(Rectangle()) // Ensure the entire area is tappable
-                        .onTapGesture {
-                            viewModel.showLanguageSelector = false
-                        }
-                }
-            }
-            if viewModel.showLanguageSelector {
-                ScrollingKeyboardView(model: scrollingModel)
-                .transition(.opacity)
-            } else {
-                CalculatorKeyboardView(keyboard: CalculatorKeyboardStandard())
-                    .frame(width: 300, height: 300)
+                .animation(.easeInOut(duration: 0.6), value: viewModel.showLanguageSelector)
+                //.background(.blue)
+                .padding(.bottom, 100)
             }
         }
-        .animation(.easeInOut(duration: 0.6), value: viewModel.showLanguageSelector)
-        //.background(.blue)
-        .padding(.bottom, 10)
+
     }
     
     var body: some View {

@@ -33,10 +33,11 @@ import SwiftUI
         let keyDiameterVertical = size.height / rowCount / (1.0 + keySpacingProportion)
         keyDiameter = min(keyDiameterVertical, keyDiameterHorizontal)
         keySpacing = keyDiameter * keySpacingProportion
+        print("keyDiameter \(keyDiameter)")
+        print("keySpacing \(keySpacing)")
 
         //let height = (keyDiameter + keySpacing) * rowCount
         //let width = (keyDiameter + keySpacing) * columnCount
-
         for row in keyMatrix {
             for k in row {
                 k.setDiameter(keyDiameter)

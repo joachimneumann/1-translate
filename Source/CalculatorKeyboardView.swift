@@ -9,8 +9,7 @@ import SwiftUI
 
 struct CalculatorKeyboardView: View {
     @State private var navigateToConfigView = false
-    
-    var keyboard: CalculatorKeyboard
+    @State var keyboard: CalculatorKeyboard
     
     init(keyboard: CalculatorKeyboard) {
         self.keyboard = keyboard
@@ -29,7 +28,6 @@ struct CalculatorKeyboardView: View {
             }
             .frame(width: geo.size.width, height: geo.size.height)
             .onAppear() {
-                print("CalculatorKeyboardView size \(geo.size)")
                 keyboard.setSize(geo.size)
             }
         }
@@ -47,10 +45,10 @@ struct CalculatorKeyboardView: View {
             HStack {
                 Spacer()
                 CalculatorKeyboardView(keyboard: keyboard)
-                    .frame(width: 300, height: 450)
+                    .frame(width: 440.0, height: 769.6666666666667)
+                    .background(.yellow)
                     .padding(.top, 10)
                     .padding(.bottom, 50)
-                    .background(.yellow)
                 Spacer()
             }
             Spacer(minLength: 100)
