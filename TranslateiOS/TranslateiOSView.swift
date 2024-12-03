@@ -46,13 +46,11 @@ struct TranslateiOSView: View {
                         ScrollingKeyboardView(model: scrollingModel)
                             .transition(.opacity)
                     } else {
-                        CalculatorKeyboardView(keyboard: calculatorKeyboardStandard)
-                            .onAppear() {
-                                let calculatorSize = CGSize(width: geo.size.width * 0.9, height: geo.size.height * 0.8)
-                                print("calculatorSize \(calculatorSize)")
-                                calculatorKeyboardStandard.setSize(calculatorSize)
-                            }
-                            .background(.yellow)
+                        let sideMargin = geo.size.width * 0.1
+                        let calculatorSize = CGSize(width: geo.size.width - 2 * sideMargin, height: geo.size.height * 0.8)
+                        CalculatorKeyboardView(size: calculatorSize, keyboard: calculatorKeyboardStandard)
+                            //.background(.yellow)
+                            .padding(.horizontal, sideMargin)
                     }
                 }
                 .animation(.easeInOut(duration: 0.6), value: viewModel.showLanguageSelector)
