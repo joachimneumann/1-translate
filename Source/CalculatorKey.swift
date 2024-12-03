@@ -24,10 +24,10 @@ struct NeumorphicModifier: ViewModifier {
                     darkShadow:  Color.clear,
                     lightShadow: Color.clear,
                     offset: 0.075 * diameter, radius: 0)
-                .softInnerShadow(Circle(), darkShadow: Color.clear, lightShadow: Color.clear, radius: 0.125 * diameter)
+                .softInnerShadow(Circle(), size: CGSize(width: diameter, height: diameter), darkShadow: Color.clear, lightShadow: Color.clear, radius: 0.125 * diameter)
         case .down:
             content
-                .softInnerShadow(Circle(), darkShadow: Color.Neumorphic.darkShadow, lightShadow: Color.Neumorphic.lightShadow, radius: 0.125 * diameter)
+                .softInnerShadow(Circle(), size: CGSize(width: diameter, height: diameter), darkShadow: Color.Neumorphic.darkShadow, lightShadow: Color.Neumorphic.lightShadow, radius: 0.125 * diameter)
         }
     }
 }
@@ -148,8 +148,8 @@ struct Demo: View {
             .background(Color.Neumorphic.main)
         }
         .onAppear() {
-            m1.setDiameter(80)
-            m2.setDiameter(80)
+            m1.setDiameter(130)
+            m2.setDiameter(130)
         }
     }
 }

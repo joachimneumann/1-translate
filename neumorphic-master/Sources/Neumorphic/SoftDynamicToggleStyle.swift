@@ -12,6 +12,7 @@ public struct SoftDynamicToggleStyle<S: Shape> : ToggleStyle {
     @Environment(\.isEnabled) private var isEnabled
     
     var shape: S
+    let size: CGSize
     var mainColor : Color
     var textColor : Color
     var darkShadowColor : Color
@@ -19,8 +20,9 @@ public struct SoftDynamicToggleStyle<S: Shape> : ToggleStyle {
     var pressedEffect : SoftButtonPressedEffect
     var padding : CGFloat
     
-    public init(_ shape: S, mainColor : Color, textColor : Color, darkShadowColor: Color, lightShadowColor: Color, pressedEffect : SoftButtonPressedEffect, padding : CGFloat = 16) {
+    public init(_ shape: S, size: CGSize, mainColor : Color, textColor : Color, darkShadowColor: Color, lightShadowColor: Color, pressedEffect : SoftButtonPressedEffect, padding : CGFloat = 16) {
         self.shape = shape
+        self.size = size
         self.mainColor = mainColor
         self.textColor = textColor
         self.darkShadowColor = darkShadowColor
@@ -46,7 +48,7 @@ public struct SoftDynamicToggleStyle<S: Shape> : ToggleStyle {
                     else if pressedEffect == .hard {
                         shape
                             .fill(mainColor)
-                            .softInnerShadow(shape, darkShadow: darkShadowColor, lightShadow: lightShadowColor, spread: 0.15, radius: 3)
+                            .softInnerShadow(shape, size: size, darkShadow: darkShadowColor, lightShadow: lightShadowColor, spread: 0.15, radius: 3)
                             .opacity(configuration.isOn ? 1 : 0)
                     }
                     
@@ -95,7 +97,7 @@ public struct SoftSwitchToggleStyle : ToggleStyle {
                 
                 Capsule()
                     .fill(configuration.isOn ? tintColor : offTintColor)
-                    .softInnerShadow(Capsule(), darkShadow: configuration.isOn ? tintColor : darkShadowColor, lightShadow: configuration.isOn ? tintColor : lightShadowColor, spread: 0.35, radius: 3)
+                    .softInnerShadow(Capsule(), size: CGSize(width: 75, height: 45), darkShadow: configuration.isOn ? tintColor : darkShadowColor, lightShadow: configuration.isOn ? tintColor : lightShadowColor, spread: 0.35, radius: 3)
                     .frame(width: 70, height: 40)
                     
                 Circle()
@@ -121,8 +123,8 @@ public struct SoftSwitchToggleStyle : ToggleStyle {
 
 extension Toggle {
     
-    public func softToggleStyle<S : Shape>(_ content: S, padding : CGFloat = 16, mainColor : Color = Color.Neumorphic.main, textColor : Color = Color.Neumorphic.secondary, darkShadowColor: Color = Color.Neumorphic.darkShadow, lightShadowColor: Color = Color.Neumorphic.lightShadow, pressedEffect : SoftButtonPressedEffect = .hard) -> some View {
-        self.toggleStyle(SoftDynamicToggleStyle(content, mainColor: mainColor, textColor: textColor, darkShadowColor: darkShadowColor, lightShadowColor: lightShadowColor, pressedEffect : pressedEffect, padding:padding))
+    public func softToggleStyle<S : Shape>(_ content: S, size: CGSize, padding : CGFloat = 16, mainColor : Color = Color.Neumorphic.main, textColor : Color = Color.Neumorphic.secondary, darkShadowColor: Color = Color.Neumorphic.darkShadow, lightShadowColor: Color = Color.Neumorphic.lightShadow, pressedEffect : SoftButtonPressedEffect = .hard) -> some View {
+        self.toggleStyle(SoftDynamicToggleStyle(content, size: size, mainColor: mainColor, textColor: textColor, darkShadowColor: darkShadowColor, lightShadowColor: lightShadowColor, pressedEffect : pressedEffect, padding:padding))
     }
 
     public func softSwitchToggleStyle(tint: Color = .green, offTint: Color = Color.Neumorphic.main, mainColor : Color = Color.Neumorphic.main, darkShadowColor: Color = Color.Neumorphic.darkShadow, lightShadowColor: Color = Color.Neumorphic.lightShadow, labelsHidden : Bool = false) -> some View {
