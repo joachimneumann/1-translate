@@ -13,6 +13,7 @@ struct CalculatorKeyboardView: View {
     @State var keyboard: CalculatorKeyboard
     
     init(size: CGSize, keyboard: CalculatorKeyboard) {
+        print("init CalculatorKeyboardView")
         self.size = size
         self.keyboard = keyboard
     }

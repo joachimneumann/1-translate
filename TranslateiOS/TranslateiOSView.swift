@@ -21,8 +21,6 @@ struct TranslateiOSView: View {
     }
     
     var TranslateiOSView: some View {
-        GeometryReader { geo in
-            if !geo.size.equalTo(.zero) {
                 VStack(spacing: 100.0) {
                     Spacer(minLength: 0.0)
 //                    ZStack {
@@ -46,9 +44,15 @@ struct TranslateiOSView: View {
                         ScrollingKeyboardView(model: scrollingModel)
                             .transition(.opacity)
                     } else {
-                        let sideMargin = geo.size.width * 0.1
-                        let calculatorSize = CGSize(width: geo.size.width - 2 * sideMargin, height: geo.size.height * 0.8)
+                        let screenSize = UIScreen.main.bounds
+                        let screenWidth = screenSize.width
+                        let screenHeight = screenSize.height
+
+                        let _ = print("TranslateiOSView \(screenSize)")
+                        let sideMargin = screenWidth * 0.1
+                        let calculatorSize = CGSize(width: screenWidth - 2 * sideMargin, height: screenHeight * 0.8)
                         CalculatorKeyboardView(size: calculatorSize, keyboard: calculatorKeyboardStandard)
+                            .frame(width: calculatorSize.width, height: calculatorSize.height)
                             //.background(.yellow)
                             .padding(.horizontal, sideMargin)
                     }
@@ -56,14 +60,13 @@ struct TranslateiOSView: View {
                 .animation(.easeInOut(duration: 0.6), value: viewModel.showLanguageSelector)
                 //.background(.blue)
                 .padding(.bottom, 100)
-            }
-        }
-
     }
     
     var body: some View {
 //        ZStack {
         TranslateiOSView
+            .background(Color.Neumorphic.main)
+
 //                .padding(.bottom, viewModel.screen.bottomPadding)
 //                .padding(.horizontal, viewModel.screen.horizontalPadding)
 //                .preferredColorScheme(.dark)
@@ -72,7 +75,6 @@ struct TranslateiOSView: View {
 //                        TranslateiOSSettingsView(viewModel: viewModel)
 //                    }
 //                }
-                .background(Color.Neumorphic.main)
 //        }
 //        .onChange(of: viewModel.navigateToSettings) { old, new in
 //            if new {

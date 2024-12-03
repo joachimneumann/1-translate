@@ -27,6 +27,7 @@ import SwiftUI
     }
     
     func setSize(_ size: CGSize) {
+        print("init CalculatorKeyboard")
         let keySpacingProportion = 0.4
 
         let keyDiameterHorizontal = size.width / columnCount / (1.0 + keySpacingProportion)
