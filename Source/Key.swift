@@ -65,7 +65,7 @@ enum VisualPressedState {
             //print("key down inside isPressed \(isPressed)")
             if !isPressed {
                 isPressed = true
-                withAnimation(.spring(duration: downTime * animation1Factor)) {
+                withAnimation(.linear(duration: downTime * animation1Factor)) {
                     //print("visualDown1")
                     visualDown1()
                 }
@@ -74,7 +74,7 @@ enum VisualPressedState {
                 }
                 secondAnimationTimer = Timer.scheduledTimer(withTimeInterval: downTime * animation1Factor, repeats: false) { _ in
                     //print("visualDown2")
-                    withAnimation(.spring(duration: self.downTime * self.animation2Factor)) {
+                    withAnimation(.linear(duration: self.downTime * self.animation2Factor)) {
                         self.visualDown2()
                     }
                 }
@@ -91,7 +91,7 @@ enum VisualPressedState {
             downTimer = nil
             secondAnimationTimer = nil
             // no intermediate state when moving outside
-            withAnimation(.spring(duration: upTime)){//} * animation1Factor)) {
+            withAnimation(.linear(duration: upTime)){//} * animation1Factor)) {
                 visualUp2()
             }
         }
@@ -103,14 +103,14 @@ enum VisualPressedState {
             callback(self)
             isPressed = false
             if downTimer != nil { return }
-            withAnimation(.spring(duration: upTime * animation1Factor)) {
+            withAnimation(.linear(duration: upTime * animation1Factor)) {
                 visualUp1()
             }
             if let timer = secondAnimationTimer, timer.isValid {
                 timer.invalidate()
             }
             secondAnimationTimer = Timer.scheduledTimer(withTimeInterval: upTime * animation1Factor, repeats: false) { _ in
-                withAnimation(.spring(duration: self.upTime * self.animation2Factor)) {
+                withAnimation(.linear(duration: self.upTime * self.animation2Factor)) {
                     self.visualUp2()
                 }
             }
@@ -120,14 +120,14 @@ enum VisualPressedState {
     private func downTimerFired() {
         downTimer = nil
         if !isPressed {
-            withAnimation(.spring(duration: upTime * animation1Factor)) {
+            withAnimation(.linear(duration: upTime * animation1Factor)) {
                 visualUp1()
             }
             if let timer = secondAnimationTimer, timer.isValid {
                 timer.invalidate()
             }
             secondAnimationTimer = Timer.scheduledTimer(withTimeInterval: upTime * animation1Factor, repeats: false) { _ in
-                withAnimation(.spring(duration: self.upTime * self.animation2Factor)) {
+                withAnimation(.linear(duration: self.upTime * self.animation2Factor)) {
                     self.visualUp2()
                 }
             }
