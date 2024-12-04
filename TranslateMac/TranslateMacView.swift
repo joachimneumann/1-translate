@@ -80,7 +80,6 @@ struct TranslateMacView: View {
 #Preview {
     let width: CGFloat = 500
     let height: CGFloat = 350
-    let screen = Screen(CGSize(width: width, height: height))
     
     NavigationStack {
         TranslateMacView()
