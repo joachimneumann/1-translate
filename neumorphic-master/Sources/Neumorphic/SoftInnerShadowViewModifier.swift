@@ -45,7 +45,7 @@ private struct SoftInnerShadowViewModifier<S: Shape> : ViewModifier {
         self.shape.fill(self.lightShadowColor)
             .inverseMask(
                 self.shape
-                    .offset(x: -self.shadowOffset(geo), y: -self.shadowOffset(geo))
+                    .offset(x: -self.shadowOffset(size), y: -self.shadowOffset(size))
             )
             .blur(radius: self.radius)
             .mask(
@@ -56,7 +56,7 @@ private struct SoftInnerShadowViewModifier<S: Shape> : ViewModifier {
                     .fill(self.darkShadowColor)
                     .inverseMask(
                         self.shape
-                            .offset(x: self.shadowOffset(geo), y: self.shadowOffset(geo))
+                            .offset(x: self.shadowOffset(size), y: self.shadowOffset(size))
                     )
                     .blur(radius: self.radius)
             )
