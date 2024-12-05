@@ -10,7 +10,7 @@ import SwiftGmp
 import NumberTranslator
 
 struct NeumorphicModifier: ViewModifier {
-    let diameter: CGFloat
+    let diameter: CGFloat = 0
     var pressed: VisualPressedState
     
     func body(content: Content) -> some View {
@@ -34,31 +34,33 @@ struct NeumorphicModifier: ViewModifier {
 
 extension View {
     func neumorphic(diameter: CGFloat, _ pressed: VisualPressedState) -> some View {
-        self.modifier(NeumorphicModifier(diameter: diameter, pressed: pressed))
+        self.modifier(NeumorphicModifier(pressed: pressed))
     }
 }
 
 @Observable class CalculatorKey: Key {
     private var flagImage: Image? = nil
     var symbolKeyViewModel: SymbolKeyViewModel? = nil
-    private(set) var diameter: CGFloat = 0.0
+    var diameter: CGFloat = 0
     
     init(flagName: String) {
         flagImage = Image(flagName)
+        super.init()
     }
     
     init(op: any OpProtocol) {
         self.symbolKeyViewModel = SymbolKeyViewModel(op: op)
         super.init()
         self.symbolKeyViewModel!.setColors(textColor: Color.Neumorphic.text, upColor: .red, downColor: .red)
-        self.symbolKeyViewModel!.newSize(CGSize(width: diameter, height: diameter))
     }
     
-    func setDiameter(_ new: CGFloat) {
-        diameter = new
-        self.symbolKeyViewModel?.newSize(CGSize(width: diameter, height: diameter))
+    func setDiameter(_ diameter: CGFloat) {
+        self.diameter = diameter
+        if let m = symbolKeyViewModel {
+            m.newSize(CGSize(width: diameter, height: diameter))
+        }
     }
-    
+        
     var flagScale: CGFloat {
         switch visualPressed {
         case .up: 1.0
@@ -139,18 +141,18 @@ struct Demo: View {
             Rectangle()
                 .foregroundColor(Color.Neumorphic.main)
             VStack {
-                HStack(spacing: m1.diameter / 2) {
+                HStack {
                     CalculatorKeyView(model: m1)
+                    Spacer()
+                    CalculatorKeyView(model: m2)
+                    Spacer()
                     CalculatorKeyView(model: m2)
                 }
-                .frame(width: 200)
+                .background(Color.yellow)
             }
             .background(Color.Neumorphic.main)
         }
-        .onAppear() {
-            m1.setDiameter(130)
-            m2.setDiameter(130)
-        }
+//        .frame(width: 300)
     }
 }
 

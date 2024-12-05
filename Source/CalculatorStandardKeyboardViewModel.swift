@@ -1,5 +1,5 @@
 //
-//  CalculatorKeyboardStandard.swift
+//  CalculatorStandardKeyboardViewModel.swift
 //  Calculator
 //
 //  Created by Joachim Neumann on 30.11.2024.
@@ -9,11 +9,11 @@ import SwiftUI
 import SwiftGmp
 
 
-@Observable class CalculatorKeyboardStandard: CalculatorKeyboard {
+@Observable class CalculatorStandardKeyboardViewModel: CalculatorKeyboardViewModel {
     let clearKey: CalculatorKey
     let separatorKey: CalculatorKey
     
-    init(settingsKey: CalculatorKey = CalculatorKey(op: InplaceOperation.abs)) {
+    init(heightProportion: CGFloat, settingsKey: CalculatorKey = CalculatorKey(op: InplaceOperation.abs)) {
         clearKey = CalculatorKey(op: ClearOperation.clear)
         let changeSignKey = CalculatorKey(op: InplaceOperation.changeSign)
         let percentKey = CalculatorKey(op: PercentOperation.percent)
@@ -39,7 +39,11 @@ import SwiftGmp
         separatorKey = CalculatorKey(op: DigitOperation.dot)
         let equalsKey = CalculatorKey(op: EqualOperation.equal)
         
-        super.init()
+        let screenSize = UIScreen.main.bounds
+        let width = screenSize.width
+        let height = screenSize.height * heightProportion
+
+        super.init(size: CGSize(width: width, height: height))
         keyMatrix.append([clearKey, changeSignKey, percentKey, divideKey])
         keyMatrix.append([sevenKey, eightKey, nineKey, multiplyKey])
         keyMatrix.append([fourKey, fiveKey, sixKey, subtractKey])

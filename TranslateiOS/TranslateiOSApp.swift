@@ -14,9 +14,10 @@ struct TranslateiOSApp: App {
         WindowGroup {
             NavigationStack {
 //                Demo()
-                TranslateiOSView(viewModel: TranslateViewModel())
+                TranslateiOSView()//(viewModel: TranslateViewModel())
             }
         }
     }
 }
+
 

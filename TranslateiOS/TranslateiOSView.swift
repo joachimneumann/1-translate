@@ -8,21 +8,46 @@ import SwiftUI
 import Neumorphic
 
 struct TranslateiOSView: View {
-    @Environment(\.scenePhase) var scenePhase
-    @ObservedObject var viewModel: TranslateViewModel
-    let scrollingModel: ScrollingKeyboardViewModel
-    @State var scrollViewID = UUID()
-    @State var isZoomed: Bool = false
-    @State private var settingsDetent = PresentationDetent.medium
-    let calculatorKeyboardStandard = CalculatorKeyboardStandard()
-    init(viewModel: TranslateViewModel) {
-        self.viewModel = viewModel
-        scrollingModel = ScrollingKeyboardViewModel(spacing: 10, keyboard: viewModel.languageSelectionKeyboard!)
+    let keyboardModel: CalculatorStandardKeyboardViewModel
+
+    init() {
+        keyboardModel = CalculatorStandardKeyboardViewModel(heightProportion: 0.6)
+        let _ = print("xxx1")
     }
+    var body: some View {
+        let _ = print("xxx2")
+        let screenSize = UIScreen.main.bounds
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+
+        let _ = print("TranslateiOSView \(screenSize)")
+        let sideMargin = screenWidth * 0.1
+        let calculatorSize = CGSize(width: screenWidth - 2 * sideMargin, height: screenHeight * 0.8)
+        CalculatorKeyboardView(size: calculatorSize, keyboard: keyboardModel)
+            .frame(width: calculatorSize.width, height: calculatorSize.height)
+            .background(.yellow)
+            .padding(.horizontal, sideMargin)
+    }
+}
+
+struct TranslateiOSViewOLD: View {
+//    @Environment(\.scenePhase) var scenePhase
+//    @ObservedObject var viewModel: TranslateViewModel
+//    let scrollingModel: ScrollingKeyboardViewModel
+//    @State var scrollViewID = UUID()
+//    @State var isZoomed: Bool = false
+//    @State private var settingsDetent = PresentationDetent.medium
+//    let calculatorKeyboardStandard = CalculatorStandardKeyboardViewModel()
+//    init(viewModel: TranslateViewModel) {
+//        let _ = print("xxx1")
+//        self.viewModel = viewModel
+//        scrollingModel = ScrollingKeyboardViewModel(spacing: 10, keyboard: viewModel.languageSelectionKeyboard!)
+//    }
     
-    var TranslateiOSView: some View {
-                VStack(spacing: 100.0) {
-                    Spacer(minLength: 0.0)
+//    var TranslateiOSView: some View {
+//                VStack(spacing: 100.0) {
+//                    let _ = print("xxx2")
+//                    Spacer(minLength: 0.0)
 //                    ZStack {
 //                        VStack(spacing: 0.0) {
 //                            Spacer(minLength: 20.0)
@@ -40,33 +65,34 @@ struct TranslateiOSView: View {
 //                                }
 //                        }
 //                    }
-                    if viewModel.showLanguageSelector {
-                        ScrollingKeyboardView(model: scrollingModel)
-                            .transition(.opacity)
-                    } else {
-                        let screenSize = UIScreen.main.bounds
-                        let screenWidth = screenSize.width
-                        let screenHeight = screenSize.height
-
-                        let _ = print("TranslateiOSView \(screenSize)")
-                        let sideMargin = screenWidth * 0.1
-                        let calculatorSize = CGSize(width: screenWidth - 2 * sideMargin, height: screenHeight * 0.8)
-                        CalculatorKeyboardView(size: calculatorSize, keyboard: calculatorKeyboardStandard)
-                            .frame(width: calculatorSize.width, height: calculatorSize.height)
+//                    if viewModel.showLanguageSelector {
+//                        ScrollingKeyboardView(model: scrollingModel)
+//                            .transition(.opacity)
+//                    } else {
+//                        let screenSize = UIScreen.main.bounds
+//                        let screenWidth = screenSize.width
+//                        let screenHeight = screenSize.height
+//
+//                        let _ = print("TranslateiOSView \(screenSize)")
+//                        let sideMargin = screenWidth * 0.1
+//                        let calculatorSize = CGSize(width: screenWidth - 2 * sideMargin, height: screenHeight * 0.8)
+//                        CalculatorKeyboardView(size: calculatorSize, keyboard: calculatorKeyboardStandard)
+//                            .frame(width: calculatorSize.width, height: calculatorSize.height)
                             //.background(.yellow)
-                            .padding(.horizontal, sideMargin)
-                    }
-                }
-                .animation(.easeInOut(duration: 0.6), value: viewModel.showLanguageSelector)
-                //.background(.blue)
-                .padding(.bottom, 100)
-    }
+//                            .padding(.horizontal, sideMargin)
+//                    }
+//                }
+//                .animation(.easeInOut(duration: 0.6), value: viewModel.showLanguageSelector)
+//                //.background(.blue)
+//                .padding(.bottom, 100)
+//    }
     
     var body: some View {
 //        ZStack {
-        TranslateiOSView
-            .background(Color.Neumorphic.main)
-
+        Text("X")
+//        TranslateiOSView
+//            .background(Color.Neumorphic.main)
+let _ = print("xxx3")
 //                .padding(.bottom, viewModel.screen.bottomPadding)
 //                .padding(.horizontal, viewModel.screen.horizontalPadding)
 //                .preferredColorScheme(.dark)
@@ -104,6 +130,6 @@ struct TranslateiOSView: View {
 
 #Preview {
     NavigationStack {
-        TranslateiOSView(viewModel: TranslateViewModel())
+        TranslateiOSView()//viewModel: TranslateViewModel())
     }
 }

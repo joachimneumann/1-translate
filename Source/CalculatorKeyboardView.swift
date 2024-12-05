@@ -10,33 +10,60 @@ import SwiftUI
 struct CalculatorKeyboardView: View {
     @State private var navigateToConfigView = false
     let size: CGSize
-    @State var keyboard: CalculatorKeyboard
+    @State var keyboard: CalculatorKeyboardViewModel
     
-    init(size: CGSize, keyboard: CalculatorKeyboard) {
-        print("init CalculatorKeyboardView")
+    init(size: CGSize, keyboard: CalculatorKeyboardViewModel) {
+        print("init CalculatorKeyboardView \(size)")
         self.size = size
         self.keyboard = keyboard
     }
     
     var body: some View {
-        VStack(spacing: keyboard.keySpacing) {
-            ForEach(keyboard.keyMatrix.indices, id: \.self) { rowIndex in
-                HStack(spacing: keyboard.keySpacing) {
-                    ForEach(keyboard.keyMatrix[rowIndex], id: \.id) { key in
+        VStack {
+            ForEach(keyboard.keyMatrix.dropLast().indices, id: \.self) { rowIndex in
+                HStack {
+                    ForEach(keyboard.keyMatrix[rowIndex].dropLast(), id: \.id) { key in
                         CalculatorKeyView(model: key)
+                        Spacer(minLength: 0.0)
+                    }
+                    if let last = keyboard.keyMatrix[rowIndex].last {
+                        CalculatorKeyView(model: last)
+                    }
+                }
+                Spacer(minLength: 0.0)
+            }
+            HStack {
+                if let lastRow = keyboard.keyMatrix.last {
+                    ForEach(lastRow.dropLast(), id: \.id) { key in
+                        CalculatorKeyView(model: key)
+                        Spacer(minLength: 0.0)
+                    }
+                    if let last = lastRow.last {
+                        CalculatorKeyView(model: last)
                     }
                 }
             }
         }
-        .frame(width: size.width, height: size.height)
-        .onAppear() {
-            keyboard.setSize(size)
-        }
+//        .frame(width: size.width, height: size.height)
+//        .onAppear() {
+//            keyboard.setSize(size)
+//        }
     }
 }
 
+
+//ForEach(keyboard.keyMatrix.dropLast().indices, id: \.self) { rowIndex in
+//    HStack(spacing: spacing) {
+//        ForEach(keyboard.keyMatrix[rowIndex], id: \.id) { key in
+//            KeyView(key: key)
+//        }
+//    }
+//    Spacer(minLength: 0.0)
+//}
+
+
 #Preview("Dark") {
-    let keyboard: CalculatorKeyboard = CalculatorKeyboardStandard()
+    let keyboard: CalculatorKeyboardViewModel = CalculatorStandardKeyboardViewModel(heightProportion: 0.4)
     
     ZStack {
         Rectangle()
@@ -59,7 +86,7 @@ struct CalculatorKeyboardView: View {
 }
 
 #Preview("Light") {
-    let keyboard: CalculatorKeyboard = CalculatorKeyboardStandard()
+    let keyboard: CalculatorKeyboardViewModel = CalculatorStandardKeyboardViewModel(heightProportion: 0.4)
     
     ZStack {
         Rectangle()
