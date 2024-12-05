@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CalculatorPressGestures: ViewModifier {
-    let key: Key
+    let key: KeyModel
     let diameter: CGFloat
 
     func body(content: Content) -> some View {
@@ -32,7 +32,7 @@ struct CalculatorPressGestures: ViewModifier {
 }
 
 extension View {
-    func applyCalculatorPressGestures(key: Key, diameter: CGFloat) -> some View {
+    func applyCalculatorPressGestures(key: KeyModel, diameter: CGFloat) -> some View {
         self.modifier(CalculatorPressGestures(key: key, diameter: diameter))
     }
 }

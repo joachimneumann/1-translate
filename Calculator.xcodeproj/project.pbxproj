@@ -37,7 +37,7 @@
 		AA6DBCCD2CE0778F00B5E0F1 /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA17F8932CCE6EB900312BF0 /* Display.swift */; };
 		AA6DBCCE2CE077B300B5E0F1 /* SmallKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9C3F692CBF33C100F64EFA /* SmallKeyboard.swift */; };
 		AA6DBCCF2CE077C700B5E0F1 /* SymbolKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC41D2CD62173006BD54C /* SymbolKey.swift */; };
-		AA6DBCD02CE077C700B5E0F1 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC4252CD6FEB4006BD54C /* Key.swift */; };
+		AA6DBCD02CE077C700B5E0F1 /* KeyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC4252CD6FEB4006BD54C /* KeyModel.swift */; };
 		AA6DBCD22CE077F100B5E0F1 /* NumberDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29F589293CD608001ADF5A /* NumberDisplay.swift */; };
 		AA6DBCD32CE0780B00B5E0F1 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9C3F6C2CBF373600F64EFA /* KeyboardView.swift */; };
 		AA6DBCD42CE0781400B5E0F1 /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC4272CD7087E006BD54C /* KeyView.swift */; };
@@ -58,7 +58,7 @@
 		AA8A6B7B2CF8C76700759D93 /* Neumorphic in Frameworks */ = {isa = PBXBuildFile; productRef = AA8A6B7A2CF8C76700759D93 /* Neumorphic */; };
 		AA8A6B7D2CF8C76D00759D93 /* Neumorphic in Frameworks */ = {isa = PBXBuildFile; productRef = AA8A6B7C2CF8C76D00759D93 /* Neumorphic */; };
 		AA8AC41E2CD62174006BD54C /* SymbolKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC41D2CD62173006BD54C /* SymbolKey.swift */; };
-		AA8AC4262CD6FEB7006BD54C /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC4252CD6FEB4006BD54C /* Key.swift */; };
+		AA8AC4262CD6FEB7006BD54C /* KeyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC4252CD6FEB4006BD54C /* KeyModel.swift */; };
 		AA8AC4282CD70883006BD54C /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC4272CD7087E006BD54C /* KeyView.swift */; };
 		AA9C3F6A2CBF33C800F64EFA /* SmallKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9C3F692CBF33C100F64EFA /* SmallKeyboard.swift */; };
 		AA9C3F6D2CBF373C00F64EFA /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9C3F6C2CBF373600F64EFA /* KeyboardView.swift */; };
@@ -72,7 +72,7 @@
 		AAB5EA3B2CE4963100D76292 /* NumberTranslator in Frameworks */ = {isa = PBXBuildFile; productRef = AAB5EA3A2CE4963100D76292 /* NumberTranslator */; };
 		AAB5EA3C2CE4967400D76292 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9C3F6C2CBF373600F64EFA /* KeyboardView.swift */; };
 		AAB5EA3D2CE4967400D76292 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3F5312CE1809900146B91 /* Keyboard.swift */; };
-		AAB5EA3E2CE4967400D76292 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC4252CD6FEB4006BD54C /* Key.swift */; };
+		AAB5EA3E2CE4967400D76292 /* KeyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC4252CD6FEB4006BD54C /* KeyModel.swift */; };
 		AAB5EA3F2CE4967400D76292 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6DBCAC2CE070FD00B5E0F1 /* ViewModel.swift */; };
 		AAB5EA402CE4967400D76292 /* SmallKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9C3F692CBF33C100F64EFA /* SmallKeyboard.swift */; };
 		AAB5EA422CE4967400D76292 /* KeyColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABEFC122972A8780023A3C9 /* KeyColor.swift */; };
@@ -92,7 +92,7 @@
 		AAFCC5C32CE46278009E42FA /* SwiftGmp in Frameworks */ = {isa = PBXBuildFile; productRef = AAFCC5C22CE46278009E42FA /* SwiftGmp */; };
 		AAFCC5C42CE46289009E42FA /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE426F629597AE3005FE365 /* Screen.swift */; };
 		AAFCC5C52CE46289009E42FA /* SmallKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9C3F692CBF33C100F64EFA /* SmallKeyboard.swift */; };
-		AAFCC5C62CE46289009E42FA /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC4252CD6FEB4006BD54C /* Key.swift */; };
+		AAFCC5C62CE46289009E42FA /* KeyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC4252CD6FEB4006BD54C /* KeyModel.swift */; };
 		AAFCC5C72CE46298009E42FA /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3F5312CE1809900146B91 /* Keyboard.swift */; };
 		AAFCC5C92CE46529009E42FA /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA17F8932CCE6EB900312BF0 /* Display.swift */; };
 		AAFCC5CA2CE46553009E42FA /* SymbolKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8AC41D2CD62173006BD54C /* SymbolKey.swift */; };
@@ -138,7 +138,7 @@
 		AA6F2BCF2CFB677D00EEB2A6 /* CalculatorStandardKeyboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorStandardKeyboardViewModel.swift; sourceTree = "<group>"; };
 		AA8A6B792CF8C74E00759D93 /* neumorphic-master */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "neumorphic-master"; sourceTree = "<group>"; };
 		AA8AC41D2CD62173006BD54C /* SymbolKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolKey.swift; sourceTree = "<group>"; };
-		AA8AC4252CD6FEB4006BD54C /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
+		AA8AC4252CD6FEB4006BD54C /* KeyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyModel.swift; sourceTree = "<group>"; };
 		AA8AC4272CD7087E006BD54C /* KeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyView.swift; sourceTree = "<group>"; };
 		AA9C3F692CBF33C100F64EFA /* SmallKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallKeyboard.swift; sourceTree = "<group>"; };
 		AA9C3F6C2CBF373600F64EFA /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
@@ -288,7 +288,7 @@
 				AA5796642CF692EE00D3A02B /* ButtonPressModifier.swift */,
 				AAE426F629597AE3005FE365 /* Screen.swift */,
 				AA6DBCAC2CE070FD00B5E0F1 /* ViewModel.swift */,
-				AA8AC4252CD6FEB4006BD54C /* Key.swift */,
+				AA8AC4252CD6FEB4006BD54C /* KeyModel.swift */,
 				AA8AC4272CD7087E006BD54C /* KeyView.swift */,
 				AA8AC41D2CD62173006BD54C /* SymbolKey.swift */,
 				AA5D3D722CEB9A5900CC8237 /* SymbolKeyViewModel.swift */,
@@ -517,7 +517,7 @@
 				AAE426F729597AE3005FE365 /* Screen.swift in Sources */,
 				AAE3F5322CE180A000146B91 /* Keyboard.swift in Sources */,
 				AA6F2BD32CFB678300EEB2A6 /* CalculatorStandardKeyboardViewModel.swift in Sources */,
-				AA8AC4262CD6FEB7006BD54C /* Key.swift in Sources */,
+				AA8AC4262CD6FEB7006BD54C /* KeyModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -542,7 +542,7 @@
 				AA5796682CF6930200D3A02B /* ButtonPressModifier.swift in Sources */,
 				AA6DBCCE2CE077B300B5E0F1 /* SmallKeyboard.swift in Sources */,
 				AA6DBCCF2CE077C700B5E0F1 /* SymbolKey.swift in Sources */,
-				AA6DBCD02CE077C700B5E0F1 /* Key.swift in Sources */,
+				AA6DBCD02CE077C700B5E0F1 /* KeyModel.swift in Sources */,
 				AA5796702CF6946F00D3A02B /* CalculatorKey.swift in Sources */,
 				AA9F5BBB2CF1CC2900570570 /* FlagView.swift in Sources */,
 			);
@@ -554,7 +554,7 @@
 			files = (
 				AAB5EA3C2CE4967400D76292 /* KeyboardView.swift in Sources */,
 				AAB5EA3D2CE4967400D76292 /* Keyboard.swift in Sources */,
-				AAB5EA3E2CE4967400D76292 /* Key.swift in Sources */,
+				AAB5EA3E2CE4967400D76292 /* KeyModel.swift in Sources */,
 				AAB5EA3F2CE4967400D76292 /* ViewModel.swift in Sources */,
 				AAB5EA402CE4967400D76292 /* SmallKeyboard.swift in Sources */,
 				AA6F2BD12CFB678300EEB2A6 /* CalculatorStandardKeyboardViewModel.swift in Sources */,
@@ -595,7 +595,7 @@
 				AA9F5BBA2CF1CC2900570570 /* FlagView.swift in Sources */,
 				AA6F2BD02CFB678300EEB2A6 /* CalculatorStandardKeyboardViewModel.swift in Sources */,
 				AA61B4BA2CEDF7D5009A916E /* FlagKey.swift in Sources */,
-				AAFCC5C62CE46289009E42FA /* Key.swift in Sources */,
+				AAFCC5C62CE46289009E42FA /* KeyModel.swift in Sources */,
 				AAFCC5CC2CE465D1009E42FA /* KeyboardView.swift in Sources */,
 				AA6F2BC92CFB660800EEB2A6 /* CalculatorKeyboardView.swift in Sources */,
 				AAFCC5CD2CE465D1009E42FA /* NumberDisplay.swift in Sources */,

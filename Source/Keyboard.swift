@@ -9,9 +9,9 @@ import SwiftUI
 
 
 @Observable class Keyboard {
-    var keyMatrix: [[Key]] = []
+    var keyMatrix: [[KeyModel]] = []
     
-    var callback: (Key) -> () = { _ in } {
+    var callback: (KeyModel) -> () = { _ in } {
         didSet {
             for row in keyMatrix {
                 for k in row {

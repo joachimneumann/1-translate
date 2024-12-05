@@ -1,5 +1,5 @@
 //
-//  Key.swift
+//  KeyModel.swift
 //  TranslateNumbers
 //
 //  Created by Joachim Neumann on 03.11.2024.
@@ -15,7 +15,7 @@ enum VisualPressedState {
 }
 
 
-@Observable class Key: Identifiable {
+@Observable class KeyModel: Identifiable {
     let id = UUID()  // unique identifier
     private var isPressed: Bool = false
     private var downTimer: Timer? = nil
@@ -33,7 +33,7 @@ enum VisualPressedState {
         AnyView(EmptyView())
     }
     
-    var callback: (Key) -> () = { _ in }
+    var callback: (KeyModel) -> () = { _ in }
     var calculatorCallback: (CalculatorKey) -> () = { _ in }
 
     let animation1Factor: Double = 0.5//0.25

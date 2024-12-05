@@ -38,7 +38,7 @@ extension View {
     }
 }
 
-@Observable class CalculatorKey: Key {
+@Observable class CalculatorKey: KeyModel {
     private var flagImage: Image? = nil
     var symbolKeyViewModel: SymbolKeyViewModel? = nil
     var diameter: CGFloat = 0

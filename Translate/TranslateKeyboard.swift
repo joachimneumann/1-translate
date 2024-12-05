@@ -19,7 +19,7 @@ import SwiftUI
     }
 }
 
-#Preview {
-    KeyboardView(spacing: 5.0, keyboard: TranslateKeyboard(persistent: TranslatePersistent(), toggle: nil))
-        .frame(height: 300)
-}
+//#Preview {
+//    KeyboardView(spacing: 5.0, keyboard: TranslateKeyboard(persistent: TranslatePersistent(), toggle: nil))
+//        .frame(height: 300)
+//}

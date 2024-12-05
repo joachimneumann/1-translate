@@ -13,7 +13,7 @@ import SwiftGmp
     let clearKey: SymbolKey
     let separatorKey: SymbolKey
     
-    init(settingsKey: Key) {
+    init(settingsKey: KeyModel) {
         clearKey = SymbolKey(ClearOperation.clear)
         let changeSignKey = SymbolKey(InplaceOperation.changeSign)
         let percentKey = SymbolKey(PercentOperation.percent)

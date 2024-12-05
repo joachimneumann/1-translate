@@ -7,7 +7,7 @@
 import NumberTranslator
 import SwiftUI
 
-@Observable class FlagKey: Key {
+@Observable class FlagKey: KeyModel {
     let persistent: TranslatePersistent
     private var languageEnum: NumberTranslator.LanguageEnum
     var image: Image

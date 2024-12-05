@@ -68,7 +68,7 @@ class ViewModel: ObservableObject {
         }
     }
     
-    func execute(_ key: Key) {
+    func execute(_ key: KeyModel) {
         if let symbolKey = key as? SymbolKey {
             calculator.press(symbolKey.model.op)
             if let smallKeyboard = smallKeyboard {

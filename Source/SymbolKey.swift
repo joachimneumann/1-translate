@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftGmp
 
-@Observable class SymbolKey: Key {
+@Observable class SymbolKey: KeyModel {
     var model: SymbolKeyViewModel
     var bgColor: Color
     

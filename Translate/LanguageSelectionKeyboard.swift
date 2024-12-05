@@ -21,7 +21,7 @@ class LanguageSelectionKeyboard: Keyboard {
         countryDescriptionKey = TextKey(top: "", bottom: nil)
         super.init()
         var columnIndex = 1
-        var tempRow: [Key] = []
+        var tempRow: [KeyModel] = []
         for language in translateViewModel.translationManager.sortedlanguages {
             let tempKey = FlagKey(
                 persistent: translateViewModel.persistent,

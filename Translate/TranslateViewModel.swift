@@ -98,7 +98,7 @@ class TranslateViewModel: ViewModel {
         process()
     }
 
-    override func execute(_ key: Key) {
+    override func execute(_ key: KeyModel) {
         if let languageSettingsKey = key as? SymbolKey {
             if languageSettingsKey.model.op.isEqual(to: TranslateOperation.settings) {
                 showSettings = true

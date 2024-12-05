@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-@Observable class TextKey: Key {
+@Observable class TextKey: KeyModel {
     var top: String
     var bottom: String?
     
