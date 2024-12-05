@@ -1,5 +1,5 @@
 //
-//  CalculatorKeyboardView.swift
+//  KeyboardView.swift
 //  Calculator
 //
 //  Created by Joachim Neumann on 30.11.2024.
@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct CalculatorKeyboardView: View {
+struct KeyboardView: View {
     @State private var navigateToConfigView = false
     let size: CGSize
-    @State var keyboard: CalculatorKeyboardViewModel
+    @State var keyboard: KeyboardModel
     
-    init(size: CGSize, keyboard: CalculatorKeyboardViewModel) {
+    init(size: CGSize, keyboard: KeyboardModel) {
         print("init CalculatorKeyboardView \(size)")
         self.size = size
         self.keyboard = keyboard
@@ -63,7 +63,7 @@ struct CalculatorKeyboardView: View {
 
 
 #Preview("Dark") {
-    let keyboard: CalculatorKeyboardViewModel = CalculatorStandardKeyboardViewModel(heightProportion: 0.4)
+    let keyboard: KeyboardModel = KeyboardModelStandard(heightProportion: 0.4)
     
     ZStack {
         Rectangle()
@@ -72,8 +72,8 @@ struct CalculatorKeyboardView: View {
             Spacer()
             HStack {
                 Spacer()
-                CalculatorKeyboardView(size: CGSize(width: 440.0, height: 769.6666666666667), keyboard: keyboard)
-                    .background(.yellow)
+                KeyboardView(size: CGSize(width: 440.0, height: 769.6666666666667), keyboard: keyboard)
+//                    .background(.yellow)
                     .padding(.top, 10)
                     .padding(.bottom, 50)
                 Spacer()
@@ -86,7 +86,7 @@ struct CalculatorKeyboardView: View {
 }
 
 #Preview("Light") {
-    let keyboard: CalculatorKeyboardViewModel = CalculatorStandardKeyboardViewModel(heightProportion: 0.4)
+    let keyboard: KeyboardModel = KeyboardModelStandard(heightProportion: 0.4)
     
     ZStack {
         Rectangle()
@@ -95,7 +95,7 @@ struct CalculatorKeyboardView: View {
             Spacer()
             HStack {
                 Spacer()
-                CalculatorKeyboardView(size: CGSize(width: 400, height: 450), keyboard: keyboard)
+                KeyboardView(size: CGSize(width: 400, height: 450), keyboard: keyboard)
                     .padding(.top, 10)
                     .padding(.bottom, 50)
                 Spacer()

@@ -8,10 +8,10 @@ import SwiftUI
 import Neumorphic
 
 struct TranslateiOSView: View {
-    let keyboardModel: CalculatorStandardKeyboardViewModel
+    let keyboardModel: KeyboardModelStandard
 
     init() {
-        keyboardModel = CalculatorStandardKeyboardViewModel(heightProportion: 0.6)
+        keyboardModel = KeyboardModelStandard(heightProportion: 0.6)
         let _ = print("xxx1")
     }
     var body: some View {
@@ -23,9 +23,9 @@ struct TranslateiOSView: View {
         let _ = print("TranslateiOSView \(screenSize)")
         let sideMargin = screenWidth * 0.1
         let calculatorSize = CGSize(width: screenWidth - 2 * sideMargin, height: screenHeight * 0.8)
-        CalculatorKeyboardView(size: calculatorSize, keyboard: keyboardModel)
+        KeyboardView(size: calculatorSize, keyboard: keyboardModel)
             .frame(width: calculatorSize.width, height: calculatorSize.height)
-            .background(.yellow)
+            .background(Color.Neumorphic.main)
             .padding(.horizontal, sideMargin)
     }
 }

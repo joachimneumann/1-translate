@@ -1,5 +1,5 @@
 //
-//  keyModelSymbolKey.swift
+//  KeyModelSymbolKey.swift
 //  Calculator
 //
 //  Created by Joachim Neumann on 18.11.2024.
@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftGmp
 
-@Observable class keyModelSymbolKey {
+@Observable class KeyModelSymbolKey {
     
     private var diameter: CGFloat
     var op: any OpProtocol

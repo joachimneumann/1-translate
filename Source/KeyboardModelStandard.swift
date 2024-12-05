@@ -1,5 +1,5 @@
 //
-//  CalculatorStandardKeyboardViewModel.swift
+//  KeyboardModelStandard.swift
 //  Calculator
 //
 //  Created by Joachim Neumann on 30.11.2024.
@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftGmp
 
 
-@Observable class CalculatorStandardKeyboardViewModel: CalculatorKeyboardViewModel {
+@Observable class KeyboardModelStandard: KeyboardModel {
     let clearKey: KeyModel
     let separatorKey: KeyModel
     

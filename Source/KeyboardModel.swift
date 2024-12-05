@@ -1,5 +1,5 @@
 //
-//  CalculatorKeyboardViewModel.swift
+//  KeyboardModel.swift
 //  Calculator
 //
 //  Created by Joachim Neumann on 30.11.2024.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-@Observable class CalculatorKeyboardViewModel {
+@Observable class KeyboardModel {
     var keyMatrix: [[KeyModel]] = []
     var keyDiameter: CGFloat = 0
     var recommendedPadding: CGFloat = 0

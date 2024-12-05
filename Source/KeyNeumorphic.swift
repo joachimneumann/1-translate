@@ -1,5 +1,5 @@
 //
-//  NeumorphicModifier.swift
+//  KeyNeumorphic.swift
 //  Calculator
 //
 //  Created by Joachim Neumann on 05.12.2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NeumorphicModifier: ViewModifier {
+struct KeyNeumorphic: ViewModifier {
     let diameter: CGFloat
     var visualState: VisualState
     
@@ -32,6 +32,6 @@ struct NeumorphicModifier: ViewModifier {
 
 extension View {
     func neumorphic(diameter: CGFloat, _ visualState: VisualState) -> some View {
-        self.modifier(NeumorphicModifier(diameter: diameter, visualState: visualState))
+        self.modifier(KeyNeumorphic(diameter: diameter, visualState: visualState))
     }
 }

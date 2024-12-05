@@ -12,7 +12,7 @@ import NumberTranslator
 
 @Observable class KeyModel: KeyAnimation {
     private var flagImage: Image? = nil
-    var symbolKeyViewModel: SymbolKeyViewModel? = nil
+    var symbolKeyViewModel: KeyModelSymbolKey? = nil
     var diameter: CGFloat = 0
     
     init(flagName: String) {
@@ -21,7 +21,7 @@ import NumberTranslator
     }
     
     init(op: any OpProtocol) {
-        self.symbolKeyViewModel = SymbolKeyViewModel(op: op)
+        self.symbolKeyViewModel = KeyModelSymbolKey(op: op)
         super.init()
         self.symbolKeyViewModel!.setColors(textColor: Color.Neumorphic.text, upColor: .red, downColor: .red)
     }
