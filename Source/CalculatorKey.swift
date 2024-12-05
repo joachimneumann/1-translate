@@ -9,34 +9,6 @@ import SwiftUI
 import SwiftGmp
 import NumberTranslator
 
-struct NeumorphicModifier: ViewModifier {
-    let diameter: CGFloat = 0
-    var pressed: VisualPressedState
-    
-    func body(content: Content) -> some View {
-        switch pressed {
-        case .up:
-            content
-                .softOuterShadow(offset: 0.075 * diameter, radius: 0.0375 * diameter)
-        case .center:
-            content
-                .softOuterShadow(
-                    darkShadow:  Color.clear,
-                    lightShadow: Color.clear,
-                    offset: 0.075 * diameter, radius: 0)
-                .softInnerShadow(Circle(), size: CGSize(width: diameter, height: diameter), darkShadow: Color.clear, lightShadow: Color.clear, radius: 0.125 * diameter)
-        case .down:
-            content
-                .softInnerShadow(Circle(), size: CGSize(width: diameter, height: diameter), darkShadow: Color.Neumorphic.darkShadow, lightShadow: Color.Neumorphic.lightShadow, radius: 0.125 * diameter)
-        }
-    }
-}
-
-extension View {
-    func neumorphic(diameter: CGFloat, _ pressed: VisualPressedState) -> some View {
-        self.modifier(NeumorphicModifier(pressed: pressed))
-    }
-}
 
 @Observable class CalculatorKey: KeyModel {
     private var flagImage: Image? = nil
@@ -62,7 +34,7 @@ extension View {
     }
         
     var flagScale: CGFloat {
-        switch visualPressed {
+        switch visualState {
         case .up: 1.0
         case .center: 0.997
         case .down: 0.989
@@ -70,7 +42,7 @@ extension View {
     }
     
     var symbolScale: CGFloat {
-        switch visualPressed {
+        switch visualState {
         case .up: 1.0
         case .center: 0.995
         case .down: 0.98
@@ -78,7 +50,7 @@ extension View {
     }
 
     var flagBrightness: CGFloat {
-        switch visualPressed {
+        switch visualState {
         case .up: 0.0
         case .center: -0.02
         case .down: -0.06
@@ -86,7 +58,7 @@ extension View {
     }
     
     var symbolBrightness: CGFloat {
-        switch visualPressed {
+        switch visualState {
         case .up: 0.0
         case .center: -0.04
         case .down: -0.2

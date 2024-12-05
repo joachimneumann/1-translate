@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftGmp
 
-enum VisualPressedState {
+enum VisualState {
     case up
     case center
     case down
@@ -22,12 +22,7 @@ enum VisualPressedState {
     private var secondAnimationTimer: Timer? = nil
     private var downTime: Double = 0.2//0.15*1.5
     private var upTime  : Double = 0.2//0.4*1.5
-    var visualPressed: VisualPressedState = .up
-
-    func visualDown1() { visualPressed = .center }
-    func visualDown2() { visualPressed = .down }
-    func visualUp1()   { visualPressed = .center }
-    func visualUp2()   { visualPressed = .up }
+    var visualState: VisualState = .up
 
     open func view() -> AnyView {
         AnyView(EmptyView())
@@ -67,7 +62,7 @@ enum VisualPressedState {
                 isPressed = true
                 withAnimation(.linear(duration: downTime * animation1Factor)) {
                     //print("visualDown1")
-                    visualDown1()
+                    visualState = .center
                 }
                 if let timer = secondAnimationTimer, timer.isValid {
                     timer.invalidate()
@@ -75,7 +70,7 @@ enum VisualPressedState {
                 secondAnimationTimer = Timer.scheduledTimer(withTimeInterval: downTime * animation1Factor, repeats: false) { _ in
                     //print("visualDown2")
                     withAnimation(.linear(duration: self.downTime * self.animation2Factor)) {
-                        self.visualDown2()
+                        self.visualState = .down
                     }
                 }
                 if let timer = downTimer, timer.isValid {
@@ -92,7 +87,7 @@ enum VisualPressedState {
             secondAnimationTimer = nil
             // no intermediate state when moving outside
             withAnimation(.linear(duration: upTime)){//} * animation1Factor)) {
-                visualUp2()
+                self.visualState = .up
             }
         }
     }
@@ -104,14 +99,14 @@ enum VisualPressedState {
             isPressed = false
             if downTimer != nil { return }
             withAnimation(.linear(duration: upTime * animation1Factor)) {
-                visualUp1()
+                self.visualState = .center
             }
             if let timer = secondAnimationTimer, timer.isValid {
                 timer.invalidate()
             }
             secondAnimationTimer = Timer.scheduledTimer(withTimeInterval: upTime * animation1Factor, repeats: false) { _ in
                 withAnimation(.linear(duration: self.upTime * self.animation2Factor)) {
-                    self.visualUp2()
+                    self.visualState = .up
                 }
             }
         }
@@ -121,14 +116,14 @@ enum VisualPressedState {
         downTimer = nil
         if !isPressed {
             withAnimation(.linear(duration: upTime * animation1Factor)) {
-                visualUp1()
+                self.visualState = .center
             }
             if let timer = secondAnimationTimer, timer.isValid {
                 timer.invalidate()
             }
             secondAnimationTimer = Timer.scheduledTimer(withTimeInterval: upTime * animation1Factor, repeats: false) { _ in
                 withAnimation(.linear(duration: self.upTime * self.animation2Factor)) {
-                    self.visualUp2()
+                    self.visualState = .up
                 }
             }
         }
