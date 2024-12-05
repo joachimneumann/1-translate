@@ -39,16 +39,19 @@ import SwiftGmp
         separatorKey = KeyModel(op: DigitOperation.dot)
         let equalsKey = KeyModel(op: EqualOperation.equal)
         
-        let screenSize = UIScreen.main.bounds
-        let width = screenSize.width
-        let height = screenSize.height * heightProportion
-
-        super.init(size: CGSize(width: width, height: height))
+ 
+        super.init()
+        
         keyMatrix.append([clearKey, changeSignKey, percentKey, divideKey])
         keyMatrix.append([sevenKey, eightKey, nineKey, multiplyKey])
         keyMatrix.append([fourKey, fiveKey, sixKey, subtractKey])
         keyMatrix.append([oneKey, twoKey, threeKey, addKey])
         keyMatrix.append([settingsKey, zeroKey, separatorKey, equalsKey])
+ 
+        let screenSize = UIScreen.main.bounds
+        let width = screenSize.width
+        let height = screenSize.height * heightProportion
+        super.setSize(CGSize(width: width, height: height))
     }
         
     func back(_ displayBufferHasDigits: Bool) {

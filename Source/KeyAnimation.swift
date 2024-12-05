@@ -24,7 +24,7 @@ enum VisualState {
     private var secondAnimationTimer: Timer? = nil
     private var downTime: Double = 0.2//0.15*1.5
     private var upTime  : Double = 0.2//0.4*1.5
-
+  
     var callback: (KeyAnimation) -> () = { _ in }
     var calculatorCallback: (KeyModel) -> () = { _ in }
 

@@ -13,7 +13,7 @@ import SwiftUI
     var keyDiameter: CGFloat = 0
     var recommendedPadding: CGFloat = 0
 
-    init(size: CGSize) {
+    func setSize(_ size: CGSize) {
         print("init CalculatorKeyboardViewModel")
         let keySpacingProportion = 0.4
 
