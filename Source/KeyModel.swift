@@ -1,131 +1,151 @@
 //
 //  KeyModel.swift
-//  TranslateNumbers
+//  Calculator
 //
-//  Created by Joachim Neumann on 03.11.2024.
+//  Created by Joachim Neumann on 27.11.2024.
 //
 
 import SwiftUI
 import SwiftGmp
+import NumberTranslator
 
-enum VisualState {
-    case up
-    case center
-    case down
+
+@Observable class KeyModel: KeyAnimation {
+    private var flagImage: Image? = nil
+    var symbolKeyViewModel: SymbolKeyViewModel? = nil
+    var diameter: CGFloat = 0
+    
+    init(flagName: String) {
+        flagImage = Image(flagName)
+        super.init()
+    }
+    
+    init(op: any OpProtocol) {
+        self.symbolKeyViewModel = SymbolKeyViewModel(op: op)
+        super.init()
+        self.symbolKeyViewModel!.setColors(textColor: Color.Neumorphic.text, upColor: .red, downColor: .red)
+    }
+    
+    func setDiameter(_ diameter: CGFloat) {
+        self.diameter = diameter
+        if let m = symbolKeyViewModel {
+            m.newSize(CGSize(width: diameter, height: diameter))
+        }
+    }
+        
+    var flagScale: CGFloat {
+        switch visualState {
+        case .up: 1.0
+        case .center: 0.997
+        case .down: 0.989
+        }
+    }
+    
+    var symbolScale: CGFloat {
+        switch visualState {
+        case .up: 1.0
+        case .center: 0.995
+        case .down: 0.98
+        }
+    }
+
+    var flagBrightness: CGFloat {
+        switch visualState {
+        case .up: 0.0
+        case .center: -0.02
+        case .down: -0.06
+        }
+    }
+    
+    var symbolBrightness: CGFloat {
+        switch visualState {
+        case .up: 0.0
+        case .center: -0.04
+        case .down: -0.2
+        }
+    }
+
+    var view: some View {
+        if let flag = flag {
+            return flag
+        } else if let symbol = symbol {
+            return symbol
+        } else {
+            return AnyView(EmptyView())
+        }
+    }
+    
+    var symbol: AnyView? {
+        if let symbolKeyViewModel = symbolKeyViewModel {
+            return AnyView(
+                symbolKeyViewModel.label
+                    .scaleEffect(symbolScale)
+                    .brightness(symbolBrightness)
+            )
+        }
+        return nil
+    }
+    
+    var flag: AnyView? {
+        if let flag = flagImage {
+            let borderWidth: CGFloat = diameter * 0.1//25
+            return AnyView(
+                flag
+                    .resizable()
+                    .scaledToFill()
+                    .brightness(flagBrightness)
+                    .clipShape(Circle())
+                    .frame(width: diameter - 2 * borderWidth, height: diameter - 2 * borderWidth)
+                    .scaleEffect(flagScale)
+            )
+        }
+        return nil
+    }
 }
 
-
-@Observable class KeyModel: Identifiable {
-    let id = UUID()  // unique identifier
-    private var isPressed: Bool = false
-    private var downTimer: Timer? = nil
-    private var secondAnimationTimer: Timer? = nil
-    private var downTime: Double = 0.2//0.15*1.5
-    private var upTime  : Double = 0.2//0.4*1.5
-    var visualState: VisualState = .up
-
-    open func view() -> AnyView {
-        AnyView(EmptyView())
-    }
-    
-    var callback: (KeyModel) -> () = { _ in }
-    var calculatorCallback: (CalculatorKey) -> () = { _ in }
-
-    let animation1Factor: Double = 0.5//0.25
-    let animation2Factor: Double = 0.5//1.0 - 0.25
-    
-    func longPress() {
-        //print("key longPress isPressed \(isPressed)")
-        if let symbolKey = self as? SymbolKey {
-            if symbolKey.model.op.isEqual(to: ClearOperation.back) {
-                symbolKey.callback(SymbolKey(ClearOperation.clear))
-            }
-        }
-    }
-
-    func down(_ location: CGPoint, in diameter: CGFloat) {
-        down(location, in: CGSize(width: diameter, height: diameter))
-    }
-    func down(_ location: CGPoint, in size: CGSize) {
-        //print("key down isPressed \(isPressed)")
-        let tolerance: CGFloat = 0.3 * size.width
-        let touchRect = CGRect(
-            x: -tolerance,
-            y: -tolerance,
-            width: size.width + 2.0 * tolerance,
-            height: size.height + 2.0 * tolerance)
-            /// If the finger moves too far away from the key
-            /// handle that like a finger up event
-        if touchRect.contains(location) {
-            //print("key down inside isPressed \(isPressed)")
-            if !isPressed {
-                isPressed = true
-                withAnimation(.linear(duration: downTime * animation1Factor)) {
-                    //print("visualDown1")
-                    visualState = .center
-                }
-                if let timer = secondAnimationTimer, timer.isValid {
-                    timer.invalidate()
-                }
-                secondAnimationTimer = Timer.scheduledTimer(withTimeInterval: downTime * animation1Factor, repeats: false) { _ in
-                    //print("visualDown2")
-                    withAnimation(.linear(duration: self.downTime * self.animation2Factor)) {
-                        self.visualState = .down
-                    }
-                }
-                if let timer = downTimer, timer.isValid {
-                    timer.invalidate()
-                }
-                downTimer = Timer.scheduledTimer(withTimeInterval: 1.4*downTime, repeats: false) { _ in
-                    self.downTimerFired()
-                }
-            }
+struct Demo: View {
+    let flagName: String
+    let m1: KeyModel
+    let m2: KeyModel
+    init() {
+        let translationManager = TranslationManager()
+        if AppleImage(named: translationManager.flagName(.english) + "Sqr") != nil {
+            flagName = translationManager.flagName(.english) + "Sqr"
         } else {
-            //print("key down outside isPressed \(isPressed)")
-            isPressed = false
-            downTimer = nil
-            secondAnimationTimer = nil
-            // no intermediate state when moving outside
-            withAnimation(.linear(duration: upTime)){//} * animation1Factor)) {
-                self.visualState = .up
-            }
+            flagName = translationManager.flagName(.english)
         }
+        m1 = KeyModel(flagName: flagName)
+        m2 = KeyModel(op: InplaceOperation.sqrt)
+        m1.setDiameter(100)
+        m2.setDiameter(100)
     }
-
-    func up() {
-        //print("key up isPressed \(isPressed)")
-        if isPressed {
-            callback(self)
-            isPressed = false
-            if downTimer != nil { return }
-            withAnimation(.linear(duration: upTime * animation1Factor)) {
-                self.visualState = .center
-            }
-            if let timer = secondAnimationTimer, timer.isValid {
-                timer.invalidate()
-            }
-            secondAnimationTimer = Timer.scheduledTimer(withTimeInterval: upTime * animation1Factor, repeats: false) { _ in
-                withAnimation(.linear(duration: self.upTime * self.animation2Factor)) {
-                    self.visualState = .up
+    
+    var body: some View {
+        ZStack {
+            Rectangle()
+                .foregroundColor(Color.Neumorphic.main)
+            VStack {
+                HStack {
+                    KeyView(key: m1)
+                    Spacer()
+                    KeyView(key: m2)
+                    Spacer()
+                    KeyView(key: m2)
                 }
+                //.background(Color.yellow)
             }
+            .background(Color.Neumorphic.main)
         }
+//        .frame(width: 300)
     }
+}
 
-    private func downTimerFired() {
-        downTimer = nil
-        if !isPressed {
-            withAnimation(.linear(duration: upTime * animation1Factor)) {
-                self.visualState = .center
-            }
-            if let timer = secondAnimationTimer, timer.isValid {
-                timer.invalidate()
-            }
-            secondAnimationTimer = Timer.scheduledTimer(withTimeInterval: upTime * animation1Factor, repeats: false) { _ in
-                withAnimation(.linear(duration: self.upTime * self.animation2Factor)) {
-                    self.visualState = .up
-                }
-            }
-        }
-    }
+#Preview("Dark") {
+    Demo()
+        .preferredColorScheme(.dark)
+}
+
+#Preview("Light") {
+    Demo()
+        .preferredColorScheme(.light)
 }

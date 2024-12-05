@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct NeumorphicModifier: ViewModifier {
-    let diameter: CGFloat = 0
+    let diameter: CGFloat
     var visualState: VisualState
     
     func body(content: Content) -> some View {
@@ -32,6 +32,6 @@ struct NeumorphicModifier: ViewModifier {
 
 extension View {
     func neumorphic(diameter: CGFloat, _ visualState: VisualState) -> some View {
-        self.modifier(NeumorphicModifier(visualState: visualState))
+        self.modifier(NeumorphicModifier(diameter: diameter, visualState: visualState))
     }
 }

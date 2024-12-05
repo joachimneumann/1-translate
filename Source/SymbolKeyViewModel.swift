@@ -13,16 +13,13 @@ import SwiftGmp
     private var diameter: CGFloat
     var op: any OpProtocol
     var symbol: String
-    private var textColor: Color
-    var upColor: Color
-    var downColor: Color
+    private var textColor: Color = .white
+    var upColor: Color = .gray
+    var downColor: Color = .gray
 
     init(op: any OpProtocol) {
         self.op = op
         self.symbol = op.getRawValue()
-        self.textColor = KeyColor.sixColors(op: op).textColor
-        self.upColor = KeyColor.sixColors(op: op).upColor
-        self.downColor = KeyColor.sixColors(op: op).downColor
         self.diameter = 0.0
     }
     

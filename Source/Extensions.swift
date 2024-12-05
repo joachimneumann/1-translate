@@ -7,6 +7,16 @@
 
 import SwiftUI
 
+#if CALCULATOR_MAC || TRANSLATE_MAC
+public typealias AppleFont = NSFont
+public typealias AppleColor = NSColor
+public typealias AppleImage = NSImage
+#else
+public typealias AppleFont = UIFont
+public typealias AppleColor = UIColor
+public typealias AppleImage = UIImage
+#endif
+
 extension Int {
     var useWords: String {
         func remainderInWords(_ remainder: String) -> String {
@@ -79,5 +89,15 @@ extension Double {
             return String(format: "%.0f seconds", self)
         }
         return String(format: "%.1f hours", self/3600.0)
+    }
+}
+
+extension String {
+    func textWidth(kerning: CGFloat, _ font: AppleFont) -> CGFloat {
+        var attributes: [NSAttributedString.Key : Any] = [:]
+        attributes[.kern] = kerning
+        attributes[.font] = font
+        let notCeil = self.size(withAttributes: attributes).width
+        return ceil(notCeil)
     }
 }

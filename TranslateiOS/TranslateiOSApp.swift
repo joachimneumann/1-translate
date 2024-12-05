@@ -13,8 +13,8 @@ struct TranslateiOSApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-//                Demo()
-                TranslateiOSView()//(viewModel: TranslateViewModel())
+                Demo()
+//                TranslateiOSView()//(viewModel: TranslateViewModel())
             }
         }
     }

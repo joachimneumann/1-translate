@@ -9,7 +9,7 @@ import SwiftUI
 
 
 @Observable class CalculatorKeyboardViewModel {
-    var keyMatrix: [[CalculatorKey]] = []
+    var keyMatrix: [[KeyModel]] = []
     var keyDiameter: CGFloat = 0
     var recommendedPadding: CGFloat = 0
 
@@ -65,7 +65,7 @@ import SwiftUI
 //        }
 //    }
     
-    var calculatorCallback: (CalculatorKey) -> () = { _ in } {
+    var calculatorCallback: (KeyModel) -> () = { _ in } {
         didSet {
             for row in keyMatrix {
                 for k in row {

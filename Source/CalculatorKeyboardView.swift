@@ -23,11 +23,11 @@ struct CalculatorKeyboardView: View {
             ForEach(keyboard.keyMatrix.dropLast().indices, id: \.self) { rowIndex in
                 HStack {
                     ForEach(keyboard.keyMatrix[rowIndex].dropLast(), id: \.id) { key in
-                        CalculatorKeyView(model: key)
+                        KeyView(key: key)
                         Spacer(minLength: 0.0)
                     }
                     if let last = keyboard.keyMatrix[rowIndex].last {
-                        CalculatorKeyView(model: last)
+                        KeyView(key: last)
                     }
                 }
                 Spacer(minLength: 0.0)
@@ -35,11 +35,11 @@ struct CalculatorKeyboardView: View {
             HStack {
                 if let lastRow = keyboard.keyMatrix.last {
                     ForEach(lastRow.dropLast(), id: \.id) { key in
-                        CalculatorKeyView(model: key)
+                        KeyView(key: key)
                         Spacer(minLength: 0.0)
                     }
                     if let last = lastRow.last {
-                        CalculatorKeyView(model: last)
+                        KeyView(key: last)
                     }
                 }
             }

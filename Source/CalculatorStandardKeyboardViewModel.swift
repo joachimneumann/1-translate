@@ -10,34 +10,34 @@ import SwiftGmp
 
 
 @Observable class CalculatorStandardKeyboardViewModel: CalculatorKeyboardViewModel {
-    let clearKey: CalculatorKey
-    let separatorKey: CalculatorKey
+    let clearKey: KeyModel
+    let separatorKey: KeyModel
     
-    init(heightProportion: CGFloat, settingsKey: CalculatorKey = CalculatorKey(op: InplaceOperation.abs)) {
-        clearKey = CalculatorKey(op: ClearOperation.clear)
-        let changeSignKey = CalculatorKey(op: InplaceOperation.changeSign)
-        let percentKey = CalculatorKey(op: PercentOperation.percent)
-        let divideKey = CalculatorKey(op: TwoOperantOperation.div)
+    init(heightProportion: CGFloat, settingsKey: KeyModel = KeyModel(op: InplaceOperation.abs)) {
+        clearKey = KeyModel(op: ClearOperation.clear)
+        let changeSignKey = KeyModel(op: InplaceOperation.changeSign)
+        let percentKey = KeyModel(op: PercentOperation.percent)
+        let divideKey = KeyModel(op: TwoOperantOperation.div)
         
-        let sevenKey = CalculatorKey(op: DigitOperation.seven)
-        let eightKey = CalculatorKey(op: DigitOperation.eight)
-        let nineKey = CalculatorKey(op: DigitOperation.nine)
-        let multiplyKey = CalculatorKey(op: TwoOperantOperation.mul)
+        let sevenKey = KeyModel(op: DigitOperation.seven)
+        let eightKey = KeyModel(op: DigitOperation.eight)
+        let nineKey = KeyModel(op: DigitOperation.nine)
+        let multiplyKey = KeyModel(op: TwoOperantOperation.mul)
         
-        let fourKey = CalculatorKey(op: DigitOperation.four)
-        let fiveKey = CalculatorKey(op: DigitOperation.five)
-        let sixKey = CalculatorKey(op: DigitOperation.six)
-        let subtractKey = CalculatorKey(op: TwoOperantOperation.sub)
+        let fourKey = KeyModel(op: DigitOperation.four)
+        let fiveKey = KeyModel(op: DigitOperation.five)
+        let sixKey = KeyModel(op: DigitOperation.six)
+        let subtractKey = KeyModel(op: TwoOperantOperation.sub)
         
-        let oneKey = CalculatorKey(op: DigitOperation.one)
-        let twoKey = CalculatorKey(op: DigitOperation.two)
-        let threeKey = CalculatorKey(op: DigitOperation.three)
-        let addKey = CalculatorKey(op: TwoOperantOperation.add)
+        let oneKey = KeyModel(op: DigitOperation.one)
+        let twoKey = KeyModel(op: DigitOperation.two)
+        let threeKey = KeyModel(op: DigitOperation.three)
+        let addKey = KeyModel(op: TwoOperantOperation.add)
         
         // settingsKey is parameter of init()
-        let zeroKey = CalculatorKey(op: DigitOperation.zero)
-        separatorKey = CalculatorKey(op: DigitOperation.dot)
-        let equalsKey = CalculatorKey(op: EqualOperation.equal)
+        let zeroKey = KeyModel(op: DigitOperation.zero)
+        separatorKey = KeyModel(op: DigitOperation.dot)
+        let equalsKey = KeyModel(op: EqualOperation.equal)
         
         let screenSize = UIScreen.main.bounds
         let width = screenSize.width
