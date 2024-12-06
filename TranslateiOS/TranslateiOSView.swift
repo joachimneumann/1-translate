@@ -28,7 +28,7 @@ struct TranslateiOSView: View {
                 Spacer()
                 NumberDisplay(display: display)
                     .padding(.horizontal, keyboard.padding)
-                    .padding(.bottom, keyboard.padding)
+                    .padding(.bottom, keyboard.padding * 0.2)
                     .frame(width: keyboard.frame.width)
                 HStack {
                     Spacer()

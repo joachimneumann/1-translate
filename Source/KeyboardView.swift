@@ -59,7 +59,9 @@ var keyboardPreview: some View {
             HStack {
                 Spacer()
                 KeyboardView(keyboard: keyboard)
+//                    .background(.green)
                     .frame(width: keyboard.frame.width, height: keyboard.frame.height)
+//                    .background(.yellow)
                 Spacer()
             }
         }

@@ -41,20 +41,20 @@ extension KeyboardModel {
         self.keyMatrix.append([oneKey, twoKey, threeKey, addKey])
         self.keyMatrix.append([settingsKey, zeroKey, separatorKey, equalsKey])
         
-        //print("standardKeyboard available: \(availableWidth) \(availableHeight)")
-        let totalKeysHorizontal = columnCount + keySpacingProportion * (columnCount)
+        print("standardKeyboard available: \(availableWidth) \(availableHeight)")
+        let totalKeysHorizontal = columnCount + keySpacingProportion * (columnCount+1)
         let diameterHorizontal = availableWidth / totalKeysHorizontal
-        let totalKeysVertical = rowCount + keySpacingProportion * (rowCount)
+        let totalKeysVertical = rowCount + keySpacingProportion * (rowCount+1)
         let diameterVertical = availableHeight / totalKeysVertical
         diameter = min(diameterVertical, diameterHorizontal)
         let spacing = diameter * keySpacingProportion
-        padding = spacing * 0.5
+        padding = spacing
         //print("standardKeyboard diameter: \(diameter)")
         print("standardKeyboard padding: \(padding)")
         frame = CGSize(
-            width: diameter * columnCount + spacing * (columnCount),
-            height: diameter * rowCount + spacing * (rowCount))
-        //print("standardKeyboard actual: \(frame)")
+            width: diameter * columnCount + spacing * (columnCount+1),
+            height: diameter * rowCount + spacing * (rowCount+1))
+        print("standardKeyboard frame: \(frame)")
 
         for row in keyMatrix {
             for k in row {
