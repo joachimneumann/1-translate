@@ -12,7 +12,7 @@ struct NumberDisplay: View {
     @ObservedObject var display: Display
 
     @ViewBuilder
-    func TextView(_ text: String, width: CGFloat?) -> some View {
+    func TextView(_ text: String, width: CGFloat? = nil) -> some View {
         if let width = width {
             Text(text)
                 .frame(width: width, alignment: .leading)
@@ -33,11 +33,16 @@ struct NumberDisplay: View {
                 .frame(height: 100)
             HStack(alignment: .bottom, spacing: 0.0) {
                 Spacer(minLength: 0.0)
-                Text(display.left)
+                TextView(display.left)
                     .foregroundColor(Color.Neumorphic.text)
                     .font(display.font)
-                    .padding(.trailing, 10)
+                if let right = display.right {
+                    TextView(right, width: display.rightWidth)
+                        .font(display.font)
+                        .padding(.leading, display.ePadding)
+                }
             }
+            .padding(.horizontal, display.textPadding)
         }
         
 //        HStack(alignment: .bottom, spacing: 0.0) {

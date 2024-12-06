@@ -51,11 +51,11 @@ import SwiftGmp
         return CGFloat(ret)
     }
     
-    var calculatorCallback: (KeyModel) -> () = { _ in } {
+    var callback: (KeyAnimation) -> () = { _ in } {
         didSet {
             for row in keyMatrix {
                 for k in row {
-                    k.calculatorCallback = calculatorCallback
+                    k.callback = callback
                 }
             }
         }

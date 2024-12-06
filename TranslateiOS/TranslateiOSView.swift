@@ -8,11 +8,11 @@ import SwiftUI
 import Neumorphic
 
 struct TranslateiOSView: View {
-    let keyboard: KeyboardModel
+    let model: ViewModel = ViewModel()
+    let keyboard: KeyboardModel = KeyboardModel()
     let display: Display
 
     init() {
-        keyboard = KeyboardModel()
         keyboard.standardKeyboard()
         display = Display(floatDisplayWidth: 210, font: AppleFont.systemFont(ofSize: floor(keyboard.diameter / 1.3)), ePadding: 0.0)
         display.left = "3.1415926"
@@ -41,7 +41,7 @@ struct TranslateiOSView: View {
     }
 }
 
-struct TranslateiOSViewOLD: View {
+//struct TranslateiOSViewOLD: View {
 //    @Environment(\.scenePhase) var scenePhase
 //    @ObservedObject var viewModel: TranslateViewModel
 //    let scrollingModel: ScrollingKeyboardViewModel
@@ -98,12 +98,12 @@ struct TranslateiOSViewOLD: View {
 //                .padding(.bottom, 100)
 //    }
     
-    var body: some View {
+//    var body: some View {
 //        ZStack {
-        Text("X")
+//        Text("X")
 //        TranslateiOSView
 //            .background(Color.Neumorphic.main)
-let _ = print("xxx3")
+//let _ = print("xxx3")
 //                .padding(.bottom, viewModel.screen.bottomPadding)
 //                .padding(.horizontal, viewModel.screen.horizontalPadding)
 //                .preferredColorScheme(.dark)
@@ -129,13 +129,13 @@ let _ = print("xxx3")
 //            }
 //        }
 //        .accentColor(.white)
-    }
+//    }
     //        .onChange(of: scenePhase) { oldPhase, newPhase in
     //            if newPhase == .active {
     //                //                            viewModel.voices.refreshVoiceDict(list: viewModel.languages.list)
     //            }
     //        }
-}
+//}
 
 
 

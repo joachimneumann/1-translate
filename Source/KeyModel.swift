@@ -7,7 +7,6 @@
 
 import SwiftUI
 import SwiftGmp
-import NumberTranslator
 
 
 @Observable class KeyModel: KeyAnimation {
@@ -104,17 +103,18 @@ import NumberTranslator
 }
 
 struct Demo: View {
-    let flagName: String
+//    let flagName: String
     let m1: KeyModel
     let m2: KeyModel
     init() {
-        let translationManager = TranslationManager()
-        if AppleImage(named: translationManager.flagName(.english) + "Sqr") != nil {
-            flagName = translationManager.flagName(.english) + "Sqr"
-        } else {
-            flagName = translationManager.flagName(.english)
-        }
-        m1 = KeyModel(flagName: flagName)
+//        let translationManager = TranslationManager()
+//        if AppleImage(named: translationManager.flagName(.english) + "Sqr") != nil {
+//            flagName = translationManager.flagName(.english) + "Sqr"
+//        } else {
+//            flagName = translationManager.flagName(.english)
+//        }
+//        m1 = KeyModel(flagName: flagName)
+        m1 = KeyModel(op: InplaceOperation.sqr)
         m2 = KeyModel(op: InplaceOperation.sqrt)
         m1.setDiameter(100)
         m2.setDiameter(100)

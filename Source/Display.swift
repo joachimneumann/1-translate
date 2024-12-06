@@ -12,6 +12,7 @@ class Display: MonoFontDisplay, ObservableObject {
     var groupingCharacter: Character? = nil
     var groupSize: Int
     var separatorCharacter: Character = "."
+    let textPadding: CGFloat = 10
     
     override var left: String {
         didSet {
@@ -40,7 +41,7 @@ class Display: MonoFontDisplay, ObservableObject {
     public var font: Font
 
     init(floatDisplayWidth: CGFloat, font: AppleFont, ePadding: CGFloat) {
-        self.floatDisplayWidth = floatDisplayWidth
+        self.floatDisplayWidth = floatDisplayWidth - 2 * textPadding
         self.uiFont = font
         self.font = Font(uiFont)
         self.ePadding = ePadding

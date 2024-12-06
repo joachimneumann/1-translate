@@ -22,6 +22,13 @@
 		AA5796702CF6946F00D3A02B /* KeyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA57966E2CF6946D00D3A02B /* KeyModel.swift */; };
 		AA5796712CF6946F00D3A02B /* KeyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA57966E2CF6946D00D3A02B /* KeyModel.swift */; };
 		AA5796722CF6946F00D3A02B /* KeyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA57966E2CF6946D00D3A02B /* KeyModel.swift */; };
+		AA5B25B22D02A26500AE4449 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA370C2C293352960041AE4E /* Extensions.swift */; };
+		AA5B25B42D02A2B600AE4449 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5B25B32D02A2B100AE4449 /* ViewModel.swift */; };
+		AA5B25B52D02A2B600AE4449 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5B25B32D02A2B100AE4449 /* ViewModel.swift */; };
+		AA5B25B62D02A2B600AE4449 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5B25B32D02A2B100AE4449 /* ViewModel.swift */; };
+		AA5B25B72D02A2B600AE4449 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5B25B32D02A2B100AE4449 /* ViewModel.swift */; };
+		AA5B25B92D02A32D00AE4449 /* Neumorphic in Frameworks */ = {isa = PBXBuildFile; productRef = AA5B25B82D02A32D00AE4449 /* Neumorphic */; };
+		AA5B25BB2D02A33400AE4449 /* Neumorphic in Frameworks */ = {isa = PBXBuildFile; productRef = AA5B25BA2D02A33400AE4449 /* Neumorphic */; };
 		AA5D3D732CEB9A6000CC8237 /* keyModelSymbolKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5D3D722CEB9A5900CC8237 /* keyModelSymbolKey.swift */; };
 		AA5D3D742CEB9A6000CC8237 /* keyModelSymbolKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5D3D722CEB9A5900CC8237 /* keyModelSymbolKey.swift */; };
 		AA5D3D752CEB9A6000CC8237 /* keyModelSymbolKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5D3D722CEB9A5900CC8237 /* keyModelSymbolKey.swift */; };
@@ -128,6 +135,7 @@
 		AA5796642CF692EE00D3A02B /* KeyGestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyGestures.swift; sourceTree = "<group>"; };
 		AA5796692CF6941100D3A02B /* KeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyView.swift; sourceTree = "<group>"; };
 		AA57966E2CF6946D00D3A02B /* KeyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyModel.swift; sourceTree = "<group>"; };
+		AA5B25B32D02A2B100AE4449 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		AA5D3D722CEB9A5900CC8237 /* keyModelSymbolKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keyModelSymbolKey.swift; sourceTree = "<group>"; };
 		AA61B4B62CEDF7CD009A916E /* OLDFlagKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OLDFlagKey.swift; sourceTree = "<group>"; };
 		AA6352B02B296C3B00CABC0C /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
@@ -189,10 +197,10 @@
 		AAFCC5BF2CE46237009E42FA /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				CalculatoriOSKeyboard.swift,
 				CalculatoriOSOperation.swift,
 				CalculatoriOSView.swift,
-				CalculatoriOSViewModel.swift,
+				OLDCalculatoriOSKeyboard.swift,
+				OLDCalculatoriOSViewModel.swift,
 			);
 			target = AAE4EB172CE4606700036518 /* Calculator_Mac */;
 		};
@@ -221,6 +229,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA5B25B92D02A32D00AE4449 /* Neumorphic in Frameworks */,
 				AA6DBCCC2CE0774800B5E0F1 /* SwiftGmp in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -239,6 +248,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA5B25BB2D02A33400AE4449 /* Neumorphic in Frameworks */,
 				AAFCC5C32CE46278009E42FA /* SwiftGmp in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -280,6 +290,7 @@
 		AA08C7C0272EDA48001B8575 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				AA5B25B32D02A2B100AE4449 /* ViewModel.swift */,
 				AA8AC4252CD6FEB4006BD54C /* KeyAnimation.swift */,
 				AA57966E2CF6946D00D3A02B /* KeyModel.swift */,
 				AA5D3D722CEB9A5900CC8237 /* keyModelSymbolKey.swift */,
@@ -358,6 +369,7 @@
 			name = Calculator_iOS;
 			packageProductDependencies = (
 				AA6DBCCB2CE0774800B5E0F1 /* SwiftGmp */,
+				AA5B25B82D02A32D00AE4449 /* Neumorphic */,
 			);
 			productName = CalculatoriOS;
 			productReference = AA6DBCB62CE075A800B5E0F1 /* Calculator_iOS.app */;
@@ -406,6 +418,7 @@
 			name = Calculator_Mac;
 			packageProductDependencies = (
 				AAFCC5C22CE46278009E42FA /* SwiftGmp */,
+				AA5B25BA2D02A33400AE4449 /* Neumorphic */,
 			);
 			productName = CalculatorMac;
 			productReference = AAE4EB182CE4606700036518 /* Calculator_Mac.app */;
@@ -511,6 +524,7 @@
 				AA8AC41E2CD62174006BD54C /* OLDSymbolKey.swift in Sources */,
 				AA5796672CF6930200D3A02B /* KeyGestures.swift in Sources */,
 				AABEFC132972A8780023A3C9 /* OLDKeyColor.swift in Sources */,
+				AA5B25B62D02A2B600AE4449 /* ViewModel.swift in Sources */,
 				AA57966B2CF6942B00D3A02B /* KeyView.swift in Sources */,
 				AA73271C2CEC2DE500A5E36C /* Extensions.swift in Sources */,
 				AA9C3F6A2CBF33C800F64EFA /* OLDSmallKeyboard.swift in Sources */,
@@ -529,6 +543,7 @@
 				AA6DBCC92CE0769200B5E0F1 /* OLDScreen.swift in Sources */,
 				AA57966D2CF6942B00D3A02B /* KeyView.swift in Sources */,
 				AA6F2BC72CFB660800EEB2A6 /* KeyboardView.swift in Sources */,
+				AA5B25B42D02A2B600AE4449 /* ViewModel.swift in Sources */,
 				AA6F2BD22CFB678300EEB2A6 /* KeyboardModelStandard.swift in Sources */,
 				AA6DBCD32CE0780B00B5E0F1 /* OLDKeyboardView.swift in Sources */,
 				AA6DBCD52CE0782B00B5E0F1 /* OLDKeyColor.swift in Sources */,
@@ -545,6 +560,7 @@
 				AA6DBCD02CE077C700B5E0F1 /* KeyAnimation.swift in Sources */,
 				AA5796702CF6946F00D3A02B /* KeyModel.swift in Sources */,
 				AA9F5BBB2CF1CC2900570570 /* OLDFlagView.swift in Sources */,
+				AA5B25B22D02A26500AE4449 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -552,6 +568,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA5B25B52D02A2B600AE4449 /* ViewModel.swift in Sources */,
 				AAB5EA3C2CE4967400D76292 /* OLDKeyboardView.swift in Sources */,
 				AAB5EA3D2CE4967400D76292 /* OLDKeyboard.swift in Sources */,
 				AAB5EA3E2CE4967400D76292 /* KeyAnimation.swift in Sources */,
@@ -589,6 +606,7 @@
 				AAFCC5C42CE46289009E42FA /* OLDScreen.swift in Sources */,
 				AA6F2BCB2CFB666100EEB2A6 /* KeyboardModel.swift in Sources */,
 				AAFCC5C52CE46289009E42FA /* OLDSmallKeyboard.swift in Sources */,
+				AA5B25B72D02A2B600AE4449 /* ViewModel.swift in Sources */,
 				AAFCC5C72CE46298009E42FA /* OLDKeyboard.swift in Sources */,
 				AAFCC5C92CE46529009E42FA /* Display.swift in Sources */,
 				AA9DB3B52CE77E0500B40CAA /* Extensions.swift in Sources */,
@@ -1116,6 +1134,14 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AA1934512C96956100FE0848 /* XCRemoteSwiftPackageReference "NumberTranslator" */;
 			productName = NumberTranslator;
+		};
+		AA5B25B82D02A32D00AE4449 /* Neumorphic */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Neumorphic;
+		};
+		AA5B25BA2D02A33400AE4449 /* Neumorphic */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Neumorphic;
 		};
 		AA6DBCCB2CE0774800B5E0F1 /* SwiftGmp */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -19,8 +19,7 @@ import Neumorphic
     private var downTime: Double = 0.2//0.15*1.5
     private var upTime  : Double = 0.2//0.4*1.5
    
-    var callback: (KeyAnimation) -> () = { _ in }
-    var calculatorCallback: (KeyModel) -> () = { _ in }
+    var callback: (KeyAnimation) -> () = { _ in print("NOT IMPLEMENTED CALLBACK")}
 
     let animation1Factor: Double = 0.5//0.25
     let animation2Factor: Double = 0.5//1.0 - 0.25
