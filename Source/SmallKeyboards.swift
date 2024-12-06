@@ -38,7 +38,6 @@ extension KeyboardModel {
         self.keyMatrix.append([oneKey, twoKey, threeKey, addKey])
         self.keyMatrix.append([settingsKey, zeroKey, separatorKey, equalsKey])
         
-        print("translatorKeyboard available: \(availableWidth) \(availableHeight)")
         let totalKeysHorizontal = columnCount + keySpacingProportion * (columnCount+1)
         let diameterHorizontal = availableWidth / totalKeysHorizontal
         let totalKeysVertical = rowCount + keySpacingProportion * (rowCount+1)
@@ -46,12 +45,9 @@ extension KeyboardModel {
         diameter = min(diameterVertical, diameterHorizontal)
         let spacing = diameter * keySpacingProportion
         padding = spacing
-        //print("standardKeyboard diameter: \(diameter)")
-        print("translatorKeyboard padding: \(padding)")
         frame = CGSize(
             width: diameter * columnCount + spacing * (columnCount+1),
             height: diameter * rowCount + spacing * (rowCount+1))
-        print("translatorKeyboard frame: \(frame)")
 
         for row in keyMatrix {
             for k in row {
@@ -61,7 +57,7 @@ extension KeyboardModel {
 
     }
 
-    func translatorKeyboard(width availableWidth: CGFloat = UIScreen.main.bounds.width, height availableHeight: CGFloat = UIScreen.main.bounds.height) {
+    func translatorKeyboard(width availableWidth: CGFloat, height availableHeight: CGFloat) {
         smallKeyboard(keySpacingProportion: 0.2, availableWidth: availableWidth, availableHeight: availableHeight)
     }
 
