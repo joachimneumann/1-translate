@@ -127,15 +127,15 @@ class TranslateViewModel: ViewModel {
     }
 
     override func execute(_ key: KeyAnimation) {
-//        if let languageSettingsKey = key as? SymbolKey {
-//            if languageSettingsKey.model.op.isEqual(to: TranslateOperation.settings) {
-//                showSettings = true
-//                return
-//            }
-//        }
-
-        
-        super.execute(key)
+        if let keyModel = key as? KeyModel {
+            if keyModel.flag != nil {
+                toggle()
+            } else {
+                process()
+                keyboard.back(calculator.privateDisplayBufferHasDigits)
+                super.execute(key)
+            }
+        }
     }
         
 

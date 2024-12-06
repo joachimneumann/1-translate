@@ -11,7 +11,6 @@ import SwiftGmp
 @Observable class KeyboardModel {
     let clearKey: KeyModel
     let separatorKey: KeyModel
-    let settingsKey: KeyModel
     
     var keyMatrix: [[KeyModel]] = []
     var diameter: CGFloat = 0
@@ -21,7 +20,6 @@ import SwiftGmp
     init() {
         clearKey = KeyModel(op: ClearOperation.clear)
         separatorKey = KeyModel(op: DigitOperation.dot)
-        settingsKey = KeyModel(op: InplaceOperation.abs)
     }
     
     func setSeparatorSymbol(_ symbol: String) {

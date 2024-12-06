@@ -19,7 +19,7 @@ enum KeyboardType {
     let calculator = Calculator(precision: 100)
  
     init(_ keybordType: KeyboardType) {
-        print("ViewModel init()")
+        //print("ViewModel init()")
         switch keybordType {
             case .standard:
             keyboard.standardKeyboard()
@@ -30,10 +30,6 @@ enum KeyboardType {
         display = Display(floatDisplayWidth: displayWidth, font: AppleFont.systemFont(ofSize: floor(keyboard.diameter / 1.3)), ePadding: 10.0)
         display.left = "0"
         keyboard.callback = execute
-    }
-    
-    func process(_ key: KeyAnimation) {
-        print("ViewModel process()")
     }
     
     func process() {
@@ -70,6 +66,7 @@ enum KeyboardType {
             }
             process()
             keyboard.back(calculator.privateDisplayBufferHasDigits)
+        }
            // keyboard.back(calculator.privateDisplayBufferHasDigits)
 //            calculator.press(symbolKey.model.op)
 //            if let smallKeyboard = smallKeyboard {
@@ -92,7 +89,6 @@ enum KeyboardType {
 //                    }
 //                }
 //            }
-        }
     }
 
 }

@@ -12,10 +12,8 @@ struct TranslateiOSView: View {
 
     init(model: TranslateViewModel) {
         self.model = model
-        let _ = print("xxx1")
     }
     var body: some View {
-        let _ = print("xxx2")
         ZStack {
             Rectangle()
                 .foregroundColor(Color.Neumorphic.main)
@@ -31,8 +29,12 @@ struct TranslateiOSView: View {
                     .frame(width: model.keyboard.frame.width, height: model.keyboard.diameter * 1.2)
                 HStack {
                     Spacer()
-                    KeyboardView(keyboard: model.keyboard)
-                        .frame(width: model.keyboard.frame.width, height: model.keyboard.frame.height)
+                    if model.showLanguageSelector {
+                        ScrollingKeyboardView(model: scrollingModel)
+                            .transition(.opacity)
+                    } else {
+                        KeyboardView(keyboard: model.keyboard)
+                            .frame(width: model.keyboard.frame.width, height: model.keyboard.frame.height)
                     Spacer()
                 }
             }

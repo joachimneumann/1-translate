@@ -12,7 +12,6 @@ struct KeyboardView: View {
     @State var keyboard: KeyboardModel
     
     init(keyboard: KeyboardModel) {
-        print("KeyboardView init()")
         self.keyboard = keyboard
     }
     

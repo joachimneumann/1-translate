@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftGmp
 
 extension KeyboardModel {
-    private func smallKeyboard(keySpacingProportion: CGFloat, availableWidth: CGFloat, availableHeight: CGFloat) {
+    private func smallKeyboard(keySpacingProportion: CGFloat, bottomLeftKey: KeyModel, availableWidth: CGFloat, availableHeight: CGFloat) {
         let changeSignKey = KeyModel(op: InplaceOperation.changeSign)
         let percentKey = KeyModel(op: PercentOperation.percent)
         let divideKey = KeyModel(op: TwoOperantOperation.div)
@@ -36,7 +36,7 @@ extension KeyboardModel {
         self.keyMatrix.append([sevenKey, eightKey, nineKey, multiplyKey])
         self.keyMatrix.append([fourKey, fiveKey, sixKey, subtractKey])
         self.keyMatrix.append([oneKey, twoKey, threeKey, addKey])
-        self.keyMatrix.append([settingsKey, zeroKey, separatorKey, equalsKey])
+        self.keyMatrix.append([bottomLeftKey, zeroKey, separatorKey, equalsKey])
         
         let totalKeysHorizontal = columnCount + keySpacingProportion * (columnCount+1)
         let diameterHorizontal = availableWidth / totalKeysHorizontal
@@ -58,11 +58,11 @@ extension KeyboardModel {
     }
 
     func translatorKeyboard(width availableWidth: CGFloat, height availableHeight: CGFloat) {
-        smallKeyboard(keySpacingProportion: 0.2, availableWidth: availableWidth, availableHeight: availableHeight)
+        smallKeyboard(keySpacingProportion: 0.2, bottomLeftKey: KeyModel(flagName: "English"), availableWidth: availableWidth, availableHeight: availableHeight)
     }
 
     func standardKeyboard(width availableWidth: CGFloat = UIScreen.main.bounds.width, height availableHeight: CGFloat = UIScreen.main.bounds.height) {
-        smallKeyboard(keySpacingProportion: 0.4, availableWidth: availableWidth, availableHeight: availableHeight)
+        smallKeyboard(keySpacingProportion: 0.4, bottomLeftKey: KeyModel(op: InplaceOperation.abs), availableWidth: availableWidth, availableHeight: availableHeight)
     }
 }
 
