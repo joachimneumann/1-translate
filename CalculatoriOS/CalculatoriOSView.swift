@@ -35,12 +35,12 @@ struct CalculatoriOSView: View {
 
 
 #Preview("Dark") {
-    CalculatoriOSView(model: ViewModel())
+    CalculatoriOSView(model: ViewModel(.standard))
         .preferredColorScheme(.dark)
 }
 
 #Preview("Light") {
-    CalculatoriOSView(model: ViewModel())
+    CalculatoriOSView(model: ViewModel(.standard))
         .preferredColorScheme(.light)
 }
 

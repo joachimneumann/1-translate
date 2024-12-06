@@ -8,9 +8,9 @@ import SwiftUI
 import Neumorphic
 
 struct TranslateiOSView: View {
-    let model: ViewModel
+    let model: TranslateViewModel
 
-    init(model: ViewModel) {
+    init(model: TranslateViewModel) {
         self.model = model
         let _ = print("xxx1")
     }
@@ -21,14 +21,14 @@ struct TranslateiOSView: View {
                 .foregroundColor(Color.Neumorphic.main)
                 .ignoresSafeArea()
             VStack(spacing: 0.0) {
-                TranslateDisplay(display: model.display)
+                TranslateDisplay(uiFont: AppleFont.systemFont(ofSize: ceil(model.keyboard.diameter * 0.4), weight: .light), translationResult: model.translationManager.result)
                     .padding(.horizontal, model.keyboard.padding)
                     .padding(.bottom, model.keyboard.padding * 0.2)
                     .frame(width: model.keyboard.frame.width)
                 NumberDisplay(display: model.display)
                     .padding(.horizontal, model.keyboard.padding)
                     .padding(.bottom, model.keyboard.padding * 0.2)
-                    .frame(width: model.keyboard.frame.width)
+                    .frame(width: model.keyboard.frame.width, height: model.keyboard.diameter * 1.2)
                 HStack {
                     Spacer()
                     KeyboardView(keyboard: model.keyboard)
@@ -140,12 +140,12 @@ struct TranslateiOSView: View {
 
 
 #Preview("Dark") {
-    TranslateiOSView(model: ViewModel(.translator))
+    TranslateiOSView(model: TranslateViewModel())
         .preferredColorScheme(.dark)
 }
 
 #Preview("Light") {
-    TranslateiOSView(model: ViewModel(.translator))
+    TranslateiOSView(model: TranslateViewModel())
         .preferredColorScheme(.light)
 }
 

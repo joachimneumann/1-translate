@@ -30,7 +30,6 @@ struct NumberDisplay: View {
             RoundedRectangle(cornerSize: size)
                 .foregroundColor(Color.Neumorphic.main)
                 .softInnerShadow(RoundedRectangle(cornerSize: size), size: size2, radius: 3)
-                .frame(height: 100)
             HStack(alignment: .bottom, spacing: 0.0) {
                 Spacer(minLength: 0.0)
                 TextView(display.left)

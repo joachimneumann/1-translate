@@ -13,13 +13,12 @@ struct TranslateDisplay: View {
     @ObservedObject var translationResult: TranslationResult
     
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 20).fill(Color.Neumorphic.main).softOuterShadow(offset: 6, radius: 3)
-            VStack(spacing: 0.0) {
+//            VStack(spacing: 0.0) {
                 HStack(spacing: 0.0) {
                     if translationResult.overline == nil {
                         Spacer(minLength: 0.0)
                         Text(translationResult.displayText)
+                            .foregroundColor(Color.Neumorphic.text)
                             .font(Font(uiFont))
                             .multilineTextAlignment(.trailing)
                             .padding(.trailing, 20)
@@ -28,44 +27,49 @@ struct TranslateDisplay: View {
                         ZStack {
                             (Text(translationResult.overline!)
                                 .baselineOffset(1.1*uiFont.pointSize)
+                                .foregroundColor(Color.Neumorphic.text)
                                 .underline(true, color: .white)
                              + Text(translationResult.displayText))
                             .foregroundColor(.clear)
                             .offset(y: -1.0 * uiFont.pointSize - 0.4*uiFont.pointSize)
                             Text(translationResult.overline!)
-                                .foregroundColor(.white)
+                                .foregroundColor(Color.Neumorphic.text)
                             + Text(translationResult.displayText)
+                                .foregroundColor(Color.Neumorphic.text)
                         }
                         .font(Font(uiFont))
                     }
                 }
                 .foregroundColor(translationResult.error ? .orange : .white)
                 .minimumScaleFactor(0.1)
-                Spacer(minLength: 0.0)
-            }
-        }
-//        .padding(20)
+//                Spacer(minLength: 0.0)
+//            }
+                .frame(maxHeight: .infinity)
+//            .background(.yellow)
     }
     
 }
 
 
-#Preview {
-//    let fontsize: CGFloat = 55.0
+var translateDisplayPreview: some View {
     let viewModel = TranslateViewModel()
-    let _ = viewModel.translationManager.translateThis("555555", to: .romanNumerals)
-    let screen = Screen()
-    ZStack {
+    let _ = viewModel.translationManager.translateThis("555555", to: .german)
+    return ZStack {
         Color.Neumorphic.main
-        TranslateDisplay(uiFont: screen.translationFont, translationResult: viewModel.translationManager.result)
-            .frame(height: 300)
+        TranslateDisplay(uiFont: AppleFont.systemFont(ofSize: 20, weight: .light), translationResult: viewModel.translationManager.result)
             .padding(30)
     }
-    .preferredColorScheme(.dark)
-
-        
 }
 
+#Preview("Dark") {
+    translateDisplayPreview
+        .preferredColorScheme(.dark)
+}
+
+#Preview("Light") {
+    translateDisplayPreview
+        .preferredColorScheme(.light)
+}
 
 
 //        .contextMenu {

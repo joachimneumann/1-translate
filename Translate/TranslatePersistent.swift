@@ -13,7 +13,7 @@ import NumberTranslator
 class TranslatePersistent {
     var translationManager = TranslationManager()
     
-    @AppStorage("currentLanguageString", store: .standard)
+    @AppStorage("xcurrentLanguageString", store: .standard)
     var currentLanguageString: String = "English"
     
     var currentLanguageEnum: NumberTranslator.LanguageEnum {
