@@ -42,27 +42,15 @@ struct KeyboardView: View {
                 }
             }
         }
-//        .frame(width: size.width, height: size.height)
-//        .onAppear() {
-//            keyboard.setSize(size)
-//        }
+        .padding(keyboard.padding)
     }
 }
 
 
-//ForEach(keyboard.keyMatrix.dropLast().indices, id: \.self) { rowIndex in
-//    HStack(spacing: spacing) {
-//        ForEach(keyboard.keyMatrix[rowIndex], id: \.id) { key in
-//            KeyView(key: key)
-//        }
-//    }
-//    Spacer(minLength: 0.0)
-//}
-
-
 #Preview("Dark") {
     let keyboard: KeyboardModel = KeyboardModel()
-    
+    let _ = keyboard.standardKeyboard()
+
     ZStack {
         Rectangle()
             .foregroundColor(Color.Neumorphic.main)
@@ -71,12 +59,9 @@ struct KeyboardView: View {
             HStack {
                 Spacer()
                 KeyboardView(keyboard: keyboard)
-//                    .background(.yellow)
-                    .padding(.top, 10)
-                    .padding(.bottom, 50)
+                    .frame(width: keyboard.frame.width, height: keyboard.frame.height)
                 Spacer()
             }
-            Spacer(minLength: 100)
         }
     }
     .background(Color.Neumorphic.main)
@@ -84,24 +69,21 @@ struct KeyboardView: View {
 }
 
 #Preview("Light") {
-    let w: CGFloat = 300
-    let h: CGFloat = 600
     let keyboard: KeyboardModel = KeyboardModel()
-    let _ = keyboard.standardKeyboard(width: w, height: h)
+    let _ = keyboard.standardKeyboard()
     ZStack {
         Rectangle()
             .foregroundColor(Color.red)//Neumorphic.main)
+            .ignoresSafeArea()
         VStack {
             Spacer()
             HStack {
                 Spacer()
                 KeyboardView(keyboard: keyboard)
-                    .frame(width: keyboard.actualSize.width, height: keyboard.actualSize.height)
-                    .padding(keyboard.padding)
+                    .frame(width: keyboard.frame.width, height: keyboard.frame.height)
                     .background(Color.Neumorphic.main)
                 Spacer()
             }
-            Spacer(minLength: 100)
         }
     }
     .background(Color.Neumorphic.main)

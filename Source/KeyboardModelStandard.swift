@@ -10,7 +10,7 @@ import SwiftGmp
 
 extension KeyboardModel {
     
-    func standardKeyboard(width availableWidth: CGFloat, height availableHeight: CGFloat) {
+    func standardKeyboard(width availableWidth: CGFloat = UIScreen.main.bounds.width, height availableHeight: CGFloat = UIScreen.main.bounds.height) {
         let keySpacingProportion = 0.4
 
         let changeSignKey = KeyModel(op: InplaceOperation.changeSign)
@@ -42,19 +42,19 @@ extension KeyboardModel {
         self.keyMatrix.append([settingsKey, zeroKey, separatorKey, equalsKey])
         
         print("standardKeyboard available: \(availableWidth) \(availableHeight)")
-        let totalKeysHorizontal = columnCount + keySpacingProportion * (columnCount - 1)
+        let totalKeysHorizontal = columnCount + keySpacingProportion * (columnCount)
         let diameterHorizontal = availableWidth / totalKeysHorizontal
-        let totalKeysVertical = rowCount + keySpacingProportion * (rowCount - 1)
+        let totalKeysVertical = rowCount + keySpacingProportion * (rowCount)
         let diameterVertical = availableHeight / totalKeysVertical
         diameter = min(diameterVertical, diameterHorizontal)
         let spacing = diameter * keySpacingProportion
         padding = spacing * 0.5
         print("standardKeyboard diameter: \(diameter)")
         print("standardKeyboard padding: \(padding)")
-        actualSize = CGSize(
-            width: diameter * columnCount + spacing * (columnCount - 1),
-            height: diameter * rowCount + spacing * (rowCount - 1))
-        print("standardKeyboard actual: \(actualSize)")
+        frame = CGSize(
+            width: diameter * columnCount + spacing * (columnCount),
+            height: diameter * rowCount + spacing * (rowCount))
+        print("standardKeyboard actual: \(frame)")
 
         for row in keyMatrix {
             for k in row {

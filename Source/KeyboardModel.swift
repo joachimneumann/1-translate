@@ -15,7 +15,7 @@ import SwiftGmp
     
     var keyMatrix: [[KeyModel]] = []
     var diameter: CGFloat = 0
-    var actualSize: CGSize = .zero
+    var frame: CGSize = .zero
     var padding: CGFloat = 0
 
     init() {
