@@ -7,11 +7,18 @@
 
 import SwiftUI
 
-struct KeyNeumorphic: ViewModifier {
+
+public enum VisualState {
+    case up
+    case center
+    case down
+}
+
+public struct KeyNeumorphic: ViewModifier {
     let diameter: CGFloat
     var visualState: VisualState
     
-    func body(content: Content) -> some View {
+    public func body(content: Content) -> some View {
         switch visualState {
         case .up:
             content
@@ -31,7 +38,7 @@ struct KeyNeumorphic: ViewModifier {
 }
 
 extension View {
-    func neumorphic(diameter: CGFloat, _ visualState: VisualState) -> some View {
+    public func neumorphic(diameter: CGFloat, _ visualState: VisualState) -> some View {
         self.modifier(KeyNeumorphic(diameter: diameter, visualState: visualState))
     }
 }

@@ -8,13 +8,11 @@
 import SwiftUI
 import SwiftGmp
 
-
-@Observable class KeyboardModelStandard: KeyboardModel {
-    let clearKey: KeyModel
-    let separatorKey: KeyModel
+extension KeyboardModel {
     
-    init(heightProportion: CGFloat, settingsKey: KeyModel = KeyModel(op: InplaceOperation.abs)) {
-        clearKey = KeyModel(op: ClearOperation.clear)
+    func standardKeyboard(width availableWidth: CGFloat, height availableHeight: CGFloat) {
+        let keySpacingProportion = 0.4
+
         let changeSignKey = KeyModel(op: InplaceOperation.changeSign)
         let percentKey = KeyModel(op: PercentOperation.percent)
         let divideKey = KeyModel(op: TwoOperantOperation.div)
@@ -34,37 +32,36 @@ import SwiftGmp
         let threeKey = KeyModel(op: DigitOperation.three)
         let addKey = KeyModel(op: TwoOperantOperation.add)
         
-        // settingsKey is parameter of init()
         let zeroKey = KeyModel(op: DigitOperation.zero)
-        separatorKey = KeyModel(op: DigitOperation.dot)
         let equalsKey = KeyModel(op: EqualOperation.equal)
         
- 
-        super.init()
+        self.keyMatrix.append([clearKey, changeSignKey, percentKey, divideKey])
+        self.keyMatrix.append([sevenKey, eightKey, nineKey, multiplyKey])
+        self.keyMatrix.append([fourKey, fiveKey, sixKey, subtractKey])
+        self.keyMatrix.append([oneKey, twoKey, threeKey, addKey])
+        self.keyMatrix.append([settingsKey, zeroKey, separatorKey, equalsKey])
         
-        keyMatrix.append([clearKey, changeSignKey, percentKey, divideKey])
-        keyMatrix.append([sevenKey, eightKey, nineKey, multiplyKey])
-        keyMatrix.append([fourKey, fiveKey, sixKey, subtractKey])
-        keyMatrix.append([oneKey, twoKey, threeKey, addKey])
-        keyMatrix.append([settingsKey, zeroKey, separatorKey, equalsKey])
- 
-        let screenSize = UIScreen.main.bounds
-        let width = screenSize.width
-        let height = screenSize.height * heightProportion
-        super.setSize(CGSize(width: width, height: height))
-    }
-        
-    func back(_ displayBufferHasDigits: Bool) {
-        if displayBufferHasDigits {
-//            clearKey.op = ClearOperation.back
-//            clearKey.symbol = ClearOperation.back.getRawValue()
-        } else {
-//            clearKey.model.op = ClearOperation.clear
-//            clearKey.model.symbol = ClearOperation.clear.getRawValue()
-        }
-    }
+        print("standardKeyboard available: \(availableWidth) \(availableHeight)")
+        let totalKeysHorizontal = columnCount + keySpacingProportion * (columnCount - 1)
+        let diameterHorizontal = availableWidth / totalKeysHorizontal
+        let totalKeysVertical = rowCount + keySpacingProportion * (rowCount - 1)
+        let diameterVertical = availableHeight / totalKeysVertical
+        diameter = min(diameterVertical, diameterHorizontal)
+        let spacing = diameter * keySpacingProportion
+        padding = spacing * 0.5
+        print("standardKeyboard diameter: \(diameter)")
+        print("standardKeyboard padding: \(padding)")
+        actualSize = CGSize(
+            width: diameter * columnCount + spacing * (columnCount - 1),
+            height: diameter * rowCount + spacing * (rowCount - 1))
+        print("standardKeyboard actual: \(actualSize)")
 
-    func setSeparatorSymbol(_ symbol: String) {
-//        separatorKey.model.symbol = symbol
+        for row in keyMatrix {
+            for k in row {
+                k.setDiameter(diameter)
+            }
+        }
+
     }
 }
+

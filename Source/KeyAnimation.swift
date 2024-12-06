@@ -7,16 +7,10 @@
 
 import SwiftUI
 import SwiftGmp
-
-enum VisualState {
-    case up
-    case center
-    case down
-}
-
+import Neumorphic
 
 @Observable class KeyAnimation: Identifiable {
-    var visualState: VisualState = .up
+    var visualState: Neumorphic.VisualState = .up
     let id = UUID()  // unique identifier
     
     private var isPressed: Bool = false

@@ -9,12 +9,10 @@ import SwiftUI
 
 struct KeyboardView: View {
     @State private var navigateToConfigView = false
-    let size: CGSize
     @State var keyboard: KeyboardModel
     
-    init(size: CGSize, keyboard: KeyboardModel) {
-        print("init CalculatorKeyboardView \(size)")
-        self.size = size
+    init(keyboard: KeyboardModel) {
+        print("init CalculatorKeyboardView")
         self.keyboard = keyboard
     }
     
@@ -63,7 +61,7 @@ struct KeyboardView: View {
 
 
 #Preview("Dark") {
-    let keyboard: KeyboardModel = KeyboardModelStandard(heightProportion: 0.4)
+    let keyboard: KeyboardModel = KeyboardModel()
     
     ZStack {
         Rectangle()
@@ -72,7 +70,7 @@ struct KeyboardView: View {
             Spacer()
             HStack {
                 Spacer()
-                KeyboardView(size: CGSize(width: 440.0, height: 769.6666666666667), keyboard: keyboard)
+                KeyboardView(keyboard: keyboard)
 //                    .background(.yellow)
                     .padding(.top, 10)
                     .padding(.bottom, 50)
@@ -86,18 +84,21 @@ struct KeyboardView: View {
 }
 
 #Preview("Light") {
-    let keyboard: KeyboardModel = KeyboardModelStandard(heightProportion: 0.4)
-    
+    let w: CGFloat = 300
+    let h: CGFloat = 600
+    let keyboard: KeyboardModel = KeyboardModel()
+    let _ = keyboard.standardKeyboard(width: w, height: h)
     ZStack {
         Rectangle()
-            .foregroundColor(Color.Neumorphic.main)
+            .foregroundColor(Color.red)//Neumorphic.main)
         VStack {
             Spacer()
             HStack {
                 Spacer()
-                KeyboardView(size: CGSize(width: 400, height: 450), keyboard: keyboard)
-                    .padding(.top, 10)
-                    .padding(.bottom, 50)
+                KeyboardView(keyboard: keyboard)
+                    .frame(width: keyboard.actualSize.width, height: keyboard.actualSize.height)
+                    .padding(keyboard.padding)
+                    .background(Color.Neumorphic.main)
                 Spacer()
             }
             Spacer(minLength: 100)

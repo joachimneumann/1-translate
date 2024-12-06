@@ -6,29 +6,35 @@
 //
 
 import SwiftUI
-
+import SwiftGmp
 
 @Observable class KeyboardModel {
+    let clearKey: KeyModel
+    let separatorKey: KeyModel
+    let settingsKey: KeyModel
+    
     var keyMatrix: [[KeyModel]] = []
-    var keyDiameter: CGFloat = 0
-    var recommendedPadding: CGFloat = 0
+    var diameter: CGFloat = 0
+    var actualSize: CGSize = .zero
+    var padding: CGFloat = 0
 
-    func setSize(_ size: CGSize) {
-        print("init CalculatorKeyboardViewModel")
-        let keySpacingProportion = 0.4
-
-        let keyDiameterHorizontal = size.width / columnCount / (1.0 + keySpacingProportion)
-        let keyDiameterVertical = size.height / rowCount / (1.0 + keySpacingProportion)
-        keyDiameter = min(keyDiameterVertical, keyDiameterHorizontal)
-        recommendedPadding = keyDiameter * (1.0 + keySpacingProportion) * 0.5
-        print("keyDiameter \(keyDiameter)")
-        print("recommendedPadding \(recommendedPadding)")
-//        let height = (keyDiameter + keySpacing) * rowCount
-//        let width = (keyDiameter + keySpacing) * columnCount
-        for row in keyMatrix {
-            for k in row {
-                k.setDiameter(keyDiameter)
-            }
+    init() {
+        clearKey = KeyModel(op: ClearOperation.clear)
+        separatorKey = KeyModel(op: DigitOperation.dot)
+        settingsKey = KeyModel(op: InplaceOperation.abs)
+    }
+    
+    func setSeparatorSymbol(_ symbol: String) {
+        separatorKey.symbolKeyViewModel?.symbol = symbol
+    }
+    
+    func back(_ showArrow: Bool) {
+        if showArrow {
+            clearKey.symbolKeyViewModel?.op = ClearOperation.back
+            clearKey.symbolKeyViewModel?.symbol = ClearOperation.back.getRawValue()
+        } else {
+            clearKey.symbolKeyViewModel?.op = ClearOperation.clear
+            clearKey.symbolKeyViewModel?.symbol = ClearOperation.clear.getRawValue()
         }
     }
 
@@ -44,26 +50,6 @@ import SwiftUI
         }
         return CGFloat(ret)
     }
-    
-//    func setSize(_ size: CGSize) {
-//        print("init CalculatorKeyboard")
-//        let keySpacingProportion = 0.4
-//
-//        let keyDiameterHorizontal = size.width / columnCount / (1.0 + keySpacingProportion)
-//        let keyDiameterVertical = size.height / rowCount / (1.0 + keySpacingProportion)
-//        keyDiameter = min(keyDiameterVertical, keyDiameterHorizontal)
-//        keySpacing = keyDiameter * keySpacingProportion
-//        print("keyDiameter \(keyDiameter)")
-//        print("keySpacing \(keySpacing)")
-
-        //let height = (keyDiameter + keySpacing) * rowCount
-        //let width = (keyDiameter + keySpacing) * columnCount
-//        for row in keyMatrix {
-//            for k in row {
-//                k.setDiameter(keyDiameter)
-//            }
-//        }
-//    }
     
     var calculatorCallback: (KeyModel) -> () = { _ in } {
         didSet {
