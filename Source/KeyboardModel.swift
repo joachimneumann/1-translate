@@ -25,16 +25,16 @@ import SwiftGmp
     }
     
     func setSeparatorSymbol(_ symbol: String) {
-        separatorKey.symbolKeyViewModel?.symbol = symbol
+        separatorKey.symbolKey?.symbol = symbol
     }
     
     func back(_ showArrow: Bool) {
         if showArrow {
-            clearKey.symbolKeyViewModel?.op = ClearOperation.back
-            clearKey.symbolKeyViewModel?.symbol = ClearOperation.back.getRawValue()
+            clearKey.symbolKey?.op = ClearOperation.back
+            clearKey.symbolKey?.symbol = ClearOperation.back.getRawValue()
         } else {
-            clearKey.symbolKeyViewModel?.op = ClearOperation.clear
-            clearKey.symbolKeyViewModel?.symbol = ClearOperation.clear.getRawValue()
+            clearKey.symbolKey?.op = ClearOperation.clear
+            clearKey.symbolKey?.symbol = ClearOperation.clear.getRawValue()
         }
     }
 

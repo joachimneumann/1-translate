@@ -25,12 +25,14 @@ import Neumorphic
     let animation2Factor: Double = 0.5//1.0 - 0.25
     
     func longPress() {
-        //print("key longPress isPressed \(isPressed)")
-//        if let symbolKey = self as? SymbolKey {
-//            if symbolKey.model.op.isEqual(to: ClearOperation.back) {
-//                symbolKey.callback(SymbolKey(ClearOperation.clear))
-//            }
-//        }
+        // print("key longPress \(isPressed)")
+        if let model = self as? KeyModel {
+            if let s = model.symbolKey {
+                if s.op.isEqual(to: ClearOperation.back) {
+                    model.callback(KeyModel(op: ClearOperation.clear))
+                }
+            }
+        }
     }
 
     func down(_ location: CGPoint, in diameter: CGFloat) {

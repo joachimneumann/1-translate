@@ -11,7 +11,7 @@ import SwiftGmp
 
 @Observable class KeyModel: KeyAnimation {
     private var flagImage: Image? = nil
-    var symbolKeyViewModel: KeyModelSymbolKey? = nil
+    var symbolKey: SymbolKeyModel? = nil
     var diameter: CGFloat = 0
     
     init(flagName: String) {
@@ -20,14 +20,14 @@ import SwiftGmp
     }
     
     init(op: any OpProtocol) {
-        self.symbolKeyViewModel = KeyModelSymbolKey(op: op)
+        self.symbolKey = SymbolKeyModel(op: op)
         super.init()
-        self.symbolKeyViewModel!.setColors(textColor: Color.Neumorphic.text, upColor: .red, downColor: .red)
+        self.symbolKey!.setColors(textColor: Color.Neumorphic.text, upColor: .red, downColor: .red)
     }
     
     func setDiameter(_ diameter: CGFloat) {
         self.diameter = diameter
-        if let m = symbolKeyViewModel {
+        if let m = symbolKey {
             m.newSize(CGSize(width: diameter, height: diameter))
         }
     }
@@ -75,7 +75,7 @@ import SwiftGmp
     }
     
     var symbol: AnyView? {
-        if let symbolKeyViewModel = symbolKeyViewModel {
+        if let symbolKeyViewModel = symbolKey {
             return AnyView(
                 symbolKeyViewModel.label
                     .scaleEffect(symbolScale)

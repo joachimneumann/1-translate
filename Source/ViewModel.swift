@@ -55,9 +55,12 @@ import SwiftGmp
 
     func execute(_ key: KeyAnimation) {
         if let keyModel = key as? KeyModel {
-            if let op = keyModel.symbolKeyViewModel?.op {
+            if let op = keyModel.symbolKey?.op {
                 calculator.press(op)
             }
+            process()
+            keyboard.back(calculator.privateDisplayBufferHasDigits)
+           // keyboard.back(calculator.privateDisplayBufferHasDigits)
 //            calculator.press(symbolKey.model.op)
 //            if let smallKeyboard = smallKeyboard {
 //                smallKeyboard.back(calculator.privateDisplayBufferHasDigits)
@@ -79,7 +82,6 @@ import SwiftGmp
 //                    }
 //                }
 //            }
-            process()
         }
     }
 

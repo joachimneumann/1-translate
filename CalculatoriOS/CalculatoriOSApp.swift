@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct CalculatoriOSApp: App {
+    let viewModel = ViewModel()
     var body: some Scene {
         WindowGroup {
-            CalculatoriOSView()
+            CalculatoriOSView(model: viewModel)
         }
     }
 }

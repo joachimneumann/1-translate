@@ -8,7 +8,7 @@ import SwiftUI
 import Neumorphic
 
 struct CalculatoriOSView: View {
-    let model = ViewModel()
+    let model: ViewModel
     
     var body: some View {
         let _ = print("CalculatoriOSView body()")
@@ -69,12 +69,12 @@ struct CalculatoriOSView: View {
 
 
 #Preview("Dark") {
-    CalculatoriOSView()
+    CalculatoriOSView(model: ViewModel())
         .preferredColorScheme(.dark)
 }
 
 #Preview("Light") {
-    CalculatoriOSView()
+    CalculatoriOSView(model: ViewModel())
         .preferredColorScheme(.light)
 }
 
