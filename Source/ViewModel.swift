@@ -8,14 +8,24 @@
 import SwiftUI
 import SwiftGmp
 
+enum KeyboardType {
+    case standard
+    case translator
+}
+
 @Observable class ViewModel {
     let keyboard: KeyboardModel = KeyboardModel()
     let display: Display
     let calculator = Calculator(precision: 100)
  
-    init() {
+    init(_ keybordType: KeyboardType) {
         print("ViewModel init()")
-        keyboard.standardKeyboard()
+        switch keybordType {
+            case .standard:
+            keyboard.standardKeyboard()
+            case .translator:
+            keyboard.translatorKeyboard(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.5)
+        }
         let displayWidth: CGFloat = keyboard.frame.width - 2 * keyboard.padding
         display = Display(floatDisplayWidth: displayWidth, font: AppleFont.systemFont(ofSize: floor(keyboard.diameter / 1.3)), ePadding: 10.0)
         display.left = "0"

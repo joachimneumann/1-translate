@@ -10,11 +10,12 @@ import SwiftUI
 
 @main
 struct TranslateiOSApp: App {
+    let viewModel = ViewModel(.translator)
     var body: some Scene {
         WindowGroup {
             NavigationStack {
 //                Demo()
-                TranslateiOSView()
+                TranslateiOSView(model: viewModel)
             }
         }
     }

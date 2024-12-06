@@ -1,5 +1,5 @@
 //
-//  KeyboardModelStandard.swift
+//  SmallKeyboards.swift
 //  Calculator
 //
 //  Created by Joachim Neumann on 30.11.2024.
@@ -9,10 +9,7 @@ import SwiftUI
 import SwiftGmp
 
 extension KeyboardModel {
-    
-    func standardKeyboard(width availableWidth: CGFloat = UIScreen.main.bounds.width, height availableHeight: CGFloat = UIScreen.main.bounds.height) {
-        let keySpacingProportion = 0.4
-
+    private func smallKeyboard(keySpacingProportion: CGFloat, availableWidth: CGFloat, availableHeight: CGFloat) {
         let changeSignKey = KeyModel(op: InplaceOperation.changeSign)
         let percentKey = KeyModel(op: PercentOperation.percent)
         let divideKey = KeyModel(op: TwoOperantOperation.div)
@@ -41,7 +38,7 @@ extension KeyboardModel {
         self.keyMatrix.append([oneKey, twoKey, threeKey, addKey])
         self.keyMatrix.append([settingsKey, zeroKey, separatorKey, equalsKey])
         
-        print("standardKeyboard available: \(availableWidth) \(availableHeight)")
+        print("translatorKeyboard available: \(availableWidth) \(availableHeight)")
         let totalKeysHorizontal = columnCount + keySpacingProportion * (columnCount+1)
         let diameterHorizontal = availableWidth / totalKeysHorizontal
         let totalKeysVertical = rowCount + keySpacingProportion * (rowCount+1)
@@ -50,11 +47,11 @@ extension KeyboardModel {
         let spacing = diameter * keySpacingProportion
         padding = spacing
         //print("standardKeyboard diameter: \(diameter)")
-        print("standardKeyboard padding: \(padding)")
+        print("translatorKeyboard padding: \(padding)")
         frame = CGSize(
             width: diameter * columnCount + spacing * (columnCount+1),
             height: diameter * rowCount + spacing * (rowCount+1))
-        print("standardKeyboard frame: \(frame)")
+        print("translatorKeyboard frame: \(frame)")
 
         for row in keyMatrix {
             for k in row {
@@ -62,6 +59,14 @@ extension KeyboardModel {
             }
         }
 
+    }
+
+    func translatorKeyboard(width availableWidth: CGFloat = UIScreen.main.bounds.width, height availableHeight: CGFloat = UIScreen.main.bounds.height) {
+        smallKeyboard(keySpacingProportion: 0.2, availableWidth: availableWidth, availableHeight: availableHeight)
+    }
+
+    func standardKeyboard(width availableWidth: CGFloat = UIScreen.main.bounds.width, height availableHeight: CGFloat = UIScreen.main.bounds.height) {
+        smallKeyboard(keySpacingProportion: 0.4, availableWidth: availableWidth, availableHeight: availableHeight)
     }
 }
 

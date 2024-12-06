@@ -8,14 +8,10 @@ import SwiftUI
 import Neumorphic
 
 struct TranslateiOSView: View {
-    let model: ViewModel = ViewModel()
-    let keyboard: KeyboardModel = KeyboardModel()
-    let display: Display
+    let model: ViewModel
 
-    init() {
-        keyboard.standardKeyboard()
-        display = Display(floatDisplayWidth: 210, font: AppleFont.systemFont(ofSize: floor(keyboard.diameter / 1.3)), ePadding: 0.0)
-        display.left = "3.1415926"
+    init(model: ViewModel) {
+        self.model = model
         let _ = print("xxx1")
     }
     var body: some View {
@@ -25,15 +21,18 @@ struct TranslateiOSView: View {
                 .foregroundColor(Color.Neumorphic.main)
                 .ignoresSafeArea()
             VStack(spacing: 0.0) {
-                Spacer()
-                NumberDisplay(display: display)
-                    .padding(.horizontal, keyboard.padding)
-                    .padding(.bottom, keyboard.padding * 0.2)
-                    .frame(width: keyboard.frame.width)
+                TranslateDisplay(display: model.display)
+                    .padding(.horizontal, model.keyboard.padding)
+                    .padding(.bottom, model.keyboard.padding * 0.2)
+                    .frame(width: model.keyboard.frame.width)
+                NumberDisplay(display: model.display)
+                    .padding(.horizontal, model.keyboard.padding)
+                    .padding(.bottom, model.keyboard.padding * 0.2)
+                    .frame(width: model.keyboard.frame.width)
                 HStack {
                     Spacer()
-                    KeyboardView(keyboard: keyboard)
-                        .frame(width: keyboard.frame.width, height: keyboard.frame.height)
+                    KeyboardView(keyboard: model.keyboard)
+                        .frame(width: model.keyboard.frame.width, height: model.keyboard.frame.height)
                     Spacer()
                 }
             }
@@ -141,12 +140,12 @@ struct TranslateiOSView: View {
 
 
 #Preview("Dark") {
-    TranslateiOSView()
+    TranslateiOSView(model: ViewModel(.translator))
         .preferredColorScheme(.dark)
 }
 
 #Preview("Light") {
-    TranslateiOSView()
+    TranslateiOSView(model: ViewModel(.translator))
         .preferredColorScheme(.light)
 }
 
