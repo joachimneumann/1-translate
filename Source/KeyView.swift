@@ -15,7 +15,7 @@ struct KeyView: View {
             Color.Neumorphic.main
                 .frame(width: key.diameter, height: key.diameter)
                 .clipShape(Circle())
-                .neumorphic(diameter: key.diameter, key.visualState)
+                .neumorphicKey(diameter: key.diameter, key.visualState)
             key.view
         }
         .keyGestures(key: key, diameter: key.diameter)

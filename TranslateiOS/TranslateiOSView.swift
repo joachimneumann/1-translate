@@ -8,25 +8,36 @@ import SwiftUI
 import Neumorphic
 
 struct TranslateiOSView: View {
-    let keyboardModel: KeyboardModel
+    let keyboard: KeyboardModel
+    let display: Display
 
     init() {
-        keyboardModel = KeyboardModel()
+        keyboard = KeyboardModel()
+        keyboard.standardKeyboard()
+        display = Display(floatDisplayWidth: 210, font: AppleFont.systemFont(ofSize: floor(keyboard.diameter / 1.3)), ePadding: 0.0)
+        display.left = "3.1415926"
         let _ = print("xxx1")
     }
     var body: some View {
         let _ = print("xxx2")
-        let screenSize = UIScreen.main.bounds
-        let screenWidth = screenSize.width
-        let screenHeight = screenSize.height
-
-        let _ = print("TranslateiOSView \(screenSize)")
-        let sideMargin = screenWidth * 0.1
-        let calculatorSize = CGSize(width: screenWidth - 2 * sideMargin, height: screenHeight * 0.8)
-        KeyboardView(keyboard: keyboardModel)
-            .frame(width: calculatorSize.width, height: calculatorSize.height)
-            .background(Color.Neumorphic.main)
-            .padding(.horizontal, sideMargin)
+        ZStack {
+            Rectangle()
+                .foregroundColor(Color.Neumorphic.main)
+                .ignoresSafeArea()
+            VStack(spacing: 0.0) {
+                Spacer()
+                NumberDisplay(display: display)
+                    .padding(.horizontal, keyboard.padding)
+                    .padding(.bottom, keyboard.padding)
+                    .frame(width: keyboard.frame.width)
+                HStack {
+                    Spacer()
+                    KeyboardView(keyboard: keyboard)
+                        .frame(width: keyboard.frame.width, height: keyboard.frame.height)
+                    Spacer()
+                }
+            }
+        }
     }
 }
 
@@ -128,8 +139,14 @@ let _ = print("xxx3")
 
 
 
-#Preview {
-    NavigationStack {
-        TranslateiOSView()//viewModel: TranslateViewModel())
-    }
+
+#Preview("Dark") {
+    TranslateiOSView()
+        .preferredColorScheme(.dark)
 }
+
+#Preview("Light") {
+    TranslateiOSView()
+        .preferredColorScheme(.light)
+}
+

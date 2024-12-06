@@ -46,34 +46,13 @@ struct KeyboardView: View {
     }
 }
 
-
-#Preview("Dark") {
+var keyboardPreview: some View {
     let keyboard: KeyboardModel = KeyboardModel()
     let _ = keyboard.standardKeyboard()
 
-    ZStack {
+    return ZStack {
         Rectangle()
             .foregroundColor(Color.Neumorphic.main)
-        VStack {
-            Spacer()
-            HStack {
-                Spacer()
-                KeyboardView(keyboard: keyboard)
-                    .frame(width: keyboard.frame.width, height: keyboard.frame.height)
-                Spacer()
-            }
-        }
-    }
-    .background(Color.Neumorphic.main)
-    .preferredColorScheme(.dark)
-}
-
-#Preview("Light") {
-    let keyboard: KeyboardModel = KeyboardModel()
-    let _ = keyboard.standardKeyboard()
-    ZStack {
-        Rectangle()
-            .foregroundColor(Color.red)//Neumorphic.main)
             .ignoresSafeArea()
         VStack {
             Spacer()
@@ -81,11 +60,18 @@ struct KeyboardView: View {
                 Spacer()
                 KeyboardView(keyboard: keyboard)
                     .frame(width: keyboard.frame.width, height: keyboard.frame.height)
-                    .background(Color.Neumorphic.main)
                 Spacer()
             }
         }
     }
-    .background(Color.Neumorphic.main)
-    .preferredColorScheme(.light)
+}
+
+#Preview("Dark") {
+    keyboardPreview
+        .preferredColorScheme(.dark)
+}
+
+#Preview("Light") {
+    keyboardPreview
+        .preferredColorScheme(.light)
 }

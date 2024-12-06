@@ -1,5 +1,5 @@
 //
-//  KeyNeumorphic.swift
+//  NeumorphicKey.swift
 //  Calculator
 //
 //  Created by Joachim Neumann on 05.12.2024.
@@ -14,7 +14,7 @@ public enum VisualState {
     case down
 }
 
-public struct KeyNeumorphic: ViewModifier {
+public struct NeumorphicKey: ViewModifier {
     let diameter: CGFloat
     var visualState: VisualState
     
@@ -38,7 +38,7 @@ public struct KeyNeumorphic: ViewModifier {
 }
 
 extension View {
-    public func neumorphic(diameter: CGFloat, _ visualState: VisualState) -> some View {
-        self.modifier(KeyNeumorphic(diameter: diameter, visualState: visualState))
+    public func neumorphicKey(diameter: CGFloat, _ visualState: VisualState) -> some View {
+        self.modifier(NeumorphicKey(diameter: diameter, visualState: visualState))
     }
 }
