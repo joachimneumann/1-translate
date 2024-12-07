@@ -21,7 +21,7 @@ struct CalculatoriOSView: View {
                 NumberDisplay(display: model.display)
                     .padding(.horizontal, model.keyboard.padding)
                     .padding(.bottom, model.keyboard.padding * 0.2)
-                    .frame(width: model.keyboard.frame.width)
+                    .frame(width: model.keyboard.frame.width, height: model.keyboard.diameter * 1.5)
                 HStack {
                     Spacer()
                     KeyboardView(keyboard: model.keyboard)
