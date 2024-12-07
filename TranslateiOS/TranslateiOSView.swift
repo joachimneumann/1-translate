@@ -30,11 +30,12 @@ struct TranslateiOSView: View {
                 HStack {
                     Spacer()
                     if model.showLanguageSelector {
-                        ScrollingKeyboardView(model: scrollingModel)
-                            .transition(.opacity)
+//                        ScrollingKeyboardView(model: scrollingModel)
+//                            .transition(.opacity)
                     } else {
                         KeyboardView(keyboard: model.keyboard)
                             .frame(width: model.keyboard.frame.width, height: model.keyboard.frame.height)
+                    }
                     Spacer()
                 }
             }

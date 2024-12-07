@@ -33,7 +33,7 @@ struct NumberDisplay: View {
             HStack(alignment: .bottom, spacing: 0.0) {
                 Spacer(minLength: 0.0)
                 TextView(display.left)
-                    .foregroundColor(Color.Neumorphic.text)
+                    .foregroundColor(display.isError ? .orange : Color.Neumorphic.text)
                     .font(display.font)
                 if let right = display.right {
                     TextView(right, width: display.rightWidth)
@@ -66,6 +66,7 @@ struct NumberDisplay: View {
 var numberDisplayPreview: some View {
     let display = Display(floatDisplayWidth: 100, font: AppleFont.systemFont(ofSize: 40), ePadding: 0.0)
     let _ = display.left = "3.14"
+    let _ = display.type = .error
     return ZStack {
         Rectangle()
             .foregroundColor(Color.Neumorphic.main)

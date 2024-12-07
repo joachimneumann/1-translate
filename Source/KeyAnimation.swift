@@ -16,8 +16,9 @@ import Neumorphic
     private var isPressed: Bool = false
     private var downTimer: Timer? = nil
     private var secondAnimationTimer: Timer? = nil
-    private var downTime: Double = 0.2//0.15*1.5
-    private var upTime  : Double = 0.2//0.4*1.5
+    private var downTime: Double = 0.15
+    private var upTime  : Double = 0.15
+    private var downTimerDelay: Double = 0.25
    
     var callback: (KeyAnimation) -> () = { _ in print("NOT IMPLEMENTED CALLBACK")}
 
@@ -68,7 +69,7 @@ import Neumorphic
                 if let timer = downTimer, timer.isValid {
                     timer.invalidate()
                 }
-                downTimer = Timer.scheduledTimer(withTimeInterval: 1.4*downTime, repeats: false) { _ in
+                downTimer = Timer.scheduledTimer(withTimeInterval: downTimerDelay, repeats: false) { _ in
                     self.downTimerFired()
                 }
             }
