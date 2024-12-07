@@ -65,7 +65,22 @@ enum KeyboardType {
                 calculator.press(op)
             }
             process()
+            
+            // clear button: AC or arrow?
             keyboard.back(calculator.privateDisplayBufferHasDigits)
+            
+            // pending buttons: text color
+            for row in keyboard.keyMatrix {
+                for k in row {
+                    if let symbolKey = k.symbolKey {
+                        if calculator.pendingOperators.contains(where: { $0.isEqual(to: symbolKey.op) }) {
+                            symbolKey.textColor = .orange
+                        } else {
+                            symbolKey.textColor = Color.Neumorphic.text
+                        }
+                    }
+                }
+            }
         }
            // keyboard.back(calculator.privateDisplayBufferHasDigits)
 //            calculator.press(symbolKey.model.op)

@@ -13,9 +13,7 @@ import SwiftGmp
     private var diameter: CGFloat
     var op: any OpProtocol
     var symbol: String
-    private var textColor: Color = .white
-    var upColor: Color = .gray
-    var downColor: Color = .gray
+    var textColor: Color = .white
 
     init(op: any OpProtocol) {
         self.op = op
@@ -23,20 +21,6 @@ import SwiftGmp
         self.diameter = 0.0
     }
     
-    func setColors(textColor: Color, upColor: Color, downColor: Color) {
-        self.textColor = textColor
-        self.upColor = upColor
-        self.downColor = downColor
-    }
-    
-    func bgColor(isPressed: Bool) -> Color {
-        if isPressed {
-            return downColor
-        } else {
-            return upColor
-        }
-    }
-
     func newSize(_ sizeParameter: CGSize) {
 #if os(macOS)
         let factorDigits          = 1.5
