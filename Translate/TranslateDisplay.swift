@@ -13,38 +13,33 @@ struct TranslateDisplay: View {
     @ObservedObject var translationResult: TranslationResult
     
     var body: some View {
-//            VStack(spacing: 0.0) {
-                HStack(spacing: 0.0) {
-                    if translationResult.overline == nil {
-                        Spacer(minLength: 0.0)
-                        Text(translationResult.displayText)
-                            .foregroundColor(translationResult.error ? .orange : Color.Neumorphic.text)
-                            .font(Font(uiFont))
-                            .multilineTextAlignment(.trailing)
-                            .padding(.top, 20)
-                    } else {
-                        ZStack {
-                            (Text(translationResult.overline!)
-                                .baselineOffset(1.1*uiFont.pointSize)
-                                .foregroundColor(Color.Neumorphic.text)
-                                .underline(true, color: .white)
-                             + Text(translationResult.displayText))
-                            .foregroundColor(.clear)
-                            .offset(y: -1.0 * uiFont.pointSize - 0.4*uiFont.pointSize)
-                            Text(translationResult.overline!)
-                                .foregroundColor(Color.Neumorphic.text)
-                            + Text(translationResult.displayText)
-                                .foregroundColor(Color.Neumorphic.text)
-                        }
-                        .font(Font(uiFont))
-                    }
+        HStack(spacing: 0.0) {
+            if translationResult.overline == nil {
+                Spacer(minLength: 0.0)
+                Text(translationResult.displayText)
+                    .foregroundColor(translationResult.error ? .orange : Color.Neumorphic.text)
+                    .font(Font(uiFont))
+                    .multilineTextAlignment(.trailing)
+            } else {
+                ZStack {
+                    (Text(translationResult.overline!)
+                        .baselineOffset(1.1*uiFont.pointSize)
+                        .foregroundColor(Color.Neumorphic.text)
+                        .underline(true, color: .white)
+                     + Text(translationResult.displayText))
+                    .foregroundColor(.clear)
+                    .offset(y: -1.0 * uiFont.pointSize - 0.4*uiFont.pointSize)
+                    Text(translationResult.overline!)
+                        .foregroundColor(Color.Neumorphic.text)
+                    + Text(translationResult.displayText)
+                        .foregroundColor(Color.Neumorphic.text)
                 }
-                .foregroundColor(translationResult.error ? .orange : .white)
-                .minimumScaleFactor(0.1)
-//                Spacer(minLength: 0.0)
-//            }
-                .frame(maxHeight: .infinity)
-//            .background(.yellow)
+                .font(Font(uiFont))
+            }
+        }
+        .foregroundColor(translationResult.error ? .orange : .white)
+        .minimumScaleFactor(0.1)
+        .frame(maxHeight: .infinity)
     }
     
 }

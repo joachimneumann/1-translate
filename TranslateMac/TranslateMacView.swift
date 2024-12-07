@@ -26,7 +26,8 @@ struct TranslateMacView: View {
             TranslateDisplay(
                 uiFont: AppleFont.systemFont(ofSize: 20),
                 translationResult: model.translationManager.result)
-            .padding(.bottom, 10)
+            //.background(.yellow)
+            .padding()
             NumberDisplay(display: model.display)
                 .padding(.horizontal, model.keyboard.padding)
                 .padding(.bottom, model.keyboard.padding * 0.2)
@@ -48,7 +49,8 @@ struct TranslateMacView: View {
 }
 
 var previewView: some View {
-    TranslateMacView(model: TranslateViewModel(.macTranslator, width: 500, height: 350))
+    TranslateMacView(model: TranslateViewModel(.macTranslator, width: 250, height: 500-30))
+        .frame(width: 250, height: 500) // Adjust window size for preview
 }
 
 #Preview("Dark") {
