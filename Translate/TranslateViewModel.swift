@@ -24,9 +24,9 @@ class TranslateViewModel: ViewModel {
     }
 #endif
     
-    init() {
+    override init(_ keyboardType: KeyboardType, width: CGFloat, height: CGFloat) {
         translationManager = TranslationManager()
-        super.init(.translator)
+        super.init(keyboardType, width: width, height: height)
 
         
 

@@ -15,11 +15,9 @@ struct TranslateMacApp: App {
     
 
     var body: some Scene {
-        let screen = Screen(CGSize(width: width, height: height))
         WindowGroup {
             NavigationStack {
-                CalculatoriOSView(viewModel: CalculatoriOSViewModel(screen: screen))
-                    .frame(width: width, height: height)
+                Text("not implemented")
             }
         }
         .windowStyle(HiddenTitleBarWindowStyle())

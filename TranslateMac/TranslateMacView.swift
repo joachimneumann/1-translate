@@ -9,81 +9,55 @@ import SwiftUI
 
 struct TranslateMacView: View {
     @Environment(\.scenePhase) var scenePhase
-    @ObservedObject var viewModel: TranslateViewModel
+    let model: TranslateViewModel
     
-    let model: TranslateMacViewModel = TranslateMacViewModel()
-    var scrollingModel: ScrollingKeyboardViewModel
+//    var scrollingModel: ScrollingKeyboardViewModel
     @State var scrollViewID = UUID()
     @State var isZoomed: Bool = false
     @State private var settingsDetent = PresentationDetent.medium
     
-    init() {
-        self.viewModel = TranslateViewModel()
-        scrollingModel = ScrollingKeyboardViewModel(spacing: 10, keyboard: nil)//viewModel.languageSelectionKeyboard!)
-    }
-    
-    func LeftSide() -> some View {
-        VStack(spacing: 0.0) {
-            Spacer(minLength: 0.0)
-            NumberDisplay(display: viewModel.display)
-                .frame(width: model.keyboardWidth, height: model.displayHeight)
-            if viewModel.showLanguageSelector {
-                ScrollingKeyboardView(model: scrollingModel)
-                    .frame(width: model.keyboardWidth, height: model.keyboardHeight)
-                    .transition(.opacity)
-            } else {
-                KeyboardView(
-                    spacing: model.keySpacing,
-                    keyboard: viewModel.smallKeyboard!)
-                .frame(width: model.keyboardWidth, height: model.keyboardHeight)
-            }
-        }
+    init(model: TranslateViewModel) {
+        self.model = model
+//        scrollingModel = ScrollingKeyboardViewModel(spacing: 10, keyboard: nil)//viewModel.languageSelectionKeyboard!)
     }
     
     var body: some View {
-        GeometryReader { geometry in
-            if geometry.notZero {
-                ZStack {
-                    VStack(spacing: 0.0) {
-                        Spacer(minLength: 0.0)
-                        HStack(spacing: 30.0) {
-                            LeftSide()
-                            Spacer(minLength: 0.0)
-                        }
-                    }
-                    HStack(spacing: 0.0) {
-                        Spacer(minLength: 0.0)
-                        TranslateDisplay(uiFont: AppleFont.systemFont(ofSize: 20)/* viewModel.screen.translationFont*/, translationResult: viewModel.translationManager.result)
-                            .padding(.top, 15)
-                            .padding(.leading, 20)
-                            .padding(.trailing, 20)
-                            .frame(width: model.translationViewWidth)
-                    }
-                }
-                .onChange(of: viewModel.showLanguageSelector) {
-                    model.setSize(geometry.size, isScrollView: viewModel.showLanguageSelector)
-                }
-                .onAppear() {
-                    model.setSize(geometry.size, isScrollView: viewModel.showLanguageSelector)
-                }
-                .animation(.easeInOut(duration: 0.6), value: viewModel.showLanguageSelector)
-            }
+        VStack(spacing: 0.0) {
+            TranslateDisplay(
+                uiFont: AppleFont.systemFont(ofSize: 20),
+                translationResult: model.translationManager.result)
+            .padding(.bottom, 10)
+            NumberDisplay(display: model.display)
+                .padding(.horizontal, model.keyboard.padding)
+                .padding(.bottom, model.keyboard.padding * 0.2)
+                .frame(width: model.keyboard.frame.width, height: model.keyboard.diameter * 1.2)
+//            if viewModel.showLanguageSelector {
+//                ScrollingKeyboardView(model: scrollingModel)
+//                    .frame(width: model.keyboardWidth, height: model.keyboardHeight)
+//                    .transition(.opacity)
+//            } else {
+            KeyboardView(keyboard: model.keyboard)
+                .frame(width: model.keyboard.frame.width, height: model.keyboard.frame.height)
+//            }
         }
-        .padding(.bottom, 10)
-        .padding(.leading, 10)
+        .animation(.easeInOut(duration: 0.6), value: model.showLanguageSelector)
+//        .padding(.bottom, 10)
+//        .padding(.leading, 10)
     }
     
 }
 
+var previewView: some View {
+    TranslateMacView(model: TranslateViewModel(.macTranslator, width: 500, height: 350))
+}
 
+#Preview("Dark") {
+    previewView
+        .preferredColorScheme(.dark)
+}
 
-#Preview {
-    let width: CGFloat = 500
-    let height: CGFloat = 350
-    
-    NavigationStack {
-        TranslateMacView()
-            .frame(width: width, height: height)
-    }
+#Preview("Light") {
+    previewView
+        .preferredColorScheme(.light)
 }
 

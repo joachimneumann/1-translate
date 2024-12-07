@@ -146,12 +146,12 @@ struct TranslateiOSView: View {
 
 
 #Preview("Dark") {
-    TranslateiOSView(model: TranslateViewModel())
+    TranslateiOSView(model: TranslateViewModel(.translator, width: defaultWidth, height: defaultHeight))
         .preferredColorScheme(.dark)
 }
 
 #Preview("Light") {
-    TranslateiOSView(model: TranslateViewModel())
+    TranslateiOSView(model: TranslateViewModel(.translator, width: defaultWidth, height: defaultHeight))
         .preferredColorScheme(.light)
 }
 

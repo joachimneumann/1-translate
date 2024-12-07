@@ -61,8 +61,20 @@ extension KeyboardModel {
         smallKeyboard(keySpacingProportion: 0.2, bottomLeftKey: KeyModel(flagName: "English"), availableWidth: availableWidth, availableHeight: availableHeight)
     }
 
-    func standardKeyboard(width availableWidth: CGFloat = UIScreen.main.bounds.width, height availableHeight: CGFloat = UIScreen.main.bounds.height) {
+    
+    func standardKeyboard(width availableWidth: CGFloat = defaultWidth, height availableHeight: CGFloat = defaultHeight) {
         smallKeyboard(keySpacingProportion: 0.4, bottomLeftKey: KeyModel(op: InplaceOperation.abs), availableWidth: availableWidth, availableHeight: availableHeight)
     }
 }
 
+#if os(iOS)
+import UIKit
+let defaultWidth = UIScreen.main.bounds.width
+let defaultHeight = UIScreen.main.bounds.height
+let defaultSize = CGSize(width: defaultWidth, height: defaultHeight)
+#elseif os(macOS)
+import AppKit
+let defaultWidth = NSScreen.main?.visibleFrame.width ?? 800
+let defaultHeight = NSScreen.main?.visibleFrame.height ?? 600
+let defaultSize = CGSize(width: defaultWidth, height: defaultHeight)
+#endif

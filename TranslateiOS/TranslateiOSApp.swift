@@ -10,7 +10,7 @@ import SwiftUI
 
 @main
 struct TranslateiOSApp: App {
-    let viewModel = TranslateViewModel()
+    let viewModel = TranslateViewModel(.translator, width: defaultWidth, height: defaultHeight)
     var body: some Scene {
         WindowGroup {
             NavigationStack {

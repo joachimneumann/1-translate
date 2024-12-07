@@ -11,6 +11,7 @@ import SwiftGmp
 enum KeyboardType {
     case standard
     case translator
+    case macTranslator
 }
 
 @Observable class ViewModel {
@@ -18,13 +19,15 @@ enum KeyboardType {
     let display: Display
     let calculator = Calculator(precision: 100)
  
-    init(_ keybordType: KeyboardType) {
-        //print("ViewModel init()")
+    init(_ keybordType: KeyboardType, width: CGFloat, height: CGFloat) {
+        print("ViewModel init()")
         switch keybordType {
             case .standard:
             keyboard.standardKeyboard()
             case .translator:
-            keyboard.translatorKeyboard(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.5)
+            keyboard.translatorKeyboard(width: width, height: height * 0.5)
+        case .macTranslator:
+            keyboard.translatorKeyboard(width: width, height: height)
         }
         let displayWidth: CGFloat = keyboard.frame.width - 2 * keyboard.padding
         display = Display(floatDisplayWidth: displayWidth, font: AppleFont.systemFont(ofSize: floor(keyboard.diameter / 1.3)), ePadding: 10.0)
