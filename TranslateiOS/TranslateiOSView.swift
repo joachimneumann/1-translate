@@ -20,13 +20,16 @@ struct TranslateiOSView: View {
                 .ignoresSafeArea()
             VStack(spacing: 0.0) {
                 TranslateDisplay(uiFont: AppleFont.systemFont(ofSize: ceil(model.keyboard.diameter * 0.4), weight: .light), translationResult: model.translationManager.result)
+                    //.background(.orange)
                     .padding(.horizontal, model.keyboard.padding)
                     .padding(.bottom, model.keyboard.padding * 0.2)
                     .frame(width: model.keyboard.frame.width)
+                    //.background(.yellow)
                 NumberDisplay(display: model.display)
                     .padding(.horizontal, model.keyboard.padding)
                     .padding(.bottom, model.keyboard.padding * 0.2)
                     .frame(width: model.keyboard.frame.width, height: model.keyboard.diameter * 1.2)
+                    //.background(Color.yellow)
                 HStack {
                     Spacer()
                     if model.showLanguageSelector {

@@ -18,10 +18,9 @@ struct TranslateDisplay: View {
                     if translationResult.overline == nil {
                         Spacer(minLength: 0.0)
                         Text(translationResult.displayText)
-                            .foregroundColor(Color.Neumorphic.text)
+                            .foregroundColor(translationResult.error ? .orange : Color.Neumorphic.text)
                             .font(Font(uiFont))
                             .multilineTextAlignment(.trailing)
-                            .padding(.trailing, 20)
                             .padding(.top, 20)
                     } else {
                         ZStack {
@@ -53,7 +52,7 @@ struct TranslateDisplay: View {
 
 var translateDisplayPreview: some View {
     let viewModel = TranslateViewModel()
-    let _ = viewModel.translationManager.translateThis("555555", to: .german)
+    let _ = viewModel.translationManager.translateThis("4", to: .german)
     return ZStack {
         Color.Neumorphic.main
         TranslateDisplay(uiFont: AppleFont.systemFont(ofSize: 20, weight: .light), translationResult: viewModel.translationManager.result)
