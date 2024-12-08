@@ -25,8 +25,8 @@ struct NumberDisplay: View {
     
     var body: some View {
         ZStack {
-            let size2 = CGSize(width: 30, height: 30)
-            let size = CGSize(width: 20, height: 20)
+            let size2 = CGSize(width: 20, height: 20)
+            let size = CGSize(width: 10, height: 10)
             RoundedRectangle(cornerSize: size)
                 .foregroundColor(Color.Neumorphic.main)
                 .softInnerShadow(RoundedRectangle(cornerSize: size), size: size2, radius: 3)
@@ -43,23 +43,6 @@ struct NumberDisplay: View {
             }
             .padding(.horizontal, display.textPadding)
         }
-        
-//        HStack(alignment: .bottom, spacing: 0.0) {
-//            Spacer(minLength: 0.0)
-//            Text(display.left)
-//                .frame(maxWidth: .infinity, alignment: .trailing)
-//                .background(.green)
-//            if let right = display.right {
-//                TextView(right, width: display.rightWidth)
-//                    .padding(.leading, display.ePadding)
-//            }
-//        }
-//        .font(display.font)
-//        .lineLimit(1)
-//        .foregroundColor(display.isError ? .orange : .white)
-//        .frame(maxWidth: .infinity)//, maxHeight: .infinity)
-//        .softInnerShadow(Rectangle(), size: CGSize(width: 10, height: 10), darkShadow: Color.Neumorphic.darkShadow, lightShadow: Color.Neumorphic.lightShadow, radius: 0.125 * 10)
-//        .background(.yellow)
     }
 }
 

@@ -11,6 +11,8 @@ import SwiftGmp
 enum KeyboardType {
     case standard
     case macStandard
+    case scientific
+    case macScientific
     case translator
     case macTranslator
 }
@@ -21,7 +23,10 @@ enum KeyboardType {
     let calculator = Calculator(precision: 100)
     var width: CGFloat
     var height: CGFloat
+    var keyboardType: KeyboardType
+    
     init(_ keybordType: KeyboardType, width: CGFloat, height: CGFloat) {
+        self.keyboardType = keybordType
         self.width = width
         self.height = height
         print("ViewModel init()")
@@ -34,6 +39,11 @@ enum KeyboardType {
             keyboard.translatorKeyboard(width: width, height: height * 0.5)
         case .macTranslator:
             keyboard.translatorKeyboard(width: width - 10, height: height - 30)
+        case .scientific:
+            keyboard.scientificKeyboard(width: width, height: height)
+        case .macScientific:
+            keyboard.scientificKeyboard(width: width - 10, height: height - 30)
+
         }
         let displayWidth: CGFloat = keyboard.frame.width - 2 * keyboard.padding
         display = Display(floatDisplayWidth: displayWidth, font: AppleFont.systemFont(ofSize: floor(keyboard.diameter / 1.3)), ePadding: 10.0)
@@ -41,6 +51,15 @@ enum KeyboardType {
         keyboard.callback = execute
     }
     
+    func toggleScientific() {
+        if keyboardType == .macStandard {
+            keyboardType = .macScientific
+            width *= 2.0
+        } else if keyboardType == .macScientific {
+            keyboardType = .macStandard
+            width *= 0.5
+        }
+    }
     func process() {
         if calculator.displayBuffer.count > 0 {
             var withGrouping: String = calculator.displayBuffer
@@ -72,7 +91,7 @@ enum KeyboardType {
         if let keyModel = key as? KeyModel {
             if let op = keyModel.symbolKey?.op {
                 if op.isEqual(to: ControlOperation.calc) {
-                    width = 2 * width
+                    toggleScientific()
                 } else {
                     calculator.press(op)
                 }
