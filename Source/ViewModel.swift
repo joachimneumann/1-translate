@@ -18,8 +18,11 @@ enum KeyboardType {
     let keyboard: KeyboardModel = KeyboardModel()
     let display: Display
     let calculator = Calculator(precision: 100)
- 
+    let width: CGFloat
+    let height: CGFloat
     init(_ keybordType: KeyboardType, width: CGFloat, height: CGFloat) {
+        self.width = width
+        self.height = height
         print("ViewModel init()")
         switch keybordType {
             case .standard:
@@ -27,7 +30,7 @@ enum KeyboardType {
             case .translator:
             keyboard.translatorKeyboard(width: width, height: height * 0.5)
         case .macTranslator:
-            keyboard.translatorKeyboard(width: width, height: height)
+            keyboard.translatorKeyboard(width: width - 10, height: height - 30)
         }
         let displayWidth: CGFloat = keyboard.frame.width - 2 * keyboard.padding
         display = Display(floatDisplayWidth: displayWidth, font: AppleFont.systemFont(ofSize: floor(keyboard.diameter / 1.3)), ePadding: 10.0)
