@@ -19,18 +19,26 @@ enum KeyboardType {
 
 @Observable class ViewModel {
     let keyboard: KeyboardModel = KeyboardModel()
-    let display: Display
+    var display: Display
     let calculator = Calculator(precision: 100)
     var width: CGFloat
     var height: CGFloat
     var keyboardType: KeyboardType
     
-    init(_ keybordType: KeyboardType, width: CGFloat, height: CGFloat) {
-        self.keyboardType = keybordType
+    init(_ keyboardType: KeyboardType, width: CGFloat, height: CGFloat) {
+        self.keyboardType = keyboardType
         self.width = width
         self.height = height
         print("ViewModel init()")
-        switch keybordType {
+        keyboard.standardKeyboard(width: width, height: height * 0.5)
+        display = Display(floatDisplayWidth: 0, font: AppleFont.systemFont(ofSize: 0), ePadding: 0)
+        display.left = "0"
+        populateKeyboard()
+    }
+    
+    func populateKeyboard() {
+        keyboard.keyMatrix.removeAll()
+        switch keyboardType {
         case .standard:
             keyboard.standardKeyboard(width: width, height: height * 0.5)
         case .macStandard:
@@ -43,11 +51,9 @@ enum KeyboardType {
             keyboard.scientificKeyboard(width: width, height: height)
         case .macScientific:
             keyboard.scientificKeyboard(width: width - 10, height: height - 30)
-
         }
         let displayWidth: CGFloat = keyboard.frame.width - 2 * keyboard.padding
         display = Display(floatDisplayWidth: displayWidth, font: AppleFont.systemFont(ofSize: floor(keyboard.diameter / 1.3)), ePadding: 10.0)
-        display.left = "0"
         keyboard.callback = execute
     }
     
@@ -59,6 +65,7 @@ enum KeyboardType {
             keyboardType = .macStandard
             width *= 0.5
         }
+        populateKeyboard()
     }
     func process() {
         if calculator.displayBuffer.count > 0 {
