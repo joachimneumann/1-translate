@@ -8,29 +8,28 @@
 import SwiftUI
 import SwiftGmp
 
-enum KeyboardType {
-    case standard
-    case macStandard
-    case scientific
-    case macScientific
-    case translator
-    case macTranslator
-}
-
 @Observable class ViewModel {
     let keyboard: KeyboardModel = KeyboardModel()
     var display: Display
     let calculator = Calculator(precision: 100)
-    var width: CGFloat
+    var width: CGFloat = 100
+    var scientificWidth: CGFloat
+    var standardWidth: CGFloat
+    var displayWidth: CGFloat = 0
     var height: CGFloat
-    var keyboardType: KeyboardType
+    let isMac: Bool
+    let isTranslator: Bool
+    var isScientific: Bool
     
-    init(_ keyboardType: KeyboardType, width: CGFloat, height: CGFloat) {
-        self.keyboardType = keyboardType
-        self.width = width
-        self.height = height
+    init(width w: CGFloat, height h: CGFloat, isTranslator: Bool = false, isMac: Bool = false, isScientific: Bool = false) {
+        self.isTranslator = isTranslator
+        self.isMac = isMac
+        self.isScientific = isScientific
+        self.standardWidth = w
+        self.scientificWidth = w * 2.345
+        self.height = h
         print("ViewModel init()")
-        keyboard.standardKeyboard(width: width, height: height * 0.5)
+//        keyboard.standardKeyboard(width: width, height: height * 0.5)
         display = Display(floatDisplayWidth: 0, font: AppleFont.systemFont(ofSize: 0), ePadding: 0)
         display.left = "0"
         populateKeyboard()
@@ -38,31 +37,47 @@ enum KeyboardType {
     
     func populateKeyboard() {
         keyboard.keyMatrix.removeAll()
-        switch keyboardType {
-        case .standard:
-            keyboard.standardKeyboard(width: width, height: height * 0.5)
-        case .macStandard:
-            keyboard.standardKeyboard(width: width - 10, height: height - 30)
-        case .translator:
-            keyboard.translatorKeyboard(width: width, height: height * 0.5)
-        case .macTranslator:
-            keyboard.translatorKeyboard(width: width - 10, height: height - 30)
-        case .scientific:
-            keyboard.scientificKeyboard(width: width, height: height)
-        case .macScientific:
-            keyboard.scientificKeyboard(width: width - 10, height: height - 30)
+        if isTranslator {
+            if isMac {
+                width = standardWidth
+                keyboard.translatorKeyboard(width: width - 10, height: height - 30)
+            } else {
+                width = standardWidth
+                keyboard.translatorKeyboard(width: width, height: height * 0.5)
+            }
+        } else {
+            if isMac {
+                if isScientific {
+                    width = scientificWidth
+                    keyboard.scientificKeyboard(width: width - 10, height: height - 30)
+                } else {
+                    width = standardWidth
+                    keyboard.standardKeyboard(width: width - 10, height: height - 30)
+                }
+            } else {
+                if isScientific {
+                    width = standardWidth
+                    keyboard.standardKeyboard(width: width, height: height * 0.5)
+                } else {
+                    width = standardWidth
+                    keyboard.scientificKeyboard(width: width, height: height)
+                }
+            }
         }
-        let displayWidth: CGFloat = keyboard.frame.width - 2 * keyboard.padding
-        display = Display(floatDisplayWidth: displayWidth, font: AppleFont.systemFont(ofSize: floor(keyboard.diameter / 1.3)), ePadding: 10.0)
+        displayWidth = keyboard.frame.width
+        if isMac && isScientific {
+            displayWidth = 250.0
+        }
+        display = Display(floatDisplayWidth: displayWidth - 2 * keyboard.padding, font: AppleFont.systemFont(ofSize: floor(keyboard.diameter / 1.3)), ePadding: 10.0)
         keyboard.callback = execute
     }
     
     func toggleScientific() {
-        if keyboardType == .macStandard {
-            keyboardType = .macScientific
+        isScientific.toggle()
+        if isMac && isScientific {
             width *= 2.345
-        } else if keyboardType == .macScientific {
-            keyboardType = .macStandard
+        }
+        if isMac && !isScientific {
             width /= 2.345
         }
         populateKeyboard()

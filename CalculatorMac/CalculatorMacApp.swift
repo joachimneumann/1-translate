@@ -11,7 +11,12 @@ import SwiftUI
 
 @main
 struct CalculatorMacApp: App {
-    let model: ViewModel = ViewModel(.macStandard, width: 250, height: 400)
+    let model: ViewModel = ViewModel(
+        width: 250,
+        height: 400,
+        isTranslator: false,
+        isMac: true,
+        isScientific: true)
     var body: some Scene {
         WindowGroup {
             CalculatorMacView(model: model)

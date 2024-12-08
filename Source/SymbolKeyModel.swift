@@ -122,7 +122,8 @@ import SwiftGmp
                     .resizable()
                     .foregroundColor(textColor)
                     .font(Font.title.weight(.light))
-                    .frame(width: diameter*0.35, height: diameter*0.45))
+//                    .colorInvert()
+                    .frame(width: diameter*0.3, height: diameter*0.4))
             } else {
                 return AnyView(Image(systemName: sfImage)
                     .resizable()

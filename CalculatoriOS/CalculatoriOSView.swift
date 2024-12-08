@@ -35,12 +35,22 @@ struct CalculatoriOSView: View {
 
 
 #Preview("Dark") {
-    CalculatoriOSView(model: ViewModel(.standard, width: defaultWidth, height: defaultHeight))
+    CalculatoriOSView(model: ViewModel(
+        width: defaultWidth,
+        height: defaultHeight,
+        isTranslator: false,
+        isMac: false,
+        isScientific: false))
         .preferredColorScheme(.dark)
 }
 
 #Preview("Light") {
-    CalculatoriOSView(model: ViewModel(.standard, width: defaultWidth, height: defaultHeight))
+    CalculatoriOSView(model: ViewModel(
+        width: defaultWidth,
+        height: defaultHeight,
+        isTranslator: false,
+        isMac: false,
+        isScientific: false))
         .preferredColorScheme(.light)
 }
 

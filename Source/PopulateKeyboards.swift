@@ -118,7 +118,7 @@ extension KeyboardModel {
         let totalKeysVertical = rowCount + keySpacingProportion * (rowCount+1)
         let diameterVertical = availableHeight / totalKeysVertical
         diameter = min(diameterVertical, diameterHorizontal)
-        let spacing = diameter * keySpacingProportion
+        spacing = diameter * keySpacingProportion
         padding = spacing
         frame = CGSize(
             width: diameter * columnCount + spacing * (columnCount+1),
