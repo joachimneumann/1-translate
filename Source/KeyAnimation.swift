@@ -12,7 +12,7 @@ import Neumorphic
 @Observable class KeyAnimation: Identifiable {
     var visualState: Neumorphic.VisualState = .up
     let id = UUID()  // unique identifier
-    
+    var isSecond: Bool = false
     private var isPressed: Bool = false
     private var downTimer: Timer? = nil
     private var secondAnimationTimer: Timer? = nil
@@ -39,6 +39,7 @@ import Neumorphic
     func down(_ location: CGPoint, in diameter: CGFloat) {
         down(location, in: CGSize(width: diameter, height: diameter))
     }
+    
     func down(_ location: CGPoint, in size: CGSize) {
         //print("key down isPressed \(isPressed)")
         let tolerance: CGFloat = 0.3 * size.width
@@ -88,18 +89,36 @@ import Neumorphic
     func up() {
         //print("key up isPressed \(isPressed)")
         if isPressed {
-            callback(self)
-            isPressed = false
-            if downTimer != nil { return }
-            withAnimation(.linear(duration: upTime * animation1Factor)) {
-                self.visualState = .center
-            }
-            if let timer = secondAnimationTimer, timer.isValid {
-                timer.invalidate()
-            }
-            secondAnimationTimer = Timer.scheduledTimer(withTimeInterval: upTime * animation1Factor, repeats: false) { _ in
-                withAnimation(.linear(duration: self.upTime * self.animation2Factor)) {
-                    self.visualState = .up
+            if isSecond {
+                callback(self)
+                print("second isPressed \(isPressed)")
+                isPressed = false
+//                if downTimer != nil { return }
+//                withAnimation(.linear(duration: upTime * animation1Factor)) {
+//                    self.visualState = .center
+//                }
+//                if let timer = secondAnimationTimer, timer.isValid {
+//                    timer.invalidate()
+//                }
+//                secondAnimationTimer = Timer.scheduledTimer(withTimeInterval: upTime * animation1Factor, repeats: false) { _ in
+//                    withAnimation(.linear(duration: self.upTime * self.animation2Factor)) {
+//                        self.visualState = .up
+//                    }
+//                }
+            } else {
+                callback(self)
+                isPressed = false
+                if downTimer != nil { return }
+                withAnimation(.linear(duration: upTime * animation1Factor)) {
+                    self.visualState = .center
+                }
+                if let timer = secondAnimationTimer, timer.isValid {
+                    timer.invalidate()
+                }
+                secondAnimationTimer = Timer.scheduledTimer(withTimeInterval: upTime * animation1Factor, repeats: false) { _ in
+                    withAnimation(.linear(duration: self.upTime * self.animation2Factor)) {
+                        self.visualState = .up
+                    }
                 }
             }
         }

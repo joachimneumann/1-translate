@@ -49,7 +49,6 @@ struct NumberDisplay: View {
 var numberDisplayPreview: some View {
     let display = Display(floatDisplayWidth: 100, font: AppleFont.systemFont(ofSize: 40), ePadding: 0.0)
     let _ = display.left = "3.14"
-    let _ = display.type = .error
     return ZStack {
         Rectangle()
             .foregroundColor(Color.Neumorphic.main)

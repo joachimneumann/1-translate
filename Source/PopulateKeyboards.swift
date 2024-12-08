@@ -139,11 +139,11 @@ extension KeyboardModel {
 
     
     func standardKeyboard(width availableWidth: CGFloat, height availableHeight: CGFloat) {
-        smallKeyboard(keySpacingProportion: 0.4, bottomLeftKey: KeyModel(op: ControlOperation.calc), availableWidth: availableWidth, availableHeight: availableHeight)
+        smallKeyboard(keySpacingProportion: 0.3, bottomLeftKey: KeyModel(op: ControlOperation.calc), availableWidth: availableWidth, availableHeight: availableHeight)
     }
     
     func scientificKeyboard(width availableWidth: CGFloat, height availableHeight: CGFloat) {
-        scientificKeyboard(keySpacingProportion: 0.4, bottomLeftKey: KeyModel(op: ControlOperation.calc), availableWidth: availableWidth, availableHeight: availableHeight)
+        scientificKeyboard(keySpacingProportion: 0.3, bottomLeftKey: KeyModel(op: ControlOperation.calc), availableWidth: availableWidth, availableHeight: availableHeight)
     }
     
 }

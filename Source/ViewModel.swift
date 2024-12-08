@@ -9,6 +9,13 @@ import SwiftUI
 import SwiftGmp
 
 @Observable class ViewModel {
+    
+    enum RadDeg {
+        case rad
+        case deg
+    }
+    var radDeg: RadDeg = .rad
+    var second: Bool = false
     let keyboard: KeyboardModel = KeyboardModel()
     var display: Display
     let calculator = Calculator(precision: 100)
@@ -115,8 +122,76 @@ import SwiftGmp
             if let op = keyModel.symbolKey?.op {
                 if op.isEqual(to: ControlOperation.calc) {
                     toggleScientific()
+                } else if op.isEqual(to: ControlOperation.rad) {
+                    radDeg = .deg
+                    keyModel.symbolKey!.op = ControlOperation.deg
+                    keyModel.symbolKey!.symbol = keyModel.symbolKey!.op.getRawValue()
+                } else if op.isEqual(to: ControlOperation.deg) {
+                    radDeg = .rad
+                    keyModel.symbolKey!.op = ControlOperation.rad
+                    keyModel.symbolKey!.symbol = keyModel.symbolKey!.op.getRawValue()
+                } else if op.isEqual(to: ControlOperation.second) {
+                    second.toggle()
+                    for row in keyboard.keyMatrix {
+                        for k in row {
+                            if k.symbolKey!.op.isEqual(to: InplaceOperation.asin) || k.symbolKey!.op.isEqual(to: InplaceOperation.sin) {
+                                k.symbolKey!.op = second ? InplaceOperation.asin : InplaceOperation.sin
+                                k.symbolKey!.symbol = k.symbolKey!.op.getRawValue()
+                            }
+                            if k.symbolKey!.op.isEqual(to: InplaceOperation.acos) || k.symbolKey!.op.isEqual(to: InplaceOperation.cos) {
+                                k.symbolKey!.op = second ? InplaceOperation.acos : InplaceOperation.cos
+                                k.symbolKey!.symbol = k.symbolKey!.op.getRawValue()
+                            }
+                            if k.symbolKey!.op.isEqual(to: InplaceOperation.atan) || k.symbolKey!.op.isEqual(to: InplaceOperation.tan) {
+                                k.symbolKey!.op = second ? InplaceOperation.atan : InplaceOperation.tan
+                                k.symbolKey!.symbol = k.symbolKey!.op.getRawValue()
+                            }
+                            if k.symbolKey!.op.isEqual(to: InplaceOperation.asinh) || k.symbolKey!.op.isEqual(to: InplaceOperation.sinh) {
+                                k.symbolKey!.op = second ? InplaceOperation.asinh : InplaceOperation.sinh
+                                k.symbolKey!.symbol = k.symbolKey!.op.getRawValue()
+                            }
+                            if k.symbolKey!.op.isEqual(to: InplaceOperation.acosh) || k.symbolKey!.op.isEqual(to: InplaceOperation.cosh) {
+                                k.symbolKey!.op = second ? InplaceOperation.acosh : InplaceOperation.cosh
+                                k.symbolKey!.symbol = k.symbolKey!.op.getRawValue()
+                            }
+                            if k.symbolKey!.op.isEqual(to: InplaceOperation.atanh) || k.symbolKey!.op.isEqual(to: InplaceOperation.tanh) {
+                                k.symbolKey!.op = second ? InplaceOperation.atanh : InplaceOperation.tanh
+                                k.symbolKey!.symbol = k.symbolKey!.op.getRawValue()
+                            }
+                            if k.symbolKey!.op.isEqual(to: TwoOperantOperation.powyx) || k.symbolKey!.op.isEqual(to: InplaceOperation.exp) {
+                                k.symbolKey!.op = second ? TwoOperantOperation.powyx : InplaceOperation.exp
+                                k.symbolKey!.symbol = k.symbolKey!.op.getRawValue()
+                            }
+                            if k.symbolKey!.op.isEqual(to: InplaceOperation.exp2) || k.symbolKey!.op.isEqual(to: InplaceOperation.exp10) {
+                                k.symbolKey!.op = second ? InplaceOperation.exp2 : InplaceOperation.exp10
+                                k.symbolKey!.symbol = k.symbolKey!.op.getRawValue()
+                            }
+                            if k.symbolKey!.op.isEqual(to: TwoOperantOperation.logy) || k.symbolKey!.op.isEqual(to: InplaceOperation.ln) {
+                                k.symbolKey!.op = second ? TwoOperantOperation.logy : InplaceOperation.ln
+                                k.symbolKey!.symbol = k.symbolKey!.op.getRawValue()
+                            }
+                            if k.symbolKey!.op.isEqual(to: InplaceOperation.log2) || k.symbolKey!.op.isEqual(to: InplaceOperation.log10) {
+                                k.symbolKey!.op = second ? InplaceOperation.log2 : InplaceOperation.log10
+                                k.symbolKey!.symbol = k.symbolKey!.op.getRawValue()
+                            }
+                        }
+                    }
                 } else {
-                    calculator.press(op)
+                    if radDeg == .deg {
+                        calculator.press(InplaceOperation.sind)
+                        switch op {
+                        case InplaceOperation.sin:  calculator.press(InplaceOperation.sind)
+                        case InplaceOperation.cos:  calculator.press(InplaceOperation.cosd)
+                        case InplaceOperation.tan:  calculator.press(InplaceOperation.tand)
+                        case InplaceOperation.asin: calculator.press(InplaceOperation.asind)
+                        case InplaceOperation.acos: calculator.press(InplaceOperation.acosd)
+                        case InplaceOperation.atan: calculator.press(InplaceOperation.atand)
+                        default:
+                            calculator.press(op)
+                        }
+                    } else {
+                        calculator.press(op)
+                    }
                 }
             }
             process()
@@ -137,28 +212,6 @@ import SwiftGmp
                 }
             }
         }
-           // keyboard.back(calculator.privateDisplayBufferHasDigits)
-//            calculator.press(symbolKey.model.op)
-//            if let smallKeyboard = smallKeyboard {
-//                smallKeyboard.back(calculator.privateDisplayBufferHasDigits)
-//                for row in smallKeyboard.keyMatrix {
-//                    for k in row {
-//                        if let symbolKey = k as? SymbolKey {
-//                            if calculator.pendingOperators.contains(where: { $0.isEqual(to: symbolKey.model.op) }) {
-//                                symbolKey.setColors(
-//                                    textColor: KeyColor.sixColors(op: symbolKey.model.op).pendingTextColor,
-//                                    upColor: KeyColor.sixColors(op: symbolKey.model.op).pendingUpColor,
-//                                    downColor: KeyColor.sixColors(op: symbolKey.model.op).pendingDownColor)
-//                            } else {
-//                                symbolKey.setColors(
-//                                    textColor: KeyColor.sixColors(op: symbolKey.model.op).textColor,
-//                                    upColor: KeyColor.sixColors(op: symbolKey.model.op).upColor,
-//                                    downColor: KeyColor.sixColors(op: symbolKey.model.op).downColor)
-//                            }
-//                        }
-//                    }
-//                }
-//            }
     }
 
 }

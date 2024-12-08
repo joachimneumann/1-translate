@@ -13,7 +13,7 @@ import SwiftGmp
     private var diameter: CGFloat
     var op: any OpProtocol
     var symbol: String
-    var textColor: Color = .white
+    var textColor: Color
 
     init(op: any OpProtocol) {
         self.op = op
@@ -96,17 +96,18 @@ import SwiftGmp
         case "logy":  AnyView(logx(base: "y"))
         case "rez":   AnyView(one_x)
         case "fac":   AnyView(textLabel(symbol: "x!"))
-        case "sqr":   AnyView(pow(base:  "x",   exponent: "2"))
-        case "cubed": AnyView(pow(base:  "x",   exponent: "3"))
-        case "powxy": AnyView(pow(base:  "x",   exponent: "y"))
-        case "exp":   AnyView(pow(base:  "e",   exponent: "x"))
-        case "powyx": AnyView(pow(base:  "y",   exponent: "x"))
-        case "2^x":   AnyView(pow(base:  "2",   exponent: "x"))
-        case "exp10": AnyView(pow(base: "10",   exponent: "x"))
-        case "2nd":   AnyView(pow(base: "2",    exponent: "nd"))
-        case "asin":  AnyView(pow(base: "sin",  exponent: "-1"))
-        case "acos":  AnyView(pow(base: "cos",  exponent: "-1"))
-        case "atan":  AnyView(pow(base: "tan",  exponent: "-1"))
+        case "sqr":   AnyView(pow(base:    "x", exponent: "2"))
+        case "cubed": AnyView(pow(base:    "x", exponent: "3"))
+        case "powxy": AnyView(pow(base:    "x", exponent: "y"))
+        case "exp":   AnyView(pow(base:    "e", exponent: "x"))
+        case "powyx": AnyView(pow(base:    "y", exponent: "x"))
+        case "2^x":   AnyView(pow(base:    "2", exponent: "x"))
+        case "exp10": AnyView(pow(base:   "10", exponent: "x"))
+        case "exp2":  AnyView(pow(base:    "2", exponent: "x"))
+        case "2nd":   AnyView(pow(base:    "2", exponent: "nd"))
+        case "asin":  AnyView(pow(base:  "sin", exponent: "-1"))
+        case "acos":  AnyView(pow(base:  "cos", exponent: "-1"))
+        case "atan":  AnyView(pow(base:  "tan", exponent: "-1"))
         case "asinh": AnyView(pow(base: "sinh", exponent: "-1"))
         case "acosh": AnyView(pow(base: "cosh", exponent: "-1"))
         case "atanh": AnyView(pow(base: "tanh", exponent: "-1"))
@@ -164,11 +165,13 @@ import SwiftGmp
             .overlay() {
                 Text("1")
                     .font(.system(size: fontSize))
+                    .foregroundColor(textColor)
                     .offset(x: -0.7 * slashSize, y: -0.4 * slashSize)
             }
             .overlay() {
                 Text("x")
                     .font(.system(size: fontSize))
+                    .foregroundColor(textColor)
                     .offset(x: 0.7 * slashSize, y: 0.3 * slashSize)
             }
     }
@@ -182,8 +185,10 @@ import SwiftGmp
                     Spacer(minLength: 0.0)
                     Text(base)
                         .font(.system(size: diameter * 0.26))
+                        .foregroundColor(textColor)
                     Text(exponent)
                         .font(.system(size: diameter * 0.18))
+                        .foregroundColor(textColor)
                         .offset(x: 0.0, y: -0.08 * diameter)
                     Spacer(minLength: 0.0)
                 }
@@ -201,8 +206,10 @@ import SwiftGmp
                     Spacer(minLength: 0.0)
                     Text("log")
                         .font(.system(size: diameter * 0.26))
+                        .foregroundColor(textColor)
                     Text(base)
                         .font(.system(size: diameter * 0.18))
+                        .foregroundColor(textColor)
                         .offset(x: 0.0, y: 0.13 * diameter)
                     Spacer(minLength: 0.0)
                 }

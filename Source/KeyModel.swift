@@ -22,6 +22,9 @@ import SwiftGmp
     init(op: any OpProtocol) {
         self.symbolKey = SymbolKeyModel(op: op)
         super.init()
+        if op.isEqual(to: ControlOperation.second) {
+            isSecond = true
+        }
     }
     
     func setDiameter(_ diameter: CGFloat) {
