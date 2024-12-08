@@ -16,27 +16,12 @@ struct KeyboardView: View {
     }
     
     var body: some View {
-        VStack {
-            ForEach(keyboard.keyMatrix.dropLast().indices, id: \.self) { rowIndex in
-                HStack {
-                    ForEach(keyboard.keyMatrix[rowIndex].dropLast(), id: \.id) { key in
+        VStack(spacing: keyboard.spacing) {
+            ForEach(keyboard.keyMatrix.indices, id: \.self) { rowIndex in
+                HStack(spacing: keyboard.spacing) {
+                    ForEach(keyboard.keyMatrix[rowIndex], id: \.id) { key in
                         KeyView(key: key)
-                        Spacer(minLength: 0.0)
-                    }
-                    if let last = keyboard.keyMatrix[rowIndex].last {
-                        KeyView(key: last)
-                    }
-                }
-                Spacer(minLength: 0.0)
-            }
-            HStack {
-                if let lastRow = keyboard.keyMatrix.last {
-                    ForEach(lastRow.dropLast(), id: \.id) { key in
-                        KeyView(key: key)
-                        Spacer(minLength: 0.0)
-                    }
-                    if let last = lastRow.last {
-                        KeyView(key: last)
+                            .frame(width: keyboard.diameter, height: keyboard.diameter)
                     }
                 }
             }
@@ -47,7 +32,7 @@ struct KeyboardView: View {
 
 var keyboardPreview: some View {
     let keyboard: KeyboardModel = KeyboardModel()
-    let _ = keyboard.standardKeyboard(width: defaultWidth, height: defaultHeight)
+    let _ = keyboard.scientificKeyboard(width: 550, height: 300)
 
     return ZStack {
         Rectangle()
@@ -58,9 +43,7 @@ var keyboardPreview: some View {
             HStack {
                 Spacer()
                 KeyboardView(keyboard: keyboard)
-//                    .background(.green)
                     .frame(width: keyboard.frame.width, height: keyboard.frame.height)
-//                    .background(.yellow)
                 Spacer()
             }
         }

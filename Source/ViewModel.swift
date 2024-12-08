@@ -60,10 +60,10 @@ enum KeyboardType {
     func toggleScientific() {
         if keyboardType == .macStandard {
             keyboardType = .macScientific
-            width *= 2.0
+            width *= 2.345
         } else if keyboardType == .macScientific {
             keyboardType = .macStandard
-            width *= 0.5
+            width /= 2.345
         }
         populateKeyboard()
     }

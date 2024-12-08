@@ -86,18 +86,19 @@ import SwiftGmp
         switch symbol {
         case "sqrt" : AnyView(rootShapeView(rootDigit: "2"))
         case "sqrt3": AnyView(rootShapeView(rootDigit: "3"))
-        case "y√":    AnyView(rootShapeView(rootDigit: "y"))
+        case "sqrty": AnyView(rootShapeView(rootDigit: "y"))
         case "log10": AnyView(logx(base: "10"))
         case "log2":  AnyView(logx(base: "2"))
         case "logy":  AnyView(logx(base: "y"))
-        case "One_x": AnyView(one_x)
+        case "rez":   AnyView(one_x)
+        case "fac":   AnyView(textLabel(symbol: "x!"))
         case "sqr":   AnyView(pow(base:  "x",   exponent: "2"))
-        case "x^3":   AnyView(pow(base:  "x",   exponent: "3"))
-        case "x^y":   AnyView(pow(base:  "x",   exponent: "y"))
-        case "e^x":   AnyView(pow(base:  "e",   exponent: "x"))
-        case "y^x":   AnyView(pow(base:  "y",   exponent: "x"))
+        case "cubed": AnyView(pow(base:  "x",   exponent: "3"))
+        case "powxy": AnyView(pow(base:  "x",   exponent: "y"))
+        case "exp":   AnyView(pow(base:  "e",   exponent: "x"))
+        case "powyx": AnyView(pow(base:  "y",   exponent: "x"))
         case "2^x":   AnyView(pow(base:  "2",   exponent: "x"))
-        case "10^x":  AnyView(pow(base: "10",   exponent: "x"))
+        case "exp10": AnyView(pow(base: "10",   exponent: "x"))
         case "2nd":   AnyView(pow(base: "2",    exponent: "nd"))
         case "asin":  AnyView(pow(base: "sin",  exponent: "-1"))
         case "acos":  AnyView(pow(base: "cos",  exponent: "-1"))
@@ -106,11 +107,11 @@ import SwiftGmp
         case "acosh": AnyView(pow(base: "cosh", exponent: "-1"))
         case "atanh": AnyView(pow(base: "tanh", exponent: "-1"))
         default:
-            AnyView(textLabel)
+            AnyView(textLabel(symbol: symbol))
         }
     }
     
-    private var textLabel: some View {
+    private func textLabel(symbol: String) -> some View {
         if let sfImage = sfImageForKey[symbol] {
             if symbol == "calc" {
                 return AnyView(Image(systemName: "candybarphone")

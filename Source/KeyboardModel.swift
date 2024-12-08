@@ -16,6 +16,7 @@ import SwiftGmp
     var diameter: CGFloat = 0
     var frame: CGSize = .zero
     var padding: CGFloat = 0
+    var spacing: CGFloat = 0
 
     init() {
         clearKey = KeyModel(op: ClearOperation.clear)
