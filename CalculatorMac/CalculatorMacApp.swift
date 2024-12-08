@@ -16,9 +16,10 @@ struct CalculatorMacApp: App {
         WindowGroup {
             CalculatorMacView(model: model)
                 .frame(width: model.width, height: model.height)
-                //.background(.yellow)
+            //.background(.yellow)
         }
         .windowResizability(.contentSize)
         .windowStyle(HiddenTitleBarWindowStyle())
     }
 }
+

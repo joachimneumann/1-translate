@@ -67,6 +67,7 @@ enum KeyboardType {
         }
         populateKeyboard()
     }
+    
     func process() {
         if calculator.displayBuffer.count > 0 {
             var withGrouping: String = calculator.displayBuffer

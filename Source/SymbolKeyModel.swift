@@ -25,9 +25,10 @@ import SwiftGmp
     func newSize(_ sizeParameter: CGSize) {
 #if os(macOS)
         let factorDigits          = 1.5
-        let factorAC              = 1.4
+        let factorAC              = 1.5
         let factorBack            = 1.5
-        let factorSpecialOperator = 1.12
+        let factorChangeSign      = 1.25
+        let factorPercent         = 1.12
         let factorOperator        = 1.04
         let factorOperatorX       = factorOperator * 0.86
         let factorComma           = 1.8
@@ -36,7 +37,8 @@ import SwiftGmp
         let factorDigits          = 1.4
         let factorAC              = factorDigits
         let factorBack            = 1.5
-        let factorSpecialOperator = 1.1
+        let factorChangeSign      = 1.23
+        let factorPercent         = 1.1
         let factorOperator        = 1.1
         let factorOperatorX       = 0.95
         let factorComma           = 1.5
@@ -51,8 +53,10 @@ import SwiftGmp
             factor = factorAC
         case "back":
             factor = factorBack
-        case "±", "%":
-            factor = factorSpecialOperator
+        case "±":
+            factor = factorChangeSign
+        case "%":
+            factor = factorPercent
         case "*":
             factor = factorOperatorX
         case "settings":
@@ -125,11 +129,11 @@ import SwiftGmp
                     .foregroundColor(textColor)
                                //.font(Font.title.weight(.regular))
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: diameter * 0.3, height: diameter * 0.3))
+                    .frame(width: diameter * 0.26, height: diameter * 0.26))
             }
         } else {
             return AnyView(Text(symbol)
-                .font(.system(size: diameter * 0.3))
+                .font(.system(size: diameter * 0.26))
                 .foregroundColor(textColor))
         }
     }
@@ -152,7 +156,7 @@ import SwiftGmp
     }
     
     private var one_x: some View {
-        let slashSize = diameter * 0.16
+        let slashSize = diameter * 0.15
         let fontSize = slashSize * 1.5
         return slashShape(slashSize: slashSize)
             .frame(width: slashSize, height: slashSize)
@@ -164,7 +168,7 @@ import SwiftGmp
             .overlay() {
                 Text("x")
                     .font(.system(size: fontSize))
-                    .offset(x: 0.6 * slashSize, y: 0.3 * slashSize)
+                    .offset(x: 0.7 * slashSize, y: 0.3 * slashSize)
             }
     }
 
@@ -176,7 +180,7 @@ import SwiftGmp
                 HStack(spacing: 0.0) {
                     Spacer(minLength: 0.0)
                     Text(base)
-                        .font(.system(size: diameter * 0.3))
+                        .font(.system(size: diameter * 0.26))
                     Text(exponent)
                         .font(.system(size: diameter * 0.18))
                         .offset(x: 0.0, y: -0.08 * diameter)
@@ -195,7 +199,7 @@ import SwiftGmp
                 HStack(spacing:0.0) {
                     Spacer(minLength: 0.0)
                     Text("log")
-                        .font(.system(size: diameter * 0.3))
+                        .font(.system(size: diameter * 0.26))
                     Text(base)
                         .font(.system(size: diameter * 0.18))
                         .offset(x: 0.0, y: 0.13 * diameter)
@@ -231,7 +235,7 @@ import SwiftGmp
     }
     
     private func rootShapeView(rootDigit: String, underTheRoot: String = "x") -> some View {
-        let rootSize = diameter * 0.8
+        let rootSize = diameter * 0.7
         let fontSize = rootSize * 0.2
         let xFontSize = rootSize * 0.3
         return root(rootSize: rootSize)
