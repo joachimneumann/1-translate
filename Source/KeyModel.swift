@@ -22,7 +22,6 @@ import SwiftGmp
     init(op: any OpProtocol) {
         self.symbolKey = SymbolKeyModel(op: op)
         super.init()
-        self.symbolKey!.textColor = Color.Neumorphic.text
     }
     
     func setDiameter(_ diameter: CGFloat) {

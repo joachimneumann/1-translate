@@ -62,8 +62,8 @@ extension KeyboardModel {
     }
 
     
-    func standardKeyboard(width availableWidth: CGFloat = defaultWidth, height availableHeight: CGFloat = defaultHeight) {
-        smallKeyboard(keySpacingProportion: 0.4, bottomLeftKey: KeyModel(op: InplaceOperation.abs), availableWidth: availableWidth, availableHeight: availableHeight)
+    func standardKeyboard(width availableWidth: CGFloat, height availableHeight: CGFloat) {
+        smallKeyboard(keySpacingProportion: 0.4, bottomLeftKey: KeyModel(op: ControlOperation.calc), availableWidth: availableWidth, availableHeight: availableHeight)
     }
 }
 

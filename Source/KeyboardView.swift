@@ -47,7 +47,7 @@ struct KeyboardView: View {
 
 var keyboardPreview: some View {
     let keyboard: KeyboardModel = KeyboardModel()
-    let _ = keyboard.standardKeyboard()
+    let _ = keyboard.standardKeyboard(width: defaultWidth, height: defaultHeight)
 
     return ZStack {
         Rectangle()

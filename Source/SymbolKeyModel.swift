@@ -19,6 +19,7 @@ import SwiftGmp
         self.op = op
         self.symbol = op.getRawValue()
         self.diameter = 0.0
+        self.textColor = Color.Neumorphic.text
     }
     
     func newSize(_ sizeParameter: CGSize) {
@@ -76,8 +77,9 @@ import SwiftGmp
         "±": "plus.slash.minus",
         "=": "equal",
         "%": "percent",
-        "back": "delete.backward",
-        "settings": "gear"
+        "back":     "delete.backward",
+        "settings": "gear",
+        "calc":     "candybarphone"
     ]
     
     var label: some View {
@@ -110,20 +112,26 @@ import SwiftGmp
     
     private var textLabel: some View {
         if let sfImage = sfImageForKey[symbol] {
-            return AnyView(Image(systemName: sfImage)
-                .resizable()
-                .foregroundColor(textColor)
-                //.font(Font.title.weight(.regular))
-                .aspectRatio(contentMode: .fit)
-                .frame(width: diameter * 0.3, height: diameter * 0.3))
-                //.background(.green)
+            if symbol == "calc" {
+                return AnyView(Image(systemName: "candybarphone")
+                    .resizable()
+                    .foregroundColor(textColor)
+                    .font(Font.title.weight(.light))
+                    .frame(width: diameter*0.35, height: diameter*0.45))
+            } else {
+                return AnyView(Image(systemName: sfImage)
+                    .resizable()
+                    .foregroundColor(textColor)
+                               //.font(Font.title.weight(.regular))
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: diameter * 0.3, height: diameter * 0.3))
+            }
         } else {
             return AnyView(Text(symbol)
                 .font(.system(size: diameter * 0.3))
                 .foregroundColor(textColor))
         }
     }
-    
     
     private func slashShape(slashSize: CGFloat) -> some View {
         let lineWidth = slashSize * 0.17

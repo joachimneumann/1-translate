@@ -10,6 +10,7 @@ import SwiftGmp
 
 enum KeyboardType {
     case standard
+    case macStandard
     case translator
     case macTranslator
 }
@@ -18,16 +19,18 @@ enum KeyboardType {
     let keyboard: KeyboardModel = KeyboardModel()
     let display: Display
     let calculator = Calculator(precision: 100)
-    let width: CGFloat
-    let height: CGFloat
+    var width: CGFloat
+    var height: CGFloat
     init(_ keybordType: KeyboardType, width: CGFloat, height: CGFloat) {
         self.width = width
         self.height = height
         print("ViewModel init()")
         switch keybordType {
-            case .standard:
-            keyboard.standardKeyboard()
-            case .translator:
+        case .standard:
+            keyboard.standardKeyboard(width: width, height: height * 0.5)
+        case .macStandard:
+            keyboard.standardKeyboard(width: width - 10, height: height - 30)
+        case .translator:
             keyboard.translatorKeyboard(width: width, height: height * 0.5)
         case .macTranslator:
             keyboard.translatorKeyboard(width: width - 10, height: height - 30)
@@ -68,7 +71,11 @@ enum KeyboardType {
     func execute(_ key: KeyAnimation) {
         if let keyModel = key as? KeyModel {
             if let op = keyModel.symbolKey?.op {
-                calculator.press(op)
+                if op.isEqual(to: ControlOperation.calc) {
+                    width = 2 * width
+                } else {
+                    calculator.press(op)
+                }
             }
             process()
             
