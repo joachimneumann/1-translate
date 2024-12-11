@@ -49,7 +49,7 @@ struct TranslateMacView: View {
 }
 
 var previewView: some View {
-    TranslateMacView(model: TranslateViewModel(.macTranslator, width: 250, height: 500-30))
+    TranslateMacView(model: TranslateViewModel(width: 250, height: 500-30))
         .frame(width: 250, height: 500) // Adjust window size for preview
 }
 

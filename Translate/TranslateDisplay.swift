@@ -46,7 +46,7 @@ struct TranslateDisplay: View {
 
 
 var translateDisplayPreview: some View {
-    let viewModel = TranslateViewModel(.translator, width: defaultWidth, height: defaultHeight)
+    let viewModel = TranslateViewModel(width: defaultWidth, height: defaultHeight)
     let _ = viewModel.translationManager.translateThis("4", to: .german)
     return ZStack {
         Color.Neumorphic.main

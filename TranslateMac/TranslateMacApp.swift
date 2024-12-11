@@ -12,7 +12,7 @@ struct TranslateMacApp: App {
     
     let width: CGFloat = 250.0
     let height: CGFloat = 500.0
-    let model: TranslateViewModel = TranslateViewModel(.macTranslator, width: 250 - 10, height: 500 - 30)
+    let model: TranslateViewModel = TranslateViewModel(width: 250, height: 700)
 
     var body: some Scene {
         WindowGroup {
