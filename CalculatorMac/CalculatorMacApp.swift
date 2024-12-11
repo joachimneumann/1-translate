@@ -13,7 +13,7 @@ import SwiftUI
 struct CalculatorMacApp: App {
     let model: ViewModel = ViewModel(
         width: 250,
-        height: 400,
+        height: 380,
         isTranslator: false,
         isMac: true,
         isScientific: true)
