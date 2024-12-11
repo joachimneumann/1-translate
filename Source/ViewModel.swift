@@ -208,6 +208,13 @@ import SwiftGmp
                         } else {
                             symbolKey.textColor = Color.Neumorphic.text
                         }
+                        if symbolKey.op.isEqual(to: ControlOperation.second) {
+                            if second {
+                                symbolKey.textColor = .orange
+                            } else {
+                                symbolKey.textColor = Color.Neumorphic.text
+                            }
+                        }
                     }
                 }
             }
