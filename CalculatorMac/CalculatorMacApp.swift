@@ -19,6 +19,7 @@ struct CalculatorMacApp: App {
         isScientific: true)
     var body: some Scene {
         WindowGroup {
+//            Demo()
             CalculatorMacView(model: model)
                 .frame(width: model.width, height: model.height)
             //.background(.yellow)

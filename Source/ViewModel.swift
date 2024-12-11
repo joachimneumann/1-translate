@@ -35,7 +35,7 @@ import SwiftGmp
         self.standardWidth = w
         self.scientificWidth = w * 2.345
         self.height = h
-        print("ViewModel init()")
+        //print("ViewModel init()")
 //        keyboard.standardKeyboard(width: width, height: height * 0.5)
         display = Display(floatDisplayWidth: 0, font: AppleFont.systemFont(ofSize: 0), ePadding: 0)
         display.left = "0"

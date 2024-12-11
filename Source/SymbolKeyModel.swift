@@ -23,6 +23,7 @@ import SwiftGmp
     }
     
     func newSize(_ sizeParameter: CGSize) {
+        //print("SymbolKeyModel size \(sizeParameter)")
 #if os(macOS)
         let factorDigits          = 1.5
         let factorAC              = 1.5
@@ -195,6 +196,7 @@ import SwiftGmp
                 Spacer(minLength: 0.0)
             }
         }
+        .frame(width: diameter*0.8, height: diameter*0.8)
     }
     
     
@@ -216,6 +218,7 @@ import SwiftGmp
                 Spacer(minLength: 0.0)
             }
         }
+        .frame(width: diameter*0.8, height: diameter*0.8)
     }
     
     private func root(rootSize: CGFloat) -> some View {

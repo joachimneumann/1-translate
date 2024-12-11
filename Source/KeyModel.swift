@@ -23,7 +23,7 @@ import SwiftGmp
         self.symbolKey = SymbolKeyModel(op: op)
         super.init()
         if op.isEqual(to: ControlOperation.second) {
-            isSecond = true
+            //isSecond = true
         }
     }
     
@@ -116,10 +116,10 @@ struct Demo: View {
 //            flagName = translationManager.flagName(.english)
 //        }
 //        m1 = KeyModel(flagName: flagName)
-        m1 = KeyModel(op: InplaceOperation.sqr)
-        m2 = KeyModel(op: InplaceOperation.sqrt)
-        m1.setDiameter(100)
+        m2 = KeyModel(op: InplaceOperation.sqr)
+        m1 = KeyModel(op: InplaceOperation.sqrt)
         m2.setDiameter(100)
+        m1.setDiameter(100)
     }
     
     var body: some View {
@@ -128,11 +128,11 @@ struct Demo: View {
                 .foregroundColor(Color.Neumorphic.main)
             VStack {
                 HStack {
+                    Spacer()
                     KeyView(key: m1)
                     Spacer()
                     KeyView(key: m2)
                     Spacer()
-                    KeyView(key: m2)
                 }
                 //.background(Color.yellow)
             }
