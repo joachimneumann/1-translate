@@ -107,7 +107,7 @@ extension KeyboardModel {
             KeyModel(op: InplaceOperation.cosh),
             KeyModel(op: InplaceOperation.tanh),
             KeyModel(op: ConstantOperation.pi),
-            KeyModel(op: ControlOperation.rad),
+            KeyModel(op: ControlOperation.deg),
             KeyModel(op: ConstantOperation.rand),
             KeyModel(op: DigitOperation.zero),
             KeyModel(op: DigitOperation.dot),

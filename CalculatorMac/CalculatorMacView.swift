@@ -46,7 +46,7 @@ struct CalculatorMacView: View {
 
 #Preview("Dark") {
     CalculatorMacView(model: ViewModel(
-        width: 400,
+        width: 500,
         height: 400,
         isTranslator: false,
         isMac: true,
@@ -56,8 +56,8 @@ struct CalculatorMacView: View {
 
 #Preview("Light") {
     CalculatorMacView(model: ViewModel(
-        width: defaultWidth,
-        height: defaultHeight,
+        width: 500,
+        height: 400,
         isTranslator: false,
         isMac: true,
         isScientific: true))

@@ -14,7 +14,7 @@ import SwiftGmp
         case rad
         case deg
     }
-    var radDeg: RadDeg = .rad
+    var radDeg: RadDeg = .deg
     var second: Bool = false
     let keyboard: KeyboardModel = KeyboardModel()
     var display: Display
@@ -178,7 +178,6 @@ import SwiftGmp
                     }
                 } else {
                     if radDeg == .deg {
-                        calculator.press(InplaceOperation.sind)
                         switch op {
                         case InplaceOperation.sin:  calculator.press(InplaceOperation.sind)
                         case InplaceOperation.cos:  calculator.press(InplaceOperation.cosd)
