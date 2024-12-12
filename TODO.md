@@ -1,20 +1,26 @@
-remove screen.swift
+iOS Calculator:
+  narrower Keyboard
+  Scientific: 90 degree rotation
+  capsule keys???
+  settings back to normal: set to zero ??
+  copy and paste of full precision
+  
+iOS Translator:
+  wider Keyboard
+  settings
+  voice
+  voice animation
+  Languages:
+    Switzerland and Liechtenstein are different, as they use a point as a decimal separator, and an apostrophe (‘) for thousands.
+    Hiragana, Katakana, and Kanji
+    Turkish
+  
+Mac Calculator: 
+  Settings in Neumorphic style
 
-Mac: 66666666 -> ...
-Settings: Neumorphic
-Mac Settings
-settings voice
-settings back to normal: set to zero ??
-
-- copy and paste of full precision
-
-voice, voice animation
-
-Switzerland and Liechtenstein are different, as they use a point as a decimal separator, and an apostrophe (‘) for thousands.
+Mac Translator:
+  voice
 
 Delete old compiler warnings:
 rm -rf ~/Library/Developer/Xcode/DerivedData
 
-Hiragana, Katakana, and Kanji
-
-Turkish

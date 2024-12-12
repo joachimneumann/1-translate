@@ -8,7 +8,7 @@ import SwiftUI
 import Neumorphic
 
 struct CalculatoriOSView: View {
-    let model: ViewModel
+    let model: CalculatoriOSViewModel
     
     var body: some View {
         //let _ = print("CalculatoriOSView body()")
@@ -30,12 +30,40 @@ struct CalculatoriOSView: View {
                 }
             }
         }
+        .onAppear() {
+            print("onAppear \(UIDevice.current.orientation)")
+            model.newOrientation(UIDevice.current.orientation)
+        }
+        .onRotate { newOrientation in
+            print("onRotate current: \(UIDevice.current.orientation) new: \(newOrientation)")
+            model.newOrientation(newOrientation)
+        }
     }
 }
 
+// Custom view modifier to track rotation
+struct DeviceRotationViewModifier: ViewModifier {
+    let action: (UIDeviceOrientation) -> Void
+
+    func body(content: Content) -> some View {
+        content
+            .onAppear()
+            .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+                print("received did change \(UIDevice.current.orientation)")
+                action(UIDevice.current.orientation)
+            }
+    }
+}
+
+// Wrapper
+extension View {
+    func onRotate(perform action: @escaping (UIDeviceOrientation) -> Void) -> some View {
+        self.modifier(DeviceRotationViewModifier(action: action))
+    }
+}
 
 #Preview("Dark") {
-    CalculatoriOSView(model: ViewModel(
+    CalculatoriOSView(model: CalculatoriOSViewModel(
         width: defaultWidth,
         height: defaultHeight,
         isTranslator: false,
@@ -45,7 +73,7 @@ struct CalculatoriOSView: View {
 }
 
 #Preview("Light") {
-    CalculatoriOSView(model: ViewModel(
+    CalculatoriOSView(model: CalculatoriOSViewModel(
         width: defaultWidth,
         height: defaultHeight,
         isTranslator: false,
