@@ -30,7 +30,7 @@ import Neumorphic
         /// ignore long press, except for clear button --> clear all
         if let model = self as? KeyModel {
             if let s = model.symbolKey {
-                if s.op.isEqual(to: ClearOperation.back) {
+                if s.op.isEqual(to: ClearOperation.clear) || s.op.isEqual(to: ClearOperation.back) {
                     model.callback(KeyModel(op: ClearOperation.clear))
                 }
             }
