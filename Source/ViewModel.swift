@@ -64,10 +64,10 @@ import SwiftGmp
             } else {
                 if isScientific {
                     width = standardWidth
-                    keyboard.standardKeyboard(width: width, height: height * 0.5)
+                    keyboard.scientificKeyboard(width: width, height: height * 0.5)
                 } else {
                     width = standardWidth
-                    keyboard.scientificKeyboard(width: width, height: height)
+                    keyboard.standardKeyboard(width: width, height: height)
                 }
             }
         }

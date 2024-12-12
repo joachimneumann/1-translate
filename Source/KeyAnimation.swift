@@ -17,7 +17,7 @@ import Neumorphic
     private var secondAnimationTimer: Timer? = nil
     private var downTime: Double = 0.15
     private var upTime  : Double = 0.15
-    private var downTimerDelay: Double = 0.25
+    private var downTimerDelay: Double = 0.20
    
     var callback: (KeyAnimation) -> () = { _ in
         print("NOT IMPLEMENTED CALLBACK")
@@ -27,7 +27,7 @@ import Neumorphic
     let animation2Factor: Double = 0.5//1.0 - 0.25
     
     func longPress() {
-        print("key longPress \(isPressed)")
+        /// ignore long press, except for clear button --> clear all
         if let model = self as? KeyModel {
             if let s = model.symbolKey {
                 if s.op.isEqual(to: ClearOperation.back) {
