@@ -12,8 +12,9 @@ import SwiftGmp
 @Observable class KeyModel: KeyAnimation {
     private var flagImage: Image? = nil
     var symbolKey: SymbolKeyModel? = nil
-    var diameter: CGFloat = 0
-    
+    var width: CGFloat = 0
+    var height: CGFloat = 0
+
     init(flagName: String) {
         flagImage = Image(flagName)
         super.init()
@@ -27,10 +28,11 @@ import SwiftGmp
         }
     }
     
-    func setDiameter(_ diameter: CGFloat) {
-        self.diameter = diameter
+    func setSize(_ size: CGSize) {
+        self.width = size.width
+        self.height = size.height
         if let m = symbolKey {
-            m.newSize(CGSize(width: diameter, height: diameter))
+            m.newSize(CGSize(width: width, height: height))
         }
     }
         
@@ -89,14 +91,14 @@ import SwiftGmp
     
     var flag: AnyView? {
         if let flag = flagImage {
-            let borderWidth: CGFloat = diameter * 0.1//25
+            let borderWidth: CGFloat = min(width, height) * 0.1//25
             return AnyView(
                 flag
                     .resizable()
                     .scaledToFill()
                     .brightness(flagBrightness)
                     .clipShape(Circle())
-                    .frame(width: diameter - 2 * borderWidth, height: diameter - 2 * borderWidth)
+                    .frame(width: width - 2 * borderWidth, height: height - 2 * borderWidth)
                     .scaleEffect(flagScale)
             )
         }
@@ -118,8 +120,8 @@ struct Demo: View {
 //        m1 = KeyModel(flagName: flagName)
         m2 = KeyModel(op: InplaceOperation.sqr)
         m1 = KeyModel(op: InplaceOperation.sqrt)
-        m2.setDiameter(100)
-        m1.setDiameter(100)
+        m2.setSize(CGSize(width: 150, height: 80))
+        m1.setSize(CGSize(width: 150, height: 80))
     }
     
     var body: some View {

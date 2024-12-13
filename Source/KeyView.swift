@@ -13,12 +13,12 @@ struct KeyView: View {
     var body: some View {
         ZStack {
             Color.Neumorphic.main
-                .frame(width: key.diameter, height: key.diameter)
-                .clipShape(Circle())
-                .neumorphicKey(diameter: key.diameter, key.visualState)
+                .frame(width: key.width, height: key.height)
+                .clipShape(Capsule())
+                .neumorphicKey(width: key.width, height: key.height, key.visualState)
             key.view
         }
-        .keyGestures(key: key, diameter: key.diameter)
+        .keyGestures(key: key, width: key.width, height: key.height)
     }
 }
 

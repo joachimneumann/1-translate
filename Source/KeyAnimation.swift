@@ -36,10 +36,6 @@ import Neumorphic
             }
         }
     }
-
-    func down(_ location: CGPoint, in diameter: CGFloat) {
-        down(location, in: CGSize(width: diameter, height: diameter))
-    }
     
     func down(_ location: CGPoint, in size: CGSize) {
         //print("key down isPressed \(isPressed)")

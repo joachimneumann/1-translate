@@ -15,30 +15,31 @@ public enum VisualState {
 }
 
 public struct NeumorphicKey: ViewModifier {
-    let diameter: CGFloat
+    let width: CGFloat
+    let height: CGFloat
     var visualState: VisualState
     
     public func body(content: Content) -> some View {
         switch visualState {
         case .up:
             content
-                .softOuterShadow(offset: 0.075 * diameter, radius: 0.0375 * diameter)
+                .softOuterShadow(offset: 0.075 * min(width, height), radius: 0.0375 * min(width, height))
         case .center:
             content
                 .softOuterShadow(
                     darkShadow:  Color.clear,
                     lightShadow: Color.clear,
-                    offset: 0.075 * diameter, radius: 0)
-                .softInnerShadow(Circle(), size: CGSize(width: diameter, height: diameter), darkShadow: Color.clear, lightShadow: Color.clear, radius: 0.125 * diameter)
+                    offset: 0.075 * min(width, height), radius: 0)
+                .softInnerShadow(Capsule(), size: CGSize(width: width, height: height), darkShadow: Color.clear, lightShadow: Color.clear, radius: 0.125 * min(width, height))
         case .down:
             content
-                .softInnerShadow(Circle(), size: CGSize(width: diameter, height: diameter), darkShadow: Color.Neumorphic.darkShadow, lightShadow: Color.Neumorphic.lightShadow, radius: 0.125 * diameter)
+                .softInnerShadow(Capsule(), size: CGSize(width: width, height: height), darkShadow: Color.Neumorphic.darkShadow, lightShadow: Color.Neumorphic.lightShadow, radius: 0.125 * min(width, height))
         }
     }
 }
 
 extension View {
-    public func neumorphicKey(diameter: CGFloat, _ visualState: VisualState) -> some View {
-        self.modifier(NeumorphicKey(diameter: diameter, visualState: visualState))
+    public func neumorphicKey(width: CGFloat, height: CGFloat, _ visualState: VisualState) -> some View {
+        self.modifier(NeumorphicKey(width: width, height: height, visualState: visualState))
     }
 }

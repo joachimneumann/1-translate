@@ -51,7 +51,7 @@ extension KeyboardModel {
 
         for row in keyMatrix {
             for k in row {
-                k.setDiameter(diameter)
+                k.setSize(CGSize(width: diameterHorizontal, height: diameterVertical))
             }
         }
     }
@@ -126,7 +126,7 @@ extension KeyboardModel {
 
         for row in keyMatrix {
             for k in row {
-                k.setDiameter(diameter)
+                k.setSize(CGSize(width: diameterHorizontal, height: diameterVertical))
             }
         }
     }
