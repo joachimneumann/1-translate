@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AA6DBCB52CE075A800B5E0F1"
-               BuildableName = "Calculator_iOS.app"
-               BlueprintName = "Calculator_iOS"
+               BuildableName = "NeuCalc_iOS.app"
+               BlueprintName = "NeuCalc_iOS"
                ReferencedContainer = "container:Calculator.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,8 +45,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AA6DBCB52CE075A800B5E0F1"
-            BuildableName = "Calculator_iOS.app"
-            BlueprintName = "Calculator_iOS"
+            BuildableName = "NeuCalc_iOS.app"
+            BlueprintName = "NeuCalc_iOS"
             ReferencedContainer = "container:Calculator.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AA6DBCB52CE075A800B5E0F1"
-            BuildableName = "Calculator_iOS.app"
-            BlueprintName = "Calculator_iOS"
+            BuildableName = "NeuCalc_iOS.app"
+            BlueprintName = "NeuCalc_iOS"
             ReferencedContainer = "container:Calculator.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

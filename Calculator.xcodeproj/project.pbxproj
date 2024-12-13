@@ -140,7 +140,7 @@
 		AA61B4B62CEDF7CD009A916E /* OLDFlagKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OLDFlagKey.swift; sourceTree = "<group>"; };
 		AA6352B02B296C3B00CABC0C /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		AA6DBCAC2CE070FD00B5E0F1 /* OLDViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OLDViewModel.swift; sourceTree = "<group>"; };
-		AA6DBCB62CE075A800B5E0F1 /* Calculator_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA6DBCB62CE075A800B5E0F1 /* NeuCalc_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NeuCalc_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA6F2BC52CFB65FA00EEB2A6 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		AA6F2BCA2CFB665A00EEB2A6 /* KeyboardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardModel.swift; sourceTree = "<group>"; };
 		AA6F2BCF2CFB677D00EEB2A6 /* PopulateKeyboards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulateKeyboards.swift; sourceTree = "<group>"; };
@@ -151,13 +151,13 @@
 		AA9C3F692CBF33C100F64EFA /* OLDSmallKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OLDSmallKeyboard.swift; sourceTree = "<group>"; };
 		AA9C3F6C2CBF373600F64EFA /* OLDKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OLDKeyboardView.swift; sourceTree = "<group>"; };
 		AA9F5BB82CF1CC2600570570 /* OLDFlagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OLDFlagView.swift; sourceTree = "<group>"; };
-		AAB5EA192CE4945F00D76292 /* Translate_Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Translate_Mac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAB5EA192CE4945F00D76292 /* LinguaCalc_Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LinguaCalc_Mac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AABEFC122972A8780023A3C9 /* OLDKeyColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OLDKeyColor.swift; sourceTree = "<group>"; };
 		AACCD0772B43A89A00D545C5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = "../1-translate-tests/README.md"; sourceTree = "<group>"; };
 		AAE3F5312CE1809900146B91 /* OLDKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OLDKeyboard.swift; sourceTree = "<group>"; };
 		AAE3F5342CE194D400146B91 /* OLDTextKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OLDTextKey.swift; sourceTree = "<group>"; };
 		AAE426F629597AE3005FE365 /* OLDScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OLDScreen.swift; sourceTree = "<group>"; };
-		AAE4EB182CE4606700036518 /* Calculator_Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator_Mac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAE4EB182CE4606700036518 /* NeuCalc_Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NeuCalc_Mac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -176,7 +176,7 @@
 				TranslateViewModel.swift,
 				TranslationResult.swift,
 			);
-			target = AAB5EA182CE4945F00D76292 /* Translate_Mac */;
+			target = AAB5EA182CE4945F00D76292 /* LinguaCalc_Mac */;
 		};
 		AAFCC5BF2CE46237009E42FA /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -184,7 +184,7 @@
 				OLDCalculatoriOSKeyboard.swift,
 				OLDCalculatoriOSViewModel.swift,
 			);
-			target = AAE4EB172CE4606700036518 /* Calculator_Mac */;
+			target = AAE4EB172CE4606700036518 /* NeuCalc_Mac */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -262,9 +262,9 @@
 			isa = PBXGroup;
 			children = (
 				AA08C7BE272EDA48001B8575 /* Calculator.app */,
-				AA6DBCB62CE075A800B5E0F1 /* Calculator_iOS.app */,
-				AAE4EB182CE4606700036518 /* Calculator_Mac.app */,
-				AAB5EA192CE4945F00D76292 /* Translate_Mac.app */,
+				AA6DBCB62CE075A800B5E0F1 /* NeuCalc_iOS.app */,
+				AAE4EB182CE4606700036518 /* NeuCalc_Mac.app */,
+				AAB5EA192CE4945F00D76292 /* LinguaCalc_Mac.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -311,9 +311,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AA08C7BD272EDA48001B8575 /* Translate_iOS */ = {
+		AA08C7BD272EDA48001B8575 /* LinguaCalc_iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AA08C7E2272EDA4A001B8575 /* Build configuration list for PBXNativeTarget "Translate_iOS" */;
+			buildConfigurationList = AA08C7E2272EDA4A001B8575 /* Build configuration list for PBXNativeTarget "LinguaCalc_iOS" */;
 			buildPhases = (
 				AA08C7BA272EDA48001B8575 /* Sources */,
 				AA08C7BB272EDA48001B8575 /* Frameworks */,
@@ -328,14 +328,14 @@
 				AA8544C82CE8D4AF00CE1996 /* TranslateiOS */,
 				AAD0EE012CE041DD008C9610 /* Translate */,
 			);
-			name = Translate_iOS;
+			name = LinguaCalc_iOS;
 			productName = xx;
 			productReference = AA08C7BE272EDA48001B8575 /* Calculator.app */;
 			productType = "com.apple.product-type.application";
 		};
-		AA6DBCB52CE075A800B5E0F1 /* Calculator_iOS */ = {
+		AA6DBCB52CE075A800B5E0F1 /* NeuCalc_iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AA6DBCC12CE075AA00B5E0F1 /* Build configuration list for PBXNativeTarget "Calculator_iOS" */;
+			buildConfigurationList = AA6DBCC12CE075AA00B5E0F1 /* Build configuration list for PBXNativeTarget "NeuCalc_iOS" */;
 			buildPhases = (
 				AA6DBCB22CE075A800B5E0F1 /* Sources */,
 				AA6DBCB32CE075A800B5E0F1 /* Frameworks */,
@@ -348,18 +348,18 @@
 			fileSystemSynchronizedGroups = (
 				AA6DBCB72CE075A900B5E0F1 /* CalculatoriOS */,
 			);
-			name = Calculator_iOS;
+			name = NeuCalc_iOS;
 			packageProductDependencies = (
 				AA6DBCCB2CE0774800B5E0F1 /* SwiftGmp */,
 				AA5B25B82D02A32D00AE4449 /* Neumorphic */,
 			);
 			productName = CalculatoriOS;
-			productReference = AA6DBCB62CE075A800B5E0F1 /* Calculator_iOS.app */;
+			productReference = AA6DBCB62CE075A800B5E0F1 /* NeuCalc_iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		AAB5EA182CE4945F00D76292 /* Translate_Mac */ = {
+		AAB5EA182CE4945F00D76292 /* LinguaCalc_Mac */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AAB5EA272CE4946000D76292 /* Build configuration list for PBXNativeTarget "Translate_Mac" */;
+			buildConfigurationList = AAB5EA272CE4946000D76292 /* Build configuration list for PBXNativeTarget "LinguaCalc_Mac" */;
 			buildPhases = (
 				AAB5EA152CE4945F00D76292 /* Sources */,
 				AAB5EA162CE4945F00D76292 /* Frameworks */,
@@ -372,19 +372,19 @@
 			fileSystemSynchronizedGroups = (
 				AAB5EA1A2CE4945F00D76292 /* TranslateMac */,
 			);
-			name = Translate_Mac;
+			name = LinguaCalc_Mac;
 			packageProductDependencies = (
 				AAB5EA382CE4962100D76292 /* SwiftGmp */,
 				AAB5EA3A2CE4963100D76292 /* NumberTranslator */,
 				AA8A6B7C2CF8C76D00759D93 /* Neumorphic */,
 			);
 			productName = TranslateMac;
-			productReference = AAB5EA192CE4945F00D76292 /* Translate_Mac.app */;
+			productReference = AAB5EA192CE4945F00D76292 /* LinguaCalc_Mac.app */;
 			productType = "com.apple.product-type.application";
 		};
-		AAE4EB172CE4606700036518 /* Calculator_Mac */ = {
+		AAE4EB172CE4606700036518 /* NeuCalc_Mac */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AAE4EB242CE4606800036518 /* Build configuration list for PBXNativeTarget "Calculator_Mac" */;
+			buildConfigurationList = AAE4EB242CE4606800036518 /* Build configuration list for PBXNativeTarget "NeuCalc_Mac" */;
 			buildPhases = (
 				AAE4EB142CE4606700036518 /* Sources */,
 				AAE4EB152CE4606700036518 /* Frameworks */,
@@ -397,13 +397,13 @@
 			fileSystemSynchronizedGroups = (
 				AAE4EB192CE4606700036518 /* CalculatorMac */,
 			);
-			name = Calculator_Mac;
+			name = NeuCalc_Mac;
 			packageProductDependencies = (
 				AAFCC5C22CE46278009E42FA /* SwiftGmp */,
 				AA5B25BA2D02A33400AE4449 /* Neumorphic */,
 			);
 			productName = CalculatorMac;
-			productReference = AAE4EB182CE4606700036518 /* Calculator_Mac.app */;
+			productReference = AAE4EB182CE4606700036518 /* NeuCalc_Mac.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -447,10 +447,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AA6DBCB52CE075A800B5E0F1 /* Calculator_iOS */,
-				AAE4EB172CE4606700036518 /* Calculator_Mac */,
-				AA08C7BD272EDA48001B8575 /* Translate_iOS */,
-				AAB5EA182CE4945F00D76292 /* Translate_Mac */,
+				AA6DBCB52CE075A800B5E0F1 /* NeuCalc_iOS */,
+				AAE4EB172CE4606700036518 /* NeuCalc_Mac */,
+				AA08C7BD272EDA48001B8575 /* LinguaCalc_iOS */,
+				AAB5EA182CE4945F00D76292 /* LinguaCalc_Mac */,
 			);
 		};
 /* End PBXProject section */
@@ -836,8 +836,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -876,8 +875,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1060,7 +1058,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AA08C7E2272EDA4A001B8575 /* Build configuration list for PBXNativeTarget "Translate_iOS" */ = {
+		AA08C7E2272EDA4A001B8575 /* Build configuration list for PBXNativeTarget "LinguaCalc_iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AA08C7E3272EDA4A001B8575 /* Debug */,
@@ -1069,7 +1067,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AA6DBCC12CE075AA00B5E0F1 /* Build configuration list for PBXNativeTarget "Calculator_iOS" */ = {
+		AA6DBCC12CE075AA00B5E0F1 /* Build configuration list for PBXNativeTarget "NeuCalc_iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AA6DBCC22CE075AA00B5E0F1 /* Debug */,
@@ -1078,7 +1076,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AAB5EA272CE4946000D76292 /* Build configuration list for PBXNativeTarget "Translate_Mac" */ = {
+		AAB5EA272CE4946000D76292 /* Build configuration list for PBXNativeTarget "LinguaCalc_Mac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AAB5EA252CE4946000D76292 /* Debug */,
@@ -1087,7 +1085,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AAE4EB242CE4606800036518 /* Build configuration list for PBXNativeTarget "Calculator_Mac" */ = {
+		AAE4EB242CE4606800036518 /* Build configuration list for PBXNativeTarget "NeuCalc_Mac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AAE4EB252CE4606800036518 /* Debug */,

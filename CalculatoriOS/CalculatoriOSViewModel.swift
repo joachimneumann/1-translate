@@ -14,11 +14,15 @@ import SwiftUI
         if new == .landscapeLeft || new == .landscapeRight {
             if isPortrait {
                 isPortrait = false
+                isScientific = true
+                populateKeyboard()
                 print("\(new) --> landscape")
             }
         } else if new == .portrait || new == .portraitUpsideDown {
             if !isPortrait {
                 isPortrait = true
+                isScientific = false
+                populateKeyboard()
                 print("\(new) --> portrait")
             }
         }

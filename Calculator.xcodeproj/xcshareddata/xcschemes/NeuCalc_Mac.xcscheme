@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AAE4EB172CE4606700036518"
-               BuildableName = "Calculator_Mac.app"
-               BlueprintName = "Calculator_Mac"
+               BuildableName = "NeuCalc_Mac.app"
+               BlueprintName = "NeuCalc_Mac"
                ReferencedContainer = "container:Calculator.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,8 +45,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AAE4EB172CE4606700036518"
-            BuildableName = "Calculator_Mac.app"
-            BlueprintName = "Calculator_Mac"
+            BuildableName = "NeuCalc_Mac.app"
+            BlueprintName = "NeuCalc_Mac"
             ReferencedContainer = "container:Calculator.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AAE4EB172CE4606700036518"
-            BuildableName = "Calculator_Mac.app"
-            BlueprintName = "Calculator_Mac"
+            BuildableName = "NeuCalc_Mac.app"
+            BlueprintName = "NeuCalc_Mac"
             ReferencedContainer = "container:Calculator.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

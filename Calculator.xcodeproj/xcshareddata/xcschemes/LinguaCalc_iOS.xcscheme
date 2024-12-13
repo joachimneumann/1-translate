@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AA08C7BD272EDA48001B8575"
                BuildableName = "Calculator.app"
-               BlueprintName = "Translate_iOS"
+               BlueprintName = "LinguaCalc_iOS"
                ReferencedContainer = "container:Calculator.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -78,7 +78,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AA08C7BD272EDA48001B8575"
             BuildableName = "Calculator.app"
-            BlueprintName = "Translate_iOS"
+            BlueprintName = "LinguaCalc_iOS"
             ReferencedContainer = "container:Calculator.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -95,7 +95,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AA08C7BD272EDA48001B8575"
             BuildableName = "Calculator.app"
-            BlueprintName = "Translate_iOS"
+            BlueprintName = "LinguaCalc_iOS"
             ReferencedContainer = "container:Calculator.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
