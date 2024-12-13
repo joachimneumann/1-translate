@@ -21,7 +21,7 @@ struct KeyboardView: View {
                 HStack(spacing: keyboard.spacing) {
                     ForEach(keyboard.keyMatrix[rowIndex], id: \.id) { key in
                         KeyView(key: key)
-                            .frame(width: keyboard.diameter, height: keyboard.diameter)
+                            .frame(width: key.width, height: key.height)
                     }
                 }
             }
@@ -43,7 +43,7 @@ var keyboardPreview: some View {
             HStack {
                 Spacer()
                 KeyboardView(keyboard: keyboard)
-                    .frame(width: keyboard.frame.width, height: keyboard.frame.height)
+                    .frame(width: keyboard.keyboardFrame.width, height: keyboard.keyboardFrame.height)
                 Spacer()
             }
         }

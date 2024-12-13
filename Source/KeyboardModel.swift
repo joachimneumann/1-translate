@@ -13,8 +13,8 @@ import SwiftGmp
     let separatorKey: KeyModel
     
     var keyMatrix: [[KeyModel]] = []
-    var diameter: CGFloat = 0
-    var frame: CGSize = .zero
+    var keyboardFrame: CGSize = .zero
+    var displayFrame: CGSize = .zero
     var padding: CGFloat = 0
     var spacing: CGFloat = 0
 

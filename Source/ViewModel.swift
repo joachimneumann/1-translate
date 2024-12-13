@@ -75,11 +75,11 @@ import SwiftGmp
                 }
             }
         }
-        displayWidth = keyboard.frame.width
+        displayWidth = keyboard.keyboardFrame.width
         if isMac && isScientific {
             displayWidth = 250.0
         }
-        display = Display(floatDisplayWidth: displayWidth - 2 * keyboard.padding, font: AppleFont.systemFont(ofSize: floor(keyboard.diameter / 1.3)), ePadding: 10.0)
+        display = Display(floatDisplayWidth: displayWidth - 2 * keyboard.padding, font: AppleFont.systemFont(ofSize: floor(keyboard.keyboardFrame.height / 1.3)), ePadding: 10.0)
         keyboard.callback = execute
     }
     

@@ -39,19 +39,21 @@ extension KeyboardModel {
         self.keyMatrix.append([bottomLeftKey, zeroKey, separatorKey, equalsKey])
         
         let totalKeysHorizontal = columnCount + keySpacingProportion * (columnCount+1)
-        let diameterHorizontal = availableWidth / totalKeysHorizontal
+        let w = availableWidth / totalKeysHorizontal
         let totalKeysVertical = rowCount + keySpacingProportion * (rowCount+1)
-        let diameterVertical = availableHeight / totalKeysVertical
-        diameter = min(diameterVertical, diameterHorizontal)
-        spacing = diameter * keySpacingProportion
+        let h = availableHeight / totalKeysVertical
+        spacing = min(w, h) * keySpacingProportion
         padding = spacing
-        frame = CGSize(
-            width: diameter * columnCount + spacing * (columnCount+1),
-            height: diameter * rowCount + spacing * (rowCount+1))
+        keyboardFrame = CGSize(
+            width: w * columnCount + spacing * (columnCount+1),
+            height: h * rowCount + spacing * (rowCount+1))
+        displayFrame = CGSize(
+            width: w * columnCount + spacing * (columnCount+1),
+            height: h)
 
         for row in keyMatrix {
             for k in row {
-                k.setSize(CGSize(width: diameterHorizontal, height: diameterVertical))
+                k.setSize(CGSize(width: w, height: h))
             }
         }
     }
@@ -114,19 +116,21 @@ extension KeyboardModel {
             KeyModel(op: EqualOperation.equal)])
         
         let totalKeysHorizontal = columnCount + keySpacingProportion * (columnCount+1)
-        let diameterHorizontal = availableWidth / totalKeysHorizontal
+        let w = availableWidth / totalKeysHorizontal
         let totalKeysVertical = rowCount + keySpacingProportion * (rowCount+1)
-        let diameterVertical = availableHeight / totalKeysVertical
-        diameter = min(diameterVertical, diameterHorizontal)
-        spacing = diameter * keySpacingProportion
+        let h = availableHeight / totalKeysVertical
+        spacing = min(w,h) * keySpacingProportion
         padding = spacing
-        frame = CGSize(
-            width: diameter * columnCount + spacing * (columnCount+1),
-            height: diameter * rowCount + spacing * (rowCount+1))
+        keyboardFrame = CGSize(
+            width: w * columnCount + spacing * (columnCount+1),
+            height: h * rowCount + spacing * (rowCount+1))
+        displayFrame = CGSize(
+            width: w * columnCount + spacing * (columnCount+1),
+            height: h)
 
         for row in keyMatrix {
             for k in row {
-                k.setSize(CGSize(width: diameterHorizontal, height: diameterVertical))
+                k.setSize(CGSize(width: w, height: h))
             }
         }
     }

@@ -10,7 +10,7 @@ import SwiftGmp
 
 @Observable class SymbolKeyModel {
     
-    private var diameter: CGFloat
+    private var symbolDiameter: CGFloat
     var op: any OpProtocol
     var symbol: String
     var textColor: Color
@@ -18,7 +18,7 @@ import SwiftGmp
     init(op: any OpProtocol) {
         self.op = op
         self.symbol = op.getRawValue()
-        self.diameter = 0.0
+        self.symbolDiameter = 0.0
         self.textColor = Color.Neumorphic.text
     }
     
@@ -71,7 +71,7 @@ import SwiftGmp
         default:
             factor = factorScientific
         }
-        self.diameter = min(sizeParameter.width, sizeParameter.height) * factor * 1.1
+        self.symbolDiameter = min(sizeParameter.width, sizeParameter.height) * factor * 1.1
     }
     
     private let sfImageForKey: [String: String] = [
@@ -125,18 +125,18 @@ import SwiftGmp
                     .foregroundColor(textColor)
                     .font(Font.title.weight(.light))
 //                    .colorInvert()
-                    .frame(width: diameter*0.3, height: diameter*0.4))
+                    .frame(width: symbolDiameter*0.3, height: symbolDiameter*0.4))
             } else {
                 return AnyView(Image(systemName: sfImage)
                     .resizable()
                     .foregroundColor(textColor)
                                //.font(Font.title.weight(.regular))
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: diameter * 0.26, height: diameter * 0.26))
+                    .frame(width: symbolDiameter * 0.26, height: symbolDiameter * 0.26))
             }
         } else {
             return AnyView(Text(symbol)
-                .font(.system(size: diameter * 0.26))
+                .font(.system(size: symbolDiameter * 0.26))
                 .foregroundColor(textColor))
         }
     }
@@ -159,7 +159,7 @@ import SwiftGmp
     }
     
     private var one_x: some View {
-        let slashSize = diameter * 0.15
+        let slashSize = symbolDiameter * 0.15
         let fontSize = slashSize * 1.5
         return slashShape(slashSize: slashSize)
             .frame(width: slashSize, height: slashSize)
@@ -185,18 +185,18 @@ import SwiftGmp
                 HStack(spacing: 0.0) {
                     Spacer(minLength: 0.0)
                     Text(base)
-                        .font(.system(size: diameter * 0.26))
+                        .font(.system(size: symbolDiameter * 0.26))
                         .foregroundColor(textColor)
                     Text(exponent)
-                        .font(.system(size: diameter * 0.18))
+                        .font(.system(size: symbolDiameter * 0.18))
                         .foregroundColor(textColor)
-                        .offset(x: 0.0, y: -0.08 * diameter)
+                        .offset(x: 0.0, y: -0.08 * symbolDiameter)
                     Spacer(minLength: 0.0)
                 }
                 Spacer(minLength: 0.0)
             }
         }
-        .frame(width: diameter*0.8, height: diameter*0.8)
+        .frame(width: symbolDiameter*0.8, height: symbolDiameter*0.8)
     }
     
     
@@ -207,18 +207,18 @@ import SwiftGmp
                 HStack(spacing:0.0) {
                     Spacer(minLength: 0.0)
                     Text("log")
-                        .font(.system(size: diameter * 0.26))
+                        .font(.system(size: symbolDiameter * 0.26))
                         .foregroundColor(textColor)
                     Text(base)
-                        .font(.system(size: diameter * 0.18))
+                        .font(.system(size: symbolDiameter * 0.18))
                         .foregroundColor(textColor)
-                        .offset(x: 0.0, y: 0.13 * diameter)
+                        .offset(x: 0.0, y: 0.13 * symbolDiameter)
                     Spacer(minLength: 0.0)
                 }
                 Spacer(minLength: 0.0)
             }
         }
-        .frame(width: diameter*0.8, height: diameter*0.8)
+        .frame(width: symbolDiameter*0.8, height: symbolDiameter*0.8)
     }
     
     private func root(rootSize: CGFloat) -> some View {
@@ -246,7 +246,7 @@ import SwiftGmp
     }
     
     private func rootShapeView(rootDigit: String, underTheRoot: String = "x") -> some View {
-        let rootSize = diameter * 0.7
+        let rootSize = symbolDiameter * 0.7
         let fontSize = rootSize * 0.2
         let xFontSize = rootSize * 0.3
         return root(rootSize: rootSize)
