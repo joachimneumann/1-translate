@@ -64,8 +64,8 @@ extension View {
 
 #Preview("Dark") {
     CalculatoriOSView(model: CalculatoriOSViewModel(
-        width: defaultWidth,
-        height: defaultHeight,
+        devicePortraitWidth: devicePortraitWidth,
+        devicePortraitHeight: devicePortraitHeight,
         isTranslator: false,
         isMac: false,
         isScientific: false))
@@ -74,8 +74,8 @@ extension View {
 
 #Preview("Light") {
     CalculatoriOSView(model: CalculatoriOSViewModel(
-        width: defaultWidth,
-        height: defaultHeight,
+        devicePortraitWidth: devicePortraitWidth,
+        devicePortraitHeight: devicePortraitHeight,
         isTranslator: false,
         isMac: false,
         isScientific: false))

@@ -19,55 +19,59 @@ import SwiftGmp
     let keyboard: KeyboardModel = KeyboardModel()
     var display: Display
     let calculator = Calculator(precision: 100)
-    var width: CGFloat = 100
+    var devicePortraitWidth: CGFloat = 100
+    var devicePortraitHeight: CGFloat
     var scientificWidth: CGFloat
-    var standardWidth: CGFloat
+    var smallKeyboardWidth: CGFloat
     var displayWidth: CGFloat = 0
-    var height: CGFloat
     let isMac: Bool
     let isTranslator: Bool
     var isScientific: Bool
     
-    init(width w: CGFloat, height h: CGFloat, isTranslator: Bool = false, isMac: Bool = false, isScientific: Bool = false) {
+    init(devicePortraitWidth: CGFloat, devicePortraitHeight: CGFloat, isTranslator: Bool = false, isMac: Bool = false, isScientific: Bool = false) {
         self.isTranslator = isTranslator
         self.isMac = isMac
         self.isScientific = isScientific
-        self.standardWidth = w
-        self.scientificWidth = w * 2.345
-        self.height = h
+        self.smallKeyboardWidth = devicePortraitWidth
+        if isMac {
+            self.scientificWidth = devicePortraitWidth * 2.345
+        } else {
+            self.scientificWidth = devicePortraitHeight
+        }
+        self.devicePortraitHeight = devicePortraitHeight
         //print("ViewModel init()")
 //        keyboard.standardKeyboard(width: width, height: height * 0.5)
         display = Display(floatDisplayWidth: 0, font: AppleFont.systemFont(ofSize: 0), ePadding: 0)
         display.left = "0"
-        populateKeyboard()
+        //populateKeyboard()
     }
     
     func populateKeyboard() {
         keyboard.keyMatrix.removeAll()
         if isTranslator {
             if isMac {
-                width = standardWidth
-                keyboard.translatorKeyboard(width: width - 10, height: height - 30)
+                devicePortraitWidth = smallKeyboardWidth
+                keyboard.translatorKeyboard(width: devicePortraitWidth - 10, height: devicePortraitHeight - 30)
             } else {
-                width = standardWidth
-                keyboard.translatorKeyboard(width: width, height: height * 0.5)
+                devicePortraitWidth = smallKeyboardWidth
+                keyboard.translatorKeyboard(width: devicePortraitWidth, height: devicePortraitHeight * 0.5)
             }
         } else {
             if isMac {
                 if isScientific {
-                    width = scientificWidth
-                    keyboard.scientificKeyboard(width: width - 10, height: height - 30)
+                    devicePortraitWidth = scientificWidth
+                    keyboard.scientificKeyboard(width: devicePortraitWidth - 10, height: devicePortraitHeight - 30)
                 } else {
-                    width = standardWidth
-                    keyboard.standardKeyboard(width: width - 10, height: height - 30)
+                    devicePortraitWidth = smallKeyboardWidth
+                    keyboard.standardKeyboard(width: devicePortraitWidth - 10, height: devicePortraitHeight - 30)
                 }
             } else {
                 if isScientific {
-                    width = standardWidth
-                    keyboard.scientificKeyboard(width: width, height: height * 0.5)
+                    devicePortraitWidth = smallKeyboardWidth
+                    keyboard.scientificKeyboard(width: devicePortraitHeight, height: devicePortraitWidth * 0.8)
                 } else {
-                    width = standardWidth
-                    keyboard.standardKeyboard(width: width, height: height)
+                    devicePortraitWidth = smallKeyboardWidth
+                    keyboard.standardKeyboard(width: devicePortraitHeight, height: devicePortraitWidth)
                 }
             }
         }
@@ -82,10 +86,10 @@ import SwiftGmp
     func toggleScientific() {
         isScientific.toggle()
         if isMac && isScientific {
-            width *= 2.345
+            devicePortraitWidth *= 2.345
         }
         if isMac && !isScientific {
-            width /= 2.345
+            devicePortraitWidth /= 2.345
         }
         populateKeyboard()
     }

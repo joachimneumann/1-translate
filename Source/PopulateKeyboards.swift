@@ -102,7 +102,7 @@ extension KeyboardModel {
             KeyModel(op: DigitOperation.three),
             KeyModel(op: TwoOperantOperation.add)])
         self.keyMatrix.append([
-            KeyModel(op: ControlOperation.calc),
+            bottomLeftKey,
             KeyModel(op: InplaceOperation.sinh),
             KeyModel(op: InplaceOperation.cosh),
             KeyModel(op: InplaceOperation.tanh),
@@ -139,20 +139,20 @@ extension KeyboardModel {
 
     
     func standardKeyboard(width availableWidth: CGFloat, height availableHeight: CGFloat) {
-        smallKeyboard(keySpacingProportion: 0.3, bottomLeftKey: KeyModel(op: ControlOperation.calc), availableWidth: availableWidth, availableHeight: availableHeight)
+        smallKeyboard(keySpacingProportion: 0.3, bottomLeftKey: KeyModel(op: ControlOperation.settings), availableWidth: availableWidth, availableHeight: availableHeight)
     }
     
     func scientificKeyboard(width availableWidth: CGFloat, height availableHeight: CGFloat) {
-        scientificKeyboard(keySpacingProportion: 0.3, bottomLeftKey: KeyModel(op: ControlOperation.calc), availableWidth: availableWidth, availableHeight: availableHeight)
+        scientificKeyboard(keySpacingProportion: 0.3, bottomLeftKey: KeyModel(op: ControlOperation.settings), availableWidth: availableWidth, availableHeight: availableHeight)
     }
     
 }
 
 #if os(iOS)
 import UIKit
-let defaultWidth = UIScreen.main.bounds.width
-let defaultHeight = UIScreen.main.bounds.height
-let defaultSize = CGSize(width: defaultWidth, height: defaultHeight)
+let devicePortraitWidth = UIScreen.main.bounds.width
+let devicePortraitHeight = UIScreen.main.bounds.height
+let devicePortraitSize = CGSize(width: devicePortraitWidth, height: devicePortraitHeight)
 #elseif os(macOS)
 import AppKit
 let defaultWidth = NSScreen.main?.visibleFrame.width ?? 800

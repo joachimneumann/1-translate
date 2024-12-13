@@ -1,7 +1,7 @@
 iOS Calculator:
   narrower Keyboard
   Scientific: 90 degree rotation
-  capsule keys???
+  capsule keys!
   settings back to normal: set to zero ??
   copy and paste of full precision
   
