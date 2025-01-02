@@ -59,17 +59,27 @@ import SwiftGmp
             }
         }
         keyboard.keyMatrix.removeAll()
+        let displayFontSize: CGFloat
         if isTranslator {
             keyboard.translatorKeyboard(width: width - 10, height: height * 0.5)
+            displayFrame.height = keyboard.keyboardFrame.height * 0.22
+            displayFontSize = floor(displayFrame.width * 0.015)
         } else {
-            keyboard.calculatorKeyboard(width: width, height: height * 0.75)
+            if isScientific {
+                keyboard.scientificKeyboard(width: width, height: height * 0.75)
+                displayFrame.height = keyboard.keyboardFrame.height * 0.2
+                displayFontSize = floor(displayFrame.width * 0.13)
+            } else {
+                keyboard.calculatorKeyboard(width: width, height: height * 0.75)
+                displayFrame.height = keyboard.keyboardFrame.height * 0.22
+                displayFontSize = floor(displayFrame.width * 0.015)
+            }
         }
         displayFrame.width = keyboard.keyboardFrame.width
-        displayFrame.height = keyboard.keyboardFrame.height * 0.22
         if isMac && isScientific {
             displayFrame.width = 250.0
         }
-        display = Display(floatDisplayWidth: displayFrame.width - 2 * keyboard.padding, font: AppleFont.systemFont(ofSize: floor(displayFrame.width * 0.15)), ePadding: 10.0)
+        display = Display(floatDisplayWidth: displayFrame.width - 2 * keyboard.padding, font: AppleFont.systemFont(ofSize: displayFontSize), ePadding: 10.0)
         keyboard.callback = execute
     }
     
