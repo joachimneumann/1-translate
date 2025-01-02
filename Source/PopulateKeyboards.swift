@@ -9,7 +9,8 @@ import SwiftUI
 import SwiftGmp
 
 extension KeyboardModel {
-    private func smallKeyboard(keySpacingProportion: CGFloat, bottomLeftKey: KeyModel, availableWidth: CGFloat, availableHeight: CGFloat) {
+    
+    private func smallKeyboard(bottomLeftKey: KeyModel) {
         let changeSignKey = KeyModel(op: InplaceOperation.changeSign)
         let percentKey = KeyModel(op: PercentOperation.percent)
         let divideKey = KeyModel(op: TwoOperantOperation.div)
@@ -37,19 +38,25 @@ extension KeyboardModel {
         self.keyMatrix.append([fourKey, fiveKey, sixKey, subtractKey])
         self.keyMatrix.append([oneKey, twoKey, threeKey, addKey])
         self.keyMatrix.append([bottomLeftKey, zeroKey, separatorKey, equalsKey])
-        
+    }
+    
+    private func smallKeyboard(availableWidth: CGFloat, availableHeight: CGFloat, keySpacingProportion: CGFloat, bottomLeftKey: KeyModel, isSquare: Bool = false) {
+        smallKeyboard(bottomLeftKey: bottomLeftKey)
+
         let totalKeysHorizontal = columnCount + keySpacingProportion * (columnCount+1)
-        let w = availableWidth / totalKeysHorizontal
+        var w = availableWidth / totalKeysHorizontal
         let totalKeysVertical = rowCount + keySpacingProportion * (rowCount+1)
-        let h = availableHeight / totalKeysVertical
+        var h = availableHeight / totalKeysVertical
+        if isSquare {
+            let min = min(w, h)
+            w = min
+            h = min
+        }
         spacing = min(w, h) * keySpacingProportion
         padding = spacing
         keyboardFrame = CGSize(
             width: w * columnCount + spacing * (columnCount+1),
             height: h * rowCount + spacing * (rowCount+1))
-        displayFrame = CGSize(
-            width: w * columnCount + spacing * (columnCount+1),
-            height: h)
 
         for row in keyMatrix {
             for k in row {
@@ -124,9 +131,6 @@ extension KeyboardModel {
         keyboardFrame = CGSize(
             width: w * columnCount + spacing * (columnCount+1),
             height: h * rowCount + spacing * (rowCount+1))
-        displayFrame = CGSize(
-            width: w * columnCount + spacing * (columnCount+1),
-            height: h)
 
         for row in keyMatrix {
             for k in row {
@@ -138,12 +142,11 @@ extension KeyboardModel {
     
 
     func translatorKeyboard(width availableWidth: CGFloat, height availableHeight: CGFloat) {
-        smallKeyboard(keySpacingProportion: 0.2, bottomLeftKey: KeyModel(flagName: "English"), availableWidth: availableWidth, availableHeight: availableHeight)
+        smallKeyboard(availableWidth: availableWidth, availableHeight: availableHeight, keySpacingProportion: 0.3, bottomLeftKey: KeyModel(flagName: "English"))
     }
-
     
-    func standardKeyboard(width availableWidth: CGFloat, height availableHeight: CGFloat) {
-        smallKeyboard(keySpacingProportion: 0.3, bottomLeftKey: KeyModel(op: ControlOperation.settings), availableWidth: availableWidth, availableHeight: availableHeight)
+    func calculatorKeyboard(width availableWidth: CGFloat, height availableHeight: CGFloat) {
+        smallKeyboard(availableWidth: availableWidth, availableHeight: availableHeight, keySpacingProportion: 0.3, bottomLeftKey: KeyModel(flagName: "English"), isSquare: true)
     }
     
     func scientificKeyboard(width availableWidth: CGFloat, height availableHeight: CGFloat) {

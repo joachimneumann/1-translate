@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct CalculatoriOSApp: App {
-    let model = CalculatoriOSViewModel(devicePortraitWidth: devicePortraitWidth, devicePortraitHeight: devicePortraitHeight, isTranslator: false, isMac: false, isScientific: false)
+    let model = CalculatoriOSViewModel(deviceWidth: devicePortraitWidth, deviceHeight: devicePortraitHeight, isTranslator: false, isMac: false)
     var body: some Scene {
         WindowGroup {
             CalculatoriOSView(model: model)

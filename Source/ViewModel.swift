@@ -17,81 +17,65 @@ import SwiftGmp
     var radDeg: RadDeg = .deg
     var second: Bool = false
     let keyboard: KeyboardModel = KeyboardModel()
+    var displayFrame: CGSize = .zero
     var display: Display
     let calculator = Calculator(precision: 100)
-    var devicePortraitWidth: CGFloat = 100
-    var devicePortraitHeight: CGFloat
-    var scientificWidth: CGFloat
-    var smallKeyboardWidth: CGFloat
-    var displayWidth: CGFloat = 0
+    var width: CGFloat = 100
+    var height: CGFloat = 100
+    var deviceWidth: CGFloat
+    var deviceHeight: CGFloat
     let isMac: Bool
     let isTranslator: Bool
     var isScientific: Bool
     
-    init(devicePortraitWidth: CGFloat, devicePortraitHeight: CGFloat, isTranslator: Bool = false, isMac: Bool = false, isScientific: Bool = false) {
+    init(deviceWidth: CGFloat, deviceHeight: CGFloat, isTranslator: Bool = false, isMac: Bool = false) {
         self.isTranslator = isTranslator
         self.isMac = isMac
-        self.isScientific = isScientific
-        self.smallKeyboardWidth = devicePortraitWidth
-        if isMac {
-            self.scientificWidth = devicePortraitWidth * 2.345
-        } else {
-            self.scientificWidth = devicePortraitHeight
-        }
-        self.devicePortraitHeight = devicePortraitHeight
-        //print("ViewModel init()")
-//        keyboard.standardKeyboard(width: width, height: height * 0.5)
+        self.isScientific = false
+        self.deviceWidth = deviceWidth
+        self.deviceHeight = deviceHeight
         display = Display(floatDisplayWidth: 0, font: AppleFont.systemFont(ofSize: 0), ePadding: 0)
         display.left = "0"
-        //populateKeyboard()
+        setWidth()
     }
     
-    func populateKeyboard() {
+    func setWidth() {
+        if isMac {
+            self.width = deviceWidth
+            self.height = deviceHeight
+        } else {
+            if isTranslator {
+                self.width = deviceWidth
+                self.height = deviceHeight
+            } else {
+                if isScientific {
+                    self.width = deviceHeight
+                    self.height = deviceWidth
+                } else {
+                    // not scientific
+                    self.width = deviceWidth
+                    self.height = deviceHeight
+                }
+            }
+        }
         keyboard.keyMatrix.removeAll()
         if isTranslator {
-            if isMac {
-                devicePortraitWidth = smallKeyboardWidth
-                keyboard.translatorKeyboard(width: devicePortraitWidth - 10, height: devicePortraitHeight - 30)
-            } else {
-                devicePortraitWidth = smallKeyboardWidth
-                keyboard.translatorKeyboard(width: devicePortraitWidth, height: devicePortraitHeight * 0.5)
-            }
+            keyboard.translatorKeyboard(width: width - 10, height: height * 0.5)
         } else {
-            if isMac {
-                if isScientific {
-                    devicePortraitWidth = scientificWidth
-                    keyboard.scientificKeyboard(width: devicePortraitWidth - 10, height: devicePortraitHeight - 30)
-                } else {
-                    devicePortraitWidth = smallKeyboardWidth
-                    keyboard.standardKeyboard(width: devicePortraitWidth - 10, height: devicePortraitHeight - 30)
-                }
-            } else {
-                if isScientific {
-                    devicePortraitWidth = smallKeyboardWidth
-                    keyboard.scientificKeyboard(width: devicePortraitHeight, height: devicePortraitWidth * 0.8)
-                } else {
-                    devicePortraitWidth = smallKeyboardWidth
-                    keyboard.standardKeyboard(width: devicePortraitHeight, height: devicePortraitWidth)
-                }
-            }
+            keyboard.calculatorKeyboard(width: width, height: height * 0.75)
         }
-        displayWidth = keyboard.keyboardFrame.width
+        displayFrame.width = keyboard.keyboardFrame.width
+        displayFrame.height = keyboard.keyboardFrame.height * 0.22
         if isMac && isScientific {
-            displayWidth = 250.0
+            displayFrame.width = 250.0
         }
-        display = Display(floatDisplayWidth: displayWidth - 2 * keyboard.padding, font: AppleFont.systemFont(ofSize: floor(keyboard.keyboardFrame.height / 1.3)), ePadding: 10.0)
+        display = Display(floatDisplayWidth: displayFrame.width - 2 * keyboard.padding, font: AppleFont.systemFont(ofSize: floor(displayFrame.width * 0.15)), ePadding: 10.0)
         keyboard.callback = execute
     }
     
     func toggleScientific() {
         isScientific.toggle()
-        if isMac && isScientific {
-            devicePortraitWidth *= 2.345
-        }
-        if isMac && !isScientific {
-            devicePortraitWidth /= 2.345
-        }
-        populateKeyboard()
+        setWidth()
     }
     
     func process() {

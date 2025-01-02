@@ -14,7 +14,6 @@ import SwiftGmp
     
     var keyMatrix: [[KeyModel]] = []
     var keyboardFrame: CGSize = .zero
-    var displayFrame: CGSize = .zero
     var padding: CGFloat = 0
     var spacing: CGFloat = 0
 

@@ -21,7 +21,7 @@ struct CalculatoriOSView: View {
                 NumberDisplay(display: model.display)
                     .padding(.horizontal, model.keyboard.padding)
                     .padding(.bottom, model.keyboard.padding * 0.2)
-                    .frame(width: model.keyboard.displayFrame.width, height: model.keyboard.displayFrame.height)
+                    .frame(width: model.displayFrame.width, height: model.displayFrame.height)
                 HStack {
                     Spacer()
                     KeyboardView(keyboard: model.keyboard)
@@ -64,21 +64,19 @@ extension View {
 
 #Preview("Dark") {
     CalculatoriOSView(model: CalculatoriOSViewModel(
-        devicePortraitWidth: devicePortraitWidth,
-        devicePortraitHeight: devicePortraitHeight,
+        deviceWidth: devicePortraitWidth,
+        deviceHeight: devicePortraitHeight,
         isTranslator: false,
-        isMac: false,
-        isScientific: false))
+        isMac: false))
         .preferredColorScheme(.dark)
 }
 
 #Preview("Light") {
     CalculatoriOSView(model: CalculatoriOSViewModel(
-        devicePortraitWidth: devicePortraitWidth,
-        devicePortraitHeight: devicePortraitHeight,
+        deviceWidth: devicePortraitWidth,
+        deviceHeight: devicePortraitHeight,
         isTranslator: false,
-        isMac: false,
-        isScientific: false))
+        isMac: false))
         .preferredColorScheme(.light)
 }
 
