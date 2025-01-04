@@ -33,6 +33,7 @@ extension KeyboardModel {
         let zeroKey = KeyModel(op: DigitOperation.zero)
         let equalsKey = KeyModel(op: EqualOperation.equal)
         
+        self.keyMatrix.removeAll()
         self.keyMatrix.append([clearKey, changeSignKey, percentKey, divideKey])
         self.keyMatrix.append([sevenKey, eightKey, nineKey, multiplyKey])
         self.keyMatrix.append([fourKey, fiveKey, sixKey, subtractKey])
@@ -65,7 +66,8 @@ extension KeyboardModel {
         }
     }
     
-    private func scientificKeyboard(keySpacingProportion: CGFloat, bottomLeftKey: KeyModel, availableWidth: CGFloat, availableHeight: CGFloat) {        
+    private func scientificKeyboard(keySpacingProportion: CGFloat, bottomLeftKey: KeyModel, availableWidth: CGFloat, availableHeight: CGFloat) {
+        self.keyMatrix.removeAll()
         self.keyMatrix.append([
             KeyModel(op: ParenthesisOperation.left),
             KeyModel(op: ParenthesisOperation.right),
@@ -154,15 +156,3 @@ extension KeyboardModel {
     }
     
 }
-
-#if os(iOS)
-import UIKit
-let devicePortraitWidth = UIScreen.main.bounds.width
-let devicePortraitHeight = UIScreen.main.bounds.height
-let devicePortraitSize = CGSize(width: devicePortraitWidth, height: devicePortraitHeight)
-#elseif os(macOS)
-import AppKit
-let defaultWidth = NSScreen.main?.visibleFrame.width ?? 800
-let defaultHeight = NSScreen.main?.visibleFrame.height ?? 600
-let defaultSize = CGSize(width: defaultWidth, height: defaultHeight)
-#endif

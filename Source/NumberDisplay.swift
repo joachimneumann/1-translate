@@ -52,7 +52,6 @@ var numberDisplayPreview: some View {
     return ZStack {
         Rectangle()
             .foregroundColor(Color.Neumorphic.main)
-            .ignoresSafeArea()
         VStack(spacing: 0.0) {
             Spacer()
             NumberDisplay(display: display)

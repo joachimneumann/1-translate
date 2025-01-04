@@ -95,7 +95,6 @@
 //            }
 //            .transition(.move(edge: .bottom))
 //            .animation(.easeInOut, value: isPresented)
-//            .ignoresSafeArea()
 //        }
 //    }
 //}

@@ -10,14 +10,21 @@ import SwiftUI
 
 @main
 struct TranslateiOSApp: App {
-    let viewModel = TranslateViewModel(width: defaultWidth, height: defaultHeight)
     var body: some Scene {
         WindowGroup {
-            NavigationStack {
-//                Demo()
-                TranslateiOSView(model: viewModel)
+            GeometryReader { geometry in
+                let width = min(geometry.size.width, geometry.size.height)
+                let height = max(geometry.size.width, geometry.size.height)
+                let model = TranslateViewModel(width: width, height: height, isMac: false)
+                TranslateiOSView(model: model)
             }
         }
+//        WindowGroup {
+//            NavigationStack {
+////                Demo()
+//                TranslateiOSView(model: viewModel)
+//            }
+//        }
     }
 }
 

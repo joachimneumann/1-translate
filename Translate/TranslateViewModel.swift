@@ -24,9 +24,9 @@ class TranslateViewModel: ViewModel {
     }
 #endif
     
-    override init(width w: CGFloat, height h: CGFloat, isTranslator: Bool = true, isMac: Bool = false, isScientific: Bool = false) {
+    init(width: CGFloat, height: CGFloat, isMac: Bool = false) {
         translationManager = TranslationManager()
-        super.init(width: w, height: h, isTranslator: true, isMac: false, isScientific: false)
+        super.init(width: width, height: height, isTranslator: true, isMac: isMac)
 
         
 

@@ -17,18 +17,17 @@ struct TranslateiOSView: View {
         ZStack {
             Rectangle()
                 .foregroundColor(Color.Neumorphic.main)
-                .ignoresSafeArea()
             VStack(spacing: 0.0) {
-                TranslateDisplay(uiFont: AppleFont.systemFont(ofSize: ceil(model.keyboard.diameter * 0.4), weight: .light), translationResult: model.translationManager.result)
+                TranslateDisplay(uiFont: AppleFont.systemFont(ofSize: 20, weight: .light), translationResult: model.translationManager.result)
                     //.background(.orange)
                     .padding(.horizontal, model.keyboard.padding)
                     .padding(.bottom, model.keyboard.padding * 0.2)
-                    .frame(width: model.keyboard.frame.width)
+                    .frame(width: model.keyboard.keyboardFrame.width)
                     //.background(.yellow)
                 NumberDisplay(display: model.display)
                     .padding(.horizontal, model.keyboard.padding)
                     .padding(.bottom, model.keyboard.padding * 0.2)
-                    .frame(width: model.keyboard.frame.width, height: model.keyboard.diameter * 1.2)
+                    .frame(width: model.keyboard.keyboardFrame.width, height: model.keyboard.keyboardFrame.height * 1.2)
                     //.background(Color.yellow)
                 HStack {
                     Spacer()
@@ -37,7 +36,7 @@ struct TranslateiOSView: View {
 //                            .transition(.opacity)
                     } else {
                         KeyboardView(keyboard: model.keyboard)
-                            .frame(width: model.keyboard.frame.width, height: model.keyboard.frame.height)
+                            .frame(width: model.keyboard.keyboardFrame.width, height: model.keyboard.keyboardFrame.height)
                     }
                     Spacer()
                 }
@@ -146,12 +145,12 @@ struct TranslateiOSView: View {
 
 
 #Preview("Dark") {
-    TranslateiOSView(model: TranslateViewModel(width: defaultWidth, height: defaultHeight))
+    TranslateiOSView(model: TranslateViewModel(width: 400, height: 600))
         .preferredColorScheme(.dark)
 }
 
 #Preview("Light") {
-    TranslateiOSView(model: TranslateViewModel(width: defaultWidth, height: defaultHeight))
+    TranslateiOSView(model: TranslateViewModel(width: 400, height: 600))
         .preferredColorScheme(.light)
 }
 

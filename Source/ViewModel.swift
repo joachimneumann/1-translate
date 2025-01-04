@@ -22,60 +22,43 @@ import SwiftGmp
     let calculator = Calculator(precision: 100)
     var width: CGFloat = 100
     var height: CGFloat = 100
-    var deviceWidth: CGFloat
-    var deviceHeight: CGFloat
     let isMac: Bool
     let isTranslator: Bool
     var isScientific: Bool
+    var isPortrait: Bool = true
     
-    init(deviceWidth: CGFloat, deviceHeight: CGFloat, isTranslator: Bool = false, isMac: Bool = false) {
+    init(width: CGFloat, height: CGFloat, isTranslator: Bool = false, isMac: Bool = false) {
         self.isTranslator = isTranslator
         self.isMac = isMac
-        self.isScientific = false
-        self.deviceWidth = deviceWidth
-        self.deviceHeight = deviceHeight
+        self.width = width
+        self.height = height
+        self.isScientific = !isTranslator && (width > height)
         display = Display(floatDisplayWidth: 0, font: AppleFont.systemFont(ofSize: 0), ePadding: 0)
         display.left = "0"
         setWidth()
     }
     
     func setWidth() {
-        if isMac {
-            self.width = deviceWidth
-            self.height = deviceHeight
-        } else {
-            if isTranslator {
-                self.width = deviceWidth
-                self.height = deviceHeight
-            } else {
-                if isScientific {
-                    self.width = deviceHeight
-                    self.height = deviceWidth
-                } else {
-                    // not scientific
-                    self.width = deviceWidth
-                    self.height = deviceHeight
-                }
-            }
-        }
-        keyboard.keyMatrix.removeAll()
         let displayFontSize: CGFloat
         if isTranslator {
             keyboard.translatorKeyboard(width: width - 10, height: height * 0.5)
+            displayFrame.width = keyboard.keyboardFrame.width
             displayFrame.height = keyboard.keyboardFrame.height * 0.22
-            displayFontSize = floor(displayFrame.width * 0.015)
+            displayFontSize = floor(displayFrame.width * 0.15)
         } else {
             if isScientific {
-                keyboard.scientificKeyboard(width: width, height: height * 0.75)
+                keyboard.scientificKeyboard(width: width, height: height * 0.99)
+                displayFrame.width = keyboard.keyboardFrame.width
                 displayFrame.height = keyboard.keyboardFrame.height * 0.2
-                displayFontSize = floor(displayFrame.width * 0.13)
+                displayFontSize = floor(displayFrame.width * 0.04)
             } else {
                 keyboard.calculatorKeyboard(width: width, height: height * 0.75)
+                displayFrame.width = keyboard.keyboardFrame.width
                 displayFrame.height = keyboard.keyboardFrame.height * 0.22
-                displayFontSize = floor(displayFrame.width * 0.015)
+                displayFontSize = floor(displayFrame.width * 0.15)
             }
         }
-        displayFrame.width = keyboard.keyboardFrame.width
+//        print(displayFontSize)
         if isMac && isScientific {
             displayFrame.width = 250.0
         }

@@ -32,12 +32,11 @@ struct KeyboardView: View {
 
 var keyboardPreview: some View {
     let keyboard: KeyboardModel = KeyboardModel()
-    let _ = keyboard.scientificKeyboard(width: 550, height: 300)
+    let _ = keyboard.calculatorKeyboard(width: 750, height: 500)
 
     return ZStack {
         Rectangle()
             .foregroundColor(Color.Neumorphic.main)
-            .ignoresSafeArea()
         VStack {
             Spacer()
             HStack {
