@@ -8,7 +8,6 @@
 import SwiftUI
 
 @Observable class CalculatoriOSViewModel: ViewModel {
-
     override init(width: CGFloat, height: CGFloat, isTranslator: Bool = false, isMac: Bool = false) {
         super.init(width: width, height: height, isTranslator: isTranslator, isMac: isMac)
         print("isPortrait \(isPortrait)")
