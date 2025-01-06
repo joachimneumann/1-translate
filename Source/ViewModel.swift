@@ -47,7 +47,7 @@ import SwiftGmp
             displayFontSize = floor(displayFrame.width * 0.15)
         } else {
             if isScientific {
-                keyboard.scientificKeyboard(width: width, height: height * 0.99)
+                keyboard.scientificKeyboard(width: width, height: height * 0.75)
                 displayFrame.width = keyboard.keyboardFrame.width
                 displayFrame.height = keyboard.keyboardFrame.height * 0.2
                 displayFontSize = floor(displayFrame.width * 0.04)

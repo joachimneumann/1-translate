@@ -128,11 +128,11 @@ extension KeyboardModel {
         let w = availableWidth / totalKeysHorizontal
         let totalKeysVertical = rowCount + keySpacingProportion * (rowCount+1)
         let h = availableHeight / totalKeysVertical
-        spacing = min(w,h) * keySpacingProportion
+        spacing = w * keySpacingProportion
         padding = spacing
         keyboardFrame = CGSize(
-            width: w * columnCount + spacing * (columnCount+1),
-            height: h * rowCount + spacing * (rowCount+1))
+            width: w * columnCount + spacing * (columnCount-1) + 2 * padding,
+            height: h * rowCount + spacing * (rowCount-1) + 2 * padding)
 
         for row in keyMatrix {
             for k in row {

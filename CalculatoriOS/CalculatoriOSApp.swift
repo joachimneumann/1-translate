@@ -12,7 +12,7 @@ struct CalculatoriOSApp: App {
     var body: some Scene {
         WindowGroup {
             GeometryReader { geometry in
-                let model = CalculatoriOSViewModel(width: geometry.size.width, height: geometry.size.height, isTranslator: false, isMac: false)
+                let model = ViewModel(width: geometry.size.width, height: geometry.size.height)
                 CalculatoriOSView(model: model)
             }
         }

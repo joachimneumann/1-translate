@@ -8,7 +8,7 @@ import SwiftUI
 import Neumorphic
 
 struct CalculatoriOSView: View {
-    let model: CalculatoriOSViewModel
+    let model: ViewModel
     var body: some View {
         ZStack {
             Rectangle()
@@ -29,7 +29,7 @@ struct CalculatoriOSView: View {
     GeometryReader { geometry in
         let width = min(geometry.size.width, geometry.size.height)
         let height = max(geometry.size.width, geometry.size.height)
-        let model = CalculatoriOSViewModel(width: width, height: height, isTranslator: false, isMac: false)
+        let model = ViewModel(width: width, height: height)
         CalculatoriOSView(model: model)
             .preferredColorScheme(.dark)
     }
@@ -39,7 +39,7 @@ struct CalculatoriOSView: View {
     GeometryReader { geometry in
         let width = min(geometry.size.width, geometry.size.height)
         let height = max(geometry.size.width, geometry.size.height)
-        let model = CalculatoriOSViewModel(width: width, height: height, isTranslator: false, isMac: false)
+        let model = ViewModel(width: width, height: height)
         CalculatoriOSView(model: model)
             .preferredColorScheme(.light)
     }
