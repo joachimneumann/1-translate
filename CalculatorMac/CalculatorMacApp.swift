@@ -12,8 +12,8 @@ import SwiftUI
 @main
 struct CalculatorMacApp: App {
     let model: ViewModel = ViewModel(
-        deviceWidth: 250,
-        deviceHeight: 380,
+        width: 250,
+        height: 380,
         isTranslator: false,
         isMac: true)
     var body: some Scene {
