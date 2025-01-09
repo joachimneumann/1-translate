@@ -31,8 +31,8 @@ import SwiftGmp
             clearKey.symbolKey?.op = ClearOperation.back
             clearKey.symbolKey?.symbol = ClearOperation.back.getRawValue()
         } else {
-//            clearKey.symbolKey?.op = ClearOperation.clear
-//            clearKey.symbolKey?.symbol = ClearOperation.clear.getRawValue()
+            clearKey.symbolKey?.op = ClearOperation.clear
+            clearKey.symbolKey?.symbol = ClearOperation.clear.getRawValue()
         }
     }
 

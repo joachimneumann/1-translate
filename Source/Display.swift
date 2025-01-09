@@ -14,23 +14,6 @@ class Display: MonoFontDisplay {
     var separatorCharacter: Character = "."
     let textPadding: CGFloat = 10
     
-//    override var left: String {
-//        didSet {
-//            DispatchQueue.main.async {
-//                self.objectWillChange.send()
-//            }
-//        }
-//    }
-//
-//    override var right: String? {
-//        didSet {
-//            DispatchQueue.main.async {
-//                self.objectWillChange.send()
-//            }
-//        }
-//    }
-//    @Published var rightWidth: CGFloat?
-    
     private let floatDisplayWidth: CGFloat
     private var narrowestDigitWidth: CGFloat
     var widestDigitWidth: CGFloat

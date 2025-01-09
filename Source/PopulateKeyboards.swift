@@ -148,7 +148,7 @@ extension KeyboardModel {
     }
     
     func calculatorKeyboard(width availableWidth: CGFloat, height availableHeight: CGFloat) {
-        smallKeyboard(availableWidth: availableWidth, availableHeight: availableHeight, keySpacingProportion: 0.3, bottomLeftKey: KeyModel(flagName: "English"), isSquare: true)
+        smallKeyboard(availableWidth: availableWidth, availableHeight: availableHeight, keySpacingProportion: 0.3, bottomLeftKey: KeyModel(op: ControlOperation.settings), isSquare: true)
     }
     
     func scientificKeyboard(width availableWidth: CGFloat, height availableHeight: CGFloat) {
