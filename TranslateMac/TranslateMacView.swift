@@ -30,15 +30,18 @@ struct TranslateMacView: View {
             .padding()
             NumberDisplay(display: model.display)
                 .padding(.horizontal, model.keyboard.padding)
-                .padding(.bottom, model.keyboard.padding * 0.2)
-                .frame(width: model.keyboard.frame.width, height: model.keyboard.diameter * 1.2)
+                .frame(height: model.displayFrame.height)
+//            NumberDisplay(display: model.display)
+//                .padding(.horizontal, model.keyboard.padding)
+//                .padding(.bottom, model.keyboard.padding * 0.2)
+//                .frame(width: model.keyboard.frame.width, height: model.keyboard.diameter * 1.2)
 //            if viewModel.showLanguageSelector {
 //                ScrollingKeyboardView(model: scrollingModel)
 //                    .frame(width: model.keyboardWidth, height: model.keyboardHeight)
 //                    .transition(.opacity)
 //            } else {
             KeyboardView(keyboard: model.keyboard)
-                .frame(width: model.keyboard.frame.width, height: model.keyboard.frame.height)
+//                .frame(width: model.keyboard.frame.width, height: model.keyboard.frame.height)
 //            }
         }
         .animation(.easeInOut(duration: 0.6), value: model.showLanguageSelector)

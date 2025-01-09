@@ -11,17 +11,16 @@ import SwiftUI
 
 @main
 struct CalculatorMacApp: App {
-    let model: ViewModel = ViewModel(
-        width: 250,
-        height: 380,
-        isTranslator: false,
+    let model: ViewModel = ViewModel(isTranslator: false,
         isMac: true)
     var body: some Scene {
         WindowGroup {
-//            Demo()
             CalculatorMacView(model: model)
-                .frame(width: model.width, height: model.height)
-            //.background(.yellow)
+                .onAppear {
+                    print("App: appear")
+                    model.updateDimensions(width: 576, height: 322)
+                }
+                .frame(width: 576, height: 322)
         }
         .windowResizability(.contentSize)
         .windowStyle(HiddenTitleBarWindowStyle())

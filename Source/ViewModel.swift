@@ -30,6 +30,9 @@ import SwiftGmp
     init(isTranslator: Bool = false, isMac: Bool = false) {
         self.isTranslator = isTranslator
         self.isMac = isMac
+        if isMac {
+            isScientific = true
+        }
         display = Display(floatDisplayWidth: 0, font: AppleFont.systemFont(ofSize: 0), ePadding: 0)
         display.left = "0"
         setWidth()
@@ -38,7 +41,11 @@ import SwiftGmp
     func updateDimensions(width: CGFloat, height: CGFloat) {
         self.width = width
         self.height = height
-        self.isScientific = !isTranslator && (width > height)
+        if isMac {
+            self.isScientific = true
+        } else {
+            self.isScientific = !isTranslator && (width > height)
+        }
         setWidth()
     }
     

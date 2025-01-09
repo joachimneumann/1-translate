@@ -24,9 +24,9 @@ class TranslateViewModel: ViewModel {
     }
 #endif
     
-    init(width: CGFloat, height: CGFloat, isMac: Bool = false) {
+    init(isMac: Bool = false) {
         translationManager = TranslationManager()
-        super.init(width: width, height: height, isTranslator: true, isMac: isMac)
+        super.init(isTranslator: true, isMac: isMac)
 
         
 

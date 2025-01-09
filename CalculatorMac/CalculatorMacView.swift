@@ -19,45 +19,52 @@ struct CalculatorMacView: View {
                     .padding(.bottom, model.keyboard.keyboardFrame.height - 100)
                 Spacer()
             }
+            
+            
+            Rectangle()
+                .foregroundColor(Color.Neumorphic.main)
+                .ignoresSafeArea()
             VStack(spacing: 0.0) {
-                Spacer(minLength: 0.0)
-                if model.isScientific && model.isMac {
-                    HStack(spacing: 0.0) {
-                        Spacer(minLength: 0.0)
-                        NumberDisplay(display: model.display)
-                            .padding(.horizontal, model.keyboard.padding)
-                            .frame(width: model.displayWidth, height: model.keyboard.diameter * 1.4)
-                            .padding(.bottom, model.keyboard.diameter * 0.1)
-                    }
-                    //.background(.yellow)
-                } else {
-                    NumberDisplay(display: model.display)
-                        .padding(.horizontal, model.keyboard.padding)
-                        .frame(width: model.displayWidth, height: model.keyboard.diameter * 1.4)
-                        .padding(.bottom, model.keyboard.diameter * 0.2)
-                }
+                NumberDisplay(display: model.display)
+                    .padding(.horizontal, model.keyboard.padding)
+//                    .frame(height: model.displayFrame.height)
+                //Spacer()
                 KeyboardView(keyboard: model.keyboard)
-                    .frame(width: model.keyboard.frame.width, height: model.keyboard.frame.height)
-                    .padding(.bottom, model.keyboard.padding * 0.2)
             }
+            
+//            VStack(spacing: 0.0) {
+//                Spacer(minLength: 0.0)
+//                if model.isScientific && model.isMac {
+//                    HStack(spacing: 0.0) {
+//                        Spacer(minLength: 0.0)
+//                        NumberDisplay(display: model.display)
+//                            .padding(.horizontal, model.keyboard.padding)
+//                            .frame(width: model.displayWidth, height: model.keyboard.diameter * 1.4)
+//                            .padding(.bottom, model.keyboard.diameter * 0.1)
+//                    }
+//                    //.background(.yellow)
+//                } else {
+//                    NumberDisplay(display: model.display)
+//                        .padding(.horizontal, model.keyboard.padding)
+//                        .frame(width: model.displayWidth, height: model.keyboard.diameter * 1.4)
+//                        .padding(.bottom, model.keyboard.diameter * 0.2)
+//                }
+//                KeyboardView(keyboard: model.keyboard)
+//                    .frame(width: model.keyboard.frame.width, height: model.keyboard.frame.height)
+//                    .padding(.bottom, model.keyboard.padding * 0.2)
+//            }
         }
     }
 }
 
 #Preview("Dark") {
-    CalculatorMacView(model: ViewModel(
-        width: 500,
-        height: 400,
-        isTranslator: false,
+    CalculatorMacView(model: ViewModel(isTranslator: false,
         isMac: true))
         .preferredColorScheme(.dark)
 }
 
 #Preview("Light") {
-    CalculatorMacView(model: ViewModel(
-        width: 500,
-        height: 400,
-        isTranslator: false,
+    CalculatorMacView(model: ViewModel(isTranslator: false,
         isMac: true))
         .preferredColorScheme(.light)
 }
