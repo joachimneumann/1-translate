@@ -16,7 +16,7 @@ struct CalculatorMacView: View {
                     .font(.system(size: 12))
                     .foregroundColor(Color.Neumorphic.text)
                     .padding(.leading, 20)
-                    .padding(.bottom, model.keyboard.frame.height - 100)
+                    .padding(.bottom, model.keyboard.keyboardFrame.height - 100)
                 Spacer()
             }
             VStack(spacing: 0.0) {
@@ -49,8 +49,7 @@ struct CalculatorMacView: View {
         width: 500,
         height: 400,
         isTranslator: false,
-        isMac: true,
-        isScientific: true))
+        isMac: true))
         .preferredColorScheme(.dark)
 }
 
@@ -59,7 +58,6 @@ struct CalculatorMacView: View {
         width: 500,
         height: 400,
         isTranslator: false,
-        isMac: true,
-        isScientific: true))
+        isMac: true))
         .preferredColorScheme(.light)
 }
