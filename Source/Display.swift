@@ -8,28 +8,28 @@
 import SwiftGmp
 import SwiftUI
 
-class Display: MonoFontDisplay, ObservableObject {
+class Display: MonoFontDisplay {
     var groupingCharacter: Character? = nil
     var groupSize: Int
     var separatorCharacter: Character = "."
     let textPadding: CGFloat = 10
     
-    override var left: String {
-        didSet {
-            DispatchQueue.main.async {
-                self.objectWillChange.send()
-            }
-        }
-    }
-
-    override var right: String? {
-        didSet {
-            DispatchQueue.main.async {
-                self.objectWillChange.send()
-            }
-        }
-    }
-    @Published var rightWidth: CGFloat?
+//    override var left: String {
+//        didSet {
+//            DispatchQueue.main.async {
+//                self.objectWillChange.send()
+//            }
+//        }
+//    }
+//
+//    override var right: String? {
+//        didSet {
+//            DispatchQueue.main.async {
+//                self.objectWillChange.send()
+//            }
+//        }
+//    }
+//    @Published var rightWidth: CGFloat?
     
     private let floatDisplayWidth: CGFloat
     private var narrowestDigitWidth: CGFloat

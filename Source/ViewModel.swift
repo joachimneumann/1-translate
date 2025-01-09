@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftGmp
 
-@Observable class ViewModel {
+@Observable class ViewModel: ObservableObject {
     
     enum RadDeg {
         case rad
@@ -24,17 +24,21 @@ import SwiftGmp
     var height: CGFloat = 100
     let isMac: Bool
     let isTranslator: Bool
-    var isScientific: Bool
+    var isScientific: Bool = false
     var isPortrait: Bool = true
     
-    init(width: CGFloat, height: CGFloat, isTranslator: Bool = false, isMac: Bool = false) {
+    init(isTranslator: Bool = false, isMac: Bool = false) {
         self.isTranslator = isTranslator
         self.isMac = isMac
+        display = Display(floatDisplayWidth: 0, font: AppleFont.systemFont(ofSize: 0), ePadding: 0)
+        display.left = "0"
+        setWidth()
+    }
+    
+    func updateDimensions(width: CGFloat, height: CGFloat) {
         self.width = width
         self.height = height
         self.isScientific = !isTranslator && (width > height)
-        display = Display(floatDisplayWidth: 0, font: AppleFont.systemFont(ofSize: 0), ePadding: 0)
-        display.left = "0"
         setWidth()
     }
     

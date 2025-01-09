@@ -9,12 +9,30 @@ import SwiftUI
 
 @main
 struct CalculatoriOSApp: App {
+    @StateObject private var model = ViewModel()
+
     var body: some Scene {
         WindowGroup {
             GeometryReader { geometry in
-                let model = ViewModel(width: geometry.size.width, height: geometry.size.height)
                 CalculatoriOSView(model: model)
+                    .onAppear {
+                        model.updateDimensions(width: geometry.size.width, height: geometry.size.height)
+                    }
             }
         }
     }
 }
+//
+//struct CalculatoriOSApp: App {
+//    @StateObject private var model = ViewModel()
+//
+//    var body: some Scene {
+//        WindowGroup {
+//            GeometryReader { geometry in
+//                let _ = print("CalculatoriOSApp GeometryReader")
+//                model.updateDimensions(width: geometry.size.width, height: geometry.size.height)
+//                CalculatoriOSView(model: model)
+//            }
+//        }
+//    }
+//}

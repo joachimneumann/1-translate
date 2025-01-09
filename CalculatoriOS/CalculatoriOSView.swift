@@ -29,7 +29,8 @@ struct CalculatoriOSView: View {
     GeometryReader { geometry in
         let width = min(geometry.size.width, geometry.size.height)
         let height = max(geometry.size.width, geometry.size.height)
-        let model = ViewModel(width: width, height: height)
+        let model = ViewModel()
+        let _ = model.updateDimensions(width: width, height: height)
         CalculatoriOSView(model: model)
             .preferredColorScheme(.dark)
     }
@@ -39,7 +40,8 @@ struct CalculatoriOSView: View {
     GeometryReader { geometry in
         let width = min(geometry.size.width, geometry.size.height)
         let height = max(geometry.size.width, geometry.size.height)
-        let model = ViewModel(width: width, height: height)
+        let model = ViewModel()
+        let _ = model.updateDimensions(width: width, height: height)
         CalculatoriOSView(model: model)
             .preferredColorScheme(.light)
     }
