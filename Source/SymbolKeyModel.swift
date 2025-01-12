@@ -25,19 +25,17 @@ import SwiftGmp
     func newSize(_ sizeParameter: CGSize) {
         //print("SymbolKeyModel size \(sizeParameter)")
 #if os(macOS)
-        let factorDigits          = 1.5
+        let factorDigits          = 1.7
         let factorAC              = 1.5
-        let factorBack            = 1.5
-        let factorChangeSign      = 1.25
-        let factorPercent         = 1.12
-        let factorOperator        = 1.04
+        let factorChangeSign      = 1.4
+        let factorPercent         = 1.4
+        let factorOperator        = 1.4
         let factorOperatorX       = factorOperator * 0.86
-        let factorComma           = 1.8
-        let factorScientific      = 1.2
+        let factorComma           = 2.0
+        let factorScientific      = 1.3
 #else
         let factorDigits          = 1.4
         let factorAC              = factorDigits
-        let factorBack            = 1.5
         let factorChangeSign      = 1.23
         let factorPercent         = 1.1
         let factorOperator        = 1.1
@@ -52,8 +50,6 @@ import SwiftGmp
             factor = factorDigits
         case "AC":
             factor = factorAC
-        case "back":
-            factor = factorBack
         case "±":
             factor = factorChangeSign
         case "%":
