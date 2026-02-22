@@ -11,116 +11,129 @@ import Neumorphic
 
 @Observable class KeyAnimation: Identifiable {
     var visualState: Neumorphic.VisualState = .up
-    let id = UUID()  // unique identifier
-    private var isPressed: Bool = false
-    private var downTimer: Timer? = nil
-    private var secondAnimationTimer: Timer? = nil
-    private var downTime: Double = 0.15
-    private var upTime  : Double = 0.15
-    private var downTimerDelay: Double = 0.20
-   
+    let id = UUID()
+
     var callback: (KeyAnimation) -> () = { _ in
         print("NOT IMPLEMENTED CALLBACK")
     }
 
-    let animation1Factor: Double = 0.5//0.25
-    let animation2Factor: Double = 0.5//1.0 - 0.25
-    
+    private var isPressed = false
+    private var pressConfirmationTimer: Timer?
+    private var visualTransitionTimer: Timer?
+
+    private let downTime: Double = 0.15
+    private let upTime: Double = 0.15
+    private let pressConfirmationDelay: Double = 0.20
+
+    private let firstPhaseFactor: Double = 0.5
+    private let secondPhaseFactor: Double = 0.5
+
+    deinit {
+        cancelTimers()
+    }
+
     func longPress() {
-        /// ignore long press, except for clear button --> clear all
+        // Ignore long press, except clear/back -> clear all.
         if let model = self as? KeyModel {
-            if let s = model.symbolKey {
-                if s.op.isEqual(to: ClearOperation.clear) || s.op.isEqual(to: ClearOperation.back) {
+            if let symbol = model.symbolKey {
+                if symbol.op.isEqual(to: ClearOperation.clear) || symbol.op.isEqual(to: ClearOperation.back) {
                     model.callback(KeyModel(op: ClearOperation.clear))
                 }
             }
         }
     }
-    
+
     func down(_ location: CGPoint, in size: CGSize) {
-        //print("key down isPressed \(isPressed)")
-        
         let tolerance: CGFloat = 0.3 * size.width
         let touchRect = CGRect(
             x: -tolerance,
             y: -tolerance,
-            width: size.width + 2.0 * tolerance,
-            height: size.height + 2.0 * tolerance)
-            /// If the finger moves too far away from the key
-            /// handle that like a finger up event
-//        print("key down touchRect \(touchRect)")
-//        print("key down location \(location)")
-//        print("key down touchRect.contains(location) \(touchRect.contains(location))")
+            width: size.width + (2.0 * tolerance),
+            height: size.height + (2.0 * tolerance)
+        )
+
         if touchRect.contains(location) {
-            //print("key down inside isPressed \(isPressed)")
-            if !isPressed {
-                isPressed = true
-                withAnimation(.linear(duration: downTime * animation1Factor)) {
-//                    print("visualDown1")
-                    visualState = .center
-                }
-                if let timer = secondAnimationTimer, timer.isValid {
-                    timer.invalidate()
-                }
-                secondAnimationTimer = Timer.scheduledTimer(withTimeInterval: downTime * animation1Factor, repeats: false) { _ in
-//                    print("visualDown2")
-                    withAnimation(.linear(duration: self.downTime * self.animation2Factor)) {
-                        self.visualState = .down
-                    }
-                }
-                if let timer = downTimer, timer.isValid {
-                    timer.invalidate()
-                }
-                downTimer = Timer.scheduledTimer(withTimeInterval: downTimerDelay, repeats: false) { _ in
-                    self.downTimerFired()
-                }
-            }
+            handleTouchInside()
         } else {
-//            print("key down outside isPressed \(isPressed)")
-            isPressed = false
-            downTimer = nil
-            secondAnimationTimer = nil
-            // no intermediate state when moving outside
-            withAnimation(.linear(duration: upTime)){//} * animation1Factor)) {
-                self.visualState = .up
-            }
+            handleTouchOutside()
         }
     }
 
     func up() {
-//        print("key up isPressed \(isPressed)")
-        if isPressed {
-            callback(self)
-            isPressed = false
-            if downTimer != nil { return }
-            withAnimation(.linear(duration: upTime * animation1Factor)) {
-                self.visualState = .center
-            }
-            if let timer = secondAnimationTimer, timer.isValid {
-                timer.invalidate()
-            }
-            secondAnimationTimer = Timer.scheduledTimer(withTimeInterval: upTime * animation1Factor, repeats: false) { _ in
-                withAnimation(.linear(duration: self.upTime * self.animation2Factor)) {
-                    self.visualState = .up
-                }
-            }
-        }
+        guard isPressed else { return }
+
+        callback(self)
+        isPressed = false
+
+        // Keep original behavior: if release happens before confirmation delay,
+        // wait for the timer callback to drive the release animation.
+        if pressConfirmationTimer != nil { return }
+        animateToUpInTwoPhases()
     }
 
     private func downTimerFired() {
-        downTimer = nil
-        if !isPressed {
-            withAnimation(.linear(duration: upTime * animation1Factor)) {
-                self.visualState = .center
-            }
-            if let timer = secondAnimationTimer, timer.isValid {
-                timer.invalidate()
-            }
-            secondAnimationTimer = Timer.scheduledTimer(withTimeInterval: upTime * animation1Factor, repeats: false) { _ in
-                withAnimation(.linear(duration: self.upTime * self.animation2Factor)) {
-                    self.visualState = .up
-                }
-            }
+        pressConfirmationTimer = nil
+        guard !isPressed else { return }
+        animateToUpInTwoPhases()
+    }
+}
+
+private extension KeyAnimation {
+    func handleTouchInside() {
+        guard !isPressed else { return }
+        isPressed = true
+
+        animateToDownInTwoPhases()
+        schedulePressConfirmation()
+    }
+
+    func handleTouchOutside() {
+        isPressed = false
+        cancelTimers()
+        animate(to: .up, duration: upTime)
+    }
+
+    func animateToDownInTwoPhases() {
+        animate(to: .center, duration: downTime * firstPhaseFactor)
+        scheduleVisualTransition(after: downTime * firstPhaseFactor) {
+            self.animate(to: .down, duration: self.downTime * self.secondPhaseFactor)
+        }
+    }
+
+    func animateToUpInTwoPhases() {
+        animate(to: .center, duration: upTime * firstPhaseFactor)
+        scheduleVisualTransition(after: upTime * firstPhaseFactor) {
+            self.animate(to: .up, duration: self.upTime * self.secondPhaseFactor)
+        }
+    }
+
+    func schedulePressConfirmation() {
+        invalidate(&pressConfirmationTimer)
+        pressConfirmationTimer = Timer.scheduledTimer(withTimeInterval: pressConfirmationDelay, repeats: false) { _ in
+            self.downTimerFired()
+        }
+    }
+
+    func scheduleVisualTransition(after delay: Double, action: @escaping () -> Void) {
+        invalidate(&visualTransitionTimer)
+        visualTransitionTimer = Timer.scheduledTimer(withTimeInterval: delay, repeats: false) { _ in
+            action()
+        }
+    }
+
+    func cancelTimers() {
+        invalidate(&pressConfirmationTimer)
+        invalidate(&visualTransitionTimer)
+    }
+
+    func invalidate(_ timer: inout Timer?) {
+        timer?.invalidate()
+        timer = nil
+    }
+
+    func animate(to state: Neumorphic.VisualState, duration: Double) {
+        withAnimation(.linear(duration: duration)) {
+            visualState = state
         }
     }
 }
