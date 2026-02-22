@@ -18,18 +18,15 @@ import Neumorphic
     }
 
     private var isPressed = false
-    private var pressConfirmationTimer: Timer?
     private var visualTransitionTimer: Timer?
 
     private let downTime: Double = 0.15
     private let upTime: Double = 0.15
-    private let pressConfirmationDelay: Double = 0.20
-
     private let firstPhaseFactor: Double = 0.5
     private let secondPhaseFactor: Double = 0.5
 
     deinit {
-        cancelTimers()
+        cancelVisualTransition()
     }
 
     func longPress() {
@@ -65,15 +62,8 @@ import Neumorphic
         callback(self)
         isPressed = false
 
-        // Keep original behavior: if release happens before confirmation delay,
-        // wait for the timer callback to drive the release animation.
-        if pressConfirmationTimer != nil { return }
-        animateToUpInTwoPhases()
-    }
-
-    private func downTimerFired() {
-        pressConfirmationTimer = nil
-        guard !isPressed else { return }
+        // Release always interrupts a pending press animation.
+        cancelVisualTransition()
         animateToUpInTwoPhases()
     }
 }
@@ -84,12 +74,11 @@ private extension KeyAnimation {
         isPressed = true
 
         animateToDownInTwoPhases()
-        schedulePressConfirmation()
     }
 
     func handleTouchOutside() {
         isPressed = false
-        cancelTimers()
+        cancelVisualTransition()
         animate(to: .up, duration: upTime)
     }
 
@@ -107,28 +96,16 @@ private extension KeyAnimation {
         }
     }
 
-    func schedulePressConfirmation() {
-        invalidate(&pressConfirmationTimer)
-        pressConfirmationTimer = Timer.scheduledTimer(withTimeInterval: pressConfirmationDelay, repeats: false) { _ in
-            self.downTimerFired()
-        }
-    }
-
     func scheduleVisualTransition(after delay: Double, action: @escaping () -> Void) {
-        invalidate(&visualTransitionTimer)
+        cancelVisualTransition()
         visualTransitionTimer = Timer.scheduledTimer(withTimeInterval: delay, repeats: false) { _ in
             action()
         }
     }
 
-    func cancelTimers() {
-        invalidate(&pressConfirmationTimer)
-        invalidate(&visualTransitionTimer)
-    }
-
-    func invalidate(_ timer: inout Timer?) {
-        timer?.invalidate()
-        timer = nil
+    func cancelVisualTransition() {
+        visualTransitionTimer?.invalidate()
+        visualTransitionTimer = nil
     }
 
     func animate(to state: Neumorphic.VisualState, duration: Double) {
