@@ -67,34 +67,49 @@ class Display: MonoFontDisplay, ObservableObject {
 }
 
 func inject(into string: inout String, separatorCharacter: Character, groupingCharacter: Character?, groupSize: Int) {
-    let parts = string.split(separator: ".")
-    var beforeDecimalPoint: String = String(parts[0])
+    guard !string.isEmpty else { return }
 
-    // Insert grouping character if provided
-    if let c = groupingCharacter {
+    // Keep empty subsequences so values like ".5" or "12." remain representable.
+    let parts = string.split(separator: ".", maxSplits: 1, omittingEmptySubsequences: false)
+    guard let firstPart = parts.first else { return }
+
+    var beforeDecimalPoint = String(firstPart)
+
+    if let groupingCharacter {
         var count = beforeDecimalPoint.count
         if groupSize == 32 {
             if count > 3 {
                 count -= 3
-                beforeDecimalPoint.insert(c, at: beforeDecimalPoint.index(beforeDecimalPoint.startIndex, offsetBy: count))
+                if count >= 0 && count <= beforeDecimalPoint.count {
+                    let index = beforeDecimalPoint.index(beforeDecimalPoint.startIndex, offsetBy: count)
+                    beforeDecimalPoint.insert(groupingCharacter, at: index)
+                }
                 while count > 2 {
                     count -= 2
-                    beforeDecimalPoint.insert(c, at: beforeDecimalPoint.index(beforeDecimalPoint.startIndex, offsetBy: count))
+                    if count >= 0 && count <= beforeDecimalPoint.count {
+                        let index = beforeDecimalPoint.index(beforeDecimalPoint.startIndex, offsetBy: count)
+                        beforeDecimalPoint.insert(groupingCharacter, at: index)
+                    } else {
+                        break
+                    }
                 }
             }
         } else {
             while count > 3 {
                 count -= 3
-                beforeDecimalPoint.insert(c, at: beforeDecimalPoint.index(beforeDecimalPoint.startIndex, offsetBy: count))
+                if count >= 0 && count <= beforeDecimalPoint.count {
+                    let index = beforeDecimalPoint.index(beforeDecimalPoint.startIndex, offsetBy: count)
+                    beforeDecimalPoint.insert(groupingCharacter, at: index)
+                } else {
+                    break
+                }
             }
         }
     }
 
     if parts.count == 1 {
-        // No decimal part, reassign self with the grouped integer part
         string = beforeDecimalPoint
-    } else if parts.count == 2 {
-        // Decimal part exists, reassemble with separator and decimal portion
+    } else {
         let afterDecimalPoint = String(parts[1])
         string = beforeDecimalPoint + String(separatorCharacter) + afterDecimalPoint
     }

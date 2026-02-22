@@ -73,7 +73,9 @@ import SwiftGmp
         if isMac && isScientific {
             displayFrame.width = 250.0
         }
+        let previousLeft = display.left
         display = Display(floatDisplayWidth: displayFrame.width - 2 * keyboard.padding, font: AppleFont.systemFont(ofSize: displayFontSize), ePadding: 10.0)
+        display.left = previousLeft.isEmpty ? "0" : previousLeft
         keyboard.callback = execute
     }
     
@@ -83,6 +85,7 @@ import SwiftGmp
     }
     
     func process() {
+        display.objectWillChange.send()
         if calculator.displayBuffer.count > 0 {
             var withGrouping: String = calculator.displayBuffer
             inject(into: &withGrouping, separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter, groupSize: display.groupSize)
