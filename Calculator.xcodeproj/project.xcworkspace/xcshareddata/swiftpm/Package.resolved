@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "NumberTranslator",
+        "repositoryURL": "https://github.com/joachimneumann/NumberTranslator",
+        "state": {
+          "branch": "main",
+          "revision": "c5aa6a3bd286c61099b66d3f029d5d3cbe5a3175",
+          "version": null
+        }
+      },
+      {
+        "package": "SwiftGmp",
+        "repositoryURL": "https://github.com/joachimneumann/SwiftGmp",
+        "state": {
+          "branch": "main",
+          "revision": "ea8285bc3b8d48038de602f91ea30d9be95abd0d",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

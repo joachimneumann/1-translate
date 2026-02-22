@@ -8,7 +8,7 @@
 import SwiftGmp
 import SwiftUI
 
-class Display: MonoFontDisplay {
+class Display: MonoFontDisplay, ObservableObject {
     var groupingCharacter: Character? = nil
     var groupSize: Int
     var separatorCharacter: Character = "."
@@ -19,6 +19,7 @@ class Display: MonoFontDisplay {
     var widestDigitWidth: CGFloat
     let ePadding: CGFloat
     let eDigitWidth: CGFloat
+    var rightWidth: CGFloat = 0.0
 
     private var uiFont: AppleFont
     public var font: Font

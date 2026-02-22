@@ -46,11 +46,10 @@ struct TranslateDisplay: View {
 
 
 var translateDisplayPreview: some View {
-    let viewModel = TranslateViewModel(width: 400, height: 600)
-    let _ = viewModel.translationManager.translateThis("4", to: .german)
+    let previewResult = TranslationResult(displayText: "vier", overline: nil, spokenText: nil)
     return ZStack {
         Color.Neumorphic.main
-        TranslateDisplay(uiFont: AppleFont.systemFont(ofSize: 20, weight: .light), translationResult: viewModel.translationManager.result)
+        TranslateDisplay(uiFont: AppleFont.systemFont(ofSize: 20, weight: .light), translationResult: previewResult)
             .padding(30)
     }
 }
