@@ -18,10 +18,7 @@ import Neumorphic
     private var isPressed = false
     private var visualTransitionTimer: Timer?
 
-    private let downTime: Double = 0.15
-    private let upTime: Double = 0.15
-    private let firstPhaseFactor: Double = 0.5
-    private let secondPhaseFactor: Double = 0.5
+    private let transitionDuration: Double = 0.15
 
     deinit {
         cancelVisualTransition()
@@ -29,13 +26,10 @@ import Neumorphic
 
     func longPress() {
         // Ignore long press, except clear/back -> clear all.
-        if let model = self as? KeyModel {
-            if let symbol = model.symbolKey {
-                if symbol.op.isEqual(to: ClearOperation.clear) || symbol.op.isEqual(to: ClearOperation.back) {
-                    model.callback(KeyModel(op: ClearOperation.clear))
-                }
-            }
-        }
+        guard let model = self as? KeyModel,
+              let op = model.symbolKey?.op,
+              op.isEqual(to: ClearOperation.clear) || op.isEqual(to: ClearOperation.back) else { return }
+        model.callback(KeyModel(op: ClearOperation.clear))
     }
 
     func down(_ location: CGPoint, in size: CGSize) {
@@ -60,9 +54,7 @@ import Neumorphic
         callback(self)
         isPressed = false
 
-        // Release always interrupts a pending press animation.
-        cancelVisualTransition()
-        animateToUpInTwoPhases()
+        transition(to: .up)
     }
 }
 
@@ -71,33 +63,24 @@ private extension KeyAnimation {
         guard !isPressed else { return }
         isPressed = true
 
-        animateToDownInTwoPhases()
+        transition(to: .down)
     }
 
     func handleTouchOutside() {
         isPressed = false
         cancelVisualTransition()
-        animate(to: .up, duration: upTime)
+        animate(to: .up, duration: transitionDuration)
     }
 
-    func animateToDownInTwoPhases() {
-        animate(to: .center, duration: downTime * firstPhaseFactor)
-        scheduleVisualTransition(after: downTime * firstPhaseFactor) {
-            self.animate(to: .down, duration: self.downTime * self.secondPhaseFactor)
-        }
-    }
-
-    func animateToUpInTwoPhases() {
-        animate(to: .center, duration: upTime * firstPhaseFactor)
-        scheduleVisualTransition(after: upTime * firstPhaseFactor) {
-            self.animate(to: .up, duration: self.upTime * self.secondPhaseFactor)
-        }
-    }
-
-    func scheduleVisualTransition(after delay: Double, action: @escaping () -> Void) {
+    func transition(to state: Neumorphic.VisualState) {
+        // A new press or release interrupts the previous transition.
         cancelVisualTransition()
-        visualTransitionTimer = Timer.scheduledTimer(withTimeInterval: delay, repeats: false) { _ in
-            action()
+        let phaseDuration = transitionDuration / 2
+        animate(to: .center, duration: phaseDuration)
+        visualTransitionTimer = Timer.scheduledTimer(withTimeInterval: phaseDuration, repeats: false) { [weak self] _ in
+            guard let self else { return }
+            self.visualTransitionTimer = nil
+            self.animate(to: state, duration: phaseDuration)
         }
     }
 
