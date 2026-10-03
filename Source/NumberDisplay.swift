@@ -12,14 +12,9 @@ struct NumberDisplay: View {
     @ObservedObject var display: Display
 
     @ViewBuilder
-    func TextView(_ text: String, width: CGFloat? = nil) -> some View {
-        if let width = width {
-            Text(text)
-                .frame(width: width, alignment: .leading)
-        } else {
-            Text(text)
-                .frame(alignment: .trailing)
-        }
+    func TextView(_ text: String) -> some View {
+        Text(text)
+            .frame(alignment: .trailing)
     }
 
     
@@ -36,7 +31,7 @@ struct NumberDisplay: View {
                     .foregroundColor(display.isError ? .orange : Color.Neumorphic.text)
                     .font(display.font)
                 if let right = display.right {
-                    TextView(right, width: display.rightWidth)
+                    TextView(right)
                         .font(display.font)
                         .padding(.leading, display.ePadding)
                 }
@@ -70,4 +65,3 @@ var numberDisplayPreview: some View {
     numberDisplayPreview
         .preferredColorScheme(.light)
 }
-

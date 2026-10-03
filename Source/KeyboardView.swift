@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct KeyboardView: View {
-    @State private var navigateToConfigView = false
     var keyboard: KeyboardModel
     
     init(keyboard: KeyboardModel) {

@@ -13,9 +13,7 @@ import Neumorphic
     var visualState: Neumorphic.VisualState = .up
     let id = UUID()
 
-    var callback: (KeyAnimation) -> () = { _ in
-        print("NOT IMPLEMENTED CALLBACK")
-    }
+    var callback: (KeyAnimation) -> () = { _ in }
 
     private var isPressed = false
     private var visualTransitionTimer: Timer?

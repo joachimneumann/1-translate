@@ -24,7 +24,7 @@ class TranslateViewModel: ViewModel {
     }
 #endif
     
-    init(isMac: Bool = false) {
+    init(width: Int, height: Int, isMac: Bool = false) {
         translationManager = TranslationManager()
         super.init(isTranslator: true, isMac: isMac)
 

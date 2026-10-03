@@ -25,7 +25,6 @@ import SwiftGmp
     let isMac: Bool
     let isTranslator: Bool
     var isScientific: Bool = false
-    var isPortrait: Bool = true
     
     init(isTranslator: Bool = false, isMac: Bool = false) {
         self.isTranslator = isTranslator
@@ -69,7 +68,6 @@ import SwiftGmp
                 displayFontSize = floor(displayFrame.width * 0.15)
             }
         }
-//        print(displayFontSize)
         if isMac && isScientific {
             displayFrame.width = 250.0
         }
@@ -96,18 +94,10 @@ import SwiftGmp
                 let raw = calculator.raw
                 display.update(raw: raw)
                 inject(into: &display.left, separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter, groupSize: display.groupSize)
-                if var right = display.right {
-                    inject(into: &right, separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter, groupSize: display.groupSize)
-                    display.rightWidth = display.eDigitWidth + display.widestDigitWidth * CGFloat(right.count - 1)
-                }
             }
         } else {
             let raw = calculator.raw
             display.update(raw: raw)
-            if let right = display.right {
-                display.rightWidth = display.eDigitWidth + display.widestDigitWidth * CGFloat(right.count - 1)
-            }
-
             inject(into: &display.left, separatorCharacter: display.separatorCharacter, groupingCharacter: display.groupingCharacter, groupSize: display.groupSize)
         }
     }

@@ -17,7 +17,6 @@ struct KeyGestures: ViewModifier {
             .simultaneousGesture(
                 DragGesture(minimumDistance: 0)
                     .onChanged { value in
-                        //print("XXX \(value.location)")
                         key.down(value.location, in: CGSize(width: width, height: height))
                     }
                     .onEnded { _ in

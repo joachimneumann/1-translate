@@ -23,9 +23,6 @@ import SwiftGmp
     init(op: any OpProtocol) {
         self.symbolKey = SymbolKeyModel(op: op)
         super.init()
-        if op.isEqual(to: ControlOperation.second) {
-            //isSecond = true
-        }
     }
     
     func setSize(_ size: CGSize) {
@@ -91,7 +88,7 @@ import SwiftGmp
     
     var flag: AnyView? {
         if let flag = flagImage {
-            let borderWidth: CGFloat = min(width, height) * 0.1//25
+            let borderWidth: CGFloat = min(width, height) * 0.1
             return AnyView(
                 flag
                     .resizable()
@@ -107,17 +104,9 @@ import SwiftGmp
 }
 
 struct Demo: View {
-//    let flagName: String
     let m1: KeyModel
     let m2: KeyModel
     init() {
-//        let translationManager = TranslationManager()
-//        if AppleImage(named: translationManager.flagName(.english) + "Sqr") != nil {
-//            flagName = translationManager.flagName(.english) + "Sqr"
-//        } else {
-//            flagName = translationManager.flagName(.english)
-//        }
-//        m1 = KeyModel(flagName: flagName)
         m2 = KeyModel(op: InplaceOperation.sqr)
         m1 = KeyModel(op: InplaceOperation.sqrt)
         m2.setSize(CGSize(width: 150, height: 80))
@@ -136,11 +125,9 @@ struct Demo: View {
                     KeyView(key: m2)
                     Spacer()
                 }
-                //.background(Color.yellow)
             }
             .background(Color.Neumorphic.main)
         }
-//        .frame(width: 300)
     }
 }
 

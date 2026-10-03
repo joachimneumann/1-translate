@@ -23,7 +23,6 @@ import SwiftGmp
     }
     
     func newSize(_ sizeParameter: CGSize) {
-        //print("SymbolKeyModel size \(sizeParameter)")
 #if os(macOS)
         let factorDigits          = 1.7
         let factorAC              = 1.5
@@ -120,13 +119,11 @@ import SwiftGmp
                     .resizable()
                     .foregroundColor(textColor)
                     .font(Font.title.weight(.light))
-//                    .colorInvert()
                     .frame(width: symbolDiameter*0.3, height: symbolDiameter*0.4))
             } else {
                 return AnyView(Image(systemName: sfImage)
                     .resizable()
                     .foregroundColor(textColor)
-                               //.font(Font.title.weight(.regular))
                     .aspectRatio(contentMode: .fit)
                     .frame(width: symbolDiameter * 0.26, height: symbolDiameter * 0.26))
             }
@@ -140,7 +137,6 @@ import SwiftGmp
     private func slashShape(slashSize: CGFloat) -> some View {
         let lineWidth = slashSize * 0.17
         return Path { path in
-            ///print("SlashShape \(height)")
             let steepness: CGFloat = 1.3
             let startX: CGFloat = 0.5 * slashSize - 0.5 * slashSize
             let startY: CGFloat = 0.5 * slashSize + 0.5 * slashSize * steepness
@@ -220,7 +216,6 @@ import SwiftGmp
     private func root(rootSize: CGFloat) -> some View {
         let lineWidth = rootSize * 0.03
         return Path { path in
-            // print("Root")
             let steepness: CGFloat = 2.8
             let f: CGFloat = 0.6
             let startX: CGFloat = 0.5 * rootSize - 0.17 * rootSize
