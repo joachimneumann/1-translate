@@ -27,13 +27,12 @@ import SwiftGmp
     }
     
     func back(_ showArrow: Bool) {
-        if showArrow {
-            clearKey.symbolKey?.op = ClearOperation.back
-            clearKey.symbolKey?.symbol = ClearOperation.back.getRawValue()
-        } else {
-            clearKey.symbolKey?.op = ClearOperation.clear
-            clearKey.symbolKey?.symbol = ClearOperation.clear.getRawValue()
+        let hasDeleteKey = keyMatrix.joined().contains { key in
+            key !== clearKey && key.symbolKey?.op.isEqual(to: ClearOperation.back) == true
         }
+        let op: ClearOperation = showArrow && !hasDeleteKey ? .back : .clear
+        clearKey.symbolKey?.op = op
+        clearKey.symbolKey?.symbol = op.getRawValue()
     }
 
     var rowCount: CGFloat {

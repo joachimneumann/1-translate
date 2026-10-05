@@ -55,8 +55,12 @@ import SwiftGmp
             factor = factorPercent
         case "*":
             factor = factorOperatorX
+        case "back":
+            factor = factorOperator * 1.1
         case "settings":
-            factor = 2.0
+            factor = 1.8
+        case "copy", "paste":
+            factor = 1.3
         case _ where sfImageForKey.keys.contains(symbol):
             factor = factorOperator
         case ",", ".":
@@ -79,6 +83,8 @@ import SwiftGmp
         "%": "percent",
         "back":     "delete.backward",
         "settings": "gear",
+        "copy":     "doc.on.doc",
+        "paste":    "clipboard",
         "calc":     "candybarphone"
     ]
     

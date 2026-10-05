@@ -11,14 +11,17 @@ import Neumorphic
 
 @Observable class KeyAnimation: Identifiable {
     var visualState: Neumorphic.VisualState = .up
+    private(set) var visualResetID = 0
     let id = UUID()
 
     var callback: (KeyAnimation) -> () = { _ in }
 
     private var isPressed = false
+    private var pressStartedAt: TimeInterval?
     private var visualTransitionTimer: Timer?
 
     private let transitionDuration: Double = 0.15
+    private let pressedHoldDuration: Double = 0.06
 
     deinit {
         cancelVisualTransition()
@@ -51,10 +54,21 @@ import Neumorphic
     func up() {
         guard isPressed else { return }
 
+        let releasedEarly = pressStartedAt.map {
+            ProcessInfo.processInfo.systemUptime - $0 < transitionDuration
+        } ?? false
         callback(self)
         isPressed = false
+        pressStartedAt = nil
 
-        transition(to: .up)
+        if releasedEarly {
+            snapToDown()
+            scheduleVisualTransition(after: pressedHoldDuration) { key in
+                key.transition(to: .up)
+            }
+        } else {
+            transition(to: .up)
+        }
     }
 }
 
@@ -62,12 +76,14 @@ private extension KeyAnimation {
     func handleTouchInside() {
         guard !isPressed else { return }
         isPressed = true
+        pressStartedAt = ProcessInfo.processInfo.systemUptime
 
         transition(to: .down)
     }
 
     func handleTouchOutside() {
         isPressed = false
+        pressStartedAt = nil
         cancelVisualTransition()
         animate(to: .up, duration: transitionDuration)
     }
@@ -77,10 +93,28 @@ private extension KeyAnimation {
         cancelVisualTransition()
         let phaseDuration = transitionDuration / 2
         animate(to: .center, duration: phaseDuration)
-        visualTransitionTimer = Timer.scheduledTimer(withTimeInterval: phaseDuration, repeats: false) { [weak self] _ in
+        scheduleVisualTransition(after: phaseDuration) { key in
+            key.animate(to: state, duration: phaseDuration)
+        }
+    }
+
+    func snapToDown() {
+        cancelVisualTransition()
+        var transaction = Transaction(animation: nil)
+        transaction.disablesAnimations = true
+        withTransaction(transaction) {
+            visualState = .down
+            // Recreate the visuals to stop an animation already targeting .down.
+            visualResetID += 1
+        }
+    }
+
+    func scheduleVisualTransition(after delay: TimeInterval, action: @escaping (KeyAnimation) -> Void) {
+        cancelVisualTransition()
+        visualTransitionTimer = Timer.scheduledTimer(withTimeInterval: delay, repeats: false) { [weak self] _ in
             guard let self else { return }
             self.visualTransitionTimer = nil
-            self.animate(to: state, duration: phaseDuration)
+            action(self)
         }
     }
 

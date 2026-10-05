@@ -18,6 +18,7 @@ struct KeyView: View {
                 .neumorphicKey(width: key.width, height: key.height, key.visualState)
             key.view
         }
+        .id(key.visualResetID)
         .keyGestures(key: key, width: key.width, height: key.height)
     }
 }

@@ -10,7 +10,7 @@ import SwiftGmp
 
 extension KeyboardModel {
     
-    private func smallKeyboard(bottomLeftKey: KeyModel) {
+    private func smallKeyboard(bottomLeftKey: KeyModel, deleteKey: KeyModel? = nil) {
         let changeSignKey = KeyModel(op: InplaceOperation.changeSign)
         let percentKey = KeyModel(op: PercentOperation.percent)
         let divideKey = KeyModel(op: TwoOperantOperation.div)
@@ -34,15 +34,19 @@ extension KeyboardModel {
         let equalsKey = KeyModel(op: EqualOperation.equal)
         
         self.keyMatrix.removeAll()
-        self.keyMatrix.append([clearKey, changeSignKey, percentKey, divideKey])
+        if let deleteKey {
+            self.keyMatrix.append([deleteKey, clearKey, percentKey, divideKey])
+        } else {
+            self.keyMatrix.append([clearKey, changeSignKey, percentKey, divideKey])
+        }
         self.keyMatrix.append([sevenKey, eightKey, nineKey, multiplyKey])
         self.keyMatrix.append([fourKey, fiveKey, sixKey, subtractKey])
         self.keyMatrix.append([oneKey, twoKey, threeKey, addKey])
         self.keyMatrix.append([bottomLeftKey, zeroKey, separatorKey, equalsKey])
     }
     
-    private func smallKeyboard(availableWidth: CGFloat, availableHeight: CGFloat, keySpacingProportion: CGFloat, bottomLeftKey: KeyModel, isSquare: Bool = false) {
-        smallKeyboard(bottomLeftKey: bottomLeftKey)
+    private func smallKeyboard(availableWidth: CGFloat, availableHeight: CGFloat, keySpacingProportion: CGFloat, bottomLeftKey: KeyModel, deleteKey: KeyModel? = nil, isSquare: Bool = false) {
+        smallKeyboard(bottomLeftKey: bottomLeftKey, deleteKey: deleteKey)
 
         let totalKeysHorizontal = columnCount + keySpacingProportion * (columnCount+1)
         var w = availableWidth / totalKeysHorizontal
@@ -66,7 +70,7 @@ extension KeyboardModel {
         }
     }
     
-    private func scientificKeyboard(keySpacingProportion: CGFloat, bottomLeftKey: KeyModel, availableWidth: CGFloat, availableHeight: CGFloat) {
+    private func scientificKeyboard(keySpacingProportion: CGFloat, bottomLeftKey: KeyModel, deleteKey: KeyModel? = nil, availableWidth: CGFloat, availableHeight: CGFloat) {
         self.keyMatrix.removeAll()
         self.keyMatrix.append([
             KeyModel(op: ParenthesisOperation.left),
@@ -75,8 +79,8 @@ extension KeyboardModel {
             KeyModel(op: MemoryOperation.addToM),
             KeyModel(op: MemoryOperation.subFromM),
             KeyModel(op: MemoryOperation.recallM),
-            clearKey,
-            KeyModel(op: InplaceOperation.changeSign),
+            deleteKey ?? clearKey,
+            deleteKey != nil ? clearKey : KeyModel(op: InplaceOperation.changeSign),
             KeyModel(op: PercentOperation.percent),
             KeyModel(op: TwoOperantOperation.div)])
         self.keyMatrix.append([
@@ -119,7 +123,7 @@ extension KeyboardModel {
             KeyModel(op: InplaceOperation.tanh),
             KeyModel(op: ConstantOperation.pi),
             KeyModel(op: ControlOperation.deg),
-            KeyModel(op: ConstantOperation.rand),
+            deleteKey != nil ? KeyModel(op: InplaceOperation.changeSign) : KeyModel(op: ConstantOperation.rand),
             KeyModel(op: DigitOperation.zero),
             KeyModel(op: DigitOperation.dot),
             KeyModel(op: EqualOperation.equal)])
@@ -148,11 +152,14 @@ extension KeyboardModel {
     }
     
     func calculatorKeyboard(width availableWidth: CGFloat, height availableHeight: CGFloat) {
-        smallKeyboard(availableWidth: availableWidth, availableHeight: availableHeight, keySpacingProportion: 0.3, bottomLeftKey: KeyModel(op: ControlOperation.settings), isSquare: true)
+        smallKeyboard(availableWidth: availableWidth, availableHeight: availableHeight, keySpacingProportion: 0.3, bottomLeftKey: KeyModel(op: InplaceOperation.changeSign), deleteKey: KeyModel(op: ClearOperation.back), isSquare: true)
     }
     
-    func scientificKeyboard(width availableWidth: CGFloat, height availableHeight: CGFloat) {
-        scientificKeyboard(keySpacingProportion: 0.3, bottomLeftKey: KeyModel(op: ControlOperation.settings), availableWidth: availableWidth, availableHeight: availableHeight)
+    func scientificKeyboard(width availableWidth: CGFloat, height availableHeight: CGFloat, hasSeparateSettings: Bool = false) {
+        scientificKeyboard(keySpacingProportion: 0.3,
+                           bottomLeftKey: hasSeparateSettings ? KeyModel(op: ConstantOperation.rand) : KeyModel(op: ControlOperation.settings),
+                           deleteKey: hasSeparateSettings ? KeyModel(op: ClearOperation.back) : nil,
+                           availableWidth: availableWidth, availableHeight: availableHeight)
     }
     
 }

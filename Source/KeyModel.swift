@@ -8,6 +8,15 @@
 import SwiftUI
 import SwiftGmp
 
+enum ClipboardOperation: String, OpProtocol {
+    case copy
+    case paste
+
+    var operatorPriority: Int { 5 }
+    var requiresValidNumber: Bool { false }
+    var numberExpected: Bool { false }
+    func getRawValue() -> String { rawValue }
+}
 
 @Observable class KeyModel: KeyAnimation {
     private var flagImage: Image? = nil
