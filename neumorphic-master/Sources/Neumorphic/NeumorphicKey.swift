@@ -18,22 +18,35 @@ public struct NeumorphicKey: ViewModifier {
     let width: CGFloat
     let height: CGFloat
     var visualState: VisualState
+
+    private var pressedSurfaceOpacity: Double {
+        switch visualState {
+        case .up: 0.0
+        case .center: 0.25
+        case .down: 0.5
+        }
+    }
     
     public func body(content: Content) -> some View {
+        let surface = content.overlay(
+            Capsule()
+                .fill(Color.Neumorphic.pressedSurface)
+                .opacity(pressedSurfaceOpacity)
+        )
         switch visualState {
         case .up:
-            content
+            surface
                 .softOuterShadow(offset: 0.075 * min(width, height), radius: 0.0375 * min(width, height))
         case .center:
-            content
+            surface
                 .softOuterShadow(
                     darkShadow:  Color.clear,
                     lightShadow: Color.clear,
                     offset: 0.075 * min(width, height), radius: 0)
-                .softInnerShadow(Capsule(), size: CGSize(width: width, height: height), darkShadow: Color.clear, lightShadow: Color.clear, radius: 0.125 * min(width, height))
+                .softInnerShadow(Capsule(), size: CGSize(width: width, height: height), darkShadow: Color.clear, lightShadow: Color.clear, radius: 0.0925 * min(width, height))
         case .down:
-            content
-                .softInnerShadow(Capsule(), size: CGSize(width: width, height: height), darkShadow: Color.Neumorphic.darkShadow, lightShadow: Color.Neumorphic.lightShadow, radius: 0.125 * min(width, height))
+            surface
+                .softInnerShadow(Capsule(), size: CGSize(width: width, height: height), darkShadow: Color.Neumorphic.pressedDarkShadow, lightShadow: Color.Neumorphic.lightShadow, radius: 0.0925 * min(width, height))
         }
     }
 }

@@ -53,8 +53,16 @@ enum ClipboardOperation: String, OpProtocol {
     var symbolScale: CGFloat {
         switch visualState {
         case .up: 1.0
-        case .center: 0.995
-        case .down: 0.98
+        case .center: 0.9875
+        case .down: 0.97
+        }
+    }
+
+    var symbolOffset: CGFloat {
+        switch visualState {
+        case .up: 0.0
+        case .center: 0.25
+        case .down: 0.5
         }
     }
 
@@ -90,6 +98,7 @@ enum ClipboardOperation: String, OpProtocol {
                 symbolKeyViewModel.label
                     .scaleEffect(symbolScale)
                     .brightness(symbolBrightness)
+                    .offset(y: symbolOffset)
             )
         }
         return nil

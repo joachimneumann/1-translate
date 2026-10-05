@@ -20,8 +20,9 @@ import Neumorphic
     private var pressStartedAt: TimeInterval?
     private var visualTransitionTimer: Timer?
 
-    private let transitionDuration: Double = 0.15
-    private let pressedHoldDuration: Double = 0.06
+    private let pressDuration: Double = 0.08
+    private let releaseDuration: Double = 0.18
+    private let pressedHoldDuration: Double = 0.10
 
     deinit {
         cancelVisualTransition()
@@ -55,7 +56,7 @@ import Neumorphic
         guard isPressed else { return }
 
         let releasedEarly = pressStartedAt.map {
-            ProcessInfo.processInfo.systemUptime - $0 < transitionDuration
+            ProcessInfo.processInfo.systemUptime - $0 < pressDuration
         } ?? false
         callback(self)
         isPressed = false
@@ -85,13 +86,13 @@ private extension KeyAnimation {
         isPressed = false
         pressStartedAt = nil
         cancelVisualTransition()
-        animate(to: .up, duration: transitionDuration)
+        animate(to: .up, duration: releaseDuration)
     }
 
     func transition(to state: Neumorphic.VisualState) {
         // A new press or release interrupts the previous transition.
         cancelVisualTransition()
-        let phaseDuration = transitionDuration / 2
+        let phaseDuration = (state == .down ? pressDuration : releaseDuration) / 2
         animate(to: .center, duration: phaseDuration)
         scheduleVisualTransition(after: phaseDuration) { key in
             key.animate(to: state, duration: phaseDuration)
