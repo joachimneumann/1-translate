@@ -13,14 +13,18 @@ struct CalculatoriOSApp: App {
 
     var body: some Scene {
         WindowGroup {
-            GeometryReader { geometry in
-                CalculatoriOSView(model: model)
-                    .onAppear {
-                        model.updateDimensions(width: geometry.size.width, height: geometry.size.height)
-                    }
-                    .onChange(of: geometry.size) {
-                        model.updateDimensions(width: geometry.size.width, height: geometry.size.height)
-                    }
+            if #available(iOS 27.1, *) {
+                CalculatorToolbarView(model: model)
+            } else {
+                GeometryReader { geometry in
+                    CalculatoriOSView(model: model)
+                        .onAppear {
+                            model.updateDimensions(width: geometry.size.width, height: geometry.size.height)
+                        }
+                        .onChange(of: geometry.size) {
+                            model.updateDimensions(width: geometry.size.width, height: geometry.size.height)
+                        }
+                }
             }
         }
     }

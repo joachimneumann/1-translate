@@ -17,35 +17,37 @@ struct CalculatoriOSView: View {
             if model.showsSettingsBesideDisplay {
                 VStack(spacing: 0) {
                     HStack(alignment: .top, spacing: model.keyboard.spacing) {
-                        VStack(spacing: 0) {
-                            KeyView(key: model.settingsKey)
-                                .frame(height: model.displayFrame.height)
-                                .zIndex(1)
-                            if model.isDisplayExpanded {
-                                VStack(spacing: model.keyboard.spacing) {
-                                    KeyView(key: model.copyKey)
-                                        .frame(height: model.copyKey.height)
-                                        .accessibilityLabel("Copy number")
-                                        .accessibilityAddTraits(.isButton)
-                                        .accessibilityAction { model.execute(model.copyKey) }
-                                    KeyView(key: model.pasteKey)
-                                        .frame(height: model.pasteKey.height)
-                                        .accessibilityLabel("Paste number")
-                                        .accessibilityAddTraits(.isButton)
-                                        .accessibilityAction { model.execute(model.pasteKey) }
-                                    if let message = model.clipboardMessage {
-                                        Text(message)
-                                            .font(.caption)
-                                            .foregroundColor(Color.Neumorphic.text)
-                                            .multilineTextAlignment(.center)
-                                            .transition(.opacity)
+                        if !model.usesSystemToolbar {
+                            VStack(spacing: 0) {
+                                KeyView(key: model.settingsKey)
+                                    .frame(height: model.displayFrame.height)
+                                    .zIndex(1)
+                                if model.isDisplayExpanded {
+                                    VStack(spacing: model.keyboard.spacing) {
+                                        KeyView(key: model.copyKey)
+                                            .frame(height: model.copyKey.height)
+                                            .accessibilityLabel("Copy number")
+                                            .accessibilityAddTraits(.isButton)
+                                            .accessibilityAction { model.execute(model.copyKey) }
+                                        KeyView(key: model.pasteKey)
+                                            .frame(height: model.pasteKey.height)
+                                            .accessibilityLabel("Paste number")
+                                            .accessibilityAddTraits(.isButton)
+                                            .accessibilityAction { model.execute(model.pasteKey) }
+                                        if let message = model.clipboardMessage {
+                                            Text(message)
+                                                .font(.caption)
+                                                .foregroundColor(Color.Neumorphic.text)
+                                                .multilineTextAlignment(.center)
+                                                .transition(.opacity)
+                                        }
                                     }
+                                    .padding(.top, model.keyboard.spacing)
+                                    .transition(.move(edge: .top).combined(with: .opacity))
                                 }
-                                .padding(.top, model.keyboard.spacing)
-                                .transition(.move(edge: .top).combined(with: .opacity))
                             }
+                            .frame(width: model.settingsKey.width, height: model.currentDisplayHeight, alignment: .top)
                         }
-                        .frame(width: model.settingsKey.width, height: model.currentDisplayHeight, alignment: .top)
                         NumberDisplay(display: model.display, isExpanded: model.isDisplayExpanded, compactHeight: model.displayFrame.height)
                             .frame(width: model.displayFrame.width - 2 * model.keyboard.padding)
                             .contentShape(Rectangle())
@@ -73,6 +75,17 @@ struct CalculatoriOSView: View {
                         .frame(height: model.displayFrame.height)
                     KeyboardView(keyboard: model.keyboard)
                 }
+            }
+        }
+        .overlay(alignment: .bottom) {
+            if model.usesSystemToolbar, let message = model.clipboardMessage {
+                Text(message)
+                    .font(.caption)
+                    .padding(10)
+                    .background(.regularMaterial, in: Capsule())
+                    .padding()
+                    .transition(.opacity)
+                    .allowsHitTesting(false)
             }
         }
     }

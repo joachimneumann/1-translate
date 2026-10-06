@@ -35,6 +35,8 @@ import UIKit
     let isTranslator: Bool
     var isScientific: Bool = false
     var isDisplayExpanded: Bool = false
+    var usesSystemToolbar: Bool = false
+    private var displayFontSize: CGFloat = 0
 
     var showsSettingsBesideDisplay: Bool {
         isScientific && !isMac && !isTranslator
@@ -53,7 +55,7 @@ import UIKit
         clipboardMessageTimer?.invalidate()
         clipboardMessage = nil
         isDisplayExpanded.toggle()
-        setDisplay(font: AppleFont.systemFont(ofSize: floor(keyboard.keyboardFrame.width * 0.04)))
+        setDisplay(font: AppleFont.systemFont(ofSize: displayFontSize))
     }
     
     init(isTranslator: Bool = false, isMac: Bool = false) {
@@ -68,6 +70,8 @@ import UIKit
     }
     
     func updateDimensions(width: CGFloat, height: CGFloat) {
+        // Navigation containers can briefly report zero bounds while changing displays.
+        guard width.isFinite, height.isFinite, width > 0, height > 0 else { return }
         self.width = width
         self.height = height
         if isMac {
@@ -80,7 +84,6 @@ import UIKit
     
     func setWidth() {
         if !showsSettingsBesideDisplay { isDisplayExpanded = false }
-        let displayFontSize: CGFloat
         if isTranslator {
             keyboard.translatorKeyboard(width: width - 10, height: height * 0.5)
             displayFrame.width = keyboard.keyboardFrame.width
@@ -92,7 +95,7 @@ import UIKit
                 displayFrame.width = keyboard.keyboardFrame.width
                 displayFrame.height = keyboard.keyboardFrame.height * 0.2
                 displayFontSize = floor(displayFrame.width * 0.04)
-                if showsSettingsBesideDisplay, let key = keyboard.keyMatrix.first?.first {
+                if showsSettingsBesideDisplay && !usesSystemToolbar, let key = keyboard.keyMatrix.first?.first {
                     settingsKey.setSize(CGSize(width: key.width, height: key.height))
                     copyKey.setSize(CGSize(width: key.width, height: key.height))
                     pasteKey.setSize(CGSize(width: key.width, height: key.height))
@@ -152,7 +155,7 @@ import UIKit
         }
         clipboardMessageTimer?.invalidate()
         clipboardMessage = nil
-        setDisplay(font: AppleFont.systemFont(ofSize: floor(keyboard.keyboardFrame.width * 0.04)))
+        setDisplay(font: AppleFont.systemFont(ofSize: displayFontSize))
         return true
     }
 
