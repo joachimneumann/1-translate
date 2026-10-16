@@ -1,0 +1,10 @@
+{
+  "app": "ManyDigits",
+  "status": "Experimental preview; current installed asset unchanged",
+  "tool": "Built-in image_gen",
+  "useCase": "precise-object-edit",
+  "editTarget": "ManyDigits-icon-source.png",
+  "output": "ManyDigits-icon-border-free-v1.png",
+  "change": "Removed the enclosing rounded-square raised card while preserving the three individual keys.",
+  "prompt": "Use case: precise-object-edit.\nAsset type: experimental ManyDigits iOS app icon.\nInput image 1 is the approved icon and the edit target.\nPrimary request: remove ONLY the large enclosing raised rounded-square border/plaque behind the three calculator buttons. The large outside rounded-square rim and its perimeter bevel, outline, highlights, and shadows should disappear entirely. Fill that whole former panel area with the same continuous smooth cool-gray background (#EDF0F3) extending evenly edge to edge.\nKeep all three buttons unchanged: the same two pale blue circular buttons with π and x² above, and the same wide pale sage rounded-rectangle equals button below. Preserve their exact sizes, positions, spacing, silhouette, symbol shapes, colors, surface texture, and soft individual button shadows. Preserve blue button fill #E2E8F0, blue symbols #455672, sage fill #D5DECD, equals symbol #485540.\nThe buttons should now float directly on a clean seamless background, with no enclosing card, no outer frame, no rounded-square boundary, no halo tracing the old panel edge. Keep the square composition and opaque background, no text additions or extra objects. This is an edit of the supplied image, not a redesign."
+}

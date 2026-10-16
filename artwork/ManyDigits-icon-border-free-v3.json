@@ -1,0 +1,21 @@
+{
+  "app": "ManyDigits",
+  "status": "Selected and installed in the iOS app icon asset catalog",
+  "tool": "Built-in image_gen",
+  "useCase": "precise-object-edit",
+  "editTarget": "ManyDigits-icon-border-free-v2.png",
+  "output": "ManyDigits-icon-border-free-v3.png",
+  "change": "Larger buttons and tighter outer margins in the border-free layout.",
+  "prompt": "Use case: precise-object-edit.\nAsset type: ManyDigits iOS app icon.\nInput image 1 is the currently installed border-free v2 icon and the edit target.\nPrimary request: modestly enlarge the whole three-button arrangement within the same square canvas so there is less whitespace around it. Keep the generous gaps between the buttons. The intended enlargement is about 12% only.\nUse these approximate normalized layout measurements (canvas width and height each = 100%): two circular buttons have diameter 29.5%; left circle center at (30.5%, 33%); right circle center at (69.5%, 33%). The bottom equals rounded rectangle has width 55.5%, height 24%, center at (50%, 67.5%). These measurements preserve substantial spacing: about 9.5% of canvas between the circles and about 7.75% vertical gap above the equals button. Buttons must remain circles and the equals button must keep its current rounded-rectangle proportions. Scale the symbols naturally with their buttons, preserving the current relative symbol-to-button size.\nKeep exactly π on the left circle, x² on the right circle, and = on the bottom button. Preserve all glyph shapes, palette, soft sculpted materials, highlights, individual soft shadows and lighting. Seamless cool-gray #EDF0F3 background from edge to edge with no enclosing frame, panel, card, border, or plaque. Preserve pale-blue fill #E2E8F0, blue symbols #455672, pale sage fill #D5DECD, and equals symbol #485540. Opaque square image. No extra text or objects. Change only the scale and positioning needed for this modest layout refinement.",
+  "installedAsset": "CalculatoriOS/Assets.xcassets/AppIcon.appiconset/1024.png",
+  "installedDimensions": [
+    1024,
+    1024
+  ],
+  "highResolutionExport": "artwork/ManyDigits-icon-border-free-v3-4096.png",
+  "highResolutionExportDimensions": [
+    4096,
+    4096
+  ],
+  "highResolutionExportNote": "Upscaled from the 1254 × 1254 generated source; no new native detail."
+}

@@ -1,0 +1,10 @@
+{
+  "app": "ManyDigits",
+  "status": "Experimental icon variant",
+  "tool": "Built-in image_gen",
+  "useCase": "precise-object-edit",
+  "editTarget": "ManyDigits-icon-border-free-v1.png",
+  "output": "ManyDigits-icon-border-free-v2.png",
+  "change": "Slightly smaller buttons with more horizontal and vertical breathing room.",
+  "prompt": "Use case: precise-object-edit.\nAsset type: ManyDigits app-icon spacing experiment.\nInput image 1 is the border-free icon and the edit target.\nPrimary request: add a little breathing room between the three calculator buttons. Scale EACH whole button and its symbol uniformly to about 92% of its present size, keeping each button's current center position fixed. This modest reduction should visibly widen the horizontal gap between the two circular buttons and the vertical gap above the equals button, while retaining the same balanced arrangement.\nKeep two circular pale-blue buttons showing exactly π and x² at the top, and one wide sage rounded-rectangle button showing exactly = below. Preserve the button proportions, rounded shapes, soft sculpted material, soft individual shadows, lighting, glyph shapes, and relative symbol-to-button proportions. Change only group sizes and resulting spacing.\nKeep the seamless full-square cool-gray #EDF0F3 background with NO enclosing frame, panel, border, or plaque. Preserve blue fill #E2E8F0, blue symbols #455672, sage fill #D5DECD, and equals symbol #485540. Opaque square image. No text additions or new objects. A restrained spacing refinement of the supplied image, not a redesign."
+}

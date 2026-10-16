@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "NumberTranslator",
+        "repositoryURL": "https://github.com/joachimneumann/NumberTranslator",
+        "state": {
+          "branch": "main",
+          "revision": "c5aa6a3bd286c61099b66d3f029d5d3cbe5a3175",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

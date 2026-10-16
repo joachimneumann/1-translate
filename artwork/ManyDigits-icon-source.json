@@ -1,0 +1,26 @@
+{
+  "app": "ManyDigits",
+  "tool": "Built-in image_gen",
+  "approvedSource": "exec-7b185ab2-a1db-4ec8-b852-024d362324ef.png",
+  "sourceDimensions": [
+    1254,
+    1254
+  ],
+  "installedDimensions": [
+    1024,
+    1024
+  ],
+  "highResolutionExportDimensions": [
+    4096,
+    4096
+  ],
+  "highResolutionExportNote": "Resampled from the approved 1254 × 1254 source; no claim of new native image detail.",
+  "prompt": "Use case: precise-object-edit / style-transfer.\nInput image 1 is the EDIT TARGET: the ManyDigits icon with two smaller circular π and x² buttons and a horizontal sage rounded rectangle equals button beneath them.\nInput image 2 is the COLOR REFERENCE ONLY: the user's screenshot of a pale blue percent key and a pale green division key on a cool gray background.\nUser request: use the colors from the screenshot.\nRecolor the existing icon using the sampled screenshot palette:\n- BOTH top circular π and x² button fills: pale cool blue #E2E8F0, RGB(226,232,240), matching the screenshot percent button.\n- BOTH top mathematical symbols π and x²: muted blue-gray #455672, RGB(69,86,114), matching the screenshot percent symbol. Replace the current nearly-black symbol color.\n- Bottom rounded-rectangle equals button fill: pale sage #D5DECD, RGB(213,222,205), matching the screenshot division button.\n- Equals symbol: muted dark sage #485540, RGB(72,85,64), matching the screenshot division symbol.\n- Rounded-square backing tile and exterior backdrop: cool very light gray #EDF0F3, RGB(237,240,243), matching the screenshot background. Replace the warm cream/ivory color cast completely.\nUse the sampled solid colors as the base surface colors. Match the screenshot's clean cool highlights and soft understated blue-gray shadows. Keep the gently sculpted neumorphic appearance; do not introduce saturated colors or dramatic gradients.\nInvariants: preserve input image 1's exact three-key composition, smaller round upper keys, wide horizontal rounded-rectangle lower key with straight edge sections and rounded corners, center positions, spacing, safe margins, tile framing, icon scale, bold glyph shapes, true superscript 2, and front-on perspective. This is a COLOR CHANGE, not a layout redesign. Do not copy % or ÷ from the screenshot. Keep π, x², and = as the only symbols. No added text, labels, logos, badge, outline, additional keys, or watermark. Preserve opaque background. Return one standalone square icon.",
+  "palette": {
+    "scientificFill": "#E2E8F0",
+    "scientificSymbol": "#455672",
+    "equalsFill": "#D5DECD",
+    "equalsSymbol": "#485540",
+    "background": "#EDF0F3"
+  }
+}
