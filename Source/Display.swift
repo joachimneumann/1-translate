@@ -30,6 +30,10 @@ class Display: MonoFontDisplay {
     let exponentFont: Font
     let exponentBaselineOffset: CGFloat
     let lineHeight: CGFloat
+    let decimalHighlightFont: Font
+    let decimalHighlightPadding: CGFloat = 4
+    private let decimalHighlightUiFont: AppleFont
+    let expandedLineHeight: CGFloat
     let maxLines: Int
     let firstLine: Line?
     let digitLimit: Int?
@@ -42,6 +46,10 @@ class Display: MonoFontDisplay {
         self.exponentFont = Font(exponentUiFont)
         self.exponentBaselineOffset = font.pointSize * 0.4
         self.lineHeight = max(1, ceil(font.ascender - font.descender + font.leading))
+        let highlightFont = AppleFont.systemFont(ofSize: font.pointSize * 1.35, weight: .semibold)
+        self.decimalHighlightFont = Font(highlightFont)
+        self.decimalHighlightUiFont = highlightFont
+        self.expandedLineHeight = max(self.lineHeight, ceil(highlightFont.ascender - highlightFont.descender + highlightFont.leading) + 2)
         self.maxLines = max(1, maxLines)
         self.firstLine = firstLine
         self.digitLimit = digitLimit
@@ -63,6 +71,25 @@ class Display: MonoFontDisplay {
 
     var isScrollable: Bool {
         digitLimit != nil
+    }
+
+    var highlightsDecimal: Bool {
+        guard !isError, let decimal = left.firstIndex(of: separatorCharacter) else { return false }
+        // Count numeric digits only, so signs and grouping do not move the threshold.
+        return left[..<decimal].filter(\.isNumber).count >= 5
+    }
+
+    func expandedLines(for availableWidth: CGFloat) -> [Line] {
+        wrap(left, nil, width: availableWidth, useFirstLine: false, highlightDecimal: highlightsDecimal)
+    }
+
+    func expandedTextWidth(_ text: String) -> CGFloat {
+        guard highlightsDecimal, let decimal = text.firstIndex(of: separatorCharacter) else {
+            return text.textWidth(kerning: 0, uiFont)
+        }
+        return String(text[..<decimal]).textWidth(kerning: 0, uiFont)
+            + String(separatorCharacter).textWidth(kerning: 0, decimalHighlightUiFont) + 2 * decimalHighlightPadding
+            + String(text[text.index(after: decimal)...]).textWidth(kerning: 0, uiFont)
     }
 
     func wrappedLines(for availableWidth: CGFloat) -> [Line] {
@@ -100,19 +127,22 @@ class Display: MonoFontDisplay {
 
     private func textWidth(of line: Line) -> CGFloat {
         line.mantissa.textWidth(kerning: 0, uiFont)
-            + (line.exponent.map { ePadding + exponentWidth($0) } ?? 0)
+            + (line.exponent.map { exponentSpacing + exponentWidth($0) } ?? 0)
     }
+
+    var exponentSpacing: CGFloat { isScrollable ? ePadding : uiFont.pointSize * 0.2 }
 
     func exponentPower(_ exponent: String) -> String {
         String(exponent.dropFirst())
     }
 
     func exponentWidth(_ exponent: String) -> CGFloat {
-        "× 10".textWidth(kerning: 0, uiFont)
+        if !isScrollable { return exponent.textWidth(kerning: 0, uiFont) }
+        return "× 10".textWidth(kerning: 0, uiFont)
             + exponentPower(exponent).textWidth(kerning: 0, exponentUiFont)
     }
 
-    private func wrap(_ mantissa: String, _ exponent: String?, width: CGFloat, limit: Int? = nil, useFirstLine: Bool = true, alignContinuation: Bool = false) -> [Line] {
+    private func wrap(_ mantissa: String, _ exponent: String?, width: CGFloat, limit: Int? = nil, useFirstLine: Bool = true, alignContinuation: Bool = false, highlightDecimal: Bool = false) -> [Line] {
         if useFirstLine, let firstLine,
            mantissa.hasPrefix(firstLine.mantissa), exponent == firstLine.exponent {
             let remaining = String(mantissa.dropFirst(firstLine.mantissa.count))
@@ -128,7 +158,8 @@ class Display: MonoFontDisplay {
                 inset = continuationInset(for: width, line: Line(mantissa: String(character)))
             }
             let candidate = current + String(character)
-            if !current.isEmpty && candidate.textWidth(kerning: 0, uiFont) + inset > width {
+            let candidateWidth = highlightDecimal ? expandedTextWidth(candidate) : candidate.textWidth(kerning: 0, uiFont)
+            if !current.isEmpty && candidateWidth + inset > width {
                 lines.append(Line(mantissa: current))
                 if let limit, lines.count >= limit { return lines + [Line(mantissa: String(character))] }
                 current = String(character)
@@ -139,7 +170,7 @@ class Display: MonoFontDisplay {
         }
         if let exponent,
            !current.isEmpty,
-           current.textWidth(kerning: 0, uiFont) + ePadding + exponentWidth(exponent) > width {
+           current.textWidth(kerning: 0, uiFont) + exponentSpacing + exponentWidth(exponent) > width {
             lines.append(Line(mantissa: current))
             current = ""
         }
@@ -180,7 +211,7 @@ class Display: MonoFontDisplay {
                 inject(into: &formattedExponent, separatorCharacter: separatorCharacter, groupingCharacter: groupingCharacter, groupSize: groupSize)
             }
             exponent = formattedExponent
-            w += ePadding + exponentWidth(formattedExponent)
+            w += exponentSpacing + exponentWidth(formattedExponent)
         }
         if maxLines > 1 {
             let lines = wrap(mantissa, exponent, width: floatDisplayWidth, limit: maxLines)

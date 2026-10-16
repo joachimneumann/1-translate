@@ -10,114 +10,139 @@ import SwiftGmp
 
 struct NumberDisplay: View {
     @ObservedObject var display: Display
-    var isExpanded: Bool = false
-    var compactHeight: CGFloat? = nil
-    @Namespace private var exponentAnimation
 
-    @ViewBuilder
-    func TextView(_ text: String) -> some View {
-        Text(text)
-            .lineLimit(1)
-            .fixedSize(horizontal: true, vertical: false)
+    var body: some View {
+        ZStack {
+            NumberDisplayBackground()
+            GeometryReader { geometry in
+                let line = Display.Line(mantissa: display.left, exponent: display.right)
+                HStack(alignment: .bottom, spacing: 0) {
+                    Text(display.left)
+                        .foregroundColor(display.isError ? .orange : Color.Neumorphic.text)
+                        .font(display.font)
+                    if let exponent = display.right {
+                        Text(exponent)
+                            .font(display.font)
+                            .foregroundColor(Color.Neumorphic.text)
+                            .padding(.leading, display.exponentSpacing)
+                            .accessibilityLabel("times ten to the power of \(display.exponentPower(exponent))")
+                    }
+                }
+                .lineLimit(1)
+                .fixedSize(horizontal: true, vertical: false)
+                .scaleEffect(display.scaleFactor(for: geometry.size.width, line: line), anchor: .trailing)
+                .frame(width: geometry.size.width, height: geometry.size.height, alignment: .trailing)
+            }
+            .padding(.horizontal, display.textPadding)
+        }
+        .clipped()
+    }
+}
+
+/// Full precision is a separate display; expanding never changes the compact one.
+struct ExpandedNumberDisplay: View {
+    @ObservedObject var display: Display
+
+    private var decimalFill: Color {
+#if CALCULATOR_IOS
+        CalculatorPalette.operators.fill.color
+#else
+        Color.green.opacity(0.18)
+#endif
+    }
+
+    private var decimalInk: Color {
+#if CALCULATOR_IOS
+        CalculatorPalette.operators.symbol.color
+#else
+        Color.Neumorphic.text
+#endif
     }
 
     private func lineView(_ line: Display.Line) -> some View {
-        HStack(alignment: .bottom, spacing: 0) {
-            TextView(line.mantissa)
-                .foregroundColor(display.isError ? .orange : Color.Neumorphic.text)
-                .font(display.font)
-            if let exponent = line.exponent {
-                exponentView(exponent)
-                    .matchedGeometryEffect(id: "exponent", in: exponentAnimation)
-                    .padding(.leading, display.ePadding)
-            }
-        }
-    }
-
-    private func exponentView(_ exponent: String) -> some View {
         HStack(alignment: .firstTextBaseline, spacing: 0) {
-            TextView("× 10")
-                .font(display.font)
-            TextView(display.exponentPower(exponent))
-                .font(display.exponentFont)
-                .baselineOffset(display.exponentBaselineOffset)
+            if display.highlightsDecimal, let decimal = line.mantissa.firstIndex(of: display.separatorCharacter) {
+                Text(String(line.mantissa[..<decimal]))
+                Text(String(display.separatorCharacter))
+                    .font(display.decimalHighlightFont)
+                    .foregroundColor(decimalInk)
+                    .padding(.horizontal, display.decimalHighlightPadding)
+                    .padding(.vertical, 1)
+                    .background(decimalFill, in: RoundedRectangle(cornerRadius: 4))
+                Text(String(line.mantissa[line.mantissa.index(after: decimal)...]))
+            } else {
+                Text(line.mantissa)
+            }
         }
-        .foregroundColor(Color.Neumorphic.text)
+        .font(display.font)
+        .foregroundColor(display.isError ? .orange : Color.Neumorphic.text)
+        .lineLimit(1)
+        .fixedSize(horizontal: true, vertical: false)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("times ten to the power of \(display.exponentPower(exponent))")
+        .accessibilityLabel(line.mantissa)
     }
 
-    @ViewBuilder
-    func digitContent(width: CGFloat, firstRowHeight: CGFloat) -> some View {
-        let lines = isExpanded ? display.wrappedLines(for: width) : [Display.Line(mantissa: display.left, exponent: display.right)]
-        if isExpanded && !display.preservesFirstLine {
-            VStack(alignment: .leading, spacing: 0) {
-                ForEach(Array(lines.enumerated()), id: \.offset) { _, line in
-                    lineView(line)
-                        .frame(height: display.lineHeight)
-                }
+    func digitContent(width: CGFloat) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            ForEach(Array(display.expandedLines(for: width).enumerated()), id: \.offset) { _, line in
+                lineView(line)
+                    .frame(height: display.highlightsDecimal ? display.expandedLineHeight : display.lineHeight)
             }
-            .padding(.vertical, display.textPadding)
-            .frame(width: width, alignment: .leading)
-        } else {
-            let scale = display.scaleFactor(for: width, line: lines[0])
-            lineView(lines[0])
-                .fixedSize(horizontal: true, vertical: false)
-                .scaleEffect(scale, anchor: .trailing)
-                .overlay(alignment: .topLeading) {
-                    GeometryReader { firstLineGeometry in
-                        ForEach(Array(lines.dropFirst().enumerated()), id: \.offset) { index, line in
-                            lineView(line)
-                                .fixedSize(horizontal: true, vertical: false)
-                                .frame(height: firstLineGeometry.size.height)
-                                .offset(x: firstLineGeometry.size.width * (1 - scale) + display.glyphAlignmentOffset(for: line, scale: scale),
-                                        y: CGFloat(index + 1) * display.lineHeight)
-                        }
-                    }
-                }
-                .frame(width: width, height: firstRowHeight, alignment: .trailing)
-                .frame(width: width, height: firstRowHeight + CGFloat(lines.count - 1) * display.lineHeight, alignment: .topLeading)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.vertical, display.textPadding)
     }
 
     var body: some View {
         ZStack {
-            let size2 = CGSize(width: 20, height: 20)
-            let size = CGSize(width: 10, height: 10)
-            RoundedRectangle(cornerSize: size)
-                .foregroundColor(Color.Neumorphic.main)
-                .softInnerShadow(RoundedRectangle(cornerSize: size), size: size2, radius: 3)
+            NumberDisplayBackground()
             GeometryReader { geometry in
-                let firstRowHeight = compactHeight ?? geometry.size.height
-                if isExpanded, let exponent = display.right {
-                    let scrollHeight = max(0, geometry.size.height - firstRowHeight - 1)
-                    VStack(spacing: 0) {
-                        exponentView(exponent)
-                            .matchedGeometryEffect(id: "exponent", in: exponentAnimation)
-                            .frame(width: geometry.size.width, height: firstRowHeight, alignment: .trailing)
+                VStack(spacing: 0) {
+                    if let exponent = display.right {
+                        NumberExponent(display: display, exponent: exponent)
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                            .padding(.vertical, display.textPadding)
                         Rectangle()
                             .fill(Color.Neumorphic.text.opacity(0.15))
                             .frame(height: 1)
-                        ScrollView(.vertical) {
-                            digitContent(width: geometry.size.width, firstRowHeight: firstRowHeight)
-                                .frame(minHeight: scrollHeight, alignment: .topLeading)
-                        }
-                        .frame(height: scrollHeight)
                     }
-                    .frame(width: geometry.size.width, height: geometry.size.height, alignment: .top)
-                } else if isExpanded {
                     ScrollView(.vertical) {
-                        digitContent(width: geometry.size.width, firstRowHeight: firstRowHeight)
-                            .frame(minHeight: geometry.size.height, alignment: .topLeading)
+                        digitContent(width: geometry.size.width)
                     }
-                } else {
-                    digitContent(width: geometry.size.width, firstRowHeight: firstRowHeight)
-                        .frame(width: geometry.size.width, height: geometry.size.height, alignment: .topLeading)
                 }
             }
             .padding(.horizontal, display.textPadding)
         }
         .clipped()
+    }
+}
+
+private struct NumberDisplayBackground: View {
+    var body: some View {
+        let shape = RoundedRectangle(cornerSize: CGSize(width: 10, height: 10))
+        shape
+            .foregroundColor(Color.Neumorphic.main)
+            .softInnerShadow(shape, size: CGSize(width: 20, height: 20), radius: 3)
+    }
+}
+
+private struct NumberExponent: View {
+    let display: Display
+    let exponent: String
+
+    var body: some View {
+        HStack(alignment: .firstTextBaseline, spacing: 0) {
+            Text("× 10")
+                .font(display.font)
+            Text(display.exponentPower(exponent))
+                .font(display.exponentFont)
+                .baselineOffset(display.exponentBaselineOffset)
+        }
+        .foregroundColor(Color.Neumorphic.text)
+        .lineLimit(1)
+        .fixedSize(horizontal: true, vertical: false)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("times ten to the power of \(display.exponentPower(exponent))")
     }
 }
 

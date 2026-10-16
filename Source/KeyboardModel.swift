@@ -26,13 +26,14 @@ import SwiftGmp
         separatorKey.symbolKey?.symbol = symbol
     }
     
-    func back(_ showArrow: Bool) {
-        let hasDeleteKey = keyMatrix.joined().contains { key in
-            key !== clearKey && key.symbolKey?.op.isEqual(to: ClearOperation.back) == true
-        }
-        let op: ClearOperation = showArrow && !hasDeleteKey ? .back : .clear
+    func updateEditingKeys(hasCurrentEntry: Bool, canBack: Bool) {
+        let op: ClearOperation = hasCurrentEntry ? .clearEntry : .clear
         clearKey.symbolKey?.op = op
         clearKey.symbolKey?.symbol = op.getRawValue()
+        clearKey.symbolKey?.newSize(CGSize(width: clearKey.width, height: clearKey.height))
+        for key in keyMatrix.joined() where key.symbolKey?.op.isEqual(to: ClearOperation.back) == true {
+            key.isEnabled = canBack
+        }
     }
 
     var rowCount: CGFloat {
@@ -53,6 +54,16 @@ import SwiftGmp
             for row in keyMatrix {
                 for k in row {
                     k.callback = callback
+                }
+            }
+        }
+    }
+
+    var pressBegan: (KeyAnimation) -> () = { _ in } {
+        didSet {
+            for row in keyMatrix {
+                for key in row {
+                    key.pressBegan = pressBegan
                 }
             }
         }

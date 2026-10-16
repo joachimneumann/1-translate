@@ -84,17 +84,14 @@ private struct HingeObserver: UIViewRepresentable {
     @Binding var hasHinge: Bool
 
     func makeUIView(context: Context) -> UIView {
-        let view = UIView()
         let binding = $hasHinge
-        view.addInteraction(UIHingeInteraction { _, update in
-            let available = update.hinge != nil
+        return CalculatorMakeHingeObserverView { available in
             DispatchQueue.main.async {
                 if binding.wrappedValue != available {
                     binding.wrappedValue = available
                 }
             }
-        })
-        return view
+        }
     }
 
     func updateUIView(_ uiView: UIView, context: Context) {}

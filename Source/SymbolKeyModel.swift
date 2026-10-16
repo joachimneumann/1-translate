@@ -15,11 +15,23 @@ import SwiftGmp
     var symbol: String
     var textColor: Color
 
+    var defaultTextColor: Color {
+#if CALCULATOR_IOS
+        CalculatorPalette.colors(for: op)?.symbol.color ?? Color.Neumorphic.text
+#else
+        Color.Neumorphic.text
+#endif
+    }
+
     init(op: any OpProtocol) {
         self.op = op
         self.symbol = op.getRawValue()
         self.symbolDiameter = 0.0
+#if CALCULATOR_IOS
+        self.textColor = CalculatorPalette.colors(for: op)?.symbol.color ?? Color.Neumorphic.text
+#else
         self.textColor = Color.Neumorphic.text
+#endif
     }
     
     func newSize(_ sizeParameter: CGSize) {
@@ -47,7 +59,7 @@ import SwiftGmp
         switch symbol {
         case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9":
             factor = factorDigits
-        case "AC":
+        case "AC", "C":
             factor = factorAC
         case "±":
             factor = factorChangeSign

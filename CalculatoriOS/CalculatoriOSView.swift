@@ -48,14 +48,24 @@ struct CalculatoriOSView: View {
                             }
                             .frame(width: model.settingsKey.width, height: model.currentDisplayHeight, alignment: .top)
                         }
-                        NumberDisplay(display: model.display, isExpanded: model.isDisplayExpanded, compactHeight: model.displayFrame.height)
-                            .frame(width: model.displayFrame.width - 2 * model.keyboard.padding)
-                            .contentShape(Rectangle())
-                            .onTapGesture {
-                                withAnimation(.easeInOut(duration: 0.3)) {
-                                    model.toggleDisplayExpansion()
+                        VStack(spacing: model.keyboard.spacing) {
+                            NumberDisplay(display: model.display)
+                                .frame(height: model.displayFrame.height)
+                                .contentShape(Rectangle())
+                                .onTapGesture {
+                                    withAnimation(.easeInOut(duration: 0.3)) {
+                                        model.toggleDisplayExpansion()
+                                    }
                                 }
+                                .accessibilityAddTraits(.isButton)
+                                .accessibilityHint(model.isDisplayExpanded ? "Double tap to close the detailed number" : "Double tap to show the detailed number")
+                            if let expandedDisplay = model.expandedDisplay {
+                                ExpandedNumberDisplay(display: expandedDisplay)
+                                    .frame(height: max(0, model.currentDisplayHeight - model.displayFrame.height - model.keyboard.spacing))
+                                    .transition(.opacity)
                             }
+                        }
+                            .frame(width: model.displayFrame.width - 2 * model.keyboard.padding)
                     }
                     .padding(.horizontal, model.keyboard.padding)
                     .frame(width: model.keyboard.keyboardFrame.width, height: model.currentDisplayHeight)

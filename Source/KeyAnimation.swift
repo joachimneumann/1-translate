@@ -8,17 +8,27 @@
 import SwiftUI
 import SwiftGmp
 import Neumorphic
+#if CALCULATOR_IOS && os(iOS)
+import UIKit
+#endif
 
 @Observable class KeyAnimation: Identifiable {
     var visualState: Neumorphic.VisualState = .up
     private(set) var visualResetID = 0
+    private(set) var isPending = false
+    var isEnabled = true
     let id = UUID()
 
     var callback: (KeyAnimation) -> () = { _ in }
+    var pressBegan: (KeyAnimation) -> () = { _ in }
 
     private var isPressed = false
     private var pressStartedAt: TimeInterval?
     private var visualTransitionTimer: Timer?
+#if CALCULATOR_IOS && os(iOS)
+    private static let pressFeedback = UIImpactFeedbackGenerator(style: .soft)
+    private var hasPlayedPressFeedback = false
+#endif
 
     private let pressDuration: Double = 0.08
     private let releaseDuration: Double = 0.18
@@ -28,15 +38,25 @@ import Neumorphic
         cancelVisualTransition()
     }
 
+    func setPending(_ pending: Bool) {
+        guard isPending != pending else { return }
+        isPending = pending
+
+        // A touched key waits until key-up to choose its resting state.
+        guard !isPressed else { return }
+        transition(to: pending ? .down : .up)
+    }
+
     func longPress() {
         // Ignore long press, except clear/back -> clear all.
-        guard let model = self as? KeyModel,
+        guard isEnabled, let model = self as? KeyModel,
               let op = model.symbolKey?.op,
-              op.isEqual(to: ClearOperation.clear) || op.isEqual(to: ClearOperation.back) else { return }
+              op.isEqual(to: ClearOperation.clear) || op.isEqual(to: ClearOperation.clearEntry) || op.isEqual(to: ClearOperation.back) else { return }
         model.callback(KeyModel(op: ClearOperation.clear))
     }
 
     func down(_ location: CGPoint, in size: CGSize) {
+        guard isEnabled else { return }
         let tolerance: CGFloat = 0.3 * size.width
         let touchRect = CGRect(
             x: -tolerance,
@@ -53,6 +73,13 @@ import Neumorphic
     }
 
     func up() {
+#if CALCULATOR_IOS && os(iOS)
+        hasPlayedPressFeedback = false
+#endif
+        guard isEnabled else {
+            handleTouchOutside()
+            return
+        }
         guard isPressed else { return }
 
         let releasedEarly = pressStartedAt.map {
@@ -61,6 +88,16 @@ import Neumorphic
         callback(self)
         isPressed = false
         pressStartedAt = nil
+
+        if isPending {
+            if releasedEarly {
+                snapToDown()
+            } else {
+                cancelVisualTransition()
+                animate(to: .down, duration: pressDuration / 2)
+            }
+            return
+        }
 
         if releasedEarly {
             snapToDown()
@@ -78,15 +115,26 @@ private extension KeyAnimation {
         guard !isPressed else { return }
         isPressed = true
         pressStartedAt = ProcessInfo.processInfo.systemUptime
+        pressBegan(self)
 
-        transition(to: .down)
+#if CALCULATOR_IOS && os(iOS)
+        // Re-entering a key during the same touch should not repeat the haptic.
+        if !hasPlayedPressFeedback {
+            hasPlayedPressFeedback = true
+            Self.pressFeedback.impactOccurred(intensity: 0.4)
+            Self.pressFeedback.prepare()
+        }
+#endif
+        if !isPending {
+            transition(to: .down)
+        }
     }
 
     func handleTouchOutside() {
         isPressed = false
         pressStartedAt = nil
         cancelVisualTransition()
-        animate(to: .up, duration: releaseDuration)
+        animate(to: isPending ? .down : .up, duration: releaseDuration)
     }
 
     func transition(to state: Neumorphic.VisualState) {

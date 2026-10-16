@@ -27,6 +27,7 @@ import UIKit
     private var clipboardMessageTimer: Timer?
     var displayFrame: CGSize = .zero
     var display: Display
+    var expandedDisplay: Display?
     static let calculationPrecision = 1000
     let calculator = Calculator(precision: ViewModel.calculationPrecision, displayWidth: ViewModel.calculationPrecision)
     var width: CGFloat = 100
@@ -37,6 +38,7 @@ import UIKit
     var isDisplayExpanded: Bool = false
     var usesSystemToolbar: Bool = false
     private var displayFontSize: CGFloat = 0
+    private var visuallyPendingOperator: (any OpProtocol)?
 
     var showsSettingsBesideDisplay: Bool {
         isScientific && !isMac && !isTranslator
@@ -55,7 +57,8 @@ import UIKit
         clipboardMessageTimer?.invalidate()
         clipboardMessage = nil
         isDisplayExpanded.toggle()
-        setDisplay(font: AppleFont.systemFont(ofSize: displayFontSize))
+        expandedDisplay = isDisplayExpanded ? makeExpandedDisplay() : nil
+        if let expandedDisplay { process(expandedDisplay) }
     }
     
     init(isTranslator: Bool = false, isMac: Bool = false) {
@@ -103,14 +106,17 @@ import UIKit
                 }
             } else {
                 keyboard.calculatorKeyboard(width: width, height: height * 0.75)
-                displayFrame.width = keyboard.keyboardFrame.width
+                displayFrame.width = width
                 displayFrame.height = keyboard.keyboardFrame.height * 0.22
-                displayFontSize = floor(displayFrame.width * 0.15)
+                displayFontSize = floor(keyboard.keyboardFrame.width * 0.12)
             }
         }
+        refreshScientificKeys()
         setDisplay(font: AppleFont.systemFont(ofSize: displayFontSize))
-        keyboard.back(calculator.privateDisplayBufferHasDigits)
+        refreshEditingKeys()
+        refreshPendingKeys()
         keyboard.callback = execute
+        keyboard.pressBegan = keyPressBegan
         settingsKey.callback = execute
         copyKey.callback = execute
         pasteKey.callback = execute
@@ -156,6 +162,8 @@ import UIKit
         clipboardMessageTimer?.invalidate()
         clipboardMessage = nil
         setDisplay(font: AppleFont.systemFont(ofSize: displayFontSize))
+        refreshEditingKeys()
+        refreshPendingKeys()
         return true
     }
 
@@ -179,17 +187,19 @@ import UIKit
         compactDisplay.groupingCharacter = previousDisplay.groupingCharacter
         compactDisplay.groupSize = previousDisplay.groupSize
         compactDisplay.separatorCharacter = previousDisplay.separatorCharacter
-        if isDisplayExpanded {
-            process(compactDisplay)
-            let firstLine = Display.Line(mantissa: compactDisplay.left, exponent: compactDisplay.right)
-            display = Display(floatDisplayWidth: displayFrame.width - 2 * keyboard.padding, font: font, ePadding: 10.0, firstLine: firstLine, digitLimit: Self.calculationPrecision)
-        } else {
-            display = compactDisplay
-        }
-        display.groupingCharacter = previousDisplay.groupingCharacter
-        display.groupSize = previousDisplay.groupSize
-        display.separatorCharacter = previousDisplay.separatorCharacter
+        display = compactDisplay
+        expandedDisplay = isDisplayExpanded ? makeExpandedDisplay() : nil
         process()
+    }
+
+    private func makeExpandedDisplay() -> Display {
+        let expanded = Display(floatDisplayWidth: displayFrame.width - 2 * keyboard.padding,
+                               font: AppleFont.systemFont(ofSize: displayFontSize),
+                               ePadding: 10.0, digitLimit: Self.calculationPrecision)
+        expanded.groupingCharacter = display.groupingCharacter
+        expanded.groupSize = display.groupSize
+        expanded.separatorCharacter = display.separatorCharacter
+        return expanded
     }
     
     func toggleScientific() {
@@ -199,6 +209,12 @@ import UIKit
     
     func process() {
         process(display)
+        if let expandedDisplay {
+            expandedDisplay.groupingCharacter = display.groupingCharacter
+            expandedDisplay.groupSize = display.groupSize
+            expandedDisplay.separatorCharacter = display.separatorCharacter
+            process(expandedDisplay)
+        }
     }
 
     private func process(_ display: Display) {
@@ -221,7 +237,15 @@ import UIKit
         }
     }
 
+    private func keyPressBegan(_ key: KeyAnimation) {
+        guard let keyModel = key as? KeyModel,
+              keyModel.symbolKey?.op is DigitOperation else { return }
+        visuallyPendingOperator = nil
+        refreshPendingKeys()
+    }
+
     func execute(_ key: KeyAnimation) {
+        guard key.isEnabled else { return }
         if let keyModel = key as? KeyModel {
             if let op = keyModel.symbolKey?.op {
                 if let clipboardOperation = op as? ClipboardOperation {
@@ -240,8 +264,7 @@ import UIKit
 #endif
                     return
                 }
-                // Backspace only edits digits currently being entered.
-                if op.isEqual(to: ClearOperation.back) && !calculator.privateDisplayBufferHasDigits {
+                if op.isEqual(to: ClearOperation.back) && !calculator.canBack {
                     return
                 }
                 if op.isEqual(to: ControlOperation.calc) {
@@ -256,50 +279,7 @@ import UIKit
                     keyModel.symbolKey!.symbol = keyModel.symbolKey!.op.getRawValue()
                 } else if op.isEqual(to: ControlOperation.second) {
                     second.toggle()
-                    for row in keyboard.keyMatrix {
-                        for k in row {
-                            if k.symbolKey!.op.isEqual(to: InplaceOperation.asin) || k.symbolKey!.op.isEqual(to: InplaceOperation.sin) {
-                                k.symbolKey!.op = second ? InplaceOperation.asin : InplaceOperation.sin
-                                k.symbolKey!.symbol = k.symbolKey!.op.getRawValue()
-                            }
-                            if k.symbolKey!.op.isEqual(to: InplaceOperation.acos) || k.symbolKey!.op.isEqual(to: InplaceOperation.cos) {
-                                k.symbolKey!.op = second ? InplaceOperation.acos : InplaceOperation.cos
-                                k.symbolKey!.symbol = k.symbolKey!.op.getRawValue()
-                            }
-                            if k.symbolKey!.op.isEqual(to: InplaceOperation.atan) || k.symbolKey!.op.isEqual(to: InplaceOperation.tan) {
-                                k.symbolKey!.op = second ? InplaceOperation.atan : InplaceOperation.tan
-                                k.symbolKey!.symbol = k.symbolKey!.op.getRawValue()
-                            }
-                            if k.symbolKey!.op.isEqual(to: InplaceOperation.asinh) || k.symbolKey!.op.isEqual(to: InplaceOperation.sinh) {
-                                k.symbolKey!.op = second ? InplaceOperation.asinh : InplaceOperation.sinh
-                                k.symbolKey!.symbol = k.symbolKey!.op.getRawValue()
-                            }
-                            if k.symbolKey!.op.isEqual(to: InplaceOperation.acosh) || k.symbolKey!.op.isEqual(to: InplaceOperation.cosh) {
-                                k.symbolKey!.op = second ? InplaceOperation.acosh : InplaceOperation.cosh
-                                k.symbolKey!.symbol = k.symbolKey!.op.getRawValue()
-                            }
-                            if k.symbolKey!.op.isEqual(to: InplaceOperation.atanh) || k.symbolKey!.op.isEqual(to: InplaceOperation.tanh) {
-                                k.symbolKey!.op = second ? InplaceOperation.atanh : InplaceOperation.tanh
-                                k.symbolKey!.symbol = k.symbolKey!.op.getRawValue()
-                            }
-                            if k.symbolKey!.op.isEqual(to: TwoOperantOperation.powyx) || k.symbolKey!.op.isEqual(to: InplaceOperation.exp) {
-                                k.symbolKey!.op = second ? TwoOperantOperation.powyx : InplaceOperation.exp
-                                k.symbolKey!.symbol = k.symbolKey!.op.getRawValue()
-                            }
-                            if k.symbolKey!.op.isEqual(to: InplaceOperation.exp2) || k.symbolKey!.op.isEqual(to: InplaceOperation.exp10) {
-                                k.symbolKey!.op = second ? InplaceOperation.exp2 : InplaceOperation.exp10
-                                k.symbolKey!.symbol = k.symbolKey!.op.getRawValue()
-                            }
-                            if k.symbolKey!.op.isEqual(to: TwoOperantOperation.logy) || k.symbolKey!.op.isEqual(to: InplaceOperation.ln) {
-                                k.symbolKey!.op = second ? TwoOperantOperation.logy : InplaceOperation.ln
-                                k.symbolKey!.symbol = k.symbolKey!.op.getRawValue()
-                            }
-                            if k.symbolKey!.op.isEqual(to: InplaceOperation.log2) || k.symbolKey!.op.isEqual(to: InplaceOperation.log10) {
-                                k.symbolKey!.op = second ? InplaceOperation.log2 : InplaceOperation.log10
-                                k.symbolKey!.symbol = k.symbolKey!.op.getRawValue()
-                            }
-                        }
-                    }
+                    refreshScientificKeys()
                 } else {
                     if radDeg == .deg {
                         switch op {
@@ -316,30 +296,84 @@ import UIKit
                         calculator.press(op)
                     }
                 }
+                if op is DigitOperation || op is ClearOperation {
+                    visuallyPendingOperator = nil
+                } else if op is TwoOperantOperation {
+                    visuallyPendingOperator = op
+                }
             }
             process()
             
-            // clear button: AC or arrow?
-            keyboard.back(calculator.privateDisplayBufferHasDigits)
+            refreshEditingKeys()
             
-            // pending buttons: text color
-            for row in keyboard.keyMatrix {
-                for k in row {
-                    if let symbolKey = k.symbolKey {
-                        if calculator.pendingOperators.contains(where: { $0.isEqual(to: symbolKey.op) }) {
-                            symbolKey.textColor = Color.Neumorphic.pendingOperation
-                        } else {
-                            symbolKey.textColor = Color.Neumorphic.text
-                        }
-                        if symbolKey.op.isEqual(to: ControlOperation.second) {
-                            if second {
-                                symbolKey.textColor = .orange
-                            } else {
-                                symbolKey.textColor = Color.Neumorphic.text
-                            }
-                        }
-                    }
+            refreshPendingKeys()
+        }
+    }
+
+    private func refreshScientificKeys() {
+        for row in keyboard.keyMatrix {
+            for k in row {
+                guard let symbolKey = k.symbolKey else { continue }
+                if symbolKey.op.isEqual(to: InplaceOperation.asin) || symbolKey.op.isEqual(to: InplaceOperation.sin) {
+                    symbolKey.op = second ? InplaceOperation.asin : InplaceOperation.sin
+                    symbolKey.symbol = symbolKey.op.getRawValue()
                 }
+                if symbolKey.op.isEqual(to: InplaceOperation.acos) || symbolKey.op.isEqual(to: InplaceOperation.cos) {
+                    symbolKey.op = second ? InplaceOperation.acos : InplaceOperation.cos
+                    symbolKey.symbol = symbolKey.op.getRawValue()
+                }
+                if symbolKey.op.isEqual(to: InplaceOperation.atan) || symbolKey.op.isEqual(to: InplaceOperation.tan) {
+                    symbolKey.op = second ? InplaceOperation.atan : InplaceOperation.tan
+                    symbolKey.symbol = symbolKey.op.getRawValue()
+                }
+                if symbolKey.op.isEqual(to: InplaceOperation.asinh) || symbolKey.op.isEqual(to: InplaceOperation.sinh) {
+                    symbolKey.op = second ? InplaceOperation.asinh : InplaceOperation.sinh
+                    symbolKey.symbol = symbolKey.op.getRawValue()
+                }
+                if symbolKey.op.isEqual(to: InplaceOperation.acosh) || symbolKey.op.isEqual(to: InplaceOperation.cosh) {
+                    symbolKey.op = second ? InplaceOperation.acosh : InplaceOperation.cosh
+                    symbolKey.symbol = symbolKey.op.getRawValue()
+                }
+                if symbolKey.op.isEqual(to: InplaceOperation.atanh) || symbolKey.op.isEqual(to: InplaceOperation.tanh) {
+                    symbolKey.op = second ? InplaceOperation.atanh : InplaceOperation.tanh
+                    symbolKey.symbol = symbolKey.op.getRawValue()
+                }
+                if symbolKey.op.isEqual(to: TwoOperantOperation.powyx) || symbolKey.op.isEqual(to: InplaceOperation.exp) {
+                    symbolKey.op = second ? TwoOperantOperation.powyx : InplaceOperation.exp
+                    symbolKey.symbol = symbolKey.op.getRawValue()
+                }
+                if symbolKey.op.isEqual(to: InplaceOperation.exp2) || symbolKey.op.isEqual(to: InplaceOperation.exp10) {
+                    symbolKey.op = second ? InplaceOperation.exp2 : InplaceOperation.exp10
+                    symbolKey.symbol = symbolKey.op.getRawValue()
+                }
+                if symbolKey.op.isEqual(to: TwoOperantOperation.logy) || symbolKey.op.isEqual(to: InplaceOperation.ln) {
+                    symbolKey.op = second ? TwoOperantOperation.logy : InplaceOperation.ln
+                    symbolKey.symbol = symbolKey.op.getRawValue()
+                }
+                if symbolKey.op.isEqual(to: InplaceOperation.log2) || symbolKey.op.isEqual(to: InplaceOperation.log10) {
+                    symbolKey.op = second ? InplaceOperation.log2 : InplaceOperation.log10
+                    symbolKey.symbol = symbolKey.op.getRawValue()
+                }
+            }
+        }
+    }
+
+    private func refreshEditingKeys() {
+        keyboard.updateEditingKeys(hasCurrentEntry: calculator.hasCurrentEntry, canBack: calculator.canBack)
+    }
+
+    private func refreshPendingKeys() {
+        // The visual indication ends on digit entry; calculation precedence does not.
+        if let operation = visuallyPendingOperator,
+           !calculator.pendingOperators.contains(where: { $0.isEqual(to: operation) }) {
+            visuallyPendingOperator = nil
+        }
+        for row in keyboard.keyMatrix {
+            for key in row {
+                guard let symbolKey = key.symbolKey else { continue }
+                let isSecondSelected = symbolKey.op.isEqual(to: ControlOperation.second) && second
+                key.setPending(isSecondSelected || visuallyPendingOperator?.isEqual(to: symbolKey.op) == true)
+                symbolKey.textColor = symbolKey.defaultTextColor
             }
         }
     }
